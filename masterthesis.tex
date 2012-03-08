@@ -44,7 +44,8 @@ Bischweier, den \today
 
 
 
-\thispagestyle{empty}
+\pagenumbering{roman}
+\setcounter{page}{1}
 \begin{center}\textbf{\large Erklärung}\\[1cm]\end{center}
 Hiermit versichere ich, dass ich die vorliegende Arbeit selbstständig verfasst und keine anderen als die angegebenen Quellen und Hilfsmittel benutzt habe, dass alle Stellen der Arbeit, die wörtlich oder sinngemäß aus anderen Quellen übernommen wurden, als solche kenntlich gemacht sind und dass die Arbeit in gleicher oder ähnlicher Form noch keiner Prüfungsbehörde vorgelegt wurde.
 \\[4\baselineskip]
@@ -54,19 +55,17 @@ Manuel Naujoks
 
 
 
-\thispagestyle{empty}
-\textbf{\large Zusammenfassung}\\[1cm]
+\chapter*{Zusammenfassung}
 Im Rahmen dieser Master-Thesis soll eine Visual Studio Erweiterung entwickelt werden, die direktes Entwickler-Feedback anhand von Software-Metriken geben kann. Dabei dient das Plugin Usus für Eclipse als Vorlage, welches bereits existiert. Die zu erstellende Erweiterung soll eine statische Code-Analyse von .NET-Projekten in Visual Stuido 2010 durchführen und für andrena relevante Code-Metriken berechnen können.
 \newline
-Die zu entwickelnde Erweiterung soll genutzt werden können, um Software-Entwickler aktiv zu unterstützen "Clean code" zu schreiben. Eine ähnliche Lösung zu Microsofts Achievements Extension mit Achievements in Bezug auf clean code best practices wäre denkbar. Dazu soll eine Evaluierung anhand von Beispielaufgaben aus einem andrena-Kurs zum Thema Refaktorisierung bearbeitet und die Veränderung in den Metriken entsprechend erfasst und dokumentiert werden.
+Die zu entwickelnde Erweiterung soll genutzt werden können, um Software-Entwickler aktiv zu unterstützen "`Clean code"' zu schreiben. Eine ähnliche Lösung zu Microsofts Achievements Extension mit Achievements in Bezug auf clean code best practices wäre denkbar. Dazu soll eine Evaluierung anhand von Beispielaufgaben aus einem andrena-Kurs zum Thema Refaktorisierung bearbeitet und die Veränderung in den Metriken entsprechend erfasst und dokumentiert werden.
 \newline
 Weiterhin soll in einer Metrik-Analyse nach Heuristiken oder Regeln mit statischer Signifikanz gesucht werden, die eventuell guten von schlechtem Code unterscheiden können. Lassen sich hier Muster beziehungsweise Strukturen aufzeigen? Ein Indiz hierfür ist, dass die Metriken oft einer Exponentialverteilung folgen. Dabei soll untersucht werden, ob und wenn möglich wie sich dies auf den Software Qualitäts Index (SQI) von andrena abbilden lässt.
 \newpage
 
 
 
-\thispagestyle{empty}
-\textbf{\large Abstract}\\[1cm]
+\chapter*{Abstract}
 Objective of this master thesis is the development of a Visual Studio Extension that is capable of providing direct development feedback based on software metrics. The Eclipse plugin Usus, which already exists, is going to be used as orientation. The extension that is developed shall be able to perform static code analysis of .NET projects in Visual Studio 2010 in order to calculate the code metrics that are relevant for andrena.
 \newline
 As far as feedback is concerned, the extension shall be able to actively support developers to write "clean code". A similar solution to Microsofts Achievements Extension could likely be found with achievements based on common clean code best practices. Therefore an evaluation with sample exercises of an andrena course on the topic of refactoring is done and the variation in the metrics is detected and documented.
@@ -77,18 +76,92 @@ Another metric analysis is performed in order to find heuristics or rules with s
 
 
 
-\begingroup
-\addtocontents{toc}{\protect\thispagestyle{empty}}
-\pagestyle{empty}
 \tableofcontents
-\newpage
-\setcounter{page}{1}
-\endgroup
+
 
 
 
 \chapter{Einführung}
-todo \cite{Wikipedia2011} todo test test
+\pagenumbering{arabic}
+\setcounter{page}{1}
+todo
+
+
+
+
+\chapter{Grundlagen}
+todo
+
+
+\section{Agile Softwareentwicklung}
+todo
+
+\subsection{Agiles Manifest}
+Im Jahr 2001 haben sich 17 Softwareentwickler zusammen gesetzt und überlegt, wie bessere Software entwickelt werden kann. Das Ergebnis ist das sogenannte \emph{Agile Manifesto} \cite{AgileManifesto2001}, welches die folgenden vier Werte beinhaltet.
+\begin{description}
+\item[Individuals and interactions] over processes and tools
+\item Working software over comprehensive documentation
+\item Customer collaboration over contract negotiation
+\item Responding to change over following a plan
+\end{description}
+Neben diesen Werten nennt das Manifest auch mehrere Prinzipien.
+\begin{enumerate} 
+\item Vorhandene Resourcen mehrfach verwenden
+\item einfach (KISS)
+\item zweckmäßig
+\item kundennah
+\item collective code ownership
+\end{enumerate}
+
+\subsection{Scrum}
+In einem agilen Projekt kann laut Ken Schwaber und Jeff Sutherland Scrum zur Planung und Steuerung eingesetzt werden \cite{Scrum2001}. Dabei ist Scrum eine \emph{Methode zum Management von Arbeit in einer sozial komplizierten Umgebung}. In einem Scrum-Projekt, also einem Projekt dessen Projektmanagement mithilfe von Scrum realisiert wird, sind drei Rollen von Bedeutung.
+\begin{description}
+\item[Scrum Master] Diese Rolle sorgt dafür, das Scrum korrekt verwendet wird, indem Hindernisse entfernt werden.
+\item[Product Owner] Diese Rolle bündelt Anforderungen und gibt sie an das Team weiter, ähnlich dem klassischen "`Projektleiter"'. Der Product Owner gibt damit das Ziel des Projekts vor, denn er hat die Vision und die neuen Ideen. Er ist dazu in der Lage, da er aus dem Fachbereich kommt und somit die Anwenderseite vertritt.
+\item[Team] Das Team ist selbstorganisierend und auch selbstverantwortlich. Flache beziehungsweise keine Hierarchien sind vorteilhaft.
+\end{description}
+Weiterhin existieren die folgenden drei wesentlichen Besprechungen.
+\begin{enumerate} 
+\item Planung
+\item Review
+\item Retrospektive
+\end{enumerate}
+Weiterhin existieren die folgenden drei wesentlichen Dokumente.
+\begin{enumerate} 
+\item Produkt Backlog
+\item Sprint Backlog
+\item Burndown Graph
+\end{enumerate}
+
+\subsection{Extreme Programming (XP)}
+Die eigentliche Entwicklung der Software wird von Scrum als Projektmanagement-Methode nicht adressiert. Daher wird das Programmieren in einem agilen Projekt durch Praktiken unterstützt, die Martin Fowler in seinem Artikel über die neue Methodik \cite{XP2001} beschreibt. Vier wichtige Bestandteile von XP sind demnach die folgenden.
+\begin{enumerate} 
+\item automatisiertes Testen
+\item ständiges Refactoring
+\item schnelle Code reviews
+\item continous integration
+\end{enumerate}
+
+\subsubsection{test}
+
+
+\chapter{USUS-Plugin}
+todo
+
+\section{Java}
+Das Plugin existiert bereits für Java.
+
+\section{.NET}
+Wir hätten es gerne auch für .NET.
+
+
+
+
+\chapter{Anforderungen}
+todo
+
+
+
 
 \bibliography{masterthesis}
 \bibliographystyle{alpha}
