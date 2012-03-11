@@ -93,10 +93,15 @@ todo
 todo
 
 
-\section{Agile Softwareentwicklung}
+\section{Objektorientierung}
 todo
 
-\subsection{Agiles Manifest}
+
+\section{Statische Code-Analyse}
+todo
+
+
+\section{Agile Softwareentwicklung}
 Im Jahr 2001 haben sich 17 Softwareentwickler zusammen gesetzt und überlegt, wie bessere Software entwickelt werden kann. Das Ergebnis ist das sogenannte \emph{Agile Manifesto} \cite{AgileManifesto2001}, welches die folgenden vier Werte beinhaltet.
 \begin{description}
 \item[Individuals and interactions] over processes and tools
@@ -112,8 +117,6 @@ Neben diesen Werten nennt das Manifest auch mehrere Prinzipien.
 \item kundennah
 \item collective code ownership
 \end{enumerate}
-
-\subsection{Scrum}
 In einem agilen Projekt kann laut Ken Schwaber und Jeff Sutherland Scrum zur Planung und Steuerung eingesetzt werden \cite{Scrum2001}. Dabei ist Scrum eine \emph{Methode zum Management von Arbeit in einer sozial komplizierten Umgebung}. In einem Scrum-Projekt, also einem Projekt dessen Projektmanagement mithilfe von Scrum realisiert wird, sind drei Rollen von Bedeutung.
 \begin{description}
 \item[Scrum Master] Diese Rolle sorgt dafür, das Scrum korrekt verwendet wird, indem Hindernisse entfernt werden.
@@ -133,7 +136,8 @@ Weiterhin existieren die folgenden drei wesentlichen Dokumente.
 \item[Burndown Graph] Fortschrittskontrolle, "`Hauptsache man weiß wo man ist."'
 \end{description}
 
-\subsection{Extreme Programming (XP)}
+
+\section{Clean Code}
 Die eigentliche Entwicklung der Software wird von Scrum als Projektmanagement-Methode nicht adressiert. Daher wird das Programmieren in einem agilen Projekt durch Praktiken unterstützt, die Martin Fowler in seinem Artikel über die neue Methodik \cite{XP2001} beschreibt. Vier wichtige Bestandteile von XP sind demnach die folgenden.
 \begin{enumerate} 
 \item automatisiertes Testen
@@ -142,23 +146,130 @@ Die eigentliche Entwicklung der Software wird von Scrum als Projektmanagement-Me
 \item continous integration
 \end{enumerate}
 
-\subsubsection{test}
 
 
-\chapter{USUS-Plugin}
-todo
 
-\section{Java}
-Das Plugin existiert bereits für Java.
+\chapter{Usus}
+Bedeutung: "`das, was üblich ist"'
 
-\section{.NET}
-Wir hätten es gerne auch für .NET.
+\section{Eclipse Plugin}
+Das Plugin existiert bereits für die Java IDE Eclipse.
+
+\section{Metriken}
+Das Plugin berechnet die folgenden Metriken.
+\begin{enumerate} 
+\item Average component dependency
+\item Class size
+\item Cyclomatic complexity
+\item Method length
+\item Number of non-static, non-final public fields
+\item Packages with cyclic dependencies
+\end{enumerate}
 
 
 
 
 \chapter{Anforderungen}
+Was muss gemacht werden?
+
+
+
+
+\chapter{Vorgehensweise}
+\begin{enumerate} 
+\item Evaluierung der geeignetsten Technologie.
+\item Implementierung der Code-Analyse zur Berechnung der Metriken.
+\item Implementierung der Visual Studio Erweiterung zur Anzeige der Ergebnisse.
+\end{enumerate}
+
+
+
+
+\chapter{Technologie Evaluierung}
+Folgende Kriterien:
+\begin{enumerate} 
+\item What is the target? //code or assembly
+\item Access to information required to calculate metrics?
+\item Does it work with unresolved references?
+\item Can it be hosted in a single executable?
+\item Can it be used for more than C$\#$ only?
+\item Does it support all .NET runtimes?
+\item What is the (performance) overhead?
+\end{enumerate}
+
+\section{System.Reflection}
+
+\section{FxCop}
+
+\section{Common Compiler Infrastracture}
+
+\section{NRefactory}
+
+\section{Codename "`Roslyn"'}
+
+\section{Zusammenfassung}
+Mit Ergebnis aka welche Technologie für die statische Codeanalyse verwendet werden soll.
+
+
+
+
+\chapter{Metrik-Berechnung}
 todo
+
+
+
+
+\chapter{Visual Studio Erweiterung}
+todo
+
+
+
+
+\chapter{Entwickler-Feedback}
+todo
+
+
+\section{Achievements System}
+todo
+
+
+\section{Fallbeispiel Andrena-Kurs}
+todo
+
+
+
+
+\chapter{Metrik-Analyse}
+todo
+
+
+\section{Heuristiken}
+todo
+
+
+\section{Exponentialverteilungen}
+todo
+
+
+\section{Andrena Software Qualitäts Index}
+todo
+
+
+
+
+\chapter{Zusammenfassung}
+todo
+
+
+
+
+\chapter{Fazit}
+todo
+
+
+
+
+
 
 
 
