@@ -17,8 +17,8 @@ Class=LaTeXView
 Document=masterthesis.tex
 
 [Frame0_View0,0]
-TopLine=62
-Cursor=4658
+TopLine=119
+Cursor=6014
 
 [Frame1]
 Flags=0
@@ -36,7 +36,7 @@ Document=masterthesis.bib
 
 [Frame1_View0,0]
 TopLine=0
-Cursor=318
+Cursor=535
 
 [SessionInfo]
 FrameCount=2
