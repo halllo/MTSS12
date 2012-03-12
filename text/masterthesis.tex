@@ -3,7 +3,7 @@ a4paper, 							% Papierformat
 %10pt,								% Schriftgröße (12pt, 11pt (Standard))
 %twoside,							% Doppelseiten
 titlepage,						% Titelei auf eigener Seite
-normalheadings,				% Überschriften etwas kleiner (smallheadings)
+%normalheadings,			% Überschriften etwas kleiner (smallheadings)
 %idxtotoc,						% Index im Inhaltsverzeichnis
 %liststotoc,					% Abb.- und Tab.verzeichnis im Inhalt
 %bibtotoc,						% Literaturverzeichnis im Inhalt
@@ -13,7 +13,7 @@ normalheadings,				% Überschriften etwas kleiner (smallheadings)
 ]
 {scrreprt}
 \usepackage[ngerman]{babel}
-\usepackage[isolatin]{inputenc}
+\usepackage[latin1]{inputenc}
 \usepackage{graphicx}
 \usepackage{url}
 \usepackage{tipa}
@@ -68,7 +68,7 @@ Weiterhin soll in einer Metrik-Analyse nach Heuristiken oder Regeln mit statisch
 \chapter*{Abstract}
 Objective of this master thesis is the development of a Visual Studio Extension that is capable of providing direct development feedback based on software metrics. The Eclipse plugin Usus, which already exists, is going to be used as orientation. The extension that is developed shall be able to perform static code analysis of .NET projects in Visual Studio 2010 in order to calculate the code metrics that are relevant for andrena.
 \newline
-As far as feedback is concerned, the extension shall be able to actively support developers to write "clean code". A similar solution to Microsofts Achievements Extension could likely be found with achievements based on common clean code best practices. Therefore an evaluation with sample exercises of an andrena course on the topic of refactoring is done and the variation in the metrics is detected and documented.
+As far as feedback is concerned, the extension shall be able to actively support developers to write "`clean code"'. A similar solution to Microsofts Achievements Extension could likely be found with achievements based on common clean code best practices. Therefore an evaluation with sample exercises of an andrena course on the topic of refactoring is done and the variation in the metrics is detected and documented.
 \newline
 Another metric analysis is performed in order to find heuristics or rules with static significance, which might be able to distinguish good code from bad code. Are there detectable patterns? One thing might be that metrics often follow an exponential distribution. An analysis shall show whether it is possible and if yes, how this can be mapped to the Software Quality Index (SQI) of andrena.
 \newpage
@@ -90,61 +90,47 @@ todo
 
 
 \chapter{Grundlagen}
-todo
+In diesem Kapitel sollen die Grundlagen vermittelt werden, die für ein Verständnis einer mit Quellcode arbeitenden Erweiterung für Visual Studio erforderlich sind. Dazu wird in Abschnitt \ref{sec:oo} zunächst der Begriff der Objektorientierung eingeführt, bevor in Abschnitt \ref{sec:staticcodeanalysis} auf das Konzept der statischen Code-Analyse eingegangen wird. Anschließend wird in Abschnitt \ref{sec:visualstudio} auf das Umfeld der Erweiterung eingegangen, die im Rahmen dieser Master-Thesis entwickelt werden soll. Dabei handelt es sich um das Entwicklungswerkzeug Visual Studio.
+In Abschnitt \ref{sec:cleancode} wird abschließend Bezug auf Quellcode, beziehungsweise die Clean Code Prinzipien genommen.
 
 
 \section{Objektorientierung}
-todo
+\label{sec:oo}
+Die Objektorientierung als Methode ermöglicht laut Benrd Oestereich die hohe Komplexität von Softwaresystemen zu beherrschen \cite{OOSE}. Das ist möglich, da diese Methode die Dinge der realen Welt als Objekte sieht und dadurch die Problemdomäne verständlich und anschaulich macht. Ein objektorientiertes Softwaresystem besteht aus den folgenden vier wesentlichen Komponenten.
+\begin{description}
+\item[Objekt] kommt aus dem lateinischen von \textit{obicere} und bedeutet "`entgegenhalten"'. Bernd Oestereich beschreibt es als "`Gegenstand der Erkenntnis und Wahrnehmung, des Denkens und Handelns"' und bezieht sich dabei auf das Brockhaus Lexikon.
+\item[Klasse] kommt ebenfalls aus dem lateinischen von \textit{classis} und bedeutet "`Aufgebot"'. Damit ist laut Oestereich eine Teilmenge von Objekten der gleichen Struktur gemeint.
+\item[Operation] kommt aus dem lateinischen von \textit{operatio} und bedeutet "`Handlung"'. Eine konkrete Aktion, die anhand einer definierten Vorschrift durchgeführt wird bezeichnet Oestereich in diesem Sinne als Operation. Das Verhalten von Objekten wird anhand ihrer Operationen festgelegt.
+\item[Attribut] kommt auch aus dem lateinischen von \textit{attributum} und bedeutet "`das Beigefügte"', was einer Eigenschaft oder einem Kennzeichen einer Sache entspricht. Die Daten, die ein Objekt ausmachen, werden anhand von Attributen gespeichert, auf die von den Operationen des Objekts aus zugegriffen werden kann.
+\end{description}
+Zusätzlich beschreibt Oerstereich zwei weitere Mittel von objektorientierten Softwaresystemen, die der Abstraktion dienen und die es erlauben irrelevant Dinge wegzulassen.
+\begin{description}
+\item[Assoziation] kommt aus dem lateinischen von \textit{associare} und bedeutet "`verbinden"'. Nach Oestereich entspricht dies einer \textit{Hat-eine-Beziehung} und gibt an, dass eine Klasse mit einer anderen Klasse zusammenarbeitet.
+\item[Vererbung] entspricht einer \textit{Ist-ein-Beziehung} und gibt an, dass eine Klasse das Verhalten und die Struktur einer anderen Klasse erbt oder spezialisiert.
+\end{description}
+Mit diesen sechs Konzepten kann eine Softwaresystem objektorientiert beschrieben werden.
 
 
 \section{Statische Code-Analyse}
+\label{sec:staticcodeanalysis}
 todo
 
 
-\section{Agile Softwareentwicklung}
-Im Jahr 2001 haben sich 17 Softwareentwickler zusammen gesetzt und überlegt, wie bessere Software entwickelt werden kann. Das Ergebnis ist das sogenannte \emph{Agile Manifesto} \cite{AgileManifesto2001}, welches die folgenden vier Werte beinhaltet.
-\begin{description}
-\item[Individuals and interactions] over processes and tools
-\item Working software over comprehensive documentation
-\item Customer collaboration over contract negotiation
-\item Responding to change over following a plan
-\end{description}
-Neben diesen Werten nennt das Manifest auch mehrere Prinzipien.
-\begin{enumerate} 
-\item Vorhandene Resourcen mehrfach verwenden
-\item einfach (KISS)
-\item zweckmäßig
-\item kundennah
-\item collective code ownership
-\end{enumerate}
-In einem agilen Projekt kann laut Ken Schwaber und Jeff Sutherland Scrum zur Planung und Steuerung eingesetzt werden \cite{Scrum2001}. Dabei ist Scrum eine \emph{Methode zum Management von Arbeit in einer sozial komplizierten Umgebung}. In einem Scrum-Projekt, also einem Projekt dessen Projektmanagement mithilfe von Scrum realisiert wird, sind drei Rollen von Bedeutung.
-\begin{description}
-\item[Scrum Master] Diese Rolle sorgt dafür, das Scrum korrekt verwendet wird, indem Hindernisse entfernt werden.
-\item[Product Owner] Diese Rolle bündelt Anforderungen und gibt sie an das Team weiter, ähnlich dem klassischen "`Projektleiter"'. Der Product Owner gibt damit das Ziel des Projekts vor, denn er hat die Vision und die neuen Ideen. Er ist dazu in der Lage, da er aus dem Fachbereich kommt und somit die Anwenderseite vertritt.
-\item[Team] Das Team ist selbstorganisierend und auch selbstverantwortlich. Flache beziehungsweise keine Hierarchien sind vorteilhaft.
-\end{description}
-Weiterhin existieren die folgenden drei wesentlichen Besprechungen.
-\begin{description} 
-\item[Planung]
-\item[Review] Entspricht einer Abnahme und besteht aus direktem Feedback nach einem Sprint, also einer kurzen, geschützten Iteration.
-\item[Retrospektive] Dabei handelt es sich um eine Möglichkeit eine kontinuierliche Verbesserung des Prozesses zu erreichen. Im Gegensatz zu Review liegt hier der Fokus auf dem Prozess und nicht auf den Features.
-\end{description}
-Weiterhin existieren die folgenden drei wesentlichen Dokumente.
-\begin{description} 
-\item[Produkt Backlog] Priorisierte Aufgabenliste
-\item[Sprint Backlog]
-\item[Burndown Graph] Fortschrittskontrolle, "`Hauptsache man weiß wo man ist."'
-\end{description}
+\section{Visual Studio}
+\label{sec:visualstudio}
+Visual Studio ist eine integrierte Entwicklungsumgebung (IDE) von Microsoft.
 
 
 \section{Clean Code}
-Die eigentliche Entwicklung der Software wird von Scrum als Projektmanagement-Methode nicht adressiert. Daher wird das Programmieren in einem agilen Projekt durch Praktiken unterstützt, die Martin Fowler in seinem Artikel über die neue Methodik \cite{XP2001} beschreibt. Vier wichtige Bestandteile von XP sind demnach die folgenden.
-\begin{enumerate} 
-\item automatisiertes Testen
-\item ständiges Refactoring
-\item schnelle Code reviews
-\item continous integration
-\end{enumerate}
+\label{sec:cleancode}
+Ein Softwaresystem wird in Form von Quellcode erstellt. Dieser Code wird anschließend kompiliert um eine ausführbares Programm zu erhalten. Robert C. Martin beschreibt Code in seinem Clean Code Buch als Sprache, in der wir die Anforderungen an die Software maschinenlesbar zum Ausdruck bringen \cite{CleanCode}. Weiter beschreibt er in seinem Buch Prinzipien und "`Best Practices"', die das Erstellen von verständlicherem und wartbareren Quellcode unterstützen. Die selben Prinzipien wurden auch von Ralf Westphal und Stefan Lieser aufgegriffen und im Rahmen eines Wertesystems mit sieben Graden vorgestellt \cite{CleanCodeDeveloper}. Martin's Clean Code Buch bleibt auch für Westphal und Lieser die grundlegende Lektüre.
+\paragraph{}
+Die Prinzipien und Best Practices der Clean Code Bewegung umfassen viele Aspekte, die bereits durch Kent Beck in seinem Buch über die Methodik \textit{Extreme Programming} (XP) \cite{XP} eingeführt wurden. Drei wichtige Bestandteile von XP, die ebenfalls in den Graden des Clean Code Wertesystems von Westphal und Lieser auftreten, sind die folgenden.
+\begin{description}
+\item[Automatisiertes Testen] ist eine der wichtigsten Praktiken in der Clean Code Bewegung. Nach Robert C. Martin ist es die Aufgabe eines Entwicklers keinen Schaden in einem Softwaresystem anzurichten. Damit meint er Schaden an der Funktionalität und Schaden an der Struktur der Anwendung. Beides kann mit automatisierten Testfällen sichergestellt werden.
+\item[Ständiges Refactoring] ist der effektivste Schutz gegen Schaden an der Struktur eines Softwaresystems bedingt durch evolutionäres Wachstum und vielen Anpassungen. Durch Tests kann dabei sichergestellt werden, dass Umstrukturierungen den Funktionsumfang nicht beeinträchtigen. Martin Fowler beschreibt solches Refactoring in seinem Buch \cite{Refactoring}
+\item[Schnelle Code Reviews] sind eine weitere Voraussetzung um Clean Code entwickeln zu können. Der entscheidende Punkt ist das Feedback. Je schneller der Entwickler Feedback bekommt um so früher können Probleme im Quellcode erkannt und mit relativ wenig Aufwand korrigiert werden.
+\end{description}
 
 
 
@@ -153,10 +139,10 @@ Die eigentliche Entwicklung der Software wird von Scrum als Projektmanagement-Me
 Bedeutung: "`das, was üblich ist"'
 
 \section{Eclipse Plugin}
-Das Plugin existiert bereits für die Java IDE Eclipse.
+Das Plugin existiert bereits für die Java IDE Eclipse. (Übertragung der einzelnen Ansichten aus Notizen)
 
 \section{Metriken}
-Das Plugin berechnet die folgenden Metriken.
+Das Plugin berechnet die folgenden Metriken. (Zusammenfassung und Erklärung der Metriken mit UML)
 \begin{enumerate} 
 \item Average component dependency
 \item Class size

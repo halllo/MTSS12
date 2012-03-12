@@ -1,0 +1,94 @@
+\documentclass[
+a4paper, 							% Papierformat
+%10pt,								% Schriftgröße (12pt, 11pt (Standard))
+%twoside,							% Doppelseiten
+titlepage,						% Titelei auf eigener Seite
+%normalheadings,			% Überschriften etwas kleiner (smallheadings)
+%idxtotoc,						% Index im Inhaltsverzeichnis
+%liststotoc,					% Abb.- und Tab.verzeichnis im Inhalt
+%bibtotoc,						% Literaturverzeichnis im Inhalt
+%leqno,   						% Nummerierung von Gleichungen links
+%fleqn,								% Ausgabe von Gleichungen linksbündig
+%draft								% überlangen Zeilen in Ausgabe gekennzeichnet
+]
+{scrreprt}
+\usepackage[ngerman]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{tipa}
+\usepackage[left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,includeheadfoot]{geometry}
+
+\begin{document}
+
+
+
+
+\chapter*{info}
+Der Text in diesem Dokument konnte nicht sinnvoll in das Hauptdokument der Master-Thesis integriert werden.
+\newpage
+
+
+
+
+\tableofcontents
+
+
+
+
+\chapter{Grundlagen}
+
+
+\section{Agile Softwareentwicklung}
+Im Jahr 2001 haben sich 17 Softwareentwickler zusammen gesetzt und überlegt, wie bessere Software entwickelt werden kann. Das Ergebnis ist das sogenannte \emph{Agile Manifesto} \cite{AgileManifesto2001}, welches die folgenden vier Werte beinhaltet.
+\begin{description}
+\item[Individuals and interactions] over processes and tools
+\item[Working software] over comprehensive documentation
+\item[Customer collaboration] over contract negotiation
+\item[Responding to change] over following a plan
+\end{description}
+Neben diesen Werten nennt das Manifest auch mehrere Prinzipien.
+\begin{enumerate} 
+\item Vorhandene Resourcen mehrfach verwenden
+\item einfach (KISS)
+\item zweckmäßig
+\item kundennah
+\item collective code ownership
+\end{enumerate}
+In einem agilen Projekt kann laut Ken Schwaber und Jeff Sutherland Scrum zur Planung und Steuerung eingesetzt werden \cite{Scrum2001}. Dabei ist Scrum eine \emph{Methode zum Management von Arbeit in einer sozial komplizierten Umgebung}. In einem Scrum-Projekt, also einem Projekt dessen Projektmanagement mithilfe von Scrum realisiert wird, sind drei Rollen von Bedeutung.
+\begin{description}
+\item[Scrum Master] Diese Rolle sorgt dafür, das Scrum korrekt verwendet wird, indem Hindernisse entfernt werden.
+\item[Product Owner] Diese Rolle bündelt Anforderungen und gibt sie an das Team weiter, ähnlich dem klassischen "`Projektleiter"'. Der Product Owner gibt damit das Ziel des Projekts vor, denn er hat die Vision und die neuen Ideen. Er ist dazu in der Lage, da er aus dem Fachbereich kommt und somit die Anwenderseite vertritt.
+\item[Team] Das Team ist selbstorganisierend und auch selbstverantwortlich. Flache beziehungsweise keine Hierarchien sind vorteilhaft.
+\end{description}
+Weiterhin existieren die folgenden drei wesentlichen Besprechungen.
+\begin{description} 
+\item[Planung] In dieser Sitzung wird festgelegt, welche Aufgaben/Features in einem Sprint abgearbeitet werden müssen.
+\item[Review] Entspricht einer Abnahme und besteht aus direktem Feedback nach einem Sprint, also einer kurzen, geschützten Iteration.
+\item[Retrospektive] Dabei handelt es sich um eine Möglichkeit eine kontinuierliche Verbesserung des Prozesses zu erreichen. Im Gegensatz zu Review liegt hier der Fokus auf dem Prozess und nicht auf den Features.
+\end{description}
+Weiterhin existieren die folgenden drei wesentlichen Dokumente.
+\begin{description} 
+\item[Produkt Backlog] Priorisierte Aufgabenliste für die komplette Projektlaufzeit.
+\item[Sprint Backlog] Priorisierte Aufgabenliste für einen Sprint.
+\item[Burndown Graph] Fortschrittskontrolle, "`Hauptsache man weiß wo man ist."'
+\end{description}
+
+
+\section{XP}
+Die eigentliche Entwicklung der Software wird von Scrum als Projektmanagement-Methode nicht adressiert. Daher wird das Programmieren in einem agilen Projekt durch Praktiken unterstützt, die Kent Beck in seinem Buch über die Methodik \textit{Extreme Programming} (XP) \cite{XP} beschreibt. Vier wichtige Bestandteile von XP sind demnach die folgenden.
+\begin{enumerate} 
+\item automatisiertes Testen
+\item ständiges Refactoring
+\item schnelle Code reviews
+\item continous integration
+\end{enumerate}
+
+
+
+
+
+\bibliography{masterthesis}
+\bibliographystyle{alpha}
+
+\end{document}
