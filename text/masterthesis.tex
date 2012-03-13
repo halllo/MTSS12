@@ -136,21 +136,30 @@ Die Prinzipien und Best Practices der Clean Code Bewegung umfassen viele Aspekte
 
 
 \chapter{Usus}
-Bedeutung: "`das, was üblich ist"'
+Das Wort \textit{usus} kommt aus dem lateinischen und bedeutet "`das, was üblich ist"'. In diesem Kapitel wird das Usus Plugin für die Java Entwicklungsumgebung Eclipse vorgestellt, sowie auf die Metriken, die es berechnet, eingegangen. Der Bedeutung entsprechend 
+
 
 \section{Eclipse Plugin}
-Das Plugin existiert bereits für die Java IDE Eclipse. (Übertragung der einzelnen Ansichten aus Notizen)
+Das Usus Plugin für Eclipse lässt sich über den Menü-Eintrag \texttt{Help / Install New Software} installieren, indem eine neue Software Site mit der Url \url{http://projectusus.googlecode.com/svn/updates/} hinzugefügt und anschließend \emph{Project Usus} ausgewählt wird. Nach der Installation steht die \emph{Project Usus perspective} zur Verfügung, die die folgenden \emph{Views} enthält.
+\begin{description}
+\item[Usus Cockpit] 
+\item[Usus Info]
+\item[Usus Hotspots]
+\item[Usus Histogram]
+\item[Usus Class Graph \& Usus Package Graph]
+\end{description}
+
 
 \section{Metriken}
 Das Plugin berechnet die folgenden Metriken. (Zusammenfassung und Erklärung der Metriken mit UML)
-\begin{enumerate} 
-\item Average component dependency
-\item Class size
-\item Cyclomatic complexity
-\item Method length
-\item Number of non-static, non-final public fields
-\item Packages with cyclic dependencies
-\end{enumerate}
+\begin{description} 
+\item[Average component dependency]
+\item[Class size]
+\item[Cyclomatic complexity]
+\item[Method length]
+\item[Number of non-static, non-final public fields]
+\item[Packages with cyclic dependencies]
+\end{description}
 
 
 
