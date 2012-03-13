@@ -140,13 +140,53 @@ Das Wort \textit{usus} kommt aus dem lateinischen und bedeutet "`das, was üblich
 
 
 \section{Eclipse Plugin}
-Das Usus Plugin für Eclipse lässt sich über den Menü-Eintrag \texttt{Help / Install New Software} installieren, indem eine neue Software Site mit der Url \url{http://projectusus.googlecode.com/svn/updates/} hinzugefügt und anschließend \emph{Project Usus} ausgewählt wird. Nach der Installation steht die \emph{Project Usus perspective} zur Verfügung, die die folgenden \emph{Views} enthält.
+Das Usus Plugin für Eclipse lässt sich über den Menü-Eintrag \texttt{Help / Install New Software} installieren, indem eine neue Software Site mit der Url \url{http://projectusus.googlecode.com/svn/updates/} hinzugefügt und anschließend \emph{Project Usus} ausgewählt wird. Nach der Installation steht die \emph{Project Usus perspective} zur Verfügung, die die folgenden Fenster enthält.
 \begin{description}
-\item[Usus Cockpit] 
-\item[Usus Info]
-\item[Usus Hotspots]
-\item[Usus Histogram]
-\item[Usus Class Graph \& Usus Package Graph]
+
+\item[Usus Cockpit] In diesem Fenster werden die Usus Metriken angezeigt, die für alle Projekte, die Usus betrachtet, gelten.
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=10cm]{images/usus_cockpit.png}
+	\caption{Usus Cockpit zeigt Übersicht über alle Projekte}
+	\label{fig:usus_cockpit}
+\end{figure}
+Die in Abbildung \ref{fig:usus_cockpit} dargestellten Metriken errechnen sich aus der Aggregation der Package-, Klassen- oder Methoden-Eigenschaften.
+
+\item[Usus Info] Dieses Fenster lässt sich im Kontext einer Methode oder einer Klasse öffnen und zeigt Metriken, die anhand der Eigenschaften des Kontextes ermittelt werden können.
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=10cm]{images/usus_info.png}
+	\caption{Usus Info zeigt Übersicht über eine Methode oder Klasse}
+	\label{fig:usus_info}
+\end{figure}
+Das in Abbildung \ref{fig:usus_info} gezeigte Info-Fenster lässt sich mit \texttt{Ctrl-U} öffnen und mit \texttt{Esc} wieder schließen.
+
+\item[Usus Hotspots] todo
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=10cm]{images/usus_hotspots.png}
+	\caption{Usus Hotspots todo}
+	\label{fig:usus_hotspots}
+\end{figure}
+todo Abbildung \ref{fig:usus_hotspots}
+
+\item[Usus Histogram] todo
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=10cm]{images/usus_histogram.png}
+	\caption{Usus Histogram todo}
+	\label{fig:usus_histogram}
+\end{figure}
+todo Abbildung \ref{fig:usus_histogram}
+
+\item[Usus Class Graph \& Usus Package Graph] todo
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=10cm]{images/usus_graph.png}
+	\caption{Usus Graph todo}
+	\label{fig:usus_graph}
+\end{figure}
+todo Abbildung \ref{fig:usus_graph}
 \end{description}
 
 
