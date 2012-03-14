@@ -102,6 +102,7 @@ Die Objektorientierung als Methode ermöglicht laut Benrd Oestereich die hohe Kom
 \item[Klasse] kommt ebenfalls aus dem lateinischen von \textit{classis} und bedeutet "`Aufgebot"'. Damit ist laut Oestereich eine Teilmenge von Objekten der gleichen Struktur gemeint.
 \item[Operation] kommt aus dem lateinischen von \textit{operatio} und bedeutet "`Handlung"'. Eine konkrete Aktion, die anhand einer definierten Vorschrift durchgeführt wird bezeichnet Oestereich in diesem Sinne als Operation. Das Verhalten von Objekten wird anhand ihrer Operationen festgelegt.
 \item[Attribut] kommt auch aus dem lateinischen von \textit{attributum} und bedeutet "`das Beigefügte"', was einer Eigenschaft oder einem Kennzeichen einer Sache entspricht. Die Daten, die ein Objekt ausmachen, werden anhand von Attributen gespeichert, auf die von den Operationen des Objekts aus zugegriffen werden kann.
+\item[Packet] wird von Oestereich als eine Ansammlung von Modellelementen bezeichnet. Dabei sind Modellelemente Klassen oder andere Pakete und dienen der besseren Strukturierung des Systems.
 \end{description}
 Zusätzlich beschreibt Oerstereich zwei weitere Mittel von objektorientierten Softwaresystemen, die der Abstraktion dienen und die es erlauben irrelevant Dinge wegzulassen.
 \begin{description}
@@ -161,32 +162,32 @@ Die in Abbildung \ref{fig:usus_cockpit} dargestellten Metriken errechnen sich au
 \end{figure}
 Das in Abbildung \ref{fig:usus_info} gezeigte Info-Fenster lässt sich mit \texttt{Ctrl-U} öffnen und mit \texttt{Esc} wieder schließen.
 
-\item[Usus Hotspots] todo
+\item[Usus Hotspots] Dieses Fenster zeigt sogenannte Hotspots, also Stellen im Quellcode, dessen Metriken definierte Grenze oder einen Schwellwert überschreiten. Hotspots lassen sich für jede Metrik definieren, die im Usus Cockpit angezeigt wird.
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=10cm]{images/usus_hotspots.png}
-	\caption{Usus Hotspots todo}
+	\caption{Usus Hotspots zeigt die Stellen im Code, die eine besondere Metrikausprägung haben}
 	\label{fig:usus_hotspots}
 \end{figure}
-todo Abbildung \ref{fig:usus_hotspots}
+Das in Abbildung \ref{fig:usus_hotspots} gezeigte Hotspot-Fenster zeigt Hotspots immer nur für eine Metrik an. Der Wechsel zu einer anderen Hotspot-Metrik erfolgt über einen Doppelklick auf die Metrikanzeige im Usus Cockpit.
 
-\item[Usus Histogram] todo
+\item[Usus Histogram] Dieses Fenster zeigt die Verteilung der Metrik-Ausprägungen über alle Projekte, die Usus betrachtet. Die Verteilung lässt sich wie für Usus Hotspots für alle Metriken, die im Usus Cockpit angezeigt werden, definieren.
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=10cm]{images/usus_histogram.png}
-	\caption{Usus Histogram todo}
+	\caption{Usus Histogram zeigt die statistische Verteilung der Ausprägungen der definierten Metrik}
 	\label{fig:usus_histogram}
 \end{figure}
-todo Abbildung \ref{fig:usus_histogram}
+Das in Abbildung \ref{fig:usus_histogram} gezeigte Histogram-Fenster zeigt die Verteilung der Metrik an, die zuvor über einen Einfachklick im Usus Cockpit markiert wurde.
 
-\item[Usus Class Graph \& Usus Package Graph] todo
+\item[Usus Class Graph \& Usus Package Graph] Dieses Fenster zeigt die Abhängigkeiten der betrachteten Projekte auf Klassenebene und auf Paketebene. Optional lassen sich nur Pakete anzeigen, die sich in mindestens einem Zyklus von Abhängigkeiten befinden. Auf Klassenebene lassen sich optional nur Kreuzverbindung (?) anzeigen.
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=10cm]{images/usus_graph.png}
-	\caption{Usus Graph todo}
+	\caption{Usus Graph Fenster zeigen die Abhängigkeiten der Klassen oder Pakete voneinander an}
 	\label{fig:usus_graph}
 \end{figure}
-todo Abbildung \ref{fig:usus_graph}
+Das in Abbildung \ref{fig:usus_graph} dargestellte Fenster besteht aus zwei Karteikarten, über die zwischen Klassen- und Paketebene umgeschaltet werden kann.
 \end{description}
 
 
