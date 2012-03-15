@@ -228,10 +228,19 @@ Was muss gemacht werden?
 
 
 \chapter{Vorgehensweise}
+Meilenstein 0 (Evaluierung der geeignetsten Technologie)
+\begin{enumerate} 
+\item System.Reflection
+\item FxCop
+\item Common Compiler Infrastructure
+\item NRefactory
+\item Codename "`Roslyn"'
+\end{enumerate}
 Meilenstein 1 (Usus.net)
 \begin{enumerate} 
-\item Evaluierung der geeignetsten Technologie.
 \item Implementierung der Code-Analyse zur Berechnung der Metriken.
+\item Implementierung eines geeigneten Objektmodells zur Berechnung von Metriken.
+\item Implementierung der Berechnung der Metriken.
 \item Implementierung der Visual Studio Erweiterung zur Anzeige der Ergebnisse.
 \end{enumerate}
 Meilenstein 2 (Entwickler-Feedback)
@@ -240,12 +249,26 @@ Meilenstein 2 (Entwickler-Feedback)
 \item Implementierung der Entwickler-Feedback Möglichkeiten
 \item Fallbeispiel Andrena-Kurs
 \end{enumerate}
-Meilenstein 3 (Mustererkennung)
+Meilenstein 3 (Statistische Mustererkennung)
 \begin{enumerate} 
-\item Evaluierung von Heuristiken in Metrik-Verteilungen
-\item Implementierung der Regeln mit statische Signifikanz zur besseren Code-Klassifikation
-\item Mapping von Metriken und Verteilungswerte auf den Andrena Software Quality Index
+\item Analyse von Heuristiken in Metrik-Verteilungen
+\item Implementierung von Regeln mit statische Signifikanz zur besseren Code-Klassifikation
+\item Mapping von Metriken und Verteilungswerten auf den Andrena Software Quality Index (SQI)
 \end{enumerate}
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=15cm]{images/planningTable.png}
+	\caption{Projektplan Tabelle}
+	\label{fig:plan_table}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=15cm]{images/planningGantt.png}
+	\caption{Projektplan Gantt-Chart}
+	\label{fig:plan_gantt}
+\end{figure}
 
 
 
@@ -257,6 +280,7 @@ Folgende Kriterien:
 \item Access to information required to calculate metrics?
 \item Does it work with unresolved references?
 \item Can it be hosted in a single executable?
+\item Does it have extenal dependencies?
 \item Can it be used for more than C$\#$ only?
 \item Does it support all .NET runtimes?
 \item What is the (performance) overhead?
