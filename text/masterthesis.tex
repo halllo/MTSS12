@@ -18,6 +18,15 @@ titlepage,						% Titelei auf eigener Seite
 \usepackage{url}
 \usepackage{tipa}
 \usepackage[left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,includeheadfoot]{geometry}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
 
 \begin{document}
 
@@ -115,6 +124,10 @@ Mit diesen sechs Konzepten kann eine Softwaresystem objektorientiert beschrieben
 \section{Statische Code-Analyse}
 \label{sec:staticcodeanalysis}
 todo
+\begin{description}
+\item[Metrik] todo
+\item[Ausprägung der Metrik] todo
+\end{description}
 
 
 \section{Visual Studio}
@@ -142,9 +155,9 @@ Das Wort \textit{usus} kommt aus dem lateinischen und bedeutet "`das, was üblich
 
 \section{Eclipse Plugin}
 Das Usus Plugin für Eclipse lässt sich über den Menü-Eintrag \texttt{Help / Install New Software} installieren, indem eine neue Software Site mit der Url \url{http://projectusus.googlecode.com/svn/updates/} hinzugefügt und anschließend \emph{Project Usus} ausgewählt wird. Nach der Installation steht die \emph{Project Usus perspective} zur Verfügung, die die folgenden Fenster enthält.
-\begin{description}
 
-\item[Usus Cockpit] In diesem Fenster werden die Usus Metriken angezeigt, die für alle Projekte, die Usus betrachtet, gelten.
+\subsection{Usus Cockpit}
+In diesem Fenster werden die Usus Metriken angezeigt, die für alle Projekte, die Usus betrachtet, gelten. Zusätzlich wird der Trend pro Metrik dargestellt, also ob sich die Ausprägung der Metrik verbessert oder verschlechtert.
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=10cm]{images/usus_cockpit.png}
@@ -153,7 +166,8 @@ Das Usus Plugin für Eclipse lässt sich über den Menü-Eintrag \texttt{Help / Inst
 \end{figure}
 Die in Abbildung \ref{fig:usus_cockpit} dargestellten Metriken errechnen sich aus der Aggregation der Package-, Klassen- oder Methoden-Eigenschaften.
 
-\item[Usus Info] Dieses Fenster lässt sich im Kontext einer Methode oder einer Klasse öffnen und zeigt Metriken, die anhand der Eigenschaften des Kontextes ermittelt werden können.
+\subsection{Usus Info}
+Dieses Fenster lässt sich im Kontext einer Methode oder einer Klasse öffnen und zeigt Metriken, die anhand der Eigenschaften des Kontextes ermittelt werden können.
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=10cm]{images/usus_info.png}
@@ -162,33 +176,35 @@ Die in Abbildung \ref{fig:usus_cockpit} dargestellten Metriken errechnen sich au
 \end{figure}
 Das in Abbildung \ref{fig:usus_info} gezeigte Info-Fenster lässt sich mit \texttt{Ctrl-U} öffnen und mit \texttt{Esc} wieder schließen.
 
-\item[Usus Hotspots] Dieses Fenster zeigt sogenannte Hotspots, also Stellen im Quellcode, dessen Metriken definierte Grenze oder einen Schwellwert überschreiten. Hotspots lassen sich für jede Metrik definieren, die im Usus Cockpit angezeigt wird.
+\subsection{Usus Hotspots}
+Dieses Fenster zeigt sogenannte Hotspots, also Stellen im Quellcode, dessen Metriken definierte Grenze oder einen Schwellwert überschreiten. Hotspots lassen sich für jede Metrik definieren, die im Usus Cockpit angezeigt wird. Zusätzlich wird der Trend pro Hotspot gezeigt, also ob sich der Hotspot verbessert oder verschlechtert.
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=10cm]{images/usus_hotspots.png}
 	\caption{Usus Hotspots zeigt die Stellen im Code, die eine besondere Metrikausprägung haben}
 	\label{fig:usus_hotspots}
 \end{figure}
-Das in Abbildung \ref{fig:usus_hotspots} gezeigte Hotspot-Fenster zeigt Hotspots immer nur für eine Metrik an. Der Wechsel zu einer anderen Hotspot-Metrik erfolgt über einen Doppelklick auf die Metrikanzeige im Usus Cockpit.
+Das in Abbildung \ref{fig:usus_hotspots} gezeigte Hotspot-Fenster zeigt Hotspots immer nur für eine Metrik an. Der Wechsel zu einer anderen Hotspot-Metrik erfolgt über einen Doppelklick auf die Metrikanzeige im Usus Cockpit. Über einen Doppelklick auf einen Hotspot lässt sich entweder zu der dazugehörigen Methode im Quelltext oder dem entsprechende Paket oder der Klasse in einem der beiden Usus Graph Ansichten navigieren.
 
-\item[Usus Histogram] Dieses Fenster zeigt die Verteilung der Metrik-Ausprägungen über alle Projekte, die Usus betrachtet. Die Verteilung lässt sich wie für Usus Hotspots für alle Metriken, die im Usus Cockpit angezeigt werden, definieren.
+\subsection{Usus Histogram}
+Dieses Fenster zeigt die absolute Häufigkeitsverteilung der Ausprägungen einer Metrik über alle Projekte an, die Usus betrachtet. Die verwendete Metrik wird dabei auf der der x-Achse angezeigt, während die Anzahl der Ausprägungen auf der y-Achse dargestellt wird. Die Verteilung lässt sich für eine der Metriken definieren, die im Usus Cockpit angezeigt werden.
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=10cm]{images/usus_histogram.png}
 	\caption{Usus Histogram zeigt die statistische Verteilung der Ausprägungen der definierten Metrik}
 	\label{fig:usus_histogram}
 \end{figure}
-Das in Abbildung \ref{fig:usus_histogram} gezeigte Histogram-Fenster zeigt die Verteilung der Metrik an, die zuvor über einen Einfachklick im Usus Cockpit markiert wurde.
+Das in Abbildung \ref{fig:usus_histogram} gezeigte Histogramm-Fenster zeigt die Verteilung der Metrik an, die zuvor über einen Einfachklick im Usus Cockpit markiert wurde. Es zeigt immer nur die Daten für eine Metrik an. Die Ansicht kann vergrößert, verkleinert, skaliert und als Grafik gespeichert werden.
 
-\item[Usus Class Graph \& Usus Package Graph] Dieses Fenster zeigt die Abhängigkeiten der betrachteten Projekte auf Klassenebene und auf Paketebene. Optional lassen sich nur Pakete anzeigen, die sich in mindestens einem Zyklus von Abhängigkeiten befinden. Auf Klassenebene lassen sich optional nur Kreuzverbindung (?) anzeigen.
+\subsection{Usus Class Graph \& Usus Package Graph}
+Dieses Fenster zeigt die Abhängigkeiten der betrachteten Projekte entweder auf Klassenebene oder auf Paketebene an. Auf Paketebene lassen sich optional nur die Pakete anzeigen, die sich in einem Zyklus von Abhängigkeiten zu anderen Paketen befinden. Auf Klassenebene lassen sich optional nur die Klassen anzeigen, die über eine Abhängigkeit über Paketgrenzen hinweg verfügen. Dabei werden auch nur eben diese Paketübergreifenden Abhängigkeiten angezeigt.
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=10cm]{images/usus_graph.png}
-	\caption{Usus Graph Fenster zeigen die Abhängigkeiten der Klassen oder Pakete voneinander an}
+	\caption{Usus Graph Schaubilder zeigen die Abhängigkeiten der Klassen oder Pakete voneinander an}
 	\label{fig:usus_graph}
 \end{figure}
-Das in Abbildung \ref{fig:usus_graph} dargestellte Fenster besteht aus zwei Karteikarten, über die zwischen Klassen- und Paketebene umgeschaltet werden kann.
-\end{description}
+Das in Abbildung \ref{fig:usus_graph} dargestellte Fenster besteht aus zwei Karteikarten. Eine Karteikarte zeigt den Usus Class Graph, während die andere den Usus Package Graph darstellt. Zwischen den beiden Ansichten kann beliebig gewechselt werden. Die Knoten in den Graphen lassen sich mit der Maus frei positionieren. Zusätzlich lassen sich die Graphen-Darstellungen auch automatisch anordnen.
 
 
 \section{Metriken}
