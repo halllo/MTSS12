@@ -11,8 +11,9 @@ namespace FxCopDemo
     {
         static void Main(string[] args)
         {
-            string toAnalyse = @"C:\Users\Manuel Naujoks\Documents\Visual Studio 2010\Projects\SilverlightRun\SilverlightRun\Bin\Release\SilverlightRun.dll";
-            string rule = @"C:\Users\Manuel Naujoks\Documents\Visual Studio 2010\Projects\FxCopDemo\FCRule1\bin\Debug\FCRule1.dll";
+            string toAnalyse = @"D:\manuel\Git\GitHub\MTSS12\source\FxCopDemo\FCRule1\bin\Debug\FCRule1.dll";
+            //string toAnalyse = @"D:\manuel\Git\GitHub\MTSS12\source\FxCopDemo\FCRule1\bin\Debug\Microsoft.Cci.dll";
+            string rule = @"D:\manuel\Git\GitHub\MTSS12\source\FxCopDemo\FCRule1\bin\Debug\FCRule1.dll";
             string fxCop = @"C:\Program Files (x86)\Microsoft Fxcop 10.0\FxCopCmd.exe";
 
             IntrospectUsingFxCopCMD(fxCop, toAnalyse, rule);

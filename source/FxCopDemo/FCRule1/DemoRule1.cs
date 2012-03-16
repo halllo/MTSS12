@@ -9,12 +9,12 @@ namespace FCRule1
 {
     public class DemoRule1 : BaseIntrospectionRule
     {
-        Dictionary<string, int> methodLengths;
+        Dictionary<string, Tuple<int, int>> methodLengths;
 
         public DemoRule1()
             : base("DemoRule1", "FCRule1.FCRule1", typeof(DemoRule1).Assembly)
         {
-            methodLengths = new Dictionary<string, int>();
+            methodLengths = new Dictionary<string, Tuple<int, int>>();
         }
 
         public override TargetVisibilities TargetVisibility
@@ -32,15 +32,33 @@ namespace FCRule1
 
         public override void AfterAnalysis()
         {
-            string newFileName = @"C:\t\" + DateTime.Now.Ticks + ".txt";
+            string outputDirectory = @"D:\e\fxcop\";
+            CreateOutputDirectory(outputDirectory);
+            CreateOutputFile(outputDirectory + DateTime.Now.Ticks + ".txt");
+            base.AfterAnalysis();
+        }
+
+        private static void CreateOutputDirectory(string outputDirectory)
+        {
+            if (!Directory.Exists(outputDirectory)) Directory.CreateDirectory(outputDirectory);
+        }
+
+        private void CreateOutputFile(string newFileName)
+        {
             using (var fileStream = new StreamWriter(File.Create(newFileName)))
             {
-                foreach (var line in methodLengths.Select((m) => m.Key + "\t->\t" + m.Value))
+                foreach (var line in GetLinesFrom(methodLengths))
                 {
                     fileStream.WriteLine(line);
                 }
             }
-            base.AfterAnalysis();
+        }
+
+        private IEnumerable<string> GetLinesFrom(IEnumerable<KeyValuePair<string, Tuple<int, int>>> methods)
+        {
+            return methods.Select((m) => m.Key + "\t->\t" 
+                + m.Value.Item1 + " statements, " 
+                + m.Value.Item2 + " instructions");
         }
 
         public override ProblemCollection Check(Member member)
@@ -49,7 +67,8 @@ namespace FCRule1
             if (method != null)
             {
                 var stCount = method.Body.Statements.Count;
-                methodLengths.Add(member.FullName, stCount);
+                var inCount = method.Instructions.Count;
+                methodLengths.Add(member.FullName, Tuple.Create(stCount, inCount));
             }
 
             return this.Problems;
