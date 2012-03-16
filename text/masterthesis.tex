@@ -209,13 +209,23 @@ Das in Abbildung \ref{fig:usus_graph} dargestellte Fenster besteht aus zwei Kart
 
 \section{Metriken}
 Das Plugin berechnet die folgenden Metriken. (Zusammenfassung und Erklärung der Metriken mit UML)
+\subsection{Projektübergreifend}
 \begin{description} 
 \item[Average component dependency]
-\item[Class size]
-\item[Cyclomatic complexity]
-\item[Method length]
 \item[Number of non-static, non-final public fields]
 \item[Packages with cyclic dependencies]
+\end{description}
+\subsection{Pro Methode}
+\begin{description}
+\item[Class size]
+\item[Cumulative component dependenc of class]
+\item[Cyclomatic complexity]
+\item[Method length]
+\end{description}
+\subsection{Pro Klasse}
+\begin{description}
+\item[Class size]
+\item[Cumulative component dependenc of class]
 \end{description}
 
 
@@ -274,27 +284,38 @@ Meilenstein 3 (Statistische Mustererkennung)
 
 
 \chapter{Technologie Evaluierung}
-Folgende Kriterien:
+Wichtigste Kriterien
 \begin{enumerate} 
-\item What is the target? //code or assembly
-\item Access to information required to calculate metrics?
-\item Does it work with unresolved references?
-\item Can it be hosted in a single executable?
-\item Does it have extenal dependencies?
-\item Can it be used for more than C$\#$ only?
+\item Access to information required to calculate Usus metrics?
 \item Does it support all .NET runtimes?
+\end{enumerate}
+Wichtige Kriterien
+\begin{enumerate} 
+\item Does it have external dependencies?
+\item Does it work with unresolved references?
+\end{enumerate}
+Nice To Have Kriterien
+\begin{enumerate} 
+\item Can it be used for more than C$\#$ only?
+\item What is the target? //code or assembly
 \item What is the (performance) overhead?
 \end{enumerate}
 
+
 \section{System.Reflection}
+
 
 \section{FxCop}
 
+
 \section{Common Compiler Infrastracture}
+
 
 \section{NRefactory}
 
+
 \section{Codename "`Roslyn"'}
+
 
 \section{Zusammenfassung}
 Mit Ergebnis aka welche Technologie für die statische Codeanalyse verwendet werden soll.
@@ -302,7 +323,15 @@ Mit Ergebnis aka welche Technologie für die statische Codeanalyse verwendet werd
 
 
 
-\chapter{Metrik-Berechnung}
+\chapter{Usus.net Objektmodell}
+todo
+
+
+\section{Struktur}
+todo
+
+
+\section{Metrikberechnung}
 todo
 
 
@@ -314,7 +343,7 @@ todo
 
 
 
-\chapter{Entwickler-Feedback}
+\chapter{Clean Code Support}
 todo
 
 
@@ -332,11 +361,15 @@ todo
 todo
 
 
-\section{Heuristiken}
+\section{Histogram}
 todo
 
 
 \section{Exponentialverteilungen}
+todo
+
+
+\section{Heuristiken}
 todo
 
 
