@@ -209,23 +209,22 @@ Das in Abbildung \ref{fig:usus_graph} dargestellte Fenster besteht aus zwei Kart
 
 \section{Metriken}
 Das Plugin berechnet die folgenden Metriken. (Zusammenfassung und Erklärung der Metriken mit UML)
-\subsection{Projektübergreifend}
-\begin{description} 
-\item[Average component dependency]
-\item[Number of non-static, non-final public fields]
-\item[Packages with cyclic dependencies]
-\end{description}
 \subsection{Pro Methode}
 \begin{description}
-\item[Class size]
-\item[Cumulative component dependenc of class]
-\item[Cyclomatic complexity]
-\item[Method length]
+\item[Cyclomatic Complexity]
+\item[Method Length]
 \end{description}
 \subsection{Pro Klasse}
 \begin{description}
-\item[Class size]
-\item[Cumulative component dependenc of class]
+\item[Class Size] Anzahl statischer und nicht-statischer Methoden sowie Konstruktoren unabhängig von der Sichtbarkeit. Eine Klasse wird von Usus dann als Hotspot betrachtet, wenn der Wert der Klassengröße 12 übersteigt.
+\item[Cumulative Component Dependency (of class)] Anzahl Klassen, von denen die betrachtete Klasse direkt und indirekt abhängt. Damit ist nicht der CCD eines Untersystems gemeint, der die CCD-Werte aller beinhalteten Klassen aufsummiert. Eine Klasse wird von Usus dann als Hotspot betrachtet, wenn ihr CCD-Wert über einer Schwelle liegt, die Projektgröße-abhängige ist. Bei kleinen Projekten liegt diese Schwelle bei 15\% der Klassenanzahl, während bei großen Projekten 5\% der Klassenanzahl empfohlen wird. Tatsächlich verwendet Usus die Schwelle von Klassen-CCD 4.
+\end{description}
+\subsection{Projektübergreifend}
+\begin{description} 
+\item[Average Component Dependency] Die ACD-Metrik des Systems entspricht dem Mittelwert der CCD-Werte aller Klassen. Die Prozentangabe in Usus entspricht dem ACD-Wert auf eine Klasse bezogen, also indem Usus noch einmal durch die Anzahl der Klassen dividiert.
+\item[Class Size] Mittelwert über alle gewichteten Klassengrößen. Die Gewichtung wird von Usus anhand der Formel f(classsize) = (classsize / 12) - 1 vorgenommen.
+\item[Number of non-static, non-final public fields]
+\item[Packages with cyclic dependencies]
 \end{description}
 
 
