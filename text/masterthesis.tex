@@ -19,6 +19,8 @@ titlepage,						% Titelei auf eigener Seite
 \usepackage{tipa}
 \usepackage[left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm,includeheadfoot]{geometry}
 \usepackage{hyperref}
+\usepackage{mathtools}
+\usepackage{listings} \lstset{numbers=left, numberstyle=\tiny, numbersep=5pt, xleftmargin=1cm, xrightmargin=1cm, frame=topline} \lstset{language=Java}
 \hypersetup{
     colorlinks,
     citecolor=black,
@@ -115,8 +117,8 @@ Die Objektorientierung als Methode ermöglicht laut Benrd Oestereich die hohe Kom
 \end{description}
 Zusätzlich beschreibt Oerstereich zwei weitere Mittel von objektorientierten Softwaresystemen, die der Abstraktion dienen und die es erlauben irrelevant Dinge wegzulassen.
 \begin{description}
-\item[Assoziation] kommt aus dem lateinischen von \textit{associare} und bedeutet "`verbinden"'. Nach Oestereich entspricht dies einer \textit{Hat-eine-Beziehung} und gibt an, dass eine Klasse mit einer anderen Klasse zusammenarbeitet.
-\item[Vererbung] entspricht einer \textit{Ist-ein-Beziehung} und gibt an, dass eine Klasse das Verhalten und die Struktur einer anderen Klasse erbt oder spezialisiert.
+\item[Assoziation] kommt aus dem lateinischen von \textit{associare} und bedeutet "`verbinden"'. Nach Oestereich entspricht dies einer \textit{Hat-eine-Beziehung} und gibt an, dass eine Klasse mit einer anderen Klasse zusammenarbeitet. Damit ist die Klasse, von der die Assoziation ausgeht, von der anderen Klasse abhängig. Anders ausgedrückt hat diese Klasse eine Abhängigkeit von der anderen.
+\item[Vererbung] entspricht einer \textit{Ist-ein-Beziehung} und gibt an, dass eine Klasse das Verhalten und die Struktur einer anderen Klasse erbt oder spezialisiert. Die Klasse, die von einer anderen erbt, hat somit auch eine Abhängigkeit von ihr.
 \end{description}
 Mit diesen sechs Konzepten kann eine Softwaresystem objektorientiert beschrieben werden.
 
@@ -208,15 +210,60 @@ Das in Abbildung \ref{fig:usus_graph} dargestellte Fenster besteht aus zwei Kart
 
 
 \section{Metriken}
-Das Plugin berechnet die folgenden Metriken. (Zusammenfassung und Erklärung der Metriken mit UML)
+In den Fenstern Usus Cockpit und Usus Info zeit das Eclipse Plugin die Werte verschiedener Metriken an. Das Usus Info Fenster zeigt im Kontext einer Methode neben den Metriken, die es zusätzlich für die Klasse anzeigt auch Methoden-Metriken. In diesem Abschnitt wird daher zuerst auf die Metriken eingegangen, die das Usus Plugin für Methoden berechnet, bevor die Klassen-Metriken näher betrachtet werden. Abschließend werden die Usus Cockpit Metriken beschrieben.
+
 \subsection{Pro Methode}
+Wenn das Usus Info Fenster im Kontext einer Methode geöffnet wird, wird die zyklomatische Komplexität sowie die Länge der Methode dargestellt.
 \subsubsection{Cyclomatic Complexity}
-\subsubsection{Method Length}
+Die Metrik Cyclomatic Complexity wurde von Thomas J. McCabe vorgestellt \cite{AComplexityMeasure} um Methoden anhand von linear unabhängigen Ablaufpfaden in Bezug auf Komplexität zu bewerten. McCabe bezieht sich in seinem Artikel auf die Graphentheorie und errechnet die Komplexität eines Ablaufgraphen wie folgt.
+\begin{equation}
+v(G) = e - n + 2p
+\label{eq:cyclomaticcomplexity1}
+\end{equation}
+\begin{eqnarray*}
+G&=&\text{Ablaufgraph}\\
+v(G)&=&\text{zyklomatische Komplexität von $G$}\\
+e&=&\text{Anzahl Kanten im Ablaufgraphen $G$}\\
+n&=&\text{Anzahl Knoten im Ablaufgraphen $G$}\\
+p&=&\text{Anzahl Zusammenhangskomponenten in $G$}\\
+\label{eq:cyc}
+\end{eqnarray*}
+Ernest Wallmüller beschreibt die zyklomatische Komplexität in seinem Buch \cite{SoftwareQMPraxis} auch als Anzahl aller entscheidungstreffenden Stellen in der Methode. Im Falle einer Verkettung von binären Entscheidungen zu logischen Ausdrücken zählt jede Entscheidung als eine solche Stelle. Diese einfachere Rechnung ergibt sich als
+\begin{equation}
+	v(G) = 1 + \Big( \sum_{b\text{ }\in\text{ }Bs(G)} 1 \Big)
+\label{eq:cyclomaticcomplexity2}
+\end{equation}
+wobei $Bs(G)$ die Menge aller binären Entscheidungen im Ablaufgraphen $G$ darstellt. Voraussetzung für diese Rechnung ist, das die Methode nur einen Eingang und nur einen Ausgang besitzt. Der Quellcode in Listing \ref{listing:simpleifs} soll die Grundlage für eine demonstrative Berechnung der zyklomatischen Komplexität darstellen.
+\begin{lstlisting}[caption={Einfache if-Verschachtelung},label={listing:simpleifs}]
+public void doSomething() {
+   if (condition1) {
+      if (condition2 || condition3)
+         do1();
+   }
+}
+\end{lstlisting}
+Nach Formel \ref{eq:cyclomaticcomplexity2} ergeben sich drei Entscheidungsstellen, welche durch die drei binären Bedingungen dargestellt werden. Die zyklomatische Komplexität entspricht damit \begin{math}v(G) = 1 + 3 = 4\end{math}.
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=9cm]{images/cc.jpg}
+	\caption{Ablaufgraph G des Quellcodes \ref{listing:simpleifs}}
+	\label{fig:ccsamplegraph}
+\end{figure}
+Die Berechnung anhand Formel \ref{eq:cyclomaticcomplexity1} basiert auf der Struktur des Ablaufgraphen, der in Abbildung \ref{fig:ccsamplegraph} dargestellt ist. Hier entspricht die zyklomatische Komplexität \begin{math}v(G) = 10 - 8 + 2 * 1 = 4\end{math}.
+
 \subsection{Pro Klasse}
 \subsubsection{Class Size}
 Anzahl statischer und nicht-statischer Methoden sowie Konstruktoren unabhängig von der Sichtbarkeit. Eine Klasse wird von Usus dann als Hotspot betrachtet, wenn der Wert der Klassengröße 12 übersteigt.
 \subsubsection{Cumulative Component Dependency (of class)}
 Anzahl Klassen, von denen die betrachtete Klasse direkt und indirekt abhängt. Damit ist nicht der CCD eines Untersystems gemeint, der die CCD-Werte aller beinhalteten Klassen aufsummiert. Eine Klasse wird von Usus dann als Hotspot betrachtet, wenn ihr CCD-Wert über einer Schwelle liegt, die Projektgröße-abhängige ist. Bei kleinen Projekten liegt diese Schwelle bei 15\% der Klassenanzahl, während bei großen Projekten 5\% der Klassenanzahl empfohlen wird. Tatsächlich verwendet Usus die Schwelle von Klassen-CCD 4.
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=10cm]{images/ccd.jpg}
+	\caption{Aufsummierte Abhängigkeiten einer Klasse}
+	\label{fig:ccd}
+\end{figure}
+Abbildung \ref{fig:ccd} zeigt sieben Klassen, die in einer hierarchischen Abhängigkeitsstruktur stehen. Klasse A ist von Klasse B und Klasse E abhängig. Zusätzlich wird der CCD-Wert jeder Klasse angegeben. Der Wert einer Klasse entspricht der Anzahl der Klassen, von denen sie direkt und indirekt abhängig ist. Dabei ist eine Klasse immer auch von sich selber abhängig.
+
 \subsection{Projektübergreifend}
 \subsubsection{Average Component Dependency}
 Die ACD-Metrik des Systems entspricht dem Mittelwert der CCD-Werte aller Klassen. Die Prozentangabe in Usus entspricht dem ACD-Wert auf eine Klasse bezogen, also indem Usus noch einmal durch die Anzahl der Klassen dividiert.
