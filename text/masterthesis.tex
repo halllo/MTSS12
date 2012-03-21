@@ -214,8 +214,8 @@ In den Fenstern Usus Cockpit und Usus Info zeit das Eclipse Plugin die Werte ver
 
 \subsection{Pro Methode}
 Wenn das Usus Info Fenster im Kontext einer Methode geöffnet wird, wird die zyklomatische Komplexität sowie die Länge der Methode dargestellt.
-\subsubsection{Cyclomatic Complexity}
-Die Metrik Cyclomatic Complexity wurde von Thomas J. McCabe vorgestellt \cite{AComplexityMeasure} um Methoden anhand von linear unabhängigen Ablaufpfaden in Bezug auf Komplexität zu bewerten. McCabe bezieht sich in seinem Artikel auf die Graphentheorie und errechnet die Komplexität eines Ablaufgraphen wie folgt.
+\subsubsection{Zyklomatische Komplexität}
+Die Metrik \textit{Cyclomatic Complexity} wurde von Thomas J. McCabe vorgestellt \cite{AComplexityMeasure} um Methoden anhand von linear unabhängigen Ablaufpfaden in Bezug auf Komplexität zu bewerten. McCabe bezieht sich in seinem Artikel auf die Graphentheorie und errechnet die Komplexität eines Ablaufgraphen wie folgt.
 \begin{equation}
 v(G) = e - n + 2p
 \label{eq:cyclomaticcomplexity1}
@@ -249,13 +249,15 @@ Nach Formel \ref{eq:cyclomaticcomplexity2} ergeben sich drei Entscheidungsstelle
 	\caption{Ablaufgraph G des Quellcodes \ref{listing:simpleifs}}
 	\label{fig:ccsamplegraph}
 \end{figure}
-Die Berechnung anhand Formel \ref{eq:cyclomaticcomplexity1} basiert auf der Struktur des Ablaufgraphen, der in Abbildung \ref{fig:ccsamplegraph} dargestellt ist. Hier entspricht die zyklomatische Komplexität \begin{math}v(G) = 10 - 8 + 2 * 1 = 4\end{math}.
+Die Berechnung anhand Formel \ref{eq:cyclomaticcomplexity1} basiert auf der Struktur des Ablaufgraphen, der in Abbildung \ref{fig:ccsamplegraph} dargestellt ist. Hier entspricht die zyklomatische Komplexität \begin{math}v(G) = 10 - 8 + 2 * 1 = 4\end{math}. Die Ergebnisse beider Rechnungen sind identisch. Die Eigenschaften einer Methode, die für die Berechnung der \textit{Cyclomatic Complexity}-Metrik erforderlich sind, sind also entweder die Anzahl der binären Entscheidungen oder der vollständige Ablaufgraph.
+\subsubsection{Methodenlänge}
+Die Länge einer Methode kann auf unterschiedliche Weise ermittelt werden. todo!
 
 \subsection{Pro Klasse}
-\subsubsection{Class Size}
+\subsubsection{Klassengröße}
 Anzahl statischer und nicht-statischer Methoden sowie Konstruktoren unabhängig von der Sichtbarkeit. Eine Klasse wird von Usus dann als Hotspot betrachtet, wenn der Wert der Klassengröße 12 übersteigt.
-\subsubsection{Cumulative Component Dependency (of class)}
-Anzahl Klassen, von denen die betrachtete Klasse direkt und indirekt abhängt. Damit ist nicht der CCD eines Untersystems gemeint, der die CCD-Werte aller beinhalteten Klassen aufsummiert. Eine Klasse wird von Usus dann als Hotspot betrachtet, wenn ihr CCD-Wert über einer Schwelle liegt, die Projektgröße-abhängige ist. Bei kleinen Projekten liegt diese Schwelle bei 15\% der Klassenanzahl, während bei großen Projekten 5\% der Klassenanzahl empfohlen wird. Tatsächlich verwendet Usus die Schwelle von Klassen-CCD 4.
+\subsubsection{Kumulierte Komponentenabhängigkeit}
+Cumulative Component Dependency (of class), Anzahl Klassen, von denen die betrachtete Klasse direkt und indirekt abhängt. Damit ist nicht der CCD eines Untersystems gemeint, der die CCD-Werte aller beinhalteten Klassen aufsummiert. Eine Klasse wird von Usus dann als Hotspot betrachtet, wenn ihr CCD-Wert über einer Schwelle liegt, die Projektgröße-abhängige ist. Bei kleinen Projekten liegt diese Schwelle bei 15\% der Klassenanzahl, während bei großen Projekten 5\% der Klassenanzahl empfohlen wird. Tatsächlich verwendet Usus die Schwelle von Klassen-CCD 4.
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=10cm]{images/ccd.jpg}
@@ -265,12 +267,14 @@ Anzahl Klassen, von denen die betrachtete Klasse direkt und indirekt abhängt. Da
 Abbildung \ref{fig:ccd} zeigt sieben Klassen, die in einer hierarchischen Abhängigkeitsstruktur stehen. Klasse A ist von Klasse B und Klasse E abhängig. Zusätzlich wird der CCD-Wert jeder Klasse angegeben. Der Wert einer Klasse entspricht der Anzahl der Klassen, von denen sie direkt und indirekt abhängig ist. Dabei ist eine Klasse immer auch von sich selber abhängig.
 
 \subsection{Projektübergreifend}
-\subsubsection{Average Component Dependency}
-Die ACD-Metrik des Systems entspricht dem Mittelwert der CCD-Werte aller Klassen. Die Prozentangabe in Usus entspricht dem ACD-Wert auf eine Klasse bezogen, also indem Usus noch einmal durch die Anzahl der Klassen dividiert.
-\subsubsection{Class Size}
+\subsubsection{Durchschnittliche kumulierte Komponentenabhängigkeit}
+Average Component Dependency, Die ACD-Metrik des Systems entspricht dem Mittelwert der CCD-Werte aller Klassen. Die Prozentangabe in Usus entspricht dem ACD-Wert auf eine Klasse bezogen, also indem Usus noch einmal durch die Anzahl der Klassen dividiert.
+\subsubsection{Durchschnittliche Klassengröße}
 Mittelwert über alle gewichteten Klassengrößen. Die Gewichtung wird von Usus anhand der Formel f(classsize) = (classsize / 12) - 1 vorgenommen.
-\subsubsection{Number of non-static, non-final public fields}
-\subsubsection{Packages with cyclic dependencies}
+\subsubsection{?Durchschnittliche zyklomatische Komplexität}
+\subsubsection{?Durchschnittliche Methodenlänge}
+\subsubsection{Anzahl nicht-statischer öffentlicher Felder}
+\subsubsection{Pakete mit zyklischen Abhängigkeiten}
 
 
 
