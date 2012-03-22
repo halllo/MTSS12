@@ -122,12 +122,12 @@ Die Prinzipien und Best Practices der Clean Code Bewegung umfassen viele Aspekte
 \subsection{Eclipse}
 \label{subsec:eclipse}
 Eclipse ist eine integrierte Entwicklungsumgebung (IDE) der Eclipse Foundation. Eclipse ist eine kostenfreies open source Programm und wird hauptsächlich für die Entwicklung von Anwendungen mit der Programmiersprache Java verwendet.
-\textbf{todo: info link}
+\newline \textbf{todo: info link}
 
 \subsection{Visual Studio}
 \label{subsec:visualstudio}
 Visual Studio ist eine integrierte Entwicklungsumgebung von Microsoft. Im Gegensatz zu Eclipse ist Visual Studio ab der Professional Version ein kommerzielles Produkt. Die Entwicklung für das .NET Framework von Microsoft wird hauptsächlich mit Visual Studio durchgeführt.
-\textbf{todo: info link}
+\newline \textbf{todo: info link}
 
 
 \section{Technische Grundlagen}
@@ -153,7 +153,7 @@ Mit diesen sieben Konzepten kann eine Softwaresystem objektorientiert beschriebe
 
 \subsection{Graphentheorie}
 \label{subsec:graphs}
-todo
+Heiko Körner beschreibt einen Graph in seinem Skript \cite{GraphAlgorithms} als Zweiertupel \begin{math}G = (V, E)\end{math}. Der erste Wert, $V$, ist eine endliche Menge an Knoten und der zweite, $E$, ist eine endliche Menge an Kanten zwischen diesen Knoten. Eine Kante ist ein Paar aus \begin{math}V \times V\end{math} und beinhaltet die beiden Knoten, die sie verbindet. Körner unterscheidet in gerichtete und ungerichtete Graphen. Bei letzterem verbindet eine Kante die Knoten in beiden Richtungen, wobei eine gerichtete Kante die Verbindungsrichtung anhand der Knoten-Reihenfolge im Kanten-Tupel vorgibt. Weiter definiert Körner einen Baum als zusammenhängenden azyklischen Graph, indem jeder Knoten von einem Wurzelknoten aus erreichbar ist.
 
 \subsection{Statische Code-Analyse}
 \label{subsec:staticcodeanalysis}
@@ -283,14 +283,14 @@ Wenn das Usus Info Fenster im Kontext einer Klasse geöffnet wird, wird die Klass
 \end{description} 
 Das Usus Info Fenster zeigt als Klassengröße die Anzahl der Instanz-Methoden, der Klassen-Methoden sowie der Konstruktoren an. Dabei wird die Sichtbarkeit der Methode oder des Konstruktors nicht berücksichtigt. Das Usus Plugin fokussiert damit auf die Funktion der Klassen und nicht auf die Information und das Wissen einer Klasse, welches in den Feldern liegt.
 \subsubsection{Kumulierte Komponentenabhängigkeit}
-Die Metrik \textit{Cumulative Component Dependency} ist laut Peter Grogono \cite{SoftwareQControl} eine Metrik die für Systeme und Untersysteme ermittelt wird. Dabei werden für jede Klasse (Komponente) in diesem System die Anzahl der Klassen ermittelt, von denen die betrachtete Klasse direkt und indirekt abhängt. Eine Klasse ist immer auch von sich selber abhängig. Anschließend werden diese Abhängigkeitswerte aller betrachteten Klassen aufsummiert und ergeben den CCD-Wert des Systems. In dem Usus Info Fenster wird der Abhängigkeitswert einer betrachteten Klasse als \textit{CCD (of class)} bezeichnet. Um die Anzahl der Klassen zu bestimmen, von denen eine betrachtete Klasse abhängig ist, ist mindestens der vollständige Abhängigkeitsgraph der Klasse erforderlich. Mit einem Durchmusterungsalgorithmus kann die Erreichbarkeitsmenge der Klasse (Startknoten) in diesem Abhängigkeitsgraphen ermittelt werden. Körner beschreibt in seinem Skript \cite{koernerskript} \textbf{TODO: körner skript} die beiden Algorithmen \textit{BFS} (Breadth First Search) und \textit{DFS} (Depth First Search) für diesen Zweck.
+Die Metrik \textit{Cumulative Component Dependency} ist laut Peter Grogono \cite{SoftwareQControl} eine Metrik die für Systeme und Untersysteme ermittelt wird. Dabei werden für jede Klasse (Komponente) in diesem System die Anzahl der Klassen ermittelt, von denen die betrachtete Klasse direkt und indirekt abhängt. Eine Klasse ist immer auch von sich selber abhängig. Anschließend werden diese Abhängigkeitswerte aller betrachteten Klassen aufsummiert und ergeben den CCD-Wert des Systems. In dem Usus Info Fenster wird der Abhängigkeitswert einer betrachteten Klasse als \textit{CCD (of class)} bezeichnet. Um die Anzahl der Klassen zu bestimmen, von denen eine betrachtete Klasse abhängig ist, ist mindestens der vollständige Abhängigkeitsgraph der Klasse erforderlich. Mit einem Durchmusterungsalgorithmus kann die Erreichbarkeitsmenge (Reach-Menge) der Klasse (Startknoten) in diesem Abhängigkeitsgraph ermittelt werden. Heiko Körner beschreibt in seinem Skript \cite{GraphAlgorithms} die beiden Algorithmen \textit{BFS} (Breadth First Search) und \textit{DFS} (Depth First Search) für diesen Zweck.
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=11cm]{images/ccd.jpg}
 	\caption{Abhängigkeitsgraph einer Klasse mit aufsummierten Abhängigkeiten}
 	\label{fig:ccd}
 \end{figure}
-Abbildung \ref{fig:ccd} zeigt sieben Klassen, die in einer hierarchischen Abhängigkeitsstruktur stehen. Offensichtlich ist Klasse A von allen anderen Klassen abhängig und hat damit den CCD-Wert sieben. Dies entspricht der Kardinalität der Reach-Menge von A \begin{math}\{A,B,C,D,E,F,G\}\end{math}, die ermittelt wird, indem BFS oder DFS mit Klasse A als Startknoten im Abhängigkeitsgraphen gestartet wird.
+Abbildung \ref{fig:ccd} zeigt sieben Klassen, die in einer hierarchischen Abhängigkeitsstruktur stehen. Offensichtlich ist Klasse A von allen anderen Klassen abhängig und hat damit den CCD-Wert sieben. Dies entspricht der Kardinalität der Reach-Menge von A, \begin{math}\{A,B,C,D,E,F,G\}\end{math}, die ermittelt wird, indem BFS oder DFS mit Klasse A als Startknoten im Abhängigkeitsgraph gestartet wird. Dabei werden die durch den Algorithmus markierten Knoten als Ergebnis des Algorithmus behandelt. Bei dem Abhängigkeitsgraph muss es sich nicht um einen Baum handeln.
 \begin{equation}
 	ccd(C) = | DFS(dG, C) |
 \label{eq:cumulativecomponentdependencyofclass}
