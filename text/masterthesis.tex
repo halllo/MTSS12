@@ -101,44 +101,15 @@ todo
 
 
 \chapter{Grundlagen}
-In diesem Kapitel sollen die Grundlagen vermittelt werden, die für ein Verständnis einer mit Quellcode arbeitenden Erweiterung für Visual Studio erforderlich sind. Dazu wird in Abschnitt \ref{sec:oo} zunächst der Begriff der Objektorientierung eingeführt, bevor in Abschnitt \ref{sec:staticcodeanalysis} auf das Konzept der statischen Code-Analyse eingegangen wird. Anschließend wird in Abschnitt \ref{sec:visualstudio} auf das Umfeld der Erweiterung eingegangen, die im Rahmen dieser Master-Thesis entwickelt werden soll. Dabei handelt es sich um das Entwicklungswerkzeug Visual Studio.
-In Abschnitt \ref{sec:cleancode} wird abschließend Bezug auf Quellcode, beziehungsweise die Clean Code Prinzipien genommen.
+In diesem Kapitel sollen die Grundlagen vermittelt werden, die für ein Verständnis einer mit Quellcode arbeitenden Erweiterung für Visual Studio erforderlich sind. Dazu wird in Abschnitt \ref{sec:generalbasics} zunächst auf allgemeine Grundlagen wie Quellcode, sowie Entwicklungsumgebungen eingegangen. Anschließend werden in Abschnitt \ref{sec:technicalbasics} die technischen Grundlagen vorgestellt.
 
 
-\section{Objektorientierung}
-\label{sec:oo}
-Die Objektorientierung als Methode ermöglicht laut Benrd Oestereich die hohe Komplexität von Softwaresystemen zu beherrschen \cite{OOSE}. Das ist möglich, da diese Methode die Dinge der realen Welt als Objekte sieht und dadurch die Problemdomäne verständlich und anschaulich macht. Ein objektorientiertes Softwaresystem besteht aus den folgenden vier wesentlichen Komponenten.
-\begin{description}
-\item[Objekt] kommt aus dem lateinischen von \textit{obicere} und bedeutet "`entgegenhalten"'. Bernd Oestereich beschreibt es als "`Gegenstand der Erkenntnis und Wahrnehmung, des Denkens und Handelns"' und bezieht sich dabei auf das Brockhaus Lexikon.
-\item[Klasse] kommt ebenfalls aus dem lateinischen von \textit{classis} und bedeutet "`Aufgebot"'. Damit ist laut Oestereich eine Teilmenge von Objekten der gleichen Struktur gemeint.
-\item[Operation] kommt aus dem lateinischen von \textit{operatio} und bedeutet "`Handlung"'. Eine konkrete Aktion, die anhand einer definierten Vorschrift durchgeführt wird bezeichnet Oestereich in diesem Sinne als Operation. Das Verhalten von Objekten wird anhand ihrer Operationen festgelegt.
-\item[Attribut] kommt auch aus dem lateinischen von \textit{attributum} und bedeutet "`das Beigefügte"', was einer Eigenschaft oder einem Kennzeichen einer Sache entspricht. Die Daten, die ein Objekt ausmachen, werden anhand von Attributen gespeichert, auf die von den Operationen des Objekts aus zugegriffen werden kann.
-\item[Packet] wird von Oestereich als eine Ansammlung von Modellelementen bezeichnet. Dabei sind Modellelemente Klassen oder andere Pakete und dienen der besseren Strukturierung des Systems.
-\end{description}
-Zusätzlich beschreibt Oerstereich zwei weitere Mittel von objektorientierten Softwaresystemen, die der Abstraktion dienen und die es erlauben irrelevant Dinge wegzulassen.
-\begin{description}
-\item[Assoziation] kommt aus dem lateinischen von \textit{associare} und bedeutet "`verbinden"'. Nach Oestereich entspricht dies einer \textit{Hat-eine-Beziehung} und gibt an, dass eine Klasse mit einer anderen Klasse zusammenarbeitet. Damit ist die Klasse, von der die Assoziation ausgeht, von der anderen Klasse abhängig. Anders ausgedrückt hat diese Klasse eine Abhängigkeit von der anderen.
-\item[Vererbung] entspricht einer \textit{Ist-ein-Beziehung} und gibt an, dass eine Klasse das Verhalten und die Struktur einer anderen Klasse erbt oder spezialisiert. Die Klasse, die von einer anderen erbt, hat somit auch eine Abhängigkeit von ihr.
-\end{description}
-Mit diesen sechs Konzepten kann eine Softwaresystem objektorientiert beschrieben werden.
+\section{Allgemeine Grundlagen}
+In diesem Abschnitt wird in Unterabschnitt \ref{subsec:cleancode} zunächst auf die Clean Code Idee sowie manche Prinzipien eingegangen. Anschließend wird in Unterabschnitt \ref{subsec:eclipse} das Programm Eclipse vorgestellt. In Unterabschnitt \ref{subsec:visualstudio} wird abschließend auf das Umfeld der Erweiterung eingegangen wird, die im Rahmen dieser Master-Thesis entwickelt werden soll. Dabei handelt es sich um das Entwicklungswerkzeug Visual Studio.
+\label{sec:generalbasics}
 
-
-\section{Statische Code-Analyse}
-\label{sec:staticcodeanalysis}
-todo
-\begin{description}
-\item[Metrik] todo
-\item[Ausprägung der Metrik] todo
-\end{description}
-
-
-\section{Visual Studio}
-\label{sec:visualstudio}
-Visual Studio ist eine integrierte Entwicklungsumgebung (IDE) von Microsoft.
-
-
-\section{Clean Code}
-\label{sec:cleancode}
+\subsection{Clean Code}
+\label{subsec:cleancode}
 Ein Softwaresystem wird in Form von Quellcode erstellt. Dieser Code wird anschließend kompiliert um eine ausführbares Programm zu erhalten. Robert C. Martin beschreibt Code in seinem Clean Code Buch als Sprache, in der wir die Anforderungen an die Software maschinenlesbar zum Ausdruck bringen \cite{CleanCode}. Weiter beschreibt er in seinem Buch Prinzipien und "`Best Practices"', die das Erstellen von verständlicherem und wartbareren Quellcode unterstützen. Die selben Prinzipien wurden auch von Ralf Westphal und Stefan Lieser aufgegriffen und im Rahmen eines Wertesystems mit sieben Graden vorgestellt \cite{CleanCodeDeveloper}. Martin's Clean Code Buch bleibt auch für Westphal und Lieser die grundlegende Lektüre.
 \paragraph{}
 Die Prinzipien und Best Practices der Clean Code Bewegung umfassen viele Aspekte, die bereits durch Kent Beck in seinem Buch über die Methodik \textit{Extreme Programming} (XP) \cite{XP} eingeführt wurden. Drei wichtige Bestandteile von XP, die ebenfalls in den Graden des Clean Code Wertesystems von Westphal und Lieser auftreten, sind die folgenden.
@@ -148,11 +119,55 @@ Die Prinzipien und Best Practices der Clean Code Bewegung umfassen viele Aspekte
 \item[Schnelle Code Reviews] sind eine weitere Voraussetzung um Clean Code entwickeln zu können. Der entscheidende Punkt ist das Feedback. Je schneller der Entwickler Feedback bekommt um so früher können Probleme im Quellcode erkannt und mit relativ wenig Aufwand korrigiert werden.
 \end{description}
 
+\subsection{Eclipse}
+\label{subsec:eclipse}
+Eclipse ist eine integrierte Entwicklungsumgebung (IDE) der Eclipse Foundation. Eclipse ist eine kostenfreies open source Programm und wird hauptsächlich für die Entwicklung von Anwendungen mit der Programmiersprache Java verwendet.
+\textbf{todo: info link}
+
+\subsection{Visual Studio}
+\label{subsec:visualstudio}
+Visual Studio ist eine integrierte Entwicklungsumgebung von Microsoft. Im Gegensatz zu Eclipse ist Visual Studio ab der Professional Version ein kommerzielles Produkt. Die Entwicklung für das .NET Framework von Microsoft wird hauptsächlich mit Visual Studio durchgeführt.
+\textbf{todo: info link}
+
+
+\section{Technische Grundlagen}
+\label{sec:technicalbasics}
+In diesem Abschnitt werden die technischen Grundlagen erläutert. Dazu wird in Unterabschnitt \ref{subsec:oo} zunächst der Begriff der Objektorientierung eingeführt, bevor in Unterabschnitt \ref{subsec:graphs} auf Graphen näher eingegangen wird. Abschließend wird in Unterabschnitt \ref{subsec:staticcodeanalysis} das Konzept der statischen Code-Analyse vorgestellt.
+
+\subsection{Objektorientierung}
+\label{subsec:oo}
+Die Objektorientierung als Methode ermöglicht laut Benrd Oestereich die hohe Komplexität von Softwaresystemen zu beherrschen \cite{OOSE}. Das ist möglich, da diese Methode die Dinge der realen Welt als Objekte sieht und dadurch die Problemdomäne verständlich und anschaulich macht. Ein objektorientiertes Softwaresystem besteht aus den folgenden vier wesentlichen Komponenten.
+\begin{description}
+\item[Klasse] kommt aus dem lateinischen von \textit{classis} und bedeutet "`Aufgebot"'. Damit ist laut Oestereich eine Teilmenge von Objekten der gleichen Struktur gemeint.
+\item[Objekt] kommt ebenfalls aus dem lateinischen von \textit{obicere} und bedeutet "`entgegenhalten"'. Bernd Oestereich beschreibt es als "`Gegenstand der Erkenntnis und Wahrnehmung, des Denkens und Handelns"' und bezieht sich dabei auf das Brockhaus Lexikon. Ein Objekt ist eine Instanz einer Klasse.
+\item[Attribut] kommt auch aus dem lateinischen von \textit{attributum} und bedeutet "`das Beigefügte"', was einer Eigenschaft oder einem Kennzeichen einer Sache entspricht. Die Daten, die ein Objekt ausmachen, werden anhand von Attributen gespeichert, auf die von den Operationen des Objekts aus zugegriffen werden kann. Attribute werden auch als Felder bezeichnet und lassen sich in Klassen-Felder und Instanz-Felder unterscheiden. Klassen-Felder können von allen Objekten der Klasse gemeinsam genutzt werden, während Instanz-Felder unterschiedliche Werte für konkrete Objekte haben können.
+\item[Operation] kommt aus dem lateinischen von \textit{operatio} und bedeutet "`Handlung"'. Eine konkrete Aktion, die anhand einer definierten Vorschrift durchgeführt wird bezeichnet Oestereich in diesem Sinne als Operation. Das Verhalten von Objekten wird anhand ihrer Operationen festgelegt. Andere Bezeichnungen für Operation ist Funktion oder Methode. Methoden lassen sich in Klassen-Methoden und Instanz-Methoden aufteilen. Klassen-Methoden können nicht auf die Instanz-Felder sondern nur auf die Klassen-Felder zugreifen. Instanz-Methoden können auf Instanz-Felder und auf Klassenfelder zugreifen.
+\item[Paket] wird von Oestereich als eine Ansammlung von Modellelementen bezeichnet. Dabei sind Modellelemente Klassen oder andere Pakete und dienen der besseren Strukturierung des Systems.
+\end{description}
+Zusätzlich beschreibt Oerstereich zwei weitere Mittel von objektorientierten Softwaresystemen, die der Abstraktion dienen und die es erlauben irrelevant Dinge wegzulassen.
+\begin{description}
+\item[Assoziation] kommt aus dem lateinischen von \textit{associare} und bedeutet "`verbinden"'. Nach Oestereich entspricht dies einer \textit{Hat-eine-Beziehung} und gibt an, dass eine Klasse mit einer anderen Klasse zusammenarbeitet. Objekte der Klasse können auf Objekte der verbundenen Klasse zugreifen. Damit ist die Klasse, von der die Assoziation ausgeht, von der anderen Klasse abhängig. Anders ausgedrückt hat diese Klasse eine Abhängigkeit von der anderen.
+\item[Vererbung] entspricht einer \textit{Ist-ein-Beziehung} und gibt an, dass eine Klasse das Verhalten und die Struktur einer anderen Klasse erbt oder spezialisiert. Ein Objekt der erbenden Klasse ist damit auch ein Objekt der gerbten Klasse und hat somit auch eine Abhängigkeit von ihr.
+\end{description}
+Mit diesen sieben Konzepten kann eine Softwaresystem objektorientiert beschrieben werden.
+
+\subsection{Graphentheorie}
+\label{subsec:graphs}
+todo
+
+\subsection{Statische Code-Analyse}
+\label{subsec:staticcodeanalysis}
+todo
+\begin{description}
+\item[Metrik] todo
+\item[Ausprägung der Metrik] todo
+\end{description}
+
 
 
 
 \chapter{Usus}
-Das Wort \textit{usus} kommt aus dem lateinischen und bedeutet "`das, was üblich ist"'. In diesem Kapitel wird das Usus Plugin für die Java Entwicklungsumgebung Eclipse vorgestellt, sowie auf die Metriken, die es berechnet, eingegangen. Der Bedeutung entsprechend 
+Das Wort \textit{usus} kommt aus dem lateinischen und bedeutet "`das, was üblich ist"'. In diesem Kapitel wird das Usus Plugin für die Java Entwicklungsumgebung Eclipse \cite{UsusEclipsePlugin} vorgestellt, sowie auf die Metriken, die es berechnet, eingegangen. Der Bedeutung entsprechend 
 
 
 \section{Eclipse Plugin}
@@ -226,7 +241,7 @@ v(G)&=&\text{zyklomatische Komplexität von $G$}\\
 e&=&\text{Anzahl Kanten im Ablaufgraphen $G$}\\
 n&=&\text{Anzahl Knoten im Ablaufgraphen $G$}\\
 p&=&\text{Anzahl Zusammenhangskomponenten in $G$}\\
-\label{eq:cyc}
+\label{eq:cyclomaticcomplexity1agenda}
 \end{eqnarray*}
 Ernest Wallmüller beschreibt die zyklomatische Komplexität in seinem Buch \cite{SoftwareQMPraxis} auch als Anzahl aller entscheidungstreffenden Stellen in der Methode. Im Falle einer Verkettung von binären Entscheidungen zu logischen Ausdrücken zählt jede Entscheidung als eine solche Stelle. Diese einfachere Rechnung ergibt sich als
 \begin{equation}
@@ -251,28 +266,51 @@ Nach Formel \ref{eq:cyclomaticcomplexity2} ergeben sich drei Entscheidungsstelle
 \end{figure}
 Die Berechnung anhand Formel \ref{eq:cyclomaticcomplexity1} basiert auf der Struktur des Ablaufgraphen, der in Abbildung \ref{fig:ccsamplegraph} dargestellt ist. Hier entspricht die zyklomatische Komplexität \begin{math}v(G) = 10 - 8 + 2 * 1 = 4\end{math}. Die Ergebnisse beider Rechnungen sind identisch. Die Eigenschaften einer Methode, die für die Berechnung der \textit{Cyclomatic Complexity}-Metrik erforderlich sind, sind also entweder die Anzahl der binären Entscheidungen oder der vollständige Ablaufgraph.
 \subsubsection{Methodenlänge}
-Die Länge einer Methode kann auf unterschiedliche Weise ermittelt werden. todo!
+Die Länge einer Methode kann auf unterschiedliche Weise ermittelt werden. Eine Unterscheidung der Möglichkeiten wird von Mark Lorenz und Jeff Kidds in \cite{OOSMetrics} vorgenommen.
+\begin{description}
+\item[Anzahl Code-Zeilen] (engl. Lines of code) entspricht der tatsächlichen Anzahl an Zeilenumbrüchen ohne leere Zeilen und Kommentarzeilen. Diese Längenangabe ist stark vom Entwicklerstil abhängig und kann sich daher unterschiedlich ausprägen, je nachdem wie beispielsweise eine Parameterliste umgebrochen wird.
+\item[Anzahl der Anweisungen] (engl. Number of statements) entspricht nach Lorenz und Kidds einer stabileren Längenangabe. Eine Anweisung ist jeder durch ein Semikolon abgeschlossene Ausdruck sowie Bedingungs- und Wiederholungsanweisungen.
+\end{description} 
+Die im Usus Info Fenster angezeigte Methodenlänge entspricht der Anzahl der Anweisungen der Methode. Eine Berechnung kann daher über die Aufsummierung der Semikola und der if-, switch-, for-, while- und try-catch-Anweisungen erfolgen.
 
 \subsection{Pro Klasse}
+Wenn das Usus Info Fenster im Kontext einer Klasse geöffnet wird, wird die Klassengröße sowie die kumulierte Komponentenabhängigkeit der Klasse dargestellt.
 \subsubsection{Klassengröße}
-Anzahl statischer und nicht-statischer Methoden sowie Konstruktoren unabhängig von der Sichtbarkeit. Eine Klasse wird von Usus dann als Hotspot betrachtet, wenn der Wert der Klassengröße 12 übersteigt.
+Ähnlich der Methodenlänge lässt sich auch die Größe einer Klasse auf verschiedene Weise berechnen. Lorenz und Jeff unterscheiden auch hier mehrere Möglichkeiten \cite{OOSMetrics}.
+\begin{description}
+\item[Anzahl der Methoden] erlaubt es Klassen zu erkennen, die zu viel oder zu wenig Funktionen erfüllen. Weitere Unterscheidungsmöglichkeiten sind Methoden in Klassen- und Instanz-Methoden aufzuteilen oder Methoden anhand der Sichtbarkeit zu klassifizieren. Ein Konstruktor würde sich wie eine statische Methode, also eine Klassen-Methode, verhalten.
+\item[Anzahl der Felder] erlaubt es Klassen zu erkennen, die zu viel Informationen verwalten. Auch hier ist eine weitere Unterteilung in Klassen- und Instanz-Felder möglich. Die Sichtbarkeit der Felder erlaubt eine weitere Einschränkung.
+\end{description} 
+Das Usus Info Fenster zeigt als Klassengröße die Anzahl der Instanz-Methoden, der Klassen-Methoden sowie der Konstruktoren an. Dabei wird die Sichtbarkeit der Methode oder des Konstruktors nicht berücksichtigt. Das Usus Plugin fokussiert damit auf die Funktion der Klassen und nicht auf die Information und das Wissen einer Klasse, welches in den Feldern liegt.
 \subsubsection{Kumulierte Komponentenabhängigkeit}
-Cumulative Component Dependency (of class), Anzahl Klassen, von denen die betrachtete Klasse direkt und indirekt abhängt. Damit ist nicht der CCD eines Untersystems gemeint, der die CCD-Werte aller beinhalteten Klassen aufsummiert. Eine Klasse wird von Usus dann als Hotspot betrachtet, wenn ihr CCD-Wert über einer Schwelle liegt, die Projektgröße-abhängige ist. Bei kleinen Projekten liegt diese Schwelle bei 15\% der Klassenanzahl, während bei großen Projekten 5\% der Klassenanzahl empfohlen wird. Tatsächlich verwendet Usus die Schwelle von Klassen-CCD 4.
+Die Metrik \textit{Cumulative Component Dependency} ist laut Peter Grogono \cite{SoftwareQControl} eine Metrik die für Systeme und Untersysteme ermittelt wird. Dabei werden für jede Klasse (Komponente) in diesem System die Anzahl der Klassen ermittelt, von denen die betrachtete Klasse direkt und indirekt abhängt. Eine Klasse ist immer auch von sich selber abhängig. Anschließend werden diese Abhängigkeitswerte aller betrachteten Klassen aufsummiert und ergeben den CCD-Wert des Systems. In dem Usus Info Fenster wird der Abhängigkeitswert einer betrachteten Klasse als \textit{CCD (of class)} bezeichnet. Um die Anzahl der Klassen zu bestimmen, von denen eine betrachtete Klasse abhängig ist, ist mindestens der vollständige Abhängigkeitsgraph der Klasse erforderlich. Mit einem Durchmusterungsalgorithmus kann die Erreichbarkeitsmenge der Klasse (Startknoten) in diesem Abhängigkeitsgraphen ermittelt werden. Körner beschreibt in seinem Skript \cite{koernerskript} \textbf{TODO: körner skript} die beiden Algorithmen \textit{BFS} (Breadth First Search) und \textit{DFS} (Depth First Search) für diesen Zweck.
 \begin{figure}[h]
 	\centering
-		\includegraphics[width=10cm]{images/ccd.jpg}
-	\caption{Aufsummierte Abhängigkeiten einer Klasse}
+		\includegraphics[width=11cm]{images/ccd.jpg}
+	\caption{Abhängigkeitsgraph einer Klasse mit aufsummierten Abhängigkeiten}
 	\label{fig:ccd}
 \end{figure}
-Abbildung \ref{fig:ccd} zeigt sieben Klassen, die in einer hierarchischen Abhängigkeitsstruktur stehen. Klasse A ist von Klasse B und Klasse E abhängig. Zusätzlich wird der CCD-Wert jeder Klasse angegeben. Der Wert einer Klasse entspricht der Anzahl der Klassen, von denen sie direkt und indirekt abhängig ist. Dabei ist eine Klasse immer auch von sich selber abhängig.
+Abbildung \ref{fig:ccd} zeigt sieben Klassen, die in einer hierarchischen Abhängigkeitsstruktur stehen. Offensichtlich ist Klasse A von allen anderen Klassen abhängig und hat damit den CCD-Wert sieben. Dies entspricht der Kardinalität der Reach-Menge von A \begin{math}\{A,B,C,D,E,F,G\}\end{math}, die ermittelt wird, indem BFS oder DFS mit Klasse A als Startknoten im Abhängigkeitsgraphen gestartet wird.
+\begin{equation}
+	ccd(C) = | DFS(dG, C) |
+\label{eq:cumulativecomponentdependencyofclass}
+\end{equation}
+\begin{eqnarray*}
+dG&=&\text{Abhängigkeitsgraph des Systems}\\
+C&=&\text{Klasse im System}\in dG\\
+ccd(C)&=&\text{CCD-Wert der Klasse } C\\
+\label{eq:cumulativecomponentdependencyofclassagenda}
+\end{eqnarray*}
+Formel \ref{eq:cumulativecomponentdependencyofclass} zeigt die Berechnungsvorschrift unter Verwendung des \textit{DFS}-Algorithmus. Die Berechnung des CCD-Werts einer Klasse kann also durchgeführt werden, sobald ein Abhängigkeitsgraph erzeugt werden kann. Um einen solchen Graphen zu erzeugen müssen die direkten Abhängigkeiten einer Klasse ermittelt werden können. Jede Klasse wird dann einem Knoten zugeordnet und jede Abhängigkeit einer gerichteten Kante.
 
 \subsection{Projektübergreifend}
 \subsubsection{Durchschnittliche kumulierte Komponentenabhängigkeit}
 Average Component Dependency, Die ACD-Metrik des Systems entspricht dem Mittelwert der CCD-Werte aller Klassen. Die Prozentangabe in Usus entspricht dem ACD-Wert auf eine Klasse bezogen, also indem Usus noch einmal durch die Anzahl der Klassen dividiert.
+Eine Klasse wird von Usus dann als Hotspot betrachtet, wenn ihr CCD-Wert über einer Schwelle liegt, die Projektgröße-abhängige ist. Bei kleinen Projekten liegt diese Schwelle bei 15\% der Klassenanzahl, während bei großen Projekten 5\% der Klassenanzahl empfohlen wird. Tatsächlich verwendet Usus die Schwelle von Klassen-CCD 4.
 \subsubsection{Durchschnittliche Klassengröße}
-Mittelwert über alle gewichteten Klassengrößen. Die Gewichtung wird von Usus anhand der Formel f(classsize) = (classsize / 12) - 1 vorgenommen.
-\subsubsection{?Durchschnittliche zyklomatische Komplexität}
-\subsubsection{?Durchschnittliche Methodenlänge}
+Mittelwert über alle gewichteten Klassengrößen. Die Gewichtung wird von Usus anhand der Formel f(classsize) = (classsize / 12) - 1 vorgenommen. Eine Klasse wird von Usus dann als Hotspot betrachtet, wenn der Wert der Klassengröße 12 übersteigt. 
+\subsubsection{Durchschnittliche zyklomatische Komplexität}
+\subsubsection{Durchschnittliche Methodenlänge}
 \subsubsection{Anzahl nicht-statischer öffentlicher Felder}
 \subsubsection{Pakete mit zyklischen Abhängigkeiten}
 
