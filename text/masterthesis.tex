@@ -95,7 +95,12 @@ Another metric analysis is performed in order to find heuristics or rules with s
 \chapter{Einführung}
 \pagenumbering{arabic}
 \setcounter{page}{1}
-todo
+bla bla bla Softwarequalität
+bla bla bla Metriken
+bla bla bla Entwicklerfeedback
+bla bla bla Übersicht über Codebasis
+bla bla bla direkt in Visual Studio
+bla bla bla
 
 
 
@@ -138,7 +143,7 @@ In diesem Abschnitt werden die technischen Grundlagen erläutert. Dazu wird in Un
 \label{subsec:oo}
 Die Objektorientierung als Methode ermöglicht laut Benrd Oestereich die hohe Komplexität von Softwaresystemen zu beherrschen \cite{OOSE}. Das ist möglich, da diese Methode die Dinge der realen Welt als Objekte sieht und dadurch die Problemdomäne verständlich und anschaulich macht. Ein objektorientiertes Softwaresystem besteht aus den folgenden vier wesentlichen Komponenten.
 \begin{description}
-\item[Klasse] kommt aus dem lateinischen von \textit{classis} und bedeutet "`Aufgebot"'. Damit ist laut Oestereich eine Teilmenge von Objekten der gleichen Struktur gemeint.
+\item[Klasse] kommt aus dem lateinischen von \textit{classis} und bedeutet "`Aufgebot"'. Damit ist laut Oestereich eine Teilmenge von Objekten der gleichen Struktur gemeint. Eine Klasse ist folglich auch der Typ aller seiner Objekte.
 \item[Objekt] kommt ebenfalls aus dem lateinischen von \textit{obicere} und bedeutet "`entgegenhalten"'. Bernd Oestereich beschreibt es als "`Gegenstand der Erkenntnis und Wahrnehmung, des Denkens und Handelns"' und bezieht sich dabei auf das Brockhaus Lexikon. Ein Objekt ist eine Instanz einer Klasse.
 \item[Attribut] kommt auch aus dem lateinischen von \textit{attributum} und bedeutet "`das Beigefügte"', was einer Eigenschaft oder einem Kennzeichen einer Sache entspricht. Die Daten, die ein Objekt ausmachen, werden anhand von Attributen gespeichert, auf die von den Operationen des Objekts aus zugegriffen werden kann. Attribute werden auch als Felder bezeichnet und lassen sich in Klassen-Felder und Instanz-Felder unterscheiden. Klassen-Felder können von allen Objekten der Klasse gemeinsam genutzt werden, während Instanz-Felder unterschiedliche Werte für konkrete Objekte haben können.
 \item[Operation] kommt aus dem lateinischen von \textit{operatio} und bedeutet "`Handlung"'. Eine konkrete Aktion, die anhand einer definierten Vorschrift durchgeführt wird bezeichnet Oestereich in diesem Sinne als Operation. Das Verhalten von Objekten wird anhand ihrer Operationen festgelegt. Andere Bezeichnungen für Operation ist Funktion oder Methode. Methoden lassen sich in Klassen-Methoden und Instanz-Methoden aufteilen. Klassen-Methoden können nicht auf die Instanz-Felder sondern nur auf die Klassen-Felder zugreifen. Instanz-Methoden können auf Instanz-Felder und auf Klassenfelder zugreifen.
@@ -157,11 +162,13 @@ Heiko Körner beschreibt einen Graph in seinem Skript \cite{GraphAlgorithms} als 
 
 \subsection{Statische Code-Analyse}
 \label{subsec:staticcodeanalysis}
-todo
+bla bla bla abstrakter Syntaxbaum
 \begin{description}
-\item[Metrik] todo
-\item[Ausprägung der Metrik] todo
+\item[Metrik] bla bla bla Softwarequalität
+\item[Ausprägung der Metrik] bla bla bla Softwarequalität
 \end{description}
+bla bla bla NDepend
+bla bla bla Visual Studio Code Metrics
 
 
 
@@ -194,6 +201,7 @@ Dieses Fenster lässt sich im Kontext einer Methode oder einer Klasse öffnen und 
 Das in Abbildung \ref{fig:usus_info} gezeigte Info-Fenster lässt sich mit \texttt{Ctrl-U} öffnen und mit \texttt{Esc} wieder schließen.
 
 \subsection{Usus Hotspots}
+\label{subsec:usushotspots}
 Dieses Fenster zeigt sogenannte Hotspots, also Stellen im Quellcode, dessen Metriken definierte Grenze oder einen Schwellwert überschreiten. Hotspots lassen sich für jede Metrik definieren, die im Usus Cockpit angezeigt wird. Zusätzlich wird der Trend pro Hotspot gezeigt, also ob sich der Hotspot verbessert oder verschlechtert.
 \begin{figure}[h]
 	\centering
@@ -281,9 +289,10 @@ Wenn das Usus Info Fenster im Kontext einer Klasse geöffnet wird, wird die Klass
 \item[Anzahl der Methoden] erlaubt es Klassen zu erkennen, die zu viel oder zu wenig Funktionen erfüllen. Weitere Unterscheidungsmöglichkeiten sind Methoden in Klassen- und Instanz-Methoden aufzuteilen oder Methoden anhand der Sichtbarkeit zu klassifizieren. Ein Konstruktor würde sich wie eine statische Methode, also eine Klassen-Methode, verhalten.
 \item[Anzahl der Felder] erlaubt es Klassen zu erkennen, die zu viel Informationen verwalten. Auch hier ist eine weitere Unterteilung in Klassen- und Instanz-Felder möglich. Die Sichtbarkeit der Felder erlaubt eine weitere Einschränkung.
 \end{description} 
-Das Usus Info Fenster zeigt als Klassengröße die Anzahl der Instanz-Methoden, der Klassen-Methoden sowie der Konstruktoren an. Dabei wird die Sichtbarkeit der Methode oder des Konstruktors nicht berücksichtigt. Das Usus Plugin fokussiert damit auf die Funktion der Klassen und nicht auf die Information und das Wissen einer Klasse, welches in den Feldern liegt.
+Das Usus Info Fenster zeigt als Klassengröße die Anzahl der Instanz-Methoden, der Klassen-Methoden sowie der Konstruktoren an. Dabei wird die Sichtbarkeit der Methode oder des Konstruktors nicht berücksichtigt. Das Usus Plugin fokussiert damit auf die Funktion der Klassen und nicht auf die Information und das Wissen einer Klasse, welches in den Feldern liegt. Die Klassengröße kann also berechnet werden, wenn alle Methoden und Konstruktoren einer Klasse ermittelt werden können.
 \subsubsection{Kumulierte Komponentenabhängigkeit}
-Die Metrik \textit{Cumulative Component Dependency} ist laut Peter Grogono \cite{SoftwareQControl} eine Metrik die für Systeme und Untersysteme ermittelt wird. Dabei werden für jede Klasse (Komponente) in diesem System die Anzahl der Klassen ermittelt, von denen die betrachtete Klasse direkt und indirekt abhängt. Eine Klasse ist immer auch von sich selber abhängig. Anschließend werden diese Abhängigkeitswerte aller betrachteten Klassen aufsummiert und ergeben den CCD-Wert des Systems. In dem Usus Info Fenster wird der Abhängigkeitswert einer betrachteten Klasse als \textit{CCD (of class)} bezeichnet. Um die Anzahl der Klassen zu bestimmen, von denen eine betrachtete Klasse abhängig ist, ist mindestens der vollständige Abhängigkeitsgraph der Klasse erforderlich. Mit einem Durchmusterungsalgorithmus kann die Erreichbarkeitsmenge (Reach-Menge) der Klasse (Startknoten) in diesem Abhängigkeitsgraph ermittelt werden. Heiko Körner beschreibt in seinem Skript \cite{GraphAlgorithms} die beiden Algorithmen \textit{BFS} (Breadth First Search) und \textit{DFS} (Depth First Search) für diesen Zweck.
+\label{subsubsec:ccd}
+Die Metrik \textit{Cumulative Component Dependency} ist laut Peter Grogono \cite{SoftwareQControl} eine Metrik, die für Systeme und Untersysteme ermittelt wird. Dabei werden für jede Klasse (Komponente) in diesem System die Anzahl der Klassen ermittelt, von denen die betrachtete Klasse direkt und indirekt abhängt. Eine Klasse ist immer auch von sich selber abhängig. Marc Philipp und Nicole Rauch bezeichnen diese Abhängigkeiten in ihrem Artikel \cite{EclipseMagUsus} als reflexsiv und transitiv. Anschließend werden die Abhängigkeiten aller betrachteten Klassen aufsummiert und ergeben den CCD-Wert des Systems. In dem Usus Info Fenster wird der Abhängigkeitswert einer betrachteten Klasse als \textit{CCD (of class)} bezeichnet. Um die Anzahl der Klassen zu bestimmen, von denen eine betrachtete Klasse abhängig ist, ist mindestens der vollständige Abhängigkeitsgraph der Klasse erforderlich. Mit einem Durchmusterungsalgorithmus kann die Erreichbarkeitsmenge (Reach-Menge) der Klasse (Startknoten) in diesem Abhängigkeitsgraph ermittelt werden. Heiko Körner beschreibt in seinem Skript \cite{GraphAlgorithms} die beiden Algorithmen \textit{BFS} (Breadth First Search) und \textit{DFS} (Depth First Search) für diesen Zweck.
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=11cm]{images/ccd.jpg}
@@ -301,12 +310,38 @@ C&=&\text{Klasse im System}\in dG\\
 ccd(C)&=&\text{CCD-Wert der Klasse } C\\
 \label{eq:cumulativecomponentdependencyofclassagenda}
 \end{eqnarray*}
-Formel \ref{eq:cumulativecomponentdependencyofclass} zeigt die Berechnungsvorschrift unter Verwendung des \textit{DFS}-Algorithmus. Die Berechnung des CCD-Werts einer Klasse kann also durchgeführt werden, sobald ein Abhängigkeitsgraph erzeugt werden kann. Um einen solchen Graphen zu erzeugen müssen die direkten Abhängigkeiten einer Klasse ermittelt werden können. Jede Klasse wird dann einem Knoten zugeordnet und jede Abhängigkeit einer gerichteten Kante.
+Formel \ref{eq:cumulativecomponentdependencyofclass} zeigt die Berechnungsvorschrift unter Verwendung des \textit{DFS}-Algorithmus. Die Berechnung des CCD-Werts einer Klasse kann also durchgeführt werden, sobald ein Abhängigkeitsgraph erzeugt werden kann. Um einen solchen Graphen zu erzeugen müssen die direkten Abhängigkeiten einer Klasse ermittelt werden können. Jede Klasse wird dann einem Knoten zugeordnet und jede Abhängigkeit einer gerichteten Kante. Die direkten Abhängigkeiten einer Klasse können bestimmt werden, wenn die Typen aller Felder, Methodenparameter, Oberklasse und Interfaces sowie sämtlicher Methodenaufrufe entfernter Klassen identifiziert werden können. Abhängigkeiten zu Klassen, wie beispielsweise \texttt{String} oder \texttt{Object}, die im Basis-Framework definiert sind, können ignoriert werden.
 
 \subsection{Projektübergreifend}
+Neben den Metriken, die Usus für Methoden und Klassen berechnet, werden im Usus Cockpit Statistiken zu der Codebasis angezeigt. Dafür werden die ermittelten Metriken bewertet, wie es Marc Philipp und Nicole Rauch in ihrem Artikel \cite{EclipseMagUsus} beschreiben. In diesem Unterabschnitt werden die verscheiden Statistiken vorgestellt und auf ihre Bewertung eingegangen. Weiterhin werden die Schwellwerte der Statistiken definiert, anhand derer eine Klasse, Methode oder Paket als Hotspot (siehe Unter-Unterabschnitt \ref{subsec:usushotspots}) eingestuft wird.
 \subsubsection{Durchschnittliche kumulierte Komponentenabhängigkeit}
-Average Component Dependency, Die ACD-Metrik des Systems entspricht dem Mittelwert der CCD-Werte aller Klassen. Die Prozentangabe in Usus entspricht dem ACD-Wert auf eine Klasse bezogen, also indem Usus noch einmal durch die Anzahl der Klassen dividiert.
-Eine Klasse wird von Usus dann als Hotspot betrachtet, wenn ihr CCD-Wert über einer Schwelle liegt, die Projektgröße-abhängige ist. Bei kleinen Projekten liegt diese Schwelle bei 15\% der Klassenanzahl, während bei großen Projekten 5\% der Klassenanzahl empfohlen wird. Tatsächlich verwendet Usus die Schwelle von Klassen-CCD 4.
+Die Metrik \textit{Average Component Dependency} ist laut Peter Grogono \cite{SoftwareQControl} wie \textit{Cumulative Component Dependency} eine Metrik, die für Systeme und Untersysteme ermittelt wird. Dabei wird der Mittelwert des CCD-Werts des Systems wie in Formel \ref{eq:averagecomponentdependency1} berechnet, wobei $n$ die Anzahl der Klassen im System ist.
+\begin{equation}
+	acd = \frac{ccd}{n}
+\label{eq:averagecomponentdependency1}
+\end{equation}
+Da Usus die CCD-Werte nicht für Systeme oder Untersysteme ermittelt, sondern die CCD-Werte der Klassen bestimmt ohne sie aufzusummieren (siehe Unter-Unterabschnitt \ref{subsubsec:ccd}), kann der ACD-Wert anhand einer Menge von Klassen $Cs$ berechnet werden, wie in Formel \ref{eq:averagecomponentdependency2} dargestellt. Die Rechnung ist äquivalent zu Formel \ref{eq:averagecomponentdependency1}.
+\begin{equation}
+	acd(Cs) = \frac{\displaystyle \sum_{C\text{ }\in\text{ }Cs} ccd(C)}{|Cs|}
+\label{eq:averagecomponentdependency2}
+\end{equation}
+Peter Grogono beschreibt die Bedeutung des ACD-Werts als durchschnittliche Anzahl an Komponenten, die durch eine Änderung einer Komponente betroffen sind und eventuell ebenfalls geändert werden müssen. Der ACD-Wert wird im Usus Cockpit als Statistik in Prozent angezeigt. Dazu wird nochmal der Mittelwert über die betrachteten Klassen gebildet, wie in Formel \ref{eq:averagecomponentdependency3} zu sehen ist und der Bewertungsfunktion von Philipp und Rauch entspricht.
+\begin{equation}
+	acd'(Cs) = \frac{acd(Cs)}{|Cs|}
+\label{eq:averagecomponentdependency3}
+\end{equation}
+Eine Klasse wird von Usus dann als Hotspot betrachtet, wenn ihr CCD-Wert über einer Schwelle liegt, die von der Projektgröße abhängig ist. Die Projektgröße wird dabei an der Anzahl der Klassen festgelegt. Anhand der Tooltip-Erklärung im Usus Cockpit liegt diese Schwelle für kleine Projekte bei 15\% der Klassenanzahl, während bei großen Projekten 5\% der Klassenanzahl verwendet wird. Dafür haben Philipp und Rauch Formel \ref{eq:averagecomponentdependency4} definiert um die Berechnung des CCD-Schwellwert $L_{ccd}$ anhand der Menge aller Klassen $Cs$ im System durchführen zu können.
+\begin{equation}
+	L_{ccd}(Cs) = \frac{1,5}{2^{\displaystyle (\log_{5} |Cs|)}}
+\label{eq:averagecomponentdependency4}
+\end{equation}
+
+
+
+
+
+
+
 \subsubsection{Durchschnittliche Klassengröße}
 Mittelwert über alle gewichteten Klassengrößen. Die Gewichtung wird von Usus anhand der Formel f(classsize) = (classsize / 12) - 1 vorgenommen. Eine Klasse wird von Usus dann als Hotspot betrachtet, wenn der Wert der Klassengröße 12 übersteigt. 
 \subsubsection{Durchschnittliche zyklomatische Komplexität}
