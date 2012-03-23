@@ -166,6 +166,7 @@ bla bla bla abstrakter Syntaxbaum
 \begin{description}
 \item[Metrik] bla bla bla Softwarequalität
 \item[Ausprägung der Metrik] bla bla bla Softwarequalität
+\item[Statistik der Metrik] bla bla bla Bewertung
 \end{description}
 bla bla bla NDepend
 bla bla bla Visual Studio Code Metrics
@@ -181,14 +182,14 @@ Das Wort \textit{usus} kommt aus dem lateinischen und bedeutet "`das, was üblich
 Das Usus Plugin für Eclipse lässt sich über den Menü-Eintrag \texttt{Help / Install New Software} installieren, indem eine neue Software Site mit der Url \url{http://projectusus.googlecode.com/svn/updates/} hinzugefügt und anschließend \emph{Project Usus} ausgewählt wird. Nach der Installation steht die \emph{Project Usus perspective} zur Verfügung, die die folgenden Fenster enthält.
 
 \subsection{Usus Cockpit}
-In diesem Fenster werden die Usus Metriken angezeigt, die für alle Projekte, die Usus betrachtet, gelten. Zusätzlich wird der Trend pro Metrik dargestellt, also ob sich die Ausprägung der Metrik verbessert oder verschlechtert.
+In diesem Fenster werden die Usus Metriken angezeigt, die für alle Projekte, die Usus betrachtet, gelten. Zusätzlich wird der Trend pro Metrik dargestellt, also ob sich die Ausprägung der Metrik verbessert oder verschlechtert hat. Die Verbesserung wird dabei zwischen zwei erstellten Snapshots gemessen, die entweder manuell oder durch einen neuen Speichervorgang ausgelöst werden können.
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=10cm]{images/usus_cockpit.png}
 	\caption{Usus Cockpit zeigt Übersicht über alle Projekte}
 	\label{fig:usus_cockpit}
 \end{figure}
-Die in Abbildung \ref{fig:usus_cockpit} dargestellten Metriken errechnen sich aus der Aggregation der Package-, Klassen- oder Methoden-Eigenschaften.
+Die in Abbildung \ref{fig:usus_cockpit} dargestellten Statistiken der Metriken errechnen sich aus der Aggregation der Paket-, Klassen- oder Methoden-Eigenschaften.
 
 \subsection{Usus Info}
 Dieses Fenster lässt sich im Kontext einer Methode oder einer Klasse öffnen und zeigt Metriken, die anhand der Eigenschaften des Kontextes ermittelt werden können.
@@ -222,6 +223,7 @@ Dieses Fenster zeigt die absolute Häufigkeitsverteilung der Ausprägungen einer M
 Das in Abbildung \ref{fig:usus_histogram} gezeigte Histogramm-Fenster zeigt die Verteilung der Metrik an, die zuvor über einen Einfachklick im Usus Cockpit markiert wurde. Es zeigt immer nur die Daten für eine Metrik an. Die Ansicht kann vergrößert, verkleinert, skaliert und als Grafik gespeichert werden.
 
 \subsection{Usus Class Graph \& Usus Package Graph}
+\label{subsec:ususgraphs}
 Dieses Fenster zeigt die Abhängigkeiten der betrachteten Projekte entweder auf Klassenebene oder auf Paketebene an. Auf Paketebene lassen sich optional nur die Pakete anzeigen, die sich in einem Zyklus von Abhängigkeiten zu anderen Paketen befinden. Auf Klassenebene lassen sich optional nur die Klassen anzeigen, die über eine Abhängigkeit über Paketgrenzen hinweg verfügen. Dabei werden auch nur eben diese Paketübergreifenden Abhängigkeiten angezeigt.
 \begin{figure}[h]
 	\centering
@@ -238,6 +240,7 @@ In den Fenstern Usus Cockpit und Usus Info zeit das Eclipse Plugin die Werte ver
 \subsection{Pro Methode}
 Wenn das Usus Info Fenster im Kontext einer Methode geöffnet wird, wird die zyklomatische Komplexität sowie die Länge der Methode dargestellt.
 \subsubsection{Zyklomatische Komplexität}
+\label{subsubsec:cyclomaticcomplexity}
 Die Metrik \textit{Cyclomatic Complexity} wurde von Thomas J. McCabe vorgestellt \cite{AComplexityMeasure} um Methoden anhand von linear unabhängigen Ablaufpfaden in Bezug auf Komplexität zu bewerten. McCabe bezieht sich in seinem Artikel auf die Graphentheorie und errechnet die Komplexität eines Ablaufgraphen wie folgt.
 \begin{equation}
 v(G) = e - n + 2p
@@ -253,7 +256,7 @@ p&=&\text{Anzahl Zusammenhangskomponenten in $G$}\\
 \end{eqnarray*}
 Ernest Wallmüller beschreibt die zyklomatische Komplexität in seinem Buch \cite{SoftwareQMPraxis} auch als Anzahl aller entscheidungstreffenden Stellen in der Methode. Im Falle einer Verkettung von binären Entscheidungen zu logischen Ausdrücken zählt jede Entscheidung als eine solche Stelle. Diese einfachere Rechnung ergibt sich als
 \begin{equation}
-	v(G) = 1 + \Big( \sum_{b\text{ }\in\text{ }Bs(G)} 1 \Big)
+	v(G) = 1 + \Big( \sum_{b\text{ }\in\text{ } \displaystyle Bs(G)} 1 \Big)
 \label{eq:cyclomaticcomplexity2}
 \end{equation}
 wobei $Bs(G)$ die Menge aller binären Entscheidungen im Ablaufgraphen $G$ darstellt. Voraussetzung für diese Rechnung ist, das die Methode nur einen Eingang und nur einen Ausgang besitzt. Der Quellcode in Listing \ref{listing:simpleifs} soll die Grundlage für eine demonstrative Berechnung der zyklomatischen Komplexität darstellen.
@@ -274,6 +277,7 @@ Nach Formel \ref{eq:cyclomaticcomplexity2} ergeben sich drei Entscheidungsstelle
 \end{figure}
 Die Berechnung anhand Formel \ref{eq:cyclomaticcomplexity1} basiert auf der Struktur des Ablaufgraphen, der in Abbildung \ref{fig:ccsamplegraph} dargestellt ist. Hier entspricht die zyklomatische Komplexität \begin{math}v(G) = 10 - 8 + 2 * 1 = 4\end{math}. Die Ergebnisse beider Rechnungen sind identisch. Die Eigenschaften einer Methode, die für die Berechnung der \textit{Cyclomatic Complexity}-Metrik erforderlich sind, sind also entweder die Anzahl der binären Entscheidungen oder der vollständige Ablaufgraph.
 \subsubsection{Methodenlänge}
+\label{subsubsec:methodlength}
 Die Länge einer Methode kann auf unterschiedliche Weise ermittelt werden. Eine Unterscheidung der Möglichkeiten wird von Mark Lorenz und Jeff Kidds in \cite{OOSMetrics} vorgenommen.
 \begin{description}
 \item[Anzahl Code-Zeilen] (engl. Lines of code) entspricht der tatsächlichen Anzahl an Zeilenumbrüchen ohne leere Zeilen und Kommentarzeilen. Diese Längenangabe ist stark vom Entwicklerstil abhängig und kann sich daher unterschiedlich ausprägen, je nachdem wie beispielsweise eine Parameterliste umgebrochen wird.
@@ -284,6 +288,7 @@ Die im Usus Info Fenster angezeigte Methodenlänge entspricht der Anzahl der Anwe
 \subsection{Pro Klasse}
 Wenn das Usus Info Fenster im Kontext einer Klasse geöffnet wird, wird die Klassengröße sowie die kumulierte Komponentenabhängigkeit der Klasse dargestellt.
 \subsubsection{Klassengröße}
+\label{subsubsec:classsize}
 Ähnlich der Methodenlänge lässt sich auch die Größe einer Klasse auf verschiedene Weise berechnen. Lorenz und Jeff unterscheiden auch hier mehrere Möglichkeiten \cite{OOSMetrics}.
 \begin{description}
 \item[Anzahl der Methoden] erlaubt es Klassen zu erkennen, die zu viel oder zu wenig Funktionen erfüllen. Weitere Unterscheidungsmöglichkeiten sind Methoden in Klassen- und Instanz-Methoden aufzuteilen oder Methoden anhand der Sichtbarkeit zu klassifizieren. Ein Konstruktor würde sich wie eine statische Methode, also eine Klassen-Methode, verhalten.
@@ -310,7 +315,7 @@ C&=&\text{Klasse im System}\in dG\\
 ccd(C)&=&\text{CCD-Wert der Klasse } C\\
 \label{eq:cumulativecomponentdependencyofclassagenda}
 \end{eqnarray*}
-Formel \ref{eq:cumulativecomponentdependencyofclass} zeigt die Berechnungsvorschrift unter Verwendung des \textit{DFS}-Algorithmus. Die Berechnung des CCD-Werts einer Klasse kann also durchgeführt werden, sobald ein Abhängigkeitsgraph erzeugt werden kann. Um einen solchen Graphen zu erzeugen müssen die direkten Abhängigkeiten einer Klasse ermittelt werden können. Jede Klasse wird dann einem Knoten zugeordnet und jede Abhängigkeit einer gerichteten Kante. Die direkten Abhängigkeiten einer Klasse können bestimmt werden, wenn die Typen aller Felder, Methodenparameter, Oberklasse und Interfaces sowie sämtlicher Methodenaufrufe entfernter Klassen identifiziert werden können. Abhängigkeiten zu Klassen, wie beispielsweise \texttt{String} oder \texttt{Object}, die im Basis-Framework definiert sind, können ignoriert werden.
+Formel \ref{eq:cumulativecomponentdependencyofclass} zeigt die Berechnungsvorschrift unter Verwendung des \textit{DFS}-Algorithmus. Die Berechnung des CCD-Werts einer Klasse kann also durchgeführt werden, sobald ein Abhängigkeitsgraph erzeugt werden kann. Um einen solchen Graphen zu erzeugen müssen die direkten Abhängigkeiten einer Klasse ermittelt werden können. Jede Klasse wird dann einem Knoten zugeordnet und jede Abhängigkeit einer gerichteten Kante. Eine grafische Darstellung (siehe Unterabschnitt \ref{subsec:ususgraphs}) ist dann ebenfalls möglich. Die direkten Abhängigkeiten einer Klasse können bestimmt werden, wenn die Typen aller Felder, Methodenparameter, Oberklasse und Interfaces sowie sämtlicher Methodenaufrufe entfernter Klassen identifiziert werden können. Abhängigkeiten zu Klassen, wie beispielsweise \texttt{String} oder \texttt{Object}, die im Basis-Framework definiert sind, können ignoriert werden.
 
 \subsection{Projektübergreifend}
 Neben den Metriken, die Usus für Methoden und Klassen berechnet, werden im Usus Cockpit Statistiken zu der Codebasis angezeigt. Dafür werden die ermittelten Metriken bewertet, wie es Marc Philipp und Nicole Rauch in ihrem Artikel \cite{EclipseMagUsus} beschreiben. In diesem Unterabschnitt werden die verscheiden Statistiken vorgestellt und auf ihre Bewertung eingegangen. Weiterhin werden die Schwellwerte der Statistiken definiert, anhand derer eine Klasse, Methode oder Paket als Hotspot (siehe Unter-Unterabschnitt \ref{subsec:usushotspots}) eingestuft wird.
@@ -335,19 +340,60 @@ Eine Klasse wird von Usus dann als Hotspot betrachtet, wenn ihr CCD-Wert über ei
 	L_{ccd}(Cs) = \frac{1,5}{2^{\displaystyle (\log_{5} |Cs|)}}
 \label{eq:averagecomponentdependency4}
 \end{equation}
-
-
-
-
-
-
-
 \subsubsection{Durchschnittliche Klassengröße}
-Mittelwert über alle gewichteten Klassengrößen. Die Gewichtung wird von Usus anhand der Formel f(classsize) = (classsize / 12) - 1 vorgenommen. Eine Klasse wird von Usus dann als Hotspot betrachtet, wenn der Wert der Klassengröße 12 übersteigt. 
+Eine Klasse wird von Usus als Hotspot gesehen, sobald die in Unter-Unterabschnitt \ref{subsubsec:classsize} beschriebene Klassengröße den Schwellwert 12 übersteigt. Das haben Philipp und Rauch festgelegt. Die im Usus Cockpit angezeigte durchschnittliche Klassengröße betrachtet nur die Klassen, die bereits als Hotspot markiert wurden. Das liegt an der Bewertungsfunktion $rating_{cs}$ von Philipp und Rauch, die in Formel \ref{eq:averageclasssize1} angegeben ist.
+\begin{equation}
+	rating_{cs}(cs) = 
+	\begin{cases}
+		\displaystyle	\frac{1}{12 * cs} - 1, & \text{wenn }cs > 12\\
+		\text{ } 0, & \text{sonst}\\
+	\end{cases}
+\label{eq:averageclasssize1}
+\end{equation}
+Die Bewertungsfunktion der Klassengröße $cs$ ist direkt von dem Schwellwert 12 abhängig und bewertet alle Klassen, dessen Größe 12 oder weniger beträgt mit 0. Um die durchschnittliche Klassengröße $acs$ einer Menge von Klassen $Cs$ zu berechnen, bildet Usus den Mittelwert aller bewerteter Klassengrößen. Dazu wird die Formel \ref{eq:averageclasssize2} verwendet.
+\begin{equation}
+	acs(Cs) = \frac{\displaystyle \sum_{C\text{ }\in\text{ }Cs} rating_{cs}(C)}{|Cs|}
+\label{eq:averageclasssize2}
+\end{equation}
+Dabei gehen die mit 0 bewerteten Klassengrößen ebenfalls in die Durchschnittsberechnung ein.
 \subsubsection{Durchschnittliche zyklomatische Komplexität}
+Die Berechnung der durchschnittlichen zyklomatischen Komplexität findet auf ähnliche Weise statt. Philipp und Rauch haben hier den Schwellwert 4 gewählt. Damit werden Methoden ignoriert, die vier oder weniger unabhängige Ablaufpfade besitzen oder anders ausgedrückt, weniger als vier verschiedene Entscheidungen treffen. Die Bewertungsfunktion $rating_{cc}$ eines wie in Unter-Unterabschnitt \ref{subsubsec:cyclomaticcomplexity} berechneten zyklomatischen Komplexitäts-Wert sieht damit folgendermaßen aus.
+\begin{equation}
+	rating_{cc}(cc) = 
+	\begin{cases}
+		\displaystyle	\frac{1}{4 * cc} - 1, & \text{wenn }cc > 4\\
+		\text{ } 0, & \text{sonst}\\
+	\end{cases}
+\label{eq:averagecyclomaticcomplexity}
+\end{equation}
+Anschließend kann der Mittelwert der bewerteten Komplexitäten gebildet werden.
 \subsubsection{Durchschnittliche Methodenlänge}
+Auch die Berechnung der durchschnittlichen Methodenlänge findet ähnlich statt. Der Schwellwert für die in Unter-Unterabschnitt \ref{subsubsec:methodlength} berechnete Metrik wurde hier auf 9 festgelegt. Methoden mit 9 oder weniger Anweisungen werden damit ignoriert. Die Bewertungsfunktion $rating_{ml}$ sieht dann folgendermaßen aus.
+\begin{equation}
+	rating_{ml}(ml) = 
+	\begin{cases}
+		\displaystyle	\frac{1}{9 * ml} - 1, & \text{wenn }ml > 9\\
+		\text{ } 0, & \text{sonst}\\
+	\end{cases}
+\label{eq:averagemethodlength}
+\end{equation}
+Aus den bewerteten Längen kann dann wieder der Mittelwert berechnet werden.
 \subsubsection{Anzahl nicht-statischer öffentlicher Felder}
+Wenn eine Klasse mindestens ein öffentliches Feld hat, das nicht statisch oder eine Konstante ist, dann betrachtet Usus diese Klasse als einen Hotspot. Dabei wird jede Klasse mit 1 bewertet, die mindestens eines dieser Felder besitzt. Der Schwellwert ist ebenfalls 1. Die Anzahl der betroffenen Klassen wird wie jede andere Metrik im Usus Cockpit über die Anzahl aller Klassen gemittelt und somit als Prozent dargestellt.
 \subsubsection{Pakete mit zyklischen Abhängigkeiten}
+Für Klassen wurde in Unter-Unterabschnitt \ref{subsubsec:ccd} ein Abhängigkeitsgraph unabhängig vom Paket ermittelt, in dem sich die betrachtete Klasse befindet. Um Pakete mit zyklischen Abhängigkeiten zu identifizieren, müssen alle Klassen-Knoten eines Paket in dem Abhängigkeitsgraph zu einem Paket-Knoten in einem neuen Abhängigkeitsgraph auf Paketebene zusammengefasst werden. Die Kanten zwischen den Klassen werden auf Kanten zwischen den übertragen. Anschließend können alle trivialen Kreise im Paket-Abhängigkeitsgraph entfernt und Zyklen gefunden werden. Heiko Körner beschreibt in seinem Skript \cite{GraphAlgorithms} die beiden Algorithmen \textit{Gegenseitige Erreichbarkeit} und \textit{Starke Zusammenhangskomponenten} für diesen Zweck. Mit den Algorithmen können alle starken Zusammenhangskomponenten (engl. \textit{strongly connected components} (SCC)) und damit alle Kreise in dem betrachteten Graphen ermittelt werden.
+\begin{equation}
+	cyclicPackages(pdG) = \sum_{scc\text{ }\in\text{ } \displaystyle SCCs(pdG)} | scc |
+\label{eq:packageswithcyclicdependencies}
+\end{equation}
+\begin{eqnarray*}
+pdG&=&\text{Paket-Abhängigkeitsgraph}\\
+SCCs(pdG)&=&\text{Menge aller starken Zusammenhangskomponenten in }pdG\\
+scc&=&\text{Starke Zusammenhangskomponenten als Menge von Paketen}\\
+cyclicPackages(pdG)&=&\text{Anzahl aller Pakete in allen starken Zusammenhangskomponenten in }pdG\\
+\label{eq:packageswithcyclicdependenciesagenda}
+\end{eqnarray*}
+Formel \ref{eq:packageswithcyclicdependencies} zeigt dabei die Aufsummierung aller Pakete in einem Paket-Abhängigkeitsgraph, unter Verwendung eines Algorithmus zur Berechnung der starken Zusammenhangskomponenten, wie beispielsweise \textit{Starke Zusammenhangskomponenten}.
 
 
 
