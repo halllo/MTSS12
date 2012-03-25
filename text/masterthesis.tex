@@ -366,7 +366,7 @@ Die Berechnung der durchschnittlichen zyklomatischen Komplexität findet auf ähnl
 	\end{cases}
 \label{eq:averagecyclomaticcomplexity}
 \end{equation}
-Anschließend kann der Mittelwert der bewerteten Komplexitäten gebildet werden.
+Anschließend kann der Mittelwert der bewerteten Komplexitäten gebildet werden, indem durch die Anzahl der Methoden dividiert wird.
 \subsubsection{Durchschnittliche Methodenlänge}
 Auch die Berechnung der durchschnittlichen Methodenlänge findet ähnlich statt. Der Schwellwert für die in Unter-Unterabschnitt \ref{subsubsec:methodlength} berechnete Metrik wurde hier auf 9 festgelegt. Methoden mit 9 oder weniger Anweisungen werden damit ignoriert. Die Bewertungsfunktion $rating_{ml}$ sieht dann folgendermaßen aus.
 \begin{equation}
@@ -377,7 +377,7 @@ Auch die Berechnung der durchschnittlichen Methodenlänge findet ähnlich statt. D
 	\end{cases}
 \label{eq:averagemethodlength}
 \end{equation}
-Aus den bewerteten Längen kann dann wieder der Mittelwert berechnet werden.
+Aus den bewerteten Längen kann dann wieder der Mittelwert berechnet werden, indem durch die Anzahl der Methoden dividiert wird.
 \subsubsection{Anzahl nicht-statischer öffentlicher Felder}
 Wenn eine Klasse mindestens ein öffentliches Feld hat, das nicht statisch oder eine Konstante ist, dann betrachtet Usus diese Klasse als einen Hotspot. Dabei wird jede Klasse mit 1 bewertet, die mindestens eines dieser Felder besitzt. Der Schwellwert ist ebenfalls 1. Die Anzahl der betroffenen Klassen wird wie jede andere Metrik im Usus Cockpit über die Anzahl aller Klassen gemittelt und somit als Prozent dargestellt.
 \subsubsection{Pakete mit zyklischen Abhängigkeiten}
@@ -389,11 +389,11 @@ Für Klassen wurde in Unter-Unterabschnitt \ref{subsubsec:ccd} ein Abhängigkeitsg
 \begin{eqnarray*}
 pdG&=&\text{Paket-Abhängigkeitsgraph}\\
 SCCs(pdG)&=&\text{Menge aller starken Zusammenhangskomponenten in }pdG\\
-scc&=&\text{Starke Zusammenhangskomponenten als Menge von Paketen}\\
+scc&=&\text{Starke Zusammenhangskomponente als Menge von Paketen}\\
 cyclicPackages(pdG)&=&\text{Anzahl aller Pakete in allen starken Zusammenhangskomponenten in }pdG\\
 \label{eq:packageswithcyclicdependenciesagenda}
 \end{eqnarray*}
-Formel \ref{eq:packageswithcyclicdependencies} zeigt dabei die Aufsummierung aller Pakete in einem Paket-Abhängigkeitsgraph, unter Verwendung eines Algorithmus zur Berechnung der starken Zusammenhangskomponenten, wie beispielsweise \textit{Starke Zusammenhangskomponenten}.
+Formel \ref{eq:packageswithcyclicdependencies} zeigt dabei die Aufsummierung aller Pakete in einem Paket-Abhängigkeitsgraph, unter Verwendung eines Algorithmus zur Berechnung der starken Zusammenhangskomponenten, wie beispielsweise \textit{Starke Zusammenhangskomponenten}. Abschließend kann der $cyclicPackages$-Wert durch die Anzahl der betrachteten Pakete dividiert werden, um einen durchschnittlichen Paket-Zyklus-Wert zu bestimmen, der im Usus Cockpit angezeigt wird.
 
 
 
