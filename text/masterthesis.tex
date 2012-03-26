@@ -102,6 +102,12 @@ bla bla bla Übersicht über Codebasis
 bla bla bla direkt in Visual Studio
 bla bla bla
 
+\section{andrena objects ag}
+Diese Master-Thesis wird bei dem Software-Unternehmen andrena objects ag durchgeführt. bla bla bla.
+
+\section{Aufbau der Thesis}
+bla bla bla.
+
 
 
 
@@ -170,6 +176,113 @@ bla bla bla abstrakter Syntaxbaum
 \end{description}
 bla bla bla NDepend
 bla bla bla Visual Studio Code Metrics
+
+
+
+
+\chapter{Anforderungen}
+In diesem Kapitel werden die Anforderungen an die Visual Studio Erweiterung zur statischen Code-Anaylse beschrieben, die im Rahmen dieser Master-Thesis entwickelt werden soll. Dabei werden die Anforderungen in einem agilen Kontext bestimmt und in Form von Sprint 0 wie in Scrum\footnote[1]{\url{http://www.pmscrum.com/blog/2011/06/10-things-do-sprint-0}} definiert. Dieses Kapitel gibt damit eine Antwort auf die Frage, was gemacht werden soll.
+
+
+\section{Interessenvertreter}
+Die Interessenvertreter (engl. \textit{Stakeholder}) im Kontext dieser Master-Thesis sind Gruppen von Personen, die einen Einfluss auf Anforderungen des Systems haben können. Die folgenden vier Gruppen wurden dafür identifiziert.
+\begin{description}
+\item[andrena objects ag] als Arbeitgeber stellt das Umfeld dar, indem das Projekt durchgeführt und das System implementiert wird. Sie legt Wert auf agile Softwareentwicklung und möchte Entwicklungsprozesse und Praktiken gewinnbringend einsetzen. Die andrena objects ag hat bereits ein Plugin zur statischen Code-Analyse für Java und Eclipse entwickelt und möchte ihren Entwicklern ein ähnliches Programm auch für die .NET-Umgebung zur Verfügung stellen können.
+\item[Leser dieser Thesis] haben ebenfalls ein Interesse an dem zu entwickelnden Produkt, das hauptsächlich theoretischer Natur ist. Sie haben einen Informatik-artigen Hintergrund und möchten einen Einblick in die Algorithmen und die Implementierungsdetails sämtlicher implementierten Aspekte des Systems erhalten.
+\item[.NET-Entwickler mit wenig Erfahrung] arbeiten an kleineren Codebasen und wollen auf einfache Weise einen Überblick über Problemfälle des Systems behalten. Mithilfe des Systems wollen sie diese rechtzeitig beseitigen und sicherstellen, dass dadurch keine neuen Probleme entstehen.
+\item[.NET-Entwickler mit viel Erfahrung] arbeiten an großen und komplizierten Codebasen und möchten das System einsetzen um Tendenzen im System zu erkennen und Spezialfälle zu analysieren. Auch sie wollen einen besseren Überblick erhalten und das System aus möglichst vielen verschiedenen Perspektiven sehen.
+\item[.NET-Entwickler (Clean Coder)] legen sehr viel Wert auf Quellcode, der möglichst einfach zu verstehen ist und damit schnell an neue Anforderungen angepasst werden kann. Sie erwarten von dem System Feedback und Unterstützung bei der Entwicklung von sauberem Code. Außerdem möchten sie auf Stellen im Code hingewiesen werden, die nicht ihren Vorstellungen entsprechen.
+\end{description}
+
+
+\section{Ziele}
+Nachdem die beteiligten Interessengruppen definiert wurden, werden in diesem Abschnitt die Ziele des zu entwickelnden Systems beschrieben. Peter Hruschka und Chris Rupp erklären in ihrem Buch \cite{AgileSEUML} ein Ziel als "`ein erstrebenswerter Zustand"' in der Zukunft, den es zu erreichen gilt. Damit ist ein Ziel eine sehr abstrakte Anforderung an das System, die sich auch in einem agilen Projekt nicht so schnell ändert wie spezielle Anforderungen.
+
+\subsection{Einsicht in die Codebasis}
+Große Entwicklungsprojekte haben eine große Codebasis, die es den Entwicklern erschwert Aussagen über den Quellcode des Systems zu machen. Mithilfe statischer Code-Analyse kann eine Einsicht in diesen Quellcode gewährleistet und so zum Vorteil aller Interessenvertreter genutzt werden. Eigenschaften des Quellcodes werden als können als Metriken berechnet und bewertet werden. Dieses Ziel ist erreicht, sobald ein Entwickler, der die Codebasis nicht oder nur unzureichend kennt, Eigenschaften des Codes erkennen und darauf reagieren kann.
+
+\subsection{Erkennen von Problemfällen}
+In einer vorhandenen Codebasis besteht die Gefahr, den Überblick über Problemfälle zu verlieren. Ein Problem kann beispielsweise eine Klasse sein, die zu viele Abhängigkeiten zu anderen Klassen hat, oder eine Methode, die zu viel Funktionalität besitzt. Das Erkennen und Anzeigen dieser Stellen ist ein Vorteil, von dem alle Interessenvertreter profitieren können, und der es ermöglicht, Schwachstellen systematisch zu entfernen. Dieses Ziel ist erreicht, sobald ein Entwickler, der die Codebasis nicht oder nur unzureichend kennt, Probleme im Code erkennen und darauf reagieren kann.
+
+\subsection{Förderung von Clean Code}
+Positives Feedback für Clean Code Praktiken.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Bewertung einer Codebasis}
+Aussagen über Codequalität anhand der Metriken.
+
+
+\section{Use Cases}
+Welche Anwendungsfälle gibt es?
+
+
+\section{Architektur Übersiht}
+Wie wird das System ungefähr aussehen?
+
+
+\section{Backlog}
+Was sind die User Stories?
+
+
+
+
+\chapter{Vorgehensweise}
+Meilenstein 0 (Evaluierung der geeignetsten Technologie)
+\begin{enumerate} 
+\item System.Reflection
+\item FxCop
+\item Common Compiler Infrastructure
+\item NRefactory
+\item Codename "`Roslyn"'
+\end{enumerate}
+Meilenstein 1 (Usus.net)
+\begin{enumerate} 
+\item Implementierung der Code-Analyse zur Berechnung der Metriken.
+\item Implementierung eines geeigneten Objektmodells zur Berechnung von Metriken.
+\item Implementierung der Berechnung der Metriken.
+\item Implementierung der Visual Studio Erweiterung zur Anzeige der Ergebnisse.
+\end{enumerate}
+Meilenstein 2 (Entwickler-Feedback)
+\begin{enumerate} 
+\item Evaluierung von Entwickler-Feedback Möglichkeiten
+\item Implementierung der Entwickler-Feedback Möglichkeiten
+\item Fallbeispiel Andrena-Kurs
+\end{enumerate}
+Meilenstein 3 (Statistische Mustererkennung)
+\begin{enumerate} 
+\item Analyse von Heuristiken in Metrik-Verteilungen
+\item Implementierung von Regeln mit statische Signifikanz zur besseren Code-Klassifikation
+\item Mapping von Metriken und Verteilungswerten auf den Andrena Software Quality Index (SQI)
+\end{enumerate}
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=15cm]{images/planningTable.png}
+	\caption{Projektplan Tabelle}
+	\label{fig:plan_table}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=15cm]{images/planningGantt.png}
+	\caption{Projektplan Gantt-Chart}
+	\label{fig:plan_gantt}
+\end{figure}
 
 
 
@@ -398,58 +511,6 @@ cyclicPackages(pdG)&=&\text{Anzahl aller Pakete in allen starken Zusammenhangsko
 \label{eq:packageswithcyclicdependenciesagenda}
 \end{eqnarray*}
 Formel \ref{eq:packageswithcyclicdependencies} zeigt dabei die Aufsummierung aller Pakete in nicht-trivialen starken Zusammenhangskomponenten eines Paket-Abhängigkeitsgraph. Abschließend kann der $cyclicPackages$-Wert durch die Anzahl der betrachteten Pakete dividiert werden, um einen durchschnittlichen Paket-Zyklus-Wert zu bestimmen, der im Usus Cockpit angezeigt wird.
-
-
-
-
-\chapter{Anforderungen}
-Was muss gemacht werden?
-
-
-
-
-\chapter{Vorgehensweise}
-Meilenstein 0 (Evaluierung der geeignetsten Technologie)
-\begin{enumerate} 
-\item System.Reflection
-\item FxCop
-\item Common Compiler Infrastructure
-\item NRefactory
-\item Codename "`Roslyn"'
-\end{enumerate}
-Meilenstein 1 (Usus.net)
-\begin{enumerate} 
-\item Implementierung der Code-Analyse zur Berechnung der Metriken.
-\item Implementierung eines geeigneten Objektmodells zur Berechnung von Metriken.
-\item Implementierung der Berechnung der Metriken.
-\item Implementierung der Visual Studio Erweiterung zur Anzeige der Ergebnisse.
-\end{enumerate}
-Meilenstein 2 (Entwickler-Feedback)
-\begin{enumerate} 
-\item Evaluierung von Entwickler-Feedback Möglichkeiten
-\item Implementierung der Entwickler-Feedback Möglichkeiten
-\item Fallbeispiel Andrena-Kurs
-\end{enumerate}
-Meilenstein 3 (Statistische Mustererkennung)
-\begin{enumerate} 
-\item Analyse von Heuristiken in Metrik-Verteilungen
-\item Implementierung von Regeln mit statische Signifikanz zur besseren Code-Klassifikation
-\item Mapping von Metriken und Verteilungswerten auf den Andrena Software Quality Index (SQI)
-\end{enumerate}
-
-\begin{figure}[h]
-	\centering
-		\includegraphics[width=15cm]{images/planningTable.png}
-	\caption{Projektplan Tabelle}
-	\label{fig:plan_table}
-\end{figure}
-
-\begin{figure}[h]
-	\centering
-		\includegraphics[width=15cm]{images/planningGantt.png}
-	\caption{Projektplan Gantt-Chart}
-	\label{fig:plan_gantt}
-\end{figure}
 
 
 
