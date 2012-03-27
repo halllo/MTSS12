@@ -137,7 +137,7 @@ Eclipse ist eine integrierte Entwicklungsumgebung (IDE) der Eclipse Foundation. 
 
 \subsection{Visual Studio}
 \label{subsec:visualstudio}
-Visual Studio ist eine integrierte Entwicklungsumgebung von Microsoft. Im Gegensatz zu Eclipse ist Visual Studio ab der Professional Version ein kommerzielles Produkt. Die Entwicklung für das .NET Framework von Microsoft wird hauptsächlich mit Visual Studio durchgeführt.
+Visual Studio ist eine integrierte Entwicklungsumgebung von Microsoft. Im Gegensatz zu Eclipse ist Visual Studio ab der Professional Version ein kommerzielles Produkt. Die Entwicklung für das .NET-Framework von Microsoft wird hauptsächlich mit Visual Studio durchgeführt. Die bekanntesten und am weitersten verbreiteten Sprachen für das .NET-Framework sind C\# und Viusal Basic .NET.
 \newline \textbf{todo: info link}
 
 
@@ -181,6 +181,7 @@ bla bla bla Visual Studio Code Metrics
 
 
 \chapter{Anforderungen}
+\label{chap:requirements}
 In diesem Kapitel werden die Anforderungen an die Visual Studio Erweiterung zur statischen Code-Anaylse beschrieben, die im Rahmen dieser Master-Thesis entwickelt werden soll. Dabei werden die Anforderungen in einem agilen Kontext bestimmt und in Form von Sprint 0 wie in Scrum\footnote[1]{\url{http://www.pmscrum.com/blog/2011/06/10-things-do-sprint-0}} definiert. Dieses Kapitel gibt damit eine Antwort auf die Frage, was gemacht werden soll.
 
 
@@ -196,6 +197,7 @@ Die Interessenvertreter (engl. \textit{Stakeholder}) im Kontext dieser Master-Th
 
 
 \section{Ziele}
+\label{sec:goals}
 Nachdem die beteiligten Interessengruppen definiert wurden, werden in diesem Abschnitt die Ziele des zu entwickelnden Systems beschrieben. Peter Hruschka und Chris Rupp erklären in ihrem Buch \cite{AgileSEUML} ein Ziel als "`ein erstrebenswerter Zustand"' in der Zukunft, den es zu erreichen gilt. Damit ist ein Ziel eine abstrakte Form einer Anforderung an das System, die sich auch in einem agilen Projekt nicht so schnell ändert wie spezielle Anforderungen.
 
 \subsection{Einsicht in die Codebasis}
@@ -211,12 +213,26 @@ Das Entwickeln von Code kann auf eine sehr rücksichtslose Art und Weise geschehe
 Eine bestehende Codebasis zu bewerten erfordert detaillierte Kenntnis über alle Klassen, deren Interaktionen und vielem mehr. Außerdem muss eine menschliche Bewertung manuell jedes mal neu erfolgen und ist dabei subjektiv. Eine automatisierte Bewertung anhand von Regeln und Gewichtungen, die auf Erfahrungen basieren, kann die Bewertung optimieren und einem Entwickler jederzeit und ohne viel Aufwand eine Qualitätsprüfung ermöglichen. Dieses Ziel ist erreicht, sobald ein Entwickler, der die Codebasis nicht oder nur unzureichend kennt, die Qualität des Quellcodes ermitteln und mit anderen Systemen vergleichen kann.
 
 
+\section{Architektur}
+In diesem Abschnitt wird die grundlegende Architektur des zu entwickelnden Systems erläutert. Im Rahmen dieser Master-Thesis soll ein System entwickelt werden, dass die in Abschnitt \ref{sec:goals} genannten Ziele erreicht. Zusätzlich soll dieses System als Erweiterung in Visual Studio laufen und den Quelltext (kompiliert und/oder unkompiliert) in einer .NET-Sprache, wie beispielsweise C\#, analysieren. Abbildung \ref{fig:architecture} zeigt die beiden Komponenten \textit{Visualisierung} und \textit{statische Code-Analyse}, um die es sich im weiteren Verlauf handeln wird.
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=12cm]{images/architektur.jpg}
+	\caption{Grobe Architektur des Systems}
+	\label{fig:architecture}
+\end{figure}
+Die Komponente, die die statische Code-Analyse durchführt, verwendet drei Aktionen, die einem kompletten Analyse-Prozess entsprechen. Die schwarzen Pfeile symbolisieren dabei Zugriffe auf Daten. Die Aktion \textit{Berechnung} betrachtet das Softwaresystem und kann dafür auf den Quellcode und das erzeugte Kompilat zugreifen. Das Ergebnis dieser Betrachtung wird in Form von Metriken in einer Datenbank gespeichert und stellt Daten für die Aktion \textit{Gewichtung} bereit. Diese gewichtet die Daten und erzeugt Statistiken, die ebenfalls in der Datenbank hinterlegt werden. Die Aktion \textit{Bewertung} versucht anhand der gewichteten Daten eine Aussage über die Qualität des Softwaresystems zu treffen. Nachdem diese drei Aktionen abgelaufen sind, ist der Analyse-Prozess beendet. Die Komponente \textit{Visualisierung}, die in Visual Studio ausgeführt wird, kann diesen Analyse-Prozess starten und auf dessen Daten zugreifen. Sie zeigt die berechneten Metriken in geeigneten Kontexten an und gibt basierend auf der Bewertung ein entsprechendes Entwickler-Feedback. Dieses Feedback entsteht dabei genau dort, wo der Quellcode entstanden ist, der von dem Analyse-Prozess verarbeitet wurde. Nach einer entsprechenden Veränderung des Quelltext kann der Prozess erneut gestartet werden, um auch diese Veränderung zu analysieren. So entsteht theoretisch ein kontinuierlicher Verbesserungskreislauf. Dieser Zyklus wird durch die breiten transparenten Pfeile angezeigt und entspricht dem Informationsfluss in dieser Umgebung.
+
+
 \section{Use Cases}
 Welche Anwendungsfälle gibt es?
-
-
-\section{Architektur Übersicht}
-Wie wird das System ungefähr aussehen?
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=12cm]{images/usecases.jpg}
+	\caption{Anwendungsfälle des Systems}
+	\label{fig:usecases}
+\end{figure}
+Abbildung \ref{fig:usecases} zeigt die Anwendungsfälle, die sich aus den Zielen in Abschnitt \ref{sec:goals} ergeben.
 
 
 \section{Backlog}
@@ -226,6 +242,8 @@ Was sind die User Stories?
 
 
 \chapter{Vorgehensweise}
+bla bla bla. Dieses Kapitel gibt damit eine Antwort auf die Frage, wie die Anforderungen aus Kapitel \ref{chap:requirements} realisiert werden sollen.
+\newline
 Meilenstein 0 (Evaluierung der geeignetsten Technologie)
 \begin{enumerate} 
 \item System.Reflection
