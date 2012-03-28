@@ -186,6 +186,7 @@ In diesem Kapitel werden die Anforderungen an die Visual Studio Erweiterung zur 
 
 
 \section{Interessenvertreter}
+\label{sec:stakeholder}
 Die Interessenvertreter (engl. \textit{Stakeholder}) im Kontext dieser Master-Thesis sind Gruppen von Personen, die einen Einfluss auf Anforderungen des Systems haben können. Die folgenden vier Gruppen wurden dafür identifiziert.
 \begin{description}
 \item[andrena objects ag] als Arbeitgeber stellt das Umfeld dar, indem das Projekt durchgeführt und das System implementiert wird. Sie legt Wert auf agile Softwareentwicklung und möchte Entwicklungsprozesse und Praktiken gewinnbringend einsetzen. Die andrena objects ag hat bereits ein Plugin zur statischen Code-Analyse für Java und Eclipse entwickelt und möchte ihren Entwicklern ein ähnliches Programm auch für die .NET-Umgebung zur Verfügung stellen können.
@@ -225,27 +226,29 @@ Die Komponente, die die statische Code-Analyse durchführt, verwendet drei Aktion
 
 
 \section{Use Cases}
-Welche Anwendungsfälle gibt es?
+Aus den in Abschnitt \ref{sec:goals} definierten Zielen dieses Projekts lassen sich zunächst vier Anwendungsfälle bestimmen, die in Abbildung \ref{fig:usecases} dargestellt sind.
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=12cm]{images/usecases.jpg}
 	\caption{Anwendungsfälle des Systems}
 	\label{fig:usecases}
 \end{figure}
-Abbildung \ref{fig:usecases} zeigt die Anwendungsfälle, die sich aus den Zielen in Abschnitt \ref{sec:goals} ergeben.
-
-TODO:
-Clean Code entwickeln -> Clean Code Hinweis bekommen
-.NET Entwickler -> Clean Code Verbindung entfernen
-Use Case Diagramm für Thesis-Leser (Technologie Evaluation)
-
-
-
-
+Die Akteure entsprechen ungefähr den in Abschnitt \ref{sec:stakeholder} definierten Interessenvertretern. Der Akteur \textit{.NET-Entwickler} entspricht dem Interessenvertreter mit wenig .NET Erfahrung und dessen Interaktionen mit dem System werden von dem Entwickler mit viel Erfahrung, beziehungsweise Clean Code Interessen, erweitert. Es ist ebenfalls zu sehen, dass der Anwendungsfall \textit{Code-Metriken bestimmen} alle anderen Anwendungsfälle direkt oder indirekt ergänzt. Damit ist er ein entscheidender Bestandteil des Systems, wenn nicht sogar der wichtigste.
 
 
 \section{Backlog}
 Was sind die User Stories?
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -459,7 +462,7 @@ Peter Grogono beschreibt die Bedeutung des ACD-Werts als durchschnittliche Anzah
 	acd'(Cs) = \frac{acd(Cs)}{|Cs|}
 \label{eq:averagecomponentdependency3}
 \end{equation}
-Eine Klasse wird von Usus dann als Hotspot betrachtet, wenn ihr CCD-Wert über einer Schwelle liegt, die von der Projektgröße abhängig ist. Die Projektgröße wird dabei an der Anzahl der Klassen festgelegt. Anhand der Tooltip-Erklärung im Usus Cockpit liegt diese Schwelle für kleine Projekte bei 15\% der Klassenanzahl, während bei großen Projekten 5\% der Klassenanzahl verwendet wird. Dafür haben Philipp und Rauch Formel \ref{eq:averagecomponentdependency4} definiert um die Berechnung des CCD-Schwellwert $L_{ccd}$ anhand der Menge aller Klassen $Cs$ im System durchführen zu können.
+Eine Klasse wird von Usus dann als Hotspot betrachtet, wenn ihr CCD-Wert über einer Schwelle liegt, die von der Projektgröße abhängig ist. Die Projektgröße wird dabei an der Anzahl der Klassen festgelegt. Anhand der Tooltip-Erklärung im Usus Cockpit liegt diese Schwelle für kleine Projekte bei 15\% der Klassenanzahl, während bei großen Projekten 5\% der Klassenanzahl verwendet wird. Dafür haben Philipp und Rauch Formel \ref{eq:averagecomponentdependency4} mithilfe von Erfahrungswerten definiert um die Berechnung des CCD-Schwellwert $L_{ccd}$ anhand der Menge aller Klassen $Cs$ im System durchführen zu können.
 \begin{equation}
 	L_{ccd}(Cs) = \frac{1,5}{2^{\displaystyle (\log_{5} |Cs|)}}
 \label{eq:averagecomponentdependency4}
