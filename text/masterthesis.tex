@@ -233,10 +233,11 @@ Aus den in Abschnitt \ref{sec:goals} definierten Zielen dieses Projekts lassen s
 	\caption{Anwendungsfälle des Systems}
 	\label{fig:usecases}
 \end{figure}
-Die Akteure entsprechen ungefähr den in Abschnitt \ref{sec:stakeholder} definierten Interessenvertretern. Der Akteur \textit{.NET-Entwickler} entspricht dem Interessenvertreter mit wenig .NET Erfahrung und dessen Interaktionen mit dem System werden von dem Entwickler mit viel Erfahrung, beziehungsweise Clean Code Interessen, erweitert. Es ist ebenfalls zu sehen, dass der Anwendungsfall \textit{Code-Metriken bestimmen} alle anderen Anwendungsfälle direkt oder indirekt ergänzt. Damit ist er ein entscheidender Bestandteil des Systems, wenn nicht sogar der wichtigste.
+Die Akteure entsprechen ungefähr den in Abschnitt \ref{sec:stakeholder} definierten Interessenvertretern. Der Akteur \textit{.NET-Entwickler} entspricht dem Interessenvertreter mit wenig .NET Erfahrung und dessen Interaktionen mit dem System werden von dem Entwickler mit viel Erfahrung, beziehungsweise Clean Code Interessen, erweitert. Die Interessenvertreter \textit{andrena objects ag} und \textit{Leser des Thesis} haben keine direkte Interaktion mit dem System und werden bei der Betrachtung der Use Cases ignoriert. Es ist ebenfalls zu sehen, dass der Anwendungsfall \textit{Code-Metriken bestimmen} alle anderen Anwendungsfälle direkt oder indirekt ergänzt. Damit ist er ein entscheidender Bestandteil des Systems, wenn nicht sogar der wichtigste.
 
 
 \section{Produkt-Backlog}
+\label{sec:productbacklog}
 Die Anwendungsfälle lassen sich in User Stories unterteilen. Abbildung \ref{fig:productbacklog} zeit diese Aufteilung in der horizontalen und die Verteilung auf geplante Sprints in der vertikalen Dimension.
 \begin{figure}[h]
 	\centering
@@ -244,52 +245,28 @@ Die Anwendungsfälle lassen sich in User Stories unterteilen. Abbildung \ref{fig:
 	\caption{Produkt-Backlog des Systems}
 	\label{fig:productbacklog}
 \end{figure}
-Die Sprint-Planung ist vorläufig und ändert sich eventuell während der Durchführung des Projekts, wenn neue Use Cases und User Stories dazukommen oder andere wegfallen. Zum Zeitpunkt dieser Planung lassen sich die bereits gefunden User Stories in wahrscheinlich fünf Sprints implementieren.
-
-
-
-
-
-
-
-
-
-
-
+Die User Stories sind allgemein gehalten, da auf ein großes Design vor der Implementierung aus Agilitätsgründen verzichtet wurde. Pro Sprint werden die User Stories in konkrete Entwicklungs-Aufgaben unterteilt. Die Sprint-Planung ist vorläufig und ändert sich eventuell während der Durchführung des Projekts, wenn neue Use Cases und User Stories dazukommen oder andere wegfallen. Zum Zeitpunkt dieser Planung lassen sich die bereits gefunden User Stories in wahrscheinlich fünf Sprints implementieren.
 
 
 
 
 \chapter{Vorgehensweise}
-bla bla bla. Dieses Kapitel gibt damit eine Antwort auf die Frage, wie die Anforderungen aus Kapitel \ref{chap:requirements} realisiert werden sollen.
-\newline
-Meilenstein 0 (Evaluierung der geeignetsten Technologie)
+Nach dem die Anforderungen an das System, das in dieser Masther-Thesis entwickelt werden soll, in Kapitel \ref{chap:requirements} definiert wurden, wird in diesem Kapitel die grobe Vorgehensweise beschrieben. Dabei wird eine grobe Zeitplanung vorgestellt. Dieses Kapitel gibt damit eine Antwort auf die Frage, wie die Anforderungen realisiert werden sollen. Abbildung \ref{fig:plan_table} zeigt die zeitliche Aufteilung der Master-Thesis, während Abbildung \ref{fig:plan_gantt} das dazugehörige Gant-Chart darstellt. Die Thesis besteht aus einem praktischen und einen theoretischen Teil.
+
+
+\section{Praktischer Teil}
+Der praktische Teil besteht aus einer Evaluationsphase und der eigentlichen Implementierungsphase. Während der Evaluierung werden verschiedene Technologien betrachtet, mit denen eine statische Code-Analyse durchgeführt werden kann. Das Ergebnis der Evaluierung wird die Grundlage der nächsten Phase darstellen. In der zweiten Phase werden die User Stories aus Abschnitt \ref{sec:productbacklog} im Rahmen der Visual Studio-Erweiterung zur statischen Code-Analyse in fünf zweiwöchigen Sprints implementiert.
+
+
+\section{Theoretischer Teil}
+bla bla bla
 \begin{enumerate} 
-\item System.Reflection
-\item FxCop
-\item Common Compiler Infrastructure
-\item NRefactory
-\item Codename "`Roslyn"'
-\end{enumerate}
-Meilenstein 1 (Usus.net)
-\begin{enumerate} 
-\item Implementierung der Code-Analyse zur Berechnung der Metriken.
-\item Implementierung eines geeigneten Objektmodells zur Berechnung von Metriken.
-\item Implementierung der Berechnung der Metriken.
-\item Implementierung der Visual Studio Erweiterung zur Anzeige der Ergebnisse.
-\end{enumerate}
-Meilenstein 2 (Entwickler-Feedback)
-\begin{enumerate} 
-\item Evaluierung von Entwickler-Feedback Möglichkeiten
-\item Implementierung der Entwickler-Feedback Möglichkeiten
+\item Planungsphase
+\item Zusammenfassung der Evaluation und der fünf Sprints
 \item Fallbeispiel Andrena-Kurs
+\item Analyse von Metrik-Verteilungen, Mapping von Metriken und Verteilungswerten auf den Andrena Software Quality Index (SQI)
 \end{enumerate}
-Meilenstein 3 (Statistische Mustererkennung)
-\begin{enumerate} 
-\item Analyse von Heuristiken in Metrik-Verteilungen
-\item Implementierung von Regeln mit statische Signifikanz zur besseren Code-Klassifikation
-\item Mapping von Metriken und Verteilungswerten auf den Andrena Software Quality Index (SQI)
-\end{enumerate}
+bla bla bla
 
 \begin{figure}[h]
 	\centering
