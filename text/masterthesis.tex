@@ -112,6 +112,7 @@ bla bla bla.
 
 
 \chapter{Grundlagen}
+\label{chap:basics}
 In diesem Kapitel sollen die Grundlagen vermittelt werden, die für ein Verständnis einer mit Quellcode arbeitenden Erweiterung für Visual Studio erforderlich sind. Dazu wird in Abschnitt \ref{sec:generalbasics} zunächst auf allgemeine Grundlagen wie Quellcode, sowie Entwicklungsumgebungen eingegangen. Anschließend werden in Abschnitt \ref{sec:technicalbasics} die technischen Grundlagen vorgestellt.
 
 
@@ -132,13 +133,11 @@ Die Prinzipien und Best Practices der Clean Code Bewegung umfassen viele Aspekte
 
 \subsection{Eclipse}
 \label{subsec:eclipse}
-Eclipse ist eine integrierte Entwicklungsumgebung (IDE) der Eclipse Foundation. Eclipse ist eine kostenfreies open source Programm und wird hauptsächlich für die Entwicklung von Anwendungen mit der Programmiersprache Java verwendet.
-\newline \textbf{todo: info link}
+Eclipse\footnote[1]{"`Eclipse - The Eclipse Foundation open source community website"' \url{http://www.eclipse.org/}} ist eine integrierte Entwicklungsumgebung (IDE) der Eclipse Foundation. Die Anwendung ist eine kostenfreies open source Programm und wird hauptsächlich für die Entwicklung von Software mit der Programmiersprache Java\footnote[2]{"`Oracle and Java"' \url{http://www.oracle.com/us/technologies/java/index.html}} verwendet. Eclipse unterstützt externe Erweiterungen in Form von Plugins.
 
 \subsection{Visual Studio}
 \label{subsec:visualstudio}
-Visual Studio ist eine integrierte Entwicklungsumgebung von Microsoft. Im Gegensatz zu Eclipse ist Visual Studio ab der Professional Version ein kommerzielles Produkt. Die Entwicklung für das .NET-Framework von Microsoft wird hauptsächlich mit Visual Studio durchgeführt. Die bekanntesten und am weitersten verbreiteten Sprachen für das .NET-Framework sind C\# und Viusal Basic .NET.
-\newline \textbf{todo: info link}
+Visual Studio\footnote[3]{"`Die Microsoft Visual Studio 2010 Produktfamilie"' \url{http://www.microsoft.com/germany/visualstudio/products/default.aspx}} ist eine integrierte Entwicklungsumgebung von Microsoft. Im Gegensatz zu Eclipse ist Visual Studio ab der Professional Version ein kommerzielles Produkt. Die Entwicklung für das .NET-Framework\footnote[4]{"`Microsoft .NET Framework"' \url{http://www.microsoft.com/net}} von Microsoft kann mit Visual Studio durchgeführt werden, wobei mehrere Programmiersprachen unterstützt werden. Zu den bekanntesten und am weitesten verbreiteten Sprachen für das .NET-Framework zählen C\# und Viusal Basic.NET. Visual Studio erlaubt die Installation von externen Erweiterungen als Addin oder Editor-Erweiterung ab der Professional Version. Die kostenfreie Express Edition besitzt einen sehr eingeschränkten Funktionsumfang.
 
 
 \section{Technische Grundlagen}
@@ -174,8 +173,6 @@ bla bla bla abstrakter Syntaxbaum
 \item[Ausprägung der Metrik] bla bla bla Softwarequalität
 \item[Statistik der Metrik] bla bla bla Bewertung
 \end{description}
-bla bla bla NDepend
-bla bla bla Visual Studio Code Metrics
 
 
 
@@ -252,30 +249,13 @@ Die User Stories sind allgemein gehalten, da auf ein großes Design vor der Imple
 
 
 \chapter{Vorgehensweise}
-Nach dem die Anforderungen an das System, das in dieser Masther-Thesis entwickelt werden soll, in Kapitel \ref{chap:requirements} definiert wurden, wird in diesem Kapitel die grobe Vorgehensweise beschrieben. Dabei wird eine grobe Zeitplanung vorgestellt. Dieses Kapitel gibt damit eine Antwort auf die Frage, wie die Anforderungen realisiert werden sollen. Abbildung \ref{fig:plan_table} zeigt die zeitliche Aufteilung der Master-Thesis, während Abbildung \ref{fig:plan_gantt} das dazugehörige Gant-Chart darstellt. Die Thesis besteht aus einem praktischen und einen theoretischen Teil.
-
-
-\section{Praktischer Teil}
-Der praktische Teil besteht aus einer Evaluationsphase und der eigentlichen Implementierungsphase. Während der Evaluierung werden verschiedene Technologien betrachtet, mit denen eine statische Code-Analyse durchgeführt werden kann. Das Ergebnis der Evaluierung wird die Grundlage der nächsten Phase darstellen. In der zweiten Phase werden die User Stories aus Abschnitt \ref{sec:productbacklog} im Rahmen der Visual Studio-Erweiterung zur statischen Code-Analyse in fünf zweiwöchigen Sprints implementiert.
-
-
-\section{Theoretischer Teil}
-bla bla bla
-\begin{enumerate} 
-\item Planungsphase
-\item Zusammenfassung der Evaluation und der fünf Sprints
-\item Fallbeispiel Andrena-Kurs
-\item Analyse von Metrik-Verteilungen, Mapping von Metriken und Verteilungswerten auf den Andrena Software Quality Index (SQI)
-\end{enumerate}
-bla bla bla
-
+Nach dem die Anforderungen an das System, das in dieser Masther-Thesis entwickelt werden soll, in Kapitel \ref{chap:requirements} definiert wurden, wird in diesem Kapitel die grobe Vorgehensweise beschrieben. Dabei wird eine grobe Zeitplanung vorgestellt. Dieses Kapitel gibt damit eine Antwort auf die Frage, wie die Anforderungen realisiert werden sollen. Abbildung \ref{fig:plan_table} zeigt die zeitliche Aufteilung der Master-Thesis, während Abbildung \ref{fig:plan_gantt} das dazugehörige Gant-Chart darstellt. Die Thesis besteht aus einem praktischen und einen theoretischen Teil. Beide Teile überlagern sich, sodass eine Dokumentation der Implementierung zeitnah erfolgen kann und keine große Schreibphase gegen Ende des sechsmonatigen Zeitrahmen notwendig ist.
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=15cm]{images/planningTable.png}
 	\caption{Projektplan Tabelle}
 	\label{fig:plan_table}
 \end{figure}
-
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=15cm]{images/planningGantt.png}
@@ -284,14 +264,23 @@ bla bla bla
 \end{figure}
 
 
+\section{Praktischer Teil}
+Der praktische Teil besteht aus einer Evaluationsphase und der eigentlichen Implementierungsphase. Während der Evaluierung werden verschiedene Technologien betrachtet, mit denen eine statische Code-Analyse durchgeführt werden kann. Das Ergebnis der Evaluierung wird die Grundlage der nächsten Phase darstellen. In der zweiten Phase werden die User Stories aus Abschnitt \ref{sec:productbacklog} im Rahmen der Visual Studio-Erweiterung zur statischen Code-Analyse in fünf zweiwöchigen Sprints implementiert.
+
+
+\section{Theoretischer Teil}
+Der theoretische Teil entspricht hauptsächlich der Dokumentation aller Ergebnisse und deren Beschreibung in Form der schriftlichen Ausarbeitung dieser Master-Thesis. So werden in einer Planungsphase zunächst Grundlagen (Kapitel \ref{chap:basics}) beschrieben, sowie eine agile Anforderungsanalyse (Kapitel \ref{chap:requirements}) durchgeführt. Außerdem wird das Usus-Programm, dessen Funktionsumfang einen maßgeblichen Einfluss auf das zu entwickelnde System haben soll, näher betrachtet und dessen Metriken beschrieben (Kapitel \ref{chap:usus}). Anschließend soll das Ergebnis der Evaluierungsphase beschrieben werden (Kapitel \ref{chap:techeval}), bevor die tatsächlichen Sprints in Form von zwei-tägigen schriftlichen Zusammenfassungen abgeschlossen werden. Nach der Zusammenfassung des  vierten Sprints soll eine Fallstudio auf Basis eines andrena Kurs zum Thema Refactoring durchgeführt werden. Bei diesem Kurs soll das in dem praktischen Teil zu entwickelnde System eingesetzt und ermittelt werden, wie gut das Werkzeug einen Entwickler unterstützen kann. Unmittelbar vor dem fünften und vorläufig letzten Sprint soll eine Analyse von statischen Verteilungen der Metrik-Werte sowie deren Bedeutung erfolgen. Aufgrund dieser Verteilungen soll geprüft und beschrieben werden, ob und wenn ja, wie eine Aussage über den andrena Software Quality Index (SQI) anhand der Metriken möglich ist.
+
+
 
 
 \chapter{Usus}
-Das Wort \textit{usus} kommt aus dem lateinischen und bedeutet "`das, was üblich ist"'. In diesem Kapitel wird das Usus Plugin für die Java Entwicklungsumgebung Eclipse \cite{UsusEclipsePlugin} vorgestellt, sowie auf die Metriken, die es berechnet, eingegangen. Der Bedeutung entsprechend 
+\label{chap:usus}
+Das Wort \textit{usus} kommt aus dem lateinischen und bedeutet "`das, was üblich ist"'. In diesem Kapitel wird das Usus-Plugin für die Java Entwicklungsumgebung Eclipse \cite{UsusEclipsePlugin} vorgestellt, sowie auf die Metriken, die es berechnet, eingegangen.
 
 
 \section{Eclipse Plugin}
-Das Usus Plugin für Eclipse lässt sich über den Menü-Eintrag \texttt{Help / Install New Software} installieren, indem eine neue Software Site mit der Url \url{http://projectusus.googlecode.com/svn/updates/} hinzugefügt und anschließend \emph{Project Usus} ausgewählt wird. Nach der Installation steht die \emph{Project Usus perspective} zur Verfügung, die die folgenden Fenster enthält.
+Das Usus-Plugin für Eclipse lässt sich über den Menü-Eintrag \texttt{Help / Install New Software} installieren, indem eine neue Software Site mit der Url \url{http://projectusus.googlecode.com/svn/updates/} hinzugefügt und anschließend \emph{Project Usus} ausgewählt wird. Nach der Installation steht die \emph{Project Usus perspective} zur Verfügung, die die folgenden Fenster enthält.
 
 \subsection{Usus Cockpit}
 In diesem Fenster werden die Usus Metriken angezeigt, die für alle Projekte, die Usus betrachtet, gelten. Zusätzlich wird der Trend pro Metrik dargestellt, also ob sich die Ausprägung der Metrik verbessert oder verschlechtert hat. Die Verbesserung wird dabei zwischen zwei erstellten Snapshots gemessen, die entweder manuell oder durch einen neuen Speichervorgang ausgelöst werden können.
@@ -347,7 +336,7 @@ Das in Abbildung \ref{fig:usus_graph} dargestellte Fenster besteht aus zwei Kart
 
 
 \section{Metriken}
-In den Fenstern Usus Cockpit und Usus Info zeit das Eclipse Plugin die Werte verschiedener Metriken an. Das Usus Info Fenster zeigt im Kontext einer Methode neben den Metriken, die es zusätzlich für die Klasse anzeigt auch Methoden-Metriken. In diesem Abschnitt wird daher zuerst auf die Metriken eingegangen, die das Usus Plugin für Methoden berechnet, bevor die Klassen-Metriken näher betrachtet werden. Abschließend werden die Usus Cockpit Metriken beschrieben.
+In den Fenstern Usus Cockpit und Usus Info zeit das Eclipse Plugin die Werte verschiedener Metriken an. Das Usus Info Fenster zeigt im Kontext einer Methode neben den Metriken, die es zusätzlich für die Klasse anzeigt auch Methoden-Metriken. In diesem Abschnitt wird daher zuerst auf die Metriken eingegangen, die das Usus-Plugin für Methoden berechnet, bevor die Klassen-Metriken näher betrachtet werden. Abschließend werden die Usus Cockpit Metriken beschrieben.
 
 \subsection{Pro Methode}
 Wenn das Usus Info Fenster im Kontext einer Methode geöffnet wird, wird die zyklomatische Komplexität sowie die Länge der Methode dargestellt.
@@ -406,7 +395,7 @@ Wenn das Usus Info Fenster im Kontext einer Klasse geöffnet wird, wird die Klass
 \item[Anzahl der Methoden] erlaubt es Klassen zu erkennen, die zu viel oder zu wenig Funktionen erfüllen. Weitere Unterscheidungsmöglichkeiten sind Methoden in Klassen- und Instanz-Methoden aufzuteilen oder Methoden anhand der Sichtbarkeit zu klassifizieren. Ein Konstruktor würde sich wie eine statische Methode, also eine Klassen-Methode, verhalten.
 \item[Anzahl der Felder] erlaubt es Klassen zu erkennen, die zu viel Informationen verwalten. Auch hier ist eine weitere Unterteilung in Klassen- und Instanz-Felder möglich. Die Sichtbarkeit der Felder erlaubt eine weitere Einschränkung.
 \end{description} 
-Das Usus Info Fenster zeigt als Klassengröße die Anzahl der Instanz-Methoden, der Klassen-Methoden sowie der Konstruktoren an. Dabei wird die Sichtbarkeit der Methode oder des Konstruktors nicht berücksichtigt. Das Usus Plugin fokussiert damit auf die Funktion der Klassen und nicht auf die Information und das Wissen einer Klasse, welches in den Feldern liegt. Die Klassengröße kann also berechnet werden, wenn alle Methoden und Konstruktoren einer Klasse ermittelt werden können.
+Das Usus Info Fenster zeigt als Klassengröße die Anzahl der Instanz-Methoden, der Klassen-Methoden sowie der Konstruktoren an. Dabei wird die Sichtbarkeit der Methode oder des Konstruktors nicht berücksichtigt. Das Usus-Plugin fokussiert damit auf die Funktion der Klassen und nicht auf die Information und das Wissen einer Klasse, welches in den Feldern liegt. Die Klassengröße kann also berechnet werden, wenn alle Methoden und Konstruktoren einer Klasse ermittelt werden können.
 \subsubsection{Kumulierte Komponentenabhängigkeit}
 \label{subsubsec:ccd}
 Die Metrik \textit{Cumulative Component Dependency} ist laut Peter Grogono \cite{SoftwareQControl} eine Metrik, die für Systeme und Untersysteme ermittelt wird. Dabei werden für jede Klasse (Komponente) in diesem System die Anzahl der Klassen ermittelt, von denen die betrachtete Klasse direkt und indirekt abhängt. Eine Klasse ist immer auch von sich selber abhängig. Marc Philipp und Nicole Rauch bezeichnen diese Abhängigkeiten in ihrem Artikel \cite{EclipseMagUsus} als reflexsiv und transitiv. Anschließend werden die Abhängigkeiten aller betrachteten Klassen aufsummiert und ergeben den CCD-Wert des Systems. In dem Usus Info Fenster wird der Abhängigkeitswert einer betrachteten Klasse als \textit{CCD (of class)} bezeichnet. Um die Anzahl der Klassen zu bestimmen, von denen eine betrachtete Klasse abhängig ist, ist mindestens der vollständige Abhängigkeitsgraph der Klasse erforderlich. Mit einem Durchmusterungsalgorithmus kann die Erreichbarkeitsmenge (Reach-Menge) der Klasse (Startknoten) in diesem Abhängigkeitsgraph ermittelt werden. Heiko Körner beschreibt in seinem Skript \cite{GraphAlgorithms} die beiden Algorithmen \textit{BFS} (Breadth First Search) und \textit{DFS} (Depth First Search) für diesen Zweck.
@@ -515,6 +504,7 @@ Formel \ref{eq:packageswithcyclicdependencies} zeigt dabei die Aufsummierung all
 
 
 \chapter{Technologie Evaluierung}
+\label{chap:techeval}
 Wichtigste Kriterien
 \begin{enumerate} 
 \item Access to information required to calculate Usus metrics?
@@ -535,7 +525,9 @@ Nice To Have Kriterien
 
 
 \section{Statische-Code-Analyse-Tools}
-
+bla bla bla NDepend
+bla bla bla Visual Studio Code Metrics Power Tool
+bla bla bla Visual Studio Code Metrics Viewer
 
 \section{FxCop}
 
