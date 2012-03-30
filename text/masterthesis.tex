@@ -195,6 +195,7 @@ Die Interessenvertreter (engl. \textit{Stakeholder}) im Kontext dieser Master-Th
 \item[.NET-Entwickler mit viel Erfahrung] arbeiten an großen und komplizierten Codebasen und möchten das System einsetzen um Tendenzen im System zu erkennen und Spezialfälle zu analysieren. Auch sie wollen einen besseren Überblick erhalten und das System aus möglichst vielen verschiedenen Perspektiven sehen.
 \item[.NET-Entwickler (Clean Coder)] legen sehr viel Wert auf Quellcode, der möglichst einfach zu verstehen ist und damit schnell an neue Anforderungen angepasst werden kann. Sie erwarten von dem System Feedback und Unterstützung bei der Entwicklung von sauberem Code. Außerdem möchten sie auf Stellen im Code hingewiesen werden, die nicht ihren Vorstellungen entsprechen.
 \end{description}
+Die Beschreibungen der Interessengruppen sind grob und allgemein gehalten, während versucht wurde, die direkten Bedürfnisse der jeweiligen Gruppe zu benennen. Natürlich ist die Erklärung damit nicht vollständig oder exklusiv. So kann beispielsweise auch ein erfahrener .NET-Entwickler ein Interesse an Clean Code haben.
 
 
 \section{Ziele}
@@ -238,14 +239,14 @@ Die Akteure entsprechen ungefähr den in Abschnitt \ref{sec:stakeholder} definier
 
 \section{Produkt-Backlog}
 \label{sec:productbacklog}
-Die Anwendungsfälle lassen sich in User Stories unterteilen. Abbildung \ref{fig:productbacklog} zeit diese Aufteilung in der horizontalen und die Verteilung auf geplante Sprints in der vertikalen Dimension.
+Die Anwendungsfälle lassen sich in User Stories (\textit{Anwendererzählungen}) unterteilen. Abbildung \ref{fig:productbacklog} zeit diese Aufteilung in der horizontalen und die Verteilung auf geplante Sprints in der vertikalen Dimension. Dieses zwei-dimensionale Backlog stellt die konkreten Anforderungen aus Benutzersicht an das komplette System dar.
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=17cm]{images/backlog.jpg}
 	\caption{Produkt-Backlog des Systems}
 	\label{fig:productbacklog}
 \end{figure}
-Die User Stories sind allgemein gehalten, da auf ein großes Design vor der Implementierung aus Agilitätsgründen verzichtet wurde. Pro Sprint werden die User Stories in konkrete Entwicklungs-Aufgaben unterteilt. Die Sprint-Planung ist vorläufig und ändert sich eventuell während der Durchführung des Projekts, wenn neue Use Cases und User Stories dazukommen oder andere wegfallen. Zum Zeitpunkt dieser Planung lassen sich die bereits gefunden User Stories in wahrscheinlich fünf Sprints implementieren.
+Die User Stories sind allgemein gehalten, da auf ein großes Design vor der Implementierung aus Agilitätsgründen verzichtet wurde. Pro Sprint werden die User Stories dann in konkrete Entwicklungs-Aufgaben unterteilt. Die Begründung jeder Story wurde nicht explizit aufgeschrieben, da die Beziehung zu den Use Cases und damit den Zielen aus Abschnitt \ref{sec:goals} erhalten und somit offensichtlich geblieben ist. Eine Priorisierung ist ebenfalls implizit durch das Aufteilen auf die Sprints entstanden, sodass eine explizite Business Value Analyse nicht notwendig ist. Die Sprint-Planung ist vorläufig und ändert sich eventuell während der Durchführung des Projekts, wenn neue Use Cases und User Stories dazukommen oder andere wegfallen. Zum Zeitpunkt dieser Planung lassen sich die bereits gefunden User Stories in wahrscheinlich fünf Sprints implementieren. Was die Abnahmekriterien und Akzeptanztests jeder Anwendererzählung betreffen, so wurde auch hier kein Mehrwert in der expliziten Definition gesehen, da pro Story schnell ein exemplarischer Test durchgeführt werden kann, der zeigt, ob das Ziel erreicht wurde. Dafür kann beispielsweise ein Benutzertest mit einer Person aus der jeweiligen Interessengruppe repräsentativ durchgeführt werden.
 
 
 
