@@ -167,12 +167,14 @@ Heiko Körner beschreibt einen Graph in seinem Skript \cite{GraphAlgorithms} als 
 
 \subsection{Statische Code-Analyse}
 \label{subsec:staticcodeanalysis}
-bla bla bla abstrakter Syntaxbaum
+Artur Wagner beschreibt in seiner Ausarbeitung \cite{IntroStaticCodeAnalysis} die statische Codeanalyse als Prozess, der von einem Programm ähnlich einem Compiler gestartet wird. Dieses Programm führt den Code nicht aus und erzeugt auch keinen ausführbaren Code, sondern ein nimmt eine Analyse vor. Wagner erwähnt noch, das eine statische Code-Analyse keinen Korrektheitsnachweis liefert sondern lediglich eine Art Systemzusammenfassung erzeugt. Eine solche Analyse des Codes findet dabei automatisiert statt. Christof Ebert, Reiner Dumke, Manfred Bundschuh und Andreas Schmietendorf stellen ebenfalls den Vergleich mit einem Compiler an. In ihrem Buch \cite{BPSoftwareMeasurement} erwähnen sie zusätzlich noch ein Qualitätsmodell, das mit dem Analyseergebnis in Verbindung gebracht wird und so eine einfache Interpretierbarkeit des analysierten Systems ermöglicht. Zusätzlich beschreiben sie den Vorgang als Sammeln von Metriken und deren Bewertung anhand von Kriterien.
+\paragraph{}
+Nadine Vehring beschreibt eine \textit{Metrik} in ihrer Ausarbeitung \cite{TestabilityMetrics} als Maß dafür, wie sehr eine \textit{Entität} ein \textit{Attribut} erfüllt. Als \textit{Entität} bezeichnet Vehring einen Teil des analysierten Systems, also beispielsweise eine Methode, Klasse oder eine Menge von Klassen. Weiterhin beschreibt sie ein \textit{Attribut} als Eigenschaft, die im betrachteten System, also bei den \textit{Entitäten} gemessen werden soll. In dieser Thesis wird der Metrik-Begriff wie folgt differenziert.
 \begin{description}
-\item[Metrik] bla bla bla Softwarequalität
-\item[Ausprägung der Metrik] bla bla bla Softwarequalität
-\item[Statistik der Metrik] bla bla bla Bewertung
+\item[Metrik] ist der Begriff für eine bestimmte und tatsächlich gemessene Eigenschaft die Methoden, Klassen, Paketen oder Mengen von Klassen im zu analysierenden System besitzen. Er entspricht damit dem direkten Ergebnis einer statischen Code-Analyse. Dieser Begriff wird manchmal Synonym für die Eigenschaft verwendet, die gemessen werden soll.
+\item[Statistik der Metrik] ist die Bezeichnung für die zusammengefassten Werte aller Komponenten im System, für die eine bestimmte Metrik ausgerechnet werden kann. Zusätzlich können Metriken vor und nach der Aggregation gewichtet und bewertet werden. Ob ein Wert in einer Statistik berücksichtigt wird kann ebenfalls festgelegt werden. Marc Philipp und Nicole Rauch unterscheiden Metrik und Statistik in ihrem Artikel \cite{EclipseMagUsus} ebenfalls.
 \end{description}
+Die Metriken eines Systems können auch manuell bestimmt werden. In dieser Master-Thesis werden Metriken aber immer als automatisiert bestimmbar und damit als Ergebnis einer automatisierten statischen Code-Analyse betrachtet. Das Konzept der statische Code-Analyse kann auch genutzt werden, um subjektive explizite Probleme im Code zu lokalisieren, wie beispielsweise die Verwendung von obsoleten Klassen und Methoden, sowie fehlende Klassenkommentare. In dieser Master-Thesis wird die statische Code-Analyse ausschließlich für die Bestimmung der Metriken genutzt.
 
 
 
