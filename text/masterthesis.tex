@@ -137,7 +137,9 @@ Eclipse\footnote[1]{"`Eclipse - The Eclipse Foundation open source community web
 
 \subsection{Visual Studio}
 \label{subsec:visualstudio}
-Visual Studio\footnote[3]{"`Die Microsoft Visual Studio 2010 Produktfamilie"' \url{http://www.microsoft.com/germany/visualstudio/products/default.aspx}} ist eine integrierte Entwicklungsumgebung von Microsoft. Im Gegensatz zu Eclipse ist Visual Studio ab der Professional Version ein kommerzielles Produkt. Die Entwicklung für das .NET-Framework\footnote[4]{"`Microsoft .NET Framework"' \url{http://www.microsoft.com/net}} von Microsoft kann mit Visual Studio durchgeführt werden, wobei mehrere Programmiersprachen unterstützt werden. Zu den bekanntesten und am weitesten verbreiteten Sprachen für das .NET-Framework zählen C\# und Viusal Basic.NET. Visual Studio erlaubt die Installation von externen Erweiterungen als Addin oder Editor-Erweiterung ab der Professional Version. Die kostenfreie Express Edition besitzt einen sehr eingeschränkten Funktionsumfang.
+Visual Studio\footnote[3]{"`Die Microsoft Visual Studio 2010 Produktfamilie"' \url{http://www.microsoft.com/germany/visualstudio/products/default.aspx}} ist eine integrierte Entwicklungsumgebung von Microsoft. Im Gegensatz zu Eclipse ist Visual Studio ab der Professional Version ein kommerzielles Produkt. Die Entwicklung für das .NET-Framework\footnote[4]{"`Microsoft .NET Framework"' \url{http://www.microsoft.com/net}} von Microsoft kann mit Visual Studio durchgeführt werden, wobei mehrere Programmiersprachen unterstützt werden. Zu den bekanntesten und am weitesten verbreiteten Sprachen für das .NET-Framework zählen C\# und Viusal Basic.NET.
+\paragraph{}
+Visual Studio erlaubt die Installation von externen Erweiterungen als Addin oder Erweiterung ab der Professional Version. Die kostenfreie Express Edition besitzt einen sehr eingeschränkten Funktionsumfang. Der Unterschied zwischen einem Visual Studio Addin und einer Visual Studio Erweiterung ist der, dass Addins bereits in früheren Versionen unterstützt wurden und ein Entwickler die Schnittstellen in Visual Studio direkt anprogrammieren kann. Die Erweiterungen werden ab Visual Studio 2010 unterstützt und benötigen zur Entwicklung das \textit{Visual Studio 2010 SDK}\footnote[5]{Download: "`Visual Studio 2010 SP1 SDK"'\url{http://www.microsoft.com/download/en/details.aspx?id=21835}}, erlauben aber eine modernere Klassenbibliothek. Aaron Marten beschreibt in seinem Artikel \cite{VSCustomExtensions} die Möglichkeiten, wie mit der neuen Erweiterungstechnologie (VSIX) Addin-ähnliche Erweiterungen erstellt werden können.
 
 
 \section{Technische Grundlagen}
@@ -280,7 +282,7 @@ Der theoretische Teil entspricht hauptsächlich der Dokumentation aller Ergebniss
 
 \chapter{Usus}
 \label{chap:usus}
-Das Wort \textit{usus} kommt aus dem lateinischen und bedeutet "`das, was üblich ist"'. In diesem Kapitel wird das Usus-Plugin für die Java Entwicklungsumgebung Eclipse \cite{UsusEclipsePlugin} vorgestellt, sowie auf die Metriken, die es berechnet, eingegangen.
+Das Wort \textit{usus} kommt aus dem lateinischen und bedeutet "`das, was üblich ist"'. In diesem Kapitel wird das Usus-Plugin für die Java Entwicklungsumgebung Eclipse \cite{UsusEclipsePlugin} vorgestellt, sowie auf die Metriken, die es berechnet, eingegangen. Usus entspricht im Groben dem Werkzeug für Eclipse und Java, das im Rahmen dieser Master-Thesis auch für Visual Studio und .NET entwickelt werden soll. Aus diesem Grund wird dessen Funktionsumfang an dieser Stelle betrachtet um ihn besser in nachimplementieren zu können. Eine direkte Portierung ist anhand der Technologieunterschiede von Visual Studio und Eclipse, sowie .NET und Java wahrscheinlich nicht möglich, sodass diese Option hier nicht in weiter verfolgt wird.
 
 
 \section{Eclipse Plugin}
@@ -509,29 +511,48 @@ Formel \ref{eq:packageswithcyclicdependencies} zeigt dabei die Aufsummierung all
 
 \chapter{Technologie Evaluierung}
 \label{chap:techeval}
-Wichtigste Kriterien
+Nachdem in Kapitel \ref{chap:requirements} die Anforderungen an die zu entwickelnde Visual Studio Erweiterung beschrieben wurden, werden in diesem Kapitel verschiedene Technologien in Betracht gezogen um ein Werkzeug zu entwickeln, das einen ähnlichen Funktionsumfang wie das in Kapitel \ref{chap:usus} beschrieben Usus-Plugin besitzt. Der Schwerpunkt in diesem Kapitel liegt auf der statischen Code-Analyse, die durchgeführt werden muss um Metriken und alles weitere Feedback zu berechnen. Zu diesem Zweck werden zuerst einige Tools beschrieben, die beides zusammen machen, also den Code analysieren und gleichzeitig Metriken bestimmen. Anschließend werden Möglichkeiten untersucht, die es erlauben die Analyse des Quellcodes von der Berechnung der Metriken zu trennen um direkt auf den Rohdaten des Quelltexts arbeiten zu können. Dieser Analyse-Schritt wird auch von Artur Wagner in seiner Ausarbeitung \cite{IntroStaticCodeAnalysis} auch mit den Analyse-Schritten eines Compilers verglichen. Allerdings ist es möglich eine statische Code-Analyse auch nach dem Kompilieren durchzuführen, indem das Kompilat betrachtet wird. Dies ist im Fall von Java und .NET möglich, da es sich bei dem erzeugten Format um eine Zwischensprache handelt, die erst unmittelbar vor dem Ausführen in Maschinensprache übersetzt wird. Die Technologien, die in diesem Kapitel behandelt werden, nutzen entweder den Quellcode oder das Compiler-Ergebnis um eine statische Code-Analyse durchzuführen.
+\paragraph{}
+Um die Technologien anhand ihrer Eignung zu evaluieren, wird die Bewertung nach verschiedenen Kriterien vorgenommen. Die Kriterien sind in Form von Fragen so formuliert, dass eine bejahende Antwort als positiv gilt. Die Kriterien sind nach Wichtigkeit absteigend sortiert.
 \begin{enumerate} 
-\item Access to information required to calculate Usus metrics?
-\item Is it available for free?
-\item Does it support all .NET runtimes?
+\item Können alle Informationen gesammelt werden, die benötigt werden um die von Usus berechneten Metriken ebenfalls zu berechnen?
+\item Ist die Technologie kostenfrei nutzbar und kann veröffentlicht werden?
+\item Unterstützt die Technologie alle .NET Laufzeitumgebungen unter Windows?
+\item Ist die Technologie möglichst unabhängig von anderen Laufzeitumgebungen und anderen externen Komponenten?
+\item Kann die Technologie ein System verarbeiten, das Klassen und Pakete verwendet, die nicht im betrachteten System definiert sind?
+\item Ist die Technologie in der Lage ein System zu analysieren, dass nicht nur mit C$\#$ entwickelt wurde?
+\item Kann die Technologie direkt mit dem Code arbeiten oder ist ein Kompilat erforderlich?
+\item Ist die Technologie einfach einzusetzen und hat eine gute Performanz?
 \end{enumerate}
-Wichtige Kriterien
-\begin{enumerate} 
-\item Does it have external dependencies?
-\item Does it work with unresolved references?
-\end{enumerate}
-Nice To Have Kriterien
-\begin{enumerate} 
-\item Can it be used for more than C$\#$ only?
-\item What is the target? //code or assembly
-\item What is the (performance) overhead?
-\end{enumerate}
+Anhand dieser Kriterien werden die verschiedenen Technologien, die in den folgenden Abschnitten beschrieben werden, evaluiert. Das Ergebnis wird dann abschließend im letzten Abschnitt in diesem Kapitel in Form einer Zusammenfassung vorgestellt.
 
 
 \section{Statische-Code-Analyse-Tools}
-bla bla bla NDepend
-bla bla bla Visual Studio Code Metrics Power Tool
-bla bla bla Visual Studio Code Metrics Viewer
+In diesem Abschnitt werden einige Werkzeuge vorgestellt, die bereits eine statische Code-Analyse durchführen um Metriken einer Codebasis zu bestimmen.
+
+\subsection{Visual Studio Metrics}
+Die Entwicklungsumgebung unterstützt bereits verschieden Ansätze Code Metriken zu bestimmen. In diesem Unterabschnitt sollen einige bekannte Möglichkeiten beschrieben werden.
+\subsubsection{Visual Studio Code Metrics Power Tool}
+\label{subsubsec:codemetricspowertool}
+Das Kommandozeilenwerkzeug \textit{Visual Studio Code Metrics Power Tool}\footnote[1]{Download: "`Visual Studio Code Metrics PowerTool 10.0"' \url{http://www.microsoft.com/download/en/details.aspx?id=9422}} wird kostenfrei von Microsoft zum Download angeboten.
+\subsubsection{Code Metrics Viewer}
+Die Erweiterung \textit{Code Metrics Viewer}\footnote[2]{Download: "`Code Metrics Viewer extension"' \url{http://visualstudiogallery.msdn.microsoft.com/9f35524b-a784-4dbc-bd7b-6babd7a5a3b3}} für Visual Studio 2010 wird von Matthias Friedrich zum kostenlosen Download angeboten. Das Tool nutzt das Kommandozeilenwerkzeug aus Unter-Unterabschnitt \ref{subsubsec:codemetricspowertool} um Metriken direkt in der Entwicklungsumgebung grafisch anzeigen zu können.
+
+\subsection{NDepend}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \section{FxCop}
 
