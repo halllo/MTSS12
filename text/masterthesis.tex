@@ -528,10 +528,37 @@ Anhand dieser Kriterien werden die verschiedenen Technologien, die in den folgen
 
 
 \section{Statische-Code-Analyse-Tools}
-In diesem Abschnitt werden einige Werkzeuge vorgestellt, die bereits eine statische Code-Analyse durchführen um Metriken einer Codebasis zu bestimmen.
+In diesem Abschnitt werden einige Werkzeuge vorgestellt, die eine statische Code-Analyse durchführen und Metriken einer Codebasis bestimmen können.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \subsection{Visual Studio Metrics}
-Die Entwicklungsumgebung unterstützt bereits verschieden Ansätze Code Metriken zu bestimmen. In diesem Unterabschnitt sollen einige bekannte Möglichkeiten beschrieben werden.
+In diesem Unterabschnitt sollen die Möglichkeiten beschrieben werden, die Visual Studio von Haus aus bietet um Software zu analysieren. Ab Visual Studio 2010 Premium können zu jeder Solution (Menge von Projekten) verschiedene Code-Metriken direkt berechnet werden.
+	\newline
+	<screenshot: vs2010premium metriken>
+	\newline
+Die berechneten Metriken sind die folgenden.
+	\newline
+	<liste mit metriken, die berechnet werden können>
+	\newline
+In Visual Studio 2010 Ultimate können zudem mehrere grafische Funktionen genutzt werden. So lassen sich zum Beispiel Methoden automatisch als Sequenz-Diagramme darstellen, was einen Hinweis auf deren Komplexität und Abhängigkeiten geben kann. Zusätzlich kann der Abhängigkeitsgraph eines Projekts/einer Solution visualisiert werden.
+	\newline
+	<screenshot: vs2010ultimate architekture explorer>
+	\newline
+Leider sind diese Funktion zur Metrik-Berechnung und zur Visualisierung in der am weitesten verbreiten Professional Version von Visual Studio nicht verfügbar. Zwei kostenlose Programme, die das Bestimmen mancher Code-Metriken erlauben werden in den folgenden Unter-Unterabschnitten vorgestellt.
 \subsubsection{Visual Studio Code Metrics Power Tool}
 \label{subsubsec:codemetricspowertool}
 Das Kommandozeilenwerkzeug \textit{Visual Studio Code Metrics Power Tool}\footnote[1]{Download: "`Visual Studio Code Metrics PowerTool 10.0"' \url{http://www.microsoft.com/download/en/details.aspx?id=9422}} wird kostenfrei von Microsoft zum Download angeboten.
@@ -539,6 +566,10 @@ Das Kommandozeilenwerkzeug \textit{Visual Studio Code Metrics Power Tool}\footno
 Die Erweiterung \textit{Code Metrics Viewer}\footnote[2]{Download: "`Code Metrics Viewer extension"' \url{http://visualstudiogallery.msdn.microsoft.com/9f35524b-a784-4dbc-bd7b-6babd7a5a3b3}} für Visual Studio 2010 wird von Matthias Friedrich zum kostenlosen Download angeboten. Das Tool nutzt das Kommandozeilenwerkzeug aus Unter-Unterabschnitt \ref{subsubsec:codemetricspowertool} um Metriken direkt in der Entwicklungsumgebung grafisch anzeigen zu können.
 
 \subsection{NDepend}
+Für die grafische Darstellung des Abhängigkeitsgraphen kann das kommerzielle Werkzeug NDepend genutzt werden. Dieses Tool ist neben der umfangreichen Darstellung von Zusammenhängen und Abhängigkeiten auch in der Lage, viele verschiedene Metriken zu berechnen.
+
+
+
 
 
 
