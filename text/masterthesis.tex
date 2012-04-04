@@ -547,17 +547,23 @@ In diesem Abschnitt werden einige Werkzeuge vorgestellt, die eine statische Code
 
 \subsection{Visual Studio Metrics}
 In diesem Unterabschnitt sollen die Möglichkeiten beschrieben werden, die Visual Studio von Haus aus bietet um Software zu analysieren. Ab Visual Studio 2010 Premium können zu jeder Solution (Menge von Projekten) verschiedene Code-Metriken direkt berechnet werden.
-	\newline
-	<screenshot: vs2010premium metriken>
-	\newline
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=10cm]{images/vsmetricsresult.png}
+	\caption{Code-Metriken Ergebnis-Fenster in Visual Studio 2010 Premium}
+	\label{fig:vsmetricsresult}
+\end{figure}
 Die berechneten Metriken sind die folgenden.
 	\newline
 	<liste mit metriken, die berechnet werden können>
 	\newline
 In Visual Studio 2010 Ultimate können zudem mehrere grafische Funktionen genutzt werden. So lassen sich zum Beispiel Methoden automatisch als Sequenz-Diagramme darstellen, was einen Hinweis auf deren Komplexität und Abhängigkeiten geben kann. Zusätzlich kann der Abhängigkeitsgraph eines Projekts/einer Solution visualisiert werden.
-	\newline
-	<screenshot: vs2010ultimate architekture explorer>
-	\newline
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=16cm]{images/vsarchitecturenamespaces.png}
+	\caption{Architektur-Diagramm in Visual Studio 2010 Ultimate auf Basis von Paketen, aufklappbar bis Methoden-Ebene}
+	\label{fig:vsarchitecturenamespaces}
+\end{figure}
 Leider sind diese Funktion zur Metrik-Berechnung und zur Visualisierung in der am weitesten verbreiten Professional Version von Visual Studio nicht verfügbar. Zwei kostenlose Programme, die das Bestimmen mancher Code-Metriken erlauben werden in den folgenden Unter-Unterabschnitten vorgestellt.
 \subsubsection{Visual Studio Code Metrics Power Tool}
 \label{subsubsec:codemetricspowertool}
