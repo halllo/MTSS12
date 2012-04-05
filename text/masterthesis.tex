@@ -154,7 +154,7 @@ Die Objektorientierung als Methode ermöglicht laut Benrd Oestereich die hohe Kom
 \item[Objekt] kommt ebenfalls aus dem lateinischen von \textit{obicere} und bedeutet "`entgegenhalten"'. Bernd Oestereich beschreibt es als "`Gegenstand der Erkenntnis und Wahrnehmung, des Denkens und Handelns"' und bezieht sich dabei auf das Brockhaus Lexikon. Ein Objekt ist eine Instanz einer Klasse.
 \item[Attribut] kommt auch aus dem lateinischen von \textit{attributum} und bedeutet "`das Beigefügte"', was einer Eigenschaft oder einem Kennzeichen einer Sache entspricht. Die Daten, die ein Objekt ausmachen, werden anhand von Attributen gespeichert, auf die von den Operationen des Objekts aus zugegriffen werden kann. Attribute werden auch als Felder bezeichnet und lassen sich in Klassen-Felder und Instanz-Felder unterscheiden. Klassen-Felder können von allen Objekten der Klasse gemeinsam genutzt werden, während Instanz-Felder unterschiedliche Werte für konkrete Objekte haben können.
 \item[Operation] kommt aus dem lateinischen von \textit{operatio} und bedeutet "`Handlung"'. Eine konkrete Aktion, die anhand einer definierten Vorschrift durchgeführt wird bezeichnet Oestereich in diesem Sinne als Operation. Das Verhalten von Objekten wird anhand ihrer Operationen festgelegt. Andere Bezeichnungen für Operation ist Funktion oder Methode. Methoden lassen sich in Klassen-Methoden und Instanz-Methoden aufteilen. Klassen-Methoden können nicht auf die Instanz-Felder sondern nur auf die Klassen-Felder zugreifen. Instanz-Methoden können auf Instanz-Felder und auf Klassenfelder zugreifen.
-\item[Paket] wird von Oestereich als eine Ansammlung von Modellelementen bezeichnet. Dabei sind Modellelemente Klassen oder andere Pakete und dienen der besseren Strukturierung des Systems.
+\item[Paket] wird von Oestereich als eine Ansammlung von Modellelementen bezeichnet. Dabei sind Modellelemente Klassen oder andere Pakete und dienen der besseren Strukturierung des Systems. Pakete werden auch als Namensräume bezeichnet, da sie eine benannte Zusammenfassung von Klassen und anderen Namensräumen sind.
 \end{description}
 Zusätzlich beschreibt Oerstereich zwei weitere Mittel von objektorientierten Softwaresystemen, die der Abstraktion dienen und die es erlauben irrelevant Dinge wegzulassen.
 \begin{description}
@@ -528,48 +528,31 @@ Anhand dieser Kriterien werden die verschiedenen Technologien, die in den folgen
 
 
 \section{Statische-Code-Analyse-Tools}
-In diesem Abschnitt werden einige Werkzeuge vorgestellt, die eine statische Code-Analyse durchführen und Metriken einer Codebasis bestimmen können.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+In diesem Abschnitt werden einige Werkzeuge vorgestellt, die eine statische Code-Analyse für .NET-Projekte durchführen und Metriken der Codebasis bestimmen können.
 
 \subsection{Visual Studio Metrics}
-In diesem Unterabschnitt sollen die Möglichkeiten beschrieben werden, die Visual Studio von Haus aus bietet um Software zu analysieren. Ab Visual Studio 2010 Premium können zu jeder Solution (Menge von Projekten) verschiedene Code-Metriken direkt berechnet werden.
+In diesem Unterabschnitt sollen die Möglichkeiten beschrieben werden, die Visual Studio von Haus aus bietet um Software zu analysieren. Ab Visual Studio 2010 Premium können zu jeder Solution (Menge von Projekten) verschiedene Code-Metriken direkt berechnet werden. Die Ergebnis-Anzeige ist in Abbildung \ref{fig:vsmetricsresult} dargestellt.
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=10cm]{images/vsmetricsresult.png}
 	\caption{Code-Metriken Ergebnis-Fenster in Visual Studio 2010 Premium}
 	\label{fig:vsmetricsresult}
 \end{figure}
-Die berechneten Metriken sind die folgenden.
-	\newline
-	<liste mit metriken, die berechnet werden können>
-	\newline
-In Visual Studio 2010 Ultimate können zudem mehrere grafische Funktionen genutzt werden. So lassen sich zum Beispiel Methoden automatisch als Sequenz-Diagramme darstellen, was einen Hinweis auf deren Komplexität und Abhängigkeiten geben kann. Zusätzlich kann der Abhängigkeitsgraph eines Projekts/einer Solution visualisiert werden.
+Bei den berechneten Metriken handelt es sich um \textit{Lines of Code} (eigentlich \textit{Number of Statements}), \textit{Class Coupling} (direkte Klassen-Abhängigkeiten), \textit{Cyclomatic Complexity} und \textit{Maintainability Index} (Microsofts Indikator für Wartbarkeit). Jede dieser Metriken wird auf Methoden-Ebene erhoben und Zusammenfassend in der hierarchischen Struktur nach oben (Klasse, Paket, Assembly) propagiert. Zusätzlich wird die Metrik \textit{Depth of Inheritance} (Anzahl an direkten und indirekten Oberklassen ohne Interfaces) auf Klassenebene bestimmt und ebenfalls nach oben aggregiert. Der Wartbarkeits-Index sowie dessen Berechnung wird von Zain Naboulsi in seinem Artikel \cite{VSMaintainabilityIndex} umfangreich erläutert. Neben der einfachen Darstellung erlaubt Visual Studio das Filtern der Methoden und Klassen anhand der Metriken und zeigt neben der Ausprägung des Wartbarkeits-Indexes eine Ampel an, die nach Microsofts Empfinden die Methode/Klasse als gut wartbar, weniger gut wartbar und nicht so gut wartbar klassifiziert.
+\paragraph{}
+In Visual Studio 2010 Ultimate können zudem mehrere grafische Funktionen genutzt werden. So lassen sich zum Beispiel Methoden automatisch als Sequenz-Diagramme darstellen, was einen Hinweis auf deren Komplexität und Abhängigkeiten geben kann. Zusätzlich kann der Abhängigkeitsgraph einer Solution visualisiert und so zyklische Abhängigkeiten von Klassen und Pakten schnell gefunden werden. Abbildung \ref{fig:vsarchitecturenamespaces} zeigt das Ergebnis der Visualisierung, die neben der Graphen-Form auch in Form einer Matrix dargestellt werden kann.
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=16cm]{images/vsarchitecturenamespaces.png}
 	\caption{Architektur-Diagramm in Visual Studio 2010 Ultimate auf Basis von Paketen, aufklappbar bis Methoden-Ebene}
 	\label{fig:vsarchitecturenamespaces}
 \end{figure}
-Leider sind diese Funktion zur Metrik-Berechnung und zur Visualisierung in der am weitesten verbreiten Professional Version von Visual Studio nicht verfügbar. Zwei kostenlose Programme, die das Bestimmen mancher Code-Metriken erlauben werden in den folgenden Unter-Unterabschnitten vorgestellt.
+Leider sind diese Funktion zur Metrik-Berechnung und zur Visualisierung in der am weitesten verbreiten Professional Version von Visual Studio nicht verfügbar. Zwei kostenlose Programme, die das Bestimmen der gleichen Menge von Code-Metriken erlauben werden in den folgenden Unter-Unterabschnitten vorgestellt.
 \subsubsection{Visual Studio Code Metrics Power Tool}
-\label{subsubsec:codemetricspowertool}
-Das Kommandozeilenwerkzeug \textit{Visual Studio Code Metrics Power Tool}\footnote[1]{Download: "`Visual Studio Code Metrics PowerTool 10.0"' \url{http://www.microsoft.com/download/en/details.aspx?id=9422}} wird kostenfrei von Microsoft zum Download angeboten.
+Das Kommandozeilenwerkzeug \textit{Visual Studio Code Metrics Power Tool}\footnote[1]{Download: "`Visual Studio Code Metrics PowerTool 10.0"' \url{http://www.microsoft.com/download/en/details.aspx?id=9422}} wird kostenfrei von Microsoft zum Download angeboten. Es erlaubt die Berechnung der gleichen Metriken wie die in Visual Studio 2010 Premium integrierte Funktionalität und erzeugt eine XML-Datei. Diese Datei enthält die Metriken für Projekte, Namensräume, Typen und Methoden in hierarchischer Form.
+
 \subsubsection{Code Metrics Viewer}
-Die Erweiterung \textit{Code Metrics Viewer}\footnote[2]{Download: "`Code Metrics Viewer extension"' \url{http://visualstudiogallery.msdn.microsoft.com/9f35524b-a784-4dbc-bd7b-6babd7a5a3b3}} für Visual Studio 2010 wird von Matthias Friedrich zum kostenlosen Download angeboten. Das Tool nutzt das Kommandozeilenwerkzeug aus Unter-Unterabschnitt \ref{subsubsec:codemetricspowertool} um Metriken direkt in der Entwicklungsumgebung grafisch anzeigen zu können.
+Die Erweiterung \textit{Code Metrics Viewer}\footnote[2]{Download: "`Code Metrics Viewer extension"' \url{http://visualstudiogallery.msdn.microsoft.com/9f35524b-a784-4dbc-bd7b-6babd7a5a3b3}} für Visual Studio 2010 wird von Matthias Friedrich zum kostenlosen Download angeboten. Das Tool nutzt das Kommandozeilenwerkzeug \textit{Visual Studio Code Metrics Power Tool} um Metriken direkt in der Entwicklungsumgebung grafisch anzeigen zu können. In einem Visual Studio-Fenster, das dem aus Abbildung \ref{fig:vsmetricsresult} nachempfunden ist, wird der Inhalt der durch das Power Tool erzeugten XML-Datei visualisiert. Es lassen sich ebenfalls verschiedene Filter einstellen. Der Hauptunterschied zu der integrierten Funktionalität besteht darin, das die Ampel zu jeder Metrik angezeigt wird.
 
 \subsection{NDepend}
 Für die grafische Darstellung des Abhängigkeitsgraphen kann das kommerzielle Werkzeug NDepend genutzt werden. Dieses Tool ist neben der umfangreichen Darstellung von Zusammenhängen und Abhängigkeiten auch in der Lage, viele verschiedene Metriken zu berechnen.
