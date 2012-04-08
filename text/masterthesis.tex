@@ -510,9 +510,86 @@ Formel \ref{eq:packageswithcyclicdependencies} zeigt dabei die Aufsummierung all
 
 
 
+\chapter{Andere Tools}
+Nachdem in dem vorherigen Kapitel das Eclipse Plugin Usus vorgestellt wurde, werden in diesem Kapitel einige andere Werkzeuge beschrieben, die ebenfalls eine statische Code-Analyse durchführen. Während Usus die direkte Inspiration für das in dieser Master-Thesis zu entwickelnde Tool darstellt, werden in diesem Kapitel einige Visual Studio Erweiterungen behandelt. Diese Erweiterungen versuchen bereits, die in Kapitel \ref{chap:requirements} definierten Anforderungen zu erfüllen und sind dabei auf Projekte spezialisiert, die für das .NET-Framework entwickelt werden.
+
+
+\section{Visual Studio Metrics}
+In diesem Abschnitt sollen die Möglichkeiten beschrieben werden, die Visual Studio von Haus aus bietet um Software zu analysieren. Ab Visual Studio 2010 Premium können zu jeder Solution (Menge von Projekten) verschiedene Code-Metriken direkt berechnet werden. Die Ergebnis-Anzeige ist in Abbildung \ref{fig:vsmetricsresult} dargestellt.
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=10cm]{images/vsmetricsresult.png}
+	\caption{Code-Metriken Ergebnis-Fenster in Visual Studio 2010 Premium}
+	\label{fig:vsmetricsresult}
+\end{figure}
+Bei den berechneten Metriken handelt es sich um \textit{Lines of Code} (eigentlich \textit{Number of Statements}), \textit{Class Coupling} (direkte Klassen-Abhängigkeiten), \textit{Cyclomatic Complexity} und \textit{Maintainability Index} (Microsofts Indikator für Wartbarkeit). Jede dieser Metriken wird auf Methoden-Ebene erhoben und Zusammenfassend in der hierarchischen Struktur nach oben (Klasse, Paket, Assembly) propagiert. Zusätzlich wird die Metrik \textit{Depth of Inheritance} (Anzahl an direkten und indirekten Oberklassen ohne Interfaces) auf Klassenebene bestimmt und ebenfalls nach oben aggregiert. Der Wartbarkeits-Index sowie dessen Berechnung wird von Zain Naboulsi in seinem Artikel \cite{VSMaintainabilityIndex} umfangreich erläutert. Neben der einfachen Darstellung erlaubt Visual Studio das Filtern der Methoden und Klassen anhand der Metriken und zeigt neben der Ausprägung des Wartbarkeits-Indexes eine Ampel an, die nach Microsofts Empfinden die Methode/Klasse als gut wartbar, weniger gut wartbar und nicht so gut wartbar klassifiziert.
+\paragraph{}
+In Visual Studio 2010 Ultimate können zudem mehrere grafische Funktionen genutzt werden. So lassen sich zum Beispiel Methoden automatisch als Sequenz-Diagramme darstellen, was einen Hinweis auf deren Komplexität und Abhängigkeiten geben kann. Zusätzlich kann der Abhängigkeitsgraph einer Solution mithilfe des Architektur-Explorer visualisiert und so zyklische Abhängigkeiten von Klassen und Pakten schnell gefunden werden. Abbildung \ref{fig:vsarchitecturenamespaces} zeigt das Ergebnis der Visualisierung, die neben der Graphen-Form auch in Form einer Matrix dargestellt werden kann.
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=16cm]{images/vsarchitecturenamespaces.png}
+	\caption{Architektur-Diagramm in Visual Studio 2010 Ultimate auf Basis von Paketen, aufklappbar bis Methoden-Ebene}
+	\label{fig:vsarchitecturenamespaces}
+\end{figure}
+Leider sind diese Funktion zur Metrik-Berechnung und zur Visualisierung in der am weitesten verbreiten Professional Version von Visual Studio nicht verfügbar. Zwei kostenlose Programme, die das Bestimmen der gleichen Menge von Code-Metriken erlauben werden in den folgenden Unterabschnitten vorgestellt.
+
+\subsection{Visual Studio Code Metrics Power Tool}
+Das Kommandozeilenwerkzeug \textit{Visual Studio Code Metrics Power Tool}\footnote[1]{Download: "`Visual Studio Code Metrics PowerTool 10.0"' \url{http://www.microsoft.com/download/en/details.aspx?id=9422}} wird kostenfrei von Microsoft zum Download angeboten. Es erlaubt die Berechnung der gleichen Metriken wie die in Visual Studio 2010 Premium integrierte Funktionalität und erzeugt eine XML-Datei. Diese Datei enthält die Metriken für Projekte, Namensräume, Typen und Methoden in hierarchischer Form.
+
+\subsection{Code Metrics Viewer}
+Die Erweiterung \textit{Code Metrics Viewer}\footnote[2]{Download: "`Code Metrics Viewer extension"' \url{http://visualstudiogallery.msdn.microsoft.com/9f35524b-a784-4dbc-bd7b-6babd7a5a3b3}} für Visual Studio 2010 wird von Matthias Friedrich zum kostenlosen Download angeboten. Das Tool nutzt das Kommandozeilenwerkzeug \textit{Visual Studio Code Metrics Power Tool} um Metriken direkt in der Entwicklungsumgebung grafisch anzeigen zu können. In einem Visual Studio-Fenster, das dem aus Abbildung \ref{fig:vsmetricsresult} nachempfunden ist, wird der Inhalt der durch das Power Tool erzeugten XML-Datei visualisiert. Es lassen sich ebenfalls verschiedene Filter einstellen. Der Hauptunterschied zu der integrierten Funktionalität besteht darin, das die Ampel zu jeder Metrik angezeigt wird.
+
+
+\section{NDepend}
+Für die grafische Darstellung des Abhängigkeitsgraphen kann das kommerzielle Werkzeug NDepend\footnote[1]{"`Tutorial with explanations and screenshots"' \url{http://www.ndepend.com/GettingStarted.aspx\#Tuto}} (299\EUR für eine Einzelplatz-Lizenz) genutzt werden. Dieses Tool ist neben der umfangreichen Darstellung von Zusammenhängen und Abhängigkeiten in der Lage, viele verschiedene Metriken auf Anwendungs-, Projekt-, Namesraum-, Klassen- und Methoden-Ebene zu berechnen. Die Abhängigkeiten können, wie im Architektur-Explorer in Visual Studio Ultimate, in Form einer Matrix oder in Form eines Diagrams veranschaulicht werden. Dafür analysiert NDepend genau wie das Code Metrics Power Tool die pro Projekt von dem Compiler erzeugten Assembly-Dateien (exe oder dll). Das Programm ist neben .NET auch für Java und C++ erhältlich und kann als eigenständige Anwendung oder als Visual Studio Addin verwendet werden.
+\subsection{Code Query Language}
+Abhängig von der Metrik- und Abhängigkeitsberechnung kann NDepend Warnungen und Hinweise anzeigen, die den Programmierer rechtzeitig auf schwierige Stellen im Code hinweisen und es ihm erlauben, dort gezielt einzugreifen. Es lassen sich auch eigene Warnungen und Berichte mithilfe der deklarativen Sprache CQL (Code Query Language) erstellen und ausführen.
+\subsection{Abstraktheit und Instabilität}
+Eine sehr interessante Metrik im NDepend Metrik-Portfolio ist "`Abstraktheit und Instabilität"'. Robert C. Martin stellt in seinem Artikel \cite{OODesignMetrics} folgende Metriken vor.
+
+Ca : Afferent Couplings : The number of classes outside this category that depend upon classes
+within this category.
+
+Ce : Efferent Couplings : The number of classes inside this category that depend upon classes
+outside this categories.
+
+I : Instability : (Ce / (Ca+Ce)) : This metric has the range [0,1]. I=0 indicates a maximally
+stable category. I=1 indicates a maximally instable category.
+
+A : Abstractness : (\# abstract classes in category / total \# of classes in category). This metric
+range is [0,1]. 0 means concrete and 1 means completely abstract.
+
+Diagramm mit "`Zone der Nutzlosigkeit"' und "`Zone der Qual"'
+
+
+
+
+
+
+\section{CCD-Addin}
+Die Grade direkt in der IDE, immer sichtbar.
+\url{http://blog.alexonasp.net/post/2009/02/21/Clean-Code-Developer-e28093-das-Visual-Studio-Add-In.aspx}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \chapter{Technologie Evaluierung}
 \label{chap:techeval}
-Nachdem in Kapitel \ref{chap:requirements} die Anforderungen an die zu entwickelnde Visual Studio Erweiterung beschrieben wurden, werden in diesem Kapitel verschiedene Technologien in Betracht gezogen um ein Werkzeug zu entwickeln, das einen ähnlichen Funktionsumfang wie das in Kapitel \ref{chap:usus} beschrieben Usus-Plugin besitzt. Der Schwerpunkt in diesem Kapitel liegt auf der statischen Code-Analyse, die durchgeführt werden muss um Metriken und alles weitere Feedback zu berechnen. Zu diesem Zweck werden zuerst einige Tools beschrieben, die beides zusammen machen, also den Code analysieren und gleichzeitig Metriken bestimmen. Anschließend werden Möglichkeiten untersucht, die es erlauben die Analyse des Quellcodes von der Berechnung der Metriken zu trennen um direkt auf den Rohdaten des Quelltexts arbeiten zu können. Dieser Analyse-Schritt wird auch von Artur Wagner in seiner Ausarbeitung \cite{IntroStaticCodeAnalysis} auch mit den Analyse-Schritten eines Compilers verglichen. Allerdings ist es möglich eine statische Code-Analyse auch nach dem Kompilieren durchzuführen, indem das Kompilat betrachtet wird. Dies ist im Fall von Java und .NET möglich, da es sich bei dem erzeugten Format um eine Zwischensprache handelt, die erst unmittelbar vor dem Ausführen in Maschinensprache übersetzt wird. Die Technologien, die in diesem Kapitel behandelt werden, nutzen entweder den Quellcode oder das Compiler-Ergebnis um eine statische Code-Analyse durchzuführen.
+Nachdem in Kapitel \ref{chap:requirements} die Anforderungen an die zu entwickelnde Visual Studio Erweiterung beschrieben wurden, werden in diesem Kapitel verschiedene Technologien in Betracht gezogen um ein Werkzeug zu entwickeln, das einen ähnlichen Funktionsumfang wie das in Kapitel \ref{chap:usus} beschrieben Usus-Plugin besitzt. Der Schwerpunkt in diesem Kapitel liegt auf der statischen Code-Analyse, die durchgeführt werden muss um Metriken und alles weitere Feedback zu berechnen. Zu diesem Zweck werden Möglichkeiten untersucht um Quellcode zu analysieren und um die Rohdaten zu ermitteln, die für die Berechnung der vorgestellten Metriken benötigt werden. Dieser Analyse-Schritt wird auch von Artur Wagner in seiner Ausarbeitung \cite{IntroStaticCodeAnalysis} auch mit den Analyse-Schritten eines Compilers verglichen. Allerdings ist es möglich eine statische Code-Analyse auch nach dem Kompilieren durchzuführen, indem das Kompilat betrachtet wird. Dies ist im Fall von Java und .NET möglich, da es sich bei dem erzeugten Format um eine Zwischensprache handelt, die erst unmittelbar vor dem Ausführen in Maschinensprache übersetzt wird. Die Technologien, die in diesem Kapitel behandelt werden, nutzen entweder den Quellcode oder das Compiler-Ergebnis um eine statische Code-Analyse durchzuführen.
 \paragraph{}
 Um die Technologien anhand ihrer Eignung zu evaluieren, wird die Bewertung nach verschiedenen Kriterien vorgenommen. Die Kriterien sind in Form von Fragen so formuliert, dass eine bejahende Antwort als positiv gilt. Die Kriterien sind nach Wichtigkeit absteigend sortiert.
 \begin{enumerate} 
@@ -526,81 +603,6 @@ Um die Technologien anhand ihrer Eignung zu evaluieren, wird die Bewertung nach 
 \item Ist die Technologie einfach einzusetzen und hat eine gute Performanz?
 \end{enumerate}
 Anhand dieser Kriterien werden die verschiedenen Technologien, die in den folgenden Abschnitten beschrieben werden, evaluiert. Das Ergebnis wird dann abschließend im letzten Abschnitt in diesem Kapitel in Form einer Zusammenfassung vorgestellt.
-
-
-\section{Statische-Code-Analyse-Tools}
-In diesem Abschnitt werden einige Werkzeuge vorgestellt, die eine statische Code-Analyse für .NET-Projekte durchführen und Metriken der Codebasis bestimmen können.
-
-\subsection{Visual Studio Metrics}
-In diesem Unterabschnitt sollen die Möglichkeiten beschrieben werden, die Visual Studio von Haus aus bietet um Software zu analysieren. Ab Visual Studio 2010 Premium können zu jeder Solution (Menge von Projekten) verschiedene Code-Metriken direkt berechnet werden. Die Ergebnis-Anzeige ist in Abbildung \ref{fig:vsmetricsresult} dargestellt.
-\begin{figure}[h]
-	\centering
-		\includegraphics[width=10cm]{images/vsmetricsresult.png}
-	\caption{Code-Metriken Ergebnis-Fenster in Visual Studio 2010 Premium}
-	\label{fig:vsmetricsresult}
-\end{figure}
-Bei den berechneten Metriken handelt es sich um \textit{Lines of Code} (eigentlich \textit{Number of Statements}), \textit{Class Coupling} (direkte Klassen-Abhängigkeiten), \textit{Cyclomatic Complexity} und \textit{Maintainability Index} (Microsofts Indikator für Wartbarkeit). Jede dieser Metriken wird auf Methoden-Ebene erhoben und Zusammenfassend in der hierarchischen Struktur nach oben (Klasse, Paket, Assembly) propagiert. Zusätzlich wird die Metrik \textit{Depth of Inheritance} (Anzahl an direkten und indirekten Oberklassen ohne Interfaces) auf Klassenebene bestimmt und ebenfalls nach oben aggregiert. Der Wartbarkeits-Index sowie dessen Berechnung wird von Zain Naboulsi in seinem Artikel \cite{VSMaintainabilityIndex} umfangreich erläutert. Neben der einfachen Darstellung erlaubt Visual Studio das Filtern der Methoden und Klassen anhand der Metriken und zeigt neben der Ausprägung des Wartbarkeits-Indexes eine Ampel an, die nach Microsofts Empfinden die Methode/Klasse als gut wartbar, weniger gut wartbar und nicht so gut wartbar klassifiziert.
-\paragraph{}
-In Visual Studio 2010 Ultimate können zudem mehrere grafische Funktionen genutzt werden. So lassen sich zum Beispiel Methoden automatisch als Sequenz-Diagramme darstellen, was einen Hinweis auf deren Komplexität und Abhängigkeiten geben kann. Zusätzlich kann der Abhängigkeitsgraph einer Solution visualisiert und so zyklische Abhängigkeiten von Klassen und Pakten schnell gefunden werden. Abbildung \ref{fig:vsarchitecturenamespaces} zeigt das Ergebnis der Visualisierung, die neben der Graphen-Form auch in Form einer Matrix dargestellt werden kann.
-\begin{figure}[h]
-	\centering
-		\includegraphics[width=16cm]{images/vsarchitecturenamespaces.png}
-	\caption{Architektur-Diagramm in Visual Studio 2010 Ultimate auf Basis von Paketen, aufklappbar bis Methoden-Ebene}
-	\label{fig:vsarchitecturenamespaces}
-\end{figure}
-Leider sind diese Funktion zur Metrik-Berechnung und zur Visualisierung in der am weitesten verbreiten Professional Version von Visual Studio nicht verfügbar. Zwei kostenlose Programme, die das Bestimmen der gleichen Menge von Code-Metriken erlauben werden in den folgenden Unter-Unterabschnitten vorgestellt.
-\subsubsection{Visual Studio Code Metrics Power Tool}
-Das Kommandozeilenwerkzeug \textit{Visual Studio Code Metrics Power Tool}\footnote[1]{Download: "`Visual Studio Code Metrics PowerTool 10.0"' \url{http://www.microsoft.com/download/en/details.aspx?id=9422}} wird kostenfrei von Microsoft zum Download angeboten. Es erlaubt die Berechnung der gleichen Metriken wie die in Visual Studio 2010 Premium integrierte Funktionalität und erzeugt eine XML-Datei. Diese Datei enthält die Metriken für Projekte, Namensräume, Typen und Methoden in hierarchischer Form.
-
-\subsubsection{Code Metrics Viewer}
-Die Erweiterung \textit{Code Metrics Viewer}\footnote[2]{Download: "`Code Metrics Viewer extension"' \url{http://visualstudiogallery.msdn.microsoft.com/9f35524b-a784-4dbc-bd7b-6babd7a5a3b3}} für Visual Studio 2010 wird von Matthias Friedrich zum kostenlosen Download angeboten. Das Tool nutzt das Kommandozeilenwerkzeug \textit{Visual Studio Code Metrics Power Tool} um Metriken direkt in der Entwicklungsumgebung grafisch anzeigen zu können. In einem Visual Studio-Fenster, das dem aus Abbildung \ref{fig:vsmetricsresult} nachempfunden ist, wird der Inhalt der durch das Power Tool erzeugten XML-Datei visualisiert. Es lassen sich ebenfalls verschiedene Filter einstellen. Der Hauptunterschied zu der integrierten Funktionalität besteht darin, das die Ampel zu jeder Metrik angezeigt wird.
-
-\subsection{NDepend}
-Für die grafische Darstellung des Abhängigkeitsgraphen kann das kommerzielle Werkzeug NDepend\footnote[1]{"`Tutorial with explanations and screenshots"' \url{http://www.ndepend.com/GettingStarted.aspx#Tuto}} (299\EUR für eine Einzelplatz-Lizenz) genutzt werden. Dieses Tool ist neben der umfangreichen Darstellung von Zusammenhängen und Abhängigkeiten in der Lage, viele verschiedene Metriken auf Anwendungs-, Projekt-, Namesraum-, Klassen- und Methoden-Ebene zu berechnen. Die Abhängigkeiten können, wie im Architekturexplorer in Visual Studio Ultimate, in Form einer Matrix oder in Form eines Diagrams veranschaulicht werden. Dafür analysiert NDepend genau wie das Code Metrics Power Tool die pro Projekt von dem Compiler erzeugten Assembly-Dateien (exe oder dll). Das Programm ist neben .NET auch für Java und C++ erhältlich und kann als eigenständige Anwendung oder als Visual Studio Addin verwendet werden.
-\subsubsection{Code Query Language}
-Abhängig von der Metrik- und Abhängigkeitsberechnung kann NDepend Warnungen und Hinweise anzeigen, die den Programmierer rechtzeitig auf schwierige Stellen im Code hinweisen und es ihm erlauben, dort gezielt einzugreifen. Es lassen sich auch eigene Warnungen und Berichte mithilfe der deklarativen Sprache CQL (Code Query Language) erstellen und ausführen.
-\subsubsection{Abstraktheit und Instabilität}
-Eine sehr interessante Metrik im NDepend Metrik-Portfolio ist "`Abstraktheit und Instabilität"'. 
-
-OO Design Quality Metrics - An Analysis of Dependencies
-http://www.objectmentor.com/resources/articles/oodmetrc.pdf
-
-Ca : Afferent Couplings : The number of classes outside this category that depend upon classes
-within this category.
-
-Ce : Efferent Couplings : The number of classes inside this category that depend upon classes
-outside this categories.
-
-I : Instability : (Ce ÷ (Ca+Ce)) : This metric has the range [0,1]. I=0 indicates a maximally
-stable category. I=1 indicates a maximally instable category.
-
-A : Abstractness : (# abstract classes in category ÷ total # of classes in category). This metric
-range is [0,1]. 0 means concrete and 1 means completely abstract.
-
-Diagram mit "`Zone der Nutzlosigkeit"' und "`Zone der Qual"'
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 \section{FxCop}
