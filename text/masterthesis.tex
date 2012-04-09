@@ -151,7 +151,7 @@ In diesem Abschnitt werden die technischen Grundlagen erläutert. Dazu wird in Un
 \label{subsec:oo}
 Die Objektorientierung als Methode ermöglicht laut Benrd Oestereich die hohe Komplexität von Softwaresystemen zu beherrschen \cite{OOSE}. Das ist möglich, da diese Methode die Dinge der realen Welt als Objekte sieht und dadurch die Problemdomäne verständlich und anschaulich macht. Ein objektorientiertes Softwaresystem besteht aus den folgenden vier wesentlichen Komponenten.
 \begin{description}
-\item[Klasse] kommt aus dem lateinischen von \textit{classis} und bedeutet "`Aufgebot"'. Damit ist laut Oestereich eine Teilmenge von Objekten der gleichen Struktur gemeint. Eine Klasse ist folglich auch der Typ aller seiner Objekte.
+\item[Klasse] kommt aus dem lateinischen von \textit{classis} und bedeutet "`Aufgebot"'. Damit ist laut Oestereich eine Teilmenge von Objekten der gleichen Struktur gemeint. Eine Klasse ist folglich auch der Typ aller seiner Objekte. Klassen können auch abstrakt sein. Eine abstrakte Klasse, oder auch genannt Schnittstelle, kann nicht als Objekt erzeugt werden. Eine nicht abstrakte Klasse, also eine konkrete Klasse, muss von dieser Klasse eine Vererbung der Struktur und des Verhaltens durchführen. Von dieser erbenden und konkreten Klasse kann dann ein Objekt erzeugt werden, das sowohl vom Typ der konkreten Klasse als auch vom Typ der abstrakten Klasse ist.
 \item[Objekt] kommt ebenfalls aus dem lateinischen von \textit{obicere} und bedeutet "`entgegenhalten"'. Bernd Oestereich beschreibt es als "`Gegenstand der Erkenntnis und Wahrnehmung, des Denkens und Handelns"' und bezieht sich dabei auf das Brockhaus Lexikon. Ein Objekt ist eine Instanz einer Klasse.
 \item[Attribut] kommt auch aus dem lateinischen von \textit{attributum} und bedeutet "`das Beigefügte"', was einer Eigenschaft oder einem Kennzeichen einer Sache entspricht. Die Daten, die ein Objekt ausmachen, werden anhand von Attributen gespeichert, auf die von den Operationen des Objekts aus zugegriffen werden kann. Attribute werden auch als Felder bezeichnet und lassen sich in Klassen-Felder und Instanz-Felder unterscheiden. Klassen-Felder können von allen Objekten der Klasse gemeinsam genutzt werden, während Instanz-Felder unterschiedliche Werte für konkrete Objekte haben können.
 \item[Operation] kommt aus dem lateinischen von \textit{operatio} und bedeutet "`Handlung"'. Eine konkrete Aktion, die anhand einer definierten Vorschrift durchgeführt wird bezeichnet Oestereich in diesem Sinne als Operation. Das Verhalten von Objekten wird anhand ihrer Operationen festgelegt. Andere Bezeichnungen für Operation ist Funktion oder Methode. Methoden lassen sich in Klassen-Methoden und Instanz-Methoden aufteilen. Klassen-Methoden können nicht auf die Instanz-Felder sondern nur auf die Klassen-Felder zugreifen. Instanz-Methoden können auf Instanz-Felder und auf Klassenfelder zugreifen.
@@ -364,7 +364,7 @@ p&=&\text{Anzahl Zusammenhangskomponenten in $G$}\\
 \end{eqnarray*}
 Ernest Wallmüller beschreibt die zyklomatische Komplexität in seinem Buch \cite{SoftwareQMPraxis} auch als Anzahl aller entscheidungstreffenden Stellen in der Methode. Im Falle einer Verkettung von binären Entscheidungen zu logischen Ausdrücken zählt jede Entscheidung als eine solche Stelle. Diese einfachere Rechnung ergibt sich als
 \begin{equation}
-	v(G) = 1 + \Big( \sum_{b\text{ }\in\text{ } \displaystyle Bs(G)} 1 \Big)
+	v(G) = 1 + \Big( \sum_{\displaystyle b \in Bs(G)} 1 \Big)
 \label{eq:cyclomaticcomplexity2}
 \end{equation}
 wobei $Bs(G)$ die Menge aller binären Entscheidungen im Ablaufgraphen $G$ darstellt. Voraussetzung für diese Rechnung ist, das die Methode nur einen Eingang und nur einen Ausgang besitzt. Der Quellcode in Listing \ref{listing:simpleifs} soll die Grundlage für eine demonstrative Berechnung der zyklomatischen Komplexität darstellen.
@@ -394,6 +394,7 @@ Die Länge einer Methode kann auf unterschiedliche Weise ermittelt werden. Eine U
 Die im Usus Info Fenster angezeigte Methodenlänge entspricht der Anzahl der Anweisungen der Methode. Eine Berechnung kann daher über die Aufsummierung der Semikola und der if-, switch-, for-, while- und try-catch-Anweisungen erfolgen.
 
 \subsection{Pro Klasse}
+\label{subsec:perclass}
 Wenn das Usus Info Fenster im Kontext einer Klasse geöffnet wird, wird die Klassengröße sowie die kumulierte Komponentenabhängigkeit der Klasse dargestellt.
 \subsubsection{Klassengröße}
 \label{subsubsec:classsize}
@@ -414,13 +415,13 @@ Die Metrik \textit{Cumulative Component Dependency} ist laut Peter Grogono \cite
 \end{figure}
 Abbildung \ref{fig:ccd} zeigt sieben Klassen, die in einer hierarchischen Abhängigkeitsstruktur stehen. Offensichtlich ist Klasse A von allen anderen Klassen abhängig und hat damit den CCD-Wert sieben. Dies entspricht der Kardinalität der Reach-Menge von A, \begin{math}\{A,B,C,D,E,F,G\}\end{math}, die ermittelt wird, indem BFS oder DFS mit Klasse A als Startknoten im Abhängigkeitsgraph gestartet wird. Dabei werden die durch den Algorithmus markierten Knoten als Ergebnis des Algorithmus behandelt. Bei dem Abhängigkeitsgraph muss es sich nicht um einen Baum handeln.
 \begin{equation}
-	ccd(C) = | DFS(dG, C) |
+	ccd(c) = | DFS(dG, c) |
 \label{eq:cumulativecomponentdependencyofclass}
 \end{equation}
 \begin{eqnarray*}
 dG&=&\text{Abhängigkeitsgraph des Systems}\\
-C&=&\text{Klasse im System}\in dG\\
-ccd(C)&=&\text{CCD-Wert der Klasse } C\\
+c&=&\text{Klasse im System}\in dG\\
+ccd(c)&=&\text{CCD-Wert der Klasse } c\\
 \label{eq:cumulativecomponentdependencyofclassagenda}
 \end{eqnarray*}
 Formel \ref{eq:cumulativecomponentdependencyofclass} zeigt die Berechnungsvorschrift unter Verwendung des \textit{DFS}-Algorithmus. Die Berechnung des CCD-Werts einer Klasse kann also durchgeführt werden, sobald ein Abhängigkeitsgraph erzeugt werden kann. Um einen solchen Graphen zu erzeugen müssen die direkten Abhängigkeiten einer Klasse ermittelt werden können. Jede Klasse wird dann einem Knoten zugeordnet und jede Abhängigkeit einer gerichteten Kante. Eine grafische Darstellung (siehe Unterabschnitt \ref{subsec:ususgraphs}) ist dann ebenfalls möglich. Die direkten Abhängigkeiten einer Klasse können bestimmt werden, wenn die Typen aller Felder, Methodenparameter, Oberklasse und Interfaces sowie sämtlicher Methodenaufrufe entfernter Klassen identifiziert werden können. Abhängigkeiten zu Klassen, wie beispielsweise \texttt{String} oder \texttt{Object}, die im Basis-Framework definiert sind, können ignoriert werden.
@@ -435,7 +436,7 @@ Die Metrik \textit{Average Component Dependency} ist laut Peter Grogono \cite{So
 \end{equation}
 Da Usus die CCD-Werte nicht für Systeme oder Untersysteme ermittelt, sondern die CCD-Werte der Klassen bestimmt ohne sie aufzusummieren (siehe Unter-Unterabschnitt \ref{subsubsec:ccd}), kann der ACD-Wert anhand einer Menge von Klassen $Cs$ berechnet werden, wie in Formel \ref{eq:averagecomponentdependency2} dargestellt. Die Rechnung ist äquivalent zu Formel \ref{eq:averagecomponentdependency1}.
 \begin{equation}
-	acd(Cs) = \frac{\displaystyle \sum_{C\text{ }\in\text{ }Cs} ccd(C)}{|Cs|}
+	acd(Cs) = \frac{\displaystyle \sum_{c\text{ }\in\text{ }Cs} ccd(C)}{|Cs|}
 \label{eq:averagecomponentdependency2}
 \end{equation}
 Peter Grogono beschreibt die Bedeutung des ACD-Werts als durchschnittliche Anzahl an Komponenten, die durch eine Änderung einer Komponente betroffen sind und eventuell ebenfalls geändert werden müssen. Der ACD-Wert wird im Usus Cockpit als Statistik in Prozent angezeigt. Dazu wird nochmal der Mittelwert über die betrachteten Klassen gebildet, wie in Formel \ref{eq:averagecomponentdependency3} zu sehen ist und der Bewertungsfunktion von Philipp und Rauch entspricht.
@@ -460,7 +461,7 @@ Eine Klasse wird von Usus als Hotspot gesehen, sobald die in Unter-Unterabschnit
 \end{equation}
 Die Bewertungsfunktion der Klassengröße $cs$ ist direkt von dem Schwellwert 12 abhängig und bewertet alle Klassen, dessen Größe 12 oder weniger beträgt mit 0. Um die durchschnittliche Klassengröße $acs$ einer Menge von Klassen $Cs$ zu berechnen, bildet Usus den Mittelwert aller bewerteter Klassengrößen. Dazu wird die Formel \ref{eq:averageclasssize2} verwendet.
 \begin{equation}
-	acs(Cs) = \frac{\displaystyle \sum_{C\text{ }\in\text{ }Cs} rating_{cs}(C)}{|Cs|}
+	acs(Cs) = \frac{\displaystyle \sum_{c\text{ }\in\text{ }Cs} rating_{cs}(c)}{|Cs|}
 \label{eq:averageclasssize2}
 \end{equation}
 Dabei gehen die mit 0 bewerteten Klassengrößen ebenfalls in die Durchschnittsberechnung ein.
@@ -491,7 +492,7 @@ Wenn eine Klasse mindestens ein öffentliches Feld hat, das nicht statisch oder e
 \subsubsection{Pakete mit zyklischen Abhängigkeiten}
 Für Klassen wurde in Unter-Unterabschnitt \ref{subsubsec:ccd} ein Abhängigkeitsgraph unabhängig vom Paket ermittelt, in dem sich die betrachtete Klasse befindet. Um Pakete mit zyklischen Abhängigkeiten zu identifizieren, müssen alle Klassen-Knoten eines Paket in dem Abhängigkeitsgraph zu einem Paket-Knoten in einem neuen Abhängigkeitsgraph auf Paketebene zusammengefasst werden. Die Kanten zwischen den Klassen werden auf Kanten zwischen den übertragen. Anschließend können alle trivialen Kreise im Paket-Abhängigkeitsgraph entfernt und Zyklen gesucht werden. Heiko Körner beschreibt in seinem Skript \cite{GraphAlgorithms} die beiden Algorithmen \textit{Gegenseitige Erreichbarkeit} und \textit{Starke Zusammenhangskomponenten} für diesen Zweck. Mit den Algorithmen können alle starken Zusammenhangskomponenten (engl. \textit{strongly connected components} (SCC)) ermittelt werden. Alle starken Zusammanhangskomponenten, die mehr als eine Paket beinhalten entsprechen dann Paketen, die auf einem Kreis im Abhängigkeitsgraph liegen.
 \begin{equation}
-	cyclicPackages(pdG) = \sum_{scc\text{ }\in\text{ } \displaystyle SCCs(pdG)}
+	cyclicPackages(pdG) = \sum_{\displaystyle scc \in SCCs(pdG)}
 	\begin{cases}
 		| scc |, & \text{wenn }|scc| > 1\\
 		0, & \text{sonst}\\
@@ -542,24 +543,77 @@ Die Erweiterung \textit{Code Metrics Viewer}\footnote[2]{Download: "`Code Metric
 
 \section{NDepend}
 Für die grafische Darstellung des Abhängigkeitsgraphen kann das kommerzielle Werkzeug NDepend\footnote[1]{"`Tutorial with explanations and screenshots"' \url{http://www.ndepend.com/GettingStarted.aspx\#Tuto}} (299\EUR für eine Einzelplatz-Lizenz) genutzt werden. Dieses Tool ist neben der umfangreichen Darstellung von Zusammenhängen und Abhängigkeiten in der Lage, viele verschiedene Metriken auf Anwendungs-, Projekt-, Namesraum-, Klassen- und Methoden-Ebene zu berechnen. Die Abhängigkeiten können, wie im Architektur-Explorer in Visual Studio Ultimate, in Form einer Matrix oder in Form eines Diagrams veranschaulicht werden. Dafür analysiert NDepend genau wie das Code Metrics Power Tool die pro Projekt von dem Compiler erzeugten Assembly-Dateien (exe oder dll). Das Programm ist neben .NET auch für Java und C++ erhältlich und kann als eigenständige Anwendung oder als Visual Studio Addin verwendet werden.
+
 \subsection{Code Query Language}
 Abhängig von der Metrik- und Abhängigkeitsberechnung kann NDepend Warnungen und Hinweise anzeigen, die den Programmierer rechtzeitig auf schwierige Stellen im Code hinweisen und es ihm erlauben, dort gezielt einzugreifen. Es lassen sich auch eigene Warnungen und Berichte mithilfe der deklarativen Sprache CQL (Code Query Language) erstellen und ausführen.
+
 \subsection{Abstraktheit und Instabilität}
-Eine sehr interessante Metrik im NDepend Metrik-Portfolio ist "`Abstraktheit und Instabilität"'. Robert C. Martin stellt in seinem Artikel \cite{OODesignMetrics} folgende Metriken vor.
+Eine sehr interessante Metrik im NDepend Metrik-Portfolio ist "`Abstraktheit und Instabilität"'. Diese Metrik-Kombination geht auf einen Artikel von Robert C. Martin \cite{OODesignMetrics} zurück. In diesem Artikel beschreibt Martin verschiedene Metriken zum Messen von Abhängigkeiten in Bezug auf eine Klassen-Kategorie. Eine Kategorie definiert er als Gruppe zusammenhängender Klassen, die gemeinsam benutzt werden. Diese Definition kann somit auf Pakete (Namensräume) oder auf Assemblies (Projekte) angewendet werden. Als erste Metrik stellt Martin \textit{Afferent Couplings} (hinführende Kupplungen $Ca(k)$) einer Kategorie $k$ als Anzahl der Klassen vor, die nicht in der Kategorie sind und eine Abhängigkeit von Klassen in der Kategorie haben. Daraus ergibt sich Formel \ref{eq:afferentcouplings}.
+\begin{equation}
+	Ca(k) = \sum_{\displaystyle c_o \in Cs \setminus Cs(k)}
+	\begin{cases}
+		1, & \text{wenn }\exists \text{ }(c_o, c_i) \in dG \mid c_i \in Cs(k)\\
+		0, & \text{sonst}\\
+	\end{cases}
+\label{eq:afferentcouplings}
+\end{equation}
+\begin{eqnarray*}
+Cs&=&\text{Menge aller Klassen im System}\\
+Cs(k)&=&\text{Menge aller Klassen in der Kategorie }k\\
+dG&=&\text{Abhängigkeitsgraph des Systems}\\
+\label{eq:afferentcouplingsagenda}
+\end{eqnarray*}
+Martin bezieht sich auf die Abhängigkeiten zwischen Kategorien. In Formel \ref{eq:afferentcouplings} und den folgenden Formeln wird der bereits aus Unterabschnitt \ref{subsec:perclass} bekannte Abhängigkeitsgraph $dG$ auf Klassen-Ebene verwendet um die Abhängigkeiten abzubilden. Die Kategorie-Grenze einer Kategorie $k$ wird in Bezug auf die Klassen-Abhängigkeiten durch die Funktion $Cs(k)$ bestimmt. Während Formel \ref{eq:afferentcouplings} alle Abhängigkeiten in Richtung der betrachteten Kategorie beschreibt, definiert Formel \ref{eq:efferentcouplings} alle Abhängigkeiten aus der Richtung der betrachteten Kategorie. Die Metrik \textit{Efferent Couplings} (wegführende Kupplungen $Ce(k)$) bezeichnet die Anzahl der Klassen innerhalb einer Kategorie $k$, die Abhängigkeiten zu Klassen außerhalb der Kategorie besitzen.
+\begin{equation}
+	Ce(k) = \sum_{\displaystyle c_i \in Cs(k)}
+	\begin{cases}
+		1, & \text{wenn }\exists \text{ }(c_i, c_o) \in dG \mid c_o \in Cs \setminus Cs(k)\\
+		0, & \text{sonst}\\
+	\end{cases}
+\label{eq:efferentcouplings}
+\end{equation}
+Die Formeln \ref{eq:afferentcouplings} und \ref{eq:efferentcouplings} besitzen die gleiche Struktur und unterscheiden sich nur durch die Richtung der gesuchten Kante im Abhängigkeitsgraph $dG$ und der Menge der Klassen, die gezählt werden soll.
+\paragraph{}
+Mit der Anzahl der hinführenden und wegführenden Abhängigkeiten kann jetzt die Metrik \textit{Instability} (Instabilität $I(k)$) einer Kategorie $k$ wie in Formel \ref{eq:instability} bestimmt werden. Martin beschreibt diese Metrik als Maß dafür, wie sich die betrachtete Kategorie anpassen muss, wenn sich das restliche System ändert.
+\begin{equation}
+	I(k) = \frac{Ce(k)}{Ca(k) + Ce(k)}
+\label{eq:instability}
+\end{equation}
+Eine Instabilität von 1.0 bedeutet maximale Instabilität und wird erreicht, wenn nur wegführende Abhängigkeiten vorhanden sind, also die Klassen innerhalb der Kategorie von Klassen außerhalb abhängig sind. Im Falle einer Änderung im restlichen System ist diese Kategorie sehr wahrscheinlich ebenfalls betroffen. Eine Instabilität von 0.0 bedeutet maximale Stabilität, da keine wegführenden Abhängigkeiten vorhanden sind und Abhängigkeiten nur von Klassen außerhalb der Kategorie zu Klassen in der Kategorie bestehen. Eine Änderung des restlichen Systems hätte also keinen Einfluss auf die betrachtete Kategorie. Instabilität kann nur bestimmt werden, wenn mindestens ein Abhängigkeit (wegführend oder hinführend) vorhanden ist.
+\paragraph{}
+Robert C. Martin erläutert in seinem Artikel zudem den Zusammenhang von Instabilität und Abstraktheit. Dafür schreibt er, dass Abhängigkeiten von instabilen Kategorien zu vermeiden sind. Da Kategorien mit abstrakten Klassen und Schnittstellen hinführende Abhängigkeit einer externen Klasse motivieren, empfiehlt er keine abstrakten Typen innerhalb einer instabilen Kategorie zu positionieren. Um den Grad der Abstraktheit $A(k)$ einer Kategorie $k$ zu bestimmen, hat Martin die Metrik \textit{Abstractness} als Verhältnis zwischen abstrakten Klassen und Schnittstellen zu konkreten Klassen beschrieben. Dieses Verhältnis kann mit Formel \ref{eq:abstractness} berechnet werden.
+\begin{equation}
+	A(k) = \frac{|aCs(k)|}{|Cs(kp)|}
+\label{eq:abstractness}
+\end{equation}
+\begin{eqnarray*}
+aCs(k)&=&\text{Menge der abstrakten Klassen und Schnittstellen in der Kategorie }k\\
+\label{eq:abstractnessagenda}
+\end{eqnarray*}
+Genau wie bei der Instabilität liegt auch die Ausprägung der Abstraktheit zwischen 0.0 und 1.0. Eine Abstraktheit von 0.0 entspricht einer konkreten Kategorie ohne abstrakte Typen, während eine Abstraktheit von 1.0 für eine Kategorie mit ausschließlich abstrakten Typen steht.
+\paragraph{}
+Die Abstraktheit und die Instabilität können kombiniert werden. NDepend greift die Idee von Martin auf und trägt jede Assembly der betrachteten Projektumgebung in einem Diagramm ähnlich Abbildung \ref{fig:abstractnessinstability} entsprechend ein.
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=7cm]{images/abstractnessinstability.jpg}
+	\caption{Schematische Darstellung des "`Abstraktheit und Instabilität"'-Diagramm in NDepend}
+	\label{fig:abstractnessinstability}
+\end{figure}
+Robert C. Martin beschreibt eine Kategorie, die in der Haupt-Sequenz liegt, als ausgeglichen, da sie zum Teil erweiterbar und zum Teil stabil ist. Laut Martin sind die beiden Endpunkte der Haupt-Sequenz die optimalen Punkte. Nach seiner Erfahrung können nur ungefähr die Hälfte der Kategorien in einem System diese optimalen Positionen einnehmen. Die andere Hälfte sollte möglichst nah an der Haupt-Sequenz liegen, was durch eine weitere Metrik in Form einer Abstandsberechnung festgehalten werden könnte.
 
-Ca : Afferent Couplings : The number of classes outside this category that depend upon classes
-within this category.
 
-Ce : Efferent Couplings : The number of classes inside this category that depend upon classes
-outside this categories.
 
-I : Instability : (Ce / (Ca+Ce)) : This metric has the range [0,1]. I=0 indicates a maximally
-stable category. I=1 indicates a maximally instable category.
 
-A : Abstractness : (\# abstract classes in category / total \# of classes in category). This metric
-range is [0,1]. 0 means concrete and 1 means completely abstract.
 
-Diagramm mit "`Zone der Nutzlosigkeit"' und "`Zone der Qual"'
+
+
+
+
+
+
+
+
+
 
 
 
