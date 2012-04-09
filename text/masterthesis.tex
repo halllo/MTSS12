@@ -602,41 +602,28 @@ Die Abstraktheit und die Instabilität können kombiniert werden. NDepend greift d
 Robert C. Martin beschreibt eine Kategorie, die in der Haupt-Sequenz liegt, als ausgeglichen, da sie zum Teil erweiterbar und zum Teil stabil ist. Laut Martin sind die beiden Endpunkte der Haupt-Sequenz die optimalen Punkte. Nach seiner Erfahrung können nur ungefähr die Hälfte der Kategorien in einem System diese optimalen Positionen einnehmen. Die andere Hälfte sollte möglichst nah an der Haupt-Sequenz liegen, was durch eine weitere Metrik in Form einer Abstandsberechnung festgehalten werden könnte.
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 \section{CCD-Addin}
-Die Grade direkt in der IDE, immer sichtbar.
-\url{http://blog.alexonasp.net/post/2009/02/21/Clean-Code-Developer-e28093-das-Visual-Studio-Add-In.aspx}
+In Kapitel \ref{chap:requirements} wurde im Rahmen der Anforderungsanalyse der Anwendungsfall "`Clean Code Hilfe bekommen"' identifiziert. Das Visual Studio Addin \textit{CcdAddIn}\footnote[1]{"`CcdAddIn is a visual Studio Add-In that displays the CCD values according to your current CCD Grade"' \url{https://github.com/AlexZeitler/CcdAddIn}} von Alexander Zeitler versucht eine solche Hilfestellung in passiver Form zu geben. In Unterabschnitt \ref{subsec:cleancode} wurde die Idee von Clean Code bereits erläutert und auf das sieben-Grade-System von Ralf Westphal und Stefan Lieser \cite{CleanCodeDeveloper} eingegangen. Das Programm integriert sich in die IDE und zeigt zu jedem Grad die entsprechenden Prinzipien und Praktiken an, sodass der Entwickler immer an seinen aktuellen Grad und an die damit verbundenen "`Regeln"' erinnert wird. Jede Praktik und jedes Prinzip ist anklickbar, sodass das Addin weitere Informationen anzeigen kann. Leider zeigt das Addin die Informationen nur an und bietet sonst kein weitere Hilfestellung.
 
+\subsection{Prinzipien}
+In diesem Unterabschnitt werden die einzelnen Grade vorgestellt. Da der \textit{schwarze} Grad lediglich einer Interessenbekundung entspricht und der \textit{weiße} Grad das komplette Spektrum abdeckt, werden im Folgenden nur die verbleibenden fünf Grade erwähnt. Die folgenden Prinzipien wurden direkt von Westphal und Lieser \cite{CleanCodeDeveloper} übernommen.
+\begin{description}
+	\item[Rot] \textit{Don´t Repeat Yourself} (DRY), \textit{Keep it simple, stupid} (KISS), Vorsicht vor Optimierungen!, \textit{Favour Composition over Inheritance} (FCoI)
+	\item[Orange] \textit{Single Level of Abstraction} (SLA), \textit{Single Responsibility Principle} (SRP), \textit{Separation of Concerns} (SoC), Source Code Konventionen
+	\item[Gelb] \textit{Interface Segregation Principle} (ISP), \textit{Dependency Inversion Principle} (DIP), \textit{Liskov Substitution Principle} (LSP), \textit{Principle of Least Astonishment} (PLA), \textit{Information Hiding Principle} (IHP)
+	\item[Grün] \textit{Open Closed Principle} (OCP), \textit{Tell, don´t ask} (TDA), \textit{Law of Demeter} (LD)
+	\item[Blau] Entwurf und Implementation überlappen nicht, Implementation spiegelt Entwurf, \textit{You Ain´t Gonna Need It} (YAGNI)
+\end{description}
 
-
-
-
-
-
-
-
-
-
-
-
-
+\subsection{Praktiken}
+Neben den Prinzipien existieren zu jedem Grad auf Praktiken, die ebenfalls direkt von Westphal und Lieser \cite{CleanCodeDeveloper} übernommen wurden.
+\begin{description}
+	\item[Rot] die Pfadfinderregel beachten, \textit{Root Cause Analysis}, ein Versionskontrollsystem einsetzen, einfache Refaktorisierungsmuster anwenden, Täglich reflektieren
+	\item[Orange] Issue Tracking, Automatisierte Integrationstests, Reviews, Lesen, Lesen, Lesen
+	\item[Gelb] Automatisierte Unit Tests, Mockups (Testattrappen), Code Coverage Analyse, Teilnahme an Fachveranstaltungen, Komplexe Refaktorisierungen
+	\item[Grün] Continuous Integration, Statische Codeanalyse (Metriken), \textit{Inversion of Control} (IOC) Container, Erfahrung weitergeben, Messen von Fehlern
+	\item[Blau] Continuous Delivery, Iterative Entwicklung, Komponentenorientierung, Test first
+\end{description}
 
 
 
