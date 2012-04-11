@@ -19,17 +19,12 @@ namespace Usus.net.UI.Controls
     /// </summary>
     public partial class SolutionView : UserControl
     {
-        Func<IEnumerable<string>> _getProjects;
+        ViewModel.SolutionView viewModel;
 
-        public SolutionView(Func<IEnumerable<string>> getProjects)
+        public SolutionView(ViewModel.SolutionView viewModel)
         {
             InitializeComponent();
-            _getProjects = getProjects;
-        }
-
-        private void button1_Click(object sender, RoutedEventArgs e)
-        {
-            projectList.ItemsSource = _getProjects();
+            DataContext = this.viewModel = viewModel;
         }
     }
 }

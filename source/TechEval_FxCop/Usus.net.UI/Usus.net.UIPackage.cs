@@ -32,7 +32,7 @@ namespace andrena.Usus_net_UI
     // This attribute registers a tool window exposed by this package.
     [ProvideToolWindow(typeof(MyToolWindow))]
     [Guid(GuidList.guidUsus_net_UIPkgString)]
-    public sealed class Usus_net_UIPackage : MyPackage
+    public sealed class Usus_net_UIPackage : Package
     {
         /// <summary>
         /// Default constructor of the package.
@@ -63,15 +63,6 @@ namespace andrena.Usus_net_UI
             }
             IVsWindowFrame windowFrame = (IVsWindowFrame)window.Frame;
             Microsoft.VisualStudio.ErrorHandler.ThrowOnFailure(windowFrame.Show());
-            
-            (window as MyToolWindow).MyPack = this;
-            this.SubscripeToEvents();
-            this.SolutionChanged += new Action(Usus_net_UIPackage_SolutionChanged);
-        }
-
-        void Usus_net_UIPackage_SolutionChanged()
-        {
-            System.Windows.MessageBox.Show("solution changed");
         }
 
         /////////////////////////////////////////////////////////////////////////////

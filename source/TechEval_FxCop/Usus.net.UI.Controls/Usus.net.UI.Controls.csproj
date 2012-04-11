@@ -49,9 +49,12 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ViewModel\Event.cs" />
+    <Compile Include="ViewModel\Project.cs" />
     <Compile Include="SolutionView.xaml.cs">
       <DependentUpon>SolutionView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\SolutionView.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />

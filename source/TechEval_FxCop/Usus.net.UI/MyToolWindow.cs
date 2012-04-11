@@ -22,7 +22,7 @@ namespace andrena.Usus_net_UI
     /// implementation of the IVsUIElementPane interface.
     /// </summary>
     [Guid("00b2b9d5-b0dd-4f5a-a295-f3cea7b25ca2")]
-    public class MyToolWindow : MyToolWindowPane
+    public class MyToolWindow : SolutionAwareToolWindowPane
     {
         /// <summary>
         /// Standard constructor for the tool window.
@@ -43,16 +43,33 @@ namespace andrena.Usus_net_UI
             // This is the user control hosted by the tool window; Note that, even if this class implements IDisposable,
             // we are not calling Dispose on this object. This is because ToolWindowPane calls Dispose on 
             // the object returned by the Content property.
-            base.Content = new Usus.net.UI.Controls.SolutionView(() =>
+
+            var viewModel = new Usus.net.UI.Controls.ViewModel.SolutionView();
+            base.SolutionChanged += () => viewModel.SetProjects(getProjects());
+            base.SavingDone += () => viewModel.SetEvent(newEvent("save"));
+            base.BuildDone += () => viewModel.SetEvent(newEvent("build"));
+
+            base.Content = new Usus.net.UI.Controls.SolutionView(viewModel);
+        }
+
+        private Usus.net.UI.Controls.ViewModel.Event newEvent(string type)
+        {
+            return new Usus.net.UI.Controls.ViewModel.Event
             {
-                return GetProjects()
-                    .Where(p => !string.IsNullOrEmpty(p.FullName))
-                    .Select(p => {
-                    return "" 
-                        + p.Properties.Item("FullPath").Value.ToString()
-                        + p.Properties.Item("OutputFileName").Value.ToString();
-                });
-            });
+                Time = DateTime.Now,
+                Type = type
+            };
+        }
+
+        private IEnumerable<Usus.net.UI.Controls.ViewModel.Project> getProjects()
+        {
+            return from p in base.Projects
+                   where !string.IsNullOrEmpty(p.FullName)
+                   select new Usus.net.UI.Controls.ViewModel.Project
+                   {
+                       OutputAssembly = p.Properties.Item("OutputFileName").Value.ToString(),
+                       ProjectPath = p.Properties.Item("FullPath").Value.ToString()
+                   };                        
         }
     }
 }

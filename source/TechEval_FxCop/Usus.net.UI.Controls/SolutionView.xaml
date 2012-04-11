@@ -12,8 +12,41 @@
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal">
             <TextBlock Text="List of projects in the current solution" VerticalAlignment="Center" Margin="10"/>
-            <Button Content="refresh" Height="30" Width="50" Click="button1_Click" />
+            <Button Content="do sth" Height="30" Width="50" />
         </StackPanel>
-        <ListBox Grid.Row="1" x:Name="projectList"/>
+        <TabControl Grid.Row="1">
+            <TabItem Header="Open Solution">
+                <ListBox ItemsSource="{Binding Projects}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Text="{Binding OutputAssembly}" FontSize="20"/>
+                                <TextBlock Text="{Binding ProjectPath}" Grid.Row="1"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </TabItem>
+            <TabItem Header="Events">
+                <ListBox ItemsSource="{Binding Events}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Text="{Binding Type}" FontSize="20"/>
+                                <TextBlock Text="{Binding Time}" Grid.Row="1"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </TabItem>
+        </TabControl>
     </Grid>
 </UserControl>
