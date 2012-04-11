@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Usus.net.UI_UnitTests", "Us
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Usus.net.UI.Controls", "Usus.net.UI.Controls\Usus.net.UI.Controls.csproj", "{B0915491-6664-4BE0-AD3A-66FF9DC8DDCF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsusNetRule", "UsusNetRule\UsusNetRule.csproj", "{3418D8FC-B7A9-4DD4-8EC8-5E085A0A68CB}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = TechEval_FxCop.vsmdi
@@ -81,6 +83,16 @@ Global
 		{B0915491-6664-4BE0-AD3A-66FF9DC8DDCF}.Release|Mixed Platforms.Build.0 = Release|x86
 		{B0915491-6664-4BE0-AD3A-66FF9DC8DDCF}.Release|x86.ActiveCfg = Release|x86
 		{B0915491-6664-4BE0-AD3A-66FF9DC8DDCF}.Release|x86.Build.0 = Release|x86
+		{3418D8FC-B7A9-4DD4-8EC8-5E085A0A68CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3418D8FC-B7A9-4DD4-8EC8-5E085A0A68CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3418D8FC-B7A9-4DD4-8EC8-5E085A0A68CB}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{3418D8FC-B7A9-4DD4-8EC8-5E085A0A68CB}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{3418D8FC-B7A9-4DD4-8EC8-5E085A0A68CB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3418D8FC-B7A9-4DD4-8EC8-5E085A0A68CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3418D8FC-B7A9-4DD4-8EC8-5E085A0A68CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3418D8FC-B7A9-4DD4-8EC8-5E085A0A68CB}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{3418D8FC-B7A9-4DD4-8EC8-5E085A0A68CB}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{3418D8FC-B7A9-4DD4-8EC8-5E085A0A68CB}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

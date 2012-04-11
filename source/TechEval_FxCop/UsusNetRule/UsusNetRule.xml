@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Rules FriendlyName="Usus.net metrics">
+  <Rule TypeName="MetricsRule" Category="UsusNet" CheckId="DR1010">
+    <Name>Metrics Rule</Name>
+    <Description>Gathers UsusNet metrics</Description>
+    <Url></Url>
+    <Resolution Name="Static">resolution static</Resolution>
+    <Resolution Name="Instance">resolution instance</Resolution>
+    <MessageLevel Certainty="95">Warning</MessageLevel>
+    <Email></Email>
+    <FixCategories>Breaking</FixCategories>
+    <Owner></Owner>
+  </Rule>
+</Rules>

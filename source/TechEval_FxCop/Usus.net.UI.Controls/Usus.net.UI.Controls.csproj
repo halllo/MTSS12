@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ViewModel\Event.cs" />
+    <Compile Include="ViewModel\Method.cs" />
     <Compile Include="ViewModel\Project.cs" />
     <Compile Include="SolutionView.xaml.cs">
       <DependentUpon>SolutionView.xaml</DependentUpon>
@@ -66,6 +67,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ControlsKey.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TechEval_FxCop\TechEval_FxCop.csproj">
+      <Project>{4F66E670-FA7C-4398-8510-D3947D3CA819}</Project>
+      <Name>TechEval_FxCop</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

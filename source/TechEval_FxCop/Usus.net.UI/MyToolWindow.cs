@@ -40,16 +40,21 @@ namespace andrena.Usus_net_UI
             this.BitmapResourceID = 301;
             this.BitmapIndex = 1;
 
-            // This is the user control hosted by the tool window; Note that, even if this class implements IDisposable,
-            // we are not calling Dispose on this object. This is because ToolWindowPane calls Dispose on 
-            // the object returned by the Content property.
+
+
+
 
             var viewModel = new Usus.net.UI.Controls.ViewModel.SolutionView();
+            /*TODO: observables*/
             base.SolutionChanged += () => viewModel.SetProjects(getProjects());
+            /*TODO: observables*/
             base.SavingDone += () => viewModel.SetEvent(newEvent("save"));
+            /*TODO: observables*/
             base.BuildDone += () => viewModel.SetEvent(newEvent("build"));
 
             base.Content = new Usus.net.UI.Controls.SolutionView(viewModel);
+
+
         }
 
         private Usus.net.UI.Controls.ViewModel.Event newEvent(string type)
@@ -64,12 +69,14 @@ namespace andrena.Usus_net_UI
         private IEnumerable<Usus.net.UI.Controls.ViewModel.Project> getProjects()
         {
             return from p in base.Projects
-                   where !string.IsNullOrEmpty(p.FullName)
+                   where p.Properties != null && !string.IsNullOrEmpty(p.FullName)
                    select new Usus.net.UI.Controls.ViewModel.Project
                    {
+                       Name = p.Name,
                        OutputAssembly = p.Properties.Item("OutputFileName").Value.ToString(),
-                       ProjectPath = p.Properties.Item("FullPath").Value.ToString()
-                   };                        
+                       ProjectPath = p.Properties.Item("FullPath").Value.ToString(),
+                       ProjectFile = p.FullName
+                   };
         }
     }
 }

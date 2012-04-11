@@ -10,10 +10,7 @@
             <RowDefinition Height="50"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal">
-            <TextBlock Text="List of projects in the current solution" VerticalAlignment="Center" Margin="10"/>
-            <Button Content="do sth" Height="30" Width="50" />
-        </StackPanel>
+        <TextBlock Text="Stuff Usus can infer from your current solution" VerticalAlignment="Center" Margin="10"/>
         <TabControl Grid.Row="1">
             <TabItem Header="Open Solution">
                 <ListBox ItemsSource="{Binding Projects}">
@@ -24,8 +21,8 @@
                                     <RowDefinition/>
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
-                                <TextBlock Text="{Binding OutputAssembly}" FontSize="20"/>
-                                <TextBlock Text="{Binding ProjectPath}" Grid.Row="1"/>
+                                <TextBlock Text="{Binding Name}" FontSize="20"/>
+                                <TextBlock Text="{Binding ProjectFile}" Grid.Row="1"/>
                             </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
@@ -42,6 +39,25 @@
                                 </Grid.RowDefinitions>
                                 <TextBlock Text="{Binding Type}" FontSize="20"/>
                                 <TextBlock Text="{Binding Time}" Grid.Row="1"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </TabItem>
+            <TabItem Header="Methods">
+                <ListBox ItemsSource="{Binding Methods}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Text="{Binding Name}"/>
+                                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Statements}" FontSize="20"/>
+                                    <TextBlock Text="statements" FontSize="15" VerticalAlignment="Bottom" Margin="3"/>
+                                </StackPanel>
                             </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
