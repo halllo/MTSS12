@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MethodInspector.cs" />
     <Compile Include="MetricsRule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

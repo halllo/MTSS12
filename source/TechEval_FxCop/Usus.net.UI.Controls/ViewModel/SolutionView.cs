@@ -51,7 +51,9 @@ namespace Usus.net.UI.Controls.ViewModel
                 {
                     var mn = line.Substring(0, line.IndexOf("->")).Trim();
                     var nos = int.Parse(line.Substring(line.IndexOf("->") + 2, line.IndexOf("statements, ") - line.IndexOf("->") - 2).Trim());
-                    Methods.Add(new Method { Name = mn, Statements = nos });
+                    var cc = int.Parse(line.Substring(line.IndexOf(",") + 1, line.IndexOf("cc, ") - line.IndexOf(",") - 1).Trim());
+                    var cls = line.Substring(line.IndexOf("{"), line.IndexOf("}") - line.IndexOf("{") + 1);
+                    Methods.Add(new Method { Name = mn, Statements = nos, CyclomaticComplexity = cc, Callees = cls });
                 }
             }
         }

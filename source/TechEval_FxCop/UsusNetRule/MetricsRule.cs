@@ -9,12 +9,12 @@ namespace UsusNetRule
 {
     public class MetricsRule : BaseIntrospectionRule
     {
-        Dictionary<string, Tuple<int, int>> methodLengths;
+        Dictionary<string, Tuple<int, int, List<string>>> methodInfos;
 
         public MetricsRule()
             : base("MetricsRule", "UsusNetRule.UsusNetRule", typeof(MetricsRule).Assembly)
         {
-            methodLengths = new Dictionary<string, Tuple<int, int>>();
+            methodInfos = new Dictionary<string, Tuple<int, int, List<string>>>();
         }
 
         public override TargetVisibilities TargetVisibility
@@ -34,7 +34,8 @@ namespace UsusNetRule
         {
             string outputDirectory = @"D:\e\fxcop\";
             CreateOutputDirectory(outputDirectory);
-            CreateOutputFile(outputDirectory + DateTime.Now.Ticks + ".txt");
+            var outputFile = outputDirectory + DateTime.Now.Ticks + ".txt";
+            CreateOutputFile(outputFile);
             base.AfterAnalysis();
         }
 
@@ -47,18 +48,24 @@ namespace UsusNetRule
         {
             using (var fileStream = new StreamWriter(File.Create(newFileName)))
             {
-                foreach (var line in GetLinesFrom(methodLengths))
+                foreach (var line in GetLinesFrom(methodInfos))
                 {
                     fileStream.WriteLine(line);
                 }
             }
         }
 
-        private IEnumerable<string> GetLinesFrom(IEnumerable<KeyValuePair<string, Tuple<int, int>>> methods)
+        private IEnumerable<string> GetLinesFrom(IEnumerable<KeyValuePair<string, Tuple<int, int, List<string>>>> methods)
         {
-            return methods.Select((m) => m.Key + "\t->\t" 
-                + m.Value.Item1 + " statements, " 
-                + m.Value.Item2 + " instructions");
+            return methods.Select(m => m.Key + "\t->\t"
+                + m.Value.Item1 + " statements, "
+                + m.Value.Item2 + " cc, "
+                + GetCalleesString(m.Value.Item3) + " callees");
+        }
+
+        private static string GetCalleesString(List<string> callees)
+        {
+            return "{" + string.Join(",", callees) + "}";
         }
 
         public override ProblemCollection Check(Member member)
@@ -66,9 +73,10 @@ namespace UsusNetRule
             Method method = member as Method;
             if (method != null)
             {
-                var stCount = method.Body.Statements.Count;
-                var inCount = method.Instructions.Count;
-                methodLengths.Add(member.FullName, Tuple.Create(stCount, inCount));
+                var stCount = method.NumberOfStatements();
+                var types = method.ReferencedTypes();
+                var cc = method.CyclomaticComplexity();
+                methodInfos.Add(member.FullName, Tuple.Create(stCount, cc, types.Select(t => t.FullName).ToList()));
             }
 
             return this.Problems;
