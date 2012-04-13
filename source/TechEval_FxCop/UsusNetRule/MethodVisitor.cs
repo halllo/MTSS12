@@ -8,7 +8,7 @@ namespace UsusNetRule
 {
     internal class MethodVisitor : BinaryReadOnlyVisitor
     {
-        public int Cc { get; set; }
+        public int CyclomaticComplextiy { get; set; }
         public IList<Method> Callees { get; private set; }
         private Dictionary<int, int> CalleeIds;
 
@@ -16,7 +16,7 @@ namespace UsusNetRule
         {
             Callees = new List<Method>();
             CalleeIds = new Dictionary<int, int>();
-            Cc = 1;
+            CyclomaticComplextiy = 1;
         }
 
         public override void VisitAssignmentStatement(AssignmentStatement assignment)
@@ -26,7 +26,7 @@ namespace UsusNetRule
 
         public override void VisitBranch(Branch branch)
         {
-            if (branch.Condition != null) Cc++;
+            if (branch.Condition != null) CyclomaticComplextiy++;
             base.VisitBranch(branch);
         }
 
@@ -35,14 +35,11 @@ namespace UsusNetRule
             base.VisitMemberBinding(memberBinding);
 
             Method method = memberBinding.BoundMember as Method;
-            if (method == null)
-                return;
+            if (method == null) return;
             int key = method.UniqueKey;
-            if (!CalleeIds.ContainsKey(key))
-            {
-                Callees.Add(method);
-                CalleeIds.Add(key, key);
-            }
+            if (CalleeIds.ContainsKey(key)) return;
+            Callees.Add(method);
+            CalleeIds.Add(key, key);
         }
     }
 }

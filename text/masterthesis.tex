@@ -647,21 +647,46 @@ Anhand dieser Kriterien werden die verschiedenen Technologien, die in den folgen
 
 
 \section{FxCop}
-Die Umgebung
-\begin{enumerate}
-	\item FxCop Regel und FxCop Runner
-	\item Assembly-Ebene
-	\item Multithreading
-	\item ProblemCollection als Datenhaltung
-	\item Problem bei Datenausgabe
-\end{enumerate}
+bla bla
 
-FxCop API
+\subsection{Umgebung}
+Die Umgebung bla bla bla
+\begin{enumerate}
+	\item FxCop Regel und FxCop Runner, Jason Kresowaty \cite{FxCopCustomRules}
+	\item Assembly-Ebene
+	\item Multithreading -> jeder Thread sammelt seine eigenen Daten, nicht Thread-Save.
+	\item ProblemCollection als Datenhaltung
+	\item Problem bei Datenausgabe -> schlechte Lösung über Logs und neu-importieren, da Konsolidierung der Thread-Ergebnisse schwierig.
+\end{enumerate}
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=12cm]{images/fxcoprunner.png}
+	\caption{FxCop Runner}
+	\label{fig:fxcoprunner}
+\end{figure}
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=12cm]{images/fxcopcmdrunner.png}
+	\caption{FxCop Kommandozeilen Runner}
+	\label{fig:fxcopcmdrunner}
+\end{figure}
+
+\subsection{API}
+Die FxCop API bla bla bla Microsoft.FxCop.Sdk bla bla
 \begin{enumerate}
 	\item wie System.Reflection
 	\item Visitor Pattern
+	\item Check Member, TypeNode, ModulNode, Parameter, Resource, TypeNodeCollection
+	\item Visit Assingment, Branch, MemberBinding (Methodenaufruf), TypeNode, ModulNode, Parameter, Resource, TypeNodeCollection
+	\item Visitor Pattern
 \end{enumerate}
-
+\begin{lstlisting}[caption={FxCop API Beipiele},label={listing:fxcopapisample}]
+public override ProblemCollection Check(Member member) {...}
+public override ProblemCollection Check(TypeNode type) {...}
+public override void VisitMemberBinding(MemberBinding memberBinding) {...}
+public override void VisitBranch(Branch branch) {...}
+public override void VisitAssignmentStatement(AssignmentStatement assignment) {...}
+\end{lstlisting}
 
 
 

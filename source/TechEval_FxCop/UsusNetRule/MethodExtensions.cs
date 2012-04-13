@@ -10,21 +10,24 @@ namespace UsusNetRule
     {
         public static IList<Method> Callees(this Method caller)
         {
-            MethodVisitor cv = new MethodVisitor();
-            cv.VisitStatements(caller.Body.Statements);
-            return cv.Callees;
-        }
-
-        public static IList<TypeNode> ReferencedTypes(this Method caller)
-        {
-            return Callees(caller).Select(m => m.DeclaringType).Distinct().ToList();
+            return VisitMethodBody(caller).Callees;
         }
 
         public static int CyclomaticComplexity(this Method caller)
         {
-            MethodVisitor cv = new MethodVisitor();
-            cv.VisitStatements(caller.Body.Statements);
-            return cv.Cc;
+            return VisitMethodBody(caller).CyclomaticComplextiy;
+        }
+
+        private static MethodVisitor VisitMethodBody(Method caller)
+        {
+            var methodVisitor = new MethodVisitor();
+            methodVisitor.VisitStatements(caller.Body.Statements);
+            return methodVisitor;
+        }
+     
+        public static IList<TypeNode> ReferencedTypes(this Method caller)
+        {
+            return Callees(caller).Select(m => m.DeclaringType).Distinct().ToList();
         }
 
         public static int NumberOfLines(this Method caller)
