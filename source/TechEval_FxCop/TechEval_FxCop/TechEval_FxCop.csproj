@@ -51,10 +51,15 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UsusRuleIntrospection.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="FxCopRuleUser.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Usus.net.UI.Controls\Usus.net.UI.Controls.csproj">
+      <Project>{B0915491-6664-4BE0-AD3A-66FF9DC8DDCF}</Project>
+      <Name>Usus.net.UI.Controls</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

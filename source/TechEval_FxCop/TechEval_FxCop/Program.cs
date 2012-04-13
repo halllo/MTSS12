@@ -12,7 +12,7 @@ namespace TechEval_FxCop
         {
             string toAnalyse = @"D:\manuel\Git\GitHub\MTSS12\source\TechEval_FxCop\UsusNetRule\bin\Debug\UsusNetRule.dll";
 
-            UsusRuleIntrospection ususRule = new UsusRuleIntrospection();
+            var ususRule = new Usus.net.UI.Controls.Model.UsusRuleIntrospection();
             ususRule.Introspect(toAnalyse);
 
             Console.WriteLine("\nDone!");

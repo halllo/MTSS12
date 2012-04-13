@@ -10,7 +10,7 @@
             <RowDefinition Height="50"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock Text="Stuff Usus can infer from your current solution" VerticalAlignment="Center" Margin="10"/>
+        <TextBlock Text="Stuff that can be inferred from your current solution" VerticalAlignment="Center" Margin="10"/>
         <TabControl Grid.Row="1">
             <TabItem Header="Open Solution">
                 <ListBox ItemsSource="{Binding Projects}">
@@ -61,7 +61,7 @@
                                     <TextBlock Text="{Binding Callees}" Margin="3"/>
                                 </StackPanel>
                                 <StackPanel Grid.Row="2" Orientation="Horizontal">
-                                    <TextBlock Text="Statements:" Margin="3"/>
+                                    <TextBlock Text="Lines:" Margin="3"/>
                                     <TextBlock Text="{Binding Statements}" Margin="3"/>
                                 </StackPanel>
                                 <StackPanel Grid.Row="3" Orientation="Horizontal">

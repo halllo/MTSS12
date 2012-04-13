@@ -45,19 +45,15 @@ namespace andrena.Usus_net_UI
 
 
             var viewModel = new Usus.net.UI.Controls.ViewModel.SolutionView();
-            /*TODO: observables*/
-            base.SolutionChanged += () => viewModel.SetProjects(getProjects());
-            /*TODO: observables*/
-            base.SavingDone += () => viewModel.SetEvent(newEvent("save"));
-            /*TODO: observables*/
-            base.BuildDone += () => viewModel.SetEvent(newEvent("build"));
+
+            base.SolutionChanged += () => viewModel.SetProjects(getProjects());/*TODO: observables*/
+            base.SavingDone += () => viewModel.SetEvent(newEvent(Usus.net.UI.Controls.ViewModel.Event.Of.save));/*TODO: observables*/
+            base.BuildDone += () => viewModel.SetEvent(newEvent(Usus.net.UI.Controls.ViewModel.Event.Of.build));/*TODO: observables*/
 
             base.Content = new Usus.net.UI.Controls.SolutionView(viewModel);
-
-
         }
 
-        private Usus.net.UI.Controls.ViewModel.Event newEvent(string type)
+        private Usus.net.UI.Controls.ViewModel.Event newEvent(Usus.net.UI.Controls.ViewModel.Event.Of type)
         {
             return new Usus.net.UI.Controls.ViewModel.Event
             {

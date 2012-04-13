@@ -19,10 +19,7 @@ namespace UsusNetRule
 
         public override TargetVisibilities TargetVisibility
         {
-            get
-            {
-                return TargetVisibilities.All;
-            }
+            get { return TargetVisibilities.All; }
         }
 
         public override void BeforeAnalysis()
@@ -34,11 +31,11 @@ namespace UsusNetRule
         {
             string outputDirectory = @"D:\e\fxcop\";
             CreateOutputDirectory(outputDirectory);
-            var outputFile = outputDirectory + DateTime.Now.Ticks + ".txt";
-            CreateOutputFile(outputFile);
+            CreateOutputFile(outputDirectory + DateTime.Now.Ticks + ".txt");
             base.AfterAnalysis();
         }
 
+        #region File output
         private static void CreateOutputDirectory(string outputDirectory)
         {
             if (!Directory.Exists(outputDirectory)) Directory.CreateDirectory(outputDirectory);
@@ -67,13 +64,14 @@ namespace UsusNetRule
         {
             return "{" + string.Join(",", callees) + "}";
         }
+        #endregion
 
         public override ProblemCollection Check(Member member)
         {
             Method method = member as Method;
             if (method != null)
             {
-                var stCount = method.NumberOfStatements();
+                var stCount = method.NumberOfLines();
                 var types = method.ReferencedTypes();
                 var cc = method.CyclomaticComplexity();
                 methodInfos.Add(member.FullName, Tuple.Create(stCount, cc, types.Select(t => t.FullName).ToList()));

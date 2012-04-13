@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Diagnostics;
 
-namespace TechEval_FxCop
+namespace Usus.net.UI.Controls.Model
 {
     public class UsusRuleIntrospection
     {
@@ -22,10 +22,6 @@ namespace TechEval_FxCop
             var processStartInfo = new ProcessStartInfo(fxCop, cmdArgs);
             processStartInfo.WindowStyle = ProcessWindowStyle.Hidden;
             var fxCopProcess = Process.Start(processStartInfo);
-            if (fxCopProcess.HasExited != true)
-            {
-                Console.WriteLine("done!");
-            }
         }
     }
 }

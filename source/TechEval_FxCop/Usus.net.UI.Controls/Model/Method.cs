@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Usus.net.UI.Controls.ViewModel
+namespace Usus.net.UI.Controls.Model
 {
     public class Method
     {

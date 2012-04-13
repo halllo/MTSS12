@@ -7,7 +7,12 @@ namespace Usus.net.UI.Controls.ViewModel
 {
     public class Event
     {
-        public string Type { get; set; }
+        public enum Of
+        {
+            build, save
+        }
+
+        public Event.Of Type { get; set; }
         public DateTime Time { get; set; }
     }
 }
