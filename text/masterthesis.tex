@@ -647,17 +647,10 @@ Anhand dieser Kriterien werden die verschiedenen Technologien, die in den folgen
 
 
 \section{FxCop}
-bla bla
+Jason Kresowaty beschreibt FxCop in seiner Ausarbeitung \cite{FxCopCustomRules} als Werkzeug zur statischen Code-Analyse für Assemblies, die mit C\#, VB.NET und allen anderen .NET-Sprachen entwickelt wurden. FxCop analysiert die vom Kompiler erzeugten Binärdateien in \textit{Common Intermediate Language} (CIL) und führt Regeln aus, die nach Problemen im Sinne von Verletzungen von Konventionen und Richtlinien suchen.
 
 \subsection{Umgebung}
-Die Umgebung bla bla bla
-\begin{enumerate}
-	\item FxCop Regel und FxCop Runner, Jason Kresowaty \cite{FxCopCustomRules}
-	\item Assembly-Ebene
-	\item Multithreading -> jeder Thread sammelt seine eigenen Daten, nicht Thread-Save.
-	\item ProblemCollection als Datenhaltung
-	\item Problem bei Datenausgabe -> schlechte Lösung über Logs und neu-importieren, da Konsolidierung der Thread-Ergebnisse schwierig.
-\end{enumerate}
+Die FxCop-Technologie besteht aus zwei Teilen. Der erste Teil ist die \textit{Microsoft FxCop} Anwendung und der zweite Teil sind die Regeln, die genutzt werden um die statische Analyse zu nutzen. Microsoft veröffentlicht mit dem Programm eine Menge von Regeln, um Assemblies anhand den von Krzysztof Cwalina und Brad Abrams veröffentlichten Konventionen und Richtlinien \cite{FrameworkDesignGuidelines} zu untersuchen. Eine Regel, die eine Berechnung von Metriken zur späteren Verwendung durchführt ist nicht vorhanden. Es lassen sich allerdings eigene Regeln definieren, die FxCop genauso ausführen kann, und mit der das Programm beliebig erweitert werden kann. Eine solche eigene Regel könnte alle notwendigen Informationen sammeln um ein Programm mit einem Usus-ähnlichen Funktionsumfang zu entwickeln. Kresowaty beschreibt in seiner Ausarbeitung \cite{FxCopCustomRules} wie so eine Regel erstellt werden kann. Regeln lassen sich auch automatisiert ausführen, wenn eine Analyse mit der grafischen Oberfläche, die in Abbildung \ref{fig:fxcoprunner} dargestellt ist, nicht sinnvoll ist. Abbildung \ref{fig:fxcopcmdrunner} zeigt die Kommandozeilenversion des FxCop Runners.
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=12cm]{images/fxcoprunner.png}
@@ -670,6 +663,8 @@ Die Umgebung bla bla bla
 	\caption{FxCop Kommandozeilen Runner}
 	\label{fig:fxcopcmdrunner}
 \end{figure}
+\paragraph{}
+Eine FxCop Regel entspricht einer Klassenbibliothek, die eine Regel-Klasse und eine Regel-Konfigurationsdatei enthält. Während FxCop den Code analysiert, erzeugt es Instanzen der Regel-Klasse und nutzt diese um in der Codebasis Problemfälle zu finden. Problemfälle können dann von der Regel-Klasse in Problem-Listen eingetragen werden, die FxCop entweder grafisch anzeigt oder in Form einer Report-Datei erzeugt. Zusätzlich können Problemfälle als kritisch gekennzeichnet und mit verschiedenen Texten und Beschreibungen versehen werden um eine möglichst detaillierte Beschreibung der Schwierigkeit zu ermöglichen. FxCop ist also auf das Finden von Problemen und nicht auf objektive Datensammlung spezialisiert. Um eine Assembly möglichst schnell analysieren zu können, erzeugt FxCop mehrere Instanzen einer Regel und führt diese in mehreren Threads parallel aus. Jason Kresowaty betont in seiner Ausarbeitung \cite{FxCopCustomRules}, dass sich die Regeln nicht Thread-sicher verhalten. Damit mit FxCop weiterverwendbare Daten gesammelt werden können, müssen diese auf eine geeignete Weise exportiert werden. Entweder können diese Daten in Form von Zeichenketten als Probleme verpackt oder direkt an ein Ziel gespeichert werden. Diese beiden Lösungen sind umständlich und nicht intuitiv und werden von der Nebenläufigkeit von FxCop noch erschwert.
 
 \subsection{API}
 Die FxCop API bla bla bla Microsoft.FxCop.Sdk bla bla
