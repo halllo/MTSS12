@@ -667,32 +667,17 @@ Die FxCop-Technologie besteht aus zwei Teilen. Der erste Teil ist die \textit{Mi
 Eine FxCop Regel entspricht einer Klassenbibliothek, die eine Regel-Klasse und eine Regel-Konfigurationsdatei enthält. Während FxCop den Code analysiert, erzeugt es Instanzen der Regel-Klasse und nutzt diese um in der Codebasis Problemfälle zu finden. Problemfälle können dann von der Regel-Klasse in Problem-Listen eingetragen werden, die FxCop entweder grafisch anzeigt oder in Form einer Report-Datei erzeugt. Zusätzlich können Problemfälle als kritisch gekennzeichnet und mit verschiedenen Texten und Beschreibungen versehen werden um eine möglichst detaillierte Beschreibung der Schwierigkeit zu ermöglichen. FxCop ist also auf das Finden von Problemen und nicht auf objektive Datensammlung spezialisiert. Um eine Assembly möglichst schnell analysieren zu können, erzeugt FxCop mehrere Instanzen einer Regel und führt diese in mehreren Threads parallel aus. Jason Kresowaty betont in seiner Ausarbeitung \cite{FxCopCustomRules}, dass sich die Regeln nicht Thread-sicher verhalten. Damit mit FxCop weiterverwendbare Daten gesammelt werden können, müssen diese auf eine geeignete Weise exportiert werden. Entweder können diese Daten in Form von Zeichenketten als Probleme verpackt oder direkt an ein Ziel gespeichert werden. Diese beiden Lösungen sind umständlich und nicht intuitiv und werden von der Nebenläufigkeit von FxCop noch erschwert.
 
 \subsection{API}
-Die FxCop API bla bla bla Microsoft.FxCop.Sdk bla bla
-\begin{enumerate}
-	\item wie System.Reflection
-	\item Visitor Pattern
-	\item Check Member, TypeNode, ModulNode, Parameter, Resource, TypeNodeCollection
-	\item Visit Assingment, Branch, MemberBinding (Methodenaufruf), TypeNode, ModulNode, Parameter, Resource, TypeNodeCollection
-	\item Visitor Pattern
-\end{enumerate}
+Regeln für FxCop können mit C$\#$ in Form einer Klassenbibliothek entwickelt, wie es Jason Kresowaty in seiner Ausarbeitung \cite{FxCopCustomRules} vorstellt, und als \textit{Dynamic Link Library} (DLL) von FxCop verwendet werden. Dazu muss die DLL über eine spezielle Metadaten-Datei als eingebettete Ressource verfügen, die die Regel dem Runner bekanntmacht. Die Regel selbst wird in einer Klasse implementiert, die von einer abstrakten Regel-Oberklasse abgeleitet ist und somit Analyse-Methoden überladen kann. Mit diesen Methoden kann das Objektmodell der zu analysierenden Assembly untersucht werden. Alle Basisklassen und Klassen, die das Objektmodell repräsentieren befinden sich im Namensraum \texttt{Microsoft.FxCop.Sdk}.
+\paragraph{}
+Das \textit{Application Programming Interface} (API) um FxCop-Regeln zu programmieren enthält Teile die dem in das .NET-Framework integrierten \texttt{System.Reflection} API ähnlich sind. Beide enthalten Klassen um das Objektmodell zu repräsentieren. Mit dem Besuchermuster (Visitor Pattern) ermöglicht es die FxCop API die gleiche Datenstruktur (Objektmodell) mit vielen Regeln (Besuchern) zu analysieren. In der Regel-Klasse, die von \texttt{BaseIntrospectionRule} abgeleitet ist können oberflächliche Besuchermethoden überladen werden. Diese oberflächlichen Methoden bestimmen, an welcher Stelle im Objektmodell eine weitere Überprüfung vorgenommen werden soll. Zum Beispiel wird die \texttt{Check(Member)}-Methode in Listing \ref{listing:fxcopapisample} für jedes Property oder Methode in jeder Klasse aufgerufen. Die \texttt{Check(TypeNode)}-Methode wird zusätzlich für jede Klasse oder Interface ausgeführt.
 \begin{lstlisting}[caption={FxCop API Beipiele},label={listing:fxcopapisample}]
-public override ProblemCollection Check(Member member) {...}
-public override ProblemCollection Check(TypeNode type) {...}
-public override void VisitMemberBinding(MemberBinding memberBinding) {...}
-public override void VisitBranch(Branch branch) {...}
-public override void VisitAssignmentStatement(AssignmentStatement assignment) {...}
+ProblemCollection Check(Member member) {...}
+ProblemCollection Check(TypeNode type) {...}
+void VisitMemberBinding(MemberBinding memberBinding) {...}
+void VisitBranch(Branch branch) {...}
+void VisitAssignmentStatement(AssignmentStatement assignment) {...}
 \end{lstlisting}
-
-
-
-
-
-
-
-
-
-
-
+Nachdem sich die Regel mit einer dieser oberflächlichen \texttt{Check}-Methoden an dem Kontrollfluss der Analyse beteiligt, kann eine tiefgehende Analyse von der oberflächlichen Stelle ausgehend erfolgen. Dazu wird ein weiterer Besucher beispielsweise vom Typ \texttt{BinaryReadOnlyVisitor} erstellt, der die aktuelle Stelle im Objektmodell detaillierter besuchen kann. In einer von \texttt{BinaryReadOnlyVisitor} abgeleiteten Unterklasse können jetzt \texttt{Visit}-Methoden überladen werden, die ebenfalls in Listing \ref{listing:fxcopapisample} dargestellt sind. Beispielsweise kann in der Methode \texttt{VisitMemberBinding} jeder Methodenaufruf und mit \texttt{VisitAssignmentStatement} jede Zuweisung analysiert werden. Auf diese Weise und mit sämtlichen Parameter- und Rückgabetypen kann aus dem Objektmodell der für die zu berechnenden Metriken erforderliche Abhängigkeitsgraph erstellt werden. Die Anzahl der Anweisungen pro Methode kann entweder im Sinne der \textit{Common Intermediate Language} (CIL, die vom Kompiler erzeugte Zwischensprache) oder im Sinne von einem FxCop \texttt{Statement} erfolgen. Während die CIL-Anweisungen die C$\#$-Anweisungen sehr viel granulärer abbilden, entsprechen die FxCop-Anweisungen zusammengefassten CIL-Anweisungen. Eine Entsprechung der C$\#$-Anweisungen konnte ohne detaillierte Betrachtung der konkreten \texttt{Statement}-Typen nicht ermittelt werden. Die Anzahl der Zeilen kann dafür auf eine sehr einfach Weise bestimmt werden, da jedes \texttt{Statement} über einen \texttt{SourceContext} und dort über Start- und Endzeilennummern verfügt. Anhand der Liste aller Anweisungen kann die erste Zeile als kleinste Startzeile und die letzte als größte Endzeile gesucht und mittels der Differenz die Methodenlänge berechnet werden.
 
 
 \section{Common Compiler Infrastracture}
