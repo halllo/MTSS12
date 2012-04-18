@@ -667,9 +667,9 @@ Die FxCop-Technologie besteht aus zwei Teilen. Der erste Teil ist die \textit{Mi
 Eine FxCop Regel entspricht einer Klassenbibliothek, die eine Regel-Klasse und eine Regel-Konfigurationsdatei enthält. Während FxCop den Code analysiert, erzeugt es Instanzen der Regel-Klasse und nutzt diese um in der Codebasis Problemfälle zu finden. Problemfälle können dann von der Regel-Klasse in Problem-Listen eingetragen werden, die FxCop entweder grafisch anzeigt oder in Form einer Report-Datei erzeugt. Zusätzlich können Problemfälle als kritisch gekennzeichnet und mit verschiedenen Texten und Beschreibungen versehen werden um eine möglichst detaillierte Beschreibung der Schwierigkeit zu ermöglichen. FxCop ist also auf das Finden von Problemen und nicht auf objektive Datensammlung spezialisiert. Um eine Assembly möglichst schnell analysieren zu können, erzeugt FxCop mehrere Instanzen einer Regel und führt diese in mehreren Threads parallel aus. Jason Kresowaty betont in seiner Ausarbeitung \cite{FxCopCustomRules}, dass sich die Regeln nicht Thread-sicher verhalten. Damit mit FxCop weiterverwendbare Daten gesammelt werden können, müssen diese auf eine geeignete Weise exportiert werden. Entweder können diese Daten in Form von Zeichenketten als Probleme verpackt oder direkt an ein Ziel gespeichert werden. Diese beiden Lösungen sind umständlich und nicht intuitiv und werden von der Nebenläufigkeit von FxCop noch erschwert.
 
 \subsection{API}
-Regeln für FxCop können mit C$\#$ in Form einer Klassenbibliothek entwickelt, wie es Jason Kresowaty in seiner Ausarbeitung \cite{FxCopCustomRules} vorstellt, und als \textit{Dynamic Link Library} (DLL) von FxCop verwendet werden. Dazu muss die DLL über eine spezielle Metadaten-Datei als eingebettete Ressource verfügen, die die Regel dem Runner bekanntmacht. Die Regel selbst wird in einer Klasse implementiert, die von einer abstrakten Regel-Oberklasse abgeleitet ist und somit Analyse-Methoden überladen kann. Mit diesen Methoden kann das Objektmodell der zu analysierenden Assembly untersucht werden. Alle Basisklassen und Klassen, die das Objektmodell repräsentieren befinden sich im Namensraum \texttt{Microsoft.FxCop.Sdk}.
+Regeln für FxCop können mit C$\#$ in Form einer Klassenbibliothek entwickelt, wie es Jason Kresowaty in seiner Ausarbeitung \cite{FxCopCustomRules} vorstellt, und als \textit{Dynamic Link Library} (DLL) von FxCop verwendet werden. Dazu muss die DLL über eine spezielle Metadaten-Datei als eingebettete Ressource verfügen, die die Regel dem Runner bekanntmacht. Die Regel selbst wird in einer Klasse implementiert, die von einer abstrakten Regel-Oberklasse abgeleitet ist und somit Analyse-Methoden überladen kann. Mit diesen Methoden kann das Objektmodell der zu analysierenden Assembly untersucht werden. Alle Basisklassen und Klassen, die das Objektmodell repräsentieren befinden sich im Namensraum \texttt{Microsoft.FxCop.Sdk}. Das \textit{Application Programming Interface} (API) um FxCop-Regeln zu programmieren enthält Teile die dem in das .NET-Framework integrierten \texttt{System.Reflection} API ähnlich sind. Beide enthalten Klassen um das Objektmodell zu repräsentieren.
 \paragraph{}
-Das \textit{Application Programming Interface} (API) um FxCop-Regeln zu programmieren enthält Teile die dem in das .NET-Framework integrierten \texttt{System.Reflection} API ähnlich sind. Beide enthalten Klassen um das Objektmodell zu repräsentieren. Mit dem Besuchermuster (Visitor Pattern) ermöglicht es die FxCop API die gleiche Datenstruktur (Objektmodell) mit vielen Regeln (Besuchern) zu analysieren. In der Regel-Klasse, die von \texttt{BaseIntrospectionRule} abgeleitet ist können oberflächliche Besuchermethoden überladen werden. Diese oberflächlichen Methoden bestimmen, an welcher Stelle im Objektmodell eine weitere Überprüfung vorgenommen werden soll. Zum Beispiel wird die \texttt{Check(Member)}-Methode in Listing \ref{listing:fxcopapisample} für jedes Property oder Methode in jeder Klasse aufgerufen. Die \texttt{Check(TypeNode)}-Methode wird zusätzlich für jede Klasse oder Interface ausgeführt.
+Um Operationen von einer Datenstruktur zu trennen, beschreiben Erich Gamma, Richard Helm, Ralph E. Johnson und John Vlissidest das Besuchermuster (Visitor Pattern) in \cite{DesignPatterns}. Mit dem Besuchermuster ermöglicht die FxCop API die gleiche Datenstruktur (Objektmodell) mit vielen Regeln (Besuchern) zu analysieren. In der Regel-Klasse, die von \texttt{BaseIntrospectionRule} abgeleitet ist können oberflächliche Besuchermethoden überladen werden. Diese oberflächlichen Methoden bestimmen, an welcher Stelle im Objektmodell eine weitere Überprüfung vorgenommen werden soll. Zum Beispiel wird die \texttt{Check(Member)}-Methode in Listing \ref{listing:fxcopapisample} für jedes Property oder Methode in jeder Klasse aufgerufen. Die \texttt{Check(TypeNode)}-Methode wird zusätzlich für jede Klasse oder Interface ausgeführt.
 \begin{lstlisting}[caption={FxCop API Beipiele},label={listing:fxcopapisample}]
 ProblemCollection Check(Member member) {...}
 ProblemCollection Check(TypeNode type) {...}
@@ -681,6 +681,25 @@ Nachdem sich die Regel mit einer dieser oberflächlichen \texttt{Check}-Methoden 
 
 
 \section{Common Compiler Infrastracture}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 \section{NRefactory}
