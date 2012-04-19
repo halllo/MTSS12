@@ -677,7 +677,7 @@ void VisitMemberBinding(MemberBinding memberBinding) {...}
 void VisitBranch(Branch branch) {...}
 void VisitAssignmentStatement(AssignmentStatement assignment) {...}
 \end{lstlisting}
-Nachdem sich die Regel mit einer dieser oberflächlichen \texttt{Check}-Methoden an dem Kontrollfluss der Analyse beteiligt, kann eine tiefgehende Analyse von der oberflächlichen Stelle ausgehend erfolgen. Dazu wird ein weiterer Besucher beispielsweise vom Typ \texttt{BinaryReadOnlyVisitor} erstellt, der die aktuelle Stelle im Objektmodell detaillierter besuchen kann. In einer von \texttt{BinaryReadOnlyVisitor} abgeleiteten Unterklasse können jetzt \texttt{Visit}-Methoden überladen werden, die ebenfalls in Listing \ref{listing:fxcopapisample} dargestellt sind. Beispielsweise kann in der Methode \texttt{VisitMemberBinding} jeder Methodenaufruf und mit \texttt{VisitAssignmentStatement} jede Zuweisung analysiert werden. Auf diese Weise und mit sämtlichen Parameter- und Rückgabetypen kann aus dem Objektmodell der für die zu berechnenden Metriken erforderliche Abhängigkeitsgraph erstellt werden. Die Anzahl der Anweisungen pro Methode kann entweder im Sinne der \textit{Common Intermediate Language} (CIL, die vom Kompiler erzeugte Zwischensprache) oder im Sinne von einem FxCop \texttt{Statement} erfolgen. Während die CIL-Anweisungen die C$\#$-Anweisungen sehr viel granulärer abbilden, entsprechen die FxCop-Anweisungen zusammengefassten CIL-Anweisungen. Eine Entsprechung der C$\#$-Anweisungen konnte ohne detaillierte Betrachtung der konkreten \texttt{Statement}-Typen nicht ermittelt werden. Die Anzahl der Zeilen kann dafür auf eine sehr einfach Weise bestimmt werden, da jedes \texttt{Statement} über einen \texttt{SourceContext} und dort über Start- und Endzeilennummern verfügt. Anhand der Liste aller Anweisungen kann die erste Zeile als kleinste Startzeile und die letzte als größte Endzeile gesucht und mittels der Differenz die Methodenlänge berechnet werden.
+Nachdem sich die Regel mit einer dieser oberflächlichen \texttt{Check}-Methoden an dem Kontrollfluss der Analyse beteiligt, kann eine tiefgehende Analyse von der oberflächlichen Stelle ausgehend erfolgen. Dazu wird ein weiterer Besucher beispielsweise vom Typ \texttt{BinaryReadOnlyVisitor} erstellt, der die aktuelle Stelle im Objektmodell detaillierter besuchen kann. In einer von \texttt{BinaryReadOnlyVisitor} abgeleiteten Unterklasse können jetzt \texttt{Visit}-Methoden überladen werden, die ebenfalls in Listing \ref{listing:fxcopapisample} dargestellt sind. Beispielsweise kann in der Methode \texttt{VisitMemberBinding} jeder Methodenaufruf und mit \texttt{VisitAssignmentStatement} jede Zuweisung analysiert werden. Auf diese Weise und mit sämtlichen Parameter- und Rückgabetypen kann aus dem Objektmodell der für die zu berechnenden Metriken erforderliche Abhängigkeitsgraph erstellt werden. Die Anzahl der Anweisungen pro Methode kann entweder im Sinne der \textit{Common Intermediate Language} (CIL, die vom Kompiler erzeugte Zwischensprache) oder im Sinne von einem FxCop \texttt{Statement} erfolgen. Während die CIL-Anweisungen die C$\#$-Anweisungen sehr viel granulärer abbilden, entsprechen die FxCop-Anweisungen zusammengefassten CIL-Anweisungen. Eine Entsprechung der C$\#$-Anweisungen konnte ohne detaillierte Betrachtung der konkreten \texttt{Statement}-Typen nicht ermittelt werden. Die Anzahl der Zeilen kann dafür auf eine sehr einfach Weise bestimmt werden, da jedes \texttt{Statement} über einen \texttt{SourceContext} und dort über Start- und Endzeilennummern verfügt. Anhand der Liste aller Anweisungen kann die erste Zeile als kleinste Startzeile und die letzte als größte Endzeile gesucht und mittels der Differenz die Methodenlänge berechnet werden. Die zyklomatische Komplexität kann bestimmt werden, da jede Verzweigung im Code von der \texttt{VisitBranch}-Methode besucht wird.
 
 
 \section{Common Compiler Infrastracture}
@@ -688,9 +688,22 @@ Nachdem sich die Regel mit einer dieser oberflächlichen \texttt{Check}-Methoden 
 Common Compiler Infrastructure: Metadata API
 \url{http://ccimetadata.codeplex.com/}
 
+Das Code Metrics Power Tool nutzt FxCop und Microsoft.Cci.
+
+FxCop nutzt ebenfalls die CCI, allerdings in einer Version die nicht von Codeplex bezogen werden kann. Die CCI besitzt viele Funktionen, die nicht öffentlich sondern nur intern aufrufbar sind. Die Funktionen, die konkrete Methoden-Metriken berechnen, sind nur von Programmen aufrufbar, die in der CCI-Assembly aufgelistet sind, wie in Abbildung \ref{fig:cciinternalsvisible}.
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=14cm]{images/cciinternalsvisible.png}
+	\caption{Micorsoft.Cci.dll \texttt{InternalsVisibleTo}-Attribute}
+	\label{fig:cciinternalsvisible}
+\end{figure}
+
+Methodenlänge über PDB-Files(?)
+Zyklomatische Komplexität genau wie Code Metrics Power Tool durch IL-Opcodes \cite{CCperCIL}
 
 Common Compiler Infrastructure: Code Model and AST API
-\http://cciast.codeplex.com/
+\url{http://cciast.codeplex.com/}
 
 
 

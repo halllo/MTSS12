@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Cci;
 using Microsoft.Cci.Immutable;
+using System.IO;
 
 namespace TechEval_CCI_MC
 {
@@ -19,13 +20,31 @@ namespace TechEval_CCI_MC
         private static void AnalyzeFile(string toAnalyse)
         {
             using (var host = new PeReader.DefaultHost())
-                AnalyzeAssembly(host.LoadUnitFrom(toAnalyse) as IAssembly);
+                AnalyzeFileInHost(toAnalyse, host);
         }
 
-        private static void AnalyzeAssembly(IAssembly assembly)
+        private static void AnalyzeFileInHost(string toAnalyse, IMetadataHost host)
+        {
+            AnalyzeFileWithPdb(toAnalyse, host, (pdb) =>
+            {
+                AnalyzeAssembly(host.LoadUnitFrom(toAnalyse) as IAssembly, pdb);
+            });
+        }
+
+        private static void AnalyzeFileWithPdb(string toAnalyse, IMetadataHost host, Action<PdbReader> pdbReader)
+        {
+            string pdbFile = Path.ChangeExtension(toAnalyse, "pdb");
+            if (File.Exists(pdbFile))
+                using (var pdb = new PdbReader(File.OpenRead(pdbFile), host))
+                    pdbReader(pdb);
+            else
+                pdbReader(null);
+        }
+
+        private static void AnalyzeAssembly(IAssembly assembly, PdbReader pdb)
         {
             foreach (var type in getTypesNotGenerated(assembly))
-                AnalyzeType(type);
+                AnalyzeType(type, pdb);
         }
 
         private static IEnumerable<INamedTypeDefinition> getTypesNotGenerated(IAssembly assembly)
@@ -45,11 +64,11 @@ namespace TechEval_CCI_MC
             return a.Type.ToString().Contains("CompilerGeneratedAttribute");
         }
 
-        private static void AnalyzeType(INamedTypeDefinition type)
+        private static void AnalyzeType(INamedTypeDefinition type, PdbReader pdb)
         {
             Console.WriteLine(type.ToString());
             foreach (var method in getMethodsNotGenerated(type))
-                AnalyzeMethod(method);
+                AnalyzeMethod(method, pdb);
             Console.WriteLine();
         }
 
@@ -60,11 +79,14 @@ namespace TechEval_CCI_MC
                    select t;
         }
 
-        private static void AnalyzeMethod(IMethodDefinition method)
+        private static void AnalyzeMethod(IMethodDefinition method, PdbReader pdb)
         {
             Console.WriteLine("\t" + method.Name);
             AnalyzeLocalVariables(method);
             AnalyzeCallOperations(method);
+            Console.WriteLine("\t\tcc: " + CyclomaticComplexity.Of(method));
+            Console.WriteLine("\t\tml: " + MethodLength.Of(method));
+            Console.WriteLine("\t\tms: " + MethodLength.WithSymbols(method, pdb));
         }
 
         private static void AnalyzeCallOperations(IMethodDefinition method)
@@ -89,8 +111,8 @@ namespace TechEval_CCI_MC
 
         private static bool IsCallOperation(OperationCode o)
         {
-            return o == OperationCode.Call 
-                || o == OperationCode.Calli 
+            return o == OperationCode.Call
+                || o == OperationCode.Calli
                 || o == OperationCode.Callvirt;
         }
 
