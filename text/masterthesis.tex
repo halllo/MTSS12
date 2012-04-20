@@ -535,6 +535,7 @@ In Visual Studio 2010 Ultimate können zudem mehrere grafische Funktionen genutzt
 Leider sind diese Funktion zur Metrik-Berechnung und zur Visualisierung in der am weitesten verbreiten Professional Version von Visual Studio nicht verfügbar. Zwei kostenlose Programme, die das Bestimmen der gleichen Menge von Code-Metriken erlauben werden in den folgenden Unterabschnitten vorgestellt.
 
 \subsection{Visual Studio Code Metrics Power Tool}
+\label{subsec:vscodemetricspowertool}
 Das Kommandozeilenwerkzeug \textit{Visual Studio Code Metrics Power Tool}\footnote[1]{Download: "`Visual Studio Code Metrics PowerTool 10.0"' \url{http://www.microsoft.com/download/en/details.aspx?id=9422}} wird kostenfrei von Microsoft zum Download angeboten. Es erlaubt die Berechnung der gleichen Metriken wie die in Visual Studio 2010 Premium integrierte Funktionalität und erzeugt eine XML-Datei. Diese Datei enthält die Metriken für Projekte, Namensräume, Typen und Methoden in hierarchischer Form.
 
 \subsection{Code Metrics Viewer}
@@ -647,6 +648,7 @@ Anhand dieser Kriterien werden die verschiedenen Technologien, die in den folgen
 
 
 \section{FxCop}
+\label{sec:fxcop}
 Jason Kresowaty beschreibt FxCop in seiner Ausarbeitung \cite{FxCopCustomRules} als Werkzeug zur statischen Code-Analyse für Assemblies, die mit C\#, VB.NET und allen anderen .NET-Sprachen entwickelt wurden. FxCop analysiert die vom Kompiler erzeugten Binärdateien in \textit{Common Intermediate Language} (CIL) und führt Regeln aus, die nach Problemen im Sinne von Verletzungen von Konventionen und Richtlinien suchen.
 
 \subsection{Umgebung}
@@ -681,16 +683,14 @@ Nachdem sich die Regel mit einer dieser oberflächlichen \texttt{Check}-Methoden 
 
 
 \section{Common Compiler Infrastracture}
+Die \textit{Common Compiler Infrastructure} (CCI) ist eine Sammlung von Bibliotheken, die Kompiler-ähnliche Funktionen erfüllen.
+Von Microsoft Research \cite{CCI}
+CCI Metadata \cite{CCIMetadata}
+CCI Code und AST Komponenten \cite{CCICode}
 
+Die Assembly Microsoft.Cci.dll wird unter anderem mit dem Code Metrics Power Tool  aus \ref{subsec:vscodemetricspowertool} und FxCop \ref{sec:fxcop} genutzt.
 
-
-
-Common Compiler Infrastructure: Metadata API
-\url{http://ccimetadata.codeplex.com/}
-
-Das Code Metrics Power Tool nutzt FxCop und Microsoft.Cci.
-
-FxCop nutzt ebenfalls die CCI, allerdings in einer Version die nicht von Codeplex bezogen werden kann. Die CCI besitzt viele Funktionen, die nicht öffentlich sondern nur intern aufrufbar sind. Die Funktionen, die konkrete Methoden-Metriken berechnen, sind nur von Programmen aufrufbar, die in der CCI-Assembly aufgelistet sind, wie in Abbildung \ref{fig:cciinternalsvisible}.
+Microsoft.Cci.dll entspricht allerdings nicht der Version, die von Codeplex bezogen werden kann. Die CCI besitzt viele Funktionen, die nicht öffentlich sondern nur intern aufrufbar sind. Die Funktionen, die konkrete Methoden-Metriken berechnen, sind nur von Programmen aufrufbar, die in der CCI-Assembly aufgelistet sind, wie in Abbildung \ref{fig:cciinternalsvisible}.
 
 \begin{figure}[h]
 	\centering
@@ -699,12 +699,17 @@ FxCop nutzt ebenfalls die CCI, allerdings in einer Version die nicht von Codeple
 	\label{fig:cciinternalsvisible}
 \end{figure}
 
+Abhängigkeitsgraph über CIL-Analyse mittels IL Operation Codes
 Methodenlänge über PDB-Files(?)
 Zyklomatische Komplexität genau wie Code Metrics Power Tool durch IL-Opcodes \cite{CCperCIL}
 
+
+
+
+
 Common Compiler Infrastructure: Code Model and AST API
 \url{http://cciast.codeplex.com/}
-
+Umfangreiche Besucher für Sprachelemente, die von CIL abstrahiert sind und eher an C$\#$ erinnern.
 
 
 
