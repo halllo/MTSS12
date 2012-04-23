@@ -683,19 +683,16 @@ Nachdem sich die Regel mit einer dieser oberflächlichen \texttt{Check}-Methoden 
 
 
 \section{Common Compiler Infrastracture}
-Die \textit{Common Compiler Infrastructure} (CCI) ist eine Sammlung von Bibliotheken, die Kompiler-ähnliche Funktionen bereitstellen und von Microsoft Research entwickelt wurde \cite{CCI}. Auf Codeplex lässt sich die Komponente \textit{CCI Metadata} finden. Guy Smith beschreibt sie als Obermenge von \texttt{System.Reflection}, \texttt{System.Reflection.Emit} und \texttt{System.CodeDom}, also den Reflektions- und Code-Erzeugungs-Mechanismen des .NET-Framework zur Laufzeit \cite{CCIMetadata}. Smith beschreibt \textit{CCI Metadata} als Werkzeug, das mir den vom Kompiler erzeugten CIL-Anweisungen arbeitet. Um einfacher mit Methoden zu arbeiten, stellt Smith mit \textit{CCI Code and AST Components} eine weitere Komponente vor \cite{CCICode}. \textit{CCI Code} erleichtert das Arbeiten mit Methoden, da es von den CIL-Anweisungen abstrahiert und Quellcode-ähnliche Bäume nutzt. Beide Komponenten sind unter der Microsoft Public License veröffentlicht.
-\paragraph{}
-Die CCI wird in einer ähnlichen Variante unter anderem von dem Code Metrics Power Tool  aus \ref{subsec:vscodemetricspowertool} und FxCop \ref{sec:fxcop} genutzt. Die Assembly Microsoft.Cci.dll, die mit diesen Tools ausgeliefert wird, besitzt viele Funktionen, die nicht öffentlich sondern nur intern aufrufbar sind. Funktionen, die konkrete Methoden-Metriken berechnen, sind nur von Programmen aufrufbar, die in der CCI-Assembly aufgelistet sind, wie in Abbildung \ref{fig:cciinternalsvisible}.
+Die \textit{Common Compiler Infrastructure} (CCI) ist eine Sammlung von Bibliotheken, die Kompiler-ähnliche Funktionen bereitstellen und von Microsoft Research entwickelt wurde \cite{CCI}. Auf Codeplex lässt sich die Komponente \textit{CCI Metadata} finden. Guy Smith beschreibt sie als Obermenge von \texttt{System.Reflection}, \texttt{System.Reflection.Emit} und \texttt{System.CodeDom}, also den Reflektions- und Code-Erzeugungs-Mechanismen des .NET-Framework zur Laufzeit \cite{CCIMetadata}. Smith beschreibt \textit{CCI Metadata} als Werkzeug, das mir den vom Kompiler erzeugten CIL-Anweisungen arbeitet. Um einfacher mit Methoden zu arbeiten, stellt Smith mit \textit{CCI Code and AST Components} eine weitere Komponente vor \cite{CCICode}. \textit{CCI Code} erleichtert das Arbeiten mit Methoden, da es von den CIL-Anweisungen abstrahiert und Quellcode-ähnliche Bäume nutzt. Beide Komponenten sind unter der Microsoft Public License veröffentlicht. Die CCI wird in einer ähnlichen Variante unter anderem von dem Code Metrics Power Tool aus Unterabschnitt \ref{subsec:vscodemetricspowertool} und FxCop aus Abschnitt \ref{sec:fxcop} genutzt. Die Assembly Microsoft.Cci.dll, die mit diesen Tools ausgeliefert wird, besitzt viele Funktionen nur intern oder von erlaubten Assemblies aufrufbar sind. Funktionen, die beispielsweise konkrete Methoden-Metriken berechnen, sind nur von Programmen aufrufbar, die in der CCI-Assembly aufgelistet sind, wie in Abbildung \ref{fig:cciinternalsvisible} dargestellt.
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=14cm]{images/cciinternalsvisible.png}
 	\caption{Micorsoft.Cci.dll \texttt{InternalsVisibleTo}-Attribute}
 	\label{fig:cciinternalsvisible}
 \end{figure}
+\paragraph{}
+Im Gegensatz zu der FxCop API kann eine .NET-Assembly mit CCI direkt untersucht werden, ohne das die Analyse in Form einer einschränkenden Regel parallelisiert erfolgt. CCI überlässt dem Verwender der Bibliothek ob und wie die Untersuchung stattfinden soll. Mit einem \texttt{PeReader.DefaultHost} können PE-Dateien (\textit{Portable Executables} also dll- oder exe-Dateien) eingelesen werden. Zusätzlich kann die vom Kompiler erzeugte pdb-Datei mit einem \texttt{PdbReader} importiert werden. Die pdb-Datei (\textit{Program Database}) enthält laut Microsoft \cite{PDBFile} Debug- und Projekt-Information wie beispielsweise die Datei- und Zeilenzuordnung der erzeugten Typen und Funktionen. Mit der \texttt{IAssembly.GetAllTypes()}-Methode können alle Typen ermittelt werden. Alle Methoden und Properties eines Typs, können mit \texttt{INamedTypeDefinition.Methods} bestimmt werden. Der Inhalt von Methoden und Properties kann in Form von CIL-Anweisungen mit \texttt{IMethodBody.Operations} genauer betrachtet werden. So lassen sich beispielsweise alle lokalen Variablen und Methodenaufrufe lokalisieren, um Abhängigkeiten der Methode zu anderen Typen zu finden. Zusammen mit Attributen, Parametern und Rückgabewerten kann der Abhängigkeitsgraph eines Typs ermittelt werden. Die zyklomatische Komplexität einer Methode kann ebenfalls über die CIL-Anweisungen bestimmt werden, was durch das Code Metrics Power Tool aus Unterabschnitt \ref{subsec:vscodemetricspowertool} sowie Steve Gilham \cite{CCperCIL} demonstriert wird. Um die Methodenlänge einer Funktion aus den CIL-Anweisungen zu ermitteln, kann auch hier die Funktionalität durch das Code Metrics Power Tool inspiriert werden. Wenn zu der .NET-Assembly zusätzlich eine pdb-Datei existiert, kann außerdem die Start- und Endzeile jeder Anweisung auf die Methode bezogen werden, ähnlich der Lösung für die FxCop Regel.
 
-Abhängigkeitsgraph über CIL-Analyse mittels IL Operation Codes
-Methodenlänge über PDB-Files(?)
-Zyklomatische Komplexität genau wie Code Metrics Power Tool durch IL-Opcodes \cite{CCperCIL}
 
 
 
@@ -706,7 +703,7 @@ Common Compiler Infrastructure: Code Model and AST API
 Umfangreiche Besucher für Sprachelemente, die von CIL abstrahiert sind und eher an C$\#$ erinnern.
 
 
-
+Umfangreiche properties: generics, attribute
 
 
 

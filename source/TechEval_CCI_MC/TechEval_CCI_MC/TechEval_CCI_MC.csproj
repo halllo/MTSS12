@@ -35,19 +35,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Cci.MetadataHelper">
-      <HintPath>C:\Users\mnaujoks\Documents\Visual Studio 2010\Projects\ccimetadata-68799\Samples\HelloIL\bin\Debug\Microsoft.Cci.MetadataHelper.dll</HintPath>
+      <HintPath>C:\Users\mnaujoks\Documents\Visual Studio 2010\Projects\ccimetadata-68817\Bin\Debug\Microsoft.Cci.MetadataHelper.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Cci.MetadataModel">
-      <HintPath>C:\Users\mnaujoks\Documents\Visual Studio 2010\Projects\ccimetadata-68799\Samples\HelloIL\bin\Debug\Microsoft.Cci.MetadataModel.dll</HintPath>
+      <HintPath>C:\Users\mnaujoks\Documents\Visual Studio 2010\Projects\ccimetadata-68817\Bin\Debug\Microsoft.Cci.MetadataModel.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Cci.PdbReader">
-      <HintPath>C:\Users\mnaujoks\Documents\Visual Studio 2010\Projects\ccimetadata-68799\Samples\PeToText\bin\Debug\Microsoft.Cci.PdbReader.dll</HintPath>
+      <HintPath>C:\Users\mnaujoks\Documents\Visual Studio 2010\Projects\ccimetadata-68817\Bin\Debug\Microsoft.Cci.PdbReader.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Cci.PeReader">
-      <HintPath>C:\Users\mnaujoks\Documents\Visual Studio 2010\Projects\ccimetadata-68799\Samples\HelloIL\bin\Debug\Microsoft.Cci.PeReader.dll</HintPath>
+      <HintPath>C:\Users\mnaujoks\Documents\Visual Studio 2010\Projects\ccimetadata-68817\Bin\Debug\Microsoft.Cci.PeReader.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Cci.SourceModel, Version=1.0.7.0, Culture=neutral, PublicKeyToken=736440c9b414ea16, processorArchitecture=MSIL">
-      <HintPath>C:\Users\mnaujoks\Documents\Visual Studio 2010\Projects\ccimetadata-68799\Samples\PeToText\bin\Debug\Microsoft.Cci.SourceModel.dll</HintPath>
+    <Reference Include="Microsoft.Cci.SourceModel">
+      <HintPath>C:\Users\mnaujoks\Documents\Visual Studio 2010\Projects\ccimetadata-68817\Bin\Debug\Microsoft.Cci.SourceModel.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
