@@ -683,15 +683,9 @@ Nachdem sich die Regel mit einer dieser oberflächlichen \texttt{Check}-Methoden 
 
 
 \section{Common Compiler Infrastracture}
-Die \textit{Common Compiler Infrastructure} (CCI) ist eine Sammlung von Bibliotheken, die Kompiler-ähnliche Funktionen erfüllen.
-Von Microsoft Research \cite{CCI}
-CCI Metadata \cite{CCIMetadata}
-CCI Code und AST Komponenten \cite{CCICode}
-
-Die Assembly Microsoft.Cci.dll wird unter anderem mit dem Code Metrics Power Tool  aus \ref{subsec:vscodemetricspowertool} und FxCop \ref{sec:fxcop} genutzt.
-
-Microsoft.Cci.dll entspricht allerdings nicht der Version, die von Codeplex bezogen werden kann. Die CCI besitzt viele Funktionen, die nicht öffentlich sondern nur intern aufrufbar sind. Die Funktionen, die konkrete Methoden-Metriken berechnen, sind nur von Programmen aufrufbar, die in der CCI-Assembly aufgelistet sind, wie in Abbildung \ref{fig:cciinternalsvisible}.
-
+Die \textit{Common Compiler Infrastructure} (CCI) ist eine Sammlung von Bibliotheken, die Kompiler-ähnliche Funktionen bereitstellen und von Microsoft Research entwickelt wurde \cite{CCI}. Auf Codeplex lässt sich die Komponente \textit{CCI Metadata} finden. Guy Smith beschreibt sie als Obermenge von \texttt{System.Reflection}, \texttt{System.Reflection.Emit} und \texttt{System.CodeDom}, also den Reflektions- und Code-Erzeugungs-Mechanismen des .NET-Framework zur Laufzeit \cite{CCIMetadata}. Smith beschreibt \textit{CCI Metadata} als Werkzeug, das mir den vom Kompiler erzeugten CIL-Anweisungen arbeitet. Um einfacher mit Methoden zu arbeiten, stellt Smith mit \textit{CCI Code and AST Components} eine weitere Komponente vor \cite{CCICode}. \textit{CCI Code} erleichtert das Arbeiten mit Methoden, da es von den CIL-Anweisungen abstrahiert und Quellcode-ähnliche Bäume nutzt. Beide Komponenten sind unter der Microsoft Public License veröffentlicht.
+\paragraph{}
+Die CCI wird in einer ähnlichen Variante unter anderem von dem Code Metrics Power Tool  aus \ref{subsec:vscodemetricspowertool} und FxCop \ref{sec:fxcop} genutzt. Die Assembly Microsoft.Cci.dll, die mit diesen Tools ausgeliefert wird, besitzt viele Funktionen, die nicht öffentlich sondern nur intern aufrufbar sind. Funktionen, die konkrete Methoden-Metriken berechnen, sind nur von Programmen aufrufbar, die in der CCI-Assembly aufgelistet sind, wie in Abbildung \ref{fig:cciinternalsvisible}.
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=14cm]{images/cciinternalsvisible.png}
