@@ -11,14 +11,14 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1470
-NormalPos.bottom=639
+NormalPos.right=1070
+NormalPos.bottom=653
 Class=LaTeXView
 Document=masterthesis.tex
 
 [Frame0_View0,0]
-TopLine=962
-Cursor=87280
+TopLine=1141
+Cursor=89387
 
 [Frame1]
 Flags=0
@@ -29,14 +29,14 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1470
-NormalPos.bottom=639
+NormalPos.right=1070
+NormalPos.bottom=653
 Class=BibTeXView
 Document=masterthesis.bib
 
 [Frame1_View0,0]
-TopLine=260
-Cursor=8915
+TopLine=268
+Cursor=9160
 
 [SessionInfo]
 FrameCount=2
