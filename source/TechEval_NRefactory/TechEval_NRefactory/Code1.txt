@@ -1,0 +1,71 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Collections;
+
+namespace ConsoleApplication1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //This is a comment
+            //and this is the next line
+            System.Console.WriteLine("ddfsd");
+            System.ArithmeticException a = new System.ArithmeticException();
+            bool c1 = true;
+            bool c2 = true;
+            bool c3 = true;
+            bool c4 = false;
+            if (c1)
+            {
+                if (c2 && c3 || c4)
+                {
+                    a.ToString();
+                }
+                else if (c4)
+                {
+                    System.Console.WriteLine("else");
+                }
+            }
+        }
+        #region MyRegion
+        static void Main2(string[] args)
+        {
+            System.Console.WriteLine("ddfsd");
+            System.Console.Write("ddfsd");
+            System.Console.WriteLine("ddfsd");
+            System.Console.WriteLine("ddfsd");
+        } 
+        #endregion
+        static void Main3(string[] args)
+        {
+            System.Console.WriteLine("ddfsd");
+            System.Console.Write("ddfsd");
+            System.Console.WriteLine("ddfsd");
+            bool c1 = true;
+            bool c2 = true;
+            if (c1 && c2)
+            {
+                System.Console.WriteLine("ddf2sd");
+            }
+
+        }
+        static void Main4(string[] args)
+        {
+            System.Console.WriteLine("ddfsd");
+            Func<System.NotFiniteNumberException> nfne = null;
+            nfne.ToString().Substring(0, 5);
+        }
+        static void Main5(string[] args)
+        {
+            System.Console.WriteLine("ddfsd");
+            Action func = () =>
+            {
+                var rev = "sadff".Reverse();
+                System.Console.WriteLine(rev);
+            };
+            func();
+        }
+    }
+}
