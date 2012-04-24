@@ -702,17 +702,19 @@ TraverseChildren(ISwitchStatement switchStatement) {...}
 \end{lstlisting}
 Für jede Stelle im Code leitet \texttt{CodeTraverser} den Aufruf an Objekte vom Typ \texttt{ICodeVisitor} weiter, und ermöglicht so einfache Erweiterungen auf mehrere Weisen vorzunehmen. \texttt{ICodeVisitor} besitzt für jede \texttt{Traverse}-Methode eine entsprechende \texttt{Visit}-Methode. Da \texttt{CodeTraverser} das Code-Modell von links nach rechts und "`Depth First"' besucht, können zwei Besucher registriert werden. Einer wird aufgerufen bevor ein Syntax-Element im Baum besucht wird und der andere wird aufgerufen nachdem der Besuch beendet ist. 
 \paragraph{}
-\textit{CCI Code and AST Components} ermöglicht das syntaktische besuchen von Sprachelementen, indem von CIL abstrahiert wird. Es existieren Besucher-Methoden für alle Sprachelemente, die aus C$\#$ 4.0 bekannt sind, wie beispielsweise Lambda-Ausdrücke, Generics, Attribute und vielen mehr. Die herunterladbare \textit{CCI Code and AST Components} Visual Studio Solution enthält ein Beispiel (PeToTextViaCodeModel), das sämtliche Strukturelemente einer dll- oder exe-Datei besucht und wieder C$\#$-Quelltext erzeugt. Das Ergebnis entspricht Code, der dem Original sehr ähnlich ist und an professionelle Decompiler erinnert.
+\textit{CCI Code and AST Components} ermöglicht das syntaktische besuchen von Sprachelementen, indem von CIL abstrahiert wird. Es existieren Besucher-Methoden für alle Sprachelemente, die aus C$\#$ 4.0 bekannt sind, wie beispielsweise Lambda-Ausdrücke, Generics, Attribute und vielen mehr. Die herunterladbare \textit{CCI Code and AST Components} Visual Studio Solution enthält ein Beispiel (PeToTextViaCodeModel), das sämtliche Strukturelemente einer dll- oder exe-Datei besucht und wieder C$\#$-Quelltext erzeugt. Das Ergebnis entspricht Code, der dem Original sehr ähnlich ist und an professionelle Decompiler erinnert. Die CCI erlaubt es außerdem eine geladene Assembly zu verändern und anschließend wieder zu exportieren.
 
 
 \section{NRefactory}
 
 AST aus Quelltext 
 AST-Besucher
-kein Method Bindung, da nichts kompiliert :(
 If-Anweisungen sehr gut besuchbar
 
+kein Method Bindung, da nichts kompiliert :( (Extension Methods?)
 Resolver und Kompilierer von Mono.Cecil...
+
+AST Manipulation möglich und Code-Erzeugung
 
 
 
