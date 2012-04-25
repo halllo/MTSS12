@@ -5,8 +5,16 @@ using ICSharpCode.NRefactory.CSharp;
 
 namespace TechEval_NRefactory
 {
+
     public class DefaultVisitor : DepthFirstAstVisitor
     {
+        MethodCalls methodCalls;
+
+        public DefaultVisitor(DefaultResolver resolved)
+        {
+            methodCalls = new MethodCalls(resolved);
+        }
+
         public override void VisitNamespaceDeclaration(NamespaceDeclaration namespaceDeclaration)
         {
             Console.WriteLine(namespaceDeclaration.Name);
@@ -23,21 +31,18 @@ namespace TechEval_NRefactory
         {
             Console.WriteLine("\t\t" + methodDeclaration.Name);
             base.VisitMethodDeclaration(methodDeclaration);
+            Console.WriteLine();
         }
 
-        public override void VisitIdentifier(Identifier identifier)
+        public override void VisitNewLine(NewLineNode newLineNode)
         {
-            base.VisitIdentifier(identifier);
+            base.VisitNewLine(newLineNode);
         }
 
         public override void VisitInvocationExpression(InvocationExpression invocationExpression)
         {
+            methodCalls.Output(invocationExpression);
             base.VisitInvocationExpression(invocationExpression);
-        }
-
-        public override void VisitMemberType(MemberType memberType)
-        {
-            base.VisitMemberType(memberType);
         }
 
         public override void VisitMemberReferenceExpression(MemberReferenceExpression memberReferenceExpression)

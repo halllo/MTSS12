@@ -64,8 +64,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CecilTries.cs" />
+    <Compile Include="DefaultResolver.cs" />
     <Compile Include="DefaultVisitor.cs" />
     <Compile Include="EmbeddedResource.cs" />
+    <Compile Include="MethodCalls.cs" />
     <Compile Include="NRefactoryTries.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

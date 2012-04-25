@@ -690,11 +690,13 @@ Die \textit{Common Compiler Infrastructure} (CCI) ist eine Sammlung von Biblioth
 	\caption{Micorsoft.Cci.dll \texttt{InternalsVisibleTo}-Attribute}
 	\label{fig:cciinternalsvisible}
 \end{figure}
-\paragraph{}
+
+\subsection{CCI Metadata}
 Im Gegensatz zu der FxCop API kann eine .NET-Assembly mit CCI direkt untersucht werden, ohne das die Analyse in Form einer einschränkenden Regel parallelisiert erfolgt. CCI überlässt dem Verwender der Bibliothek ob und wie die Untersuchung stattfinden soll. Mit einem \texttt{PeReader.DefaultHost} können PE-Dateien (\textit{Portable Executables} also dll- oder exe-Dateien) eingelesen werden. Zusätzlich kann die vom Compiler erzeugte pdb-Datei mit einem \texttt{PdbReader} importiert werden. Die pdb-Datei (\textit{Program Database}) enthält laut Microsoft \cite{PDBFile} Debug- und Projekt-Information wie beispielsweise die Datei- und Zeilenzuordnung der erzeugten Typen und Funktionen. Mit der \texttt{IAssembly.GetAllTypes()}-Methode können alle Typen ermittelt werden. Alle Methoden und Properties eines Typs, können mit \texttt{INamedTypeDefinition.Methods} bestimmt werden. Der Inhalt von Methoden und Properties kann in Form von CIL-Anweisungen mit \texttt{IMethodBody.Operations} genauer betrachtet werden. So lassen sich beispielsweise alle lokalen Variablen und Methodenaufrufe lokalisieren, um Abhängigkeiten der Methode zu anderen Typen zu finden. Zusammen mit Attributen, Parametern und Rückgabewerten kann der Abhängigkeitsgraph eines Typs ermittelt werden. Die zyklomatische Komplexität einer Methode kann ebenfalls über die CIL-Anweisungen bestimmt werden, was durch das Code Metrics Power Tool aus Unterabschnitt \ref{subsec:vscodemetricspowertool} sowie Steve Gilham \cite{CCperCIL} demonstriert wird. Um die Methodenlänge einer Funktion aus den CIL-Anweisungen zu ermitteln, kann auch hier die Funktionalität durch das Code Metrics Power Tool inspiriert werden. Wenn zu der .NET-Assembly zusätzlich eine pdb-Datei existiert, kann außerdem die Start- und Endzeile jeder Anweisung auf die Methode bezogen werden, ähnlich der Lösung für die FxCop Regel.
-\paragraph{}
+
+\subsection{CCI Code and AST Components}
 Soweit wurden nur Funktionen von \textit{CCI Metadata} betrachtet. \textit{CCI Code and AST Components} erlaubt es das Quellcode-Modell einer Methode in Form eines abstrakten Syntax-Baums (AST) zu analysieren. Philip Newcomb beschreibt einen AST in seinem Tutorial über den AST Metamodel Standard \cite{ASTMetamodel} als formale Repräsentation der syntaktischen Struktur einer Software auch innerhalb Methoden. Um einen solchen Baum zu betrachten, können Besucher verwendet werden. Beispielsweise erlaubt eine Objekt vom Typ \texttt{CodeTraverser} jede strukturelle Stelle der Assembly mit überladbaren Methoden, von denen einige in Listing \ref{listing:ccicodeastsample} aufgeführt sind, zu besuchen.
-\begin{lstlisting}[caption={\textit{CCI Code and AST Components} \texttt{CodeTraverser}-Methods},label={listing:ccicodeastsample}]
+\begin{lstlisting}[caption={\textit{CCI Code and AST Components} \texttt{CodeTraverser}-Methoden},label={listing:ccicodeastsample}]
 TraverseChildren(IConditionalStatement conditionalStatement) {...}//if
 TraverseChildren(IConditional conditional) {...}//bool expression
 TraverseChildren(IForStatement forStatement) {...}
@@ -706,15 +708,57 @@ Für jede Stelle im Code leitet \texttt{CodeTraverser} den Aufruf an Objekte vom 
 
 
 \section{NRefactory}
+\textit{NRefactory} ist Teil der freien .NET-Entwicklungsumgebung SharpDevelop, die in der Mono-Welt benutzt wird. Mono ist eine Implementierung des .NET-Frameworks für Windows, Linux, Mac OS und verschiedene mobile Plattformen. Fussnote bla bla \url{http://www.mono-project.com/}
 
-AST aus Quelltext 
-AST-Besucher
-If-Anweisungen sehr gut besuchbar
 
-kein Method Bindung, da nichts kompiliert :( (Extension Methods?)
-Resolver und Kompilierer von Mono.Cecil...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{AST aus Quellcode}
+Mit \textit{NRefactory} ist es möglich einen AST aus C$\#$-Quelltext zu erzeugen.
+AST-Besucher können direkt als Implementierung des \texttt{IAstVisitor}-Interface oder als Ableitung von \texttt{DepthFirstAstVisitor} erstellt werden.
+Mit einem solchen Besucher können strukturelle Code-Elemente wie if-Anweisungen sehr gut besucht werden.
+Listing \ref{listing:nrefacastsample} zeigt Methoden, die in \texttt{IAstVisitor} definiert sind.
+
+\begin{lstlisting}[caption={\textit{NRefactory} \texttt{IAstVisitor}-Methoden},label={listing:nrefacastsample}]
+VisitIfElseStatement(IfElseStatement ifElseStatement) {...}
+VisitBinaryOperatorExpression(BinaryOperatorExpression binaryOperatorExpression) {...}
+VisitPrimitiveExpression(PrimitiveExpression primitiveExpression) {...}
+VisitNewLine(NewLineNode newLineNode) {...}
+VisitInvocationExpression(InvocationExpression invocationExpression) {...}
+\end{lstlisting}
+
+CC kann wie in \ref{subsubsec:cyclomaticcomplexity} beschrieben berechnet werden indem alle Entscheidungsstellen besucht und aufsummiert werden.
+Methodenlänge kann entweder berechnet werden, indem alle Statements oder alle Zeilenumbrüche besucht und aufsummiert werden.
+
+Allerdings kann durch die alleinige Erzeugung des AST der Abhängigkeitsgraph nicht erstellt werden. 
+
+\subsection{Mono.Cecil}
+\textit{NRefactory} ordnet Methodenaufrufe in Form von \texttt{InvocationExpression} erst dann der definierenden Stelle zu, wenn alle Typen und Methoden im AST mit einem \texttt{CSharpAstResolver} komplett aufgelöst werden. Dazu verwendet \textit{NRefactory} die \textit{Mono.Cecil}-Bibliothek, die Jean-Baptiste Evain als API zum Erzeugen, Analysieren und Verändern von .NET-Assemblies beschreibt \cite{MonoCecil}. \textit{Mono.Cecil} ist damit das CCI der Mono-Umgebung. \textit{NRefactory} nutzt \textit{Mono.Cecil} um Assemblies, auf dessen Typen der Code zugreift, zu analysieren und Methodenaufrufe den definierenden Typen zuzordnen.
+
+Ähnlich CCI, also CCI Berechnung auch anhand von Operation Codes möglich
 
 AST Manipulation möglich und Code-Erzeugung
+
+
+
+
+
+
+
+
+
 
 
 
