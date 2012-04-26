@@ -708,7 +708,7 @@ Für jede Stelle im Code leitet \texttt{CodeTraverser} den Aufruf an Objekte vom 
 
 
 \section{NRefactory}
-\textit{NRefactory} ist Teil der freien .NET-Entwicklungsumgebung SharpDevelop, die in der Mono-Welt benutzt wird. Mono ist eine Implementierung des .NET-Frameworks für Windows, Linux, Mac OS und verschiedene mobile Plattformen. Fussnote bla bla \url{http://www.mono-project.com/}
+\textit{NRefactory} ist Teil der freien .NET-Entwicklungsumgebung SharpDevelop, die in der Mono-Welt benutzt wird. Das Team hinter Mono beschreibt Mono als Implementierung des .NET-Frameworks für Windows, Linux, Mac OS und verschiedene mobile Plattformen \cite{Mono}.
 
 
 
@@ -742,14 +742,23 @@ VisitInvocationExpression(InvocationExpression invocationExpression) {...}
 CC kann wie in \ref{subsubsec:cyclomaticcomplexity} beschrieben berechnet werden indem alle Entscheidungsstellen besucht und aufsummiert werden.
 Methodenlänge kann entweder berechnet werden, indem alle Statements oder alle Zeilenumbrüche besucht und aufsummiert werden.
 
+Der AST kann verändert und anschließend neuer Code erzeugt werden.
+
 Allerdings kann durch die alleinige Erzeugung des AST der Abhängigkeitsgraph nicht erstellt werden. 
 
 \subsection{Mono.Cecil}
-\textit{NRefactory} ordnet Methodenaufrufe in Form von \texttt{InvocationExpression} erst dann der definierenden Stelle zu, wenn alle Typen und Methoden im AST mit einem \texttt{CSharpAstResolver} komplett aufgelöst werden. Dazu verwendet \textit{NRefactory} die \textit{Mono.Cecil}-Bibliothek, die Jean-Baptiste Evain als API zum Erzeugen, Analysieren und Verändern von .NET-Assemblies beschreibt \cite{MonoCecil}. \textit{Mono.Cecil} ist damit das CCI der Mono-Umgebung. \textit{NRefactory} nutzt \textit{Mono.Cecil} um Assemblies, auf dessen Typen der Code zugreift, zu analysieren und Methodenaufrufe den definierenden Typen zuzordnen.
-
-Ähnlich CCI, also CCI Berechnung auch anhand von Operation Codes möglich
-
-AST Manipulation möglich und Code-Erzeugung
+\textit{NRefactory} ordnet Methodenaufrufe in Form von \texttt{InvocationExpression}-Objekten erst dann der definierenden Stelle zu, wenn alle Typen und Methoden im AST mit einem \texttt{CSharpAstResolver} komplett aufgelöst werden. Dazu verwendet \textit{NRefactory} die \textit{Mono.Cecil}-Bibliothek, die Jean-Baptiste Evain als API zum Erzeugen, Analysieren und Verändern von .NET-Assemblies beschreibt \cite{MonoCecil}. Die Assemblies, in denen sich die Typen befinden auf die der Code zugreift, werden von \textit{Mono.Cecil} geladen. Listing \ref{listing:nrefacastresolvercreation} zeigt wie ein \texttt{CSharpAstResolver}-Objekt zur Auflösung des abstrakten Syntaxbaums erzeugt werden kann.
+\begin{lstlisting}[caption={\textit{NRefactory} Erzeugung von \texttt{CSharpAstResolver}},label={listing:nrefacastresolvercreation}]
+CSharpAstResolver CreateResolver(CompilationUnit parsed, params Type[] types)
+{
+    IProjectContent project = new CSharpProjectContent();
+    CSharpParsedFile parsedFile = parsed.ToTypeSystem();
+    project = project.UpdateProjectContent(null, parsedFile);
+    project = project.AddAssemblyReferences(LoadAssemblies(types));
+    return new CSharpAstResolver(project.CreateCompilation(), parsed, parsedFile);
+}
+\end{lstlisting}
+Der Code orientiert sich an dem Demo Beispiel von Daniel Grunwald in dem \textit{NRefactory}-Repository \cite{NRefacRepo}. Das übergebene \texttt{CompilationUnit}-Objekt ist der Wurzelknoten eines \textit{NRefactory}-AST. Jede Assembly, die in die Auflösung mit einbezogen werden soll, wird durch einen in dieser Assembly enthaltenen Typ identifiziert. Die eigentliche Auflösung wird über einen Aufruf der Methode \texttt{CSharpAstResolver.ApplyNavigator} synchron durchgeführt, die ein Objekt vom Typ \texttt{IResolveVisitorNavigator} erwartet und diesem alle aufgelösten Details zu allen Knoten im AST mitteilt. Ähnlich wie die CCI erlaubt auch \textit{Mono.Cecil} das manuelle Einlesen von Assemblies und \textit{Program Database}-Dateien um diese anhand der CIL-Anweisungen zu analysieren und verändert zu speichern.
 
 
 
