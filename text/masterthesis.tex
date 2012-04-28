@@ -708,29 +708,10 @@ Für jede Stelle im Code leitet \texttt{CodeTraverser} den Aufruf an Objekte vom 
 
 
 \section{NRefactory}
-\textit{NRefactory} ist Teil der freien .NET-Entwicklungsumgebung SharpDevelop, die in der Mono-Welt benutzt wird. Das Team hinter Mono beschreibt Mono als Implementierung des .NET-Frameworks für Windows, Linux, Mac OS und verschiedene mobile Plattformen \cite{Mono}.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Auch in der Mono-Welt existieren Werkzeuge für Compiler-ähnliche Funktionen. Das Team hinter Mono beschreibt Mono als Implementierung des .NET-Frameworks für Windows, Linux, Mac OS und verschiedene mobile Plattformen \cite{Mono}. In diesem Umfeld ist \textit{NRefactory} Teil der freien .NET-Entwicklungsumgebung SharpDevelop\footnote[1]{"`The Open Source Development Environment for .NET"' \url{http://www.icsharpcode.net/OpenSource/SD/}} und arbeitet im Gegensatz zur CCI und FxCop nicht nur auf Assembly-Ebene, sondern hauptsächlich mit Quellcode.
 
 \subsection{AST aus Quellcode}
-Mit \textit{NRefactory} ist es möglich einen AST aus C$\#$-Quelltext zu erzeugen.
-AST-Besucher können direkt als Implementierung des \texttt{IAstVisitor}-Interface oder als Ableitung von \texttt{DepthFirstAstVisitor} erstellt werden.
-Mit einem solchen Besucher können strukturelle Code-Elemente wie if-Anweisungen sehr gut besucht werden.
-Listing \ref{listing:nrefacastsample} zeigt Methoden, die in \texttt{IAstVisitor} definiert sind.
-
+Mit \textit{NRefactory} ist es möglich einen AST aus C$\#$-Quelltext zu erzeugen. VB.net wird noch nicht unterstützt. Anschließend können AST-Besucher als direkte Implementierung der \texttt{IAstVisitor}-Schnittstelle oder als Ableitung von \texttt{DepthFirstAstVisitor} erstellt werden und mit dem abstrakten Syntax-Baum arbeiten. Listing \ref{listing:nrefacastsample} zeigt einige wenige Methoden, die in \texttt{IAstVisitor} definiert sind.
 \begin{lstlisting}[caption={\textit{NRefactory} \texttt{IAstVisitor}-Methoden},label={listing:nrefacastsample}]
 VisitIfElseStatement(IfElseStatement ifElseStatement) {...}
 VisitBinaryOperatorExpression(BinaryOperatorExpression binaryOperatorExpression) {...}
@@ -738,13 +719,7 @@ VisitPrimitiveExpression(PrimitiveExpression primitiveExpression) {...}
 VisitNewLine(NewLineNode newLineNode) {...}
 VisitInvocationExpression(InvocationExpression invocationExpression) {...}
 \end{lstlisting}
-
-CC kann wie in \ref{subsubsec:cyclomaticcomplexity} beschrieben berechnet werden indem alle Entscheidungsstellen besucht und aufsummiert werden.
-Methodenlänge kann entweder berechnet werden, indem alle Statements oder alle Zeilenumbrüche besucht und aufsummiert werden.
-
-Der AST kann verändert und anschließend neuer Code erzeugt werden.
-
-Allerdings kann durch die alleinige Erzeugung des AST der Abhängigkeitsgraph nicht erstellt werden. 
+Mit einem solchen Besucher können strukturelle Code-Elemente wie if-Anweisungen sehr gut besucht werden, was die Berechnung der zyklomatischen Komplexität ermöglicht, ohne kompiliern zu müssen. Wie in Unter-Unterabschnitt \ref{subsubsec:cyclomaticcomplexity} beschrieben, brauchen dafür nur alle Entscheidungsstellen besucht und aufsummiert werden. Die Methodenlänge kann ebenfalls einfach bestimmt werden. Es ist möglich entweder alle Statements oder alle Zeilenumbrüche zu besuchen und aufzusummieren. Der AST kann auch verändert und anschließend neuer Code erzeugt werden. Allerdings kann der Abhängigkeitsgraph nicht durch die alleinige Erzeugung des AST erstellt werden.
 
 \subsection{Mono.Cecil}
 \textit{NRefactory} ordnet Methodenaufrufe in Form von \texttt{InvocationExpression}-Objekten erst dann der definierenden Stelle zu, wenn alle Typen und Methoden im AST mit einem \texttt{CSharpAstResolver} komplett aufgelöst werden. Dazu verwendet \textit{NRefactory} die \textit{Mono.Cecil}-Bibliothek, die Jean-Baptiste Evain als API zum Erzeugen, Analysieren und Verändern von .NET-Assemblies beschreibt \cite{MonoCecil}. Die Assemblies, in denen sich die Typen befinden auf die der Code zugreift, werden von \textit{Mono.Cecil} geladen. Listing \ref{listing:nrefacastresolvercreation} zeigt wie ein \texttt{CSharpAstResolver}-Objekt zur Auflösung des abstrakten Syntaxbaums erzeugt werden kann.
@@ -758,7 +733,7 @@ CSharpAstResolver CreateResolver(CompilationUnit parsed, params Type[] types)
     return new CSharpAstResolver(project.CreateCompilation(), parsed, parsedFile);
 }
 \end{lstlisting}
-Der Code orientiert sich an dem Demo Beispiel von Daniel Grunwald in dem \textit{NRefactory}-Repository \cite{NRefacRepo}. Das übergebene \texttt{CompilationUnit}-Objekt ist der Wurzelknoten eines \textit{NRefactory}-AST. Jede Assembly, die in die Auflösung mit einbezogen werden soll, wird durch einen in dieser Assembly enthaltenen Typ identifiziert. Die eigentliche Auflösung wird über einen Aufruf der Methode \texttt{CSharpAstResolver.ApplyNavigator} synchron durchgeführt, die ein Objekt vom Typ \texttt{IResolveVisitorNavigator} erwartet und diesem alle aufgelösten Details zu allen Knoten im AST mitteilt. Ähnlich wie die CCI erlaubt auch \textit{Mono.Cecil} das manuelle Einlesen von Assemblies und \textit{Program Database}-Dateien um diese anhand der CIL-Anweisungen zu analysieren und verändert zu speichern.
+Der Code orientiert sich an dem Demo Beispiel von Daniel Grunwald in dem \textit{NRefactory}-Repository \cite{NRefacRepo}. Das übergebene \texttt{CompilationUnit}-Objekt ist der Wurzelknoten eines \textit{NRefactory}-AST, der aus Quellcode-Fragment erstellt wurde. Dieser AST wird für die Typ-Zuordnung vorbereitet und gemeinsam mit allen anderen Assemblies, die für die Auflösung von externen Typen verwendet werden sollen, in Form eines \texttt{CSharpProjectContent}-Objekts zusammengefasst. Um diese Assemblies zu finden, wird jede durch einen in ihr enthaltenen, nicht weiter relevanten Typ identifiziert. Für die Erzeugung des \texttt{CSharpAstResolver}-Objekts, wird der unvorbereitete AST, der vorbereitete AST und das Kompilat des \texttt{CSharpProjectContent}-Objekts übergeben. Die eigentliche Auflösung wird dann über einen Aufruf der Methode \texttt{CSharpAstResolver.ApplyNavigator} synchron durchgeführt. Diese Funktion erwartet ein Objekt vom Typ \texttt{IResolveVisitorNavigator} und teilt diesem alle aufgelösten Details zu allen Knoten im AST mit. Ähnlich wie die CCI erlaubt auch \textit{Mono.Cecil} das manuelle Einlesen von Assemblies und \textit{Program Database}-Dateien um diese anhand der CIL-Anweisungen zu analysieren. Assemblies und pdb-Dateien können verändert und gespeichert werden.
 
 
 
