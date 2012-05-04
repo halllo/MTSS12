@@ -736,34 +736,90 @@ CSharpAstResolver CreateResolver(CompilationUnit parsed, params Type[] types)
 Der Code orientiert sich an dem Demo Beispiel von Daniel Grunwald in dem \textit{NRefactory}-Repository \cite{NRefacRepo}. Das übergebene \texttt{CompilationUnit}-Objekt ist der Wurzelknoten eines \textit{NRefactory}-AST, der aus Quellcode-Fragment erstellt wurde. Dieser AST wird für die Typ-Zuordnung vorbereitet und gemeinsam mit allen anderen Assemblies, die für die Auflösung von externen Typen verwendet werden sollen, in Form eines \texttt{CSharpProjectContent}-Objekts zusammengefasst. Um diese Assemblies zu finden, wird jede durch einen in ihr enthaltenen, nicht weiter relevanten Typ identifiziert. Für die Erzeugung des \texttt{CSharpAstResolver}-Objekts, wird der unvorbereitete AST, der vorbereitete AST und das Kompilat des \texttt{CSharpProjectContent}-Objekts übergeben. Die eigentliche Auflösung wird dann über einen Aufruf der Methode \texttt{CSharpAstResolver.ApplyNavigator} synchron durchgeführt. Diese Funktion erwartet ein Objekt vom Typ \texttt{IResolveVisitorNavigator} und teilt diesem alle aufgelösten Details zu allen Knoten im AST mit. Ähnlich wie die CCI erlaubt auch \textit{Mono.Cecil} das manuelle Einlesen von Assemblies und \textit{Program Database}-Dateien um diese anhand der CIL-Anweisungen zu analysieren. Assemblies und pdb-Dateien können verändert und gespeichert werden.
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 \section{Codename "`Roslyn"'}
+Karen Ng, Matt Warren, Peter Golde und Anders Hejlsberg beschreiben in ihrem Dokument \cite{RoslynOverview} ein Projekt um den C$\#$- und den VB.net-Compiler als Dienst zur Verfügung zu stellen. Sie beschreiben das Problem, dass Compiler viel isoliertes und ungeteiltes Wissen über die zu kompilierende Sprache besitzten. Dieses Wissen ist auch für andere Anwendungen, wie beispielsweise Entwicklungsumgebungen, Refactoring-Werkzeuge und Code-Analyse-Tools von bedeutung. Momentan müssen diese Programme das Wissen der Compiler neu erfinden und Teile des Compilers neu implementieren. Im Rahmen des Projekt \texttt{Roslyn} sollen die Compiler ihr Wissen teilen können. Dazu werden sie als Dienste zur Verfügung gestellt und bieten APIs an. Diese APIs können dann von sämtlichen Code-orientierten Werkzeugen genutzt werden. Kirill Osenkov stellt in seinem Blog-Post \cite{RoslynCTPIntro} die CTP\footnote[1]{"`Microsoft Roslyn October 2011 CTP"' \url{http://msdn.com/roslyn}} (Community Technology Preview) von \texttt{Roslyn} vor und erwähnt ein weiteres Ziel. Die bisherigen Compiler sollen in einer Sprache, die auf der CLR (Common Language Runtime) ausgeführt wird, neu geschrieben werden. Auf diese Weise soll das Team hinter Visual Studio schneller und bessere Features entwickeln können.
 
-rewriting the existing compilers (existing in c++) in managed code
-managed compilers + language services
-code analysis apis
-language service extensibility
-read eval print loop (REPL)
-not a framework for buildung compilers
+\subsection{Schichten}
+In dem Dokument \cite{RoslynOverview} beschreiben Hejlsberg und co die traditionelle Compiler Pipeline der .net-Umgebung. Die \texttt{Roslyn}-Compiler werden diese Pipeline ebenfalls haben. Ein Parser erzeugt einen Syntax-Baum anhand der Grammatik der Sprache. Darauf folgt die Deklarierungsphase. In dieser Phase werden die Deklarierungen im Code zusammen mit importierten Metadaten in Form von benannten Einheiten, sogenannten Symbols, erstellt. Danach folgt die Binder-Phase, in der Typen im Syntax Baum den Symbols zugeordnet werden. In der letzten Phase wird alle vom Compiler angesammelte Information in Form von CIL-Anweisungen in eine Assembly-Datei exportiert. Project \texttt{Roslyn} bietet für jede dieser Phasen eine entsprechende API im Rahmen einer Compiler API Schicht, die auf der Compiler Pipeline aufbaut. Auf diese Compiler API Schicht setzt \texttt{Roslyn} noch eine Language Service Schicht, die mit dem Objektmodell der Compiler Phasen arbeitet und beispielsweise Refactorings unterstützt.
+\paragraph{}
+Hejlsberg und co unterscheiden noch zwischen verschiedenen Architekturschichten, die getrennt von den oben beschrieben Schichten über der Compiler Pipeline beschrieben werden. Die Compiler APIs erlauben den Zugriff auf das syntaktische und semantische Objektmodell, das durch die Compiler Pipeline zur Verfügung gestellt wird. Die nächste Schicht ist die Scripting API. Sie bietet eine Umgebung für das Ausführen von Code-Schnippseln in Form von Ausdrücken und Anweisungen. Mit dieser Umgebung kann ein REPL (Read Eval Print Loop) realisiert werden. Die Workspace API stellt die nächste Schicht dar und ermöglicht eine Analyse auf der Basis von kompletten Visual Studio Solutions. Die letzte Schicht ist die Services API. Sie ist die einzige, die eine Abhängigkeit von Visual Studio hat. Sämtliche Funktionen wie Visual Studio \texttt{IntelliSense}, Refactorings und Fomratierungsfunktionen befinden sich in dieser Schicht.
+
+\subsection{Syntax Tree}
+In diesem Unterabschnitt werden die Möglichkeiten beschrieben, wie der Syntax-Baum der Compiler API verwendet werden kann.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{lstlisting}[caption={bla},label={listing:bla1}]
+SyntaxTree tree = SyntaxTree.ParseCompilationUnit(sourceText);
+var methods = tree.Root.DescendentNodes().OfType<MethodDeclarationSyntax>();
+...
+var ifs = method.DescendentNodes().OfType<IfStatementSyntax>();
+var invocations = method.DescendentNodes().OfType<InvocationExpressionSyntax>();
+\end{lstlisting}
+
+
+how to get it
+how to analyse it
+how to visit it
+
+\subsection{Semantik}
+In diesem Unterabschnitt wird beschrieben, wie die Compiler API die Semantik von Code verwaltet. Nach der Erzeugung der syntaktischen Repräsentation von Code, dem Syntax Tree, ...
+
+\begin{lstlisting}[caption={bla},label={listing:bla2}]
+Compilation compilation = Compilation.Create(name)
+				.AddReferences(mscorlib)
+				.AddSyntaxTrees(tree);
+SemanticModel semanticModel = compilation.GetSemanticModel(tree);
+\end{lstlisting}
+
+Methodbinding
+Compilation
+Symbols
+
+\begin{lstlisting}[caption={bla},label={listing:bla3}]
+SemanticInfo invocationSymbols = semanticModel.GetSemanticInfo(invocation);
+string typeName = invocationSymbols.Symbol.ContainingType.Name;
+\end{lstlisting}
+
+\subsection{Workspace}
+In diesem Unterabschnitt werden die Möglichkeiten der Compiler API in Bezug auf die Analyse von ganzen Solutions beschrieben.
+Solution Level Analysis
+
+\begin{lstlisting}[caption={bla},label={listing:bla4}]
+IWorkspace workSpace = Workspace.LoadSolution(solutionFile);
+ISolution solution = ws.CurrentSolution;
+...
+SyntaxTree tree = document.GetSyntaxTree();
+SemanticModel semantic = document.GetSemanticModel();
+\end{lstlisting}
+
+
+
+
+
+
 
 \section{Zusammenfassung}
 Mit Ergebnis aka welche Technologie für die statische Codeanalyse verwendet werden soll.
-
+0
 
 
 
