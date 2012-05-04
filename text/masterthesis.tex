@@ -737,89 +737,70 @@ Der Code orientiert sich an dem Demo Beispiel von Daniel Grunwald in dem \textit
 
 
 \section{Codename "`Roslyn"'}
-Karen Ng, Matt Warren, Peter Golde und Anders Hejlsberg beschreiben in ihrem Dokument \cite{RoslynOverview} ein Projekt um den C$\#$- und den VB.net-Compiler als Dienst zur Verfügung zu stellen. Sie beschreiben das Problem, dass Compiler viel isoliertes und ungeteiltes Wissen über die zu kompilierende Sprache besitzten. Dieses Wissen ist auch für andere Anwendungen, wie beispielsweise Entwicklungsumgebungen, Refactoring-Werkzeuge und Code-Analyse-Tools von bedeutung. Momentan müssen diese Programme das Wissen der Compiler neu erfinden und Teile des Compilers neu implementieren. Im Rahmen des Projekt \texttt{Roslyn} sollen die Compiler ihr Wissen teilen können. Dazu werden sie als Dienste zur Verfügung gestellt und bieten APIs an. Diese APIs können dann von sämtlichen Code-orientierten Werkzeugen genutzt werden. Kirill Osenkov stellt in seinem Blog-Post \cite{RoslynCTPIntro} die CTP\footnote[1]{"`Microsoft Roslyn October 2011 CTP"' \url{http://msdn.com/roslyn}} (Community Technology Preview) von \texttt{Roslyn} vor und erwähnt ein weiteres Ziel. Die bisherigen Compiler sollen in einer Sprache, die auf der CLR (Common Language Runtime) ausgeführt wird, neu geschrieben werden. Auf diese Weise soll das Team hinter Visual Studio schneller und bessere Features entwickeln können.
+Karen Ng, Matt Warren, Peter Golde und Anders Hejlsberg beschreiben in ihrem Dokument \cite{RoslynOverview} ein Projekt um den C$\#$- und den VB.net-Compiler als Dienst zur Verfügung zu stellen. Sie beschreiben das Problem, dass Compiler viel isoliertes und ungeteiltes Wissen über die zu kompilierende Sprache besitzten. Dieses Wissen ist auch für andere Anwendungen, wie beispielsweise Entwicklungsumgebungen, Refactoring-Werkzeuge und Code-Analyse-Tools von bedeutung. Momentan müssen diese Programme das Wissen der Compiler neu erfinden und Teile des Compilers neu implementieren. Im Rahmen des Projekt \textit{Roslyn} sollen die Compiler ihr Wissen teilen können. Dazu werden sie als Dienste zur Verfügung gestellt und bieten APIs an. Diese APIs können dann von sämtlichen Code-orientierten Werkzeugen genutzt werden. Kirill Osenkov stellt in seinem Blog-Post \cite{RoslynCTPIntro} die CTP\footnote[1]{"`Microsoft Roslyn October 2011 CTP"' \url{http://msdn.com/roslyn}} (Community Technology Preview) von \textit{Roslyn} vor und erwähnt ein weiteres Ziel. Die bisherigen Compiler sollen in einer Sprache, die auf der CLR (Common Language Runtime) ausgeführt wird, neu geschrieben werden. Auf diese Weise soll das Team hinter Visual Studio schneller und bessere Features entwickeln können.
 
 \subsection{Schichten}
-In dem Dokument \cite{RoslynOverview} beschreiben Hejlsberg und co die traditionelle Compiler Pipeline der .net-Umgebung. Die \texttt{Roslyn}-Compiler werden diese Pipeline ebenfalls haben. Ein Parser erzeugt einen Syntax-Baum anhand der Grammatik der Sprache. Darauf folgt die Deklarierungsphase. In dieser Phase werden die Deklarierungen im Code zusammen mit importierten Metadaten in Form von benannten Einheiten, sogenannten Symbols, erstellt. Danach folgt die Binder-Phase, in der Typen im Syntax Baum den Symbols zugeordnet werden. In der letzten Phase wird alle vom Compiler angesammelte Information in Form von CIL-Anweisungen in eine Assembly-Datei exportiert. Project \texttt{Roslyn} bietet für jede dieser Phasen eine entsprechende API im Rahmen einer Compiler API Schicht, die auf der Compiler Pipeline aufbaut. Auf diese Compiler API Schicht setzt \texttt{Roslyn} noch eine Language Service Schicht, die mit dem Objektmodell der Compiler Phasen arbeitet und beispielsweise Refactorings unterstützt.
+In dem Dokument \cite{RoslynOverview} beschreiben Hejlsberg und co die traditionelle Compiler Pipeline der .net-Umgebung. Die \texttt{Roslyn}-Compiler werden diese Pipeline ebenfalls haben. Ein Parser erzeugt einen Syntax-Baum anhand der Grammatik der Sprache. Darauf folgt die Deklarierungsphase. In dieser Phase werden die Deklarierungen im Code zusammen mit importierten Metadaten in Form von benannten Einheiten, sogenannten Symbols, erstellt. Danach folgt die Binder-Phase, in der Typen im Syntax Baum den Symbols zugeordnet werden. In der letzten Phase wird alle vom Compiler angesammelte Information in Form von CIL-Anweisungen in eine Assembly-Datei exportiert. Project \textit{Roslyn} bietet für jede dieser Phasen eine entsprechende API im Rahmen einer Compiler API Schicht, die auf der Compiler Pipeline aufbaut. Auf diese Compiler API Schicht setzt \textit{Roslyn} noch eine Language Service Schicht, die mit dem Objektmodell der Compiler Phasen arbeitet und beispielsweise Refactorings unterstützt.
 \paragraph{}
 Hejlsberg und co unterscheiden noch zwischen verschiedenen Architekturschichten, die getrennt von den oben beschrieben Schichten über der Compiler Pipeline beschrieben werden. Die Compiler APIs erlauben den Zugriff auf das syntaktische und semantische Objektmodell, das durch die Compiler Pipeline zur Verfügung gestellt wird. Die nächste Schicht ist die Scripting API. Sie bietet eine Umgebung für das Ausführen von Code-Schnippseln in Form von Ausdrücken und Anweisungen. Mit dieser Umgebung kann ein REPL (Read Eval Print Loop) realisiert werden. Die Workspace API stellt die nächste Schicht dar und ermöglicht eine Analyse auf der Basis von kompletten Visual Studio Solutions. Die letzte Schicht ist die Services API. Sie ist die einzige, die eine Abhängigkeit von Visual Studio hat. Sämtliche Funktionen wie Visual Studio \texttt{IntelliSense}, Refactorings und Fomratierungsfunktionen befinden sich in dieser Schicht.
 
 \subsection{Syntax Tree}
-In diesem Unterabschnitt werden die Möglichkeiten beschrieben, wie der Syntax-Baum der Compiler API verwendet werden kann.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-\begin{lstlisting}[caption={bla},label={listing:bla1}]
+\label{subsec:roslynsyntaxtree}
+In diesem Unterabschnitt werden die Möglichkeiten beschrieben, wie der Syntax-Baum der Compiler API verwendet werden kann. Interessant ist zu sehen, dass \textit{Roslyn} im Gegensatz zu \textit{NRefactory} die Datenstruktur nicht als abstrakten Syntax-Baum bezeichnet, sondern lediglich als Syntax-Baum. Philip Newcomb beschreibt in seiner Präsentation über den "`AST Metamodel Standard"' \cite{ASTMetamodel} den Unterschied als Nähe zum tatsächlichen Quellcode. Der Syntax Tree von \textit{Roslyn} orientiert sich sehr am Quellcode. Hejlsberg und co legen in ihrem Dokument \cite{RoslynOverview} besonderen Wert auf die Vollständigkeit des Baums, in dem jedes Leerzeichen und sogar synatktische Fehler Bestandteil des Syntax-Baum sind.
+\paragraph{}
+Listing \ref{listing:roslynsyntaxtreecreation} zeigt die Erzeugung eines Syntax-Baum aus einem Quellcode-Ausschnitt, der in der Variable \texttt{sourceText} enthalten ist. Ähnlich wie \textit{NRefactory} bietet auch \textit{Roslyn} die Möglichkeit den Baum mit LINQ-Abfragen zu analysieren, da \texttt{DescendentNodes} ein \texttt{IEnumerable} zurückliefert. LINQ\footnote[1]{"`LINQ (Language-Integrated Query, sprachintegrierte Abfrage)"' \url{http://msdn.microsoft.com/de-de/library/bb397926.aspx}} ist ein Sprachkonstrukt, das es erlaubt mit Keywords wie beispielsweise \texttt{from}, \texttt{where} und \texttt{select} SQL-ähnliche Abfragen direkt in C$\#$ oder VB.net zu schreiben.
+\begin{lstlisting}[caption={Erzeugung eines Syntax Tree mit der \textit{Rosyln} Compiler API},label={listing:roslynsyntaxtreecreation}]
 SyntaxTree tree = SyntaxTree.ParseCompilationUnit(sourceText);
 var methods = tree.Root.DescendentNodes().OfType<MethodDeclarationSyntax>();
 ...
 var ifs = method.DescendentNodes().OfType<IfStatementSyntax>();
 var invocations = method.DescendentNodes().OfType<InvocationExpressionSyntax>();
 \end{lstlisting}
-
-
-how to get it
-how to analyse it
-how to visit it
+Listing \ref{listing:roslynsyntaxtreecreation} zeigt ebenfalls wie alle Methoden, die in \texttt{sourceText} deklariert werden gefunden werden. In jeder dieser Methoden kann anschließend nach \texttt{if}-Anweisungen und ähnlichen Entscheidungsträgern gesucht werden, um die zyklomatische Komplexität, wie sie in Unter-Unterabschnitt \ref{subsubsec:cyclomaticcomplexity} beschrieben wurde, auszurechnen. Um die Typen zu finden, von denen eine Methode abhängig ist, können neben sämtlichen Variablen alle Methodenaufrufe gefunden werden. Daraus kann anschließend der Abhängigkeitsgraph bestimmt werden. Ähnlich zu \textit{NRefactory} kann auch für den \textit{Roslyn}-Baum ein Besucher als Ableitung von \texttt{SyntaxWalker} erstellt werden. Über entsprechende Überladungen kann dann auf alle Knoten im Syntax-Baum reagiert werden. Leerzeichen, Zeilenumbrüche und andere Elemente, die keine nicht syntaktische Relevanz haben, sind im Baum in Form von \texttt{Trivia}-Objekten vorhanden und lassen sich ebenfalls finden. Eine Manipulation des Code-Baums ist auch möglich indem ein neuer Baum erzeugt wird. Bestehende Bäume sind laut Hejlsberg und co unveränderlich.
 
 \subsection{Semantik}
-In diesem Unterabschnitt wird beschrieben, wie die Compiler API die Semantik von Code verwaltet. Nach der Erzeugung der syntaktischen Repräsentation von Code, dem Syntax Tree, ...
-
-\begin{lstlisting}[caption={bla},label={listing:bla2}]
+\label{subsec:roslynsemanticmodel}
+In diesem Unterabschnitt wird beschrieben, wie die Compiler API die Semantik von Code verwaltet. Nach der Erzeugung der syntaktischen Repräsentation von Code, dem Syntax Tree, werden beispielsweise die Methodenaufrufe nicht automatisch der Stelle zugeordnet, die sie deklarieren. Ähnlich wie bei \textit{NRefactory} wird dazu eine Auflösung benötigt, die den Baum mit den Symbols verbindet. Listing \ref{listing:rosylnsemanticmodelcreation} zeigt wie ein Syntax-Baum kompiliert werden kann. Durch die Kompilierung werden alle Verweise, die sich wie im Beispiel auf die \texttt{mscorlib} (Bibliothek der Basistypen wie \texttt{object}, \texttt{string}, \texttt{DateTime}, usw) beziehen, aufgelöst.
+\begin{lstlisting}[caption={Erzeugung eines semantischen Modells und Syntax-Bäumen},label={listing:rosylnsemanticmodelcreation}]
 Compilation compilation = Compilation.Create(name)
 				.AddReferences(mscorlib)
 				.AddSyntaxTrees(tree);
 SemanticModel semanticModel = compilation.GetSemanticModel(tree);
 \end{lstlisting}
-
-Methodbinding
-Compilation
-Symbols
-
-\begin{lstlisting}[caption={bla},label={listing:bla3}]
+Das Kompilieren findet im Speicher statt und das Ergebnis wird nicht in Form einer Assembly in eine Datei geschrieben. Aus dem Kompilat kann das semantische Modell erzeugt werden. Dieses Modell kann anschließend genutzt werden um zu sämtlichen syntaktischen Elementen im Syntax Tree semantische Eigenschaften zu erhalten.
+\begin{lstlisting}[caption={Ermitteln der semantischen Information eines Methodenaufrufs},label={listing:roslynsemanticmodelusage}]
 SemanticInfo invocationSymbols = semanticModel.GetSemanticInfo(invocation);
 string typeName = invocationSymbols.Symbol.ContainingType.Name;
 \end{lstlisting}
+Dafür kann die \texttt{GetSemanticInfo}-Methode mit dem entsprechenden Element aufgerufen werden, wie in Lisiting \ref{listing:roslynsemanticmodelusage} dargestellt. Das semantische Modell enthält alle Symbols des Kompilats und nicht nur die, die für die Auflösung der Typen benötigt werden die im Syntax-Baum deklariert wurden. Wenn also über alle Typen im semantischen Modell iteriert wird, werden nicht nur die Typen aus dem Baum, sondern auch alle Typen aller Referenz-Assemblies, betrachtet.
 
 \subsection{Workspace}
-In diesem Unterabschnitt werden die Möglichkeiten der Compiler API in Bezug auf die Analyse von ganzen Solutions beschrieben.
-Solution Level Analysis
-
-\begin{lstlisting}[caption={bla},label={listing:bla4}]
+In diesem Unterabschnitt werden die Möglichkeiten der Compiler API in Bezug auf die Analyse von ganzen Visual Stuido Solutions beschrieben. Eine Solution ist eine Datei, die es Visual Studio ermöglicht mehrere Projekte mit mehreren Quellcode-Dateien zu verwalten und zu kompilieren. In einer Solution sind in der Regel alle Abhängigkeiten der beinhalteten Projekte entweder durch andere beinhaltete Projekte oder durch Referenz-Assemblies auflösbar. Die \textit{Roslyn} Services API erlaubt es im Kontext einer laufenden Visual Studio Instanz einen sogenannten Workspace zu verwenden, der die Visual Studio Umgebung Repräsentiert und den Syntax-Baum ändert, sobald der Quellcode ändert. Ein Workspace kann auch ohne Abhängigkeit von Visual Studio erzeugt werden, indem die Solution-Datei direkt geladen wird, wie in Listing \ref{listing:roslynsolutionworkspacecreation} zu sehen ist.
+\begin{lstlisting}[caption={Erzeugung eines Workspace aus einer Visual Studio Solution-Datei},label={listing:roslynsolutionworkspacecreation}]
 IWorkspace workSpace = Workspace.LoadSolution(solutionFile);
 ISolution solution = ws.CurrentSolution;
 ...
 SyntaxTree tree = document.GetSyntaxTree();
 SemanticModel semantic = document.GetSemanticModel();
 \end{lstlisting}
-
-
-
-
-
+In einem \texttt{ISolution}-Objekt kann über alle enthaltenen Projekte iteriert werden. In jedem Projekt können alle Dokumente als \texttt{IDocument}-Objekte betrachtet werden. Zu jedem Dokument kann der zugehörige Syntax-Baum und das semantische Modell bestimmt werden. Da die Workspace-Repräsentation das Erzeugen und Kompilieren der Dateien übernimmt, kann die Code-Analyse direkt auf Solution-Ebene erfolgen, indem das Syntax-Baum und das semantische Modell wie in den Unterabschnitten \ref{subsec:roslynsyntaxtree} und \ref{subsec:roslynsemanticmodel} beschrieben wurde.
 
 
 \section{Zusammenfassung}
 Mit Ergebnis aka welche Technologie für die statische Codeanalyse verwendet werden soll.
-0
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
