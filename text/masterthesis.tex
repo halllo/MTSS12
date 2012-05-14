@@ -635,16 +635,17 @@ Nachdem in Kapitel \ref{chap:requirements} die Anforderungen an die zu entwickel
 \paragraph{}
 Um die Technologien anhand ihrer Eignung zu evaluieren, wird die Bewertung nach verschiedenen Kriterien vorgenommen. Die Kriterien sind in Form von Fragen so formuliert, dass eine bejahende Antwort als positiv gilt. Die Kriterien sind nach Wichtigkeit absteigend sortiert.
 \begin{enumerate} 
-\item Können alle Informationen gesammelt werden, die benötigt werden um die von Usus berechneten Metriken ebenfalls zu berechnen?
-\item Ist die Technologie verfügbar, kostenfrei nutzbar und kann veröffentlicht werden?
-\item Unterstützt die Technologie alle .NET Laufzeitumgebungen unter Windows?
+\item Können alle Informationen gesammelt werden, die benötigt werden um die von Usus berechneten Metriken zu berechnen?
+\item Ist die Technologie allgemein verfügbar und kann als Bestandteil einer Anwendung veröffentlicht werden?
+\item Ist die Technologie kostenfrei verwendbar?
+\item Ist die Technologie einfach zu verwenden und kann leicht eingesetzt werden?
+\item Unterstützt die Technologie alle Versionen der .NET Laufzeitumgebungen unter Windows?
 \item Ist die Technologie unabhängig von anderen Laufzeitumgebungen und anderen externen Komponenten?
-\item Kann die Technologie ein System verarbeiten, das Klassen und Pakete verwendet, die nicht im betrachteten System definiert sind?
-\item Ist die Technologie in der Lage ein System zu analysieren, dass nicht nur mit C$\#$ entwickelt wurde?
+\item Kann die Technologie ein unvollständiges System verarbeiten, das Klassen und Pakete verwendet, die nicht im betrachteten System definiert sind?
+\item Ist die Technologie in der Lage ein System zu analysieren, dass nicht nur mit C$\#$ entwickelt wurde sondern auch in VB.net?
 \item Kann die Technologie mit dem Code und dem Kompilat arbeiten?
-\item Ist die Technologie einfach und performant einsetzbar?
 \end{enumerate}
-Anhand dieser Kriterien werden die verschiedenen Technologien, die in den folgenden Abschnitten beschrieben werden, evaluiert. Das Ergebnis wird dann abschließend im letzten Abschnitt in diesem Kapitel in Form einer Zusammenfassung vorgestellt.
+Anhand dieser Kriterien können verschiedene Technologien, die in den folgenden Abschnitten beschrieben werden, evaluiert werden. Das Ergebnis wird abschließend im letzten Abschnitt dieses Kapitels in Form einer Zusammenfassung vorgestellt. Die Auswahl der betrachteten Technologien wurde abhängig vom subjektiven Bekanntheitsgrad eingeschränkt und ist nicht vollständig.
 
 
 \section{FxCop}
@@ -692,7 +693,7 @@ Die \textit{Common Compiler Infrastructure} (CCI) ist eine Sammlung von Biblioth
 \end{figure}
 
 \subsection{CCI Metadata}
-Im Gegensatz zu der \textit{FxCop} API kann eine .NET-Assembly mit CCI direkt untersucht werden, ohne das die Analyse in Form einer einschränkenden Regel parallelisiert erfolgt. CCI überlässt dem Verwender der Bibliothek ob und wie die Untersuchung stattfinden soll. Mit einem \texttt{PeReader.DefaultHost} können PE-Dateien (\textit{Portable Executables} also dll- oder exe-Dateien) eingelesen werden. Zusätzlich kann die vom Compiler erzeugte pdb-Datei mit einem \texttt{PdbReader} importiert werden. Die pdb-Datei (\textit{Program Database}) enthält laut Microsoft \cite{PDBFile} Debug- und Projekt-Information wie beispielsweise die Datei- und Zeilenzuordnung der erzeugten Typen und Funktionen. Mit der \texttt{IAssembly.GetAllTypes()}-Methode können alle Typen ermittelt werden. Alle Methoden und Properties eines Typs, können mit \texttt{INamedTypeDefinition.Methods} bestimmt werden. Der Inhalt von Methoden und Properties kann in Form von CIL-Anweisungen mit \texttt{IMethodBody.Operations} genauer betrachtet werden. So lassen sich beispielsweise alle lokalen Variablen und Methodenaufrufe lokalisieren, um Abhängigkeiten der Methode zu anderen Typen zu finden. Zusammen mit Attributen, Parametern und Rückgabewerten kann der Abhängigkeitsgraph eines Typs ermittelt werden. Die zyklomatische Komplexität einer Methode kann ebenfalls über die CIL-Anweisungen bestimmt werden, was durch das Code Metrics Power Tool aus Unterabschnitt \ref{subsec:vscodemetricspowertool} sowie Steve Gilham \cite{CCperCIL} demonstriert wird. Um die Methodenlänge einer Funktion aus den CIL-Anweisungen zu ermitteln, kann auch hier die Funktionalität durch das Code Metrics Power Tool inspiriert werden. Wenn zu der .NET-Assembly zusätzlich eine pdb-Datei existiert, kann außerdem die Start- und Endzeile jeder Anweisung auf die Methode bezogen werden, ähnlich der Lösung für die \textit{FxCop} Regel.
+Im Gegensatz zu der \textit{FxCop} API kann eine .NET-Assembly mit CCI direkt untersucht werden, ohne das die Analyse in Form einer einschränkenden Regel parallelisiert erfolgt. CCI überlässt dem Verwender der Bibliothek ob und wie die Untersuchung stattfinden soll. Mit einem \texttt{PeReader.DefaultHost} können PE-Dateien (\textit{Portable Executables} also dll- oder exe-Dateien) eingelesen werden. Zusätzlich kann die vom Compiler erzeugte pdb-Datei mit einem \texttt{PdbReader} importiert werden. Die pdb-Datei (\textit{Program Database}) enthält laut Microsoft \cite{PDBFile} Debug- und Projekt-Information wie beispielsweise die Datei- und Zeilenzuordnung der erzeugten Typen und Funktionen. Mit der \texttt{IAssembly.GetAllTypes()}-Methode können alle Typen ermittelt werden. Alle Methoden und Properties eines Typs, können mit \texttt{INamedTypeDefinition.Methods} bestimmt werden. Der Inhalt von Methoden und Properties kann in Form von CIL-Anweisungen mit \texttt{IMethodBody.Operations} genauer betrachtet werden. So lassen sich beispielsweise alle lokalen Variablen und Methodenaufrufe lokalisieren, um Abhängigkeiten der Methode zu anderen Typen zu finden. Die CIL-Anweisung eines Methodenaufrufs enthält immer auch den Typ, der das Aufrufziel darstellt. Zusammen mit Attributen, Parametern und Rückgabewerten kann der Abhängigkeitsgraph eines Typs ermittelt werden. Die zyklomatische Komplexität einer Methode kann ebenfalls über die CIL-Anweisungen bestimmt werden, was durch das Code Metrics Power Tool aus Unterabschnitt \ref{subsec:vscodemetricspowertool} sowie Steve Gilham \cite{CCperCIL} demonstriert wird. Um die Methodenlänge einer Funktion aus den CIL-Anweisungen zu ermitteln, kann auch hier die Funktionalität durch das Code Metrics Power Tool inspiriert werden. Wenn zu der .NET-Assembly zusätzlich eine pdb-Datei existiert, kann außerdem die Start- und Endzeile jeder Anweisung auf die Methode bezogen werden, ähnlich der Lösung für die \textit{FxCop} Regel.
 
 \subsection{CCI Code and AST Components}
 Soweit wurden nur Funktionen von \textit{CCI Metadata} betrachtet. \textit{CCI Code and AST Components} erlaubt es das Quellcode-Modell einer Methode in Form eines abstrakten Syntax-Baums (AST) zu analysieren. Philip Newcomb beschreibt einen AST in seinem Tutorial über den AST Metamodel Standard \cite{ASTMetamodel} als formale Repräsentation der syntaktischen Struktur einer Software auch innerhalb Methoden. Um einen solchen Baum zu betrachten, können Besucher verwendet werden. Beispielsweise erlaubt eine Objekt vom Typ \texttt{CodeTraverser} jede strukturelle Stelle der Assembly mit überladbaren Methoden, von denen einige in Listing \ref{listing:ccicodeastsample} aufgeführt sind, zu besuchen.
@@ -711,7 +712,7 @@ Für jede Stelle im Code leitet \texttt{CodeTraverser} den Aufruf an Objekte vom 
 Auch in der Mono-Welt existieren Werkzeuge für Compiler-ähnliche Funktionen. Das Team hinter Mono beschreibt Mono als Implementierung des .NET-Frameworks für Windows, Linux, Mac OS und verschiedene mobile Plattformen \cite{Mono}. In diesem Umfeld ist \textit{NRefactory} Teil der freien .NET-Entwicklungsumgebung SharpDevelop\footnote[1]{"`The Open Source Development Environment for .NET"' \url{http://www.icsharpcode.net/OpenSource/SD/}} und arbeitet im Gegensatz zur CCI und FxCop nicht nur auf Assembly-Ebene, sondern hauptsächlich mit Quellcode.
 
 \subsection{AST aus Quellcode}
-Mit \textit{NRefactory} ist es möglich einen AST aus C$\#$-Quelltext zu erzeugen. VB.net wird noch nicht unterstützt. Anschließend können AST-Besucher als direkte Implementierung der \texttt{IAstVisitor}-Schnittstelle oder als Ableitung von \texttt{DepthFirstAstVisitor} erstellt werden und mit dem abstrakten Syntax-Baum arbeiten. Listing \ref{listing:nrefacastsample} zeigt einige wenige Methoden, die in \texttt{IAstVisitor} definiert sind.
+Mit \textit{NRefactory} ist es möglich einen AST aus C$\#$-Quelltext zu erzeugen. Unterstützung für VB.net ist nach Angaben in der Funktionsbeschreibung der Bibliothek \cite{NRefacRepo} noch nicht implementiert. Anschließend können AST-Besucher als direkte Implementierung der \texttt{IAstVisitor}-Schnittstelle oder als Ableitung von \texttt{DepthFirstAstVisitor} erstellt werden und mit dem abstrakten Syntax-Baum arbeiten. Listing \ref{listing:nrefacastsample} zeigt einige wenige Methoden, die in \texttt{IAstVisitor} definiert sind.
 \begin{lstlisting}[caption={\textit{NRefactory} \texttt{IAstVisitor}-Methoden},label={listing:nrefacastsample}]
 VisitIfElseStatement(IfElseStatement ifElseStatement) {...}
 VisitBinaryOperatorExpression(BinaryOperatorExpression binaryOperatorExpression) {...}
@@ -787,25 +788,24 @@ In einem \texttt{ISolution}-Objekt kann über alle enthaltenen Projekte iteriert 
 
 
 \section{Zusammenfassung}
-Als Ergebnis einer formalen Nutzwert-Analyse, die hier noch erfolgt, und durch die Beantwortung der anfangs gestellten Fragen wird die folgende Technologie für die statische Code-Analyse in Usus.net verwendet:
-\newline
-CCI in Verbindung mit \textit{NRefactory}
-\newline
-\textsl{FxCop} leider nicht geeignet
-\textit{Roslyn} leider nur als CTP verfügbar mit eigenem Compiler (allerdings langfristig die Lösung)
-\newline
-\newline
-TODO! Tabelle mit Fragen als Zeilen und Technologien als Spalten:
-\begin{enumerate} 
-\item Können alle Informationen gesammelt werden, die benötigt werden um die von Usus berechneten Metriken ebenfalls zu berechnen?
-\item Ist die Technologie verfügbar, kostenfrei nutzbar und kann veröffentlicht werden?
-\item Unterstützt die Technologie alle .NET Laufzeitumgebungen unter Windows?
-\item Ist die Technologie unabhängig von anderen Laufzeitumgebungen und anderen externen Komponenten?
-\item Kann die Technologie ein System verarbeiten, das Klassen und Pakete verwendet, die nicht im betrachteten System definiert sind?
-\item Ist die Technologie in der Lage ein System zu analysieren, dass nicht nur mit C$\#$ entwickelt wurde?
-\item Kann die Technologie mit dem Code und dem Kompilat arbeiten?
-\item Ist die Technologie einfach und performant einsetzbar?
-\end{enumerate}
+In den oberen Abschnitten wurden die vier Technologien \textit{FxCop}, CCI, \textit{NRefactory} und Projekt \textit{Roslyn} kurz vorgestellt. Zu jeder Technologie wurden Eigenheiten und Besonderheiten beschrieben, die sich mehr oder weniger auf die Eignung der Technologie in Bezug auf ein Usus-ähnliches Programm für .NET auswirken. Abbildung \ref{fig:techevalsummary} visualisiert die sich daraus ergebenen bewerteten Verbindungen zwischen den Technologien und den Eingangs festgelegten Fragen.
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=16cm]{images/techevalsummary.png}
+	\caption{Tabellarisches Ergebnis der Technologie Evaluierung}
+	\label{fig:techevalsummary}
+\end{figure}
+
+FxCop leider nicht geeignet, da Runner-Anwendung benötigt wird und Kommunikation zwischen Regel und Programm eingeschränkt ist.
+
+CCI sehr geeignet, bis auf auf die Tatsache, dass Quellcode nicht analysiert werden kann und immer eine Assembly verwendet werden muss.
+
+NRefactory geeignet, da Unterstützung für die Analyse von Quelltext verfügbar (zumindest für VB.net) dadurch allerdings die Methodenaufrufe keinem Ziel zugeordndet sind. Dafür muss auch NRefactory kompillieren, was dann nur in einer vollständigen Umgebung möglich ist.
+
+Roslyn leider nicht geeignet, da es noch als CTP verfügbar ist und die Installation der Roslyn Umgebung erfordert. Langfristig die Lösung da wesentlich bessere Möglichkeiten als CCI und NRefactory zusammen (z.B. Workspace API). Langfristig die Lösung aller Code-Basierten-Programme.
+
+
+Da leider kein Roslyn, CCI für alles kompilierte und für den Fall, das Analyse am Code benötigt wird zusätzlich NRefactory.
 
 
 
