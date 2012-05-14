@@ -643,7 +643,8 @@ Um die Technologien anhand ihrer Eignung zu evaluieren, wird die Bewertung nach 
 \item Ist die Technologie unabhängig von anderen Laufzeitumgebungen und anderen externen Komponenten?
 \item Kann die Technologie ein unvollständiges System verarbeiten, das Klassen und Pakete verwendet, die nicht im betrachteten System definiert sind?
 \item Ist die Technologie in der Lage ein System zu analysieren, dass nicht nur mit C$\#$ entwickelt wurde sondern auch in VB.net?
-\item Kann die Technologie mit dem Code und dem Kompilat arbeiten?
+\item Kann die Technologie mit dem kompilierten Quellcode, also der Assembly, arbeiten?
+\item Kann die Technologie mit dem unkompilierten Quellcode arbeiten?
 \end{enumerate}
 Anhand dieser Kriterien können verschiedene Technologien, die in den folgenden Abschnitten beschrieben werden, evaluiert werden. Das Ergebnis wird abschließend im letzten Abschnitt dieses Kapitels in Form einer Zusammenfassung vorgestellt. Die Auswahl der betrachteten Technologien wurde abhängig vom subjektiven Bekanntheitsgrad eingeschränkt und ist nicht vollständig.
 
@@ -684,6 +685,7 @@ Nachdem sich die Regel mit einer dieser oberflächlichen \texttt{Check}-Methoden 
 
 
 \section{Common Compiler Infrastracture}
+\label{sec:cci}
 Die \textit{Common Compiler Infrastructure} (CCI) ist eine Sammlung von Bibliotheken, die Compiler-ähnliche Funktionen bereitstellen und von Microsoft Research entwickelt wurde \cite{CCI}. Auf Codeplex lässt sich die Komponente \textit{CCI Metadata} finden. Guy Smith beschreibt sie als Obermenge von \texttt{System.Reflection}, \texttt{System.Reflection.Emit} und \texttt{System.CodeDom}, also den Reflektions- und Code-Erzeugungs-Mechanismen des .NET-Framework zur Laufzeit \cite{CCIMetadata}. Smith beschreibt \textit{CCI Metadata} als Werkzeug, das mir den vom Compiler erzeugten CIL-Anweisungen arbeitet. Um einfacher mit Methoden zu arbeiten, stellt Smith mit \textit{CCI Code and AST Components} eine weitere Komponente vor \cite{CCICode}. \textit{CCI Code} erleichtert das Arbeiten mit Methoden, da es von den CIL-Anweisungen abstrahiert und Quellcode-ähnliche Bäume nutzt. Beide Komponenten sind unter der Microsoft Public License veröffentlicht. Die CCI wird in einer ähnlichen Variante unter anderem von dem Code Metrics Power Tool aus Unterabschnitt \ref{subsec:vscodemetricspowertool} und FxCop aus Abschnitt \ref{sec:fxcop} genutzt. Die Assembly Microsoft.Cci.dll, die mit diesen Tools ausgeliefert wird, besitzt viele Funktionen nur intern oder von erlaubten Assemblies aufrufbar sind. Funktionen, die beispielsweise konkrete Methoden-Metriken berechnen, sind nur von Programmen aufrufbar, die in der CCI-Assembly aufgelistet sind, wie in Abbildung \ref{fig:cciinternalsvisible} dargestellt.
 \begin{figure}[h]
 	\centering
@@ -709,6 +711,7 @@ Für jede Stelle im Code leitet \texttt{CodeTraverser} den Aufruf an Objekte vom 
 
 
 \section{NRefactory}
+\label{sec:nrefactory}
 Auch in der Mono-Welt existieren Werkzeuge für Compiler-ähnliche Funktionen. Das Team hinter Mono beschreibt Mono als Implementierung des .NET-Frameworks für Windows, Linux, Mac OS und verschiedene mobile Plattformen \cite{Mono}. In diesem Umfeld ist \textit{NRefactory} Teil der freien .NET-Entwicklungsumgebung SharpDevelop\footnote[1]{"`The Open Source Development Environment for .NET"' \url{http://www.icsharpcode.net/OpenSource/SD/}} und arbeitet im Gegensatz zur CCI und FxCop nicht nur auf Assembly-Ebene, sondern hauptsächlich mit Quellcode.
 
 \subsection{AST aus Quellcode}
@@ -738,6 +741,7 @@ Der Code orientiert sich an dem Demo Beispiel von Daniel Grunwald in dem \textit
 
 
 \section{Codename "`Roslyn"'}
+\label{sec:roslyn}
 Karen Ng, Matt Warren, Peter Golde und Anders Hejlsberg beschreiben in ihrem Dokument \cite{RoslynOverview} ein Projekt um den C$\#$- und den VB.net-Compiler als Dienst zur Verfügung zu stellen. Sie beschreiben das Problem, dass Compiler viel isoliertes und ungeteiltes Wissen über die zu kompilierende Sprache besitzten. Dieses Wissen ist auch für andere Anwendungen, wie beispielsweise Entwicklungsumgebungen, Refactoring-Werkzeuge und Code-Analyse-Tools von bedeutung. Momentan müssen diese Programme das Wissen der Compiler neu erfinden und Teile des Compilers neu implementieren. Im Rahmen des Projekt \textit{Roslyn} sollen die Compiler ihr Wissen teilen können. Dazu werden sie als Dienste zur Verfügung gestellt und bieten APIs an. Diese APIs können dann von sämtlichen Code-orientierten Werkzeugen genutzt werden. Kirill Osenkov stellt in seinem Blog-Post \cite{RoslynCTPIntro} die CTP\footnote[1]{"`Microsoft Roslyn October 2011 CTP"' \url{http://msdn.com/roslyn}} (Community Technology Preview) von \textit{Roslyn} vor und erwähnt ein weiteres Ziel. Die bisherigen Compiler sollen in einer Sprache, die auf der CLR (Common Language Runtime) ausgeführt wird, neu geschrieben werden. Auf diese Weise soll das Team hinter Visual Studio schneller und bessere Features entwickeln können.
 
 \subsection{Schichten}
@@ -795,26 +799,17 @@ In den oberen Abschnitten wurden die vier Technologien \textit{FxCop}, CCI, \tex
 	\caption{Tabellarisches Ergebnis der Technologie Evaluierung}
 	\label{fig:techevalsummary}
 \end{figure}
-
-FxCop leider nicht geeignet, da Runner-Anwendung benötigt wird und Kommunikation zwischen Regel und Programm eingeschränkt ist.
-
-CCI sehr geeignet, bis auf auf die Tatsache, dass Quellcode nicht analysiert werden kann und immer eine Assembly verwendet werden muss.
-
-NRefactory geeignet, da Unterstützung für die Analyse von Quelltext verfügbar (zumindest für VB.net) dadurch allerdings die Methodenaufrufe keinem Ziel zugeordndet sind. Dafür muss auch NRefactory kompillieren, was dann nur in einer vollständigen Umgebung möglich ist.
-
-Roslyn leider nicht geeignet, da es noch als CTP verfügbar ist und die Installation der Roslyn Umgebung erfordert. Langfristig die Lösung da wesentlich bessere Möglichkeiten als CCI und NRefactory zusammen (z.B. Workspace API). Langfristig die Lösung aller Code-Basierten-Programme.
-
-
-Da leider kein Roslyn, CCI für alles kompilierte und für den Fall, das Analyse am Code benötigt wird zusätzlich NRefactory.
-
-
-
-
-
-
-
-
-
+Es ist zu sehen, dass die für die Berechnung der Metriken erforderlichen Informationen von allen untersuchten Lösungen ermittelt werden können. Bei zwei Lösungen allerdings mit Vorbedingung.
+\paragraph{}
+Zuerst wurde in Abschnitt \ref{sec:fxcop} \textit{FxCop} betrachtet. Diese Technologie wird im Rahmen der Evaluierung als nicht tauglich bewertet. Der Grund dieser Entscheidung ist auf die Umgebung zurückzuführen. Die eigentliche Code-Analyse wird von einer eigenen speziellen Regel durchgeführt, die im Kontext der \textit{FxCop} Runner-Anwendung ausgeführt wird. Dadurch wird die Kommunikation zwischen Regel und aufrufendem Programm erschwert was zu einer größeren Distanz zwischen Informationssammlung und Informationsaufbereitung führt.
+\paragraph{}
+Anschließend wurde in Abschnitt \ref{sec:cci} die \textit{Common Compiler Infrastructure} (CCI) betrachtet. Im Rahmen der Evaluierung wird diese Technologie als sehr geeignet erachtet. Als einzigen Nachteil wurde festgestellt, dass CCI mit Assemblies und CIL-Anweisungen arbeitet und daher keinen direkten Bezug zu dem Original-Quellcode hat. Da das zu analysierende Programm in Form einer Assembly vorliegen muss, wurden alle Abhängigkeiten bereits zur Kompilierzeit aufgelöst und Ziele von Methodenaufrufen bestimmt. CCI kann diese auslesen und brauch nicht selbst zu kompilieren.
+\paragraph{}
+Weiter wurde in Abschnitt \ref{sec:nrefactory} \textit{NRefactory} untersucht. Diese Technologie wird in der Evaluierung als geeignet angesehen. Die Besonderheit von \textit{NRefactory} ist, dass diese Bibliothek Unterstützung für die Analyse von Quelltext bietet (zumindest für C$\#$, VB.net kommt wahrscheinlich bald dazu). Diese Form der Analyse hat einige Einschränkungen. Beispielsweise kann das tatsächliche Aufrufziel eines Methodenaufrufs durch die alleinige Betrachtung von Quelltext nicht ermittelt werden. Dafür muss \textit{NRefactory} kompilieren, was dann nur in einer vollständigen Umgebung möglich ist. Um mit Assemblies zu arbeiten wird \textit{Mono.Cecil} genutzt, das hier in Verbindung mit \textit{NRefactory} gesehen wird. Während der Evaluierung wurden die Möglichkeiten der Assembly-Analyse mithilfe von CCI als umfangreicher festgestellt.
+\paragraph{}
+Abschließend wurde in Abschnitt \ref{sec:roslyn} das Projekt mit dem Codenamen \textit{Roslyn} vorgestellt. Im dieser Evaluierung wurde diese Technologie als nicht geeignet bewertet. Diese Entscheidung wurde aufgrund der Tatsache getroffen, dass \textit{Roslyn} noch nicht offiziell verfügbar ist sondern derzeitig nur als CTP bezogen werden kann (was sich nach dieser Master-Thesis wahrscheinlich bald ändert). Weiterhin ist die Installation der \textit{Roslyn} Umgebung erforderlich. Langfristig ist diese Technologie die bessere Lösung, da sie direkt von Microsoft kommt und im Gegensatz zu \textit{NRefactory} wesentlich umfangreichere Möglichkeiten, wie beispielsweise die Workspace API, bietet. \textit{Roslyn} arbeitet mit Quellcode und muss zur Auflösung von Methodenaufrufen ebenfalls kompilieren was wieder nur in einer vollständigen Umgebung funktioniert. Dank der Workspace API wird diese aber automatisch verwaltet.
+\paragraph{}
+Zusammenfassend ist zu sagen, das die \textit{Common Compiler Infrastructure} (CCI) derzeitig die beste Möglichkeit darstellt eine statische Code-Analyse, oder besser gesagt Assembly-Analyse durchzuführen. Sollte die Analyse von reinem Quellcode in einem Sonderfall erforderlich werden, kann eine Kombination mit \textit{NRefactory} genutzt werden. Sobald Projekt \textit{Roslyn} allerdings einen offiziellen Zustand erreicht, sollte eine mögliche Technologieersetzung möglich sein. Bis dahin unterstützt die Tatsache, dass \textit{FxCop} und andere Programme ebenfalls die CCI verwenden, diese Entscheidung.
 
 
 
