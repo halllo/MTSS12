@@ -49,6 +49,7 @@ namespace andrena.Usus_net_UI
         public event Action SolutionChanged;
         public event Action SavingDone;
         public event Action CommandDone;
+        public event Action BuildStart;
         public event Action BuildDone;
 
         private void PreInitializeEvents()
@@ -57,6 +58,7 @@ namespace andrena.Usus_net_UI
             SavingDone += () => { };
             CommandDone += () => { };
             BuildDone += () => { };
+            BuildStart += () => { };
         }
 
         private EnvDTE.BuildEvents buildEvents;
@@ -72,6 +74,7 @@ namespace andrena.Usus_net_UI
             documentEvents = events.DocumentEvents;
             solutionEvents = events.SolutionEvents;
 
+            buildEvents.OnBuildBegin += new EnvDTE._dispBuildEvents_OnBuildBeginEventHandler(BuildEvents_OnBuildBegin);
             buildEvents.OnBuildDone += new EnvDTE._dispBuildEvents_OnBuildDoneEventHandler(BuildEvents_OnBuildDone);
             commandEvents.AfterExecute += new EnvDTE._dispCommandEvents_AfterExecuteEventHandler(CommandEvents_AfterExecute);
             documentEvents.DocumentSaved += new EnvDTE._dispDocumentEvents_DocumentSavedEventHandler(DocumentEvents_DocumentSaved);
@@ -126,6 +129,11 @@ namespace andrena.Usus_net_UI
         void BuildEvents_OnBuildDone(EnvDTE.vsBuildScope Scope, EnvDTE.vsBuildAction Action)
         {
             BuildDone();
+        }
+
+        void BuildEvents_OnBuildBegin(EnvDTE.vsBuildScope Scope, EnvDTE.vsBuildAction Action)
+        {
+            BuildStart();
         }
         #endregion
     }
