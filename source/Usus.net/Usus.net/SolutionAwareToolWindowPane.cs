@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 
-namespace andrena.Usus_net_UI
+namespace andrena.Usus.net
 {
     public class SolutionAwareToolWindowPane : ToolWindowPane
     {

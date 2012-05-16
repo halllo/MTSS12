@@ -7,10 +7,9 @@ using System.Windows;
 using System.Runtime.InteropServices;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.Shell;
-using andrena.Usus_net_UI;
-using BuildSaveUi;
+using andrena.Usus.net.View;
 
-namespace andrena.BuildSave
+namespace andrena.Usus.net
 {
     /// <summary>
     /// This class implements the tool window exposed by this package and hosts a user control.
@@ -21,7 +20,7 @@ namespace andrena.BuildSave
     /// This class derives from the ToolWindowPane class provided from the MPF in order to use its 
     /// implementation of the IVsUIElementPane interface.
     /// </summary>
-    [Guid("353f0be2-791f-440a-9609-d176005d4fb3")]
+    [Guid("fd29826d-3055-4ae3-aed7-229fff349a20")]
     public class MyToolWindow : SolutionAwareToolWindowPane
     {
         /// <summary>
@@ -37,25 +36,13 @@ namespace andrena.BuildSave
             // The resource ID correspond to the one defined in the resx file
             // while the Index is the offset in the bitmap strip. Each image in
             // the strip being 16x16.
-            this.BitmapResourceID = 303;
+            this.BitmapResourceID = 301;
             this.BitmapIndex = 1;
 
             // This is the user control hosted by the tool window; Note that, even if this class implements IDisposable,
             // we are not calling Dispose on this object. This is because ToolWindowPane calls Dispose on 
             // the object returned by the Content property.
-
-
-            Setup();
-        }
-
-        private void Setup()
-        {
-            BuildSaveViewModel buildsAndSaves = new BuildSaveViewModel();
-            base.Content = new BuildSaveView(buildsAndSaves);
-
-            SavingDone += () => buildsAndSaves.Save();
-            BuildDone += (s) => buildsAndSaves.BuildEnd(s);
-            BuildStart += () => buildsAndSaves.BuildStart();
+            base.Content = new MainView();
         }
     }
 }

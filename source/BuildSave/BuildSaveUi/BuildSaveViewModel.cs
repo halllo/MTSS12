@@ -24,9 +24,9 @@ namespace BuildSaveUi
             AddEvent("build start");
         }
 
-        public void BuildEnd()
+        public void BuildEnd(bool success)
         {
-            AddEvent("build end");
+            AddEvent(String.Format("build end: {0}successful", (success ? "" : "not ")));
         }
 
         public void Save()
