@@ -7,8 +7,13 @@ namespace andrena.Usus.net.Console
 {
     class Program
     {
+        /// <summary>
+        /// dsfasdfsdf
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
+            //dsfhasdjkhffsdfasdfsdfa
         }
     }
 }
