@@ -55,6 +55,12 @@
   <ItemGroup>
     <None Include="Key.snk" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Usus.net.Core\Usus.net.Core.csproj">
+      <Project>{F8527516-94DE-42E3-B885-C7664EE4F655}</Project>
+      <Name>Usus.net.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
