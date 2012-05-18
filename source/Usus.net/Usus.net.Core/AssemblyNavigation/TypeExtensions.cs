@@ -7,28 +7,27 @@ namespace andrena.Usus.net.Core.AssemblyNavigation
 {
     public static class TypeExtensions
     {
-        public static IEnumerable<INamedTypeDefinition> GetTypesNotGenerated(this IAssembly assembly)
+        public static IEnumerable<ITypeReference> GetAllRealTypeReferences(this ITypeReference typeReference)
         {
-            return from t in assembly.GetAllTypes()
-                   where !t.HasAnyGeneratedCodeAttributes()
-                   select t;
+            //Needs adjustment for recursive generics? Recursive call?
+            if (typeReference is IGenericTypeInstanceReference)
+                return AnalyzeGenericTypeReference(typeReference as IGenericTypeInstanceReference);
+            else
+                return AnalyzeNonGenericTypeReference(typeReference);
         }
 
-        public static bool HasAnyGeneratedCodeAttributes(this IReference r)
+        private static IEnumerable<ITypeReference> AnalyzeNonGenericTypeReference(ITypeReference typeReference)
         {
-            return r.Attributes.Any((a => IsGeneratedCodeAttribute(a)));
+            yield return typeReference;
         }
 
-        private static bool IsGeneratedCodeAttribute(ICustomAttribute a)
+        private static IEnumerable<ITypeReference> AnalyzeGenericTypeReference(IGenericTypeInstanceReference typeReference)
         {
-            return a.Type.ToString().Contains("CompilerGeneratedAttribute");
-        }
-
-        public static IEnumerable<IMethodDefinition> GetMethodsNotGenerated(this INamedTypeDefinition type)
-        {
-            return from t in type.Methods
-                   where !t.HasAnyGeneratedCodeAttributes()
-                   select t;
+            yield return typeReference.GenericType;
+            foreach (var genericArg in typeReference.GenericArguments)
+            {
+                yield return genericArg;
+            }
         }
     }
 }

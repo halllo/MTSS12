@@ -61,8 +61,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssemblyNavigation\GeneratedExtensions.cs" />
     <Compile Include="AssemblyNavigation\TypeExtensions.cs" />
-    <Compile Include="MethodMetrics.cs" />
+    <Compile Include="MetricsEngine.cs" />
+    <Compile Include="Metrics\MethodMetricsReport.cs" />
+    <Compile Include="Metrics\MetricsReport.cs" />
     <Compile Include="Metrics\Methods\CyclomaticComplexity.cs" />
     <Compile Include="Metrics\Methods\MethodLength.cs" />
     <Compile Include="AssemblyNavigation\MetricGathering.cs" />

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Cci;
-using Microsoft.Cci.Immutable;
+using andrena.Usus.net.Core.AssemblyNavigation;
 
 namespace andrena.Usus.net.Core.Metrics.Methods
 {
@@ -11,18 +11,51 @@ namespace andrena.Usus.net.Core.Metrics.Methods
         public static IEnumerable<string> Of(IMethodDefinition method)
         {
             return Enumerable.Empty<string>()
-                .Union(AnalyzeLocalVariables(method))
-                .Union(AnalyzeCallOperations(method))
+                .Union(GetTypesOfVariables(method))
+                .Union(GetTypesOfCallOperations(method))
+                .Union(GetTypesOfSignature(method))
                 .ToList();
         }
 
-        #region Calls
-        private static IEnumerable<string> AnalyzeCallOperations(IMethodDefinition method)
+        #region Of Signature
+        private static IEnumerable<string> GetTypesOfSignature(IMethodDefinition method)
         {
-            foreach (var operation in GetCallOperations(method))
-            {
-                yield return GetTypeOfMethod(operation).ToString();
-            }
+            return Enumerable.Empty<string>()
+                .Union(GetReturnType(method))
+                .Union(GetParameterTypes(method))
+                .Union(GetTypesOfGenericsConstraints(method))
+                .ToList();
+        }
+
+        private static IEnumerable<string> GetReturnType(IMethodDefinition method)
+        {
+            return from t in method.Type.GetAllRealTypeReferences()
+                   select t.ToString();
+        }
+
+        private static IEnumerable<string> GetParameterTypes(IMethodDefinition method)
+        {
+            return from p in method.Parameters
+                   from t in p.Type.GetAllRealTypeReferences()
+                   where !(t is IGenericMethodParameter)
+                   select t.ToString();
+        }
+
+        private static IEnumerable<string> GetTypesOfGenericsConstraints(IMethodDefinition method)
+        {
+            return from g in method.GenericParameters
+                   from c in g.Constraints
+                   from t in c.ResolvedType.GetAllRealTypeReferences()
+                   select t.ToString();
+        }
+        #endregion
+
+        #region Of Calls
+        private static IEnumerable<string> GetTypesOfCallOperations(IMethodDefinition method)
+        {
+            return from o in GetCallOperations(method)
+                   from t in GetDefiningTypeOfMethod(o)
+                   select t.ToString();
         }
 
         private static IEnumerable<IOperation> GetCallOperations(IMethodDefinition method)
@@ -39,38 +72,24 @@ namespace andrena.Usus.net.Core.Metrics.Methods
                 || o == OperationCode.Callvirt;
         }
 
-        private static ITypeReference GetTypeOfMethod(IOperation operation)
+        private static IEnumerable<ITypeReference> GetDefiningTypeOfMethod(IOperation operation)
         {
-            return ((ITypeMemberReference)(operation.Value)).ContainingType;
+            yield return ((ITypeMemberReference)(operation.Value)).ContainingType;
         }
         #endregion
 
-        #region Variables
-        private static IEnumerable<string> AnalyzeLocalVariables(IMethodDefinition method)
+        #region Of Variables
+        private static IEnumerable<string> GetTypesOfVariables(IMethodDefinition method)
         {
-            return method.Body.LocalVariables.SelectMany(v => AnalyzeVariable(v));
+            return from v in method.Body.LocalVariables
+                   from t in GetTypesOfVariable(v)
+                   select t;
         }
 
-        private static IEnumerable<string> AnalyzeVariable(ILocalDefinition variable)
+        private static IEnumerable<string> GetTypesOfVariable(ILocalDefinition variable)
         {
-            if (variable.Type is GenericTypeInstanceReference)
-                return AnalyzeGenericVariable(variable.Type as GenericTypeInstanceReference);
-            else
-                return AnalyzeNonGenericVaribale(variable);
-        }
-
-        private static IEnumerable<string> AnalyzeNonGenericVaribale(ILocalDefinition variable)
-        {
-            yield return variable.Type.ToString();
-        }
-
-        private static IEnumerable<string> AnalyzeGenericVariable(GenericTypeInstanceReference variable)
-        {
-            yield return variable.GenericType.ToString();
-            foreach (var genericArg in variable.GenericArguments)
-            {
-                yield return genericArg.ToString();
-            }
+            return from t in variable.Type.GetAllRealTypeReferences()
+                   select t.ToString();
         }
         #endregion
     }

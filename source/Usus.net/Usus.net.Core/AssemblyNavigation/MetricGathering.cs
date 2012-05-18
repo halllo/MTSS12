@@ -4,13 +4,17 @@ using System.IO;
 using System.Linq;
 using Microsoft.Cci;
 using andrena.Usus.net.Core.AssemblyNavigation;
+using andrena.Usus.net.Core.Metrics;
 
 namespace andrena.Usus.net.Core.AssemblyNavigation
 {
     public abstract class MetricGathering
     {
+        public MetricsReport Report { get; private set; }
+
         public void Analyze(string assemblyPath)
         {
+            Report = new MetricsReport();
             using (var host = new PeReader.DefaultHost())
                 AnalyzeInHost(assemblyPath, host);
         }
@@ -60,11 +64,11 @@ namespace andrena.Usus.net.Core.AssemblyNavigation
         {
             foreach (var method in type.GetMethodsNotGenerated())
             {
-                AnalyzeMethod(method, pdb);
+                Report.MethodReports.Add(AnalyzeMethod(method, pdb));
             }
         }
 
         protected abstract void AnalyzeType(INamedTypeDefinition type, PdbReader pdb);
-        protected abstract void AnalyzeMethod(IMethodDefinition method, PdbReader pdb);
+        protected abstract MethodMetricsReport AnalyzeMethod(IMethodDefinition method, PdbReader pdb);
     }
 }

@@ -15,8 +15,18 @@ namespace andrena.Usus.net.Console
 
         private static void AnalyzeFile(string assemblyToAnalyze)
         {
-            MethodMetrics methodMetics = new MethodMetrics();
-            methodMetics.Analyze(assemblyToAnalyze);
+            MetricsEngine metrics = new MetricsEngine();
+            metrics.Analyze(assemblyToAnalyze);
+            
+            foreach (var method in metrics.Report.Methods)
+            {
+                System.Console.WriteLine(method.MethodName);
+                System.Console.WriteLine("\t" + method.CyclomaticComplexity);
+                System.Console.WriteLine("\t" + method.MethodLengthWithSymbols);
+                System.Console.WriteLine("\t" + method.MethodLength);
+                System.Console.WriteLine("\t" + string.Join(", ", method.TypeDependencies));
+                System.Console.WriteLine();
+            }
         }
     }
 }
