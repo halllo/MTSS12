@@ -6,7 +6,7 @@ Version=4
 MainFile=masterthesis.tex
 UseBibTeX=1
 UseMakeIndex=0
-ActiveProfile=LaTeX => PDF
+ActiveProfile=LaTeX ⇨ PDF
 ProjectLanguage=
 ProjectDialect=
 
