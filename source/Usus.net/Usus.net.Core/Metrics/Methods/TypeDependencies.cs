@@ -74,7 +74,8 @@ namespace andrena.Usus.net.Core.Metrics.Methods
 
         private static IEnumerable<ITypeReference> GetDefiningTypeOfMethod(IOperation operation)
         {
-            yield return ((ITypeMemberReference)(operation.Value)).ContainingType;
+            var type = ((ITypeMemberReference)operation.Value).ContainingType;
+            return type.GetAllRealTypeReferences();
         }
         #endregion
 

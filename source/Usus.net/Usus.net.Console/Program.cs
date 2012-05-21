@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using andrena.Usus.net.Core;
+using andrena.Usus.net.Core.Metrics;
 
 namespace andrena.Usus.net.Console
 {
@@ -9,7 +10,8 @@ namespace andrena.Usus.net.Console
     {
         static void Main(string[] args)
         {
-            AnalyzeFile(@"C:\Users\mnaujoks\Documents\Visual Studio 2010\Projects\ConsoleApplication2\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe");
+            //AnalyzeFile(@"C:\Users\mnaujoks\Documents\Visual Studio 2010\Projects\ConsoleApplication2\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe");
+            AnalyzeFile(System.Reflection.Assembly.GetExecutingAssembly().Location);
             System.Console.ReadLine();
         }
 
@@ -17,16 +19,23 @@ namespace andrena.Usus.net.Console
         {
             MetricsEngine metrics = new MetricsEngine();
             metrics.Analyze(assemblyToAnalyze);
-            
-            foreach (var method in metrics.Report.Methods)
-            {
-                System.Console.WriteLine(method.MethodName);
-                System.Console.WriteLine("\t" + method.CyclomaticComplexity);
-                System.Console.WriteLine("\t" + method.MethodLengthWithSymbols);
-                System.Console.WriteLine("\t" + method.MethodLength);
-                System.Console.WriteLine("\t" + string.Join(", ", method.TypeDependencies));
-                System.Console.WriteLine();
-            }
+
+            var thisMetrics = metrics.Report.For(() => AnalyzeFile(""));
+            OutputMethodMetricsReport(thisMetrics);
+
+            //foreach (var method in metrics.Report.Methods)
+            //    OutputMethodMetricsReport(method);
+        }
+
+        private static void OutputMethodMetricsReport(MethodMetricsReport methodMetrics)
+        {
+            System.Console.WriteLine(methodMetrics.Name);
+            System.Console.WriteLine("\tcc: " + methodMetrics.CyclomaticComplexity);
+            System.Console.WriteLine("\tns: " + methodMetrics.NumberOfStatements);
+            System.Console.WriteLine("\tml: " + methodMetrics.NumberOfRealLines);
+            System.Console.WriteLine("\tml: " + methodMetrics.NumberOfLogicalLines);
+            System.Console.WriteLine("\ttd: " + string.Join(", ", methodMetrics.TypeDependencies));
+            System.Console.WriteLine();
         }
     }
 }

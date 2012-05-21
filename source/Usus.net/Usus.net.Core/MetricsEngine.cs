@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using andrena.Usus.net.Core.AssemblyNavigation;
-using Microsoft.Cci;
-using andrena.Usus.net.Core.Metrics.Methods;
 using andrena.Usus.net.Core.Metrics;
+using andrena.Usus.net.Core.Metrics.Methods;
+using Microsoft.Cci;
 
 namespace andrena.Usus.net.Core
 {
@@ -20,10 +18,12 @@ namespace andrena.Usus.net.Core
         {
             return new MethodMetricsReport
             {
-                MethodName = method.Name.ToString(),
+                Name = method.Name.ToString(),
+                Signature = method.ToString(),
                 CyclomaticComplexity = CyclomaticComplexity.Of(method),
-                MethodLength = MethodLength.Of(method),
-                MethodLengthWithSymbols = MethodLength.WithSymbols(method, pdb),
+                NumberOfStatements = NumberOfStatements.Of(method),
+                NumberOfRealLines = MethodLength.RealLinesOf(method, pdb),
+                NumberOfLogicalLines = MethodLength.LogicalLinesOf(method, pdb),
                 TypeDependencies = TypeDependencies.Of(method)
             };
         }

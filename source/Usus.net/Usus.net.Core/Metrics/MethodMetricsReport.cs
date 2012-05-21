@@ -6,10 +6,12 @@ namespace andrena.Usus.net.Core.Metrics
 {
     public class MethodMetricsReport
     {
-        public string MethodName { get; set; }
+        public string Name { get; set; }
+        public string Signature { get; set; }
         public int CyclomaticComplexity { get; set; }
-        public int MethodLength { get; set; }
-        public int MethodLengthWithSymbols { get; set; }
+        public int NumberOfStatements { get; set; }
+        public int NumberOfRealLines { get; set; }
+        public int NumberOfLogicalLines { get; set; }
         public IEnumerable<string> TypeDependencies { get; set; }
     }
 }

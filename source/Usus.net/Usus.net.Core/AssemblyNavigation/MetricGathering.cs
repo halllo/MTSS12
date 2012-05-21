@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using Microsoft.Cci;
-using andrena.Usus.net.Core.AssemblyNavigation;
+﻿using System.IO;
 using andrena.Usus.net.Core.Metrics;
+using Microsoft.Cci;
 
 namespace andrena.Usus.net.Core.AssemblyNavigation
 {
