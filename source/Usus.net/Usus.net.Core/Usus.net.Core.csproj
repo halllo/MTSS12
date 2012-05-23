@@ -61,9 +61,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Metrics\MetricsReportSearch.cs" />
+    <Compile Include="ReflectionHelper\AttributeExtensions.cs" />
+    <Compile Include="ReflectionHelper\ExpressionExtensions.cs" />
     <Compile Include="AssemblyNavigation\GeneratedExtensions.cs" />
     <Compile Include="AssemblyNavigation\TypeExtensions.cs" />
-    <Compile Include="MetricsSearch.cs" />
+    <Compile Include="Verification\ExpectTypeDependencyAttribute.cs" />
+    <Compile Include="Verification\ExpectNumberOfLogicalLinesAttribute.cs" />
+    <Compile Include="Verification\ExpectNumberOfRealLinesAttribute.cs" />
+    <Compile Include="Verification\ExpectCyclomaticComplexityAttribute.cs" />
     <Compile Include="MetricsEngine.cs" />
     <Compile Include="Metrics\MethodMetricsReport.cs" />
     <Compile Include="Metrics\Methods\NumberOfStatements.cs" />
@@ -73,6 +79,10 @@
     <Compile Include="AssemblyNavigation\MetricGathering.cs" />
     <Compile Include="Metrics\Methods\TypeDependencies.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Verification\ExpectNumberOfStatementsAttribute.cs" />
+    <Compile Include="Verification\MethodExpectation.cs" />
+    <Compile Include="Verification\VerificationException.cs" />
+    <Compile Include="Verification\Verify.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Key.snk" />

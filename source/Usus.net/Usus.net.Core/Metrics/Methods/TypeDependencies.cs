@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Microsoft.Cci;
 using andrena.Usus.net.Core.AssemblyNavigation;
+using Microsoft.Cci;
 
 namespace andrena.Usus.net.Core.Metrics.Methods
 {
@@ -14,6 +13,7 @@ namespace andrena.Usus.net.Core.Metrics.Methods
                 .Union(GetTypesOfVariables(method))
                 .Union(GetTypesOfCallOperations(method))
                 .Union(GetTypesOfSignature(method))
+                .Union(GetTypesOfNewOperations(method))
                 .ToList();
         }
 
@@ -92,6 +92,27 @@ namespace andrena.Usus.net.Core.Metrics.Methods
             return from t in variable.Type.GetAllRealTypeReferences()
                    select t.ToString();
         }
+        #endregion
+
+        #region Of News
+        private static IEnumerable<string> GetTypesOfNewOperations(IMethodDefinition method)
+        {
+            return from o in GetNewOperations(method)
+                   select o.Value.ToString();
+            //TODO get types form here
+        }
+
+        private static IEnumerable<IOperation> GetNewOperations(IMethodDefinition method)
+        {
+            return from o in method.Body.Operations
+                   where IsNewOperation(o.OperationCode)
+                   select o;
+        }
+
+        private static bool IsNewOperation(OperationCode o)
+        {
+            return o == OperationCode.Newobj;
+        } 
         #endregion
     }
 }

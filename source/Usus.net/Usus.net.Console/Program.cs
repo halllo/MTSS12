@@ -10,8 +10,8 @@ namespace andrena.Usus.net.Console
     {
         static void Main(string[] args)
         {
-            //AnalyzeFile(@"C:\Users\mnaujoks\Documents\Visual Studio 2010\Projects\ConsoleApplication2\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe");
-            AnalyzeFile(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            AnalyzeFile(@"C:\Users\mnaujoks\Documents\Visual Studio 2010\Projects\ConsoleApplication2\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe");
+            //AnalyzeFile(System.Reflection.Assembly.GetExecutingAssembly().Location);
             System.Console.ReadLine();
         }
 
@@ -20,11 +20,11 @@ namespace andrena.Usus.net.Console
             MetricsEngine metrics = new MetricsEngine();
             metrics.Analyze(assemblyToAnalyze);
 
-            var thisMetrics = metrics.Report.For(() => AnalyzeFile(""));
-            OutputMethodMetricsReport(thisMetrics);
+            //var thisMetrics = metrics.Report.For(() => AnalyzeFile(""));
+            //OutputMethodMetricsReport(thisMetrics);
 
-            //foreach (var method in metrics.Report.Methods)
-            //    OutputMethodMetricsReport(method);
+            foreach (var method in metrics.Report.Methods)
+                OutputMethodMetricsReport(method);
         }
 
         private static void OutputMethodMetricsReport(MethodMetricsReport methodMetrics)
