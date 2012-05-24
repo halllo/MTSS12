@@ -187,7 +187,7 @@ Mit diesen sieben Konzepten kann eine Softwaresystem objektorientiert beschriebe
 
 \subsection{Graphentheorie}
 \label{subsec:graphs}
-ANDERE QUELLE VERWENDEN: Heiko Körner beschreibt einen Graph in seinem Skript \cite{GraphAlgorithms} als Tupel \begin{math}G = (V, E)\end{math}. Der erste Wert, $V$, ist eine endliche Menge an Knoten und der zweite, $E$, ist eine endliche Menge an Kanten zwischen diesen Knoten. Eine Kante ist ein Paar aus \begin{math}V \times V\end{math} und beinhaltet die beiden Knoten, die sie verbindet. Körner unterscheidet in gerichtete und ungerichtete Graphen. Bei letzterem verbindet eine Kante die Knoten in beiden Richtungen, wobei eine gerichtete Kante die Verbindungsrichtung anhand der Knoten-Reihenfolge im Kanten-Tupel vorgibt. Weiter definiert Körner einen Baum als zusammenhängenden azyklischen Graph, indem jeder Knoten von einem Wurzelknoten aus erreichbar ist.
+Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest und Clifford Stein beschreiben einen Graph in ihrem Buch "`Introduction to Algorithms"' \cite{GraphAlgorithms} als Tupel \begin{math}G = (V, E)\end{math}. Der erste Wert, $V$, ist eine endliche Menge an Knoten und der zweite, $E$, ist eine endliche Menge an Kanten zwischen diesen Knoten. Eine Kante ist ein Paar aus \begin{math}V \times V\end{math} und beinhaltet die beiden Knoten, die sie verbindet. Cormen und co unterscheiden in gerichtete und ungerichtete Graphen. Bei letzterem verbindet eine Kante die Knoten in beiden Richtungen, wobei eine gerichtete Kante die Verbindungsrichtung anhand der Knoten-Reihenfolge im Kanten-Tupel vorgibt. Weiter definieren Cormen und seine Koautoren einen Baum als zusammenhängenden azyklischen Graph, indem jeder Knoten von einem Wurzelknoten aus erreichbar ist. %Seite 1168, 1173
 
 \subsection{Statische Code-Analyse}
 \label{subsec:staticcodeanalysis}
@@ -434,7 +434,7 @@ Die Anzahl der Felder zu betrachten erlaubt es Klassen zu erkennen, die zu viel 
 Das Usus Info Fenster zeigt als Klassengröße die Anzahl der Instanz-Methoden, der Klassen-Methoden sowie der Konstruktoren an. Dabei wird die Sichtbarkeit der Methode oder des Konstruktors nicht berücksichtigt. Das Usus-Plugin fokussiert damit auf die Funktion der Klassen und nicht auf die Information und das Wissen einer Klasse, welches in den Feldern liegt. Die Klassengröße kann also berechnet werden, wenn alle Methoden und Konstruktoren einer Klasse ermittelt werden können.
 \subsubsection{Kumulierte Komponentenabhängigkeit}
 \label{subsubsec:ccd}
-Die Metrik \emph{Kumulierte Komponentenabhängigkeit} (engl. Cumulative Component Dependency) CCD ist laut Peter Grogono \cite{SoftwareQControl} eine Metrik, die für Systeme und Untersysteme ermittelt wird. Dabei werden für jede Klasse (Komponente) in diesem System die Anzahl der Klassen ermittelt, von denen die betrachtete Klasse direkt und indirekt abhängt. Eine Klasse ist immer auch von sich selber abhängig. Marc Philipp und Nicole Rauch bezeichnen diese Abhängigkeiten in ihrem Artikel \cite{EclipseMagUsus} als reflexsiv und transitiv. Anschließend werden die Abhängigkeiten aller betrachteten Klassen aufsummiert und ergeben den CCD-Wert des Systems. In dem Usus Info Fenster wird der Abhängigkeitswert einer betrachteten Klasse als \emph{CCD (of class)} bezeichnet. Um die Anzahl der Klassen zu bestimmen, von denen eine betrachtete Klasse abhängig ist, ist mindestens der vollständige Abhängigkeitsgraph der Klasse erforderlich. Mit einem Durchmusterungsalgorithmus kann die Erreichbarkeitsmenge (Reach-Menge) der Klasse (Startknoten) in diesem Abhängigkeitsgraph ermittelt werden. ANDERE QUELLE VERWENDEN: Heiko Körner beschreibt in seinem Skript \cite{GraphAlgorithms} die beiden Algorithmen \emph{Breadth First Search} BFS und \emph{Depth First Search} DFS für diesen Zweck.
+Die Metrik \emph{Kumulierte Komponentenabhängigkeit} (engl. Cumulative Component Dependency) CCD ist laut Peter Grogono \cite{SoftwareQControl} eine Metrik, die für Systeme und Untersysteme ermittelt wird. Dabei werden für jede Klasse (Komponente) in diesem System die Anzahl der Klassen ermittelt, von denen die betrachtete Klasse direkt und indirekt abhängt. Eine Klasse ist immer auch von sich selber abhängig. Marc Philipp und Nicole Rauch bezeichnen diese Abhängigkeiten in ihrem Artikel \cite{EclipseMagUsus} als reflexsiv und transitiv. Anschließend werden die Abhängigkeiten aller betrachteten Klassen aufsummiert und ergeben den CCD-Wert des Systems. In dem Usus Info Fenster wird der Abhängigkeitswert einer betrachteten Klasse als \emph{CCD (of class)} bezeichnet. Um die Anzahl der Klassen zu bestimmen, von denen eine betrachtete Klasse abhängig ist, ist mindestens der vollständige Abhängigkeitsgraph der Klasse erforderlich. Mit einem Durchmusterungsalgorithmus kann die Erreichbarkeitsmenge (Reach-Menge) der Klasse (Startknoten) in diesem Abhängigkeitsgraph ermittelt werden. Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest und Clifford Stein beschreiben in ihrem Buch "`Introduction to Algorithms"' \cite{GraphAlgorithms} die beiden Algorithmen \emph{Breadth First Search} BFS und \emph{Depth First Search} DFS für diesen Zweck. %Seite 594, 603
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=11cm]{images/ccd.jpg}
@@ -518,7 +518,7 @@ Aus den bewerteten Längen kann dann wieder der Mittelwert berechnet werden, inde
 \subsubsection{Anzahl nicht-statischer öffentlicher Felder}
 Wenn eine Klasse mindestens ein öffentliches Feld hat, das nicht statisch oder eine Konstante ist, dann betrachtet Usus diese Klasse als einen Hotspot. Dabei wird jede Klasse mit 1 bewertet, die mindestens eines dieser Felder besitzt. Der Schwellwert ist ebenfalls 1. Die Anzahl der betroffenen Klassen wird wie jede andere Metrik im Usus Cockpit über die Anzahl aller Klassen gemittelt und somit als Prozent dargestellt.
 \subsubsection{Pakete mit zyklischen Abhängigkeiten}
-Für Klassen wurde in Unter-Unterabschnitt \ref{subsubsec:ccd} ein Abhängigkeitsgraph unabhängig vom Paket ermittelt, in dem sich die betrachtete Klasse befindet. Um Pakete mit zyklischen Abhängigkeiten zu identifizieren, müssen alle Klassen-Knoten eines Paket in dem Abhängigkeitsgraph zu einem Paket-Knoten in einem neuen Abhängigkeitsgraph auf Paketebene zusammengefasst werden. Die Kanten zwischen den Klassen werden auf Kanten zwischen den übertragen. Anschließend können alle trivialen Kreise im Paket-Abhängigkeitsgraph entfernt und Zyklen gesucht werden. ANDERE QUELLE VERWENDEN: Heiko Körner beschreibt in seinem Skript \cite{GraphAlgorithms} die beiden Algorithmen \emph{Gegenseitige Erreichbarkeit} und \emph{Starke Zusammenhangskomponenten} für diesen Zweck. Mit den Algorithmen können alle starken Zusammenhangskomponenten (engl. \emph{Strongly Connected Components} (SCC)) ermittelt werden. Alle starken Zusammanhangskomponenten, die mehr als eine Paket beinhalten entsprechen dann Paketen, die auf einem Kreis im Abhängigkeitsgraph liegen.
+Für Klassen wurde in Unter-Unterabschnitt \ref{subsubsec:ccd} ein Abhängigkeitsgraph unabhängig vom Paket ermittelt, in dem sich die betrachtete Klasse befindet. Um Pakete mit zyklischen Abhängigkeiten zu identifizieren, müssen alle Klassen-Knoten eines Paket in dem Abhängigkeitsgraph zu einem Paket-Knoten in einem neuen Abhängigkeitsgraph auf Paketebene zusammengefasst werden. Die Kanten zwischen den Klassen werden zu Kanten zwischen den Paketen. Anschließend können alle trivialen Kreise im Paket-Abhängigkeitsgraph entfernt und Zyklen gesucht werden. Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest und Clifford Stein beschreiben in ihrem Buch "`Introduction to Algorithms"' \cite{GraphAlgorithms} den Algorithmus \emph{Strongly Connected Components} (Starke Zusammenhangskomponenten) für diesen Zweck. Mit diesem Algorithmus können alle starken Zusammenhangskomponenten (SCCs) eines Graphen ermittelt werden. Da per Definition von Cormen und co alle Knoten in einer SCC sich gegenseitig erreichen können, handelt es sich um Kreise. Folglich enthalten alle starken Zusammanhangskomponenten, die mehr als eine Paket beinhalten, Pakete, die auf einem Kreis im Abhängigkeitsgraph liegen. %Seite 615, 617
 \begin{equation}
 	cyclicPackages(pdG) = \sum_{\displaystyle scc \in SCCs(pdG)}
 	\begin{cases}
@@ -842,11 +842,11 @@ Zusammenfassend ist zu sagen, das die \emph{Common Compiler Infrastructure} (CCI
 
 
 
-\chapter{Usus.net Objektmodell}
+\chapter{Usus.net.Core}
 todo
 
 
-\section{Struktur}
+\section{Objektmodell}
 todo
 
 
@@ -854,9 +854,13 @@ todo
 todo
 
 
+\section{Testen}
+todo
 
 
-\chapter{Visual Studio Erweiterung}
+
+
+\chapter{Usus.net Visual Studio Erweiterung}
 todo
 
 
