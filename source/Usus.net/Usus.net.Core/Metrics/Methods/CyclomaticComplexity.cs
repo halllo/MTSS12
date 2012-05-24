@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using Microsoft.Cci;
+using System.Linq;
+using System;
 
 namespace andrena.Usus.net.Core.Metrics.Methods
 {
@@ -11,6 +10,8 @@ namespace andrena.Usus.net.Core.Metrics.Methods
         public static int Of(IMethodDefinition method)
         {
             int num = 1;
+            num += method.Body.OperationExceptionInformation.Count(e => e.HandlerKind == HandlerKind.Catch);
+            
             foreach (var operation in method.Body.Operations)
             {
                 switch (operation.OperationCode)

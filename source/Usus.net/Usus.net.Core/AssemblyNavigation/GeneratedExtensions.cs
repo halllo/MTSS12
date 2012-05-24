@@ -15,10 +15,10 @@ namespace andrena.Usus.net.Core.AssemblyNavigation
 
         public static bool HasAnyGeneratedCodeAttributes(this IReference r)
         {
-            return r.Attributes.Any((a => IsGeneratedCodeAttribute(a)));
+            return r.Attributes.Any((a => a.IsGeneratedCodeAttribute()));
         }
 
-        private static bool IsGeneratedCodeAttribute(ICustomAttribute a)
+        private static bool IsGeneratedCodeAttribute(this ICustomAttribute a)
         {
             return a.Type.ToString().Contains("CompilerGeneratedAttribute");
         }

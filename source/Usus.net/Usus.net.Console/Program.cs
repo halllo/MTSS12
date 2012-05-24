@@ -17,7 +17,7 @@ namespace andrena.Usus.net.Console
 
         private static void AnalyzeFile(string assemblyToAnalyze)
         {
-            MetricsEngine metrics = new MetricsEngine();
+            MetricsCollector metrics = new MetricsCollector();
             metrics.Analyze(assemblyToAnalyze);
 
             //var thisMetrics = metrics.Report.For(() => AnalyzeFile(""));

@@ -16,13 +16,21 @@ namespace andrena.Usus.net.Core.ReflectionHelper
         public static IEnumerable<MethodWithAttributes<T>> GetMethodsWithAssigned<T>(this Assembly asm) where T : Attribute
         {
             return (from t in asm.GetTypes()
-                    from m in t.GetMethods()
+                    from m in t.GetMethods(GetBindingFlags())
                     where m.Attributes<T>().Any()
                     select new MethodWithAttributes<T>
                     {
                         Method = m,
                         Attributes = m.Attributes<T>()
                     }).ToList();
+        }
+
+        private static BindingFlags GetBindingFlags()
+        {
+            return BindingFlags.Instance 
+                | BindingFlags.Static 
+                | BindingFlags.NonPublic 
+                | BindingFlags.Public;
         }
 
         private static IEnumerable<T> Attributes<T>(this MethodInfo method)

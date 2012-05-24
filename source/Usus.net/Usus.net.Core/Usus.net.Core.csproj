@@ -61,26 +61,36 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssemblyNavigation\MethodExtensions.cs" />
+    <Compile Include="Metrics\Methods\NumberOfRealLines.cs" />
+    <Compile Include="Metrics\Methods\OperationLocation.cs" />
+    <Compile Include="Metrics\Methods\TypeDependenciesOfCallOperations.cs" />
+    <Compile Include="Metrics\Methods\TypeDependenciesOfNewOperations.cs" />
+    <Compile Include="Metrics\Methods\TypeDependenciesOfOperations.cs" />
+    <Compile Include="Metrics\Methods\TypeDependenciesOfSignature.cs" />
+    <Compile Include="Metrics\Methods\TypeDependenciesOfVariables.cs" />
     <Compile Include="Metrics\MetricsReportSearch.cs" />
     <Compile Include="ReflectionHelper\AttributeExtensions.cs" />
-    <Compile Include="ReflectionHelper\ExpressionExtensions.cs" />
+    <Compile Include="ReflectionHelper\MethodExtensions.cs" />
     <Compile Include="AssemblyNavigation\GeneratedExtensions.cs" />
     <Compile Include="AssemblyNavigation\TypeExtensions.cs" />
+    <Compile Include="Verification\ExpectNoTypeDependencyAttribute.cs" />
     <Compile Include="Verification\ExpectTypeDependencyAttribute.cs" />
     <Compile Include="Verification\ExpectNumberOfLogicalLinesAttribute.cs" />
     <Compile Include="Verification\ExpectNumberOfRealLinesAttribute.cs" />
     <Compile Include="Verification\ExpectCyclomaticComplexityAttribute.cs" />
-    <Compile Include="MetricsEngine.cs" />
+    <Compile Include="MetricsCollector.cs" />
     <Compile Include="Metrics\MethodMetricsReport.cs" />
     <Compile Include="Metrics\Methods\NumberOfStatements.cs" />
     <Compile Include="Metrics\MetricsReport.cs" />
     <Compile Include="Metrics\Methods\CyclomaticComplexity.cs" />
-    <Compile Include="Metrics\Methods\MethodLength.cs" />
-    <Compile Include="AssemblyNavigation\MetricGathering.cs" />
+    <Compile Include="Metrics\Methods\NumberOfLogicalLines.cs" />
+    <Compile Include="AssemblyNavigation\AssemblyVisitor.cs" />
     <Compile Include="Metrics\Methods\TypeDependencies.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Verification\ExpectNumberOfStatementsAttribute.cs" />
     <Compile Include="Verification\MethodExpectation.cs" />
+    <Compile Include="Verification\MetricsNotFoundException.cs" />
     <Compile Include="Verification\VerificationException.cs" />
     <Compile Include="Verification\Verify.cs" />
   </ItemGroup>

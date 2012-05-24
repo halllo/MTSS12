@@ -6,7 +6,7 @@ using Microsoft.Cci;
 
 namespace andrena.Usus.net.Core
 {
-    public class MetricsEngine : MetricGathering
+    public class MetricsCollector : AssemblyVisitor
     {
         protected override void AnalyzeType(INamedTypeDefinition type, PdbReader pdb)
         {
@@ -18,12 +18,12 @@ namespace andrena.Usus.net.Core
         {
             return new MethodMetricsReport
             {
-                Name = method.Name.ToString(),
-                Signature = method.ToString(),
+                Name = method.Name(),
+                Signature = method.Signature(),
                 CyclomaticComplexity = CyclomaticComplexity.Of(method),
                 NumberOfStatements = NumberOfStatements.Of(method),
-                NumberOfRealLines = MethodLength.RealLinesOf(method, pdb),
-                NumberOfLogicalLines = MethodLength.LogicalLinesOf(method, pdb),
+                NumberOfRealLines = NumberOfRealLines.Of(method, pdb),
+                NumberOfLogicalLines = NumberOfLogicalLines.Of(method, pdb),
                 TypeDependencies = TypeDependencies.Of(method)
             };
         }
