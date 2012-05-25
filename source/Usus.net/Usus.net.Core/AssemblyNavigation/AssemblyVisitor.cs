@@ -60,7 +60,7 @@ namespace andrena.Usus.net.Core.AssemblyNavigation
         {
             foreach (var method in type.GetMethodsNotGenerated())
             {
-                Report.MethodReports.Add(AnalyzeMethod(method, pdb));
+                Report.AddMethodReport(AnalyzeMethod(method, pdb));
             }
         }
 

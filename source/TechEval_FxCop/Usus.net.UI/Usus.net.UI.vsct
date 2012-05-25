@@ -65,7 +65,7 @@
         <Icon guid="guidImages" id="bmpPic1" />
         <Strings>
           <CommandName>cmdUsusNetWindow</CommandName>
-          <ButtonText>Usus.net</ButtonText>
+          <ButtonText>Usus.net FxCop</ButtonText>
         </Strings>
       </Button>
 

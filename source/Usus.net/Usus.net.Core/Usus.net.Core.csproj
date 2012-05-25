@@ -62,6 +62,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyNavigation\MethodExtensions.cs" />
+    <Compile Include="Hotspots\MethodHotspots.cs" />
+    <Compile Include="Hotspots\RatedMethodMetrics.cs" />
+    <Compile Include="Hotspots\RatedMetrics.cs" />
+    <Compile Include="Hotspots\RatingFunctions.cs" />
     <Compile Include="Metrics\Methods\NumberOfRealLines.cs" />
     <Compile Include="Metrics\Methods\OperationLocation.cs" />
     <Compile Include="Metrics\Methods\TypeDependenciesOfCallOperations.cs" />

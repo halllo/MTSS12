@@ -482,7 +482,7 @@ Eine Klasse wird von Usus als Hotspot gesehen, sobald die in Unter-Unterabschnit
 \begin{equation}
 	rating_{cs}(cs) = 
 	\begin{cases}
-		\displaystyle	\frac{1}{12 * cs} - 1, & \text{wenn }cs > 12\\
+		\displaystyle	\bigg(\frac{cs}{12}\bigg) - 1, & \text{wenn }cs > 12\\
 		0, & \text{sonst}\\
 	\end{cases}
 \label{eq:averageclasssize1}
@@ -498,7 +498,7 @@ Die Berechnung der durchschnittlichen zyklomatischen Komplexität findet auf ähnl
 \begin{equation}
 	rating_{cc}(cc) = 
 	\begin{cases}
-		\displaystyle	\frac{1}{4 * cc} - 1, & \text{wenn }cc > 4\\
+		\displaystyle	\bigg(\frac{cc}{4}\bigg) - 1, & \text{wenn }cc > 4\\
 		0, & \text{sonst}\\
 	\end{cases}
 \label{eq:averagecyclomaticcomplexity}
@@ -509,7 +509,7 @@ Auch die Berechnung der durchschnittlichen Methodenlänge findet ähnlich statt. D
 \begin{equation}
 	rating_{ml}(ml) = 
 	\begin{cases}
-		\displaystyle	\frac{1}{9 * ml} - 1, & \text{wenn }ml > 9\\
+		\displaystyle	\bigg(\frac{ml}{9}\bigg) - 1, & \text{wenn }ml > 9\\
 		0, & \text{sonst}\\
 	\end{cases}
 \label{eq:averagemethodlength}
@@ -846,11 +846,11 @@ Zusammenfassend ist zu sagen, das die \emph{Common Compiler Infrastructure} (CCI
 todo
 
 
-\section{Objektmodell}
+\section{Metrikberechnung}
 todo
 
 
-\section{Metrikberechnung}
+\section{Objektmodell}
 todo
 
 

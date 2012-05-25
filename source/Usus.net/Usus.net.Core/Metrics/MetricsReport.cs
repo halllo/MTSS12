@@ -4,7 +4,7 @@ namespace andrena.Usus.net.Core.Metrics
 {
     public class MetricsReport
     {
-        internal List<MethodMetricsReport> MethodReports { get; private set; }
+        private List<MethodMetricsReport> MethodReports;
         public IEnumerable<MethodMetricsReport> Methods
         {
             get { return MethodReports; }
@@ -13,6 +13,11 @@ namespace andrena.Usus.net.Core.Metrics
         public MetricsReport()
         {
             MethodReports = new List<MethodMetricsReport>();
+        }
+
+        internal void AddMethodReport(MethodMetricsReport methodMertics)
+        {
+            MethodReports.Add(methodMertics);
         }
     }
 }
