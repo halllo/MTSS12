@@ -1,10 +1,10 @@
 ﻿using System;
 using andrena.Usus.net.Core.AssemblyNavigation;
-using andrena.Usus.net.Core.Metrics;
 using andrena.Usus.net.Core.Metrics.Methods;
+using andrena.Usus.net.Core.Reports;
 using Microsoft.Cci;
 
-namespace andrena.Usus.net.Core
+namespace andrena.Usus.net.Core.Metrics
 {
     public class MetricsCollector : AssemblyVisitor
     {

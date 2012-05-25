@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace andrena.Usus.net.Core.Metrics
+namespace andrena.Usus.net.Core.Reports
 {
     public class MethodMetricsReport
     {

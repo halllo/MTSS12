@@ -29,5 +29,11 @@ namespace andrena.Usus.net.Core.AssemblyNavigation
                    where !t.HasAnyGeneratedCodeAttributes()
                    select t;
         }
+
+        public static IEnumerable<IMethodDefinition> GetMethods(this INamedTypeDefinition type)
+        {
+            return from t in type.Methods
+                   select t;
+        }
     }
 }

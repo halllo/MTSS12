@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Text.RegularExpressions;
 
 namespace andrena.Usus.net.Core.ReflectionHelper
 {
@@ -16,39 +15,48 @@ namespace andrena.Usus.net.Core.ReflectionHelper
         {
             return String.Format("{0} {1}.{2}",
                 method.FullReturnTypeName(),
-                method.FullDeclaringTpyeName(),
+                method.FullDeclaringType(),
                 method.MethodNameAndParameters());
+        }
+  
+        private static string FullDeclaringType(this MethodInfo method)
+        {
+            return NormalizeSubTypeName(method.DeclaringType.FullName);
         }
 
         private static string FullReturnTypeName(this MethodInfo method)
         {
             if (method.ReturnType.IsGenericType)
-                return GetAsGenerics(method.ReturnParameter.ToString());
+                return NormalizeGenericName(method.ReturnParameter.ToString());
             else
                 return method.ReturnType.FullName;
         }
 
-        private static string FullDeclaringTpyeName(this MethodInfo method)
-        {
-            return method.DeclaringType.FullName;
-        }
-
         private static string MethodNameAndParameters(this MethodInfo method)
         {
-            string methodName = method.StartingAfterFirst(" ");
-            return GetAsGenerics(methodName);
+            return NormalizeGenericName(NormalizePropertyName(method.JustName()));
+        }
+  
+        private static string JustName(this MethodInfo method)
+        {
+            return method.ToString().StartingAfterFirst(" ");
+        }
+  
+        private static string NormalizePropertyName(string methodName)
+        {
+            return methodName
+                .ReplaceIfStartsWith("get_", "()", ".get()")
+                .ReplaceIfStartsWith("set_", "(", ".set(");
         }
 
-        private static string StartingAfterFirst(this MethodInfo method, string textToSkip)
+        private static string NormalizeGenericName(string methodName)
         {
-            int toSkip = method.ToString().IndexOf(" ") + 1;
-            return method.ToString().Substring(toSkip);
+            return methodName.ReplaceRegex("`.*?\\[", "[").Replace("[", "<").Replace("]", ">").Trim();
         }
 
-        private static string GetAsGenerics(string methodName)
+        private static string NormalizeSubTypeName(string subTypeName)
         {
-            var clearedAnonGenerics = Regex.Replace(methodName, "`.*?\\[", "[");
-            return clearedAnonGenerics.Replace("[", "<").Replace("]", ">").Trim();
+            return subTypeName.Replace("+", ".");
         }
     }
 }

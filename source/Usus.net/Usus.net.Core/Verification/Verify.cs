@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Reflection;
 using andrena.Usus.net.Core.AssemblyNavigation;
-using andrena.Usus.net.Core.Metrics;
+using andrena.Usus.net.Core.Reports;
 using andrena.Usus.net.Core.ReflectionHelper;
 
 namespace andrena.Usus.net.Core.Verification

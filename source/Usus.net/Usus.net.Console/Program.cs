@@ -1,7 +1,7 @@
-﻿using andrena.Usus.net.Core;
+﻿using andrena.Usus.net.Core.Hotspots;
 using andrena.Usus.net.Core.Metrics;
+using andrena.Usus.net.Core.Reports;
 using andrena.Usus.net.Core.Verification;
-using andrena.Usus.net.Core.Hotspots;
 
 namespace andrena.Usus.net.Console
 {

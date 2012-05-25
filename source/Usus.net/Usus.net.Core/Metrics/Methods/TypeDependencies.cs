@@ -12,12 +12,14 @@ namespace andrena.Usus.net.Core.Metrics.Methods
             var typesOfVariables = TypeDependenciesOfVariables.Of(method).ToList();
             var typesOfCallOperations = TypeDependenciesOfCallOperations.Of(method).ToList();
             var typesOfNewOperations = TypeDependenciesOfNewOperations.Of(method).ToList();
+            var typesOfCatches = TypeDependenciesOfCatches.Of(method).ToList();
 
             return Enumerable.Empty<string>()
                 .Union(typesOfSignature)
                 .Union(typesOfVariables)
                 .Union(typesOfCallOperations)
                 .Union(typesOfNewOperations)
+                .Union(typesOfCatches)
                 .ToList();
         }
     }

@@ -5,6 +5,34 @@ namespace Usus.net.Core.IntegrationTests.MethodMetrics
 {
     public class MethodLengths
     {
+        public static Object PropertyAutoImplemented
+        {
+            [ExpectNumberOfLogicalLines(0)]
+            [ExpectNumberOfRealLines(0)]
+            get;
+
+            [ExpectNumberOfLogicalLines(0)]
+            [ExpectNumberOfRealLines(0)]
+            set;
+        }
+
+
+        public static Object PropertyWithLogic
+        {
+            [ExpectNumberOfLogicalLines(2)]
+            [ExpectNumberOfRealLines(1)]
+            get
+            {
+                return new NullReferenceException();
+            }
+            [ExpectNumberOfLogicalLines(1)]
+            [ExpectNumberOfRealLines(1)]
+            set
+            {
+                value.ToString();
+            }
+        }
+
         [ExpectNumberOfLogicalLines(0)]
         [ExpectNumberOfRealLines(0)]
         private void MethodWithNoLines_PrivateInstance()

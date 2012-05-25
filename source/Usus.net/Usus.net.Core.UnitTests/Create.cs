@@ -1,6 +1,6 @@
 ﻿using System;
 using andrena.Usus.net.Core.Hotspots;
-using andrena.Usus.net.Core.Metrics;
+using andrena.Usus.net.Core.Reports;
 
 namespace Usus.net.Core.UnitTests
 {

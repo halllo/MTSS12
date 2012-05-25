@@ -6,6 +6,30 @@ namespace Usus.net.Core.IntegrationTests.MethodMetrics
 {
     public class TypeDependencies
     {
+        public AccessViolationException PropertyAutoImplemented
+        {
+            [ExpectTypeDependency("System.AccessViolationException")]
+            get;
+
+            [ExpectTypeDependency("System.AccessViolationException")]
+            set;
+        }
+
+        public Exception PropertyWithLogic
+        {
+            [ExpectTypeDependency("System.Exception")]
+            [ExpectTypeDependency("System.NullReferenceException")]
+            get
+            {
+                return new NullReferenceException();
+            }
+            [ExpectTypeDependency("System.Exception")]
+            set
+            {
+                value.ToString();
+            }
+        }
+
         [ExpectTypeDependency("System.Console")]
         public static void MethodWithConsole()
         {
@@ -82,6 +106,24 @@ namespace Usus.net.Core.IntegrationTests.MethodMetrics
         public static void MethodWithNoObject()
         {
             return;
+        }
+
+        [ExpectTypeDependency("System.NotImplementedException")]
+        [ExpectTypeDependency("System.NotFiniteNumberException")]
+        public static void MethodWithTryCatch()
+        {
+            try
+            {
+                Console.WriteLine();
+            }
+            catch (NotImplementedException)
+            {
+                Console.WriteLine();
+            }
+            catch (NotFiniteNumberException)
+            {
+                Console.WriteLine();
+            }
         }
     }
 }

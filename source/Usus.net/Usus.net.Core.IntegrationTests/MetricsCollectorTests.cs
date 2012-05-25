@@ -1,4 +1,6 @@
-﻿using andrena.Usus.net.Core;
+﻿using andrena.Usus.net.Core.Metrics;
+using andrena.Usus.net.Core.ReflectionHelper;
+using andrena.Usus.net.Core.Reports;
 using andrena.Usus.net.Core.Verification;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -49,6 +51,15 @@ namespace Usus.net.Core.IntegrationTests
         public void Verify_NumberOfLogicalLines()
         {
             Verify.MethodsWith<ExpectNumberOfLogicalLinesAttribute>(metrics.Report);
+        }
+
+        [TestMethod]
+        public void PropertyGetterAndSetterFound()
+        {
+            var property = PropertyExtensions.GetPropertyInfo(() => MethodMetrics.MethodLengths.PropertyAutoImplemented);
+            var propertyMetrics = metrics.Report.For(property);
+            Assert.IsTrue(propertyMetrics.Getter != null);
+            Assert.IsTrue(propertyMetrics.Setter != null);
         }
     }
 }

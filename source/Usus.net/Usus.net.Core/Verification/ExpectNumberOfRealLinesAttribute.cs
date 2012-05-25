@@ -1,9 +1,9 @@
 ﻿using System;
-using andrena.Usus.net.Core.Metrics;
+using andrena.Usus.net.Core.Reports;
 
 namespace andrena.Usus.net.Core.Verification
 {
-    [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
+    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Constructor, AllowMultiple = false, Inherited = true)]
     public class ExpectNumberOfRealLinesAttribute : MethodExpectation
     {
         public int ExpectedNumberOfRealLines { get; private set; }

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace andrena.Usus.net.Core.Metrics
+namespace andrena.Usus.net.Core.Reports
 {
     public class MetricsReport
     {

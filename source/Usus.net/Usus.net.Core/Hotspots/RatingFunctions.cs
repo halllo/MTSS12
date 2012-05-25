@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using andrena.Usus.net.Core.Metrics;
+using andrena.Usus.net.Core.Reports;
 
 namespace andrena.Usus.net.Core.Hotspots
 {

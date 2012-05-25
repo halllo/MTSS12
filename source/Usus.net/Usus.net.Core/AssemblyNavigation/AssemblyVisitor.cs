@@ -1,5 +1,5 @@
 ﻿using System.IO;
-using andrena.Usus.net.Core.Metrics;
+using andrena.Usus.net.Core.Reports;
 using Microsoft.Cci;
 
 namespace andrena.Usus.net.Core.AssemblyNavigation
@@ -58,7 +58,7 @@ namespace andrena.Usus.net.Core.AssemblyNavigation
 
         private void AnalyzeMethods(INamedTypeDefinition type, PdbReader pdb)
         {
-            foreach (var method in type.GetMethodsNotGenerated())
+            foreach (var method in type.GetMethods())
             {
                 Report.AddMethodReport(AnalyzeMethod(method, pdb));
             }

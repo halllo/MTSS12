@@ -6,6 +6,29 @@ namespace Usus.net.Core.IntegrationTests.MethodMetrics
 {
     public class CyclomaticComplexities
     {
+        public Object PropertyAutoImplemented
+        {
+            [ExpectCyclomaticComplexity(1)]
+            get;
+
+            [ExpectCyclomaticComplexity(1)]
+            set;
+        }
+
+        public Object PropertyWithLogic
+        {
+            [ExpectCyclomaticComplexity(1)]
+            get
+            {
+                return new NullReferenceException();
+            }
+            [ExpectCyclomaticComplexity(1)]
+            set
+            {
+                value.ToString();
+            }
+        }
+
         [ExpectCyclomaticComplexity(1)]
         public static void MethodWithNothing()
         {
