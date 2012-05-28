@@ -6,7 +6,7 @@ using Microsoft.Cci;
 
 namespace andrena.Usus.net.Core.Metrics.Methods
 {
-    public static class TypeDependenciesOfOperations
+    internal static class TypeDependenciesOfOperations
     {
         public static IEnumerable<string> OperationTypes(this IMethodDefinition method,
             Func<OperationCode, bool> predicate,

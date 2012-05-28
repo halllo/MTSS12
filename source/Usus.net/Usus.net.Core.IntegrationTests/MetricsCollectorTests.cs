@@ -1,5 +1,4 @@
-﻿using andrena.Usus.net.Core.Metrics;
-using andrena.Usus.net.Core.ReflectionHelper;
+﻿using andrena.Usus.net.Core;
 using andrena.Usus.net.Core.Reports;
 using andrena.Usus.net.Core.Verification;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -9,57 +8,71 @@ namespace Usus.net.Core.IntegrationTests
     [TestClass]
     public class MetricsCollectorTests
     {
-        static MetricsCollector metrics = new MetricsCollector();
+        static MetricsReport metrics;
 
         [TestInitialize]
         public void Ensure_MetricsReportIsAvailable()
         {
-            if (metrics.Report == null) metrics.AnalyzeMe();
+            if (metrics == null) metrics = Analyze.Me();
         }
 
         [TestMethod]
         public void Verify_CyclomaticComplexities()
         {
-            Verify.MethodsWith<ExpectCyclomaticComplexityAttribute>(metrics.Report);
+            Verify.MethodsWith<ExpectCyclomaticComplexityAttribute>(metrics);
         }
 
         [TestMethod]
         public void Verify_TypeDependencies()
         {
-            Verify.MethodsWith<ExpectTypeDependencyAttribute>(metrics.Report);
+            Verify.MethodsWith<ExpectTypeDependencyAttribute>(metrics);
         }
 
         [TestMethod]
         public void Verify_NoTypeDependencies()
         {
-            Verify.MethodsWith<ExpectNoTypeDependencyAttribute>(metrics.Report);
+            Verify.MethodsWith<ExpectNoTypeDependencyAttribute>(metrics);
         }
 
         [TestMethod]
         public void Verify_NumberOfStatements()
         {
-            Verify.MethodsWith<ExpectNumberOfStatementsAttribute>(metrics.Report);
+            Verify.MethodsWith<ExpectNumberOfStatementsAttribute>(metrics);
         }
 
         [TestMethod]
         public void Verify_NumberOfRealLines()
         {
-            Verify.MethodsWith<ExpectNumberOfRealLinesAttribute>(metrics.Report);
+            Verify.MethodsWith<ExpectNumberOfRealLinesAttribute>(metrics);
         }
 
         [TestMethod]
         public void Verify_NumberOfLogicalLines()
         {
-            Verify.MethodsWith<ExpectNumberOfLogicalLinesAttribute>(metrics.Report);
+            Verify.MethodsWith<ExpectNumberOfLogicalLinesAttribute>(metrics);
         }
 
         [TestMethod]
-        public void PropertyGetterAndSetterFound()
+        public void MetricsForProperty_AutoImplementedPropertyGetterAndSetter_Found()
         {
-            var property = PropertyExtensions.GetPropertyInfo(() => MethodMetrics.MethodLengths.PropertyAutoImplemented);
-            var propertyMetrics = metrics.Report.For(property);
+            var propertyMetrics = metrics.ForProperty(() => MethodMetrics.MethodLengths.PropertyAutoImplemented);
             Assert.IsTrue(propertyMetrics.Getter != null);
             Assert.IsTrue(propertyMetrics.Setter != null);
+        }
+
+        [TestMethod]
+        public void MetricsForProperty_PropertyGetterNoSetter_Found()
+        {
+            var propertyMetrics = metrics.ForProperty(() => MethodMetrics.MethodLengths.PropertyGetterWithLogic);
+            Assert.IsTrue(propertyMetrics.Getter != null);
+            Assert.IsTrue(propertyMetrics.Setter == null);
+        }
+
+        [TestMethod]
+        public void MetricsForMethod_MethodWithReturnValue_Found()
+        {
+            var report = metrics.ForMethod(() => MethodMetrics.TypeDependencies.MethodWithNoGenericsInSignature(null));
+            Assert.IsTrue(report != null);
         }
     }
 }

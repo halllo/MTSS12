@@ -1,11 +1,9 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using Microsoft.Cci;
 
 namespace andrena.Usus.net.Core.Metrics.Methods
 {
-    public static class NumberOfStatements
+    internal static class NumberOfStatements
     {
         public static int Of(IMethodDefinition method)
         {

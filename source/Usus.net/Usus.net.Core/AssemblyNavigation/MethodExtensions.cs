@@ -5,7 +5,7 @@ using Microsoft.Cci;
 
 namespace andrena.Usus.net.Core.AssemblyNavigation
 {
-    public static class MethodExtensions
+    internal static class MethodExtensions
     {
         public static string Signature(this IMethodDefinition method)
         {

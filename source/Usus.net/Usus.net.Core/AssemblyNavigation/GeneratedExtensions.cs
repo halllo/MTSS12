@@ -4,7 +4,7 @@ using Microsoft.Cci;
 
 namespace andrena.Usus.net.Core.AssemblyNavigation
 {
-    public static class GeneratedExtensions
+    internal static class GeneratedExtensions
     {
         public static IEnumerable<INamedTypeDefinition> GetTypesNotGenerated(this IAssembly assembly)
         {

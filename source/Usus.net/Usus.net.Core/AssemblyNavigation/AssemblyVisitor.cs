@@ -4,7 +4,7 @@ using Microsoft.Cci;
 
 namespace andrena.Usus.net.Core.AssemblyNavigation
 {
-    public abstract class AssemblyVisitor
+    internal abstract class AssemblyVisitor
     {
         public MetricsReport Report { get; private set; }
 

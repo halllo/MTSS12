@@ -11,11 +11,6 @@ namespace andrena.Usus.net.Core.ReflectionHelper
             return (expression.Body as MemberExpression).Member as PropertyInfo;
         }
 
-        public static string GetCalleeName(this MemberExpression member)
-        {
-            return member != null ? (member.Member as PropertyInfo).GetFullGetterName() : null;
-        }
-
         public static string GetFullGetterName(this PropertyInfo property)
         {
             return property.WithReturnTypeDeclaringTypeAndName("{0} {1}.{2}.get()");

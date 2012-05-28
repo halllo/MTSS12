@@ -16,7 +16,6 @@ namespace Usus.net.Core.IntegrationTests.MethodMetrics
             set;
         }
 
-
         public static Object PropertyWithLogic
         {
             [ExpectNumberOfLogicalLines(2)]
@@ -30,6 +29,16 @@ namespace Usus.net.Core.IntegrationTests.MethodMetrics
             set
             {
                 value.ToString();
+            }
+        }
+
+        public static Object PropertyGetterWithLogic
+        {
+            [ExpectNumberOfLogicalLines(2)]
+            [ExpectNumberOfRealLines(1)]
+            get
+            {
+                return new NullReferenceException();
             }
         }
 

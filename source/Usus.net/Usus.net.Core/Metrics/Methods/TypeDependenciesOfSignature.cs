@@ -5,7 +5,7 @@ using Microsoft.Cci;
 
 namespace andrena.Usus.net.Core.Metrics.Methods
 {
-    public static class TypeDependenciesOfSignature
+    internal static class TypeDependenciesOfSignature
     {
         public static IEnumerable<string> Of(IMethodDefinition method)
         {

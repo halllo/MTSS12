@@ -4,7 +4,7 @@ using Microsoft.Cci;
 
 namespace andrena.Usus.net.Core.Metrics.Methods
 {
-    public static class NumberOfLogicalLines
+    internal static class NumberOfLogicalLines
     {
         public static int Of(IMethodDefinition method, PdbReader pdb)
         {

@@ -3,7 +3,7 @@ using Microsoft.Cci;
 
 namespace andrena.Usus.net.Core.Metrics.Methods
 {
-    public static class TypeDependenciesOfCallOperations
+    internal static class TypeDependenciesOfCallOperations
     {
         public static IEnumerable<string> Of(IMethodDefinition method)
         {

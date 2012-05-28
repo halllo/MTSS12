@@ -8,24 +8,23 @@ namespace andrena.Usus.net.Core.Reports
 {
     public static partial class MetricsReportSearch
     {
-        public static MethodMetricsReport For(this MetricsReport metrics, Expression<Action> expression)
+        public static MethodMetricsReport ForMethod(this MetricsReport metrics, Expression<Action> expression)
         {
             var methodName = (expression.Body as MethodCallExpression).GetCalleeName();
             return metrics.For(methodName);
         }
 
-        public static MethodMetricsReport For<T>(this MetricsReport metrics, Expression<Func<T>> expression)
-        {
-            var methodName = (expression.Body as MemberExpression).GetCalleeName();
-            return metrics.For(methodName);
-        }
-
-        public static MethodMetricsReport For(this MetricsReport metrics, MethodInfo method)
+        public static MethodMetricsReport ForMethod(this MetricsReport metrics, MethodInfo method)
         {
             return metrics.For(method.GetFullName());
         }
 
-        public static PropertyMetricsReport For(this MetricsReport metrics, PropertyInfo property)
+        public static PropertyMetricsReport ForProperty(this MetricsReport metrics, Expression<Func<object>> expression)
+        {
+            return metrics.ForProperty(PropertyExtensions.GetPropertyInfo(expression));
+        }
+
+        public static PropertyMetricsReport ForProperty(this MetricsReport metrics, PropertyInfo property)
         {
             return new PropertyMetricsReport
             {
@@ -34,10 +33,10 @@ namespace andrena.Usus.net.Core.Reports
             };
         }
 
-        public static MethodMetricsReport For(this MetricsReport metrics, string methodName)
+        public static MethodMetricsReport For(this MetricsReport metrics, string memberName)
         {
             return (from m in metrics.Methods
-                    where m.Signature == methodName
+                    where m.Signature == memberName
                     select m).FirstOrDefault();
         }
     }

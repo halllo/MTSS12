@@ -4,7 +4,7 @@ using Microsoft.Cci;
 
 namespace andrena.Usus.net.Core.AssemblyNavigation
 {
-    public static class TypeExtensions
+    internal static class TypeExtensions
     {
         public static IEnumerable<ITypeReference> GetAllRealTypeReferences(this ITypeReference typeReference)
         {

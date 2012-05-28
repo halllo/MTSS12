@@ -1,24 +1,13 @@
 ﻿using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
-using andrena.Usus.net.Core.AssemblyNavigation;
-using andrena.Usus.net.Core.Reports;
 using andrena.Usus.net.Core.ReflectionHelper;
+using andrena.Usus.net.Core.Reports;
 
 namespace andrena.Usus.net.Core.Verification
 {
     public static class Verify
     {
-        public static void AnalyzeMe(this AssemblyVisitor metrics)
-        {
-            metrics.Analyze(Assembly.GetCallingAssembly());
-        }
-
-        public static void Analyze(this AssemblyVisitor metrics, Assembly asm)
-        {
-            metrics.Analyze(asm.Location);
-        }
-
         public static bool MethodsWith<T>(MetricsReport metrics) where T : MethodExpectation
         {
             var methods = Assembly.GetCallingAssembly().GetMethodsWithAssigned<T>();
@@ -40,7 +29,7 @@ namespace andrena.Usus.net.Core.Verification
 
         private static MethodMetricsReport GetMethodMetrics(this MetricsReport metrics, MethodInfo method)
         {
-            var methodMetrics = metrics.For(method);
+            var methodMetrics = metrics.ForMethod(method);
             if (methodMetrics != null) return methodMetrics;
             throw new MetricsNotFoundException(method);
         }

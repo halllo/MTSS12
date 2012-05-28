@@ -1,7 +1,6 @@
-﻿using andrena.Usus.net.Core.Hotspots;
-using andrena.Usus.net.Core.Metrics;
+﻿using andrena.Usus.net.Core;
 using andrena.Usus.net.Core.Reports;
-using andrena.Usus.net.Core.Verification;
+using andrena.Usus.net.Core.Hotspots;
 
 namespace andrena.Usus.net.Console
 {
@@ -17,20 +16,17 @@ namespace andrena.Usus.net.Console
 
         private static void AnalyzeThisAssembly()
         {
-            MetricsCollector metrics = new MetricsCollector();
-            metrics.AnalyzeMe();
-            OutputMethodMetricsReport(metrics.Report.For(() => AnalyzeFile("")));
+            var metrics = Analyze.Me();
+            OutputMethodMetricsReport(metrics.ForMethod(() => AnalyzeFile("")));
         }
 
         private static void AnalyzeFile(string assemblyToAnalyze)
         {
-            MetricsCollector metrics = new MetricsCollector();
-            metrics.Analyze(assemblyToAnalyze);
-
-            foreach (var method in metrics.Report.Methods)
+            var metrics = Analyze.PortableExecutable(assemblyToAnalyze);
+            foreach (var method in metrics.Methods)
                 OutputMethodMetricsReport(method);
 
-            OutputRatings(metrics.Report.Rate());
+            OutputRatings(metrics.Rate());
         }
 
         private static void OutputMethodMetricsReport(MethodMetricsReport methodMetrics)

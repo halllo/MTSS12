@@ -5,7 +5,7 @@ using Microsoft.Cci;
 
 namespace andrena.Usus.net.Core.Metrics.Methods
 {
-    public static class TypeDependenciesOfVariables
+    internal static class TypeDependenciesOfVariables
     {
         public static IEnumerable<string> Of(IMethodDefinition method)
         {

@@ -5,7 +5,7 @@ using System;
 
 namespace andrena.Usus.net.Core.Metrics.Methods
 {
-    public static class CyclomaticComplexity
+    internal static class CyclomaticComplexity
     {
         public static int Of(IMethodDefinition method)
         {

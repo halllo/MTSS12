@@ -6,7 +6,7 @@ using Microsoft.Cci;
 
 namespace andrena.Usus.net.Core.Metrics
 {
-    public class MetricsCollector : AssemblyVisitor
+    internal class MetricsCollector : AssemblyVisitor
     {
         protected override void AnalyzeType(INamedTypeDefinition type, PdbReader pdb)
         {
