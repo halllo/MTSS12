@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using andrena.Usus.net.Core.Verification;
+using System.Linq;
 
 namespace Usus.net.Core.IntegrationTests.MethodMetrics
 {
@@ -68,6 +69,13 @@ namespace Usus.net.Core.IntegrationTests.MethodMetrics
             return;
         }
 
+        [ExpectTypeDependency("System.IndexOutOfRangeException")]
+        [ExpectTypeDependency("System.NotImplementedException")]
+        public static void MethodWithInOutRefArgs(out NotImplementedException e1, ref IndexOutOfRangeException e2)
+        {
+            e1 = new NotImplementedException();
+        }
+
         [ExpectTypeDependency("System.Exception")]
         [ExpectTypeDependency("System.NotImplementedException")]
         public static Exception MethodWithNoGenericsInSignature(NotImplementedException e)
@@ -124,6 +132,44 @@ namespace Usus.net.Core.IntegrationTests.MethodMetrics
             {
                 Console.WriteLine();
             }
+        }
+
+        [ExpectTypeDependency("System.Exception")]
+        [ExpectTypeDependency("System.Collections.Generic.List")]
+        public static void MethodWithArrayOfLists()
+        {
+            var exceptions = new List<Exception>[0];
+        }
+
+        [ExpectTypeDependency("System.Exception")]
+        [ExpectTypeDependency("System.Collections.Generic.List")]
+        public static void MethodWithListArrays()
+        {
+            var exceptions = new List<Exception[]>();
+        }
+
+        [ExpectTypeDependency("System.Linq.Enumerable")]
+        [ExpectTypeDependency("System.Exception")]
+        public static void MethodWithGenericCall()
+        {
+            var ints = new int[0];
+            ints.Cast<Exception>();
+        }
+
+        [ExpectTypeDependency("System.FieldAccessException")]
+        [ExpectTypeDependency("System.NotImplementedException")]
+        public static void MethodWithCasts()
+        {
+            object o1 = (NotImplementedException)null;
+            object o2 = null as FieldAccessException;
+        }
+
+        [ExpectTypeDependency("System.FieldAccessException")]
+        [ExpectTypeDependency("System.NotImplementedException")]
+        public static void MethodWithTypeOfs()
+        {
+            object o1 = typeof(FieldAccessException);
+            object o2 = null is NotImplementedException;
         }
     }
 }

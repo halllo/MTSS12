@@ -34,7 +34,11 @@ namespace andrena.Usus.net.Core.ReflectionHelper
 
         private static string MethodNameAndParameters(this MethodInfo method)
         {
-            return NormalizeGenericName(NormalizePropertyName(method.JustName()));
+            return NormalizeWhiteSpaces(
+                NormalizeByRefs(
+                NormalizeGenericName(
+                NormalizePropertyName(
+                method.JustName()))));
         }
   
         private static string JustName(this MethodInfo method)
@@ -52,6 +56,16 @@ namespace andrena.Usus.net.Core.ReflectionHelper
         private static string NormalizeGenericName(string methodName)
         {
             return methodName.ReplaceRegex("`.*?\\[", "[").Replace("[", "<").Replace("]", ">").Trim();
+        }
+
+        private static string NormalizeByRefs(string methodName)
+        {
+            return methodName.Replace(" ByRef,", ",").Replace(" ByRef)", ")");
+        }
+
+        private static string NormalizeWhiteSpaces(string methodName)
+        {
+            return methodName.Replace(", ", ",");
         }
 
         private static string NormalizeSubTypeName(string subTypeName)

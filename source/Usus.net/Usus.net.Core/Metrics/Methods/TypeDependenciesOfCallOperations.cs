@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Microsoft.Cci;
+using Microsoft.Cci.Immutable;
 
 namespace andrena.Usus.net.Core.Metrics.Methods
 {
@@ -22,6 +23,14 @@ namespace andrena.Usus.net.Core.Metrics.Methods
         private static IEnumerable<ITypeReference> CalleeTypes(this IOperation o)
         {
             yield return (o.Value as ITypeMemberReference).ContainingType;
+            if (o.Value is GenericMethodInstanceReference)
+                foreach (var genericArgument in GetGenericArguments(o))
+                    yield return genericArgument;
+        }
+  
+        private static IEnumerable<ITypeReference> GetGenericArguments(IOperation o)
+        {
+            return (o.Value as GenericMethodInstanceReference).GenericArguments;
         }
     }
 }
