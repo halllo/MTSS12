@@ -102,14 +102,6 @@ namespace Usus.net.Core.IntegrationTests.MethodMetrics
             return new List<List<Object>>();
         }
 
-        [ExpectTypeDependency("System.Object")]
-        [ExpectTypeDependency("System.Collections.Generic.IEnumerable")]
-        [ExpectNoTypeDependency("System.NotImplementedException")]//iterators not yet supported!
-        public static IEnumerable<Object> MethodWithYieldReturn()
-        {
-            yield return new NotImplementedException();
-        }
-
         [ExpectNoTypeDependency("System.Object")]
         public static void MethodWithNoObject()
         {
@@ -160,8 +152,10 @@ namespace Usus.net.Core.IntegrationTests.MethodMetrics
         [ExpectTypeDependency("System.NotImplementedException")]
         public static void MethodWithCasts()
         {
-            object o1 = (NotImplementedException)null;
-            object o2 = null as FieldAccessException;
+            object o1 = (NotImplementedException)new object();
+            o1.ToString();
+            object o2 = new object() as FieldAccessException;
+            o2.ToString();
         }
 
         [ExpectTypeDependency("System.FieldAccessException")]
@@ -169,7 +163,43 @@ namespace Usus.net.Core.IntegrationTests.MethodMetrics
         public static void MethodWithTypeOfs()
         {
             object o1 = typeof(FieldAccessException);
-            object o2 = null is NotImplementedException;
+            object o2 = new object() is NotImplementedException;
+        }
+
+        enum SampleEnum { One, Two }
+        [ExpectTypeDependency("Usus.net.Core.IntegrationTests.MethodMetrics.TypeDependencies.SampleEnum")]
+        public static void MethodWithEnumReference()
+        {
+            object dt = SampleEnum.One;
+        }
+
+        class SampleEventClass { public static event Action<Exception> SampleEvent; }
+        [ExpectTypeDependency("Usus.net.Core.IntegrationTests.MethodMetrics.TypeDependencies.SampleEventClass")]
+        public static void MethodWithEventReference()
+        {
+            SampleEventClass.SampleEvent += (e) => { };
+        }
+
+        [ExpectNoTypeDependency("System.Object")]
+        /* •—————————————————————————————————————————————————————————————————————————————————————•
+           | Lambdas are compiler generated fields with delegates to compiler generated methods. |
+           | Their types will be recognized by method and field aggregation.                     |
+           •—————————————————————————————————————————————————————————————————————————————————————• */
+        public static void MethodWithLambda()
+        {
+            Action a = () => object.Equals(null, null);
+        }
+
+        [ExpectTypeDependency("System.Object")]
+        [ExpectTypeDependency("System.Collections.Generic.IEnumerable")]
+        [ExpectNoTypeDependency("System.NotImplementedException")]
+        /* •—————————————————————————————————————————————————————————————•
+           | Iterators are compiler generated sub classes.               |
+           | Their types will be recognized by nested class aggregation. |
+           •—————————————————————————————————————————————————————————————• */
+        public static IEnumerable<Object> MethodWithYieldReturn()
+        {
+            yield return new NotImplementedException();
         }
     }
 }

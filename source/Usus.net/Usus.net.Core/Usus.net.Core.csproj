@@ -74,6 +74,7 @@
     <Compile Include="Metrics\Methods\TypeDependenciesOfNewOperations.cs" />
     <Compile Include="Metrics\Methods\TypeDependenciesOfOperations.cs" />
     <Compile Include="Metrics\Methods\TypeDependenciesOfSignature.cs" />
+    <Compile Include="Metrics\Methods\TypeDependenciesOfTypeMentions.cs" />
     <Compile Include="Metrics\Methods\TypeDependenciesOfVariables.cs" />
     <Compile Include="Reports\MetricsReportSearch.cs" />
     <Compile Include="Reports\PropertyMetricsReport.cs" />
