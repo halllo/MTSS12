@@ -9,7 +9,7 @@ namespace andrena.Usus.net.Core.Hotspots
         public double RatedCyclomaticComplexity { get; private set; }
         public double RatedMethodLength { get; private set; }
 
-        public RatedMethodMetrics(MethodMetricsReport metrics)
+        internal RatedMethodMetrics(MethodMetricsReport metrics)
         {
             Name = metrics.Name;
             Signature = metrics.Signature;

@@ -9,7 +9,7 @@ namespace andrena.Usus.net.Core.Hotspots
     {
         public MetricsReport Metrics { get; private set; }
 
-        public MetricsHotspots(MetricsReport metrics)
+        internal MetricsHotspots(MetricsReport metrics)
         {
             Metrics = metrics;
         }

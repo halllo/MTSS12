@@ -10,7 +10,7 @@ namespace andrena.Usus.net.Core.Reports
             get { return MethodReports; }
         }
 
-        public MetricsReport()
+        internal MetricsReport()
         {
             MethodReports = new List<MethodMetricsReport>();
         }
