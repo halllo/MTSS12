@@ -6,18 +6,25 @@ namespace andrena.Usus.net.Core.Hotspots
 {
     public static class RatingFunctions
     {
+        public static RatingFunctionLimits Limits { get; set; }
+
+        static RatingFunctions()
+        {
+            Limits = new RatingFunctionLimits();
+        }
+
         public static double RateCyclomaticComplexity(this MethodMetricsReport metrics)
         {
-            if (metrics.CyclomaticComplexity > 4)
-                return ((1.0 / 4) * metrics.CyclomaticComplexity) - 1;
+            if (metrics.CyclomaticComplexity > Limits.CyclomaticComplexity)
+                return ((1.0 / Limits.CyclomaticComplexity) * metrics.CyclomaticComplexity) - 1;
             else
                 return 0.0;
         }
 
         public static double RateMethodLength(this MethodMetricsReport metrics)
         {
-            if (metrics.NumberOfLogicalLines > 9)
-                return ((1.0 / 9) * metrics.NumberOfLogicalLines) - 1;
+            if (metrics.NumberOfLogicalLines > Limits.MethodLength)
+                return ((1.0 / Limits.MethodLength) * metrics.NumberOfLogicalLines) - 1;
             else
                 return 0.0;
         }

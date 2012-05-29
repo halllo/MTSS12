@@ -1,56 +1,16 @@
-﻿using andrena.Usus.net.Core;
-using andrena.Usus.net.Core.Reports;
-using andrena.Usus.net.Core.Hotspots;
-
+﻿
 namespace andrena.Usus.net.Console
 {
     class Program
     {
         static void Main(string[] args)
         {
-            //AnalyzeThisAssembly();
-            AnalyzeFile(@"C:\Users\mnaujoks\Documents\Visual Studio 2010\Projects\ConsoleApplication2\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe");
+            Analyzer analyzer = new ConsoleOutputAnalyzer();
+
+            //analyzer.AnalyzeThisAssembly();
+            analyzer.AnalyzeFile(@"C:\Users\mnaujoks\Documents\Visual Studio 2010\Projects\ConsoleApplication2\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe");
             
             System.Console.ReadLine();
-        }
-
-        private static void AnalyzeThisAssembly()
-        {
-            var metrics = Analyze.Me();
-            OutputMethodMetricsReport(metrics.ForMethod(() => AnalyzeFile("")));
-        }
-
-        private static void AnalyzeFile(string assemblyToAnalyze)
-        {
-            var metrics = Analyze.PortableExecutable(assemblyToAnalyze);
-            foreach (var method in metrics.Methods)
-                OutputMethodMetricsReport(method);
-
-            OutputRatings(metrics.Rate());
-        }
-
-        private static void OutputMethodMetricsReport(MethodMetricsReport methodMetrics)
-        {
-            Output(methodMetrics.Name);
-            Output("\tSignature:\t\t" + methodMetrics.Signature);
-            Output("\tCyclomaticComplexity:\t" + methodMetrics.CyclomaticComplexity);
-            Output("\tNumberOfStatements:\t" + methodMetrics.NumberOfStatements);
-            Output("\tNumberOfRealLines:\t" + methodMetrics.NumberOfRealLines);
-            Output("\tNumberOfLogicalLines:\t" + methodMetrics.NumberOfLogicalLines);
-            Output("\tTypes:\t\t\t" + string.Join(", ", methodMetrics.TypeDependencies));
-            Output("");
-        }
-
-        private static void OutputRatings(RatedMetrics rated)
-        {
-            Output("Overall Metrics");
-            Output("\tAverageRatedCyclomaticComplexity:\t" + rated.AverageRatedCyclomaticComplexity);
-            Output("\tAverageRatedMethodLength:\t\t" + rated.AverageRatedMethodLength);
-        }
-        
-        private static void Output(string line)
-        {
-            System.Console.WriteLine(line);
         }
     }
 }

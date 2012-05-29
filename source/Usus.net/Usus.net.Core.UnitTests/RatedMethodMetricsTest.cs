@@ -5,6 +5,8 @@ namespace Usus.net.Core.UnitTests
     [TestClass]
     public class RatedMethodMetricsTest
     {
+        private const double DELTA = 0.1;
+
         [TestMethod]
         public void Rate_CyclomaticComplexity0_Rated0()
         {
@@ -56,7 +58,7 @@ namespace Usus.net.Core.UnitTests
         [TestMethod]
         public void Rate_MethodLength10_RatedPoint1111()
         {
-            Assert.AreEqual(0.111111, Create.RatedMethodLength(10), 0.00001);
+            Assert.AreEqual(0.111111, Create.RatedMethodLength(10), DELTA);
         }
     }
 }

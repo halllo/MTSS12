@@ -8,6 +8,8 @@ namespace andrena.Usus.net.Core.Reports
     {
         public string Name { get; set; }
         public string Signature { get; set; }
+        public bool CompilerGenerated { get; set; }
+
         public int CyclomaticComplexity { get; set; }
         public int NumberOfStatements { get; set; }
         public int NumberOfRealLines { get; set; }
