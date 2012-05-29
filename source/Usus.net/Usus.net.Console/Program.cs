@@ -5,12 +5,27 @@ namespace andrena.Usus.net.Console
     {
         static void Main(string[] args)
         {
-            Analyzer analyzer = new ConsoleOutputAnalyzer();
+            if (HelpRequested(args)) 
+                PrintHelp(args);
+            else 
+                Analysis(args);
+        }
 
-            //analyzer.AnalyzeThisAssembly();
-            analyzer.AnalyzeFile(@"C:\Users\mnaujoks\Documents\Visual Studio 2010\Projects\ConsoleApplication2\ConsoleApplication1\bin\Debug\ConsoleApplication1.exe");
-            
-            System.Console.ReadLine();
+        private static void Analysis(string[] args)
+        {
+            Analyzer analyzer = new ConsoleOutputAnalyzer();
+            if (args.Length == 0) analyzer.AnalyzeThisAssembly();
+            if (args.Length == 1) analyzer.AnalyzeFile(args[0]);
+        }
+
+        private static bool HelpRequested(string[] args)
+        {
+            return args.Length == 1 && args[0].Contains("?");
+        }
+
+        private static void PrintHelp(string[] args)
+        {
+            System.Console.WriteLine("Usus.net.Console.exe <assemblyPath>");
         }
     }
 }
