@@ -241,11 +241,12 @@ Eine bestehende Codebasis zu bewerten erfordert detaillierte Kenntnis über alle 
 
 
 \section{Architektur}
+\label{sec:architecture}
 In diesem Abschnitt wird die grundlegende Architektur des zu entwickelnden Systems erläutert. Im Rahmen dieser Master-Thesis soll ein System entwickelt werden, dass die in Abschnitt \ref{sec:goals} genannten Ziele erreicht. Zusätzlich soll dieses System als Erweiterung in Visual Studio laufen und den Quelltext (kompiliert und/oder unkompiliert) in einer .NET-Sprache, wie beispielsweise C\#, analysieren. Abbildung \ref{fig:architecture} zeigt die beiden Komponenten \textit{Visualisierung} und \textit{statische Code-Analyse}, um die es sich im weiteren Verlauf handeln wird.
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=12cm]{images/architektur.jpg}
-	\caption{Grobe Architektur des Systems}
+	\caption{Grobe Architektur des zu entwickelnden Systems}
 	\label{fig:architecture}
 \end{figure}
 Die Komponente, die die statische Code-Analyse durchführt, verwendet drei Aktionen, die einem kompletten Analyse-Prozess entsprechen. Die schwarzen Pfeile symbolisieren dabei Zugriffe auf Daten. Die Aktion \textit{Berechnung} betrachtet das Softwaresystem und kann dafür auf den Quellcode und das erzeugte Kompilat zugreifen. Das Ergebnis dieser Betrachtung wird in Form von Metriken in einer Datenbank gespeichert und stellt Daten für die Aktion \textit{Gewichtung} bereit. Diese gewichtet die Daten und erzeugt Statistiken, die ebenfalls in der Datenbank hinterlegt werden. Die Aktion \textit{Bewertung} versucht anhand der gewichteten Daten eine Aussage über die Qualität des Softwaresystems zu treffen. Nachdem diese drei Aktionen abgelaufen sind, ist der Analyse-Prozess beendet. Die Komponente \textit{Visualisierung}, die in Visual Studio ausgeführt wird, kann diesen Analyse-Prozess starten und auf dessen Daten zugreifen. Sie zeigt die berechneten Metriken in geeigneten Kontexten an und gibt basierend auf der Bewertung ein entsprechendes Entwickler-Feedback. Dieses Feedback entsteht dabei genau dort, wo der Quellcode entstanden ist, der von dem Analyse-Prozess verarbeitet wurde. Nach einer entsprechenden Veränderung des Quelltext kann der Prozess erneut gestartet werden, um auch diese Veränderung zu analysieren. So entsteht theoretisch ein kontinuierlicher Verbesserungskreislauf. Dieser Zyklus wird durch die breiten transparenten Pfeile angezeigt und entspricht dem Informationsfluss in dieser Umgebung.
@@ -256,7 +257,7 @@ Aus den in Abschnitt \ref{sec:goals} definierten Zielen dieses Projekts lassen s
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=12cm]{images/usecases.jpg}
-	\caption{Anwendungsfälle des Systems}
+	\caption{Anwendungsfälle des zu entwickelnden Systems}
 	\label{fig:usecases}
 \end{figure}
 Die Akteure entsprechen ungefähr den in Abschnitt \ref{sec:stakeholder} definierten Interessenvertretern. Der Akteur \textit{.NET-Entwickler} entspricht dem Interessenvertreter mit wenig .NET Erfahrung und dessen Interaktionen mit dem System werden von dem Entwickler mit viel Erfahrung, beziehungsweise Clean Code Interessen, erweitert. Die Interessenvertreter \textit{andrena objects ag} und \textit{Leser des Thesis} haben keine direkte Interaktion mit dem System und werden bei der Betrachtung der Use Cases ignoriert. Es ist ebenfalls zu sehen, dass der Anwendungsfall \textit{Code-Metriken bestimmen} alle anderen Anwendungsfälle direkt oder indirekt ergänzt. Damit ist er ein entscheidender Bestandteil des Systems, wenn nicht sogar der wichtigste.
@@ -268,7 +269,7 @@ Die Anwendungsfälle lassen sich in User Stories (\textit{Anwendererzählungen}) u
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=16cm]{images/backlog.jpg}
-	\caption{Produkt-Backlog des Systems}
+	\caption{Produkt-Backlog des zu entwickelnden Systems}
 	\label{fig:productbacklog}
 \end{figure}
 Die User Stories sind allgemein gehalten, da auf ein großes Design vor der Implementierung aus Agilitätsgründen verzichtet wurde. Pro Sprint werden die User Stories dann in konkrete Entwicklungs-Aufgaben unterteilt. Die Begründung jeder Story wurde nicht explizit aufgeschrieben, da die Beziehung zu den Use Cases und damit den Zielen aus Abschnitt \ref{sec:goals} erhalten und somit offensichtlich geblieben ist. Eine Priorisierung ist ebenfalls implizit durch das Aufteilen auf die Sprints entstanden, sodass eine explizite Business Value Analyse nicht notwendig ist. Da die Entwicklungsgeschwindigkeit noch nicht bekannt ist, ist die Sprint-Planung vorläufig. Eine Änderung kann also jederzeit erfolgen, wenn neue Use Cases und User Stories dazukommen, andere wegfallen oder nicht alle in einem Sprint geschafft werden. Zum Zeitpunkt dieser Planung lassen sich die bereits gefunden User Stories in schätzungswiese fünf Sprints implementieren. 
@@ -366,6 +367,7 @@ Das in Abbildung \ref{fig:usus_graph} dargestellte Fenster besteht aus zwei Kart
 
 
 \section{Metriken}
+\label{sec:metrics}
 In den Fenstern Usus Cockpit und Usus Info zeit das Eclipse Plugin die Werte verschiedener Metriken an. Das Usus Info Fenster zeigt im Kontext einer Methode neben den Metriken, die es zusätzlich für die Klasse anzeigt auch Methoden-Metriken. In diesem Abschnitt wird daher zuerst auf die Metriken eingegangen, die das Usus-Plugin für Methoden berechnet, bevor die Klassen-Metriken näher betrachtet werden. Abschließend werden die Usus Cockpit Metriken beschrieben. Diese Beschreibungen sind von Bedeutung, da sämtliche Metriken im Rahmen der Usus-Erweiterung für Visual Studio nach-implementiert werden sollen.
 
 \subsection{Pro Methode}
@@ -842,11 +844,47 @@ Zusammenfassend ist zu sagen, das die \emph{Common Compiler Infrastructure} (CCI
 
 
 
-\chapter{Usus.net.Core}
-todo
-
+\chapter{Usus.net}
+Nachdem das Usus-Plugin für Java einfach \emph{Usus} heißt, wird die Visual Studio Erweiterung, die in der vorliegenden Master-Thesis entwickelt wird, im weiteren Verlauf als \emph{Usus.net} bezeichnet. Die Architektur von Usus.net, das in Abschnitt \ref{sec:architecture} noch grob als System bezeichnet wurde, besteht aus drei Teilen, die in Abbildung \ref{fig:architecture2} abgebildet sind.
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=10cm]{images/architektur2.jpg}
+	\caption{Architektur von Usus.net}
+	\label{fig:architecture2}
+\end{figure}
+\texttt{Usus.net} als Visual Studio Erweiterung verwendet Oberflächen-Elemente, die in einer Bibliothek zusammengefasst und unabhängig von Visual Studio sind. Die Oberflächen sind Bestandteil der Bibliothek \texttt{Usus.net.View}. Diese verwendet eine weitere Bibliothek, die den allgemeinen Funktionsumfang von Usus darstellt: \texttt{Usus.net.Core} übernimmt die statische Code-Analyse von Assemblies, die Bewertung der Metriken und die Hotspot-Analyse. Diese Bibliothek kann sowohl über die Kommandozeile bedient werden, als auch in andere Anwendungen integriert werden. In diesem Kapitel wird Usus.net aus der Perspektive von \texttt{Usus.net.Core} vorgestellt. Dafür wird die konkrete Berechnung der Metriken mit der \emph{Common Compiler Infrastructure} beschrieben, sowie auf das zugrunde liegende Objektmodell eingegangen. Das Objektmodell dient dazu die Ergebnisse der Analyse weiter zu verarbeiten. Abschließend wird das Usus.net Verifikations-Framework vorgestellt, mit dem \texttt{Usus.net.Core} selbst getestet wurde.
 
 \section{Metrikberechnung}
+In diesem Abschnitt wird vorgestellt, wie die Usus-Metriken aus Abschnitt \ref{sec:metrics} von Usus.net berechnet werden.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Zyklomatische Komplexität}
+todo
+
+\subsection{Methodenlänge}
+todo
+
+\subsection{Kumulierte Komponentenabhängigkeit}
 todo
 
 
@@ -860,7 +898,7 @@ todo
 
 
 
-\chapter{Usus.net Visual Studio Erweiterung}
+\chapter{Usus.net als Visual Studio Erweiterung}
 todo
 
 
