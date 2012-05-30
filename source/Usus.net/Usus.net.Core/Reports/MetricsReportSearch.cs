@@ -6,7 +6,7 @@ using andrena.Usus.net.Core.ReflectionHelper;
 
 namespace andrena.Usus.net.Core.Reports
 {
-    public static partial class MetricsReportSearch
+    public static class MetricsReportSearch
     {
         public static MethodMetricsReport ForMethod(this MetricsReport metrics, Expression<Action> expression)
         {

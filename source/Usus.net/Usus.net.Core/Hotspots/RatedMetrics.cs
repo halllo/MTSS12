@@ -11,7 +11,7 @@ namespace andrena.Usus.net.Core.Hotspots
         public double AverageRatedCyclomaticComplexity { get; private set; }
         public double AverageRatedMethodLength { get; private set; }
 
-        public RatedMetrics(MetricsReport metrics)
+        internal RatedMetrics(MetricsReport metrics)
         {
             RatedMethods = RatedMethodMetrics(metrics);
             AverageRatedCyclomaticComplexity = RatedMethods.AverageRatedCyclomaticComplexities();
