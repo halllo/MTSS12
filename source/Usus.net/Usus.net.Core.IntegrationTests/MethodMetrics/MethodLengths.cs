@@ -1,5 +1,6 @@
 ﻿using System;
 using andrena.Usus.net.Core.Verification;
+using System.Linq;
 
 namespace Usus.net.Core.IntegrationTests.MethodMetrics
 {
@@ -94,6 +95,13 @@ namespace Usus.net.Core.IntegrationTests.MethodMetrics
         {
             bool c1 = true;
             if (c1) Console.WriteLine();
+        }
+
+        [ExpectNumberOfStatements(4)]//compiler creates while/if/catch
+        public static void MethodWithForeach()
+        {
+            foreach (var item in Enumerable.Repeat(0, 2))
+                Console.WriteLine(item);
         }
     }
 }

@@ -17,7 +17,7 @@ namespace andrena.Usus.net.Core.Metrics.Methods
         private static int CalculateStatements(this IMethodDefinition method, PdbReader pdb, IMetadataHost host)
         {
             var methodBody = method.Decompile(pdb, host);
-            var statementCollector = new StatementCollector();
+            var statementCollector = new StatementCollector(pdb);
             statementCollector.Traverse(methodBody.Statements());
             return statementCollector.Result.Count();
         }

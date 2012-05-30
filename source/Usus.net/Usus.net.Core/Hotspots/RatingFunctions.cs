@@ -23,8 +23,8 @@ namespace andrena.Usus.net.Core.Hotspots
 
         public static double RateMethodLength(this MethodMetricsReport metrics)
         {
-            if (metrics.NumberOfLogicalLines > Limits.MethodLength)
-                return ((1.0 / Limits.MethodLength) * metrics.NumberOfLogicalLines) - 1;
+            if (metrics.MethodLength > Limits.MethodLength)
+                return ((1.0 / Limits.MethodLength) * metrics.MethodLength) - 1;
             else
                 return 0.0;
         }

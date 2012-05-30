@@ -16,6 +16,14 @@ namespace andrena.Usus.net.Core.Reports
         public int NumberOfLogicalLines { get; internal set; }
         public IEnumerable<string> TypeDependencies { get; internal set; }
 
+        public int MethodLength
+        {
+            get
+            {
+                return NumberOfLogicalLines < 0 ? NumberOfStatements : NumberOfLogicalLines;
+            }
+        }
+
         internal MethodMetricsReport()
         {
         }

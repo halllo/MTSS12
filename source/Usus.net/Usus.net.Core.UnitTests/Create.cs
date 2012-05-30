@@ -57,5 +57,15 @@ namespace Usus.net.Core.UnitTests
             var metrics = new MethodMetricsReport { NumberOfLogicalLines = ml };
             return metrics.Rate().RatedMethodLength;
         }
+
+        public static double RatedMethodLength(int numberOfLogicalLines, int numberOfStatements)
+        {
+            var metrics = new MethodMetricsReport
+            {
+                NumberOfLogicalLines = numberOfLogicalLines,
+                NumberOfStatements = numberOfStatements
+            };
+            return metrics.Rate().RatedMethodLength;
+        }
     }
 }

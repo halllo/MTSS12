@@ -44,6 +44,12 @@ namespace Usus.net.Core.UnitTests
         }
 
         [TestMethod]
+        public void Rate_MethodLengthMinus1_FallbackToStatementsRated10()
+        {
+            Assert.AreEqual(0.111111, Create.RatedMethodLength(-1, 10), DELTA);
+        }
+
+        [TestMethod]
         public void Rate_MethodLength0_Rated0()
         {
             Assert.AreEqual(0, Create.RatedMethodLength(0));

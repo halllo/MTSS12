@@ -21,7 +21,7 @@ namespace andrena.Usus.net.Core.Hotspots
 
         public IEnumerable<MethodMetricsReport> OfMethodLength()
         {
-            return MethodsWhereOverLimit(m => m.NumberOfLogicalLines, l => l.MethodLength);
+            return MethodsWhereOverLimit(m => m.MethodLength, l => l.MethodLength);
         }
 
         private IEnumerable<MethodMetricsReport> MethodsWhereOverLimit<T>(Func<MethodMetricsReport, T> metricSelector, Func<RatingFunctionLimits, T> limitSelector)
