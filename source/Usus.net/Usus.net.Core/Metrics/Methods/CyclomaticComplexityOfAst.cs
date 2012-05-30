@@ -1,6 +1,5 @@
 ﻿using andrena.Usus.net.Core.AssemblyNavigation;
 using Microsoft.Cci;
-using Microsoft.Cci.ILToCodeModel;
 
 namespace andrena.Usus.net.Core.Metrics.Methods
 {

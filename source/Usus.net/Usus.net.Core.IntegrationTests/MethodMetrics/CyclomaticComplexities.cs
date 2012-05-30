@@ -43,9 +43,9 @@ namespace Usus.net.Core.IntegrationTests.MethodMetrics
             else
                 Console.WriteLine();
         }
-
+        
         [ExpectCyclomaticComplexity(6)]
-        public static void MethodWitNestedIfs()
+        public static void MethodWithNestedIfs()
         {
             bool c1 = true;
             bool c2 = true;
@@ -65,10 +65,84 @@ namespace Usus.net.Core.IntegrationTests.MethodMetrics
         }
 
         [ExpectCyclomaticComplexity(2)]
+        public static void MethodWithIf1Arg()
+        {
+            bool c1 = true;
+            if (c1)
+                Console.WriteLine();
+        }
+
+        [ExpectCyclomaticComplexity(3)]
+        public static void MethodWithIf2Args()
+        {
+            bool c1 = true;
+            bool c2 = true;
+            if (c1 && c2)
+                Console.WriteLine();
+        }
+
+        [ExpectCyclomaticComplexity(4)]
+        public static void MethodWithIf3Args()
+        {
+            bool c1 = true;
+            bool c2 = true;
+            bool c3 = true;
+            if (c1 || c2 || c3)
+                Console.WriteLine();
+        }
+
+        [ExpectCyclomaticComplexity(5)]
+        public static void MethodWithIf4Args()
+        {
+            bool c1 = true;
+            bool c2 = true;
+            bool c3 = true;
+            bool c4 = true;
+            if (c1 && c2 && c3 && c4)
+                Console.WriteLine();
+        }
+
+        [ExpectCyclomaticComplexity(5)]
+        public static void MethodWithIf4ArgsCascaded()
+        {
+            bool c1 = true;
+            bool c2 = true;
+            bool c3 = true;
+            bool c4 = true;
+            if (c1)
+                if (c2)
+                    if (c3)
+                        if (c4)
+                            Console.WriteLine();
+        }
+
+        [ExpectCyclomaticComplexity(9)]
+        public static void MethodWith2Ifs4Args()
+        {
+            bool c1 = true;
+            bool c2 = true;
+            bool c3 = true;
+            bool c4 = true;
+            if (c1 && c2 && c3 || c4)
+                Console.WriteLine();
+            if (c1 && c2 && c3 || c4)
+                Console.WriteLine();
+        }
+
+        [ExpectCyclomaticComplexity(2)]
         public static void MethodWithWhile()
         {
             bool c1 = true;
             while (c1)
+                Console.WriteLine();
+        }
+
+        [ExpectCyclomaticComplexity(3)]
+        public static void MethodWithWhile2Args()
+        {
+            bool c1 = true;
+            bool c2 = true;
+            while (c1 || c2)
                 Console.WriteLine();
         }
 
