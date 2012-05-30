@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using andrena.Usus.net.Core.AssemblyNavigation;
 using Microsoft.Cci;
 
 namespace andrena.Usus.net.Core.Metrics.Methods
@@ -11,7 +12,7 @@ namespace andrena.Usus.net.Core.Metrics.Methods
         {
             if (pdb != null)
             {
-                var locations = OperationLocation.From(method, pdb);
+                var locations = method.LocatedOperations(pdb);
                 return locations.DifferenceBetweenStartAndEndlines();
             }
             return -1;

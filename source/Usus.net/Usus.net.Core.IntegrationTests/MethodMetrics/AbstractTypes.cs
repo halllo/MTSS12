@@ -11,7 +11,7 @@ namespace Usus.net.Core.IntegrationTests.MethodMetrics
             [ExpectNumberOfRealLines(0)]
             [ExpectTypeDependency("System.Exception")]
             [ExpectTypeDependency("System.NullReferenceException")]
-            [ExpectCyclomaticComplexity(1)]
+            [ExpectCyclomaticComplexity(0)]
             NullReferenceException DoSomething(Exception e);
         }
 
@@ -21,7 +21,7 @@ namespace Usus.net.Core.IntegrationTests.MethodMetrics
             [ExpectNumberOfRealLines(0)]
             [ExpectTypeDependency("System.Exception")]
             [ExpectTypeDependency("System.NullReferenceException")]
-            [ExpectCyclomaticComplexity(1)]
+            [ExpectCyclomaticComplexity(0)]
             public abstract NullReferenceException DoSomething(Exception e);
         }
     }

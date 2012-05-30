@@ -1,27 +1,25 @@
-using System;
+using System.Linq;
+using andrena.Usus.net.Core.AssemblyNavigation;
 using Microsoft.Cci;
 
 namespace andrena.Usus.net.Core.Metrics.Methods
 {
     internal static class NumberOfStatements
     {
-        public static int Of(IMethodDefinition method)
+        public static int Of(IMethodDefinition method, PdbReader pdb, IMetadataHost host)
         {
-            int num = 0;
-            bool flag = false;
-            foreach (var operation in method.Body.Operations)
-            {
-                if (operation.OperationCode != OperationCode.Ret)
-                {
-                    flag = true;
-                }
-                num += 1;
-            }
-            if (flag)
-            {
-                num = (int)Math.Max((double)num, 5.0);
-            }
-            return (int)Math.Round((double)(((double)num) / 5.0));
+            if (method.HasOperations())
+                return method.CalculateStatements(pdb, host);
+            else
+                return 0;
+        }
+
+        private static int CalculateStatements(this IMethodDefinition method, PdbReader pdb, IMetadataHost host)
+        {
+            var methodBody = method.Decompile(pdb, host);
+            var statementCollector = new StatementCollector();
+            statementCollector.Traverse(methodBody.Statements());
+            return statementCollector.Result.Count();
         }
     }
 }

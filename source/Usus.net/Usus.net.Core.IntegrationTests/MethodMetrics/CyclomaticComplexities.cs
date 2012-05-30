@@ -43,7 +43,7 @@ namespace Usus.net.Core.IntegrationTests.MethodMetrics
             else
                 Console.WriteLine();
         }
-        
+
         [ExpectCyclomaticComplexity(6)]
         public static void MethodWitNestedIfs()
         {
@@ -98,11 +98,11 @@ namespace Usus.net.Core.IntegrationTests.MethodMetrics
                 Console.WriteLine();
         }
 
-        [ExpectCyclomaticComplexity(3)]//compiler creates iterator calls
+        [ExpectCyclomaticComplexity(3)]//compiler creates while/if/catch
         public static void MethodWithForeach()
         {
             foreach (var item in Enumerable.Repeat(0, 2))
-                Console.WriteLine();
+                Console.WriteLine(item);
         }
 
         [ExpectCyclomaticComplexity(3)]
@@ -136,10 +136,26 @@ namespace Usus.net.Core.IntegrationTests.MethodMetrics
             catch (NotFiniteNumberException)
             {
                 bool c1 = true;
-                if (c1) 
+                if (c1)
                     Console.WriteLine();
             }
         }
 
+        [ExpectCyclomaticComplexity(4)]
+        public static void MethodWithSwitch()
+        {
+            int i = 3;
+            switch (i)
+            {
+                case 1:
+                    Console.WriteLine(i); break;
+                case 2:
+                    Console.WriteLine(i); break;
+                case 3:
+                    Console.WriteLine(i); break;
+                default:
+                    Console.WriteLine(i); break;
+            }
+        }
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using andrena.Usus.net.Core.AssemblyNavigation;
 using Microsoft.Cci;
 using Microsoft.Cci.Immutable;
 
@@ -8,7 +9,7 @@ namespace andrena.Usus.net.Core.Metrics.Methods
     {
         public static IEnumerable<string> Of(IMethodDefinition method)
         {
-            return method.OperationTypes(
+            return method.TypesOfOperations(
                 o => o.IsCallOperation(), 
                 o => o.CalleeTypes());
         }

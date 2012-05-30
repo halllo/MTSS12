@@ -33,13 +33,13 @@ namespace andrena.Usus.net.Core.AssemblyNavigation
             if (pdbPath != null)
                 AnalyzeAssemblyInHostWithProgramDatabase(assembly, host, pdbPath);
             else
-                AnalyzeTypes(assembly, null);
+                AnalyzeTypes(assembly, null, host);
         }
 
         private void AnalyzeAssemblyInHostWithProgramDatabase(IAssembly assembly, IMetadataHost host, string pdbPath)
         {
             using (var pdb = GetProgramDatabase(host, pdbPath))
-                AnalyzeTypes(assembly, pdb);
+                AnalyzeTypes(assembly, pdb, host);
         }
 
         private PdbReader GetProgramDatabase(IMetadataHost host, string pdbPath)
@@ -47,24 +47,24 @@ namespace andrena.Usus.net.Core.AssemblyNavigation
             return new PdbReader(File.OpenRead(pdbPath), host);
         }
 
-        private void AnalyzeTypes(IAssembly assembly, PdbReader pdb)
+        private void AnalyzeTypes(IAssembly assembly, PdbReader pdb, IMetadataHost host)
         {
             foreach (var type in assembly.GetTypesNotGenerated())
             {
                 AnalyzeType(type, pdb);
-                AnalyzeMethods(type, pdb);
+                AnalyzeMethods(type, pdb,host);
             }
         }
 
-        private void AnalyzeMethods(INamedTypeDefinition type, PdbReader pdb)
+        private void AnalyzeMethods(INamedTypeDefinition type, PdbReader pdb, IMetadataHost host)
         {
             foreach (var method in type.GetMethods())
             {
-                Report.AddMethodReport(AnalyzeMethod(method, pdb));
+                Report.AddMethodReport(AnalyzeMethod(method, pdb, host));
             }
         }
 
         protected abstract void AnalyzeType(INamedTypeDefinition type, PdbReader pdb);
-        protected abstract MethodMetricsReport AnalyzeMethod(IMethodDefinition method, PdbReader pdb);
+        protected abstract MethodMetricsReport AnalyzeMethod(IMethodDefinition method, PdbReader pdb, IMetadataHost host);
     }
 }

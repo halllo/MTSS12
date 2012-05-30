@@ -37,11 +37,23 @@
     <AssemblyOriginatorKeyFile>Key.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Cci.CodeModel">
+      <HintPath>..\CCI-Libs\Microsoft.Cci.CodeModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Cci.ILToCodeModel">
+      <HintPath>..\CCI-Libs\Microsoft.Cci.ILToCodeModel.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Cci.MetadataHelper">
       <HintPath>..\CCI-Libs\Microsoft.Cci.MetadataHelper.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Cci.MetadataModel">
       <HintPath>..\CCI-Libs\Microsoft.Cci.MetadataModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Cci.MutableCodeModel">
+      <HintPath>..\CCI-Libs\Microsoft.Cci.MutableCodeModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Cci.MutableMetadataModel">
+      <HintPath>..\CCI-Libs\Microsoft.Cci.MutableMetadataModel.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Cci.PdbReader">
       <HintPath>..\CCI-Libs\Microsoft.Cci.PdbReader.dll</HintPath>
@@ -69,12 +81,15 @@
     <Compile Include="Hotspots\RatedMetrics.cs" />
     <Compile Include="Hotspots\RatingFunctionLimits.cs" />
     <Compile Include="Hotspots\RatingFunctions.cs" />
+    <Compile Include="Metrics\Methods\CyclomaticComplexityOfAst.cs" />
+    <Compile Include="Metrics\Methods\CyclomaticComplexityCalculator.cs" />
+    <Compile Include="Metrics\Methods\NumberOfIlOperations.cs" />
     <Compile Include="Metrics\Methods\NumberOfRealLines.cs" />
-    <Compile Include="Metrics\Methods\OperationLocation.cs" />
+    <Compile Include="AssemblyNavigation\OperationLocation.cs" />
+    <Compile Include="Metrics\Methods\StatementCollector.cs" />
     <Compile Include="Metrics\Methods\TypeDependenciesOfCallOperations.cs" />
     <Compile Include="Metrics\Methods\TypeDependenciesOfCatches.cs" />
     <Compile Include="Metrics\Methods\TypeDependenciesOfNewOperations.cs" />
-    <Compile Include="Metrics\Methods\TypeDependenciesOfOperations.cs" />
     <Compile Include="Metrics\Methods\TypeDependenciesOfSignature.cs" />
     <Compile Include="Metrics\Methods\TypeDependenciesOfTypeMentions.cs" />
     <Compile Include="Metrics\Methods\TypeDependenciesOfVariables.cs" />
@@ -95,7 +110,7 @@
     <Compile Include="Reports\MethodMetricsReport.cs" />
     <Compile Include="Metrics\Methods\NumberOfStatements.cs" />
     <Compile Include="Reports\MetricsReport.cs" />
-    <Compile Include="Metrics\Methods\CyclomaticComplexity.cs" />
+    <Compile Include="Metrics\Methods\CyclomaticComplexityOfIl.cs" />
     <Compile Include="Metrics\Methods\NumberOfLogicalLines.cs" />
     <Compile Include="AssemblyNavigation\AssemblyVisitor.cs" />
     <Compile Include="Metrics\Methods\TypeDependencies.cs" />

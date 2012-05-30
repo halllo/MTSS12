@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
-using Microsoft.Cci;
 using System.Linq;
-using System;
+using Microsoft.Cci;
 
 namespace andrena.Usus.net.Core.Metrics.Methods
 {
-    internal static class CyclomaticComplexity
+    internal static class CyclomaticComplexityOfIl
     {
         public static int Of(IMethodDefinition method)
         {

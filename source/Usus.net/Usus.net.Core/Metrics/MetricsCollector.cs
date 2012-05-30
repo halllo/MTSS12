@@ -14,15 +14,15 @@ namespace andrena.Usus.net.Core.Metrics
             Console.WriteLine();
         }
 
-        protected override MethodMetricsReport AnalyzeMethod(IMethodDefinition method, PdbReader pdb)
+        protected override MethodMetricsReport AnalyzeMethod(IMethodDefinition method, PdbReader pdb, IMetadataHost host)
         {
             return new MethodMetricsReport
             {
                 Name = method.Name(),
                 Signature = method.Signature(),
                 CompilerGenerated = method.HasAnyGeneratedCodeAttributes(),
-                CyclomaticComplexity = CyclomaticComplexity.Of(method),
-                NumberOfStatements = NumberOfStatements.Of(method),
+                CyclomaticComplexity = CyclomaticComplexityOfAst.Of(method, pdb, host),
+                NumberOfStatements = NumberOfStatements.Of(method, pdb, host),
                 NumberOfRealLines = NumberOfRealLines.Of(method, pdb),
                 NumberOfLogicalLines = NumberOfLogicalLines.Of(method, pdb),
                 TypeDependencies = TypeDependencies.Of(method)
