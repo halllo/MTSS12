@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Cci;
 using Microsoft.Cci.ILToCodeModel;
 
@@ -18,7 +19,8 @@ namespace andrena.Usus.net.Core.Metrics.Methods
         {
             if (statement is IEmptyStatement) return;
             if (statement is IReturnStatement && (statement as IReturnStatement).Expression == null) return;
-            if (!(statement is BasicBlock)) statements.Add(statement);
+            if (statement.Locations.Any() || statement is IConditionalStatement) 
+                statements.Add(statement);
             base.TraverseChildren(statement);
         }
     }

@@ -9,12 +9,12 @@ namespace Usus.net.Core.IntegrationTests.MethodMetrics
         {
             [ExpectNumberOfLogicalLines(0)]
             [ExpectNumberOfRealLines(0)]
-            [ExpectNumberOfStatements(1)]
+            [ExpectNumberOfStatements(0)]
             get;
 
             [ExpectNumberOfLogicalLines(0)]
             [ExpectNumberOfRealLines(0)]
-            [ExpectNumberOfStatements(1)]
+            [ExpectNumberOfStatements(0)]
             set;
         }
 
