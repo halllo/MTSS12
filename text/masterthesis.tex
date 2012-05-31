@@ -33,8 +33,8 @@ titlepage,						% Titelei auf eigener Seite
 \newshadetheorem{definition}{Definition}
 \newshadetheorem{goal}{Ziel}
 \definecolor{shadethmcolor}{rgb}{.95,.95,.95}   % Farbe des Hintergrundes  
-\definecolor{shaderulecolor}{rgb}{0.0,0.0,1.0}   % Farbe des Rahmens
-\setlength{\shadeboxrule}{0pt}   % Breite des Rahmens
+\definecolor{shaderulecolor}{rgb}{0.7,0.7,0.7}   % Farbe des Rahmens
+\setlength{\shadeboxrule}{1.0pt}   % Breite des Rahmens
 
 \begin{document}
 
@@ -573,6 +573,7 @@ Die Erweiterung \emph{Code Metrics Viewer}\footnote[2]{Download: "`Code Metrics 
 
 
 \section{NDepend}
+\label{sec:ndepend}
 Für die grafische Darstellung des Abhängigkeitsgraphen kann das kommerzielle Werkzeug NDepend\footnote[1]{NDepend "`Tutorial with explanations and screenshots"' \url{http://www.ndepend.com/GettingStarted.aspx\#Tuto}} (299\EUR für eine Einzelplatz-Lizenz) genutzt werden. Dieses Tool ist neben der umfangreichen Darstellung von Zusammenhängen und Abhängigkeiten in der Lage, viele verschiedene Metriken auf Anwendungs-, Projekt-, Namesraum-, Klassen- und Methoden-Ebene zu berechnen. Die Abhängigkeiten können, wie im Architektur-Explorer in Visual Studio Ultimate, in Form einer Matrix oder in Form eines Diagrams veranschaulicht werden. Dafür analysiert NDepend genau wie das Code Metrics Power Tool die pro Projekt von dem Compiler erzeugten Assembly-Dateien (exe oder dll). Das Programm ist neben .NET auch für Java und C++ erhältlich und kann als eigenständige Anwendung oder als Visual Studio Addin verwendet werden.
 
 \subsection{Code Query Language}
@@ -725,10 +726,23 @@ Die \emph{Common Compiler Infrastructure} (CCI) ist eine Sammlung von Bibliothek
 \end{figure}
 
 \subsection{CCI Metadata}
-Im Gegensatz zu der \emph{FxCop} API kann eine .NET-Assembly mit CCI direkt untersucht werden, ohne das die Analyse in Form einer einschränkenden Regel parallelisiert erfolgt. CCI überlässt dem Verwender der Bibliothek ob und wie die Untersuchung stattfinden soll. Mit einem \texttt{PeReader.DefaultHost} können PE-Dateien (\emph{Portable Executables} also dll- oder exe-Dateien) eingelesen werden. Zusätzlich kann die vom Compiler erzeugte pdb-Datei mit einem \texttt{PdbReader} importiert werden. Die pdb-Datei (\emph{Program Database}) enthält laut Microsoft \cite{PDBFile} Debug- und Projekt-Information wie beispielsweise die Datei- und Zeilenzuordnung der erzeugten Typen und Funktionen. Mit der \texttt{IAssembly.GetAllTypes()}-Methode können alle Typen ermittelt werden. Alle Methoden und Properties eines Typs, können mit \texttt{INamedTypeDefinition.Methods} bestimmt werden. Der Inhalt von Methoden und Properties kann in Form von CIL-Anweisungen mit \texttt{IMethodBody.Operations} genauer betrachtet werden. So lassen sich beispielsweise alle lokalen Variablen und Methodenaufrufe lokalisieren, um Abhängigkeiten der Methode zu anderen Typen zu finden. Die CIL-Anweisung eines Methodenaufrufs enthält immer auch den Typ, der das Aufrufziel darstellt. Zusammen mit Attributen, Parametern und Rückgabewerten kann der Abhängigkeitsgraph eines Typs ermittelt werden. Die zyklomatische Komplexität einer Methode kann ebenfalls über die CIL-Anweisungen bestimmt werden, was durch das Code Metrics Power Tool aus Unterabschnitt \ref{subsec:vscodemetricspowertool} sowie Steve Gilham \cite{CCperCIL} demonstriert wird. Um die Methodenlänge einer Funktion aus den CIL-Anweisungen zu ermitteln, kann auch hier die Funktionalität durch das Code Metrics Power Tool inspiriert werden. Wenn zu der .NET-Assembly zusätzlich eine pdb-Datei existiert, kann außerdem die Start- und Endzeile jeder Anweisung auf die Methode bezogen werden, ähnlich der Lösung für die \emph{FxCop} Regel.
+\label{subsec:ccimetadata}
+Im Gegensatz zu der \emph{FxCop} API kann eine .NET-Assembly mit CCI direkt untersucht werden, ohne das die Analyse in Form einer einschränkenden Regel parallelisiert erfolgt. CCI überlässt dem Verwender der Bibliothek ob und wie die Untersuchung stattfinden soll. Mit einem \texttt{PeReader.DefaultHost} können Assemblies eingelesen werden, die von CCI als PE-Dateien bezeichnet werden. PE-Dateien werden hier wie folgt definiert.
+\begin{definition}[Portable Executable]
+Eine \emph{Portable Executable}-Datei (PE-Datei), also eine transportierbare und ausführbare Datei, ist das Ergebnis einer Kompilierung eines Visual Studio .NET-Projekts. Die Datei ist entweder eine Bibliothek (dll-Datei) oder eine direkt ausführbare Datei (exe-Datei).
+\end{definition}
+Zusätzlich kann die vom Compiler erzeugte pdb-Datei mit einem \texttt{PdbReader} importiert werden. Eine pdb-Datei wird hier wie folgt definiert.
+\begin{definition}[Program Database]
+Die \emph{Program Database}-Datei (pdb-Datei) enthält die Datei- und Zeilenzuordnung der kompilierten Typen und Funktionen in einer PE-Datei. Laut Microsoft \cite{PDBFile} enthält sie generell Debug- und Projekt-Information.
+\end{definition}
+Mit der \texttt{IAssembly.GetAllTypes()}-Methode können alle Typen ermittelt werden. Alle Methoden und Properties eines Typs, können mit \texttt{INamedTypeDefinition.Methods} bestimmt werden. Der Inhalt von Methoden und Properties kann in Form von CIL-Anweisungen mit \texttt{IMethodBody.Operations} genauer betrachtet werden. So lassen sich beispielsweise alle lokalen Variablen und Methodenaufrufe lokalisieren, um Abhängigkeiten der Methode zu anderen Typen zu finden. Die CIL-Anweisung eines Methodenaufrufs enthält immer auch den Typ, der das Aufrufziel darstellt. Zusammen mit Attributen, Parametern und Rückgabewerten kann der Abhängigkeitsgraph eines Typs ermittelt werden. Die zyklomatische Komplexität einer Methode kann ebenfalls über die CIL-Anweisungen bestimmt werden, was durch das Code Metrics Power Tool aus Unterabschnitt \ref{subsec:vscodemetricspowertool} sowie Steve Gilham \cite{CCperCIL} demonstriert wird. Um die Methodenlänge einer Funktion aus den CIL-Anweisungen zu ermitteln, kann auch hier die Funktionalität durch das Code Metrics Power Tool inspiriert werden. Wenn zu der .NET-Assembly zusätzlich eine pdb-Datei existiert, kann außerdem die Start- und Endzeile jeder Anweisung auf die Methode bezogen werden, ähnlich der Lösung für die \emph{FxCop} Regel.
 
 \subsection{CCI Code and AST Components}
-Soweit wurden nur Funktionen von \emph{CCI Metadata} betrachtet. \emph{CCI Code and AST Components} erlaubt es das Quellcode-Modell einer Methode in Form eines abstrakten Syntax-Baums (AST) zu analysieren. Philip Newcomb beschreibt einen AST in seinem Tutorial über den AST Metamodel Standard \cite{ASTMetamodel} als formale Repräsentation der syntaktischen Struktur einer Software auch innerhalb Methoden. Um einen solchen Baum zu betrachten, können Besucher verwendet werden. Beispielsweise erlaubt eine Objekt vom Typ \texttt{CodeTraverser} jede strukturelle Stelle der Assembly mit überladbaren Methoden, von denen einige in Listing \ref{listing:ccicodeastsample} aufgeführt sind, zu besuchen.
+Soweit wurden nur Funktionen von \emph{CCI Metadata} betrachtet. \emph{CCI Code and AST Components} erlaubt es das Quellcode-Modell einer Methode in Form eines abstrakten Syntax-Baums (AST) zu analysieren. Philip Newcomb beschreibt einen AST in seinem Tutorial über den AST Metamodel Standard \cite{ASTMetamodel}. In der vorliegenden Master-Thesis wird ein AST wie folgt definiert.
+\begin{definition}[Abstrakter Syntax-Baum]
+Ein abstrakter Syntax-Baum (engl. Abstract Syntax Tree) ist einer formale Repräsentation der syntaktischen Struktur einer Software auch innerhalb Methoden. Besonders in Methoden enthält der AST einen Knoten für jede Anweisung. Wenn diese Anweisung aus mehreren anderen Anweisungen besteht, besitzt der Knoten für diese Anweisungen entsprechende Unter-Knoten.
+\end{definition} 
+Um einen solchen Baum zu betrachten, können Besucher verwendet werden. Beispielsweise erlaubt eine Objekt vom Typ \texttt{CodeTraverser} jede strukturelle Stelle der Assembly mit überladbaren Methoden, von denen einige in Listing \ref{listing:ccicodeastsample} aufgeführt sind, zu besuchen.
 \begin{lstlisting}[caption={\emph{CCI Code and AST Components} \texttt{CodeTraverser}-Methoden},label={listing:ccicodeastsample}]
 TraverseChildren(IConditionalStatement conditionalStatement) {...}//if
 TraverseChildren(IConditional conditional) {...}//bool expression
@@ -848,47 +862,78 @@ Zusammenfassend ist zu sagen, das die \emph{Common Compiler Infrastructure} (CCI
 Nachdem das Usus-Plugin für Java einfach \emph{Usus} heißt, wird die Visual Studio Erweiterung, die in der vorliegenden Master-Thesis entwickelt wird, im weiteren Verlauf als \emph{Usus.net} bezeichnet. Die Architektur von Usus.net, das in Abschnitt \ref{sec:architecture} noch grob als System bezeichnet wurde, besteht aus drei Teilen, die in Abbildung \ref{fig:architecture2} abgebildet sind.
 \begin{figure}[h]
 	\centering
-		\includegraphics[width=10cm]{images/architektur2.jpg}
+		\includegraphics[width=8cm]{images/architektur2.jpg}
 	\caption{Architektur von Usus.net}
 	\label{fig:architecture2}
 \end{figure}
 \texttt{Usus.net} als Visual Studio Erweiterung verwendet Oberflächen-Elemente, die in einer Bibliothek zusammengefasst und unabhängig von Visual Studio sind. Die Oberflächen sind Bestandteil der Bibliothek \texttt{Usus.net.View}. Diese verwendet eine weitere Bibliothek, die den allgemeinen Funktionsumfang von Usus darstellt: \texttt{Usus.net.Core} übernimmt die statische Code-Analyse von Assemblies, die Bewertung der Metriken und die Hotspot-Analyse. Diese Bibliothek kann sowohl über die Kommandozeile bedient werden, als auch in andere Anwendungen integriert werden. In diesem Kapitel wird Usus.net aus der Perspektive von \texttt{Usus.net.Core} vorgestellt. Dafür wird die konkrete Berechnung der Metriken mit der \emph{Common Compiler Infrastructure} beschrieben, sowie auf das zugrunde liegende Objektmodell eingegangen. Das Objektmodell dient dazu die Ergebnisse der Analyse weiter zu verarbeiten. Abschließend wird das Usus.net Verifikations-Framework vorgestellt, mit dem \texttt{Usus.net.Core} selbst getestet wurde.
 
+
 \section{Metrikberechnung}
-In diesem Abschnitt wird vorgestellt, wie die Usus-Metriken aus Abschnitt \ref{sec:metrics} von Usus.net berechnet werden.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+In diesem Abschnitt wird vorgestellt, wie die Usus-Metriken aus Abschnitt \ref{sec:metrics} von Usus.net berechnet werden. In Abschnitt \ref{sec:cci} wurde erklärt das CCI Assemblies analysiert. Deswegen beginnt auch die Berechnung der Metriken mit einem Pfad zu einer \emph{Portable Executable}-Datei, wie sie in Unterabschnitt \ref{subsec:ccimetadata} definiert wurde. Abbildung \ref{fig:metriccalc} zeigt die Klassen, die an der Berechnung beteiligt sind.
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=12cm]{images/metriccalc.jpg}
+	\caption{Metrikberechnung von Usus.net}
+	\label{fig:metriccalc}
+\end{figure}
+Ein \texttt{AssemblyVisitor}-Objekt ist in der Lage eine PE-Datei einzulesen und definierte Typen und Methoden zu lokalisieren. Dies ist mit \emph{CCI Metadata} möglich. \texttt{MetricCollector} erbt die Analyse-Funktionalität von \texttt{AssemblyVisitor} und berechnet für die gefundenen Typen und Methoden die Metriken. Für jede zu berechnende Metrik existiert eine Klasse, die die Berechnung durchführen kann. Alle Ergebnisse werden in einem \texttt{MetricsReport}-Objekt gesammelt und in Form eines Berichts im \texttt{MetricCollector}-Objekt hinterlegt. Der Aufrufer kann diesen Bericht jederzeit einsehen. Abschnitt \ref{sec:ususobjectmodel} beschreibt diesen Bericht als Bestandteil des Objektmodells ausführlicher.
+\paragraph{}
+Listing \ref{listing:ususnetcoreusage} zeigt einen vereinfachten Codeausschnitt aus \texttt{Usus.net.Console} der die statische Code-Analyse durchführt und sämtliche Metriken aller Methoden einfach auf der Console ausgibt.
+\begin{lstlisting}[caption={Aufruf der Code-Analyse von \texttt{Usus.net.Core} in \texttt{Usus.net.Console}},label={listing:ususnetcoreusage}]
+var metrics = Analyze.PortableExecutable(assemblyToAnalyze);
+foreach (var method in metrics.Methods) {
+	Console.WriteLine("Signature: " + method.Signature);
+	Console.WriteLine("CyclomaticComplexity: " + method.CyclomaticComplexity);
+	...
+}
+\end{lstlisting}
+Nachdem die Infrastruktur der Metrikberechnung hiermit beschrieben wurde, werden in den folgenden Unterabschnitten die konkreten Berechnungen der einzelnen Metriken vorgestellt.
 
 \subsection{Zyklomatische Komplexität}
-todo
+Die zyklomatische Komplexität einer Methode gibt an, wie viele unterschiedliche Ablaufpfade durch eine Methode existieren. In Unter-Unterabschnitt \ref{subsubsec:cyclomaticcomplexity} wurde diese Metrik ausführlicher erklärt. In Usus.net kann die Berechnung auf zwei verschiedene Arten durchgeführt werden. Zum einen kann ausschließlich \emph{CCI Metadata} verwendet und alle CIL-Anweisungen die eine Entscheidung treffen aufsummiert werden. Die Klasse \texttt{CyclomaticComplexityOfIl} implementiert diesbezüglich eine einfache Abwandlung des Algorithmus, der unter anderem von Steve Gilham vorgestellt wurde \cite{CILBasedCC} und laut ihm angeblich auch in frühen Versionen von NDepend (Abschnitt \ref{sec:ndepend}) verwendet wurde. Die andere Variante, die in Usus.net standardmäßig verwendet wird, nutzt \emph{CCI Code and AST Components}. Die Klasse \texttt{CyclomaticComplexityOfAst} erzeugt ein spezielles Besucher-Objekt vom Typ \texttt{CyclomaticComplexityCalculator}, das den aus dem Methodenrumpf erzeugten abstrakten Syntaxbaum besucht. Die Erzeugung des AST aus der Methoden-Definition übernimmt CCI. Listing \ref{listing:cyclomaticcomplexityofast} zeigt den Code der die zyklomatische Komplexität in \texttt{Usus.net.Core} bestimmt.
+\begin{lstlisting}[caption={Statement-Analyse zur Bestimmung der zyklomatischen Komplexität},label={listing:cyclomaticcomplexityofast}]
+var methodBody = method.Decompile(pdb, host);
+var cyclomaticComplexityCalculator = new CyclomaticComplexityCalculator();
+cyclomaticComplexityCalculator.Traverse(methodBody.Statements());
+var result = cyclomaticComplexityCalculator.Result;
+\end{lstlisting}
+Das \texttt{CyclomaticComplexityCalculator}-Objekt erbt die Funktionalität, sämtliche Anweisungen (engl. Statements) in einem Methodenrumpf zu besuchen, von \texttt{CodeTraverser}, einer Klasse in der CCI. Jede Bedingung, jede \texttt{if}-, \texttt{while}-, \texttt{for}-, \texttt{case}- und \texttt{catch}-Anweisung erhöht einen anfangs mit 1 initiierten Zähler. Obwohl \texttt{CodeTraverser} auch eine Behandlungsroutine für \texttt{foreach}-Anweisungen anbietet, ist die CCI momentan nicht in der Lage diese als solche erfolgreich zu erkennen. Dies hat zur Folge, das \texttt{foreach}-Anweisungen, die vom Compiler in \texttt{while}/\texttt{if}/\texttt{finally}-Anweisungen übersetzt werden, auch also solche erkannt werden. Durch das \texttt{while} und das \texttt{if} entstehen also zwei Stellen, die eine Entscheidung treffen, während im Quellcode mit \texttt{foreach} nur eine erkennbar ist. Die in Usus.net berechnete zyklomatische Komplexität einer Methode entspricht also der Komplexität, die der Compiler generiert und nicht der, die durch den Quellcode suggeriert wird.
+
 
 \subsection{Methodenlänge}
-todo
+Die Länge einer Methode sagt etwas darüber aus, wie viele Dinge diese Methode ausführt. Eine kurze Methode ist einfacher zu verstehen und zu verändern als eine lange. In Unter-Unterabschnitt \ref{subsubsec:methodlength} wurde diese Metrik und ihre Varianten genauer beschrieben. Usus.net bestimmt drei verschiedene Methodenlängen. Als sehr nachvollziehbare Längenangabe wird wohl die Anzahl der Codezeilen gesehen, die Logik enthalten. Dieser Wert wird von der Klasse \texttt{NumberOfLogicalLines} bestimmt und ausschließlicher Verwendung von \emph{CCI Metadata}. Alle CIL-Anweisungen, außer leeren Anweisungen (\texttt{Nop}), Block-Verlassen-Anweisungen (\texttt{Leave.S}) und Methoden-Rückgabe-Anweisungen (\texttt{Ret}) werden dabei betrachtet. Listing \ref{listing:numberoflogicallines} zeigt den Code, der die betroffenen Codezeilen der CIL-Anweisungen (Operationen) findet und deren Anzahl bestimmt.
+\begin{lstlisting}[caption={Operation-Analyse zur Bestimmung der Anzahl der logischen Codezeilen},label={listing:numberoflogicallines}]
+var locations = method.LocatedOperations(pdb);
+var result = locations.GetAllStartLinesOfInterestingOpCodes().Distinct().Count();
+\end{lstlisting}
+Die Zuordnung der Codezeilen des Quelltexts vor der Kompilierung zu den CIL-Anweisungen danach kann nur durchgeführt werden, wenn zu der zu analysierenden PE-Datei eine pdb-Datei existiert. Wie in Unterabschnitt \ref{subsec:ccimetadata} definiert, beinhaltet die pdb-Datei die erforderlichen Zeilenangaben. Die CCI unterstützt die Analyse dieser Dateien ebenfalls mithilfe der Klasse \texttt{PdbReader}. Sollte keine pdb-Datei zur Verfügung stehen, bestimmt Usus.net den Ergebniswert der \texttt{NumberOfLogicalLines}-Metrik mit -1.
+\paragraph{}
+gleiches gilt für \texttt{NumberOfRealLines}.
+\paragraph{}
+Fallback ist \texttt{NumberOfStatements}.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \subsection{Kumulierte Komponentenabhängigkeit}
 todo
 
 
 \section{Objektmodell}
+\label{sec:ususobjectmodel}
 todo
 
 
