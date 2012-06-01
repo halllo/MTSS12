@@ -900,7 +900,6 @@ var result = cyclomaticComplexityCalculator.Result;
 \end{lstlisting}
 Das \texttt{CyclomaticComplexityCalculator}-Objekt erbt die Funktionalität, sämtliche Anweisungen (engl. Statements) in einem Methodenrumpf zu besuchen, von \texttt{CodeTraverser}, einer Klasse in der CCI. Jede Bedingung, jede \texttt{if}-, \texttt{while}-, \texttt{for}-, \texttt{case}- und \texttt{catch}-Anweisung erhöht einen anfangs mit 1 initiierten Zähler. Obwohl \texttt{CodeTraverser} auch eine Behandlungsroutine für \texttt{foreach}-Anweisungen anbietet, ist die CCI momentan nicht in der Lage diese als solche erfolgreich zu erkennen. Dies hat zur Folge, das \texttt{foreach}-Anweisungen, die vom Compiler in \texttt{while}/\texttt{if}/\texttt{finally}-Anweisungen übersetzt werden, auch also solche erkannt werden. Durch das \texttt{while} und das \texttt{if} entstehen also zwei Stellen, die eine Entscheidung treffen, während im Quellcode mit \texttt{foreach} nur eine erkennbar ist. Die in Usus.net berechnete zyklomatische Komplexität einer Methode entspricht also der Komplexität, die der Compiler generiert und nicht der, die durch den Quellcode suggeriert wird.
 
-
 \subsection{Methodenlänge}
 Die Länge einer Methode sagt etwas darüber aus, wie viele Dinge diese Methode ausführt. Eine kurze Methode ist einfacher zu verstehen und zu verändern als eine lange. In Unter-Unterabschnitt \ref{subsubsec:methodlength} wurde diese Metrik und ihre Varianten genauer beschrieben. Usus.net bestimmt drei verschiedene Methodenlängen.
 \paragraph{}
@@ -930,13 +929,16 @@ var result = Math.Max(0, lastLine - firstLine - 1);
 Wenn die pdb-Datei nicht existiert, wird der Wert der \texttt{NumberOfRealLines}-Metrik auf -1 gesetzt.
 
 \subsection{Kumulierte Komponentenabhängigkeit}
-todo
-
-
-
-
-
-
+Die Anzahl aller Klassen, von denen eine Klasse direkt und indirekt abhängig ist, ist auch unter kumulierte Komponentenabhängigkeit (CCD) bekannt und wurde bereits ausführlich in Unter-Unterabschnitt \ref{subsubsec:ccd} vorgestellt. Damit die direkten Abhängigkeiten einer Klasse bestimmt werden können müssen zunächst die direkten Klassenabhängigkeiten pro Methoden ermittelt werden. Jede Verwendung eines Typs innerhalb der Methodensignatur sowie dem Methodenrumpf muss erkannt werden. Usus.net verwendet dazu die Klasse \texttt{TypeDependencies}. Mithilfer der \emph{CCI Metadata}-Infrastruktur werden die CIL-Anweisungen der Methode nach Referenzen auf Typen untersucht. Die dabei verwendeten Strategien sind in Listing \ref{listing:typedependencies} zu sehen. Die Ergebnisse dieser Strategien werden in einer Liste konsolidiert, wobei doppelte Vorkommen ignoriert werden.
+\begin{lstlisting}[caption={Typen-Analyse zur Bestimmung der Klassenabhängigkeiten einer Methode},label={listing:typedependencies}]
+var result = Enumerable.Empty<string>()
+		.Union(TypeDependenciesOfSignature.Of(method))
+		.Union(TypeDependenciesOfVariables.Of(method))
+		.Union(TypeDependenciesOfCallOperations.Of(method))
+		.Union(TypeDependenciesOfNewOperations.Of(method))
+		.Union(TypeDependenciesOfCatches.Of(method))
+		.Union(TypeDependenciesOfTypeMentions.Of(method));
+\end{lstlisting}
 
 
 
