@@ -21,9 +21,9 @@ namespace andrena.Usus.net.Core.Metrics.Methods
         private static int DifferenceBetweenStartAndEndlines(this IEnumerable<OperationLocation> locations)
         {
             if (!locations.Any()) return 0;
-            var startLine = locations.GetAllValidLines(l => l.EndLine).Min();
-            var endLine = locations.GetAllValidLines(l => l.EndLine).Max();
-            return Math.Max(0, endLine - startLine - 1);
+            var firstLine = locations.GetAllValidLines(l => l.EndLine).Min();
+            var lastLine = locations.GetAllValidLines(l => l.EndLine).Max();
+            return Math.Max(0, lastLine - firstLine - 1);
         }
 
         private static IEnumerable<int> GetAllValidLines(this IEnumerable<OperationLocation> locations, Func<IPrimarySourceLocation, int> line)

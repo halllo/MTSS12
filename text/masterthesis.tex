@@ -902,34 +902,58 @@ Das \texttt{CyclomaticComplexityCalculator}-Objekt erbt die Funktionalität, sämt
 
 
 \subsection{Methodenlänge}
-Die Länge einer Methode sagt etwas darüber aus, wie viele Dinge diese Methode ausführt. Eine kurze Methode ist einfacher zu verstehen und zu verändern als eine lange. In Unter-Unterabschnitt \ref{subsubsec:methodlength} wurde diese Metrik und ihre Varianten genauer beschrieben. Usus.net bestimmt drei verschiedene Methodenlängen. Als sehr nachvollziehbare Längenangabe wird wohl die Anzahl der Codezeilen gesehen, die Logik enthalten. Dieser Wert wird von der Klasse \texttt{NumberOfLogicalLines} bestimmt und ausschließlicher Verwendung von \emph{CCI Metadata}. Alle CIL-Anweisungen, außer leeren Anweisungen (\texttt{Nop}), Block-Verlassen-Anweisungen (\texttt{Leave.S}) und Methoden-Rückgabe-Anweisungen (\texttt{Ret}) werden dabei betrachtet. Listing \ref{listing:numberoflogicallines} zeigt den Code, der die betroffenen Codezeilen der CIL-Anweisungen (Operationen) findet und deren Anzahl bestimmt.
+Die Länge einer Methode sagt etwas darüber aus, wie viele Dinge diese Methode ausführt. Eine kurze Methode ist einfacher zu verstehen und zu verändern als eine lange. In Unter-Unterabschnitt \ref{subsubsec:methodlength} wurde diese Metrik und ihre Varianten genauer beschrieben. Usus.net bestimmt drei verschiedene Methodenlängen.
+\paragraph{}
+Als sehr nachvollziehbare Längenangabe wird wohl die Anzahl der Codezeilen gesehen, die Logik enthalten. Dieser Wert wird von der Klasse \texttt{NumberOfLogicalLines} bestimmt und ausschließlicher Verwendung von \emph{CCI Metadata}. Alle CIL-Anweisungen, außer leeren Anweisungen (\texttt{Nop}), Block-Verlassen-Anweisungen (\texttt{Leave.S}) und Methoden-Rückgabe-Anweisungen (\texttt{Ret}) werden dabei betrachtet. Listing \ref{listing:numberoflogicallines} zeigt den Code, der die Codezeilen der betroffenen CIL-Anweisungen (Operationen) findet, doppelte Werte entfernt und deren Anzahl bestimmt.
 \begin{lstlisting}[caption={Operation-Analyse zur Bestimmung der Anzahl der logischen Codezeilen},label={listing:numberoflogicallines}]
 var locations = method.LocatedOperations(pdb);
 var result = locations.GetAllStartLinesOfInterestingOpCodes().Distinct().Count();
 \end{lstlisting}
 Die Zuordnung der Codezeilen des Quelltexts vor der Kompilierung zu den CIL-Anweisungen danach kann nur durchgeführt werden, wenn zu der zu analysierenden PE-Datei eine pdb-Datei existiert. Wie in Unterabschnitt \ref{subsec:ccimetadata} definiert, beinhaltet die pdb-Datei die erforderlichen Zeilenangaben. Die CCI unterstützt die Analyse dieser Dateien ebenfalls mithilfe der Klasse \texttt{PdbReader}. Sollte keine pdb-Datei zur Verfügung stehen, bestimmt Usus.net den Ergebniswert der \texttt{NumberOfLogicalLines}-Metrik mit -1.
 \paragraph{}
-gleiches gilt für \texttt{NumberOfRealLines}.
+Standardmässig verwendet Usus.net die Anzahl der logischen Codezeilen als Methodenlänge. Sollte deren Bestimmung aufgrund einer fehlenden pdb-Datei nicht möglich sein, wird die Anzahl der Anweisungen verwendet. Die Klasse \texttt{NumberOfStatements} verwendet \emph{CCI Code and AST Components} um den Methodenrumpf zu dekompilieren und einen AST zu erzeugen. Dieser kann anschließend analysiert und sämtliche Anweisungen besucht werden. Dieses Vorgehen ist vergleichbar mit der Bestimmung der zyklomatischen Komplexität. Listing \ref{listing:numberofstatements} zeigt wie dafür ein \texttt{StatementCollector}-Objekt verwendet wird.
+\begin{lstlisting}[caption={Statement-Analyse zur Bestimmung der Anzahl der Anweisungen},label={listing:numberofstatements}]
+var methodBody = method.Decompile(pdb, host);
+var statementCollector = new StatementCollector(pdb);
+statementCollector.Traverse(methodBody.Statements());
+var result = return statementCollector.Result.Count();
+\end{lstlisting}
+Neben der Anzahl der Anweisungen kann Usus.net auch die Anzahl der CIL-Anweisungen, den sogenannten Operationen, bestimmen. Dafür wird kein AST erzeugt, sodass nur die \emph{CCI Metadata}-Infrastruktur benötigt wird. Allerdings besteht eine Methode aus einer Vielzahl von Operationen, die keinen direkten Zusammenhang mit dem Quellcode vor dem Kompilieren erkennen lassen.
 \paragraph{}
-Fallback ist \texttt{NumberOfStatements}.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Als dritte Möglichkeit die Methodenlänge zu bestimmen, kann Usus.net die Anzahl der tatsächlichen Zeilen einer Methode ausrechnen. Genau wie bei der Anzahl der logischen Codezeilen ist hierfür \emph{CCI Metadata} sowie eine pdb-Datei erforderlich. In der Klasse \texttt{NumberOfRealLines} werden die Zeilen aller Operationen eines Methodenrumpfs ermittelt. Durch die Differenz der ersten und letzten Zeile kann die Anzahl der Zeilenumbrüche bestimmt werden. Listing \ref{listing:numberofreallines} zeigt diese Berechnung.
+\begin{lstlisting}[caption={Operation-Analyse zur Bestimmung der Anzahl der tatsächlichen Zeilen},label={listing:numberofreallines}]
+var locations = method.LocatedOperations(pdb);
+var firstLine = locations.GetAllValidLines(l => l.EndLine).Min();
+var lastLine = locations.GetAllValidLines(l => l.EndLine).Max();
+var result = Math.Max(0, lastLine - firstLine - 1);
+\end{lstlisting}
+Wenn die pdb-Datei nicht existiert, wird der Wert der \texttt{NumberOfRealLines}-Metrik auf -1 gesetzt.
 
 \subsection{Kumulierte Komponentenabhängigkeit}
 todo
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 \section{Objektmodell}
