@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using andrena.Usus.net.Core.Hotspots;
 using andrena.Usus.net.Core.Reports;
 
@@ -38,12 +39,22 @@ namespace Usus.net.Core.UnitTests
 
         public static MetricsReport ManyMetrics(Func<int, MethodMetricsReport> methodMetricsReport, params int[] metrics)
         {
-            MetricsReport metricsReport = new MetricsReport();
-            foreach (int metric in metrics)
-            {
-                metricsReport.AddMethodReport(methodMetricsReport(metric));
-            }
+            return MetricsReport(from metric in metrics
+                                 select methodMetricsReport(metric));
+        }
+
+        public static MetricsReport MetricsReport(IEnumerable<MethodMetricsReport> methodMetrics)
+        {
+            var metricsReport = new MetricsReport();
+            metricsReport.AddTypeReport(TypeMetrics(methodMetrics));
             return metricsReport;
+        }
+
+        internal static TypeMetricsWithMethodMetrics TypeMetrics(IEnumerable<MethodMetricsReport> methodMetrics)
+        {
+            var typeWithMethods = new TypeMetricsWithMethodMetrics();
+            typeWithMethods.AddMethodReports(methodMetrics);
+            return typeWithMethods;
         }
 
         public static double RatedCyclomaticComplexity(int cc)

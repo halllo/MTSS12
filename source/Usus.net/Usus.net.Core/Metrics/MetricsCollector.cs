@@ -1,17 +1,22 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using andrena.Usus.net.Core.AssemblyNavigation;
 using andrena.Usus.net.Core.Metrics.Methods;
+using andrena.Usus.net.Core.Metrics.Types;
 using andrena.Usus.net.Core.Reports;
 using Microsoft.Cci;
 
 namespace andrena.Usus.net.Core.Metrics
 {
-    internal class MetricsCollector : AssemblyVisitor
+    internal class MetricsCollector : TypeVisitor
     {
-        protected override void AnalyzeType(INamedTypeDefinition type, PdbReader pdb)
+        protected override TypeMetricsReport AnalyzeType(INamedTypeDefinition type, PdbReader pdb, IEnumerable<MethodMetricsReport> methods)
         {
-            Console.WriteLine("Type: " + type.Name);
-            Console.WriteLine();
+            return new TypeMetricsReport
+            {
+                Name = type.Name(),
+                CompilerGenerated = type.HasAnyGeneratedCodeAttributes(),
+                NumberOfNonStaticPublicFields = NumberOfNonStaticPublicFields.Of(type)
+            };
         }
 
         protected override MethodMetricsReport AnalyzeMethod(IMethodDefinition method, PdbReader pdb, IMetadataHost host)

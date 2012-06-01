@@ -1,23 +1,30 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace andrena.Usus.net.Core.Reports
 {
     public class MetricsReport
     {
-        private List<MethodMetricsReport> MethodReports;
+        private List<TypeMetricsWithMethodMetrics> TypeReports;
+        
         public IEnumerable<MethodMetricsReport> Methods
         {
-            get { return MethodReports; }
+            get { return TypeReports.SelectMany(t => t.Methods); }
+        }
+
+        public IEnumerable<TypeMetricsReport> Types
+        {
+            get { return TypeReports.Select(t => t.Metrics); }
         }
 
         internal MetricsReport()
         {
-            MethodReports = new List<MethodMetricsReport>();
+            TypeReports = new List<TypeMetricsWithMethodMetrics>();
         }
 
-        internal void AddMethodReport(MethodMetricsReport methodMertics)
+        internal void AddTypeReport(TypeMetricsWithMethodMetrics typeMertics)
         {
-            MethodReports.Add(methodMertics);
+            TypeReports.Add(typeMertics);
         }
     }
 }
