@@ -12,5 +12,10 @@ namespace andrena.Usus.net.Core.Verification
             : base(String.Format(MESSAGE, method.GetFullName(), expectation.Message))
         {
         }
+
+        public VerificationException(Type type, TypeExpectation expectation)
+            : base(String.Format(MESSAGE, type.FullName, expectation.Message))
+        {
+        }
     }
 }

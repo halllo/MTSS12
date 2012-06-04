@@ -7,7 +7,7 @@ namespace andrena.Usus.net.Core.Metrics.Types
     {
         public static int Of(INamedTypeDefinition type)
         {
-            return type.Fields.Count(f => f.IsStatic && f.Visibility == TypeMemberVisibility.Public);
+            return type.Fields.Count(f => !f.IsStatic && f.Visibility == TypeMemberVisibility.Public);
         }
     }
 }

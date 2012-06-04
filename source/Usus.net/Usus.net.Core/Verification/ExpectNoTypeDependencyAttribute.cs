@@ -19,7 +19,7 @@ namespace andrena.Usus.net.Core.Verification
             return !metrics.TypeDependencies.Contains(NotExpectedTypeDependency);
         }
 
-        public override string Expectation
+        public override string What
         {
             get { return NotExpectedTypeDependency; }
         }

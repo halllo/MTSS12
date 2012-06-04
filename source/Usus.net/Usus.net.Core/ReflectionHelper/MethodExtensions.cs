@@ -18,59 +18,28 @@ namespace andrena.Usus.net.Core.ReflectionHelper
                 method.FullDeclaringType(),
                 method.MethodNameAndParameters());
         }
-  
+
         private static string FullDeclaringType(this MethodInfo method)
         {
-            return NormalizeSubTypeName(method.DeclaringType.FullName);
+            return Normalize.SubTypeName(method.DeclaringType.FullName);
         }
 
         private static string FullReturnTypeName(this MethodInfo method)
         {
             if (method.ReturnType.IsGenericType)
-                return NormalizeGenericName(method.ReturnParameter.ToString());
+                return Normalize.GenericName(method.ReturnParameter.ToString());
             else
                 return method.ReturnType.FullName;
         }
 
         private static string MethodNameAndParameters(this MethodInfo method)
         {
-            return NormalizeWhiteSpaces(
-                NormalizeByRefs(
-                NormalizeGenericName(
-                NormalizePropertyName(
-                method.JustName()))));
+            return Normalize.MethodName(method.JustName());
         }
-  
+
         private static string JustName(this MethodInfo method)
         {
             return method.ToString().StartingAfterFirst(" ");
-        }
-  
-        private static string NormalizePropertyName(string methodName)
-        {
-            return methodName
-                .ReplaceIfStartsWith("get_", "()", ".get()")
-                .ReplaceIfStartsWith("set_", "(", ".set(");
-        }
-
-        private static string NormalizeGenericName(string methodName)
-        {
-            return methodName.ReplaceRegex("`.*?\\[", "[").Replace("[", "<").Replace("]", ">").Trim();
-        }
-
-        private static string NormalizeByRefs(string methodName)
-        {
-            return methodName.Replace(" ByRef,", ",").Replace(" ByRef)", ")");
-        }
-
-        private static string NormalizeWhiteSpaces(string methodName)
-        {
-            return methodName.Replace(", ", ",");
-        }
-
-        private static string NormalizeSubTypeName(string subTypeName)
-        {
-            return subTypeName.Replace("+", ".");
         }
     }
 }

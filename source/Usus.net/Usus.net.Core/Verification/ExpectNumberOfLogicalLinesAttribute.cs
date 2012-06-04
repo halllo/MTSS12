@@ -18,7 +18,7 @@ namespace andrena.Usus.net.Core.Verification
             return metrics.NumberOfLogicalLines == ExpectedNumberOfLogicalLines;
         }
 
-        public override string Expectation
+        public override string What
         {
             get { return ExpectedNumberOfLogicalLines.ToString(); }
         }

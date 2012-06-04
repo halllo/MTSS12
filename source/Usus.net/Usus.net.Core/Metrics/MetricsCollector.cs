@@ -14,6 +14,7 @@ namespace andrena.Usus.net.Core.Metrics
             return new TypeMetricsReport
             {
                 Name = type.Name(),
+                FullName = type.FullName(),
                 CompilerGenerated = type.HasAnyGeneratedCodeAttributes(),
                 NumberOfNonStaticPublicFields = NumberOfNonStaticPublicFields.Of(type)
             };

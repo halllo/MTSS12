@@ -18,7 +18,7 @@ namespace andrena.Usus.net.Core.Verification
             return metrics.CyclomaticComplexity == ExpectedCyclomaticComplexity;
         }
 
-        public override string Expectation
+        public override string What
         {
             get { return ExpectedCyclomaticComplexity.ToString(); }
         }

@@ -1,3 +1,4 @@
+using andrena.Usus.net.Core.Verification;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Usus.net.Core.IntegrationTests
@@ -6,11 +7,9 @@ namespace Usus.net.Core.IntegrationTests
     public class MetricsCollectorTypeTests : MetricsCollectorTests
     {
         [TestMethod]
-        public void MetricsForTypes_TypeWithPublicFields_Found()
+        public void Verify_NumberOfNonStaticPublicFields()
         {
-            //TODO: verification on types
-            var report = metrics.Types;
-            Assert.IsTrue(report != null);
+            Verify.TypesWith<ExpectNumberOfNonStaticPublicFieldsAttribute>(metrics);
         }
     }
 }

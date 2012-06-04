@@ -18,7 +18,7 @@ namespace andrena.Usus.net.Core.Verification
             return metrics.NumberOfStatements == ExpectedNumberOfStatements;
         }
 
-        public override string Expectation
+        public override string What
         {
             get { return ExpectedNumberOfStatements.ToString(); }
         }
