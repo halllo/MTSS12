@@ -17,8 +17,8 @@ Class=LaTeXView
 Document=masterthesis.tex
 
 [Frame0_View0,0]
-TopLine=1341
-Cursor=125630
+TopLine=574
+Cursor=45852
 
 [Frame1]
 Flags=0

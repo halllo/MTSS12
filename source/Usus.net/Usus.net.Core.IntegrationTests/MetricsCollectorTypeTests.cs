@@ -11,5 +11,11 @@ namespace Usus.net.Core.IntegrationTests
         {
             Verify.TypesWith<ExpectNumberOfNonStaticPublicFieldsAttribute>(metrics);
         }
+
+        [TestMethod]
+        public void Verify_NumberOfMethods()
+        {
+            Verify.TypesWith<ExpectNumberOfMethodsAttribute>(metrics);
+        }
     }
 }

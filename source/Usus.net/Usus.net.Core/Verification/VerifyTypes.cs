@@ -17,6 +17,9 @@ namespace andrena.Usus.net.Core.Verification
         {
             Debug.WriteLine("verify " + type.Name);
             var typeMetrics = metrics.GetTypeMetrics(type);
+
+            //var methods = metrics.MethodsOf(typeMetrics);
+
             if (expectation.Verify(typeMetrics)) return true;
             throw new VerificationException(type, expectation);
         }

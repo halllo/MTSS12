@@ -54,6 +54,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MetricsCollectorTests.cs" />
     <Compile Include="TypeMetrics\ClassesWithNonStaticPublicFields.cs" />
+    <Compile Include="TypeMetrics\ClassesWithMethods.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Usus.net.Core\Usus.net.Core.csproj">

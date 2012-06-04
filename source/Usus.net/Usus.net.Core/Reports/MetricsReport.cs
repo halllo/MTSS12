@@ -5,26 +5,31 @@ namespace andrena.Usus.net.Core.Reports
 {
     public class MetricsReport
     {
-        private List<TypeMetricsWithMethodMetrics> TypeReports;
+        Dictionary<TypeMetricsReport, TypeMetricsWithMethodMetrics> TypeReports;
         
         public IEnumerable<MethodMetricsReport> Methods
         {
-            get { return TypeReports.SelectMany(t => t.Methods); }
+            get { return TypeReports.Values.SelectMany(t => t.Methods); }
         }
 
         public IEnumerable<TypeMetricsReport> Types
         {
-            get { return TypeReports.Select(t => t.Metrics); }
+            get { return TypeReports.Values.Select(t => t.Itself); }
         }
 
         internal MetricsReport()
         {
-            TypeReports = new List<TypeMetricsWithMethodMetrics>();
+            TypeReports = new Dictionary<TypeMetricsReport, TypeMetricsWithMethodMetrics>();
         }
 
         internal void AddTypeReport(TypeMetricsWithMethodMetrics typeMertics)
         {
-            TypeReports.Add(typeMertics);
+            TypeReports.Add(typeMertics.Itself, typeMertics);
+        }
+
+        public IEnumerable<MethodMetricsReport> MethodsOf(TypeMetricsReport type)
+        {
+            return TypeReports[type].Methods;
         }
     }
 }

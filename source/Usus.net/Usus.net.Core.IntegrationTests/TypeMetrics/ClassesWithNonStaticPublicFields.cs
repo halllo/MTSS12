@@ -9,6 +9,7 @@ namespace Usus.net.Core.IntegrationTests.TypeMetrics
         static int i1;
         public static int i2;
         int i3;
+        public int p1 { get; set; }
     }
 
     [ExpectNumberOfNonStaticPublicFields(1)]

@@ -53,6 +53,7 @@ namespace Usus.net.Core.UnitTests
         internal static TypeMetricsWithMethodMetrics TypeMetrics(IEnumerable<MethodMetricsReport> methodMetrics)
         {
             var typeWithMethods = new TypeMetricsWithMethodMetrics();
+            typeWithMethods.Itself = new TypeMetricsReport();
             typeWithMethods.AddMethodReports(methodMetrics);
             return typeWithMethods;
         }

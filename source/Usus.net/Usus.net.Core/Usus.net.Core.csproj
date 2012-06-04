@@ -95,6 +95,7 @@
     <Compile Include="Metrics\Methods\TypeDependenciesOfSignature.cs" />
     <Compile Include="Metrics\Methods\TypeDependenciesOfTypeMentions.cs" />
     <Compile Include="Metrics\Methods\TypeDependenciesOfVariables.cs" />
+    <Compile Include="Metrics\Types\NumberOfMethods.cs" />
     <Compile Include="Metrics\Types\NumberOfNonStaticPublicFields.cs" />
     <Compile Include="ReflectionHelper\MethodWithAttributes.cs" />
     <Compile Include="ReflectionHelper\Normalize.cs" />
@@ -114,6 +115,7 @@
     <Compile Include="Reports\TypeMetricsWithMethodMetrics.cs" />
     <Compile Include="Verification\Expectation.cs" />
     <Compile Include="Verification\ExpectNoTypeDependencyAttribute.cs" />
+    <Compile Include="Verification\ExpectNumberOfMethodsAttribute.cs" />
     <Compile Include="Verification\ExpectNumberOfNonStaticPublicFieldsAttribute.cs" />
     <Compile Include="Verification\ExpectTypeDependencyAttribute.cs" />
     <Compile Include="Verification\ExpectNumberOfLogicalLinesAttribute.cs" />

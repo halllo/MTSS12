@@ -10,6 +10,7 @@ namespace andrena.Usus.net.Core.Reports
         public bool CompilerGenerated { get; internal set; }
 
         public int NumberOfNonStaticPublicFields { get; internal set; }
+        public int NumberOfMethods { get; internal set; }
 
         internal TypeMetricsReport()
         {

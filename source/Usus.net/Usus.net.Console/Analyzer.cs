@@ -21,11 +21,16 @@ namespace andrena.Usus.net.Console
 
         private void OutputMetricsReport(MetricsReport metrics)
         {
+            foreach (var type in metrics.Types)
+                OutputTypeMetricsReport(type);
+
+            OutputSeperator(2);
+
             foreach (var method in metrics.Methods)
                 OutputMethodMetricsReport(method);
 
-            OutputSeperator();
-            OutputSeperator();
+            OutputSeperator(3);
+
             OutputRatings(metrics.Rate());
             OutputHotspots(metrics.Hotspots());
         }
@@ -33,6 +38,12 @@ namespace andrena.Usus.net.Console
         private void OutputSeperator()
         {
             Output("---------------------------------------------------");
+        }
+
+        private void OutputSeperator(int times)
+        {
+            for (int i = 0; i < times; i++)
+                OutputSeperator();
         }
 
         private void OutputMethodMetricsReport(MethodMetricsReport methodMetrics)
@@ -46,6 +57,16 @@ namespace andrena.Usus.net.Console
             Output("\tNumberOfRealLines:\t" + methodMetrics.NumberOfRealLines);
             Output("\tNumberOfLogicalLines:\t" + methodMetrics.NumberOfLogicalLines);
             Output("\tTypes:\t\t\t" + string.Join(", ", methodMetrics.TypeDependencies));
+            Output("");
+        }
+
+        private void OutputTypeMetricsReport(TypeMetricsReport typeMetrics)
+        {
+            OutputSeperator();
+            Output("Name:\t\t" + typeMetrics.Name);
+            Output("Fullname:\t" + typeMetrics.FullName);
+            Output("Generated:\t" + typeMetrics.CompilerGenerated);
+            Output("\tNumberOfNonStaticPublicFields:\t" + typeMetrics.NumberOfNonStaticPublicFields);
             Output("");
         }
 
