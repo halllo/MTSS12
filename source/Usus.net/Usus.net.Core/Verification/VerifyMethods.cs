@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
-using andrena.Usus.net.Core.ReflectionHelper;
+using andrena.Usus.net.Core.Helper.Reflection;
 using andrena.Usus.net.Core.Reports;
 
 namespace andrena.Usus.net.Core.Verification

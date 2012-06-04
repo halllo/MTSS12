@@ -14,6 +14,11 @@ namespace andrena.Usus.net.Core.Hotspots
             return new RatedMethodMetrics(metrics);
         }
 
+        public static RatedTypeMetrics Rate(this TypeMetricsReport metrics)
+        {
+            return new RatedTypeMetrics(metrics);
+        }
+
         public static MetricsHotspots Hotspots(this MetricsReport metrics)
         {
             return new MetricsHotspots(metrics);

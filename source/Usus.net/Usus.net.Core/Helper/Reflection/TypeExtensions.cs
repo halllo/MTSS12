@@ -1,6 +1,6 @@
 using System;
 
-namespace andrena.Usus.net.Core.ReflectionHelper
+namespace andrena.Usus.net.Core.Helper.Reflection
 {
     public static class TypeExtensions
     {

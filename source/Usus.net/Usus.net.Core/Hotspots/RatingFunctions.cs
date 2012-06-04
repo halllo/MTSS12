@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using andrena.Usus.net.Core.Reports;
+using System;
 
 namespace andrena.Usus.net.Core.Hotspots
 {
@@ -29,18 +30,18 @@ namespace andrena.Usus.net.Core.Hotspots
                 return 0.0;
         }
 
-        public static double AverageRatedCyclomaticComplexities(this IEnumerable<RatedMethodMetrics> ratedMethods)
+        public static double RateClassSize(this TypeMetricsReport metrics)
         {
-            if (ratedMethods.Any())
-                return ratedMethods.Average(m => m.RatedCyclomaticComplexity) * 100;
+            if (metrics.ClassSize > Limits.ClassSize)
+                return ((1.0 / Limits.ClassSize) * metrics.ClassSize) - 1;
             else
-                return 0;
+                return 0.0;
         }
 
-        public static double AverageRatedMethodLengths(this IEnumerable<RatedMethodMetrics> ratedMethods)
+        public static double AverageRating<T>(this IEnumerable<T> ratedMethods, Func<T, double> metricSelector)
         {
             if (ratedMethods.Any())
-                return ratedMethods.Average(m => m.RatedMethodLength) * 100;
+                return ratedMethods.Average(metricSelector) * 100;
             else
                 return 0;
         }

@@ -1,0 +1,29 @@
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Usus.net.Core.UnitTests.Factories;
+
+namespace Usus.net.Core.UnitTests
+{
+    [TestClass]
+    public class RatedClassSizeTest
+    {
+        private const double DELTA = 0.01;
+
+        [TestMethod]
+        public void Rate_ClassSize0_Rated0()
+        {
+            Assert.AreEqual(0.0, CreateRated.ClassSize(0));
+        }
+        
+        [TestMethod]
+        public void Rate_ClassSize12_Rated0()
+        {
+            Assert.AreEqual(0.0, CreateRated.ClassSize(12));
+        }
+        
+        [TestMethod]
+        public void Rate_ClassSize13_Rated0Point08()
+        {
+            Assert.AreEqual(0.08, CreateRated.ClassSize(13), DELTA);
+        }
+    }
+}

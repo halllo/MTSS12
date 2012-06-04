@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace andrena.Usus.net.Core.ReflectionHelper
+namespace andrena.Usus.net.Core.Helper.Reflection
 {
     public class MethodWithAttributes<T> where T : Attribute
     {

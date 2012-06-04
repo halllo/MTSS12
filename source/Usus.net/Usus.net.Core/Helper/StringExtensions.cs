@@ -1,6 +1,6 @@
 using System.Text.RegularExpressions;
 
-namespace andrena.Usus.net.Core.ReflectionHelper
+namespace andrena.Usus.net.Core.Helper
 {
     public static class StringExtensions
     {

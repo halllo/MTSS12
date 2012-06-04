@@ -1,7 +1,7 @@
 using System;
 using System.Linq.Expressions;
 using System.Reflection;
-using andrena.Usus.net.Core.ReflectionHelper;
+using andrena.Usus.net.Core.Helper.Reflection;
 
 namespace andrena.Usus.net.Core.Reports
 {

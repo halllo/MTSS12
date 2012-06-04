@@ -2,7 +2,7 @@
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace andrena.Usus.net.Core.ReflectionHelper
+namespace andrena.Usus.net.Core.Helper.Reflection
 {
     public static class MethodExtensions
     {

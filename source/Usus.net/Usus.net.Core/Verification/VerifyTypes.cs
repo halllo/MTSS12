@@ -1,7 +1,7 @@
 using System;
 using System.Diagnostics;
 using System.Linq;
-using andrena.Usus.net.Core.ReflectionHelper;
+using andrena.Usus.net.Core.Helper.Reflection;
 using andrena.Usus.net.Core.Reports;
 
 namespace andrena.Usus.net.Core.Verification
@@ -17,9 +17,6 @@ namespace andrena.Usus.net.Core.Verification
         {
             Debug.WriteLine("verify " + type.Name);
             var typeMetrics = metrics.GetTypeMetrics(type);
-
-            //var methods = metrics.MethodsOf(typeMetrics);
-
             if (expectation.Verify(typeMetrics)) return true;
             throw new VerificationException(type, expectation);
         }

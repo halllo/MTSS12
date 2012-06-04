@@ -1,4 +1,5 @@
 using System.Linq;
+using andrena.Usus.net.Core.AssemblyNavigation;
 using Microsoft.Cci;
 
 namespace andrena.Usus.net.Core.Metrics.Types
@@ -7,7 +8,7 @@ namespace andrena.Usus.net.Core.Metrics.Types
     {
         public static int Of(INamedTypeDefinition type)
         {
-            return type.Methods.Count();
+            return type.Methods.Count(m => !m.IsDefaultCtor());
         }
     }
 }

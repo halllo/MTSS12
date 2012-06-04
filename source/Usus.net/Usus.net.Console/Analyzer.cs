@@ -67,6 +67,7 @@ namespace andrena.Usus.net.Console
             Output("Fullname:\t" + typeMetrics.FullName);
             Output("Generated:\t" + typeMetrics.CompilerGenerated);
             Output("\tNumberOfNonStaticPublicFields:\t" + typeMetrics.NumberOfNonStaticPublicFields);
+            Output("\tClassSize:\t\t" + typeMetrics.ClassSize);
             Output("");
         }
 

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Reflection;
-using andrena.Usus.net.Core.ReflectionHelper;
+using andrena.Usus.net.Core.Helper.Reflection;
 
 namespace andrena.Usus.net.Core.Verification
 {

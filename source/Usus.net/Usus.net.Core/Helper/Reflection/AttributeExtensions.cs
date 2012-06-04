@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace andrena.Usus.net.Core.ReflectionHelper
+namespace andrena.Usus.net.Core.Helper.Reflection
 {
     public static class AttributeExtensions
     {

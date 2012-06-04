@@ -12,6 +12,14 @@ namespace andrena.Usus.net.Core.Reports
         public int NumberOfNonStaticPublicFields { get; internal set; }
         public int NumberOfMethods { get; internal set; }
 
+        public int ClassSize
+        {
+            get
+            {
+                return NumberOfMethods;
+            }
+        }
+
         internal TypeMetricsReport()
         {
         }

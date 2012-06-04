@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace andrena.Usus.net.Core.ReflectionHelper
+namespace andrena.Usus.net.Core.Helper.Reflection
 {
     public class TypeWithAttributes<T> where T : Attribute
     {

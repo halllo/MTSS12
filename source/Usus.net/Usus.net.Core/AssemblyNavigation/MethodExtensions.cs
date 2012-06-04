@@ -23,6 +23,11 @@ namespace andrena.Usus.net.Core.AssemblyNavigation
             return method.Body.Operations.Any();
         }
 
+        public static bool IsDefaultCtor(this IMethodDefinition method)
+        {
+            return method.ToString().EndsWith("..ctor()");
+        }
+
         public static IEnumerable<IOperation> Operations(this IMethodDefinition method,
             Func<OperationCode, bool> predicate)
         {
