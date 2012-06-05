@@ -21,9 +21,9 @@ namespace Usus.net.Core.UnitTests
         }
         
         [TestMethod]
-        public void Rate_ClassSize13_Rated0Point08()
+        public void Rate_ClassSize13_Rated8Point33()
         {
-            Assert.AreEqual(0.08, CreateRated.ClassSize(13), DELTA);
+            Assert.AreEqual(8.33, CreateRated.ClassSize(13), DELTA);
         }
     }
 }

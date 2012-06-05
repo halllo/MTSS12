@@ -15,12 +15,12 @@ namespace andrena.Usus.net.Core.Hotspots
 
         internal RatedMetrics(MetricsReport metrics)
         {
-            RatedMethods = metrics.Methods.SelectList(m => m.Rate());
-            RatedTypes = metrics.Types.SelectList(m => m.Rate());
+            RatedMethods = metrics.Methods.ToList(m => m.Rate());
+            RatedTypes = metrics.Types.ToList(m => m.Rate());
 
-            AverageRatedCyclomaticComplexity = RatedMethods.AverageRating(m => m.RatedCyclomaticComplexity);
-            AverageRatedMethodLength = RatedMethods.AverageRating(m => m.RatedMethodLength);
-            AverageRatedClassSize = RatedTypes.AverageRating(m => m.RatedClassSize);
+            AverageRatedCyclomaticComplexity = RatedMethods.AverageAny(m => m.RatedCyclomaticComplexity);
+            AverageRatedMethodLength = RatedMethods.AverageAny(m => m.RatedMethodLength);
+            AverageRatedClassSize = RatedTypes.AverageAny(m => m.RatedClassSize);
         }
     }
 }

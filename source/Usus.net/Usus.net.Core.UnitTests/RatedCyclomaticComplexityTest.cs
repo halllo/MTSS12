@@ -31,9 +31,9 @@ namespace Usus.net.Core.UnitTests
         }
         
         [TestMethod]
-        public void Rate_CyclomaticComplexity5_RatedPoint25()
+        public void Rate_CyclomaticComplexity5_Rated25()
         {
-            Assert.AreEqual(0.25, CreateRated.CyclomaticComplexity(5));
+            Assert.AreEqual(25.0, CreateRated.CyclomaticComplexity(5));
         }
     }
 }
