@@ -1,6 +1,6 @@
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Usus.net.Core.UnitTests.Factories;
+using Usus.net.Core.UnitTests.Factories.Metrics;
 
 namespace Usus.net.Core.UnitTests
 {

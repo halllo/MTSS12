@@ -38,31 +38,34 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Cci.CodeModel">
-      <HintPath>..\CCI-Libs\Microsoft.Cci.CodeModel.dll</HintPath>
+      <HintPath>..\Libs\Microsoft.Cci.CodeModel.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Cci.ILToCodeModel">
-      <HintPath>..\CCI-Libs\Microsoft.Cci.ILToCodeModel.dll</HintPath>
+      <HintPath>..\Libs\Microsoft.Cci.ILToCodeModel.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Cci.MetadataHelper">
-      <HintPath>..\CCI-Libs\Microsoft.Cci.MetadataHelper.dll</HintPath>
+      <HintPath>..\Libs\Microsoft.Cci.MetadataHelper.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Cci.MetadataModel">
-      <HintPath>..\CCI-Libs\Microsoft.Cci.MetadataModel.dll</HintPath>
+      <HintPath>..\Libs\Microsoft.Cci.MetadataModel.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Cci.MutableCodeModel">
-      <HintPath>..\CCI-Libs\Microsoft.Cci.MutableCodeModel.dll</HintPath>
+      <HintPath>..\Libs\Microsoft.Cci.MutableCodeModel.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Cci.MutableMetadataModel">
-      <HintPath>..\CCI-Libs\Microsoft.Cci.MutableMetadataModel.dll</HintPath>
+      <HintPath>..\Libs\Microsoft.Cci.MutableMetadataModel.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Cci.PdbReader">
-      <HintPath>..\CCI-Libs\Microsoft.Cci.PdbReader.dll</HintPath>
+      <HintPath>..\Libs\Microsoft.Cci.PdbReader.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Cci.PeReader">
-      <HintPath>..\CCI-Libs\Microsoft.Cci.PeReader.dll</HintPath>
+      <HintPath>..\Libs\Microsoft.Cci.PeReader.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Cci.SourceModel">
-      <HintPath>..\CCI-Libs\Microsoft.Cci.SourceModel.dll</HintPath>
+      <HintPath>..\Libs\Microsoft.Cci.SourceModel.dll</HintPath>
+    </Reference>
+    <Reference Include="QuickGraph">
+      <HintPath>..\Libs\QuickGraph.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -97,6 +100,9 @@
     <Compile Include="Metrics\Methods\TypeDependenciesOfTypeMentions.cs" />
     <Compile Include="Metrics\Methods\TypeDependenciesOfVariables.cs" />
     <Compile Include="Metrics\PostProcess.cs" />
+    <Compile Include="Metrics\Types\CumulativeComponentDependency.cs" />
+    <Compile Include="Metrics\Types\Interconnection\Graph.cs" />
+    <Compile Include="Metrics\Types\Interconnection\GraphExtensions.cs" />
     <Compile Include="Metrics\Types\NumberOfMethods.cs" />
     <Compile Include="Metrics\Types\NumberOfNonStaticPublicFields.cs" />
     <Compile Include="Helper\EnumerableExtensions.cs" />

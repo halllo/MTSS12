@@ -4,7 +4,7 @@ using System.Linq;
 using andrena.Usus.net.Core.Hotspots;
 using andrena.Usus.net.Core.Reports;
 
-namespace Usus.net.Core.UnitTests.Factories
+namespace Usus.net.Core.UnitTests.Factories.Metrics
 {
     public static class Create
     {
