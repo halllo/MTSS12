@@ -11,15 +11,15 @@ namespace andrena.Usus.net.Core.Reports
         public static MethodMetricsReport ForMethod(this MetricsReport metrics, Expression<Action> expression)
         {
             var methodName = (expression.Body as MethodCallExpression).GetCalleeName();
-            return metrics.ForMember(methodName);
+            return metrics.ForMethod(methodName);
         }
 
         public static MethodMetricsReport ForMethod(this MetricsReport metrics, MethodInfo method)
         {
-            return metrics.ForMember(method.GetFullName());
+            return metrics.ForMethod(method.GetFullName());
         }
 
-        public static MethodMetricsReport ForMember(this MetricsReport metrics, string memberName)
+        public static MethodMetricsReport ForMethod(this MetricsReport metrics, string memberName)
         {
             return (from m in metrics.Methods
                     where m.Signature == memberName

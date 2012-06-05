@@ -14,7 +14,7 @@ namespace andrena.Usus.net.Core.Verification
         }
 
         public VerificationException(Type type, TypeExpectation expectation)
-            : base(String.Format(MESSAGE, type.FullName, expectation.Message))
+            : base(String.Format(MESSAGE, type.GetFullName(), expectation.Message))
         {
         }
     }

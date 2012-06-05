@@ -15,7 +15,7 @@ namespace andrena.Usus.net.Core.AssemblyNavigation
 
         private IEnumerable<TypeMetricsWithMethodMetrics> AnalyzeTypes(IAssembly assembly, PdbReader pdb, IMetadataHost host)
         {
-            return from type in assembly.GetTypesNotGenerated()
+            return from type in assembly.GetTypes()
                    select TypeAndMethods(pdb, host, type);
         }
 

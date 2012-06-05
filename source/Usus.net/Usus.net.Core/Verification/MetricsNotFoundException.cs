@@ -14,7 +14,7 @@ namespace andrena.Usus.net.Core.Verification
         }
         
         public MetricsNotFoundException(Type type)
-            : base(String.Format(MESSAGE, type.FullName))
+            : base(String.Format(MESSAGE, type.GetFullName()))
         {
         }
     }

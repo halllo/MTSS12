@@ -16,8 +16,8 @@ namespace andrena.Usus.net.Core.Reports
         {
             return new PropertyMetricsReport
             {
-                Getter = metrics.ForMember(property.GetFullGetterName()),
-                Setter = metrics.ForMember(property.GetFullSetterName())
+                Getter = metrics.ForMethod(property.GetFullGetterName()),
+                Setter = metrics.ForMethod(property.GetFullSetterName())
             };
         }
     }

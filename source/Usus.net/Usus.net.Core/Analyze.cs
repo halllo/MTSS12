@@ -20,7 +20,7 @@ namespace andrena.Usus.net.Core
         {
             MetricsCollector mc = new MetricsCollector();
             mc.Analyze(asmPath);
-            return mc.Report;
+            return PostProcess.Metrics(mc.Report);
         }
     }
 }

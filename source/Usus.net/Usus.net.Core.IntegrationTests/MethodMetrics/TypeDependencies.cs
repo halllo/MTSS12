@@ -193,10 +193,10 @@ namespace Usus.net.Core.IntegrationTests.MethodMetrics
         [ExpectTypeDependency("System.Object")]
         [ExpectTypeDependency("System.Collections.Generic.IEnumerable")]
         [ExpectNoTypeDependency("System.NotImplementedException")]
-        /* •—————————————————————————————————————————————————————————————•
-           | Iterators are compiler generated sub classes.               |
-           | Their types will be recognized by nested class aggregation. |
-           •—————————————————————————————————————————————————————————————• */
+        /* •——————————————————————————————————————————————————————————————————————•
+           | Iterators are compiler generated sub classes.                        |
+           | Their types will be recognized by cumulative dependency aggregation. |
+           •——————————————————————————————————————————————————————————————————————• */
         public static IEnumerable<Object> MethodWithYieldReturn()
         {
             yield return new NotImplementedException();
