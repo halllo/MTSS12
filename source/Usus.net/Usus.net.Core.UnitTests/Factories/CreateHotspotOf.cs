@@ -23,5 +23,11 @@ namespace Usus.net.Core.UnitTests.Factories
             return Create.ManyMetrics(m => new TypeMetricsReport { NumberOfMethods = m }, css)
                 .Hotspots().OfClassSize();
         }
+
+        public static IEnumerable<TypeMetricsReport> NumberOfNonStaticPublicFields(params int[] nspfs)
+        {
+            return Create.ManyMetrics(m => new TypeMetricsReport { NumberOfNonStaticPublicFields = m }, nspfs)
+                .Hotspots().OfNumberOfNonStaticPublicFields();
+        }
     }
 }

@@ -74,16 +74,20 @@ namespace andrena.Usus.net.Console
         private void OutputRatings(RatedMetrics rated)
         {
             Output("Overall Metrics");
-            Output("\tAverageRatedCyclomaticComplexity:\t" + rated.AverageRatedCyclomaticComplexity);
-            Output("\tAverageRatedMethodLength:\t\t" + rated.AverageRatedMethodLength);
+            Output("\tAverageRatedCyclomaticComplexity:\t\t" + rated.AverageRatedCyclomaticComplexity);
+            Output("\tAverageRatedMethodLength:\t\t\t" + rated.AverageRatedMethodLength);
+            Output("\tAverageRatedClassSize:\t\t\t\t" + rated.AverageRatedClassSize);
+            Output("\tAverageRatedNumberOfNonStaticPublicFields:\t" + rated.AverageRatedNumberOfNonStaticPublicFields);
             Output("");
         }
 
         private void OutputHotspots(MetricsHotspots hotspots)
         {
             Output("Hotspots");
-            Output("\tCyclomaticComplexity:\t" + string.Join(", ", hotspots.OfCyclomaticComplexity().Select(h => h.Signature)));
-            Output("\tMethodLength:\t\t" + string.Join(", ", hotspots.OfMethodLength().Select(h => h.Signature)));
+            Output("\tCyclomaticComplexity:\t\t" + string.Join(", ", hotspots.OfCyclomaticComplexity().Select(h => h.Signature)));
+            Output("\tMethodLength:\t\t\t" + string.Join(", ", hotspots.OfMethodLength().Select(h => h.Signature)));
+            Output("\tClassSize:\t\t\t" + string.Join(", ", hotspots.OfClassSize().Select(h => h.FullName)));
+            Output("\tNumberOfNonStaticPublicFields:\t" + string.Join(", ", hotspots.OfNumberOfNonStaticPublicFields().Select(h => h.FullName)));
             Output("");
         }
 

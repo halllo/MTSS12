@@ -21,5 +21,11 @@ namespace Usus.net.Core.UnitTests.Factories
             return Create.ManyRatedMetrics(m => new TypeMetricsReport { NumberOfMethods = m }, css)
                 .AverageRatedClassSize;
         }
+
+        public static double RatedNumberOfNonStaticPublicFields(params int[] nspfs)
+        {
+            return Create.ManyRatedMetrics(m => new TypeMetricsReport { NumberOfNonStaticPublicFields = m }, nspfs)
+                .AverageRatedNumberOfNonStaticPublicFields;
+        }
     }
 }

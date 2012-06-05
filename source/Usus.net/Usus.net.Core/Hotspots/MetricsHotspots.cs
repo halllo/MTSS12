@@ -29,6 +29,11 @@ namespace andrena.Usus.net.Core.Hotspots
             return TypesWhereOverLimit(m => m.ClassSize, l => l.ClassSize);
         }
 
+        public IEnumerable<TypeMetricsReport> OfNumberOfNonStaticPublicFields()
+        {
+            return TypesWhereOverLimit(m => m.NumberOfNonStaticPublicFields, l => l.NumberOfNonStaticPublicFields);
+        }
+
         private IEnumerable<MethodMetricsReport> MethodsWhereOverLimit<T>(Func<MethodMetricsReport, T> metricSelector, Func<RatingFunctionLimits, T> limitSelector)
             where T : IComparable<T>
         {

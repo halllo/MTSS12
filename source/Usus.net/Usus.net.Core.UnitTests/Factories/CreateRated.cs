@@ -32,5 +32,11 @@ namespace Usus.net.Core.UnitTests.Factories
             var metrics = new TypeMetricsReport { NumberOfMethods = cs };
             return metrics.Rate().RatedClassSize;
         }
+
+        public static double NumberOfNonStaticPublicFields(int nspfs)
+        {
+            var metrics = new TypeMetricsReport { NumberOfNonStaticPublicFields = nspfs };
+            return metrics.Rate().RatedNumberOfNonStaticPublicFields;
+        }
     }
 }

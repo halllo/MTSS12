@@ -34,5 +34,13 @@ namespace andrena.Usus.net.Core.Hotspots
             else
                 return 0.0;
         }
+
+        public static double RateNumberOfNonStaticPublicFields(this TypeMetricsReport metrics)
+        {
+            if (metrics.NumberOfNonStaticPublicFields > Limits.NumberOfNonStaticPublicFields)
+                return 100.0;
+            else
+                return 0.0;
+        }
     }
 }

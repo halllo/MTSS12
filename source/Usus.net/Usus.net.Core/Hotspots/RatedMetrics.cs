@@ -12,6 +12,7 @@ namespace andrena.Usus.net.Core.Hotspots
         public double AverageRatedCyclomaticComplexity { get; private set; }
         public double AverageRatedMethodLength { get; private set; }
         public double AverageRatedClassSize { get; private set; }
+        public double AverageRatedNumberOfNonStaticPublicFields { get; private set; }
 
         internal RatedMetrics(MetricsReport metrics)
         {
@@ -21,6 +22,7 @@ namespace andrena.Usus.net.Core.Hotspots
             AverageRatedCyclomaticComplexity = RatedMethods.AverageAny(m => m.RatedCyclomaticComplexity);
             AverageRatedMethodLength = RatedMethods.AverageAny(m => m.RatedMethodLength);
             AverageRatedClassSize = RatedTypes.AverageAny(m => m.RatedClassSize);
+            AverageRatedNumberOfNonStaticPublicFields = RatedTypes.AverageAny(m => m.RatedNumberOfNonStaticPublicFields);
         }
     }
 }

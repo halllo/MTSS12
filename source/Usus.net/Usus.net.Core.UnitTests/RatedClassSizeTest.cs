@@ -11,13 +11,13 @@ namespace Usus.net.Core.UnitTests
         [TestMethod]
         public void Rate_ClassSize0_Rated0()
         {
-            Assert.AreEqual(0.0, CreateRated.ClassSize(0));
+            Assert.AreEqual(0.0, CreateRated.ClassSize(0), DELTA);
         }
         
         [TestMethod]
         public void Rate_ClassSize12_Rated0()
         {
-            Assert.AreEqual(0.0, CreateRated.ClassSize(12));
+            Assert.AreEqual(0.0, CreateRated.ClassSize(12), DELTA);
         }
         
         [TestMethod]

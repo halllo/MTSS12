@@ -11,7 +11,7 @@ namespace Usus.net.Core.UnitTests
         [TestMethod]
         public void Rate_0ClassSizes_AverageRated0()
         {
-            Assert.AreEqual(0.0, CreateAverage.RatedClassSize(), DELTA);
+            Assert.AreEqual(0.0, CreateAverage.RatedClassSize());
         }
 
         [TestMethod]

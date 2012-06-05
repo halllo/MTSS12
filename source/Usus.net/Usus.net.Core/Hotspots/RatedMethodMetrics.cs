@@ -6,6 +6,7 @@ namespace andrena.Usus.net.Core.Hotspots
     {
         public string Name { get; private set; }
         public string Signature { get; private set; }
+
         public double RatedCyclomaticComplexity { get; private set; }
         public double RatedMethodLength { get; private set; }
 
