@@ -33,7 +33,7 @@ namespace Usus.net.Core.UnitTests.Factories.Metrics
         public static MetricsReport MetricsReport(IEnumerable<MethodMetricsReport> methodMetrics)
         {
             var metricsReport = new MetricsReport();
-            metricsReport.AddTypeReport(TypeMetrics(new TypeMetricsReport(), methodMetrics));
+            metricsReport.AddTypeReport(TypeMetrics(new TypeMetricsReport() { FullName = RandomName() }, methodMetrics));
             return metricsReport;
         }
 
@@ -51,6 +51,12 @@ namespace Usus.net.Core.UnitTests.Factories.Metrics
             typeWithMethods.Itself = typeMetrics;
             typeWithMethods.AddMethodReports(methodMetrics);
             return typeWithMethods;
+        }
+
+        static Random randomizer = new Random();
+        internal static string RandomName()
+        {
+            return randomizer.NextDouble().ToString();
         }
     }
 }

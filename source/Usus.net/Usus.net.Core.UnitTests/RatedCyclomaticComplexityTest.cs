@@ -6,8 +6,6 @@ namespace Usus.net.Core.UnitTests
     [TestClass]
     public class RatedCyclomaticComplexityTest
     {
-        private const double DELTA = 0.01;
-
         [TestMethod]
         public void Rate_CyclomaticComplexity0_Rated0()
         {
@@ -33,9 +31,9 @@ namespace Usus.net.Core.UnitTests
         }
         
         [TestMethod]
-        public void Rate_CyclomaticComplexity5_Rated25()
+        public void Rate_CyclomaticComplexity5_RatedPoint25()
         {
-            Assert.AreEqual(25.0, CreateRated.CyclomaticComplexity(5), DELTA);
+            Assert.AreEqual(0.25, CreateRated.CyclomaticComplexity(5), Constants.DELTA);
         }
     }
 }

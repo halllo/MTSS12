@@ -6,8 +6,6 @@ namespace Usus.net.Core.UnitTests
     [TestClass]
     public class AverageClassSizeTest
     {
-        private const double DELTA = 0.1;
-
         [TestMethod]
         public void Rate_0ClassSizes_AverageRated0()
         {
@@ -15,9 +13,9 @@ namespace Usus.net.Core.UnitTests
         }
 
         [TestMethod]
-        public void Rate_4ClassSizes_AverageRated8Point3()
+        public void Rate_4ClassSizes_AverageRatedPoint0833()
         {
-            Assert.AreEqual(8.3, CreateAverage.RatedClassSize(5, 13, 15, 1), DELTA);
+            Assert.AreEqual(0.0833, CreateAverage.RatedClassSize(5, 13, 15, 1), Constants.DELTA);
         }
     }
 }

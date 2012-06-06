@@ -56,7 +56,7 @@ namespace andrena.Usus.net.Console
             Output("\tNumberOfStatements:\t" + methodMetrics.NumberOfStatements);
             Output("\tNumberOfRealLines:\t" + methodMetrics.NumberOfRealLines);
             Output("\tNumberOfLogicalLines:\t" + methodMetrics.NumberOfLogicalLines);
-            Output("\tTypes:\t\t\t" + string.Join(", ", methodMetrics.TypeDependencies));
+            Output("\tDependencies:\t\t" + string.Join(", ", methodMetrics.TypeDependencies));
             Output("");
         }
 
@@ -68,6 +68,8 @@ namespace andrena.Usus.net.Console
             Output("Generated:\t" + typeMetrics.CompilerGenerated);
             Output("\tNumberOfNonStaticPublicFields:\t" + typeMetrics.NumberOfNonStaticPublicFields);
             Output("\tClassSize:\t\t" + typeMetrics.ClassSize);
+            Output("\tCumulativeComponentDependency:\t" + typeMetrics.CumulativeComponentDependency);
+            Output("\tInterestingDependencies:\t\t" + string.Join(", ", typeMetrics.InterestingDirectDependencies));
             Output("");
         }
 
@@ -78,6 +80,7 @@ namespace andrena.Usus.net.Console
             Output("\tAverageRatedMethodLength:\t\t\t" + rated.AverageRatedMethodLength);
             Output("\tAverageRatedClassSize:\t\t\t\t" + rated.AverageRatedClassSize);
             Output("\tAverageRatedNumberOfNonStaticPublicFields:\t" + rated.AverageRatedNumberOfNonStaticPublicFields);
+            Output("\tAverageComponentDependency:\t\t\t" + rated.AverageComponentDependency);
             Output("");
         }
 
@@ -88,6 +91,7 @@ namespace andrena.Usus.net.Console
             Output("\tMethodLength:\t\t\t" + string.Join(", ", hotspots.OfMethodLength().Select(h => h.Signature)));
             Output("\tClassSize:\t\t\t" + string.Join(", ", hotspots.OfClassSize().Select(h => h.FullName)));
             Output("\tNumberOfNonStaticPublicFields:\t" + string.Join(", ", hotspots.OfNumberOfNonStaticPublicFields().Select(h => h.FullName)));
+            Output("\tCCD (Limit " + hotspots.CumulativeComponentDependencyLimit + "):\t\t\t" + string.Join(", ", hotspots.OfCumulativeComponentDependency().Select(h => h.FullName)));
             Output("");
         }
 

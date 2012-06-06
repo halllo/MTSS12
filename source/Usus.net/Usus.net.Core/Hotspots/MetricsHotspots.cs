@@ -1,13 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using andrena.Usus.net.Core.Reports;
 
 namespace andrena.Usus.net.Core.Hotspots
 {
     public class MetricsHotspots
     {
-        public MetricsReport Metrics { get; private set; }
+        internal MetricsReport Metrics { get; private set; }
+        
+        public int CumulativeComponentDependencyLimit
+        {
+            get
+            {
+                return RatingFunctions.Limits.CumulativeComponentDependency(Metrics.CommonKnowledge.NumberOfClasses);
+            }
+        }
 
         internal MetricsHotspots(MetricsReport metrics)
         {
@@ -16,38 +22,27 @@ namespace andrena.Usus.net.Core.Hotspots
 
         public IEnumerable<MethodMetricsReport> OfCyclomaticComplexity()
         {
-            return MethodsWhereOverLimit(m => m.CyclomaticComplexity, l => l.CyclomaticComplexity);
+            return Metrics.MethodsOverLimit(m => m.CyclomaticComplexity, l => l.CyclomaticComplexity);
         }
 
         public IEnumerable<MethodMetricsReport> OfMethodLength()
         {
-            return MethodsWhereOverLimit(m => m.MethodLength, l => l.MethodLength);
+            return Metrics.MethodsOverLimit(m => m.MethodLength, l => l.MethodLength);
         }
 
         public IEnumerable<TypeMetricsReport> OfClassSize()
         {
-            return TypesWhereOverLimit(m => m.ClassSize, l => l.ClassSize);
+            return Metrics.TypesOverLimit(m => m.ClassSize, l => l.ClassSize);
         }
 
         public IEnumerable<TypeMetricsReport> OfNumberOfNonStaticPublicFields()
         {
-            return TypesWhereOverLimit(m => m.NumberOfNonStaticPublicFields, l => l.NumberOfNonStaticPublicFields);
+            return Metrics.TypesOverLimit(m => m.NumberOfNonStaticPublicFields, l => l.NumberOfNonStaticPublicFields);
         }
 
-        private IEnumerable<MethodMetricsReport> MethodsWhereOverLimit<T>(Func<MethodMetricsReport, T> metricSelector, Func<RatingFunctionLimits, T> limitSelector)
-            where T : IComparable<T>
+        public IEnumerable<TypeMetricsReport> OfCumulativeComponentDependency()
         {
-            return from method in Metrics.Methods
-                   where metricSelector(method).CompareTo(limitSelector(RatingFunctions.Limits)) > 0
-                   select method;
-        }
-
-        private IEnumerable<TypeMetricsReport> TypesWhereOverLimit<T>(Func<TypeMetricsReport, T> metricSelector, Func<RatingFunctionLimits, T> limitSelector)
-            where T : IComparable<T>
-        {
-            return from type in Metrics.Types
-                   where metricSelector(type).CompareTo(limitSelector(RatingFunctions.Limits)) > 0
-                   select type;
+            return Metrics.TypesOverLimit(m => m.CumulativeComponentDependency, l => l.CumulativeComponentDependency);
         }
     }
 }

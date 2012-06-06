@@ -1,4 +1,5 @@
 using andrena.Usus.net.Core.Verification;
+using System.Collections.Generic;
 
 namespace Usus.net.Core.IntegrationTests.TypeMetrics
 {
@@ -7,7 +8,7 @@ namespace Usus.net.Core.IntegrationTests.TypeMetrics
         [ExpectCumulativeComponentDependency(1)]
         class ClassNoInterestingDependencies
         { }
-
+     
         [ExpectCumulativeComponentDependency(2)]
         class ClassInterestingDependenciesA : ClassNoInterestingDependencies
         { }
@@ -34,6 +35,15 @@ namespace Usus.net.Core.IntegrationTests.TypeMetrics
         {
             ClassNoInterestingDependencies f1;
             ClassInterestingDependenciesB f2;
+        }
+
+        [ExpectCumulativeComponentDependency(3)]
+        class ClassWitIteratorDependencies
+        {
+            IEnumerable<ClassNoInterestingDependencies> m()
+            {
+                yield return new ClassInterestingDependenciesA();
+            }
         }
     }
 }

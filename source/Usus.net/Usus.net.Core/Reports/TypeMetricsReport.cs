@@ -5,6 +5,8 @@ namespace andrena.Usus.net.Core.Reports
 {
     public class TypeMetricsReport
     {
+        internal CommonReportKnowledge CommonKnowledge { get; set; }
+
         public string Name { get; internal set; }
         public string FullName { get; internal set; }
         public bool CompilerGenerated { get; internal set; }
@@ -24,7 +26,6 @@ namespace andrena.Usus.net.Core.Reports
         }
 
         internal TypeMetricsReport()
-        {
-        }
+        { }
     }
 }

@@ -4,17 +4,19 @@ namespace andrena.Usus.net.Core.Hotspots
 {
     public class RatingFunctionLimits
     {
-        public int CyclomaticComplexity { get; set; }
-        public int MethodLength { get; set; }
-        public int ClassSize { get; set; }
-        public int NumberOfNonStaticPublicFields { get; set; }
+        public Func<int, int> CyclomaticComplexity { get; set; }
+        public Func<int, int> MethodLength { get; set; }
+        public Func<int, int> ClassSize { get; set; }
+        public Func<int, int> NumberOfNonStaticPublicFields { get; set; }
+        public Func<int, int> CumulativeComponentDependency { get; set; }
 
         public RatingFunctionLimits()
         {
-            CyclomaticComplexity = 4;
-            MethodLength = 9;
-            ClassSize = 12;
-            NumberOfNonStaticPublicFields = 0;
+            CyclomaticComplexity = cs => 4;
+            MethodLength = cs => 9;
+            ClassSize = cs => 12;
+            NumberOfNonStaticPublicFields = cs => 0;
+            CumulativeComponentDependency = cs => (int)(cs * (1.5 / Math.Pow(2, (Math.Log(cs) / Math.Log(5)))));
         }
     }
 }

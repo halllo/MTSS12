@@ -16,6 +16,7 @@ namespace andrena.Usus.net.Core.AssemblyNavigation
         private IEnumerable<TypeMetricsWithMethodMetrics> AnalyzeTypes(IAssembly assembly, PdbReader pdb, IMetadataHost host)
         {
             return from type in assembly.GetTypes()
+                   where type.Name.ToString() != "<Module>"
                    select TypeAndMethods(pdb, host, type);
         }
 

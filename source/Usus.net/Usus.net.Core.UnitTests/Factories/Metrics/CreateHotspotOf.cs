@@ -20,14 +20,20 @@ namespace Usus.net.Core.UnitTests.Factories.Metrics
 
         public static IEnumerable<TypeMetricsReport> ClassSize(params int[] css)
         {
-            return Create.ManyMetrics(m => new TypeMetricsReport { NumberOfMethods = m }, css)
+            return Create.ManyMetrics(m => new TypeMetricsReport { FullName = Create.RandomName(), NumberOfMethods = m }, css)
                 .Hotspots().OfClassSize();
         }
 
         public static IEnumerable<TypeMetricsReport> NumberOfNonStaticPublicFields(params int[] nspfs)
         {
-            return Create.ManyMetrics(m => new TypeMetricsReport { NumberOfNonStaticPublicFields = m }, nspfs)
+            return Create.ManyMetrics(m => new TypeMetricsReport { FullName = Create.RandomName(), NumberOfNonStaticPublicFields = m }, nspfs)
                 .Hotspots().OfNumberOfNonStaticPublicFields();
+        }
+
+        public static IEnumerable<TypeMetricsReport> CumulativeComponentDependency(params int[] ccds)
+        {
+            return Create.ManyMetrics(m => new TypeMetricsReport { FullName = Create.RandomName(), CumulativeComponentDependency = m }, ccds)
+                .Hotspots().OfCumulativeComponentDependency();
         }
     }
 }

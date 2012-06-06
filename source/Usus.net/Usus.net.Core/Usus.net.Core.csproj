@@ -82,6 +82,7 @@
     <Compile Include="AssemblyNavigation\TypeVisitor.cs" />
     <Compile Include="Hotspots\MetricsHotspots.cs" />
     <Compile Include="Hotspots\MetricsRating.cs" />
+    <Compile Include="Hotspots\RatingFunctionLimitsSeach.cs" />
     <Compile Include="Hotspots\RatedMethodMetrics.cs" />
     <Compile Include="Hotspots\RatedMetrics.cs" />
     <Compile Include="Hotspots\RatedTypeMetrics.cs" />
@@ -112,6 +113,7 @@
     <Compile Include="Helper\Reflection\TypeExtensions.cs" />
     <Compile Include="Helper\Reflection\TypeWithAttributes.cs" />
     <Compile Include="Metrics\Types\DirectDependencies.cs" />
+    <Compile Include="Reports\CommonReportKnowledge.cs" />
     <Compile Include="Reports\MethodMetricsReportSearch.cs" />
     <Compile Include="Reports\PropertyMetricsReportSearch.cs" />
     <Compile Include="Reports\TypeMetricsReportSearch.cs" />

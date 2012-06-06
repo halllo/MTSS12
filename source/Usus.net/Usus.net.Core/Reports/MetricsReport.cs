@@ -5,7 +5,9 @@ namespace andrena.Usus.net.Core.Reports
 {
     public class MetricsReport
     {
-        Dictionary<TypeMetricsReport, TypeMetricsWithMethodMetrics> TypeReports;
+        Dictionary<string, TypeMetricsWithMethodMetrics> TypeReports;
+        
+        internal CommonReportKnowledge CommonKnowledge { get; private set; }
         
         public IEnumerable<MethodMetricsReport> Methods
         {
@@ -19,17 +21,31 @@ namespace andrena.Usus.net.Core.Reports
 
         internal MetricsReport()
         {
-            TypeReports = new Dictionary<TypeMetricsReport, TypeMetricsWithMethodMetrics>();
+            TypeReports = new Dictionary<string, TypeMetricsWithMethodMetrics>();
+            CommonKnowledge = new CommonReportKnowledge();
         }
 
         internal void AddTypeReport(TypeMetricsWithMethodMetrics typeMertics)
         {
-            TypeReports.Add(typeMertics.Itself, typeMertics);
+            TypeReports.Add(typeMertics.Itself.FullName, typeMertics);
+            ShareTheKnowledge(typeMertics);
+            if (!typeMertics.Itself.CompilerGenerated) CommonKnowledge.NumberOfClasses++;
         }
 
-        public IEnumerable<MethodMetricsReport> MethodsOf(TypeMetricsReport type)
+        internal TypeMetricsReport TypeForName(string fullName)
         {
-            return TypeReports[type].Methods;
+            return TypeReports[fullName].Itself;
+        }
+
+        internal IEnumerable<MethodMetricsReport> MethodsOf(TypeMetricsReport type)
+        {
+            return TypeReports[type.FullName].Methods;
+        }
+
+        private void ShareTheKnowledge(TypeMetricsWithMethodMetrics typeMertics)
+        {
+            typeMertics.Itself.CommonKnowledge = CommonKnowledge;
+            foreach (var method in typeMertics.Methods) method.CommonKnowledge = CommonKnowledge;
         }
     }
 }

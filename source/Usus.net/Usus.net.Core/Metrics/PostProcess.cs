@@ -21,14 +21,14 @@ namespace andrena.Usus.net.Core.Metrics
                 type.InterestingDirectDependencies = InterestingDirectDependencies.Of(type, metrics.Types);
         }
 
-        private static Graph<string> ToTypeGraph(this MetricsReport metrics)
+        private static Graph<TypeMetricsReport> ToTypeGraph(this MetricsReport metrics)
         {
             return metrics.Types
-                .ToDictionary(t => t.FullName, t => t.InterestingDirectDependencies)
+                .ToDictionary(t => t, t => t.InterestingDirectDependencies.Select(d => metrics.TypeForName(d)))
                 .ToGraph();
         }
 
-        private static void SetCumulativeComponentDependency(this MetricsReport metrics, Graph<string> graph)
+        private static void SetCumulativeComponentDependency(this MetricsReport metrics, Graph<TypeMetricsReport> graph)
         {
             foreach (var type in metrics.Types)
                 type.CumulativeComponentDependency = CumulativeComponentDependency.Of(type, graph);

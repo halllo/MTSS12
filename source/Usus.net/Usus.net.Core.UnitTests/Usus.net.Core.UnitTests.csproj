@@ -54,6 +54,7 @@
     <Compile Include="AverageClassSizeTest.cs" />
     <Compile Include="AverageMethodLengthTest.cs" />
     <Compile Include="AverageNumberOfNonStaticPublicFieldsTest.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="Factories\CreateGraph.cs" />
     <Compile Include="Factories\Metrics\Create.cs" />
     <Compile Include="Factories\Metrics\CreateAverage.cs" />
@@ -61,11 +62,13 @@
     <Compile Include="Factories\Metrics\CreateRated.cs" />
     <Compile Include="GraphTests.cs" />
     <Compile Include="HotspotClassSizeTest.cs" />
+    <Compile Include="HotspotCumulativeComponentDependencyTest.cs" />
     <Compile Include="HotspotMethodLengthTest.cs" />
     <Compile Include="HotspotCyclomaticComplexityTest.cs" />
     <Compile Include="AverageCyclomaticComplexityTest.cs" />
     <Compile Include="HotspotNumberOfNonStaticPublicFieldsTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="AverageCumulativeComponentDependencyTest.cs" />
     <Compile Include="RatedCyclomaticComplexityTest.cs" />
     <Compile Include="RatedMethodLengthTest.cs" />
     <Compile Include="RatedClassSizeTest.cs" />

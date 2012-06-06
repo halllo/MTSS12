@@ -6,8 +6,6 @@ namespace Usus.net.Core.UnitTests
     [TestClass]
     public class RatedMethodLengthTest
     {
-        private const double DELTA = 0.1;
-
         [TestMethod]
         public void Rate_MethodLengthMinus1_Rated0()
         {
@@ -15,9 +13,9 @@ namespace Usus.net.Core.UnitTests
         }
 
         [TestMethod]
-        public void Rate_MethodLengthMinus1_FallbackToStatementsRated10()
+        public void Rate_MethodLengthMinus1_FallbackToStatementsRatedPoint11()
         {
-            Assert.AreEqual(11.111111, CreateRated.MethodLength(-1, 10), DELTA);
+            Assert.AreEqual(0.11111111, CreateRated.MethodLength(-1, 10), Constants.DELTA);
         }
 
         [TestMethod]
@@ -33,9 +31,9 @@ namespace Usus.net.Core.UnitTests
         }
 
         [TestMethod]
-        public void Rate_MethodLength10_Rated11Point1111()
+        public void Rate_MethodLength10_RatedPoint11()
         {
-            Assert.AreEqual(11.111111, CreateRated.MethodLength(10), DELTA);
+            Assert.AreEqual(0.11111111, CreateRated.MethodLength(10), Constants.DELTA);
         }
     }
 }

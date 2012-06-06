@@ -6,24 +6,22 @@ namespace Usus.net.Core.UnitTests
     [TestClass]
     public class RatedClassSizeTest
     {
-        private const double DELTA = 0.01;
-
         [TestMethod]
         public void Rate_ClassSize0_Rated0()
         {
-            Assert.AreEqual(0.0, CreateRated.ClassSize(0), DELTA);
+            Assert.AreEqual(0.0, CreateRated.ClassSize(0), Constants.DELTA);
         }
         
         [TestMethod]
         public void Rate_ClassSize12_Rated0()
         {
-            Assert.AreEqual(0.0, CreateRated.ClassSize(12), DELTA);
+            Assert.AreEqual(0.0, CreateRated.ClassSize(12), Constants.DELTA);
         }
         
         [TestMethod]
-        public void Rate_ClassSize13_Rated8Point33()
+        public void Rate_ClassSize13_RatedPoint0833()
         {
-            Assert.AreEqual(8.33, CreateRated.ClassSize(13), DELTA);
+            Assert.AreEqual(0.0833, CreateRated.ClassSize(13), Constants.DELTA);
         }
     }
 }

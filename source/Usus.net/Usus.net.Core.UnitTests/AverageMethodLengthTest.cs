@@ -6,25 +6,23 @@ namespace Usus.net.Core.UnitTests
     [TestClass]
     public class AverageMethodLengthTest
     {
-        private const double DELTA = 0.1;
-
         [TestMethod]
         public void Rate_0MethodLengths_AverageRated0()
         {
-            Assert.AreEqual(0.0, CreateAverage.RatedMethodLength(), DELTA);
+            Assert.AreEqual(0.0, CreateAverage.RatedMethodLength(), Constants.DELTA);
         }
 
         [TestMethod]
-        public void Rate_1MethodLength10_AverageRated0()
+        public void Rate_1MethodLength10_AverageRatedPoint1111()
         {
-            Assert.AreEqual(11.11, CreateAverage.RatedMethodLength(10), DELTA);
+            Assert.AreEqual(0.1111, CreateAverage.RatedMethodLength(10), Constants.DELTA);
         }
 
         [TestMethod]
-        public void Rate_31MethodLengths_AverageRated1Point4()
+        public void Rate_31MethodLengths_AverageRatedPoint0143()
         {
-            Assert.AreEqual(1.4, CreateAverage.RatedMethodLength(
-                13, 8, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), DELTA);
+            Assert.AreEqual(0.0143, CreateAverage.RatedMethodLength(
+                13, 8, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), Constants.DELTA);
         }
     }
 }

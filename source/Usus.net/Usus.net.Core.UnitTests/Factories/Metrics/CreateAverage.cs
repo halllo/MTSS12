@@ -1,4 +1,5 @@
 using andrena.Usus.net.Core.Reports;
+using System;
 
 namespace Usus.net.Core.UnitTests.Factories.Metrics
 {
@@ -18,14 +19,20 @@ namespace Usus.net.Core.UnitTests.Factories.Metrics
 
         public static double RatedClassSize(params int[] css)
         {
-            return Create.ManyRatedMetrics(m => new TypeMetricsReport { NumberOfMethods = m }, css)
+            return Create.ManyRatedMetrics(m => new TypeMetricsReport { FullName = Create.RandomName(), NumberOfMethods = m }, css)
                 .AverageRatedClassSize;
         }
 
         public static double RatedNumberOfNonStaticPublicFields(params int[] nspfs)
         {
-            return Create.ManyRatedMetrics(m => new TypeMetricsReport { NumberOfNonStaticPublicFields = m }, nspfs)
+            return Create.ManyRatedMetrics(m => new TypeMetricsReport { FullName = Create.RandomName(), NumberOfNonStaticPublicFields = m }, nspfs)
                 .AverageRatedNumberOfNonStaticPublicFields;
+        }
+
+        public static double CumulativeComponentDependency(params int[] ccds)
+        {
+            return Create.ManyRatedMetrics(m => new TypeMetricsReport { FullName = Create.RandomName(), CumulativeComponentDependency = m }, ccds)
+                .AverageComponentDependency;
         }
     }
 }

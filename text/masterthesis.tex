@@ -474,11 +474,12 @@ Peter Grogono beschreibt die Bedeutung des ACD-Werts als durchschnittliche Anzah
 	acd'(Cs) = \frac{acd(Cs)}{|Cs|}
 \label{eq:averagecomponentdependency3}
 \end{equation}
-Eine Klasse wird von Usus dann als Hotspot betrachtet, wenn ihr CCD-Wert über einer Schwelle liegt, die von der Projektgröße abhängig ist. Die Projektgröße wird dabei an der Anzahl der Klassen festgelegt. Anhand der Tooltip-Erklärung im Usus Cockpit liegt diese Schwelle für kleine Projekte bei 15\% der Klassenanzahl, während bei großen Projekten 5\% der Klassenanzahl verwendet wird. Dafür haben Philipp und Rauch Formel \ref{eq:averagecomponentdependency4} mithilfe von Erfahrungswerten definiert um die Berechnung des CCD-Schwellwert $L_{ccd}$ anhand der Menge aller Klassen $Cs$ im System durchführen zu können.
+Eine Klasse wird von Usus dann als Hotspot betrachtet, wenn ihr CCD-Wert über einer Schwelle liegt, die von der Projektgröße abhängig ist. Die Projektgröße wird dabei an der Anzahl der Klassen festgelegt. Anhand der Tooltip-Erklärung im Usus Cockpit liegt diese Schwelle für kleine Projekte bei 15\% der Klassenanzahl, während bei großen Projekten 5\% der Klassenanzahl verwendet wird. Dafür haben Philipp und Rauch Formel \ref{eq:averagecomponentdependency4} mithilfe von Erfahrungswerten definiert um die Berechnung des CCD-Schwellwert-Faktors $L_{ccd}$ anhand der Menge aller Klassen $Cs$ im System durchführen zu können.
 \begin{equation}
 	L_{ccd}(Cs) = \frac{1,5}{2^{\displaystyle (\log_{5} |Cs|)}}
 \label{eq:averagecomponentdependency4}
 \end{equation}
+Um den tatsächlichen Schwellwert für eine Menge von Klassen $Cs$ zu bestimmen, muss der Faktor $L_{ccd}(Cs)$ noch mit der Anzahl der Klassen $|Cs|$ multipliziert werden.
 \subsubsection{Durchschnittliche Klassengröße}
 Eine Klasse wird von Usus als Hotspot gesehen, sobald die in Unter-Unterabschnitt \ref{subsubsec:classsize} beschriebene Klassengröße den Schwellwert 12 übersteigt. Das haben Philipp und Rauch festgelegt. Die im Usus Cockpit angezeigte durchschnittliche Klassengröße betrachtet nur die Klassen, die bereits als Hotspot markiert wurden. Das liegt an der Bewertungsfunktion $rating_{cs}$ von Philipp und Rauch, die in Formel \ref{eq:averageclasssize1} angegeben ist.
 \begin{equation}

@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 
 namespace andrena.Usus.net.Core.Reports
 {
     public class MethodMetricsReport
     {
+        internal CommonReportKnowledge CommonKnowledge { get; set; }
+
         public string Name { get; internal set; }
         public string Signature { get; internal set; }
         public bool CompilerGenerated { get; internal set; }
@@ -25,7 +25,6 @@ namespace andrena.Usus.net.Core.Reports
         }
 
         internal MethodMetricsReport()
-        {
-        }
+        { }
     }
 }

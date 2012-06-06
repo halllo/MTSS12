@@ -1,5 +1,4 @@
 using andrena.Usus.net.Core.Reports;
-using System;
 
 namespace andrena.Usus.net.Core.Hotspots
 {
@@ -7,6 +6,7 @@ namespace andrena.Usus.net.Core.Hotspots
     {
         public string Name { get; private set; }
         public string FullName { get; private set; }
+        public double CumulativeComponentDependency { get; private set; }
 
         public double RatedClassSize { get; private set; }
         public double RatedNumberOfNonStaticPublicFields { get; private set; }
@@ -15,6 +15,8 @@ namespace andrena.Usus.net.Core.Hotspots
         {
             Name = metrics.Name;
             FullName = metrics.FullName;
+            CumulativeComponentDependency = metrics.CumulativeComponentDependency;
+
             RatedClassSize = metrics.RateClassSize();
             RatedNumberOfNonStaticPublicFields = metrics.RateNumberOfNonStaticPublicFields();
         }

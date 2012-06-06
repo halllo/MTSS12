@@ -6,8 +6,6 @@ namespace Usus.net.Core.UnitTests
     [TestClass]
     public class RatedNumberOfNonStaticPublicFieldsTest
     {
-        private const double DELTA = 0.01;
-
         [TestMethod]
         public void Rate_NumberOfNonStaticPublicFields0_Rated0()
         {
@@ -17,12 +15,13 @@ namespace Usus.net.Core.UnitTests
         [TestMethod]
         public void Rate_NumberOfNonStaticPublicFields1_Rated1()
         {
-            Assert.AreEqual(100.0, CreateRated.NumberOfNonStaticPublicFields(1), DELTA);
+            Assert.AreEqual(1.0, CreateRated.NumberOfNonStaticPublicFields(1), Constants.DELTA);
         }
+
         [TestMethod]
         public void Rate_NumberOfNonStaticPublicFields3_Rated1()
         {
-            Assert.AreEqual(100.0, CreateRated.NumberOfNonStaticPublicFields(3), DELTA);
+            Assert.AreEqual(1.0, CreateRated.NumberOfNonStaticPublicFields(3), Constants.DELTA);
         }
     }
 }
