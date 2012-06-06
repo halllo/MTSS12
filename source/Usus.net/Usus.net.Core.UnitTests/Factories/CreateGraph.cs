@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using andrena.Usus.net.Core.Metrics.Types.Interconnection;
+using andrena.Usus.net.Core.Graphs;
 
 namespace Usus.net.Core.UnitTests.Factories
 {

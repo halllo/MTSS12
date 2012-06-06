@@ -4,9 +4,9 @@ using System.Linq;
 using QuickGraph;
 using QuickGraph.Algorithms.Search;
 
-namespace andrena.Usus.net.Core.Metrics.Types.Interconnection
+namespace andrena.Usus.net.Core.Graphs
 {
-    public class Graph<T> where T : IComparable
+    public class Graph<T> where T : class
     {
         AdjacencyGraph<T, Edge<T>> graph;
 
@@ -28,7 +28,7 @@ namespace andrena.Usus.net.Core.Metrics.Types.Interconnection
             reachGraph.AddVertex(start);
 
             var dfs = new DepthFirstSearchAlgorithm<T, Edge<T>>(graph);
-            dfs.StartVertex += v => { if (v.CompareTo(start) != 0) dfs.Abort(); };
+            dfs.StartVertex += v => { if (!v.Equals(start)) dfs.Abort(); };
             dfs.ExamineEdge += e => reachGraph.AddVerticesAndEdge(e);
             dfs.Compute(start);
 

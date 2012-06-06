@@ -29,5 +29,17 @@ namespace Usus.net.Core.IntegrationTests
         {
             Verify.TypesWith<ExpectNoDirectDependencyAttribute>(metrics);
         }
+
+        [TestMethod]
+        public void Verify_InterestingDependencies()
+        {
+            Verify.TypesWith<ExpectInterestingDirectDependencyAttribute>(metrics);
+        }
+
+        [TestMethod]
+        public void Verify_NoInterestingDependencies()
+        {
+            Verify.TypesWith<ExpectNoInterestingDirectDependencyAttribute>(metrics);
+        }
     }
 }

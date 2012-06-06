@@ -54,6 +54,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MetricsCollectorTests.cs" />
     <Compile Include="TypeMetrics\DirectDependencies.cs" />
+    <Compile Include="TypeMetrics\InterestingDirectDependencies.cs" />
     <Compile Include="TypeMetrics\NonStaticPublicFields.cs" />
     <Compile Include="TypeMetrics\ClassesSizes.cs" />
   </ItemGroup>

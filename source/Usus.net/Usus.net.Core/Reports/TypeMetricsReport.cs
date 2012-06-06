@@ -12,6 +12,8 @@ namespace andrena.Usus.net.Core.Reports
         public int NumberOfNonStaticPublicFields { get; internal set; }
         public int NumberOfMethods { get; internal set; }
         public IEnumerable<string> DirectDependencies { get; internal set; }
+        public IEnumerable<string> InterestingDirectDependencies { get; internal set; }
+        public int CumulativeComponentDependency { get; internal set; }
 
         public int ClassSize
         {

@@ -101,8 +101,9 @@
     <Compile Include="Metrics\Methods\TypeDependenciesOfVariables.cs" />
     <Compile Include="Metrics\PostProcess.cs" />
     <Compile Include="Metrics\Types\CumulativeComponentDependency.cs" />
-    <Compile Include="Metrics\Types\Interconnection\Graph.cs" />
-    <Compile Include="Metrics\Types\Interconnection\GraphExtensions.cs" />
+    <Compile Include="Metrics\Types\InterestingDirectDependencies.cs" />
+    <Compile Include="Graphs\Graph.cs" />
+    <Compile Include="Graphs\GraphExtensions.cs" />
     <Compile Include="Metrics\Types\NumberOfMethods.cs" />
     <Compile Include="Metrics\Types\NumberOfNonStaticPublicFields.cs" />
     <Compile Include="Helper\EnumerableExtensions.cs" />
@@ -125,7 +126,9 @@
     <Compile Include="Reports\TypeMetricsWithMethodMetrics.cs" />
     <Compile Include="Verification\Expectation.cs" />
     <Compile Include="Verification\ExpectDirectDependencyAttribute.cs" />
+    <Compile Include="Verification\ExpectInterestingDirectDependencyAttribute.cs" />
     <Compile Include="Verification\ExpectNoDirectDependencyAttribute.cs" />
+    <Compile Include="Verification\ExpectNoInterestingDirectDependencyAttribute.cs" />
     <Compile Include="Verification\ExpectNoTypeDependencyAttribute.cs" />
     <Compile Include="Verification\ExpectNumberOfMethodsAttribute.cs" />
     <Compile Include="Verification\ExpectNumberOfNonStaticPublicFieldsAttribute.cs" />
