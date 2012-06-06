@@ -41,5 +41,11 @@ namespace Usus.net.Core.IntegrationTests
         {
             Verify.TypesWith<ExpectNoInterestingDirectDependencyAttribute>(metrics);
         }
+
+        [TestMethod]
+        public void Verify_CumulativeComponentDependencies()
+        {
+            Verify.TypesWith<ExpectCumulativeComponentDependencyAttribute>(metrics);
+        }
     }
 }

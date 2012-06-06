@@ -125,6 +125,7 @@
     <Compile Include="Reports\TypeMetricsReport.cs" />
     <Compile Include="Reports\TypeMetricsWithMethodMetrics.cs" />
     <Compile Include="Verification\Expectation.cs" />
+    <Compile Include="Verification\ExpectCumulativeComponentDependencyAttribute.cs" />
     <Compile Include="Verification\ExpectDirectDependencyAttribute.cs" />
     <Compile Include="Verification\ExpectInterestingDirectDependencyAttribute.cs" />
     <Compile Include="Verification\ExpectNoDirectDependencyAttribute.cs" />

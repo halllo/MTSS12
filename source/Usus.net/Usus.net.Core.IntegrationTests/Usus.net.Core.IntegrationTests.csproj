@@ -53,6 +53,7 @@
     <Compile Include="MetricsCollectorTypeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MetricsCollectorTests.cs" />
+    <Compile Include="TypeMetrics\CumulativeComponentDependencies.cs" />
     <Compile Include="TypeMetrics\DirectDependencies.cs" />
     <Compile Include="TypeMetrics\InterestingDirectDependencies.cs" />
     <Compile Include="TypeMetrics\NonStaticPublicFields.cs" />
