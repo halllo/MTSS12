@@ -5,7 +5,7 @@ using Usus.net.Core.UnitTests.Factories;
 namespace Usus.net.Core.UnitTests
 {
     [TestClass]
-    public class GraphTests
+    public class GraphReachTests
     {
         [TestMethod]
         public void Reach_Circle_All()
@@ -16,8 +16,8 @@ namespace Usus.net.Core.UnitTests
             graphDict.Add("c", new List<string> { "d" });
             graphDict.Add("d", new List<string> { "a" });
 
-            var reach = CreateGraph.Reach(graphDict, "a");
-            Assert.IsTrue(reach.ContainsAll("a", "b", "c", "d"));
+            var reach = graphDict.GetReach("a");
+            Assert.IsTrue(reach.ContainsAllVertices("a", "b", "c", "d"));
         }
 
         [TestMethod]
@@ -29,9 +29,9 @@ namespace Usus.net.Core.UnitTests
             graphDict.Add("c", new List<string> { "d" });
             graphDict.Add("d", new List<string> { });
 
-            var reach = CreateGraph.Reach(graphDict, "d");
-            Assert.IsTrue(reach.ContainsAllNot("a", "b", "c"));
-            Assert.IsTrue(reach.ContainsAll("d"));
+            var reach = graphDict.GetReach("d");
+            Assert.IsTrue(reach.ContainsAllVerticesNot("a", "b", "c"));
+            Assert.IsTrue(reach.ContainsAllVertices("d"));
         }
 
         [TestMethod]
@@ -43,9 +43,9 @@ namespace Usus.net.Core.UnitTests
             graphDict.Add("c", new List<string> { "d" });
             graphDict.Add("d", new List<string> { });
 
-            var reach = CreateGraph.Reach(graphDict, "c");
-            Assert.IsTrue(reach.ContainsAllNot("a", "b"));
-            Assert.IsTrue(reach.ContainsAll("c", "d"));
+            var reach = graphDict.GetReach("c");
+            Assert.IsTrue(reach.ContainsAllVerticesNot("a", "b"));
+            Assert.IsTrue(reach.ContainsAllVertices("c", "d"));
         }
     }
 }
