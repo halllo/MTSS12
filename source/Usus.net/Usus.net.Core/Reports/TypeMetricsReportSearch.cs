@@ -18,9 +18,7 @@ namespace andrena.Usus.net.Core.Reports
 
         public static TypeMetricsReport ForType(this MetricsReport metrics, string typeName)
         {
-            return (from t in metrics.Types
-                    where t.FullName == typeName
-                    select t).FirstOrDefault();
+            return metrics.TypeForName(typeName);
         }
     }
 }

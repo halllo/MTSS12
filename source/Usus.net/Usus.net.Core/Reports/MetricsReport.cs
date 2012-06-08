@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using andrena.Usus.net.Core.Graphs;
 
 namespace andrena.Usus.net.Core.Reports
 {
@@ -8,6 +9,7 @@ namespace andrena.Usus.net.Core.Reports
         Dictionary<string, TypeMetricsWithMethodMetrics> TypeReports;
         
         public CommonReportKnowledge CommonKnowledge { get; private set; }
+        public Graph<TypeMetricsReport> TypeGraph { get; internal set; }
         
         public IEnumerable<MethodMetricsReport> Methods
         {

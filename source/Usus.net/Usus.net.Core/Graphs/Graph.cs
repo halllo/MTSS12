@@ -34,11 +34,11 @@ namespace andrena.Usus.net.Core.Graphs
         public Graph<T> Reach(T start)
         {
             var reachGraph = start.ToNewGraph(PARALLEL_EDGES);
-            Search(start, e => reachGraph.AddVerticesAndEdge(e));
+            Reach(start, e => reachGraph.AddVerticesAndEdge(e));
             return new Graph<T>(reachGraph);
         }
 
-        private void Search(T start, Action<Edge<T>> foundEdge)
+        private void Reach(T start, Action<Edge<T>> foundEdge)
         {
             var dfs = new DepthFirstSearchAlgorithm<T, Edge<T>>(graph);
             dfs.StartVertex += v => { if (!v.Equals(start)) dfs.Abort(); };

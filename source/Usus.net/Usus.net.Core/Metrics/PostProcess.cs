@@ -7,12 +7,11 @@ namespace andrena.Usus.net.Core.Metrics
 {
     internal static class PostProcess
     {
-        public static MetricsReport Metrics(MetricsReport metrics)
+        public static void Metrics(MetricsReport metrics)
         {
             metrics.SetInterestingDirectDependencies();
-            var graph = metrics.ToTypeGraph();
-            metrics.SetCumulativeComponentDependency(graph);
-            return metrics;
+            metrics.TypeGraph = metrics.ToTypeGraph();
+            metrics.SetCumulativeComponentDependency();
         }
 
         private static void SetInterestingDirectDependencies(this MetricsReport metrics)
@@ -28,10 +27,10 @@ namespace andrena.Usus.net.Core.Metrics
                 .ToGraph();
         }
 
-        private static void SetCumulativeComponentDependency(this MetricsReport metrics, Graph<TypeMetricsReport> graph)
+        private static void SetCumulativeComponentDependency(this MetricsReport metrics)
         {
             foreach (var type in metrics.Types)
-                type.CumulativeComponentDependency = CumulativeComponentDependency.Of(type, graph);
+                type.CumulativeComponentDependency = CumulativeComponentDependency.Of(type, metrics.TypeGraph);
         }
     }
 }
