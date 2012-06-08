@@ -7,7 +7,7 @@ namespace andrena.Usus.net.Core.Reports
     {
         Dictionary<string, TypeMetricsWithMethodMetrics> TypeReports;
         
-        internal CommonReportKnowledge CommonKnowledge { get; private set; }
+        public CommonReportKnowledge CommonKnowledge { get; private set; }
         
         public IEnumerable<MethodMetricsReport> Methods
         {

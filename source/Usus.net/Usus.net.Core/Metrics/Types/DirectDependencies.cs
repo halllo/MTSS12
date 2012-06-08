@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using andrena.Usus.net.Core.AssemblyNavigation;
+using andrena.Usus.net.Core.Helper;
 using andrena.Usus.net.Core.Reports;
 using Microsoft.Cci;
 
@@ -15,6 +16,7 @@ namespace andrena.Usus.net.Core.Metrics.Types
             var typesOfAncestors = GetAncestorTypes(type).ToList();
 
             return Enumerable.Empty<string>()
+                .Union(type.FullName().Return())
                 .Union(typesOfMethods)
                 .Union(typesOfFields)
                 .Union(typesOfAncestors)

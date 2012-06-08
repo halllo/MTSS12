@@ -7,5 +7,10 @@ namespace andrena.Usus.net.Console
         {
             System.Console.WriteLine(line);
         }
+
+        protected override void Output()
+        {
+            Output("");
+        }
     }
 }

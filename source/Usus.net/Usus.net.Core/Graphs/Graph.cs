@@ -27,23 +27,15 @@ namespace andrena.Usus.net.Core.Graphs
         public Graph<T> Reduce(params T[] vertices)
         {
             var reducedGraph = graph.Clone();
-            foreach (var vertex in vertices.Skip(1))
-                reducedGraph.MergeVertex(vertex, (s, t) => new Edge<T>(s, t));
+            reducedGraph.MergeTogether(vertices);
             return new Graph<T>(reducedGraph);
         }
 
         public Graph<T> Reach(T start)
         {
-            var reachGraph = NewEmptyGraph(start);
+            var reachGraph = start.ToNewGraph(PARALLEL_EDGES);
             Search(start, e => reachGraph.AddVerticesAndEdge(e));
             return new Graph<T>(reachGraph);
-        }
-
-        private static BidirectionalGraph<T, Edge<T>> NewEmptyGraph(T start)
-        {
-            var reachGraph = new BidirectionalGraph<T, Edge<T>>(PARALLEL_EDGES);
-            reachGraph.AddVertex(start);
-            return reachGraph;
         }
 
         private void Search(T start, Action<Edge<T>> foundEdge)

@@ -6,6 +6,10 @@ namespace Usus.net.Core.IntegrationTests.TypeMetrics
 {
     class DirectDependencies
     {
+        [ExpectDirectDependency("Usus.net.Core.IntegrationTests.TypeMetrics.DirectDependencies.SimpleClass")]
+        class SimpleClass
+        { }
+
         [ExpectNoDirectDependency("System.Exception")]
         class ClassWithoutBase
         { }

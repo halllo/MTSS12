@@ -80,6 +80,7 @@
     <Compile Include="AssemblyNavigation\TypeExtensions.cs" />
     <Compile Include="AssemblyNavigation\MethodExtensions.cs" />
     <Compile Include="AssemblyNavigation\TypeVisitor.cs" />
+    <Compile Include="Graphs\BidirectionalGraphExtensions.cs" />
     <Compile Include="Hotspots\MetricsHotspots.cs" />
     <Compile Include="Hotspots\MetricsRating.cs" />
     <Compile Include="Hotspots\RatingFunctionLimitsSeach.cs" />

@@ -8,7 +8,7 @@ namespace Usus.net.Core.UnitTests
     public class GraphReachTests
     {
         [TestMethod]
-        public void Reach_Circle_All()
+        public void Reach_CircleGraph_All()
         {
             var graphDict = new Dictionary<string, IEnumerable<string>>();
             graphDict.Add("a", new List<string> { "b", "c" });
@@ -21,7 +21,7 @@ namespace Usus.net.Core.UnitTests
         }
 
         [TestMethod]
-        public void Reach_LineFromLast_OnlyStarting()
+        public void Reach_LineGraphFromLast_OnlyLastVertexReched()
         {
             var graphDict = new Dictionary<string, IEnumerable<string>>();
             graphDict.Add("a", new List<string> { "b" });
@@ -35,7 +35,7 @@ namespace Usus.net.Core.UnitTests
         }
 
         [TestMethod]
-        public void Reach_LineFromSecondLast_LastTwo()
+        public void Reach_LineGraphFromSecondLast_LastTwoVerticesReached()
         {
             var graphDict = new Dictionary<string, IEnumerable<string>>();
             graphDict.Add("a", new List<string> { "b" });

@@ -5,16 +5,8 @@ namespace andrena.Usus.net.Core.Hotspots
 {
     public class MetricsHotspots
     {
-        internal MetricsReport Metrics { get; private set; }
+        public MetricsReport Metrics { get; private set; }
         
-        public int CumulativeComponentDependencyLimit
-        {
-            get
-            {
-                return RatingFunctions.Limits.CumulativeComponentDependency(Metrics.CommonKnowledge.NumberOfClasses);
-            }
-        }
-
         internal MetricsHotspots(MetricsReport metrics)
         {
             Metrics = metrics;

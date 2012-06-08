@@ -19,13 +19,13 @@ namespace Usus.net.Core.IntegrationTests
         }
 
         [TestMethod]
-        public void Verify_Dependencies()
+        public void Verify_DirectDependencies()
         {
             Verify.TypesWith<ExpectDirectDependencyAttribute>(metrics);
         }
 
         [TestMethod]
-        public void Verify_NoDependencies()
+        public void Verify_NoDirectDependencies()
         {
             Verify.TypesWith<ExpectNoDirectDependencyAttribute>(metrics);
         }
