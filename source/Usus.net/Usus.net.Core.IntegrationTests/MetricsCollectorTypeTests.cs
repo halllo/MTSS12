@@ -47,5 +47,11 @@ namespace Usus.net.Core.IntegrationTests
         {
             Verify.TypesWith<ExpectCumulativeComponentDependencyAttribute>(metrics);
         }
+
+        [TestMethod]
+        public void Verify_Namespaces()
+        {
+            Verify.TypesWith<ExpectNamespaceAttribute>(metrics);
+        }
     }
 }

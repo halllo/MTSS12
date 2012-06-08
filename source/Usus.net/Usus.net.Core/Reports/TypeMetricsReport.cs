@@ -9,6 +9,7 @@ namespace andrena.Usus.net.Core.Reports
 
         public string Name { get; internal set; }
         public string FullName { get; internal set; }
+        public IEnumerable<string> Namespaces { get; internal set; }
         public bool CompilerGenerated { get; internal set; }
 
         public int NumberOfNonStaticPublicFields { get; internal set; }

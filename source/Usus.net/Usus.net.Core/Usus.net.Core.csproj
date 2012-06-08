@@ -77,6 +77,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Analyze.cs" />
+    <Compile Include="AssemblyNavigation\NamespaceExtensions.cs" />
     <Compile Include="AssemblyNavigation\TypeExtensions.cs" />
     <Compile Include="AssemblyNavigation\MethodExtensions.cs" />
     <Compile Include="AssemblyNavigation\TypeVisitor.cs" />
@@ -131,6 +132,7 @@
     <Compile Include="Verification\ExpectCumulativeComponentDependencyAttribute.cs" />
     <Compile Include="Verification\ExpectDirectDependencyAttribute.cs" />
     <Compile Include="Verification\ExpectInterestingDirectDependencyAttribute.cs" />
+    <Compile Include="Verification\ExpectNamespaceAttribute.cs" />
     <Compile Include="Verification\ExpectNoDirectDependencyAttribute.cs" />
     <Compile Include="Verification\ExpectNoInterestingDirectDependencyAttribute.cs" />
     <Compile Include="Verification\ExpectNoTypeDependencyAttribute.cs" />

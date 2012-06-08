@@ -56,6 +56,7 @@
     <Compile Include="TypeMetrics\CumulativeComponentDependencies.cs" />
     <Compile Include="TypeMetrics\DirectDependencies.cs" />
     <Compile Include="TypeMetrics\InterestingDirectDependencies.cs" />
+    <Compile Include="TypeMetrics\Namespaces.cs" />
     <Compile Include="TypeMetrics\NonStaticPublicFields.cs" />
     <Compile Include="TypeMetrics\ClassesSizes.cs" />
   </ItemGroup>
