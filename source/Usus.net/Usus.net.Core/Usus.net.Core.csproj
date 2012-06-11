@@ -81,6 +81,7 @@
     <Compile Include="AssemblyNavigation\TypeExtensions.cs" />
     <Compile Include="AssemblyNavigation\MethodExtensions.cs" />
     <Compile Include="AssemblyNavigation\TypeVisitor.cs" />
+    <Compile Include="Graphs\BidirectionalGraphCloneExtensions.cs" />
     <Compile Include="Graphs\BidirectionalGraphExtensions.cs" />
     <Compile Include="Hotspots\MetricsHotspots.cs" />
     <Compile Include="Hotspots\MetricsRating.cs" />
@@ -102,7 +103,8 @@
     <Compile Include="Metrics\Methods\TypeDependenciesOfSignature.cs" />
     <Compile Include="Metrics\Methods\TypeDependenciesOfTypeMentions.cs" />
     <Compile Include="Metrics\Methods\TypeDependenciesOfVariables.cs" />
-    <Compile Include="Metrics\PostProcess.cs" />
+    <Compile Include="Metrics\PostProcessNamespaceDependencies.cs" />
+    <Compile Include="Metrics\PostProcessTypeDependencies.cs" />
     <Compile Include="Metrics\Types\CumulativeComponentDependency.cs" />
     <Compile Include="Metrics\Types\InterestingDirectDependencies.cs" />
     <Compile Include="Graphs\Graph.cs" />
@@ -117,6 +119,7 @@
     <Compile Include="Metrics\Types\DirectDependencies.cs" />
     <Compile Include="Reports\CommonReportKnowledge.cs" />
     <Compile Include="Reports\MethodMetricsReportSearch.cs" />
+    <Compile Include="Reports\NamespacedTypes.cs" />
     <Compile Include="Reports\PropertyMetricsReportSearch.cs" />
     <Compile Include="Reports\TypeMetricsReportSearch.cs" />
     <Compile Include="Reports\PropertyMetricsReport.cs" />

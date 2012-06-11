@@ -5,9 +5,9 @@ using andrena.Usus.net.Core.Reports;
 
 namespace andrena.Usus.net.Core.Metrics
 {
-    internal static class PostProcess
+    internal static class PostProcessTypeDependencies
     {
-        public static void Metrics(MetricsReport metrics)
+        public static void Of(MetricsReport metrics)
         {
             metrics.SetInterestingDirectDependencies();
             metrics.TypeGraph = metrics.ToTypeGraph();

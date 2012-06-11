@@ -10,6 +10,7 @@ namespace andrena.Usus.net.Core.Reports
         
         public CommonReportKnowledge CommonKnowledge { get; private set; }
         public Graph<TypeMetricsReport> TypeGraph { get; internal set; }
+        public Graph<NamespacedTypes> NamespaceGraph { get; internal set; }
         
         public IEnumerable<MethodMetricsReport> Methods
         {

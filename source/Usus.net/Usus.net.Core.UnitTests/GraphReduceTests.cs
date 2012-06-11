@@ -1,7 +1,7 @@
+using System;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Usus.net.Core.UnitTests.Factories;
-using System;
 
 namespace Usus.net.Core.UnitTests
 {
@@ -16,8 +16,8 @@ namespace Usus.net.Core.UnitTests
             graphDict.Add("b", new List<string> { "c" });
             graphDict.Add("c", new List<string> { });
 
-            var reduced = graphDict.GetReduced("a", "b");
-            Assert.IsTrue(reduced.ContainsAllVertices("a", "c"));
+            var reduced = graphDict.GetReduced("ab", "a", "b");
+            Assert.IsTrue(reduced.ContainsAllVertices("ab", "c"));
             Assert.IsTrue(reduced.ContainsAllVerticesNot("b"));
         }
 
@@ -28,8 +28,8 @@ namespace Usus.net.Core.UnitTests
             graphDict.Add("a", new List<string> { "b" });
             graphDict.Add("b", new List<string> { });
 
-            var reduced = graphDict.GetReduced("a", "b");
-            Assert.IsTrue(reduced.ContainsAllVertices("a"));
+            var reduced = graphDict.GetReduced("ab", "a", "b");
+            Assert.IsTrue(reduced.ContainsAllVertices("ab"));
             Assert.IsTrue(reduced.ContainsAllVerticesNot("b"));
         }
 
@@ -40,7 +40,7 @@ namespace Usus.net.Core.UnitTests
             graphDict.Add("a", new List<string> { "b" });
             graphDict.Add("b", new List<string> { });
 
-            var reduced = graphDict.GetReduced("a");
+            var reduced = graphDict.GetReduced("a'", "a");
             Assert.IsTrue(reduced.ContainsAllEdgesNot(Tuple.Create("b", "b")));
         }
 
@@ -53,10 +53,10 @@ namespace Usus.net.Core.UnitTests
             graphDict.Add("c", new List<string> { "d" });
             graphDict.Add("d", new List<string> { });
 
-            var reduced = graphDict.GetReduced("a", "c");
-            Assert.IsTrue(reduced.ContainsAllVertices("a", "b", "d"));
+            var reduced = graphDict.GetReduced("ac", "a", "c");
+            Assert.IsTrue(reduced.ContainsAllVertices("ac", "b", "d"));
             Assert.IsTrue(reduced.ContainsAllVerticesNot("c"));
-            Assert.IsTrue(reduced.ContainsAllEdges(Tuple.Create("a", "b"), Tuple.Create("a", "d")));
+            Assert.IsTrue(reduced.ContainsAllEdges(Tuple.Create("ac", "b"), Tuple.Create("ac", "d")));
         }
 
         [TestMethod]
@@ -67,9 +67,9 @@ namespace Usus.net.Core.UnitTests
             graphDict.Add("b", new List<string> { "c" });
             graphDict.Add("c", new List<string> { });
 
-            var reduced = graphDict.GetReduced("a");
-            Assert.IsTrue(reduced.ContainsAllVertices("a", "b", "c"));
-            Assert.IsTrue(reduced.ContainsAllEdges(Tuple.Create("a", "b"), Tuple.Create("a", "c"), Tuple.Create("b", "c")));
+            var reduced = graphDict.GetReduced("a'", "a");
+            Assert.IsTrue(reduced.ContainsAllVertices("a'", "b", "c"));
+            Assert.IsTrue(reduced.ContainsAllEdges(Tuple.Create("a'", "b"), Tuple.Create("a'", "c"), Tuple.Create("b", "c")));
         }
 
         [TestMethod]
@@ -80,7 +80,7 @@ namespace Usus.net.Core.UnitTests
             graphDict.Add("b", new List<string> { "c" });
             graphDict.Add("c", new List<string> { });
 
-            var reduced = graphDict.GetReduced();
+            var reduced = graphDict.GetReduced("-");
             Assert.IsTrue(reduced.ContainsAllVertices("a", "b", "c"));
             Assert.IsTrue(reduced.ContainsAllEdges(Tuple.Create("a", "b"), Tuple.Create("a", "c"), Tuple.Create("b", "c")));
         }

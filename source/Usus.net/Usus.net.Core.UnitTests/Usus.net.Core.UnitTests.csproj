@@ -60,6 +60,7 @@
     <Compile Include="Factories\Metrics\CreateAverage.cs" />
     <Compile Include="Factories\Metrics\CreateHotspotOf.cs" />
     <Compile Include="Factories\Metrics\CreateRated.cs" />
+    <Compile Include="GraphCastTests.cs" />
     <Compile Include="GraphReachTests.cs" />
     <Compile Include="GraphReduceTests.cs" />
     <Compile Include="HotspotClassSizeTest.cs" />
