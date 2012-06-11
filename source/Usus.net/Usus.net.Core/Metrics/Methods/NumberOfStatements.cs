@@ -19,7 +19,7 @@ namespace andrena.Usus.net.Core.Metrics.Methods
             var methodBody = method.Decompile(pdb, host);
             var statementCollector = new StatementCollector(pdb);
             statementCollector.Traverse(methodBody.Statements());
-            return statementCollector.Result.Count();
+            return statementCollector.ResultCount;
         }
     }
 }

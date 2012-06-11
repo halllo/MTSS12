@@ -10,7 +10,10 @@ namespace andrena.Usus.net.Core.Metrics.Methods
         bool requireLocations;
         List<IStatement> statements;
 
-        public IEnumerable<IStatement> Result { get { return statements; } }
+        public int ResultCount
+        {
+            get { return statements.Count; }
+        }
 
         public StatementCollector(PdbReader pdb)
         {
@@ -32,19 +35,40 @@ namespace andrena.Usus.net.Core.Metrics.Methods
             if (requireLocations)
                 RememberStatementWithLocation(statement);
             else
-                RememberStatementNotBlock(statement);
+                RememberStatementWithoutLocation(statement);
         }
 
         private void RememberStatementWithLocation(IStatement statement)
         {
-            if (statement.Locations.Any() || statement is IConditionalStatement)
+            if (HasLocation(statement) || IsConditional(statement) || IsDeclaration(statement))
                 statements.Add(statement);
         }
 
-        private void RememberStatementNotBlock(IStatement statement)
+        private void RememberStatementWithoutLocation(IStatement statement)
         {
-            if (!(statement is BasicBlock))
+            if (IsNotBlock(statement))
                 statements.Add(statement);
+        }
+
+        private bool IsNotBlock(IStatement statement)
+        {
+            return !(statement is BasicBlock);
+        }
+
+        private bool HasLocation(IStatement statement)
+        {
+            return statement.Locations.Any();
+        }
+
+        private bool IsConditional(IStatement statement)
+        {
+            return statement is IConditionalStatement;
+        }
+
+        private bool IsDeclaration(IStatement statement)
+        {
+            var declaration = statement as ILocalDeclarationStatement;
+            return declaration != null && declaration.InitialValue != null;
         }
     }
 }

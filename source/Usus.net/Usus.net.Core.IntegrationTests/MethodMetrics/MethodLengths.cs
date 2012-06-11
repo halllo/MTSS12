@@ -1,6 +1,7 @@
 ﻿using System;
-using andrena.Usus.net.Core.Verification;
+using System.Collections.Generic;
 using System.Linq;
+using andrena.Usus.net.Core.Verification;
 
 namespace Usus.net.Core.IntegrationTests.MethodMetrics
 {
@@ -97,11 +98,38 @@ namespace Usus.net.Core.IntegrationTests.MethodMetrics
             if (c1) Console.WriteLine();
         }
 
-        [ExpectNumberOfStatements(4)]//compiler creates while/if/catch
+        [ExpectNumberOfStatements(4)]
+        /* •———————————————————————————————————————————————•
+           | Compiler creates while/if/finally statements. |
+           •———————————————————————————————————————————————• */
         public static void MethodWithForeach()
         {
             foreach (var item in Enumerable.Repeat(0, 2))
                 Console.WriteLine(item);
+        }
+
+        [ExpectNumberOfLogicalLines(-1)]
+        [ExpectNumberOfRealLines(-1)]
+        [ExpectNumberOfStatements(4)]
+        /* •——————————————————————————————————————————————————•
+           | Iterators don't have operation locations in pdb. |
+           •——————————————————————————————————————————————————• */
+        public static IEnumerable<string> MethodWithIteratorBlocks()
+        {
+            yield return "";
+            bool c1 = true;
+            if (c1) yield return "";
+        }
+
+        [ExpectNumberOfLogicalLines(2)]
+        [ExpectNumberOfRealLines(4)]
+        [ExpectNumberOfStatements(4)]
+        public static void MethodWithListComprehensions()
+        {
+            var result = from i in Enumerable.Range(0, 10)
+                         from ii in Enumerable.Repeat(".", i)
+                         select ii;
+            var list = result.ToList();
         }
     }
 }

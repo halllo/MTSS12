@@ -12,6 +12,7 @@ namespace andrena.Usus.net.Core.Metrics.Methods
         {
             if (pdb != null)
             {
+                if (pdb.IsIterator(method.Body)) return -1;
                 var locations = method.LocatedOperations(pdb);
                 return locations.DifferenceBetweenStartAndEndlines();
             }

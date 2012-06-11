@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using andrena.Usus.net.Core.Verification;
 
@@ -43,7 +44,7 @@ namespace Usus.net.Core.IntegrationTests.MethodMetrics
             else
                 Console.WriteLine();
         }
-        
+
         [ExpectCyclomaticComplexity(6)]
         public static void MethodWithNestedIfs()
         {
@@ -172,11 +173,31 @@ namespace Usus.net.Core.IntegrationTests.MethodMetrics
                 Console.WriteLine();
         }
 
-        [ExpectCyclomaticComplexity(3)]//compiler creates while/if/finally
+        [ExpectCyclomaticComplexity(3)]
+        /* •———————————————————————————————————————————————•
+           | Compiler creates while/if/finally statements. |
+           •———————————————————————————————————————————————• */
         public static void MethodWithForeach()
         {
             foreach (var item in Enumerable.Repeat(0, 2))
                 Console.WriteLine(item);
+        }
+
+        [ExpectCyclomaticComplexity(2)]
+        public static IEnumerable<string> MethodWithIteratorBlocks()
+        {
+            yield return "";
+            bool c1 = true;
+            if (c1) yield return "";
+        }
+
+        [ExpectCyclomaticComplexity(1)]
+        public static void MethodWithListComprehensions()
+        {
+            var result = from i in Enumerable.Range(0, 10)
+                         from ii in Enumerable.Repeat(".", i)
+                         select ii;
+            var list = result.ToList();
         }
 
         [ExpectCyclomaticComplexity(3)]
