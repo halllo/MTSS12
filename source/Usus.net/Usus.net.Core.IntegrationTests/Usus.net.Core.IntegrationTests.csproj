@@ -50,7 +50,9 @@
     <Compile Include="MethodMetrics\MethodLengths.cs" />
     <Compile Include="MethodMetrics\TypeDependencies.cs" />
     <Compile Include="MetricsCollectorMethodTests.cs" />
+    <Compile Include="MetricsCollectorNamespaceTests.cs" />
     <Compile Include="MetricsCollectorTypeTests.cs" />
+    <Compile Include="NamespaceMetrics\CyclicDependencies.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MetricsCollectorTests.cs" />
     <Compile Include="TypeMetrics\CumulativeComponentDependencies.cs" />

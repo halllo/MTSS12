@@ -28,6 +28,7 @@ namespace andrena.Usus.net.Core.Graphs
             foreach (var vertex in vertices)
             {
                 reducedGraph.AddEdge(new Edge<T>(reducedVertex, vertex));
+                reducedGraph.AddEdge(new Edge<T>(vertex, reducedVertex));
                 reducedGraph.MergeVertex(vertex, (s, t) => new Edge<T>(s, t));
             }
         }

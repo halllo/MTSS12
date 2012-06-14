@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Usus.net.Core.UnitTests.Factories;
 
@@ -17,7 +16,7 @@ namespace Usus.net.Core.UnitTests
             graphDict.Add("c", new List<string> { });
 
             var cycles = graphDict.GetCycles();
-            Assert.IsFalse(cycles.Any());
+            Assert.AreEqual(0, cycles.Count(c => c.VertexCount > 1));
         }
 
         [TestMethod]
@@ -28,8 +27,8 @@ namespace Usus.net.Core.UnitTests
             graphDict.Add("b", new List<string> { "a" });
 
             var cycles = graphDict.GetCycles();
-            Assert.IsTrue(cycles.Count() == 1 
-                && cycles.First().Count() == 2);
+            Assert.IsTrue(cycles.OfVertex("a").ContainsAllVertices("a", "b"));
+            Assert.IsTrue(cycles.OfVertex("b").ContainsAllVertices("a", "b"));
         }
 
         [TestMethod]
@@ -42,9 +41,11 @@ namespace Usus.net.Core.UnitTests
             graphDict.Add("d", new List<string> { "c" });
 
             var cycles = graphDict.GetCycles();
-            Assert.IsTrue(cycles.Count() == 2
-                && cycles.First().Count() == 2
-                && cycles.Last().Count() == 2);
+
+            Assert.IsTrue(cycles.OfVertex("a").ContainsAllVertices("a", "b"));
+            Assert.IsTrue(cycles.OfVertex("b").ContainsAllVertices("a", "b"));
+            Assert.IsTrue(cycles.OfVertex("c").ContainsAllVertices("c", "d"));
+            Assert.IsTrue(cycles.OfVertex("d").ContainsAllVertices("c", "d"));
         }
     }
 }

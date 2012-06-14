@@ -10,43 +10,43 @@ namespace Usus.net.Core.IntegrationTests
         [TestMethod]
         public void Verify_CyclomaticComplexities()
         {
-            Verify.MethodsWith<ExpectCyclomaticComplexityAttribute>(metrics);
+            Verify.MethodsWith<ExpectCyclomaticComplexityAttribute>(Metrics);
         }
 
         [TestMethod]
         public void Verify_TypeDependencies()
         {
-            Verify.MethodsWith<ExpectTypeDependencyAttribute>(metrics);
+            Verify.MethodsWith<ExpectTypeDependencyAttribute>(Metrics);
         }
 
         [TestMethod]
         public void Verify_NoTypeDependencies()
         {
-            Verify.MethodsWith<ExpectNoTypeDependencyAttribute>(metrics);
+            Verify.MethodsWith<ExpectNoTypeDependencyAttribute>(Metrics);
         }
 
         [TestMethod]
         public void Verify_NumberOfStatements()
         {
-            Verify.MethodsWith<ExpectNumberOfStatementsAttribute>(metrics);
+            Verify.MethodsWith<ExpectNumberOfStatementsAttribute>(Metrics);
         }
 
         [TestMethod]
         public void Verify_NumberOfRealLines()
         {
-            Verify.MethodsWith<ExpectNumberOfRealLinesAttribute>(metrics);
+            Verify.MethodsWith<ExpectNumberOfRealLinesAttribute>(Metrics);
         }
 
         [TestMethod]
         public void Verify_NumberOfLogicalLines()
         {
-            Verify.MethodsWith<ExpectNumberOfLogicalLinesAttribute>(metrics);
+            Verify.MethodsWith<ExpectNumberOfLogicalLinesAttribute>(Metrics);
         }
 
         [TestMethod]
         public void MetricsForProperty_AutoImplementedPropertyGetterAndSetter_Found()
         {
-            var propertyMetrics = metrics.ForProperty(() => MethodMetrics.MethodLengths.PropertyAutoImplemented);
+            var propertyMetrics = Metrics.ForProperty(() => MethodMetrics.MethodLengths.PropertyAutoImplemented);
             Assert.IsTrue(propertyMetrics.Getter != null);
             Assert.IsTrue(propertyMetrics.Setter != null);
         }
@@ -54,7 +54,7 @@ namespace Usus.net.Core.IntegrationTests
         [TestMethod]
         public void MetricsForProperty_PropertyGetterNoSetter_Found()
         {
-            var propertyMetrics = metrics.ForProperty(() => MethodMetrics.MethodLengths.PropertyGetterWithLogic);
+            var propertyMetrics = Metrics.ForProperty(() => MethodMetrics.MethodLengths.PropertyGetterWithLogic);
             Assert.IsTrue(propertyMetrics.Getter != null);
             Assert.IsTrue(propertyMetrics.Setter == null);
         }
@@ -62,7 +62,7 @@ namespace Usus.net.Core.IntegrationTests
         [TestMethod]
         public void MetricsForMethod_MethodWithReturnValue_Found()
         {
-            var report = metrics.ForMethod(() => MethodMetrics.TypeDependencies.MethodWithNoGenericsInSignature(null));
+            var report = Metrics.ForMethod(() => MethodMetrics.TypeDependencies.MethodWithNoGenericsInSignature(null));
             Assert.IsTrue(report != null);
         }
     }

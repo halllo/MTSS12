@@ -14,10 +14,11 @@ namespace andrena.Usus.net.Core.Metrics
         private static void SetNamespacesWithCyclicDependencies(this MetricsReport metrics)
         {
             var cycles = CyclicDependencies.In(metrics.GraphOfNamespaces);
-            foreach (var cycle in cycles)
+            foreach (var namespaceWithTypes in metrics.GraphOfNamespaces.Vertices)
             {
+                metrics.AddNamespaceReport(namespaceWithTypes);
+                namespaceWithTypes.Itself.CyclicDependencies = CyclicDependencies.Of(namespaceWithTypes, cycles);
             }
-
         }
     }
 }

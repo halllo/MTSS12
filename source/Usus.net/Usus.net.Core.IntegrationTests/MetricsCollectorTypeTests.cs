@@ -9,49 +9,49 @@ namespace Usus.net.Core.IntegrationTests
         [TestMethod]
         public void Verify_NumberOfNonStaticPublicFields()
         {
-            Verify.TypesWith<ExpectNumberOfNonStaticPublicFieldsAttribute>(metrics);
+            Verify.TypesWith<ExpectNumberOfNonStaticPublicFieldsAttribute>(Metrics);
         }
 
         [TestMethod]
         public void Verify_NumberOfMethods()
         {
-            Verify.TypesWith<ExpectNumberOfMethodsAttribute>(metrics);
+            Verify.TypesWith<ExpectNumberOfMethodsAttribute>(Metrics);
         }
 
         [TestMethod]
         public void Verify_DirectDependencies()
         {
-            Verify.TypesWith<ExpectDirectDependencyAttribute>(metrics);
+            Verify.TypesWith<ExpectDirectDependencyAttribute>(Metrics);
         }
 
         [TestMethod]
         public void Verify_NoDirectDependencies()
         {
-            Verify.TypesWith<ExpectNoDirectDependencyAttribute>(metrics);
+            Verify.TypesWith<ExpectNoDirectDependencyAttribute>(Metrics);
         }
 
         [TestMethod]
         public void Verify_InterestingDependencies()
         {
-            Verify.TypesWith<ExpectInterestingDirectDependencyAttribute>(metrics);
+            Verify.TypesWith<ExpectInterestingDirectDependencyAttribute>(Metrics);
         }
 
         [TestMethod]
         public void Verify_NoInterestingDependencies()
         {
-            Verify.TypesWith<ExpectNoInterestingDirectDependencyAttribute>(metrics);
+            Verify.TypesWith<ExpectNoInterestingDirectDependencyAttribute>(Metrics);
         }
 
         [TestMethod]
         public void Verify_CumulativeComponentDependencies()
         {
-            Verify.TypesWith<ExpectCumulativeComponentDependencyAttribute>(metrics);
+            Verify.TypesWith<ExpectCumulativeComponentDependencyAttribute>(Metrics);
         }
 
         [TestMethod]
         public void Verify_Namespaces()
         {
-            Verify.TypesWith<ExpectNamespaceAttribute>(metrics);
+            Verify.TypesWith<ExpectNamespaceAttribute>(Metrics);
         }
     }
 }

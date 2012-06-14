@@ -31,15 +31,17 @@ namespace Usus.net.Core.IntegrationTests.TypeMetrics
 
         [ExpectDirectDependency("System.Exception")]
         [ExpectDirectDependency("System.Action")]
-        [ExpectDirectDependency("System.NotSupportedException")]
         [ExpectDirectDependency("System.Func")]
         [ExpectDirectDependency("System.Nullable")]
         [ExpectDirectDependency("System.Double")]
+        [ExpectDirectDependency("System.NotSupportedException")]
+        [ExpectDirectDependency("System.NotImplementedException")]
         class ClassWithField
         {
             Exception f;
             Action<NotSupportedException[]> a;
             event Func<Nullable<double>[]> e;
+            object o = new NotImplementedException();
         }
 
         [ExpectDirectDependency("System.Exception")]

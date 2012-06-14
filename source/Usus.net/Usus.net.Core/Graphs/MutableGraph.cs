@@ -40,9 +40,9 @@ namespace andrena.Usus.net.Core.Graphs
             return graph.Clone(selector);
         }
 
-        public IEnumerable<IEnumerable<T>> Cycles()
+        public StronglyConntectedComponents<T> Cycles()
         {
-            return graph.Sccs().Vertices().Where(c => c.Count > 1);
+            return graph.Sccs();
         }
     }
 }

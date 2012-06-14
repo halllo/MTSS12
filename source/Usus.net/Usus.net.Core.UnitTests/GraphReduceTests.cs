@@ -60,6 +60,37 @@ namespace Usus.net.Core.UnitTests
         }
 
         [TestMethod]
+        public void Reduce_FourVerticesWithInsAndOuts_ConnectedAllVerticesThere()
+        {
+            var graphDict = new Dictionary<string, IEnumerable<string>>();
+            graphDict.Add("a", new List<string> { "e" });
+            graphDict.Add("b", new List<string> { });
+            graphDict.Add("c", new List<string> { });
+            graphDict.Add("d", new List<string> { });
+            graphDict.Add("e", new List<string> { });
+            graphDict.Add("f", new List<string> { "d" });
+
+            var reduced = graphDict.GetReduced("abcd", "a", "b", "c", "d");
+            Assert.IsTrue(reduced.ContainsAllVertices("abcd", "e", "f"));
+            Assert.IsTrue(reduced.ContainsAllVerticesNot("a", "b", "c", "d"));
+        }
+
+        [TestMethod]
+        public void Reduce_FourVerticesWithInsAndOuts_ConnectedLine()
+        {
+            var graphDict = new Dictionary<string, IEnumerable<string>>();
+            graphDict.Add("a", new List<string> { "e" });
+            graphDict.Add("b", new List<string> { });
+            graphDict.Add("c", new List<string> { });
+            graphDict.Add("d", new List<string> { });
+            graphDict.Add("e", new List<string> { });
+            graphDict.Add("f", new List<string> { "d" });
+
+            var reduced = graphDict.GetReduced("abcd", "a", "b", "c", "d");
+            Assert.IsTrue(reduced.ContainsAllEdges(Tuple.Create("abcd", "e"), Tuple.Create("f", "abcd")));
+        }
+
+        [TestMethod]
         public void Reduce_GroupOfOneVertex_NothingChanged()
         {
             var graphDict = new Dictionary<string, IEnumerable<string>>();

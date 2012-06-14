@@ -6,12 +6,12 @@ namespace Usus.net.Core.IntegrationTests
 {
     public class MetricsCollectorTests
     {
-        protected static MetricsReport metrics;
+        protected static MetricsReport Metrics;
 
         [TestInitialize]
         public void Ensure_MetricsReportIsAvailable()
         {
-            if (metrics == null) metrics = Analyze.Me();
+            if (Metrics == null) Metrics = Analyze.Me();
         }
     }
 }

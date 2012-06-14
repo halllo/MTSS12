@@ -26,10 +26,15 @@ namespace Usus.net.Core.UnitTests.Factories
             return graph.Cast(selector);
         }
 
-        public static IEnumerable<IEnumerable<string>> GetCycles(this Dictionary<string, IEnumerable<string>> graphDict)
+        public static StronglyConntectedComponents<string> GetCycles(this Dictionary<string, IEnumerable<string>> graphDict)
         {
             var graph = graphDict.ToGraph();
             return graph.Cycles();
+        }
+
+        public static bool ContainsAllVertices(this StronglyConntectedComponent<string> cycle, params string[] others)
+        {
+            return cycle.VertexCount == others.Length && cycle.Vertices.All(c => others.Contains(c));
         }
 
         public static bool ContainsAllEdges(this IGraph<string> sequence, params Tuple<string, string>[] contains)

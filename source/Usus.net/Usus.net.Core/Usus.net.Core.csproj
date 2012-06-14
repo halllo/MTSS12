@@ -85,6 +85,7 @@
     <Compile Include="Graphs\BidirectionalGraphExtensions.cs" />
     <Compile Include="Graphs\GraphSurrogate.cs" />
     <Compile Include="Graphs\IGraph.cs" />
+    <Compile Include="Graphs\StronglyConntectedComponent.cs" />
     <Compile Include="Graphs\StronglyConntectedComponents.cs" />
     <Compile Include="Hotspots\MetricsHotspots.cs" />
     <Compile Include="Hotspots\MetricsRating.cs" />
@@ -124,6 +125,7 @@
     <Compile Include="Metrics\Types\DirectDependencies.cs" />
     <Compile Include="Reports\CommonReportKnowledge.cs" />
     <Compile Include="Reports\MethodMetricsReportSearch.cs" />
+    <Compile Include="Reports\MetricsReportSearch.cs" />
     <Compile Include="Reports\NamespaceMetricsWithTypeMetrics.cs" />
     <Compile Include="Reports\NamespaceMetricsReport.cs" />
     <Compile Include="Reports\PropertyMetricsReportSearch.cs" />

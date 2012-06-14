@@ -10,7 +10,7 @@ namespace andrena.Usus.net.Core.Reports
         List<TypeMetricsReport> TypeReports;
         public IEnumerable<TypeMetricsReport> Types
         {
-            get { return Types; }
+            get { return TypeReports; }
         }
 
         internal NamespaceMetricsWithTypeMetrics()
