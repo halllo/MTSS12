@@ -6,7 +6,7 @@ namespace andrena.Usus.net.Core.Reports
     {
         public TypeMetricsReport Itself { get; internal set; }
         
-        private List<MethodMetricsReport> MethodReports;
+        List<MethodMetricsReport> MethodReports;
         public IEnumerable<MethodMetricsReport> Methods
         {
             get { return MethodReports; }

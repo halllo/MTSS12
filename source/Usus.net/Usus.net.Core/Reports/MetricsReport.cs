@@ -6,43 +6,52 @@ namespace andrena.Usus.net.Core.Reports
 {
     public class MetricsReport
     {
-        Dictionary<string, TypeMetricsWithMethodMetrics> TypeReports;
+        Dictionary<string, TypeMetricsWithMethodMetrics> typeReports;
+        List<NamespaceMetricsWithTypeMetrics> namespaceReports;
         
+        internal MutableGraph<TypeMetricsReport> GraphOfTypes { get; set; }
+        internal MutableGraph<NamespaceMetricsWithTypeMetrics> GraphOfNamespaces { get; set; }
         public CommonReportKnowledge CommonKnowledge { get; private set; }
-        public Graph<TypeMetricsReport> TypeGraph { get; internal set; }
-        public Graph<NamespacedTypes> NamespaceGraph { get; internal set; }
-        
+
         public IEnumerable<MethodMetricsReport> Methods
         {
-            get { return TypeReports.Values.SelectMany(t => t.Methods); }
+            get { return typeReports.Values.SelectMany(t => t.Methods); }
         }
 
+        public IGraph<TypeMetricsReport> TypeGraph { get { return GraphOfTypes; } }
         public IEnumerable<TypeMetricsReport> Types
         {
-            get { return TypeReports.Values.Select(t => t.Itself); }
+            get { return typeReports.Values.Select(t => t.Itself); }
+        }
+
+        public IGraph<NamespaceMetricsReport> NamespaceGraph { get { return GraphOfNamespaces.Select(n => n.Itself); } }
+        public IEnumerable<NamespaceMetricsReport> Namespaces
+        {
+            get { return namespaceReports.Select(t => t.Itself); }
         }
 
         internal MetricsReport()
         {
-            TypeReports = new Dictionary<string, TypeMetricsWithMethodMetrics>();
             CommonKnowledge = new CommonReportKnowledge();
+            typeReports = new Dictionary<string, TypeMetricsWithMethodMetrics>();
+            namespaceReports = new List<NamespaceMetricsWithTypeMetrics>();
         }
 
         internal void AddTypeReport(TypeMetricsWithMethodMetrics typeMertics)
         {
-            TypeReports.Add(typeMertics.Itself.FullName, typeMertics);
+            typeReports.Add(typeMertics.Itself.FullName, typeMertics);
             ShareTheKnowledge(typeMertics);
             if (!typeMertics.Itself.CompilerGenerated) CommonKnowledge.NumberOfClasses++;
         }
 
         internal TypeMetricsReport TypeForName(string fullName)
         {
-            return TypeReports[fullName].Itself;
+            return typeReports[fullName].Itself;
         }
 
         internal IEnumerable<MethodMetricsReport> MethodsOf(TypeMetricsReport type)
         {
-            return TypeReports[type.FullName].Methods;
+            return typeReports[type.FullName].Methods;
         }
 
         private void ShareTheKnowledge(TypeMetricsWithMethodMetrics typeMertics)

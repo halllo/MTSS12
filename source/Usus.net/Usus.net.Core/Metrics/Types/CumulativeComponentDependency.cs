@@ -7,13 +7,13 @@ namespace andrena.Usus.net.Core.Metrics.Types
 {
     internal static class CumulativeComponentDependency
     {
-        public static int Of(TypeMetricsReport type, Graph<TypeMetricsReport> graph)
+        public static int Of(TypeMetricsReport type, MutableGraph<TypeMetricsReport> graph)
         {
             return type.GetDirectAndIndirectDependencies(graph)
                 .Count(t => !t.CompilerGenerated);
         }
 
-        private static IEnumerable<TypeMetricsReport> GetDirectAndIndirectDependencies(this TypeMetricsReport type, Graph<TypeMetricsReport> graph)
+        private static IEnumerable<TypeMetricsReport> GetDirectAndIndirectDependencies(this TypeMetricsReport type, MutableGraph<TypeMetricsReport> graph)
         {
             return graph.Reach(type).Vertices;
         }

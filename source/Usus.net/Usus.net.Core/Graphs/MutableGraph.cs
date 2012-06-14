@@ -5,7 +5,7 @@ using QuickGraph;
 
 namespace andrena.Usus.net.Core.Graphs
 {
-    public class Graph<T> where T : class
+    public class MutableGraph<T> : IGraph<T> where T : class
     {
         BidirectionalGraph<T, Edge<T>> graph;
         const bool PARALLEL_EDGES = false;
@@ -13,12 +13,12 @@ namespace andrena.Usus.net.Core.Graphs
         public IEnumerable<T> Vertices { get { return graph.Vertices; } }
         public IEnumerable<Tuple<T, T>> Edges { get { return graph.Edges.Select(e => Tuple.Create(e.Source, e.Target)); } }
 
-        public Graph(IDictionary<T, IEnumerable<T>> graphDict)
+        public MutableGraph(IDictionary<T, IEnumerable<T>> graphDict)
         {
             graph = graphDict.Keys.ToBidirectionalGraph(v => graphDict[v].Select(e => new Edge<T>(v, e)), PARALLEL_EDGES);
         }
 
-        internal Graph(BidirectionalGraph<T, Edge<T>> graph)
+        internal MutableGraph(BidirectionalGraph<T, Edge<T>> graph)
         {
             this.graph = graph;
         }
@@ -28,16 +28,21 @@ namespace andrena.Usus.net.Core.Graphs
             graph.MergeVertices(vertex, vertices);
         }
 
-        public Graph<T> Reach(T start)
+        public MutableGraph<T> Reach(T start)
         {
             var reachGraph = start.ToNewGraph(PARALLEL_EDGES);
             graph.Dfs(start, e => reachGraph.AddVerticesAndEdge(e));
-            return new Graph<T>(reachGraph);
+            return new MutableGraph<T>(reachGraph);
         }
 
-        public Graph<R> Cast<R>(Func<T, R> selector) where R : class
+        public MutableGraph<R> Cast<R>(Func<T, R> selector) where R : class
         {
             return graph.Clone(selector);
+        }
+
+        public IEnumerable<IEnumerable<T>> Cycles()
+        {
+            return graph.Sccs().Vertices().Where(c => c.Count > 1);
         }
     }
 }

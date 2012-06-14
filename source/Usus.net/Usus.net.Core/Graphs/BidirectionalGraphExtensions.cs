@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using andrena.Usus.net.Core.Helper;
 using QuickGraph;
+using QuickGraph.Algorithms;
 using QuickGraph.Algorithms.Search;
 
 namespace andrena.Usus.net.Core.Graphs
@@ -35,6 +38,13 @@ namespace andrena.Usus.net.Core.Graphs
             dfs.StartVertex += v => { if (!v.Equals(start)) dfs.Abort(); };
             dfs.ExamineEdge += e => foundEdge(e);
             dfs.Compute(start);
+        }
+
+        public static StronglyConntectedComponents<T> Sccs<T>(this BidirectionalGraph<T, Edge<T>> graph)
+        {
+            IDictionary<T, int> sccNumbering;
+            graph.StronglyConnectedComponents(out sccNumbering);
+            return new StronglyConntectedComponents<T>(sccNumbering, sccNumbering.TurnAround());
         }
     }
 }

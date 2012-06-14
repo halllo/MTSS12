@@ -20,5 +20,16 @@ namespace andrena.Usus.net.Core.Helper
         {
             return sequence.Any() ? sequence.Average(selector) : 0.0;
         }
+
+        public static IDictionary<R, List<T>> TurnAround<T, R>(this IDictionary<T, R> dictionary)
+        {
+            Dictionary<R, List<T>> turnedAround = new Dictionary<R, List<T>>();
+            foreach (var vertex in dictionary)
+            {
+                if (!turnedAround.ContainsKey(vertex.Value)) turnedAround.Add(vertex.Value, new List<T>());
+                turnedAround[vertex.Value].Add(vertex.Key);
+            }
+            return turnedAround;
+        }
     }
 }

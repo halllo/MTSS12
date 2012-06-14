@@ -6,13 +6,13 @@ namespace andrena.Usus.net.Core.Graphs
 {
     internal static class BidirectionalGraphCloneExtensions
     {
-        public static Graph<R> Clone<T, R>(this BidirectionalGraph<T, Edge<T>> graph, Func<T, R> selector)
+        public static MutableGraph<R> Clone<T, R>(this BidirectionalGraph<T, Edge<T>> graph, Func<T, R> selector)
             where R : class
         {
             var newGraph = BidirectionalGraphExtensions.NewGraph<R>(graph.AllowParallelEdges);
             var verticesMap = graph.CopyVertices<T, R>(newGraph, selector);
             graph.CopyEdges<T, R>(newGraph, verticesMap);
-            return new Graph<R>(newGraph);
+            return new MutableGraph<R>(newGraph);
         }
 
         private static Dictionary<T, R> CopyVertices<T, R>(this BidirectionalGraph<T, Edge<T>> graph, BidirectionalGraph<R, Edge<R>> newGraph, Func<T, R> selector)
