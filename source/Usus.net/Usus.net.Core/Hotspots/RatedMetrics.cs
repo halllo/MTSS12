@@ -8,17 +8,20 @@ namespace andrena.Usus.net.Core.Hotspots
     {
         public IEnumerable<RatedMethodMetrics> RatedMethods { get; private set; }
         public IEnumerable<RatedTypeMetrics> RatedTypes { get; private set; }
+        public IEnumerable<RatedNamespaceMetrics> RatedNamespaces { get; private set; }
 
         public double AverageRatedCyclomaticComplexity { get; private set; }
         public double AverageRatedMethodLength { get; private set; }
         public double AverageRatedClassSize { get; private set; }
         public double AverageRatedNumberOfNonStaticPublicFields { get; private set; }
         public double AverageComponentDependency { get; private set; }
+        public double NamespacesWithCyclicDependencies { get; private set; }
 
         internal RatedMetrics(MetricsReport metrics)
         {
             RatedMethods = metrics.Methods.ToList(m => m.Rate());
             RatedTypes = metrics.Types.ToList(m => m.Rate());
+            RatedNamespaces = metrics.Namespaces.ToList(m => m.Rate());
 
             AverageRatedCyclomaticComplexity = RatedMethods.AverageAny(m => m.RatedCyclomaticComplexity);
             AverageRatedMethodLength = RatedMethods.AverageAny(m => m.RatedMethodLength);
@@ -26,6 +29,8 @@ namespace andrena.Usus.net.Core.Hotspots
             AverageRatedNumberOfNonStaticPublicFields = RatedTypes.AverageAny(m => m.RatedNumberOfNonStaticPublicFields);
             
             AverageComponentDependency = RatedTypes.AverageAny(m => m.CumulativeComponentDependency) / metrics.CommonKnowledge.NumberOfClasses;
+            NamespacesWithCyclicDependencies = RatedNamespaces.AverageAny(m => m.NumberOfNamespacesInCycle) / metrics.CommonKnowledge.NumberOfNamespaces;
+            //TODO: number of hotspots instead of number average
         }
     }
 }

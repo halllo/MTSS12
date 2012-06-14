@@ -22,5 +22,13 @@ namespace andrena.Usus.net.Core.Hotspots
                    where metricSelector(type).CompareTo(limitSelector(RatingFunctions.Limits)(metrics.CommonKnowledge)) > 0
                    select type;
         }
+
+        public static IEnumerable<NamespaceMetricsReport> NamespacesOverLimit<T>(this MetricsReport metrics, Func<NamespaceMetricsReport, T> metricSelector, Func<RatingFunctionLimits, Func<CommonReportKnowledge, T>> limitSelector)
+            where T : IComparable<T>
+        {
+            return from namespaceMetric in metrics.Namespaces
+                   where metricSelector(namespaceMetric).CompareTo(limitSelector(RatingFunctions.Limits)(metrics.CommonKnowledge)) > 0
+                   select namespaceMetric;
+        }
     }
 }

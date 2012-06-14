@@ -18,12 +18,12 @@ namespace andrena.Usus.net.Core.Reports
             TypeReports = new List<TypeMetricsReport>();
         }
 
-        internal void AddType(TypeMetricsReport typeReport)
+        internal void AddTypeReport(TypeMetricsReport typeReport)
         {
             TypeReports.Add(typeReport);
         }
 
-        internal void AddTypes(IEnumerable<NamespaceMetricsWithTypeMetrics> typeReports)
+        internal void AddTypeReports(IEnumerable<NamespaceMetricsWithTypeMetrics> typeReports)
         {
             TypeReports.AddRange(typeReports.SelectMany(n => n.TypeReports));
         }

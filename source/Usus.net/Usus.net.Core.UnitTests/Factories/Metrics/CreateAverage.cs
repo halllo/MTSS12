@@ -34,5 +34,11 @@ namespace Usus.net.Core.UnitTests.Factories.Metrics
             return Create.ManyRatedMetrics(m => new TypeMetricsReport { FullName = Create.RandomName(), CumulativeComponentDependency = m }, ccds)
                 .AverageComponentDependency;
         }
+
+        public static double RatedNumberOfNamespacesInCycle(params int[] nonics)
+        {
+            return Create.ManyRatedMetrics(m => new NamespaceMetricsReport { Name = Create.RandomName(), CyclicDependencies = Create.Sequence<string>(m) }, nonics)
+                .NamespacesWithCyclicDependencies;
+        }
     }
 }

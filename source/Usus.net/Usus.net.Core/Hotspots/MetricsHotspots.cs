@@ -36,5 +36,10 @@ namespace andrena.Usus.net.Core.Hotspots
         {
             return Metrics.TypesOverLimit(m => m.CumulativeComponentDependency, l => l.CumulativeComponentDependency);
         }
+
+        public IEnumerable<NamespaceMetricsReport> OfNumberOfNamespacesInCycle()
+        {
+            return Metrics.NamespacesOverLimit(m => m.NumberOfNamespacesInCycle, l => l.NumberOfNamespacesInCycle);
+        }
     }
 }

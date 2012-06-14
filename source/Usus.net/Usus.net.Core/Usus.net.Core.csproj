@@ -89,6 +89,7 @@
     <Compile Include="Graphs\StronglyConntectedComponents.cs" />
     <Compile Include="Hotspots\MetricsHotspots.cs" />
     <Compile Include="Hotspots\MetricsRating.cs" />
+    <Compile Include="Hotspots\RatedNamespaceMetrics.cs" />
     <Compile Include="Hotspots\RatingFunctionLimitsSeach.cs" />
     <Compile Include="Hotspots\RatedMethodMetrics.cs" />
     <Compile Include="Hotspots\RatedMetrics.cs" />

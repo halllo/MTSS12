@@ -18,6 +18,11 @@ namespace Usus.net.Core.UnitTests.Factories.Metrics
             return ManyMetrics(typeMetricsReport, metrics).Rate();
         }
 
+        public static RatedMetrics ManyRatedMetrics(Func<int, NamespaceMetricsReport> namespaceMetricsReport, params int[] metrics)
+        {
+            return ManyMetrics(namespaceMetricsReport, metrics).Rate();
+        }
+
         public static MetricsReport ManyMetrics(Func<int, MethodMetricsReport> methodMetricsReport, params int[] metrics)
         {
             return MetricsReport(from metric in metrics
@@ -28,6 +33,12 @@ namespace Usus.net.Core.UnitTests.Factories.Metrics
         {
             return MetricsReport(from metric in metrics
                                  select typeMetricsReport(metric));
+        }
+
+        public static MetricsReport ManyMetrics(Func<int, NamespaceMetricsReport> namespaceMetricsReport, params int[] metrics)
+        {
+            return MetricsReport(from metric in metrics
+                                 select namespaceMetricsReport(metric));
         }
 
         public static MetricsReport MetricsReport(IEnumerable<MethodMetricsReport> methodMetrics)
@@ -53,10 +64,36 @@ namespace Usus.net.Core.UnitTests.Factories.Metrics
             return typeWithMethods;
         }
 
+        public static MetricsReport MetricsReport(IEnumerable<NamespaceMetricsReport> namespaceMetrics)
+        {
+            var metricsReport = new MetricsReport();
+            foreach (var namespaceMetric in namespaceMetrics)
+                metricsReport.AddNamespaceReport(NamespaceMetrics(namespaceMetric, Enumerable.Empty<TypeMetricsReport>()));
+            return metricsReport;
+        }
+
+        private static NamespaceMetricsWithTypeMetrics NamespaceMetrics(NamespaceMetricsReport namespaceMetrics, IEnumerable<TypeMetricsReport> typeMetrics)
+        {
+            var namespaceWithTypes = new NamespaceMetricsWithTypeMetrics();
+            namespaceWithTypes.Itself = namespaceMetrics;
+            foreach (var typeMetric in typeMetrics) namespaceWithTypes.AddTypeReport(typeMetric);
+            return namespaceWithTypes;
+        }
+
         static Random randomizer = new Random();
         internal static string RandomName()
         {
             return randomizer.NextDouble().ToString();
+        }
+
+        internal static List<T> List<T>(params T[] elements)
+        {
+            return elements.ToList();
+        }
+
+        internal static IEnumerable<T> Sequence<T>(int count)
+        {
+            return Enumerable.Repeat(default(T), count);
         }
     }
 }

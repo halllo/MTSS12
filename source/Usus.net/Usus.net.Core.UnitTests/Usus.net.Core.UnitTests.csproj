@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="AverageClassSizeTest.cs" />
     <Compile Include="AverageMethodLengthTest.cs" />
+    <Compile Include="AverageNumberOfNamespacesInCycleTest.cs" />
     <Compile Include="AverageNumberOfNonStaticPublicFieldsTest.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Factories\CreateGraph.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="HotspotMethodLengthTest.cs" />
     <Compile Include="HotspotCyclomaticComplexityTest.cs" />
     <Compile Include="AverageCyclomaticComplexityTest.cs" />
+    <Compile Include="HotspotNumberOfNamespacesInCycleTest.cs" />
     <Compile Include="HotspotNumberOfNonStaticPublicFieldsTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AverageCumulativeComponentDependencyTest.cs" />

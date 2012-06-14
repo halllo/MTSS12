@@ -48,6 +48,7 @@ namespace andrena.Usus.net.Core.Reports
         {
             namespaceReports.Add(namespaceMertics.Itself.Name, namespaceMertics);
             namespaceMertics.Itself.CommonKnowledge = CommonKnowledge;
+            CommonKnowledge.NumberOfNamespaces++;
         }
 
         internal void AddTypeReport(TypeMetricsWithMethodMetrics typeMertics)

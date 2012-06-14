@@ -25,7 +25,7 @@ namespace andrena.Usus.net.Core.Metrics
         {
             var namespaceWithTypes = new NamespaceMetricsWithTypeMetrics();
             namespaceWithTypes.Itself = new NamespaceMetricsReport { Name = namespaceGroup.Key };
-            namespaceWithTypes.AddTypes(namespaceGroup);
+            namespaceWithTypes.AddTypeReports(namespaceGroup);
             return namespaceWithTypes;
         }
 
@@ -33,7 +33,7 @@ namespace andrena.Usus.net.Core.Metrics
         {
             var namespaceWithTypes = new NamespaceMetricsWithTypeMetrics();
             namespaceWithTypes.Itself = new NamespaceMetricsReport { Name = t.Namespaces.First() };
-            namespaceWithTypes.AddType(t);
+            namespaceWithTypes.AddTypeReport(t);
             return namespaceWithTypes;
         }
     }

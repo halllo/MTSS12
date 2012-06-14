@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using andrena.Usus.net.Core.Hotspots;
 using andrena.Usus.net.Core.Reports;
+using System.Linq;
 
 namespace Usus.net.Core.UnitTests.Factories.Metrics
 {
@@ -34,6 +35,12 @@ namespace Usus.net.Core.UnitTests.Factories.Metrics
         {
             return Create.ManyMetrics(m => new TypeMetricsReport { FullName = Create.RandomName(), CumulativeComponentDependency = m }, ccds)
                 .Hotspots().OfCumulativeComponentDependency();
+        }
+
+        public static IEnumerable<NamespaceMetricsReport> NumberOfNamespacesInCycle(params int[] cds)
+        {
+            return Create.ManyMetrics(m => new NamespaceMetricsReport { Name = Create.RandomName(), CyclicDependencies = Create.Sequence<string>(m) }, cds)
+                .Hotspots().OfNumberOfNamespacesInCycle();
         }
     }
 }
