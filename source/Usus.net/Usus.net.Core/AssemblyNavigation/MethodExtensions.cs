@@ -18,6 +18,11 @@ namespace andrena.Usus.net.Core.AssemblyNavigation
             return method.Name.ToString();
         }
 
+        public static bool IsOnlyDeclaration(this IMethodDefinition method)
+        {
+            return method.IsAbstract;
+        }
+
         public static bool HasOperations(this IMethodDefinition method)
         {
             return method.Body.Operations.Any();

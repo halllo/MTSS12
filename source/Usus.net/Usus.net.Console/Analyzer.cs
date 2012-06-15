@@ -22,12 +22,17 @@ namespace andrena.Usus.net.Console
 
         private void OutputMetricsReport(MetricsReport metrics)
         {
-            foreach (var type in metrics.Types)
+            foreach (var namespaceMetrics in metrics.Namespaces)
+                OutputNamespaceMetricsReport(namespaceMetrics);
+
+            OutputSeperator(2);
+
+            foreach (var type in metrics.Types.Where(t => !t.CompilerGenerated))
                 OutputTypeMetricsReport(type);
 
             OutputSeperator(2);
 
-            foreach (var method in metrics.Methods)
+            foreach (var method in metrics.Methods.Where(m => !m.CompilerGenerated && !m.OnlyDeclaration))
                 OutputMethodMetricsReport(method);
 
             OutputSeperator(3);
@@ -73,6 +78,14 @@ namespace andrena.Usus.net.Console
             Output();
         }
 
+        private void OutputNamespaceMetricsReport(NamespaceMetricsReport namespaceMetrics)
+        {
+            OutputSeperator();
+            Output(String.Format("Name:\t\t{0}", namespaceMetrics.Name));
+            Output(String.Format("NumberOfNamespacesInCycle:\t{0}", namespaceMetrics.NumberOfNamespacesInCycle));
+            Output();
+        }
+
         private void OutputRatings(RatedMetrics rated)
         {
             Output("Overall Metrics");
@@ -81,17 +94,19 @@ namespace andrena.Usus.net.Console
             Output(String.Format("\tAverageRatedClassSize:\t\t\t\t{0}", rated.AverageRatedClassSize));
             Output(String.Format("\tAverageRatedNumberOfNonStaticPublicFields:\t{0}", rated.AverageRatedNumberOfNonStaticPublicFields));
             Output(String.Format("\tAverageComponentDependency:\t\t\t{0}", rated.AverageComponentDependency));
+            Output(String.Format("\tNamespacesWithCyclicDependencies:\t\t{0}", rated.NamespacesWithCyclicDependencies));
             Output();
         }
 
         private void OutputHotspots(MetricsHotspots hotspots)
         {
             Output("Hotspots");
-            Output(String.Format("\tCyclomaticComplexity:\t\t{0}", string.Join(", ", hotspots.OfCyclomaticComplexity().Select(h => h.Signature))));
-            Output(String.Format("\tMethodLength:\t\t\t{0}", string.Join(", ", hotspots.OfMethodLength().Select(h => h.Signature))));
-            Output(String.Format("\tClassSize:\t\t\t{0}", string.Join(", ", hotspots.OfClassSize().Select(h => h.FullName))));
-            Output(String.Format("\tNumberOfNonStaticPublicFields:\t{0}", string.Join(", ", hotspots.OfNumberOfNonStaticPublicFields().Select(h => h.FullName))));
-            Output(String.Format("\tCCD (Limit {0}):\t\t\t{1}", GetCcdLimit(hotspots), string.Join(", ", hotspots.OfCumulativeComponentDependency().Select(h => h.FullName))));
+            Output(String.Format("\tCyclomaticComplexity:\t\t\t{0}", string.Join(", ", hotspots.OfCyclomaticComplexity().Select(h => h.Signature))));
+            Output(String.Format("\tMethodLength:\t\t\t\t{0}", string.Join(", ", hotspots.OfMethodLength().Select(h => h.Signature))));
+            Output(String.Format("\tClassSize:\t\t\t\t{0}", string.Join(", ", hotspots.OfClassSize().Select(h => h.FullName))));
+            Output(String.Format("\tNumberOfNonStaticPublicFields:\t\t{0}", string.Join(", ", hotspots.OfNumberOfNonStaticPublicFields().Select(h => h.FullName))));
+            Output(String.Format("\tCumulativeComponentDependency ({0}):\t{1}", GetCcdLimit(hotspots), string.Join(", ", hotspots.OfCumulativeComponentDependency().Select(h => h.FullName))));
+            Output(String.Format("\tNamespacesWithCyclicDependencies:\t{0}", string.Join(", ", hotspots.OfNamespacesInCycle().Select(h => h.Name))));
             Output();
         }
 

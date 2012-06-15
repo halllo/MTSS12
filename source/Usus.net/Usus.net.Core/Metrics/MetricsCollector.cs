@@ -30,6 +30,7 @@ namespace andrena.Usus.net.Core.Metrics
                 Name = method.Name(),
                 Signature = method.Signature(),
                 CompilerGenerated = method.HasAnyGeneratedCodeAttributes(),
+                OnlyDeclaration = method.IsOnlyDeclaration(),
                 CyclomaticComplexity = CyclomaticComplexityOfAst.Of(method, pdb, host),
                 NumberOfStatements = NumberOfStatements.Of(method, pdb, host),
                 NumberOfRealLines = NumberOfRealLines.Of(method, pdb),

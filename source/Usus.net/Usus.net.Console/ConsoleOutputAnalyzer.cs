@@ -1,4 +1,3 @@
-
 namespace andrena.Usus.net.Console
 {
     class ConsoleOutputAnalyzer : Analyzer

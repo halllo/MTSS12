@@ -65,5 +65,19 @@ namespace Usus.net.Core.IntegrationTests
             var report = Metrics.ForMethod(() => MethodMetrics.TypeDependencies.MethodWithNoGenericsInSignature(null));
             Assert.IsTrue(report != null);
         }
+
+        [TestMethod]
+        public void MetricsForMethod_InterfaceMethod_IsJustDeclaration()
+        {
+            var report = Metrics.ForMethod("System.NullReferenceException Usus.net.Core.IntegrationTests.MethodMetrics.AbstractTypes.IInterface.DoSomething(System.Exception)");
+            Assert.IsTrue(report.OnlyDeclaration);
+        }
+
+        [TestMethod]
+        public void MetricsForMethod_AbstractClassMethod_IsJustDeclaration()
+        {
+            var report = Metrics.ForMethod("System.NullReferenceException Usus.net.Core.IntegrationTests.MethodMetrics.AbstractTypes.IAbstractClass.DoSomething(System.Exception)");
+            Assert.IsTrue(report.OnlyDeclaration);
+        }
     }
 }

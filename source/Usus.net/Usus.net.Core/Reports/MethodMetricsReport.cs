@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System;
 
 namespace andrena.Usus.net.Core.Reports
 {
@@ -9,6 +10,7 @@ namespace andrena.Usus.net.Core.Reports
         public string Name { get; internal set; }
         public string Signature { get; internal set; }
         public bool CompilerGenerated { get; internal set; }
+        public bool OnlyDeclaration { get; internal set; }
 
         public int CyclomaticComplexity { get; internal set; }
         public int NumberOfStatements { get; internal set; }
