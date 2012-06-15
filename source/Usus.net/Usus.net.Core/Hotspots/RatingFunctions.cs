@@ -42,5 +42,13 @@ namespace andrena.Usus.net.Core.Hotspots
             else
                 return 0.0;
         }
+
+        internal static bool RateNumberOfNamespacesInCycle(this NamespaceMetricsReport metrics)
+        {
+            if (metrics.NumberOfNamespacesInCycle > Limits.NumberOfNamespacesInCycle(metrics.CommonKnowledge))
+                return true;
+            else
+                return false;
+        }
     }
 }

@@ -43,5 +43,12 @@ namespace Usus.net.Core.UnitTests.Factories.Metrics
             metrics.CommonKnowledge = new CommonReportKnowledge { NumberOfClasses = 0 };
             return metrics.Rate().RatedNumberOfNonStaticPublicFields;
         }
+
+        public static bool NumberOfNamespacesInCycle(int nonic)
+        {
+            var metrics = new NamespaceMetricsReport { CyclicDependencies = Create.Default<string>(nonic) };
+            metrics.CommonKnowledge = new CommonReportKnowledge { NumberOfNamespaces = 1 };
+            return metrics.Rate().IsInCycle;
+        }
     }
 }

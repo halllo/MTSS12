@@ -45,6 +45,7 @@ namespace Usus.net.Core.UnitTests.Factories.Metrics
         {
             var metricsReport = new MetricsReport();
             metricsReport.AddTypeReport(TypeMetrics(new TypeMetricsReport() { FullName = RandomName() }, methodMetrics));
+            metricsReport.CommonKnowledge.NumberOfNamespaces = 1;
             return metricsReport;
         }
 
@@ -53,15 +54,8 @@ namespace Usus.net.Core.UnitTests.Factories.Metrics
             var metricsReport = new MetricsReport();
             foreach (var typeMetric in typeMetrics)
                 metricsReport.AddTypeReport(TypeMetrics(typeMetric, Enumerable.Empty<MethodMetricsReport>()));
+            metricsReport.CommonKnowledge.NumberOfNamespaces = 1;
             return metricsReport;
-        }
-
-        private static TypeMetricsWithMethodMetrics TypeMetrics(TypeMetricsReport typeMetrics, IEnumerable<MethodMetricsReport> methodMetrics)
-        {
-            var typeWithMethods = new TypeMetricsWithMethodMetrics();
-            typeWithMethods.Itself = typeMetrics;
-            typeWithMethods.AddMethodReports(methodMetrics);
-            return typeWithMethods;
         }
 
         public static MetricsReport MetricsReport(IEnumerable<NamespaceMetricsReport> namespaceMetrics)
@@ -72,10 +66,16 @@ namespace Usus.net.Core.UnitTests.Factories.Metrics
             return metricsReport;
         }
 
+        private static TypeMetricsWithMethodMetrics TypeMetrics(TypeMetricsReport typeMetrics, IEnumerable<MethodMetricsReport> methodMetrics)
+        {
+            var typeWithMethods = new TypeMetricsWithMethodMetrics() { Itself = typeMetrics };
+            typeWithMethods.AddMethodReports(methodMetrics);
+            return typeWithMethods;
+        }
+
         private static NamespaceMetricsWithTypeMetrics NamespaceMetrics(NamespaceMetricsReport namespaceMetrics, IEnumerable<TypeMetricsReport> typeMetrics)
         {
-            var namespaceWithTypes = new NamespaceMetricsWithTypeMetrics();
-            namespaceWithTypes.Itself = namespaceMetrics;
+            var namespaceWithTypes = new NamespaceMetricsWithTypeMetrics() { Itself = namespaceMetrics };
             foreach (var typeMetric in typeMetrics) namespaceWithTypes.AddTypeReport(typeMetric);
             return namespaceWithTypes;
         }
@@ -86,12 +86,7 @@ namespace Usus.net.Core.UnitTests.Factories.Metrics
             return randomizer.NextDouble().ToString();
         }
 
-        internal static List<T> List<T>(params T[] elements)
-        {
-            return elements.ToList();
-        }
-
-        internal static IEnumerable<T> Sequence<T>(int count)
+        internal static IEnumerable<T> Default<T>(int count)
         {
             return Enumerable.Repeat(default(T), count);
         }

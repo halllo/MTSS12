@@ -37,7 +37,7 @@ namespace Usus.net.Core.UnitTests.Factories.Metrics
 
         public static double RatedNumberOfNamespacesInCycle(params int[] nonics)
         {
-            return Create.ManyRatedMetrics(m => new NamespaceMetricsReport { Name = Create.RandomName(), CyclicDependencies = Create.Sequence<string>(m) }, nonics)
+            return Create.ManyRatedMetrics(m => new NamespaceMetricsReport { Name = Create.RandomName(), CyclicDependencies = Create.Default<string>(m) }, nonics)
                 .NamespacesWithCyclicDependencies;
         }
     }

@@ -6,12 +6,12 @@ namespace andrena.Usus.net.Core.Hotspots
     {
         public string Name { get; private set; }
 
-        public int NumberOfNamespacesInCycle { get; private set; }
+        public bool IsInCycle { get; private set; }
 
         public RatedNamespaceMetrics(NamespaceMetricsReport metrics)
         {
             Name = metrics.Name;
-            NumberOfNamespacesInCycle = metrics.NumberOfNamespacesInCycle;
+            IsInCycle = metrics.RateNumberOfNamespacesInCycle();
         }
     }
 }

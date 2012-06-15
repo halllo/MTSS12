@@ -29,8 +29,7 @@ namespace andrena.Usus.net.Core.Hotspots
             AverageRatedNumberOfNonStaticPublicFields = RatedTypes.AverageAny(m => m.RatedNumberOfNonStaticPublicFields);
             
             AverageComponentDependency = RatedTypes.AverageAny(m => m.CumulativeComponentDependency) / metrics.CommonKnowledge.NumberOfClasses;
-            NamespacesWithCyclicDependencies = RatedNamespaces.AverageAny(m => m.NumberOfNamespacesInCycle) / metrics.CommonKnowledge.NumberOfNamespaces;
-            //TODO: number of hotspots instead of number average
+            NamespacesWithCyclicDependencies = (double)RatedNamespaces.CountAny(m => m.IsInCycle) / metrics.CommonKnowledge.NumberOfNamespaces;
         }
     }
 }

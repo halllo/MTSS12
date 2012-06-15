@@ -39,7 +39,7 @@ namespace Usus.net.Core.UnitTests.Factories.Metrics
 
         public static IEnumerable<NamespaceMetricsReport> NumberOfNamespacesInCycle(params int[] cds)
         {
-            return Create.ManyMetrics(m => new NamespaceMetricsReport { Name = Create.RandomName(), CyclicDependencies = Create.Sequence<string>(m) }, cds)
+            return Create.ManyMetrics(m => new NamespaceMetricsReport { Name = Create.RandomName(), CyclicDependencies = Create.Default<string>(m) }, cds)
                 .Hotspots().OfNumberOfNamespacesInCycle();
         }
     }

@@ -15,7 +15,7 @@ namespace Usus.net.Core.UnitTests
         [TestMethod]
         public void Rate_3NumberOfNamespacesInCycle_AverageRated0()
         {
-            Assert.AreEqual(0.667, CreateAverage.RatedNumberOfNamespacesInCycle(2, 2, 1), Constants.DELTA);
+            Assert.AreEqual(0.6667, CreateAverage.RatedNumberOfNamespacesInCycle(2, 2, 1), Constants.DELTA);
         }
     }
 }

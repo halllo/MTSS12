@@ -21,6 +21,11 @@ namespace andrena.Usus.net.Core.Helper
             return sequence.Any() ? sequence.Average(selector) : 0.0;
         }
 
+        public static int CountAny<T>(this IEnumerable<T> sequence, Func<T, bool> selector)
+        {
+            return sequence.Count(selector);
+        }
+
         public static IDictionary<R, List<T>> TurnAround<T, R>(this IDictionary<T, R> dictionary)
         {
             Dictionary<R, List<T>> turnedAround = new Dictionary<R, List<T>>();
