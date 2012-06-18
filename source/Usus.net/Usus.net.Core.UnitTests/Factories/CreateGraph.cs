@@ -23,7 +23,7 @@ namespace Usus.net.Core.UnitTests.Factories
         public static IGraph<string> GetCasted(this Dictionary<string, IEnumerable<string>> graphDict, Func<string, string> selector)
         {
             var graph = graphDict.ToGraph();
-            return graph.Cast(selector);
+            return graph.Cast(selector, n => true);
         }
 
         public static StronglyConntectedComponents<string> GetCycles(this Dictionary<string, IEnumerable<string>> graphDict)

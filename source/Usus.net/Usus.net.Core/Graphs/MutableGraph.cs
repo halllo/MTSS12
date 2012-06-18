@@ -34,10 +34,10 @@ namespace andrena.Usus.net.Core.Graphs
             graph.Dfs(start, e => reachGraph.AddVerticesAndEdge(e));
             return new MutableGraph<T>(reachGraph);
         }
-
-        public MutableGraph<R> Cast<R>(Func<T, R> selector) where R : class
+        
+        public MutableGraph<R> Cast<R>(Func<T, R> selector, Func<R, bool> condition) where R : class
         {
-            return graph.Clone(selector);
+            return graph.Clone(selector, condition);
         }
 
         public StronglyConntectedComponents<T> Cycles()

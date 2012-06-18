@@ -6,6 +6,7 @@ namespace andrena.Usus.net.Core.Reports
     internal class NamespaceMetricsWithTypeMetrics
     {
         public NamespaceMetricsReport Itself { get; internal set; }
+        public bool HasName { get { return !string.IsNullOrEmpty(Itself.Name); } }
 
         List<TypeMetricsReport> TypeReports;
         public IEnumerable<TypeMetricsReport> Types

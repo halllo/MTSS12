@@ -1,5 +1,4 @@
-﻿
-namespace Usus.net.Core.IntegrationTests.NamespaceMetrics
+﻿namespace Usus.net.Core.IntegrationTests.NamespaceMetrics
 {
     namespace Test1
     {

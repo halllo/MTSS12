@@ -5,9 +5,14 @@ namespace andrena.Usus.net.Console
     {
         static void Main(string[] args)
         {
-            if (HelpRequested(args)) 
+            /* •————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————•
+               | //Analyze Usus.net itself                                                                                                          |
+               | new ConsoleOutputAnalyzer().AnalyzeFile(@"D:\manuel\Git\GitHub\MTSS12\source\Usus.net\Usus.net.Core\bin\Debug\Usus.net.Core.dll"); |
+               •————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————• */
+
+            if (HelpRequested(args))
                 PrintHelp(args);
-            else 
+            else
                 Analysis(args);
         }
 

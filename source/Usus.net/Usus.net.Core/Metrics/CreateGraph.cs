@@ -15,7 +15,7 @@ namespace andrena.Usus.net.Core.Metrics
 
         public static MutableGraph<NamespaceMetricsWithTypeMetrics> WithNamespacesOf(MetricsReport metrics)
         {
-            var namespaceGraph = metrics.GraphOfTypes.Cast(t => t.AsNamespaceWithTypes());
+            var namespaceGraph = metrics.GraphOfTypes.Cast(t => t.AsNamespaceWithTypes(), n => n.HasName);
             foreach (var namespaceGroup in namespaceGraph.Vertices.GroupBy(n => n.Itself.Name))
                 namespaceGraph.Reduce(namespaceGroup.AsNamespaceWithTypes(), namespaceGroup);
             return namespaceGraph;
@@ -32,7 +32,7 @@ namespace andrena.Usus.net.Core.Metrics
         private static NamespaceMetricsWithTypeMetrics AsNamespaceWithTypes(this TypeMetricsReport t)
         {
             var namespaceWithTypes = new NamespaceMetricsWithTypeMetrics();
-            namespaceWithTypes.Itself = new NamespaceMetricsReport { Name = t.Namespaces.First() };
+            namespaceWithTypes.Itself = new NamespaceMetricsReport { Name = t.Namespaces.FirstOrDefault() };
             namespaceWithTypes.AddTypeReport(t);
             return namespaceWithTypes;
         }
