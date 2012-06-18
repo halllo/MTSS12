@@ -6,7 +6,7 @@ namespace andrena.Usus.net.Console
         static void Main(string[] args)
         {
             /* •————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————•
-               | //Analyze Usus.net itself                                                                                                          |
+               | //Analyze Usus.net itself                                                                                                            |
                | new ConsoleOutputAnalyzer().AnalyzeFile(@"D:\manuel\Git\GitHub\MTSS12\source\Usus.net\Usus.net.Core\bin\Debug\Usus.net.Core.dll"); |
                •————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————• */
 
