@@ -1,0 +1,311 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm10="http://schemas.microsoft.com/dsltools/UseCaseModel" dslVersion="1.0.0.0" Id="c168a4fd-5d39-4ae9-9599-dd2897f4719c" name="UsusNet" linkedPackageId="d4ccc591-bc7c-4fe7-85a1-ad6f4aeabc97" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
+  <packagedElements>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="47c607f5-94de-441f-ad71-53d094fdf5b3" name="Analyze" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="2e3e6156-5f21-461d-98e1-c97d1f7cd9a1" />
+        <suppliersInternal>
+          <dependency Id="6d2fca5f-c389-416f-bd88-d48ffb7ed632">
+            <classMoniker Id="f9b6eef5-d5a8-46df-acaa-7ced45750c8a" LastKnownName="MetricsReport" />
+            <elementDefinition Id="e0c11e12-f34a-472f-a652-76d4c639e555" />
+          </dependency>
+        </suppliersInternal>
+        <targetEnds>
+          <association Id="71aadbfa-ba94-44e9-853e-ec65cb381eb3" isDerived="false" sourceEndRoleName="" targetEndRoleName="MetricsCollector" isLeaf="false" isAbstract="false">
+            <classMoniker Id="29666a31-4322-4a44-af0e-98f9c7792d4c" LastKnownName="MetricsCollector" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="5e9fe1ac-2aa5-4abd-926e-7b3bcd507e1a" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="355d4b64-395a-46ba-b7e4-1bb495ac661c" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="c0c7451c-48a0-4a10-b641-f5b771460bc6" name="MetricsCollector" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="88511df4-2fbf-42a7-8484-c07af195ee07" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="d268a26b-26a0-43bc-a60b-f9ec288f4585" />
+          </association>
+          <association Id="f55b80aa-a5f0-4b1c-8a54-82d681839ecf" isDerived="false" sourceEndRoleName="" targetEndRoleName="PostProcessTypeDependencies" isLeaf="false" isAbstract="false">
+            <classMoniker Id="6a0b6dbd-15fe-4d66-bc7a-0e0488a7cec8" LastKnownName="PostProcessTypeDependencies" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="2ffcc8fe-3d2c-4ce8-b31d-cac2afa4a52e" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="1ed82a65-ff0a-4ec5-b41d-e6f819b75d34" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="e6ffeae1-8baf-43d9-bd0a-5a4888a5f842" name="PostProcessTypeDependencies" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="5276b97f-d226-48a2-a806-30718bab985f" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="ab99aeb4-e68e-4444-9e04-a4f638f0e1b5" />
+          </association>
+          <association Id="aace6137-2f61-4b2c-8e11-070cdf7d74af" isDerived="false" sourceEndRoleName="" targetEndRoleName="PostProcessNamespaceDependencies" isLeaf="false" isAbstract="false">
+            <classMoniker Id="36df7be0-64c8-45d5-944c-25455f467369" LastKnownName="PostProcessNamespaceDependencies" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="d80a95f8-5752-4820-9597-190ce78bacbc" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="57b85741-2968-4d1d-83a2-2479653f42a2" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="23e76ac9-aa14-4fe1-831f-2880d3774e00" name="PostProcessNamespaceDependencies" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="1934a7f3-87d1-4ace-8feb-05ac2f6ba539" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="cc2ba3b0-49db-434d-a44a-0fd900d0fab9" />
+          </association>
+        </targetEnds>
+        <ownedOperationsInternal>
+          <operation Id="fb09cac8-aca1-47b5-be23-66f0b953299f" name="Me" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="47371f75-702e-4a86-922e-ce06d3e47127" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="70270670-d6fa-46ae-962d-59619ff6af92" direction="Return">
+                  <elementDefinition Id="eb4415a7-ddbb-42e7-b93d-5f24ee45a6e3" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="4f1d36db-954d-4d18-91f0-eec75aba13be" LastKnownName="MetricsReport" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="78795f85-e0b6-427c-9f04-89958e906bae" name="PortableExecutable" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="3beb8e93-3b5c-4435-a218-b5b0bfc66be9" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="db309647-cef3-4ecd-8ed8-40941f82fed2" direction="Return">
+                  <elementDefinition Id="8b79b0ac-8b16-4dec-bd36-9fe3b1464d52" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="e3d94079-2902-47e8-add2-36275713780b" LastKnownName="MetricsReport" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="2c854c6c-ab9e-4edf-9efe-7536b4d42a84" name="Assembly" direction="In">
+                  <elementDefinition Id="db563de0-2350-4961-b448-4302cb38db7d" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="6b8a8cb9-30cf-4f24-9ce4-09bb3b07aaa2" name="PortableExecutable" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="738dafe6-8bad-4a6a-a5ef-2f63591075b4" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="6175261d-61fd-4d2b-a43d-263aad5cd6b6" direction="Return">
+                  <elementDefinition Id="4a5174b3-a9f3-418e-bb27-c48d7118f415" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="a293f529-05ff-40f8-b44d-69ae83d3853d" LastKnownName="MetricsReport" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="bd5df095-af8f-4736-9638-308eef8ea0eb" name="string" direction="In" isUnique="false">
+                  <elementDefinition Id="18773efa-85f5-47bb-9016-455b07b85673" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="f9b6eef5-d5a8-46df-acaa-7ced45750c8a" name="MetricsReport" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="42d28292-703e-49a1-a634-3df33b993600" />
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="29666a31-4322-4a44-af0e-98f9c7792d4c" name="MetricsCollector" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="75945415-44a7-4d94-a542-c616d64b38d7" />
+        <suppliersInternal>
+          <dependency Id="0f6b71df-b128-40af-979e-3b7b624e2d67">
+            <classMoniker Id="1f229769-308e-41df-a280-d4acf0c33b15" LastKnownName="CyclomaticComplexityOfAst" />
+            <elementDefinition Id="09f35106-95fc-4b0c-8e18-66d9e43b191d" />
+          </dependency>
+          <dependency Id="f1010275-83a8-4091-ba1d-d0007fb6a7b9">
+            <classMoniker Id="f72656a3-899d-4116-9010-87c484fa5bf2" LastKnownName="NumberOfStatements" />
+            <elementDefinition Id="c65fbea7-107d-4737-8868-7d3e958217ab" />
+          </dependency>
+          <dependency Id="3d24f576-52f2-4e55-ae59-8983a2774335">
+            <classMoniker Id="ed3d570a-9d8b-466c-832b-1df8e20d9e9a" LastKnownName="NumberOfRealLines" />
+            <elementDefinition Id="3ab1858b-c671-437c-ad73-e648d3027f0c" />
+          </dependency>
+          <dependency Id="669542de-7bd9-406c-a666-6b6de4bb2d1a">
+            <classMoniker Id="4930c3bf-ac27-4b79-9251-a883c57eeb8e" LastKnownName="NumberOfLogicalLines" />
+            <elementDefinition Id="702c0502-8a5f-47e2-88b8-65fd1cd00173" />
+          </dependency>
+          <dependency Id="fafae969-c171-43da-bcf4-8becf338e7be">
+            <classMoniker Id="9caef242-c3d7-4e63-8c38-b0c5dc4d0cdf" LastKnownName="TypeDependencies" />
+            <elementDefinition Id="03e2f029-2653-44f3-a233-3782a47ead3b" />
+          </dependency>
+          <dependency Id="db21784b-8ef6-4009-8961-285a52d30402">
+            <classMoniker Id="4ad6f7b9-c007-4d8d-a4ec-0fddef6933c8" LastKnownName="NumberOfNonStaticPublicFields" />
+            <elementDefinition Id="84505af8-a5ff-4cfa-8477-4d5c80509e22" />
+          </dependency>
+          <dependency Id="df2e7cd7-26f9-4b68-bb3d-206a5232b6e5">
+            <classMoniker Id="7d0ed379-926a-49bf-b425-abb967c260a0" LastKnownName="NumberOfMethods" />
+            <elementDefinition Id="0a8fc76e-a12c-44e6-b43b-4c92027c23e7" />
+          </dependency>
+          <dependency Id="9b19db6a-a6be-4a2c-a0d0-7a38dd4da918">
+            <classMoniker Id="1bc9b5a5-1ac8-4bd4-bb9e-db6c3a8f5de3" LastKnownName="DirectDependencies" />
+            <elementDefinition Id="38fdc529-e31b-4715-b9a3-e4fb28ea67ac" />
+          </dependency>
+        </suppliersInternal>
+        <generalsInternal>
+          <generalization Id="a31c6830-5300-4fbd-b7e9-c3ea0eb9ac32" isSubstitutable="false">
+            <classMoniker Id="9d086f58-8185-4d75-8306-f49efd958942" LastKnownName="AssemblyVisitor" />
+            <elementDefinition Id="51e979cf-b3d4-4af1-b3ff-9f733a3e9e65" />
+          </generalization>
+        </generalsInternal>
+        <targetEnds>
+          <association Id="bc63be8f-f750-424e-a89c-fc914322e152" isDerived="false" sourceEndRoleName="" targetEndRoleName="Report" isLeaf="false" isAbstract="false">
+            <classMoniker Id="f9b6eef5-d5a8-46df-acaa-7ced45750c8a" LastKnownName="MetricsReport" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="03ea4454-de96-408d-8af4-f939c4870bb2" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="5b5977f3-b4b3-4728-8069-edb7b058fd54" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="5d365df2-5207-459a-98b3-c2daaf55b511" name="Report" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="39437918-7f54-4309-b9dd-9ca474969e6c" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="b1873e56-02f7-452a-a5f0-b15bda879a08" />
+          </association>
+        </targetEnds>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="9d086f58-8185-4d75-8306-f49efd958942" name="AssemblyVisitor" isAbstract="true" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="58542646-a505-4bde-bf76-6ae3239ee78d" />
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="36df7be0-64c8-45d5-944c-25455f467369" name="PostProcessNamespaceDependencies" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="e10cd425-902b-4ff5-89fe-ec89711f3a9b" />
+        <suppliersInternal>
+          <dependency Id="7f8584b3-63af-429a-95ba-b8619c8735ae">
+            <classMoniker Id="8a27e66d-d5e7-4b55-bcfb-2326391c4df3" LastKnownName="CyclicDependencies" />
+            <elementDefinition Id="6029906a-a9af-4cd9-a88d-d3b295c64690" />
+          </dependency>
+          <dependency Id="928fa8e6-87de-44c9-b3ec-e7f6f3207fbe">
+            <classMoniker Id="f9b6eef5-d5a8-46df-acaa-7ced45750c8a" LastKnownName="MetricsReport" />
+            <elementDefinition Id="25517aa5-39fb-4d3e-a9fb-b5774c578cd1" />
+          </dependency>
+        </suppliersInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="6a0b6dbd-15fe-4d66-bc7a-0e0488a7cec8" name="PostProcessTypeDependencies" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="494c881a-b07d-4aae-9606-2751d33f68be" />
+        <suppliersInternal>
+          <dependency Id="9f82a3f7-a4e8-42a1-a1f9-1d2aa632d870">
+            <classMoniker Id="1d904f3a-984e-4bdc-90f2-3b59e8edd2f5" LastKnownName="InterestingDirectDependencies" />
+            <elementDefinition Id="d3e2b62b-011c-4d65-af76-dc3178ae792d" />
+          </dependency>
+          <dependency Id="c8235b64-77c9-459e-9401-f7571ff03bd7">
+            <classMoniker Id="6690bfce-51aa-4e9a-86f0-271c43baf043" LastKnownName="CumulativeComponentDependency" />
+            <elementDefinition Id="43b0de60-0b2c-4b11-8a64-875b7bd3f16b" />
+          </dependency>
+          <dependency Id="45b9df65-537f-4c42-b37e-31d8620b313e">
+            <classMoniker Id="f9b6eef5-d5a8-46df-acaa-7ced45750c8a" LastKnownName="MetricsReport" />
+            <elementDefinition Id="3fb07397-189a-448c-bc59-abe4b9d02e27" />
+          </dependency>
+        </suppliersInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="8a27e66d-d5e7-4b55-bcfb-2326391c4df3" name="CyclicDependencies" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="c51266a4-2d5a-47b0-8b06-ca8569e496c8" />
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="1d904f3a-984e-4bdc-90f2-3b59e8edd2f5" name="InterestingDirectDependencies" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="2efc4ffc-a9bf-4aaf-adfa-f8ddbe3c7eec" />
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="6690bfce-51aa-4e9a-86f0-271c43baf043" name="CumulativeComponentDependency" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="dd8fb3ee-171a-459b-a564-71a8c8f634bc" />
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="4ad6f7b9-c007-4d8d-a4ec-0fddef6933c8" name="NumberOfNonStaticPublicFields" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="4e4dd570-f15a-4fb1-b6fb-20880825502c" />
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="7d0ed379-926a-49bf-b425-abb967c260a0" name="NumberOfMethods" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="169fb35d-3c99-4408-bfac-339236993ee3" />
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="1bc9b5a5-1ac8-4bd4-bb9e-db6c3a8f5de3" name="DirectDependencies" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="f78c13d3-b30a-4a5e-b9b0-0b93af693c3a" />
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="1f229769-308e-41df-a280-d4acf0c33b15" name="CyclomaticComplexityOfAst" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="5f1d0028-1bed-42df-be91-1c16681d4462" />
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="f72656a3-899d-4116-9010-87c484fa5bf2" name="NumberOfStatements" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="4e296391-a659-476d-891a-61eca94becff" />
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="ed3d570a-9d8b-466c-832b-1df8e20d9e9a" name="NumberOfRealLines" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="aa61e85b-e548-40d3-87ff-8f38b230c198" />
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="4930c3bf-ac27-4b79-9251-a883c57eeb8e" name="NumberOfLogicalLines" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="48c47aaa-7ad3-4130-b57b-d17cb729efb2" />
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="9caef242-c3d7-4e63-8c38-b0c5dc4d0cdf" name="TypeDependencies" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="0fbf2c4e-e2fb-45ec-a7c9-a230c50842f3" />
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="4f1d36db-954d-4d18-91f0-eec75aba13be" name="MetricsReport" isAbstract="false" isLeaf="false" cachedFullName="Modeling::MetricsReport">
+        <elementDefinition Id="42d28292-703e-49a1-a634-3df33b993600" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="e3d94079-2902-47e8-add2-36275713780b" name="MetricsReport" isAbstract="false" isLeaf="false" cachedFullName="Modeling::MetricsReport">
+        <elementDefinition Id="42d28292-703e-49a1-a634-3df33b993600" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="a293f529-05ff-40f8-b44d-69ae83d3853d" name="MetricsReport" isAbstract="false" isLeaf="false" cachedFullName="Modeling::MetricsReport">
+        <elementDefinition Id="42d28292-703e-49a1-a634-3df33b993600" />
+      </referencedType>
+    </packageHasNamedElement>
+  </packagedElements>
+  <package Id="d4ccc591-bc7c-4fe7-85a1-ad6f4aeabc97" name="Modeling">
+    <elementDefinition Id="eba52b28-def3-4521-87af-2d11f5403a2b" />
+    <profileInstances>
+      <packageHasProfileInstances Id="a4ea61de-0355-46ac-9edf-53a7d1e5cb71">
+        <profileInstance Id="a2e9bcb5-68a4-47fd-8b10-fb30b7900f39" name="StandardProfileL2">
+          <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+        </profileInstance>
+        <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="145a1c5a-a192-48d5-9d99-313b3253d944">
+        <profileInstance Id="c59e838c-10aa-4696-930c-6f8fa37d97f7" name="StandardProfileL3">
+          <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+        </profileInstance>
+        <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+      </packageHasProfileInstances>
+    </profileInstances>
+  </package>
+</logicalClassDesignerModel>

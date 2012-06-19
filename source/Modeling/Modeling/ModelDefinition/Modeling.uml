@@ -1,0 +1,861 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm9="http://schemas.microsoft.com/dsltools/UseCaseModel" xmlns:dm10="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="eba52b28-def3-4521-87af-2d11f5403a2b"
+  name="Modeling" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <profileInstances>
+    <packageHasProfileInstances
+      Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b">
+      <profileInstance
+        Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791"
+        name="StandardProfileL2" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances
+      Id="29349502-908c-4fda-9054-c48619c59ed0">
+      <profileInstance
+        Id="532ea607-fb19-44b8-8502-3351b05452be"
+        name="StandardProfileL3" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <packageHasNamedElement>
+      <subsystem
+        Id="20b491a1-6dd8-4710-9c23-ccd2e6cdcd97"
+        name="Visual Studio Erweiterung zur statischen Code-Analyse"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <actor
+        Id="897d8b6b-ca7f-45cc-89da-7445ef81c380"
+        name=".NET-Entwickler mit Interesse an Metriken"
+        isAbstract="false"
+        isLeaf="false">
+        <targetEnds>
+          <association
+            Id="1ecbbd82-3194-4974-aea1-c1619e7bf841"
+            isDerived="false"
+            sourceEndRoleName=".NET Entwickler mit Interesse an Metriken"
+            targetEndRoleName="Code-Metriken bestimmen"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="9ecee530-92c6-47c2-bb85-14e15a5ae4d6"
+              LastKnownName="Code-Metriken bestimmen"
+              LastKnownLocation="Modeling.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="9f8bce1d-8f19-4392-9e6c-79d8f50eedbe"
+                  name=".NET Entwickler mit Interesse an Metriken"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="bc17048b-5f22-4b23-9334-c9d746c439a3"
+                  name="Code-Metriken bestimmen"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="00c1ed42-5994-4043-b601-05ad8d39cc83"
+            isDerived="false"
+            sourceEndRoleName=".NET Entwickler mit Interesse an Metriken"
+            targetEndRoleName="Code-Probleme indentifizieren"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="c32cd07e-f410-42fd-969a-ffcefab140ff"
+              LastKnownName="Code-Probleme indentifizieren"
+              LastKnownLocation="Modeling.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="4ec5a20b-640a-4b78-b8cb-1ed12d1aaf75"
+                  name=".NET Entwickler mit Interesse an Metriken"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="a507914d-5d38-4354-9b8c-c29c0b15d37b"
+                  name="Code-Probleme indentifizieren"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </actor>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <actor
+        Id="ccdcc037-2ec4-4330-9c74-df3d9eb013b8"
+        name=".NET-Entwickler mit Interesse an Qualitätsinterpretation"
+        isAbstract="false"
+        isLeaf="false">
+        <targetEnds>
+          <association
+            Id="74036fc6-35a9-43af-b609-07df10795730"
+            isDerived="false"
+            sourceEndRoleName=".NET Entwickler mit Interesse an Qualitätsinterpretation"
+            targetEndRoleName="Software-Qualität interpretieren"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="1713964e-91d3-4d11-9801-9c4958fac5b2"
+              LastKnownName="Software-Qualität interpretieren"
+              LastKnownLocation="Modeling.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="0c0a5a4b-8214-4979-85b9-5bc838a78a0a"
+                  name=".NET Entwickler mit Interesse an Qualitätsinterpretation"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="6b3f0eaf-164b-4263-8298-9f5f8b148ad4"
+                  name="Software-Qualität interpretieren"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </actor>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <actor
+        Id="750614ea-43b7-43af-a43e-581cd1e3ece6"
+        name=".NET-Entwickler mit Interesse an Clean Code"
+        isAbstract="false"
+        isLeaf="false">
+        <targetEnds>
+          <association
+            Id="0f94142f-25f8-4a1e-9a81-9205e4b70e6c"
+            isDerived="false"
+            sourceEndRoleName=".NET Entwickler mit Interesse an Clean Code"
+            targetEndRoleName="Clean Code Hilfe bekommen"
+            isLeaf="false"
+            isAbstract="false">
+            <useCaseMoniker
+              Id="6528286d-e2ce-4a07-b86b-81d37571893b"
+              LastKnownName="Clean Code Hilfe bekommen"
+              LastKnownLocation="Modeling.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="fc0a9b9d-9e94-4711-9eef-f49c60c5c7b4"
+                  name=".NET Entwickler mit Interesse an Clean Code"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="e4bffeba-7b7d-4314-8c94-4e3f2d7a092a"
+                  name="Clean Code Hilfe bekommen"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </actor>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="9ecee530-92c6-47c2-bb85-14e15a5ae4d6"
+        name="Code-Metriken bestimmen"
+        isAbstract="false"
+        isLeaf="false">
+        <extendedCases>
+          <extend
+            Id="d28cd249-d999-4b91-b832-d306794d3607">
+            <useCaseMoniker
+              Id="1713964e-91d3-4d11-9801-9c4958fac5b2"
+              LastKnownName="Software-Qualität interpretieren"
+              LastKnownLocation="Modeling.uml" />
+          </extend>
+          <extend
+            Id="765b6cc3-5551-4d96-b84a-dd3f3c46a389">
+            <useCaseMoniker
+              Id="c32cd07e-f410-42fd-969a-ffcefab140ff"
+              LastKnownName="Code-Probleme indentifizieren"
+              LastKnownLocation="Modeling.uml" />
+          </extend>
+        </extendedCases>
+        <subjects>
+          <subsystemMoniker
+            Id="20b491a1-6dd8-4710-9c23-ccd2e6cdcd97"
+            LastKnownName="Visual Studio Erweiterung zur statischen Code-Analyse"
+            LastKnownLocation="Modeling.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="1713964e-91d3-4d11-9801-9c4958fac5b2"
+        name="Software-Qualität interpretieren"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="20b491a1-6dd8-4710-9c23-ccd2e6cdcd97"
+            LastKnownName="Visual Studio Erweiterung zur statischen Code-Analyse"
+            LastKnownLocation="Modeling.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="c32cd07e-f410-42fd-969a-ffcefab140ff"
+        name="Code-Probleme indentifizieren"
+        isAbstract="false"
+        isLeaf="false">
+        <extendedCases>
+          <extend
+            Id="4cd9e9bf-fa5d-4238-8b54-e638f6eb4561">
+            <useCaseMoniker
+              Id="6528286d-e2ce-4a07-b86b-81d37571893b"
+              LastKnownName="Clean Code Hilfe bekommen"
+              LastKnownLocation="Modeling.uml" />
+          </extend>
+        </extendedCases>
+        <subjects>
+          <subsystemMoniker
+            Id="20b491a1-6dd8-4710-9c23-ccd2e6cdcd97"
+            LastKnownName="Visual Studio Erweiterung zur statischen Code-Analyse"
+            LastKnownLocation="Modeling.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase
+        Id="6528286d-e2ce-4a07-b86b-81d37571893b"
+        name="Clean Code Hilfe bekommen"
+        isAbstract="false"
+        isLeaf="false">
+        <subjects>
+          <subsystemMoniker
+            Id="20b491a1-6dd8-4710-9c23-ccd2e6cdcd97"
+            LastKnownName="Visual Studio Erweiterung zur statischen Code-Analyse"
+            LastKnownLocation="Modeling.uml" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="2e3e6156-5f21-461d-98e1-c97d1f7cd9a1"
+        name="Analyze"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <dependency
+            Id="e0c11e12-f34a-472f-a652-76d4c639e555">
+            <classMoniker
+              Id="42d28292-703e-49a1-a634-3df33b993600"
+              LastKnownName="MetricsReport"
+              LastKnownLocation="Modeling.uml" />
+          </dependency>
+        </suppliersInternal>
+        <targetEnds>
+          <association
+            Id="d268a26b-26a0-43bc-a60b-f9ec288f4585"
+            isDerived="false"
+            sourceEndRoleName=""
+            targetEndRoleName="MetricsCollector"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="75945415-44a7-4d94-a542-c616d64b38d7"
+              LastKnownName="MetricsCollector"
+              LastKnownLocation="Modeling.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="355d4b64-395a-46ba-b7e4-1bb495ac661c"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="88511df4-2fbf-42a7-8484-c07af195ee07"
+                  name="MetricsCollector"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="ab99aeb4-e68e-4444-9e04-a4f638f0e1b5"
+            isDerived="false"
+            sourceEndRoleName=""
+            targetEndRoleName="PostProcessTypeDependencies"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="494c881a-b07d-4aae-9606-2751d33f68be"
+              LastKnownName="PostProcessTypeDependencies"
+              LastKnownLocation="Modeling.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="1ed82a65-ff0a-4ec5-b41d-e6f819b75d34"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="5276b97f-d226-48a2-a806-30718bab985f"
+                  name="PostProcessTypeDependencies"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="cc2ba3b0-49db-434d-a44a-0fd900d0fab9"
+            isDerived="false"
+            sourceEndRoleName=""
+            targetEndRoleName="PostProcessNamespaceDependencies"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="e10cd425-902b-4ff5-89fe-ec89711f3a9b"
+              LastKnownName="PostProcessNamespaceDependencies"
+              LastKnownLocation="Modeling.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="57b85741-2968-4d1d-83a2-2479653f42a2"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="1934a7f3-87d1-4ace-8feb-05ac2f6ba539"
+                  name="PostProcessNamespaceDependencies"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <ownedOperationsInternal>
+          <operation
+            Id="47371f75-702e-4a86-922e-ce06d3e47127"
+            name="Me"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="eb4415a7-ddbb-42e7-b93d-5f24ee45a6e3"
+                  direction="Return">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="42d28292-703e-49a1-a634-3df33b993600"
+                      LastKnownName="MetricsReport"
+                      LastKnownLocation="Modeling.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="3beb8e93-3b5c-4435-a218-b5b0bfc66be9"
+            name="PortableExecutable"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="8b79b0ac-8b16-4dec-bd36-9fe3b1464d52"
+                  direction="Return">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="42d28292-703e-49a1-a634-3df33b993600"
+                      LastKnownName="MetricsReport"
+                      LastKnownLocation="Modeling.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="db563de0-2350-4961-b448-4302cb38db7d"
+                  name="Assembly"
+                  direction="In" />
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="738dafe6-8bad-4a6a-a5ef-2f63591075b4"
+            name="PortableExecutable"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="4a5174b3-a9f3-418e-bb27-c48d7118f415"
+                  direction="Return">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="42d28292-703e-49a1-a634-3df33b993600"
+                      LastKnownName="MetricsReport"
+                      LastKnownLocation="Modeling.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="18773efa-85f5-47bb-9016-455b07b85673"
+                  name="string"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="42d28292-703e-49a1-a634-3df33b993600"
+        name="MetricsReport"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="75945415-44a7-4d94-a542-c616d64b38d7"
+        name="MetricsCollector"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <dependency
+            Id="09f35106-95fc-4b0c-8e18-66d9e43b191d">
+            <classMoniker
+              Id="5f1d0028-1bed-42df-be91-1c16681d4462"
+              LastKnownName="CyclomaticComplexityOfAst"
+              LastKnownLocation="Modeling.uml" />
+          </dependency>
+          <dependency
+            Id="c65fbea7-107d-4737-8868-7d3e958217ab">
+            <classMoniker
+              Id="4e296391-a659-476d-891a-61eca94becff"
+              LastKnownName="NumberOfStatements"
+              LastKnownLocation="Modeling.uml" />
+          </dependency>
+          <dependency
+            Id="3ab1858b-c671-437c-ad73-e648d3027f0c">
+            <classMoniker
+              Id="aa61e85b-e548-40d3-87ff-8f38b230c198"
+              LastKnownName="NumberOfRealLines"
+              LastKnownLocation="Modeling.uml" />
+          </dependency>
+          <dependency
+            Id="702c0502-8a5f-47e2-88b8-65fd1cd00173">
+            <classMoniker
+              Id="48c47aaa-7ad3-4130-b57b-d17cb729efb2"
+              LastKnownName="NumberOfLogicalLines"
+              LastKnownLocation="Modeling.uml" />
+          </dependency>
+          <dependency
+            Id="03e2f029-2653-44f3-a233-3782a47ead3b">
+            <classMoniker
+              Id="0fbf2c4e-e2fb-45ec-a7c9-a230c50842f3"
+              LastKnownName="TypeDependencies"
+              LastKnownLocation="Modeling.uml" />
+          </dependency>
+          <dependency
+            Id="84505af8-a5ff-4cfa-8477-4d5c80509e22">
+            <classMoniker
+              Id="4e4dd570-f15a-4fb1-b6fb-20880825502c"
+              LastKnownName="NumberOfNonStaticPublicFields"
+              LastKnownLocation="Modeling.uml" />
+          </dependency>
+          <dependency
+            Id="0a8fc76e-a12c-44e6-b43b-4c92027c23e7">
+            <classMoniker
+              Id="169fb35d-3c99-4408-bfac-339236993ee3"
+              LastKnownName="NumberOfMethods"
+              LastKnownLocation="Modeling.uml" />
+          </dependency>
+          <dependency
+            Id="38fdc529-e31b-4715-b9a3-e4fb28ea67ac">
+            <classMoniker
+              Id="f78c13d3-b30a-4a5e-b9b0-0b93af693c3a"
+              LastKnownName="DirectDependencies"
+              LastKnownLocation="Modeling.uml" />
+          </dependency>
+        </suppliersInternal>
+        <generalsInternal>
+          <generalization
+            Id="51e979cf-b3d4-4af1-b3ff-9f733a3e9e65"
+            isSubstitutable="false">
+            <classMoniker
+              Id="58542646-a505-4bde-bf76-6ae3239ee78d"
+              LastKnownName="AssemblyVisitor"
+              LastKnownLocation="Modeling.uml" />
+          </generalization>
+        </generalsInternal>
+        <targetEnds>
+          <association
+            Id="b1873e56-02f7-452a-a5f0-b15bda879a08"
+            isDerived="false"
+            sourceEndRoleName=""
+            targetEndRoleName="Report"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="42d28292-703e-49a1-a634-3df33b993600"
+              LastKnownName="MetricsReport"
+              LastKnownLocation="Modeling.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="5b5977f3-b4b3-4728-8069-edb7b058fd54"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="39437918-7f54-4309-b9dd-9ca474969e6c"
+                  name="Report"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="58542646-a505-4bde-bf76-6ae3239ee78d"
+        name="AssemblyVisitor"
+        isAbstract="true"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="e10cd425-902b-4ff5-89fe-ec89711f3a9b"
+        name="PostProcessNamespaceDependencies"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <dependency
+            Id="6029906a-a9af-4cd9-a88d-d3b295c64690">
+            <classMoniker
+              Id="c51266a4-2d5a-47b0-8b06-ca8569e496c8"
+              LastKnownName="CyclicDependencies"
+              LastKnownLocation="Modeling.uml" />
+          </dependency>
+          <dependency
+            Id="25517aa5-39fb-4d3e-a9fb-b5774c578cd1">
+            <classMoniker
+              Id="42d28292-703e-49a1-a634-3df33b993600"
+              LastKnownName="MetricsReport"
+              LastKnownLocation="Modeling.uml" />
+          </dependency>
+        </suppliersInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="494c881a-b07d-4aae-9606-2751d33f68be"
+        name="PostProcessTypeDependencies"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <dependency
+            Id="d3e2b62b-011c-4d65-af76-dc3178ae792d">
+            <classMoniker
+              Id="2efc4ffc-a9bf-4aaf-adfa-f8ddbe3c7eec"
+              LastKnownName="InterestingDirectDependencies"
+              LastKnownLocation="Modeling.uml" />
+          </dependency>
+          <dependency
+            Id="43b0de60-0b2c-4b11-8a64-875b7bd3f16b">
+            <classMoniker
+              Id="dd8fb3ee-171a-459b-a564-71a8c8f634bc"
+              LastKnownName="CumulativeComponentDependency"
+              LastKnownLocation="Modeling.uml" />
+          </dependency>
+          <dependency
+            Id="3fb07397-189a-448c-bc59-abe4b9d02e27">
+            <classMoniker
+              Id="42d28292-703e-49a1-a634-3df33b993600"
+              LastKnownName="MetricsReport"
+              LastKnownLocation="Modeling.uml" />
+          </dependency>
+        </suppliersInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="ab5329ff-f402-48a0-8966-4a6b85858a03"
+        name="CreateGraph"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="c51266a4-2d5a-47b0-8b06-ca8569e496c8"
+        name="CyclicDependencies"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="2efc4ffc-a9bf-4aaf-adfa-f8ddbe3c7eec"
+        name="InterestingDirectDependencies"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="dd8fb3ee-171a-459b-a564-71a8c8f634bc"
+        name="CumulativeComponentDependency"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="4e4dd570-f15a-4fb1-b6fb-20880825502c"
+        name="NumberOfNonStaticPublicFields"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="169fb35d-3c99-4408-bfac-339236993ee3"
+        name="NumberOfMethods"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="f78c13d3-b30a-4a5e-b9b0-0b93af693c3a"
+        name="DirectDependencies"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="5f1d0028-1bed-42df-be91-1c16681d4462"
+        name="CyclomaticComplexityOfAst"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="4e296391-a659-476d-891a-61eca94becff"
+        name="NumberOfStatements"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="aa61e85b-e548-40d3-87ff-8f38b230c198"
+        name="NumberOfRealLines"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="48c47aaa-7ad3-4130-b57b-d17cb729efb2"
+        name="NumberOfLogicalLines"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="0fbf2c4e-e2fb-45ec-a7c9-a230c50842f3"
+        name="TypeDependencies"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <component
+        Id="ae6591bf-a8a4-4d33-bab8-ea04b34d5706"
+        name="Usus.net"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <component
+        Id="fbb322d0-ea7d-4f87-9080-a2a1f1469044"
+        name="Usus.net1"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <component
+        Id="aa67c22b-b371-480c-a1c8-51d2ca2f3337"
+        name="Usus.net.View"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <component
+        Id="88b2eb04-e8bf-459f-ac6b-2962bdc2b9a7"
+        name="Usus.net.Core"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <component
+        Id="54b6b971-34ca-4abf-9e15-bb71699e0dab"
+        name="Usus.net.Console"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+  </packagedElements>
+  <primitiveType
+    Id="220a3521-e091-4221-bae9-3ef9018e845c"
+    name="Integer"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="8943dc84-709e-4f62-b15a-a3273aa6f165"
+    name="Boolean"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
+    name="String"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="3ab42e7d-4969-445a-b209-471f5cb8209c"
+    name="UnlimitedNatural"
+    isAbstract="false"
+    isLeaf="false" />
+</modelStoreModel>

@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<useCaseModelRoot xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="d4cfcb10-a30f-486f-847c-2c62f3fde7a8" name="UsusNet" linkedPackageId="8059f22f-fedd-4320-8db1-ba1c3bdc8eea" xmlns="http://schemas.microsoft.com/dsltools/UseCaseModel">
+  <profileInstances>
+    <packageHasProfileInstances Id="3ea78c2a-eb89-4980-9a84-5d6a6095e11d">
+      <profileInstance Id="c7db3764-d865-4651-abf1-8f7f11cdeaa8" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="26dc161b-8600-4891-9f89-b00e298a74ff">
+      <profileInstance Id="89f8fcea-b26d-4691-8448-596fbcf0988a" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <useCaseModelRootHasTypes>
+      <subsystem Id="611b23b8-211a-4455-ad82-4ec9350bd67f" name="Visual Studio Erweiterung zur statischen Code-Analyse" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="20b491a1-6dd8-4710-9c23-ccd2e6cdcd97" />
+      </subsystem>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <actor Id="852d2107-438f-4bf5-906f-1133e3af6cfa" name=".NET-Entwickler mit Interesse an Metriken" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="897d8b6b-ca7f-45cc-89da-7445ef81c380" />
+        <targetEnds>
+          <association Id="25a34937-8dd1-44e5-b616-9ddf59a6428b" isDerived="false" sourceEndRoleName=".NET Entwickler mit Interesse an Metriken" targetEndRoleName="Code-Metriken bestimmen" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="de7d0ec6-9bde-4f87-8aca-b46d409111fa" LastKnownName="Code-Metriken bestimmen" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="c47ed470-9de3-4fe3-a78b-11b2b0119276" name=".NET Entwickler mit Interesse an Metriken" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="9f8bce1d-8f19-4392-9e6c-79d8f50eedbe" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="455064e1-b1b5-4343-bbd4-015863e1b39f" name="Code-Metriken bestimmen" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="bc17048b-5f22-4b23-9334-c9d746c439a3" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="1ecbbd82-3194-4974-aea1-c1619e7bf841" />
+          </association>
+          <association Id="3e003aca-fc21-48e7-aae2-79dad6796c98" isDerived="false" sourceEndRoleName=".NET Entwickler mit Interesse an Metriken" targetEndRoleName="Code-Probleme indentifizieren" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="3c013414-ec4c-4297-b56a-868150010944" LastKnownName="Code-Probleme indentifizieren" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="891269ae-44cc-46c6-bd91-64d9106b6987" name=".NET Entwickler mit Interesse an Metriken" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="4ec5a20b-640a-4b78-b8cb-1ed12d1aaf75" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="90c412bc-5d2f-480f-b4eb-0edf68a71ee5" name="Code-Probleme indentifizieren" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="a507914d-5d38-4354-9b8c-c29c0b15d37b" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="00c1ed42-5994-4043-b601-05ad8d39cc83" />
+          </association>
+        </targetEnds>
+      </actor>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <actor Id="7878fcf8-456d-46c5-928c-fcd3d2709505" name=".NET-Entwickler mit Interesse an Qualitätsinterpretation" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="ccdcc037-2ec4-4330-9c74-df3d9eb013b8" />
+        <targetEnds>
+          <association Id="1d259437-b724-40e8-b055-21551aa10ded" isDerived="false" sourceEndRoleName=".NET Entwickler mit Interesse an Qualitätsinterpretation" targetEndRoleName="Software-Qualität interpretieren" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="46524f30-c512-445f-9f74-251f207df8f3" LastKnownName="Software-Qualität interpretieren" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="937df544-b485-403b-82b3-8c4241497e07" name=".NET Entwickler mit Interesse an Qualitätsinterpretation" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="0c0a5a4b-8214-4979-85b9-5bc838a78a0a" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="50b77b90-8e73-4a60-aba6-6c90ba4a0159" name="Software-Qualität interpretieren" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="6b3f0eaf-164b-4263-8298-9f5f8b148ad4" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="74036fc6-35a9-43af-b609-07df10795730" />
+          </association>
+        </targetEnds>
+      </actor>
+    </useCaseModelRootHasTypes>
+    <useCaseModelRootHasTypes>
+      <actor Id="5bca19ab-7033-45a0-a15b-c09b3c25f067" name=".NET-Entwickler mit Interesse an Clean Code" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="750614ea-43b7-43af-a43e-581cd1e3ece6" />
+        <targetEnds>
+          <association Id="8b9fc12d-65b9-4a6c-a6e9-63d2ffd334ac" isDerived="false" sourceEndRoleName=".NET Entwickler mit Interesse an Clean Code" targetEndRoleName="Clean Code Hilfe bekommen" isLeaf="false" isAbstract="false">
+            <useCaseMoniker Id="d9c3d1c6-bbbc-43b9-90ad-ef835176044c" LastKnownName="Clean Code Hilfe bekommen" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="0120405b-75eb-418e-ae66-bf8365156af0" name=".NET Entwickler mit Interesse an Clean Code" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="fc0a9b9d-9e94-4711-9eef-f49c60c5c7b4" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="3c89a06a-3186-4687-99ed-54e2e25d7d8f" name="Clean Code Hilfe bekommen" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="e4bffeba-7b7d-4314-8c94-4e3f2d7a092a" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="0f94142f-25f8-4a1e-9a81-9205e4b70e6c" />
+          </association>
+        </targetEnds>
+      </actor>
+    </useCaseModelRootHasTypes>
+    <packageHasNamedElement>
+      <useCase Id="de7d0ec6-9bde-4f87-8aca-b46d409111fa" name="Code-Metriken bestimmen" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="9ecee530-92c6-47c2-bb85-14e15a5ae4d6" />
+        <extendedCases>
+          <extend Id="d2a73533-0e3c-493b-9dbe-8534f253602a">
+            <useCaseMoniker Id="46524f30-c512-445f-9f74-251f207df8f3" LastKnownName="Software-Qualität interpretieren" />
+            <elementDefinition Id="d28cd249-d999-4b91-b832-d306794d3607" />
+          </extend>
+          <extend Id="60999cc4-0907-4126-a842-1bfad1d028c7">
+            <useCaseMoniker Id="3c013414-ec4c-4297-b56a-868150010944" LastKnownName="Code-Probleme indentifizieren" />
+            <elementDefinition Id="765b6cc3-5551-4d96-b84a-dd3f3c46a389" />
+          </extend>
+        </extendedCases>
+        <subjects>
+          <subsystemMoniker Id="611b23b8-211a-4455-ad82-4ec9350bd67f" LastKnownName="Visual Studio Erweiterung zur statischen Code-Analyse" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <useCase Id="46524f30-c512-445f-9f74-251f207df8f3" name="Software-Qualität interpretieren" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="1713964e-91d3-4d11-9801-9c4958fac5b2" />
+        <subjects>
+          <subsystemMoniker Id="611b23b8-211a-4455-ad82-4ec9350bd67f" LastKnownName="Visual Studio Erweiterung zur statischen Code-Analyse" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+    <useCaseModelRootHasTypes>
+      <useCase Id="3c013414-ec4c-4297-b56a-868150010944" name="Code-Probleme indentifizieren" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="c32cd07e-f410-42fd-969a-ffcefab140ff" />
+        <extendedCases>
+          <extend Id="d9696062-a12d-42b8-909f-c40420c39c9d">
+            <useCaseMoniker Id="d9c3d1c6-bbbc-43b9-90ad-ef835176044c" LastKnownName="Clean Code Hilfe bekommen" />
+            <elementDefinition Id="4cd9e9bf-fa5d-4238-8b54-e638f6eb4561" />
+          </extend>
+        </extendedCases>
+        <subjects>
+          <subsystemMoniker Id="611b23b8-211a-4455-ad82-4ec9350bd67f" LastKnownName="Visual Studio Erweiterung zur statischen Code-Analyse" />
+        </subjects>
+      </useCase>
+    </useCaseModelRootHasTypes>
+    <packageHasNamedElement>
+      <useCase Id="d9c3d1c6-bbbc-43b9-90ad-ef835176044c" name="Clean Code Hilfe bekommen" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="6528286d-e2ce-4a07-b86b-81d37571893b" />
+        <subjects>
+          <subsystemMoniker Id="611b23b8-211a-4455-ad82-4ec9350bd67f" LastKnownName="Visual Studio Erweiterung zur statischen Code-Analyse" />
+        </subjects>
+      </useCase>
+    </packageHasNamedElement>
+  </packagedElements>
+  <package Id="8059f22f-fedd-4320-8db1-ba1c3bdc8eea" name="Modeling">
+    <elementDefinition Id="eba52b28-def3-4521-87af-2d11f5403a2b" />
+  </package>
+</useCaseModelRoot>

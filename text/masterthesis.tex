@@ -188,7 +188,7 @@ Mit diesen sieben Konzepten kann eine Softwaresystem objektorientiert beschriebe
 
 \subsection{Graphentheorie}
 \label{subsec:graphs}
-Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest und Clifford Stein beschreiben einen Graph in ihrem Buch "`Introduction to Algorithms"' \cite{GraphAlgorithms} als Tupel \begin{math}G = (V, E)\end{math}. Der erste Wert, $V$, ist eine endliche Menge an Knoten und der zweite, $E$, ist eine endliche Menge an Kanten zwischen diesen Knoten. Eine Kante ist ein Paar aus \begin{math}V \times V\end{math} und beinhaltet die beiden Knoten, die sie verbindet. Cormen und co unterscheiden in gerichtete und ungerichtete Graphen. Bei letzterem verbindet eine Kante die Knoten in beiden Richtungen, wobei eine gerichtete Kante die Verbindungsrichtung anhand der Knoten-Reihenfolge im Kanten-Tupel vorgibt. Weiter definieren Cormen und seine Koautoren einen Baum als zusammenhängenden azyklischen Graph, indem jeder Knoten von einem Wurzelknoten aus erreichbar ist. %Seite 1168, 1173
+Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest und Clifford Stein beschreiben einen Graph in ihrem Buch "`Introduction to Algorithms"' \cite{GraphAlgorithms} als Tupel \begin{math}G = (V, E)\end{math}. Der erste Wert, $V$, ist eine endliche Menge an Knoten und der zweite, $E$, ist eine endliche Menge an Kanten zwischen diesen Knoten. Eine Kante ist ein Paar aus \begin{math}V \times V\end{math} und beinhaltet die beiden Knoten, die sie verbindet. Cormen und co unterscheiden in gerichtete und ungerichtete Graphen. Bei letzterem verbindet eine Kante die Knoten in beiden Richtungen, wobei eine gerichtete Kante die Verbindungsrichtung anhand der Knoten-Reihenfolge im Kanten-Tupel vorgibt. Ein gerichteter Graph wird auch als Digraph bezeichnet. Weiter definieren Cormen und seine Koautoren einen Baum als zusammenhängenden azyklischen Graph, indem jeder Knoten von einem Wurzelknoten aus erreichbar ist. %Seite 1168, 1173
 
 \subsection{Statische Code-Analyse}
 \label{subsec:staticcodeanalysis}
@@ -526,6 +526,7 @@ Aus den bewerteten Längen kann dann wieder der Mittelwert berechnet werden, inde
 \label{subsubsec:nonstaticpublicfields}
 Wenn eine Klasse mindestens ein öffentliches Feld hat, das nicht statisch oder eine Konstante ist, dann betrachtet Usus diese Klasse als einen Hotspot. Dabei wird jede Klasse mit 1 bewertet, die mindestens eines dieser Felder besitzt. Der Schwellwert ist ebenfalls 1. Die Anzahl der betroffenen Klassen wird wie jede andere Metrik im Usus Cockpit über die Anzahl aller Klassen gemittelt und somit als Prozent dargestellt.
 \subsubsection{Pakete mit zyklischen Abhängigkeiten}
+\label{subsubsec:packetswithcyclicdependencies}
 Für Klassen wurde in Unter-Unterabschnitt \ref{subsubsec:ccd} ein Abhängigkeitsgraph unabhängig vom Paket ermittelt, in dem sich die betrachtete Klasse befindet. Um Pakete mit zyklischen Abhängigkeiten zu identifizieren, müssen alle Klassen-Knoten eines Paket in dem Abhängigkeitsgraph zu einem Paket-Knoten in einem neuen Abhängigkeitsgraph auf Paketebene zusammengefasst werden. Die Kanten zwischen den Klassen werden zu Kanten zwischen den Paketen. Anschließend können alle trivialen Kreise im Paket-Abhängigkeitsgraph entfernt und Zyklen gesucht werden. Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest und Clifford Stein beschreiben in ihrem Buch "`Introduction to Algorithms"' \cite{GraphAlgorithms} den Algorithmus \emph{Strongly Connected Components} (Starke Zusammenhangskomponenten) für diesen Zweck. Mit diesem Algorithmus können alle starken Zusammenhangskomponenten (SCCs) eines Graphen ermittelt werden. Da per Definition von Cormen und co alle Knoten in einer SCC sich gegenseitig erreichen können, handelt es sich um Kreise. Folglich enthalten alle starken Zusammanhangskomponenten, die mehr als eine Paket beinhalten, Pakete, die auf einem Kreis im Abhängigkeitsgraph liegen. %Seite 615, 617
 \begin{equation}
 	cyclicPackages(pdG) = \sum_{\displaystyle scc \in SCCs(pdG)}
@@ -876,6 +877,7 @@ Nachdem das Usus-Plugin für Java einfach \emph{Usus} heißt, wird die Visual Stud
 
 
 \section{Metrikberechnung}
+\label{sec:metriccalc}
 In diesem Abschnitt wird vorgestellt, wie die Usus-Metriken aus Abschnitt \ref{sec:metrics} von Usus.net berechnet werden. In Abschnitt \ref{sec:cci} wurde erklärt das CCI Assemblies analysiert. Deswegen beginnt auch die Berechnung der Metriken mit einem Pfad zu einer \emph{Portable Executable}-Datei, wie sie in Unterabschnitt \ref{subsec:ccimetadata} definiert wurde. Abbildung \ref{fig:metriccalc} zeigt die Klassen, die an der Berechnung beteiligt sind.
 \begin{figure}[h]
 	\centering
@@ -935,6 +937,7 @@ var result = Math.Max(0, lastLine - firstLine - 1);
 Wenn die pdb-Datei nicht existiert, wird der Wert der \texttt{NumberOfRealLines}-Metrik auf -1 gesetzt.
 
 \subsection{Kumulierte Komponentenabhängigkeit}
+\label{subsec:ccdcode}
 Die Anzahl aller Klassen, von denen eine Klasse direkt und indirekt abhängig ist, ist auch als kumulierte Komponentenabhängigkeit (CCD) bekannt und wurde bereits ausführlich in Unter-Unterabschnitt \ref{subsubsec:ccd} vorgestellt. Damit die direkten Abhängigkeiten einer Klasse bestimmt werden können müssen zunächst die direkten Klassenabhängigkeiten pro Methoden ermittelt werden. Jede Verwendung eines Typs innerhalb der Methodensignatur sowie dem Methodenrumpf muss erkannt werden. Usus.net verwendet dazu die Klasse \texttt{TypeDependencies}. Mithilfer der \emph{CCI Metadata}-Infrastruktur werden die CIL-Anweisungen der Methode nach Referenzen auf Typen untersucht. Die dabei verwendeten Strategien sind in Listing \ref{listing:typedependencies} zu sehen. Die Ergebnisse dieser Strategien werden in einer Liste konsolidiert, wobei doppelte Vorkommen ignoriert werden.
 \begin{lstlisting}[caption={Typen-Analyse zur Bestimmung der Klassenabhängigkeiten einer Methode},label={listing:typedependencies}]
 var result = Enumerable.Empty<string>()
@@ -945,7 +948,7 @@ var result = Enumerable.Empty<string>()
 		.Union(TypeDependenciesOfCatches.Of(method))
 		.Union(TypeDependenciesOfTypeMentions.Of(method));
 \end{lstlisting}
-Nachdem zu jeder Methode alle Abhängigkeiten bestimmt wurden, können die Abhängigkeiten einer Klasse einfach bestimmt werden, indem die Abhängigkeitslisten der Methoden zusammengefasst werden. Dafür verwendet Usus.net die Klasse \texttt{DirectDependencies}. Um Typen wie \texttt{object}, \texttt{string} und \texttt{int}, die in der Base Class Library (BCL) definiert sind zu ignorieren, brauchen nur die interessanten Typen betrachtet werden. Dies sind Klassen, die in der analysierten Assembly selbst deklariert und definiert wurden. Dieser Filter ist in der Klasse \texttt{InterestingDirectDependencies} definiert. Da zu diesem Zeitpunkt alle deklarierten Typen des Systems bereits bekannt sein müssen, kann der Filter erst im Rahmen der nachträglichen Bearbeitung durch die \texttt{PostProcessTypeDependencies}-Klasse angewendet werden. Jeder in der Assembly deklarierte Typ ist anschließend nur noch von anderen in der Assembly deklarierten Typen abhängig. Aus diesem Netz der Abhängigkeiten erzeugt Usus.net mithilfe der QuickGraph\footnote[1]{QuickGraph: "`Generic Graph Data Structures and Algorithms for .NET"' \url{http://quickgraph.codeplex.com/}} Bibliothek einen Abhängigkeitsgraphen auf Typ-Ebene. Um jetzt alle direkten und indirekten Abhängigkeiten einer Klasse $type$ zu bestimmen, kann wie Unter-Unterabschnitt \ref{subsubsec:ccd} hergeleitet der Algorithmus \emph{Depth First Search} verwendet werden, um die Erreichbarkeitsmenge des Knoten von $type$ zu finden. Wie in Listing \ref{listing:cumulatedcomponentdependency} dargestellt, ist die kumulierte Komponentenabhängigkeit einer Klasse $type$ die Anzahl der nicht vom Kompiler erzeugten Typen, in der Erreichbarkeitsmenge von $type$.
+Nachdem zu jeder Methode alle Abhängigkeiten bestimmt wurden, können die Abhängigkeiten einer Klasse einfach bestimmt werden, indem die Abhängigkeitslisten der Methoden zusammengefasst werden. Dafür verwendet Usus.net die Klasse \texttt{DirectDependencies}. Um Typen wie \texttt{object}, \texttt{string} und \texttt{int}, die in der Base Class Library (BCL) definiert sind zu ignorieren, brauchen nur die interessanten Typen betrachtet werden. Dies sind Klassen, die in der analysierten Assembly selbst deklariert und definiert wurden. Dieser Filter ist in der Klasse \texttt{InterestingDirectDependencies} definiert. Da zu diesem Zeitpunkt alle deklarierten Typen des Systems bereits bekannt sein müssen, kann der Filter erst im Rahmen der nachträglichen Bearbeitung durch die \texttt{PostProcessTypeDependencies}-Klasse angewendet werden. Jeder in der Assembly deklarierte Typ ist anschließend nur noch von anderen in der Assembly deklarierten Typen abhängig. Aus diesem Netz der Abhängigkeiten erzeugt Usus.net mithilfe der QuickGraph\footnote[1]{QuickGraph: "`Generic Graph Data Structures and Algorithms for .NET"' \url{http://quickgraph.codeplex.com/}} Bibliothek einen Abhängigkeitsgraphen auf Typ-Ebene. Um jetzt alle direkten und indirekten Abhängigkeiten einer Klasse \texttt{type} zu bestimmen, kann wie Unter-Unterabschnitt \ref{subsubsec:ccd} hergeleitet der Algorithmus \emph{Depth First Search} verwendet werden, um die Erreichbarkeitsmenge des Knoten von \texttt{type} zu finden. Wie in Listing \ref{listing:cumulatedcomponentdependency} dargestellt, ist die kumulierte Komponentenabhängigkeit einer Klasse \texttt{type} die Anzahl der nicht vom Kompiler erzeugten Typen, in der Erreichbarkeitsmenge von \texttt{type}.
 \begin{lstlisting}[caption={Typen-Analyse zur Bestimmung der kumulierten Komponentenabhängigkeit},label={listing:cumulatedcomponentdependency}]
 var result = typeGraph.Reach(type).Vertices
 		.Count(t => !t.CompilerGenerated);
@@ -968,22 +971,81 @@ var result = type.Fields.Count(f => !f.IsStatic
 Auch hier ermöglicht die API der \emph{CCI Metadata} eine Iteration über alle Felder einer Typ-Definition.
 
 \subsection{Namespaces mit zyklischen Abhängigkeiten}
-todo
-\texttt{PostProcessNamespaceDependencies}
-Abhängigkeitsgraph auf Typ-Ebene reduziert zu Abhängigkeitsgraph auf Namespace-Ebene
-
-
-
-
-
-
-
-
+Die einzige Metrik die Usus.net für Namespaces bestimmt, ist die Anzahl der zyklischen Abhängigkeiten. In Unter-Unterabschnitt \ref{subsubsec:packetswithcyclicdependencies} wurde hergeleitet, das dafür der Algorithmus \textit{Strongly Connected Components} verwendet werden kann. Die Berechnung setzt also den vollständigen Abhängigkeitsgraphen auf Namespace-Ebene voraus. Der Abhängigkeitsgraph auf Typen-Ebene wurde von Usus.net bereits für die Berechnung der kumulierten Komponentenabhängigkeit in \ref{subsec:ccdcode} erstellt. Aus diesem Graph kann der Namespace-Graph reduziert werden. Damit ist offensichtlich, das auch diese Metrik im Rahmen der nachträglichen Bearbeitung kontextabhängig bestimmt wird. Die Klasse \texttt{PostProcessNamespaceDependencies} führt die nötigen Berechnungen durch, indem zuerst der Abhängigkeitsgraph auf Namespace-Ebene erstellt wird. Danach werden die Kreise ermittelt und den entsprechenden Namespaces zugewiesen.
+\subsubsection{Namespace-Graph}
+Die Erstellung des Graphen aller Namespaces geschieht wie in Listing \ref{listing:namespacegraphcreation} dargestellt.
+\begin{lstlisting}[caption={Erzeugung des Abhängigkeitsgraphen auf Namespace-Ebene},label={listing:namespacegraphcreation}]
+namespaceGraph = metrics.GraphOfTypes.Cast(t => t.AsNamespaceWithTypes());
+foreach (var namespaceGroup in namespaceGraph.Vertices
+	.GroupBy(n => n.Itself.Name)) {
+	namespaceGraph.Reduce(
+		namespaceGroup.AsNamespaceWithTypes(), 
+		namespaceGroup);
+}
+\end{lstlisting}
+Der Abhängigkeitsgraph auf Klassen-Ebene vom Typ \texttt{MutableGraph<TypeMetricsReport>} wird zunächst in einen neuen Graphen vom Typ \texttt{MutableGraph<NamespaceMetricsWithTypeMetrics>} überführt. Dies ist notwendig, da Knoten im nächsten Schritt zusammengefasst werden und alle Knoten in einem Graph den gleichen Knotentyp haben müssen. Jeder \texttt{TypeMetricsReport}-Knoten wird zu einen \texttt{NamespaceMetricsWithTypeMetrics}-Knoten umgestaltet. Das Ergebnis dieser \texttt{Cast}-Operation ist also ein identischer Graph mit einem unterschiedlichen Knotentyp. Anschließend können alle Knoten, die den gleichen Namespace (\texttt{n.Itself.Name}) besitzen zusammengefasst werden. Alle diese gruppierten Knoten (Typen) des gleichen Namespace können dann mit der \texttt{Reduce}-Operation des Graphen zu einem einzigen Knoten zusammengefasst werden, der alle Typen des Namespace repräsentiert. Der erste Parameter von \texttt{Reduce} ist der neue Knoten, der die Knoten in der Menge, die als zweiter Parameter übergeben wird, ersetzen soll. Selbstverständlich müssen alle Kanten zwischen Knoten außerhalb und Knoten innerhalb der zu reduzierenden Menge zu Kanten zwischen dem neuen Knoten und den Knoten außerhalb der reduzierten Menge umgestaltet werden. In der QuickGraph Bibliothek konnte kein Algorithmus gefunden werden, der diesen Reduktionsvorgang komplett übernimmt. QuickGraph bietet lediglich die \texttt{MergeVertex}-Operation an, die es erlaubt einen einzigen Knoten aufzulösen und die Knoten seiner eingehenden Kanten mit den Knoten seiner ausgehenden Kanten zu verbinden. Auf dieser Basis kann der Algorithmus in Listing \ref{listing:vertexreduction}, der in der vorliegenden Master-Thesis als \textit{Vertex Reduction} bezeichnet wird, aufgebaut werden.
+\begin{lstlisting}[caption={\textit{Vertex Reduction} - Reduktion von Knotenmengen in einem Digraph},label={listing:vertexreduction}]
+graph.AddVertex(reducedVertex);
+foreach (var vertex in vertices) {
+	graph.AddEdge(new Edge<T>(reducedVertex, vertex));
+	graph.AddEdge(new Edge<T>(vertex, reducedVertex));
+	graph.MergeVertex(vertex, (s, t) => new Edge<T>(s, t));
+}
+\end{lstlisting}
+Der erste Parameter dieses Algorithmus ist der neue Knoten, der eine Menge an anderen Knoten zusammenfassen soll und in \texttt{reducedVertex} vorliegt. Der zweite Parameter des Algorithmus sind die Knoten, die zusammengefasst werden sollen, welche als Menge von Knoten in \texttt{vertices} vorliegen. Der neue Knoten wird in den Graph eingefügt und mit allen Knoten, die er ersetzen soll, \textit{stark} verbunden. Anschließend können alle Knoten, die ersetzt werden sollen mithilfe der \texttt{MergeVertex}-Operation aufgelöst werden. Durch die beidseitigen Verbindungen der aufzulösenden Knoten mit dem neuen Knoten werden alle Kanten der alten Knoten auf den neuen Knoten umgebogen. Abbildung \ref{fig:vertexreduction} zeigt die schematische Funktionsweise des Algorithmus \textit{Vertex Reduction} an einem Beispiel.
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=15cm]{images/vertexreduction.jpg}
+	\caption{Schematische Darstellung der Funktionsweise des \textit{Vertex Reduction}-Algorithmus}
+	\label{fig:vertexreduction}
+\end{figure}
+Die beiden mittleren Knoten sollen zu einem zusammengefasst werden, ohne das die Kanten verloren gehen. Diese Graphenreduktion, wie sie für die Erstellung des Abhängigkeitsgraph auf Namespace-Ebene erforderlich ist, kann mit der wiederholten Anwendung des \textit{Vertex Reduction}-Algorithmus erreicht werden. Bei jeder Anwendung wird dem Graph ein neuer \texttt{NamespaceMetricsWithTypeMetrics}-Knoten hinzugefügt, der alle \texttt{NamespaceMetricsWithTypeMetrics}-Knoten des gleichen Namespace ersetzt. Sobald der Algorithmus für alle Gruppen von Typen, die sich im gleichen Namespace befinden angewendet wurde, ist der Abhängigkeitsgraph auf Namespace-Ebene vollständig.
+\subsubsection{Namespace-Kreise}
+Die QuickGraph Bibliothek bietet eine Implementierung des Algorithmus zur Erkennung der starken Zusammenhangskomponenten. Dieser Algorithmus lässt sich über die \texttt{StronglyConnectedComponents}-Methode auf dem QuickGraph-Graphen vom Typ \texttt{BidirectionalGraph<V, Edge<V>>} aufrufen. Das Ergebnis ist eine Zuordnung von Knoten \texttt{V} zu der eindeutigen Identifikationsnummer der \textit{Strongly Connected Component} in Form eines \texttt{IDictionary<V, int>}-Objekts. Um die Kreise den Knoten die sie enthalten zuordnen zu können, ist eine Zuordnung von Knoten zu einer Menge von Knoten (dem Kreis) erforderlich. Tabelle \ref{tab:sccfunctionalcomp} zeigt die Manipulation der ursprünglichen Zuordnung um die gewünschte Abbildung von Knoten auf Knotenmenge zu erhalten.
+\begin{table}
+\centering
+\begin{array}[t]{ l r c l l}
+(1) & V & \rightarrow & int & \text{Ergebnis der \texttt{StronglyConnectedComponents}-Methode}\\
+(2) & int & \rightarrow & IE<V> & \text{Umkehrung der Abbildung (1)}\\
+(3) & V \rightarrow int & \rightarrow & int \rightarrow IE<V> & \text{Funktionale Komposition von (1) und (2)}\\
+(4) & V & \rightarrow & IE<V> & \text{Reduktion der funktionalen Komposition (3)}\\
+\end{array}
+\caption{This table shows some data}
+\label{tab:sccfunctionalcomp}
+\end{table}
+Diese neue Abbildung wird in einem Objekt vom Typ \texttt{StronglyConntectedComponents} gekapselt. Um die Anzahl der zyklischen Abhängigkeiten eines konkreten Namespace zu ermitteln muss die Methode \texttt{StronglyConntectedComponents}-Methode auf dem Abhängigkeitsgraph auf Namespace-Ebene aufgerufen werden. Auf das Ergebnis kann die in Tabelle \ref{tab:sccfunctionalcomp} gezeigte Transformation angewendet werden um ein \texttt{StronglyConntectedComponents<NamespaceMetricsWithTypeMetrics>}-Objekt zu erhalten. Dieses Objekt kann jederzeit nach allen oder speziellen Kreisen gefragt werden. Die zyklischen Abhängigkeiten eines Namespace werden in der nachträglichen Bearbeitung der Metriken von der Klasse \texttt{CyclicDependencies} bestimmt. Listing \ref{listing:namespacedependencies} zeigt wie das Objekt, dass die starken Zusammenhangskomponenten repräsentiert (also das Kompositions-Ergebnis aus Tabelle \ref{tab:sccfunctionalcomp}) nach dem Kreis gefragt wird, auf dem sich der Knoten des Namespace \texttt{namespaceWithTypes} befindet.
+\begin{lstlisting}[caption={Namespace-Analyse zur Bestimmung der zyklischen Abhängigkeiten},label={listing:namespacedependencies}]
+var result = from n in cycles.OfVertex(namespaceWithTypes).Vertices
+	     select n.Itself;
+\end{lstlisting}
+Nachdem alle Namespaces Informationen über die Kreise, auf denen sie sich eventuell befinden, erhalten haben, ist die nachträgliche Bearbeitung der Metrik-Analyse beendet. Das vollständige MetrikReport-Objekt steht dem Aufrufer der Analysemethoden der \texttt{Analyze}-Klasse zur Verfügung.
 
 
 \section{Objektmodell}
 \label{sec:ususobjectmodel}
+Im vorherigen Abschnitt wurde die Berechnung der Metriken ausführlich beschrieben. Dieser Abschnitt stellt das Objektmodell des Metrikberichts näher vor. Abbildung \ref{fig:metriccalc} zeigt, dass das zentrale Datenobjekt \texttt{MetricsReport} ist. Wie in Abschnitt \ref{sec:metriccalc} beschrieben, wird dieses Objekt zunächst mit den Daten befüllt, die das \texttt{MetricsCollector}-Objekt sammelt. Anschließend werden im Rahmen der nachträglichen Bearbeitung weitere Berechnungen vorgenommen um auch die kontextabhängigen Metriken zu bestimmen. Diese komplette Metrik-Analyse wird durch die statischen Methoden der \texttt{Analyze}-Klasse gestartet. Diese Methoden liefern das \texttt{MetricsReport}-Objekt als Ergebnis an den Aufrufer zurück. In diesem Abschnitt wird genau dieses Objekt genauer betrachtet.
+
 todo
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 \section{Metrikgewichtung}
