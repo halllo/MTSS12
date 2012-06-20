@@ -1001,7 +1001,7 @@ Der erste Parameter dieses Algorithmus ist der neue Knoten, der eine Menge an an
 \end{figure}
 Die beiden mittleren Knoten sollen zu einem zusammengefasst werden, ohne das die Kanten verloren gehen. Diese Graphenreduktion, wie sie für die Erstellung des Abhängigkeitsgraph auf Namespace-Ebene erforderlich ist, kann mit der wiederholten Anwendung des \textit{Vertex Reduction}-Algorithmus erreicht werden. Bei jeder Anwendung wird dem Graph ein neuer \texttt{NamespaceMetricsWithTypeMetrics}-Knoten hinzugefügt, der alle \texttt{NamespaceMetricsWithTypeMetrics}-Knoten des gleichen Namespace ersetzt. Sobald der Algorithmus für alle Gruppen von Typen, die sich im gleichen Namespace befinden angewendet wurde, ist der Abhängigkeitsgraph auf Namespace-Ebene vollständig.
 \subsubsection{Namespace-Kreise}
-Die QuickGraph Bibliothek bietet eine Implementierung des Algorithmus zur Erkennung der starken Zusammenhangskomponenten. Dieser Algorithmus lässt sich über die \texttt{StronglyConnectedComponents}-Methode auf dem QuickGraph-Graphen vom Typ \texttt{BidirectionalGraph<V, Edge<V>>} aufrufen. Das Ergebnis ist eine Zuordnung von Knoten \texttt{V} zu der eindeutigen Identifikationsnummer der \textit{Strongly Connected Component} in Form eines \texttt{IDictionary<V, int>}-Objekts. Um die Kreise den Knoten die sie enthalten zuordnen zu können, ist eine Zuordnung von Knoten zu einer Menge von Knoten (dem Kreis) erforderlich. Tabelle \ref{tab:sccfunctionalcomp} zeigt die Manipulation der ursprünglichen Zuordnung um die gewünschte Abbildung von Knoten auf Knotenmenge zu erhalten.
+Die QuickGraph Bibliothek bietet eine Implementierung des Algorithmus zur Erkennung der starken Zusammenhangskomponenten. Dieser Algorithmus lässt sich über die \texttt{StronglyConnectedComponents}-Methode auf dem QuickGraph-Graphen vom Typ \texttt{BidirectionalGraph<V, Edge<V>>} aufrufen. Das Ergebnis ist eine Zuordnung von Knoten \texttt{V} zu der eindeutigen Identifikationsnummer der \textit{Strongly Connected Component} in Form eines \texttt{IDictionary<V, int>}-Objekts. Um die Kreise den Knoten die sie enthalten zuordnen zu können, ist eine Zuordnung von Knoten zu einer Menge von Knoten (dem Kreis) erforderlich. Tabelle \ref{tab:sccfunctionalcomp} zeigt die Transformation der ursprünglichen Zuordnung um die gewünschte Abbildung von Knoten auf Knotenmenge zu erhalten. IE\textless{}$V$\textgreater{} steht für eine Sequenz von Objekten vom Typ $V$ und ist eine Abkürzung des Typen \texttt{IEnumerable<V>}. Die Transformation hat einen einmaligen Aufwand von $O(n)$, da die initiale Abbildung einmal vollständig invertiert werden muss.
 \begin{table}
 \centering
 \begin{array}[t]{ l r c l l}
@@ -1010,7 +1010,7 @@ Die QuickGraph Bibliothek bietet eine Implementierung des Algorithmus zur Erkenn
 (3) & V \rightarrow int & \rightarrow & int \rightarrow IE<V> & \text{Funktionale Komposition von (1) und (2)}\\
 (4) & V & \rightarrow & IE<V> & \text{Reduktion der funktionalen Komposition (3)}\\
 \end{array}
-\caption{This table shows some data}
+\caption{Abbildung von Knoten zu starker Zusammenhangskomponente zu anderen Knoten}
 \label{tab:sccfunctionalcomp}
 \end{table}
 Diese neue Abbildung wird in einem Objekt vom Typ \texttt{StronglyConntectedComponents} gekapselt. Um die Anzahl der zyklischen Abhängigkeiten eines konkreten Namespace zu ermitteln muss die Methode \texttt{StronglyConntectedComponents}-Methode auf dem Abhängigkeitsgraph auf Namespace-Ebene aufgerufen werden. Auf das Ergebnis kann die in Tabelle \ref{tab:sccfunctionalcomp} gezeigte Transformation angewendet werden um ein \texttt{StronglyConntectedComponents<NamespaceMetricsWithTypeMetrics>}-Objekt zu erhalten. Dieses Objekt kann jederzeit nach allen oder speziellen Kreisen gefragt werden. Die zyklischen Abhängigkeiten eines Namespace werden in der nachträglichen Bearbeitung der Metriken von der Klasse \texttt{CyclicDependencies} bestimmt. Listing \ref{listing:namespacedependencies} zeigt wie das Objekt, dass die starken Zusammenhangskomponenten repräsentiert (also das Kompositions-Ergebnis aus Tabelle \ref{tab:sccfunctionalcomp}) nach dem Kreis gefragt wird, auf dem sich der Knoten des Namespace \texttt{namespaceWithTypes} befindet.
@@ -1023,9 +1023,14 @@ Nachdem alle Namespaces Informationen über die Kreise, auf denen sie sich eventu
 
 \section{Objektmodell}
 \label{sec:ususobjectmodel}
-Im vorherigen Abschnitt wurde die Berechnung der Metriken ausführlich beschrieben. Dieser Abschnitt stellt das Objektmodell des Metrikberichts näher vor. Abbildung \ref{fig:metriccalc} zeigt, dass das zentrale Datenobjekt \texttt{MetricsReport} ist. Wie in Abschnitt \ref{sec:metriccalc} beschrieben, wird dieses Objekt zunächst mit den Daten befüllt, die das \texttt{MetricsCollector}-Objekt sammelt. Anschließend werden im Rahmen der nachträglichen Bearbeitung weitere Berechnungen vorgenommen um auch die kontextabhängigen Metriken zu bestimmen. Diese komplette Metrik-Analyse wird durch die statischen Methoden der \texttt{Analyze}-Klasse gestartet. Diese Methoden liefern das \texttt{MetricsReport}-Objekt als Ergebnis an den Aufrufer zurück. In diesem Abschnitt wird genau dieses Objekt genauer betrachtet.
+Im vorherigen Abschnitt wurde die Berechnung der Metriken ausführlich beschrieben. Dieser Abschnitt stellt das Objektmodell des Metrikberichts näher vor. Abbildung \ref{fig:metriccalc} zeigt, dass das zentrale Datenobjekt \texttt{MetricsReport} ist. Wie in Abschnitt \ref{sec:metriccalc} beschrieben, wird dieses Objekt zunächst mit den Daten befüllt, die das \texttt{MetricsCollector}-Objekt sammelt. Anschließend werden im Rahmen der nachträglichen Bearbeitung weitere Berechnungen vorgenommen um auch die kontextabhängigen Metriken zu bestimmen. Diese komplette Metrik-Analyse wird durch die statischen Methoden der \texttt{Analyze}-Klasse gestartet. Diese Methoden liefern das \texttt{MetricsReport}-Objekt als Ergebnis an den Aufrufer zurück. In diesem Abschnitt wird genau dieses Objekt genauer betrachtet. Abbildung \ref{fig:metricsreport} zeigt alle Klassen, aus denen dieser Bericht besteht.
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=17cm]{images/metricsreport.jpg}
+	\caption{Objektmodell und Klassen des vollständigen Metrikberichts}
+	\label{fig:metricsreport}
+\end{figure}
 
-todo
 
 
 
