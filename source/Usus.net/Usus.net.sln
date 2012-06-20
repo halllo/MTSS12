@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Usus.net", "Usus.net\Usus.net.csproj", "{E33B8DD5-EC14-40EF-BB8E-0B346E015F21}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Usus.net.View", "Usus.net.View\Usus.net.View.csproj", "{08D9B61E-6197-4775-B90E-9F685C731BFB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Usus.net.Core", "Usus.net.Core\Usus.net.Core.csproj", "{F8527516-94DE-42E3-B885-C7664EE4F655}"
@@ -33,16 +31,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E33B8DD5-EC14-40EF-BB8E-0B346E015F21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E33B8DD5-EC14-40EF-BB8E-0B346E015F21}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E33B8DD5-EC14-40EF-BB8E-0B346E015F21}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{E33B8DD5-EC14-40EF-BB8E-0B346E015F21}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{E33B8DD5-EC14-40EF-BB8E-0B346E015F21}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{E33B8DD5-EC14-40EF-BB8E-0B346E015F21}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E33B8DD5-EC14-40EF-BB8E-0B346E015F21}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E33B8DD5-EC14-40EF-BB8E-0B346E015F21}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{E33B8DD5-EC14-40EF-BB8E-0B346E015F21}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{E33B8DD5-EC14-40EF-BB8E-0B346E015F21}.Release|x86.ActiveCfg = Release|Any CPU
 		{08D9B61E-6197-4775-B90E-9F685C731BFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{08D9B61E-6197-4775-B90E-9F685C731BFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08D9B61E-6197-4775-B90E-9F685C731BFB}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
