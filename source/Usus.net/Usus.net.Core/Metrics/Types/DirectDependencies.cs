@@ -14,12 +14,14 @@ namespace andrena.Usus.net.Core.Metrics.Types
             var typesOfMethods = GetMethodTypes(methods).ToList();
             var typesOfFields = GetFieldTypes(type.Fields).ToList();
             var typesOfAncestors = GetAncestorTypes(type).ToList();
+            var typesOfGenerics = GetGenericConstraints(type).ToList();
 
             return Enumerable.Empty<string>()
                 .Union(type.FullName().Return())
                 .Union(typesOfMethods)
                 .Union(typesOfFields)
                 .Union(typesOfAncestors)
+                .Union(typesOfGenerics)
                 .ToList();
         }
 
@@ -40,6 +42,14 @@ namespace andrena.Usus.net.Core.Metrics.Types
         private static IEnumerable<string> GetAncestorTypes(INamedTypeDefinition type)
         {
             return from c in type.BaseClasses.Concat(type.Interfaces)
+                   from t in c.GetAllRealTypeReferences()
+                   select t.ToString();
+        }
+
+        private static IEnumerable<string> GetGenericConstraints(INamedTypeDefinition type)
+        {
+            return from g in type.GenericParameters
+                   from c in g.Constraints
                    from t in c.GetAllRealTypeReferences()
                    select t.ToString();
         }

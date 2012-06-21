@@ -5,6 +5,25 @@
         
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <view:Cockpit/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Background="Green">
+            <Button Content="Analyze" HorizontalAlignment="Right" Click="Button_Click" />
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <view:Cockpit x:Name="Cockpit" Grid.Row="0" Grid.Column="0"/>
+            <view:Hotspots x:Name="Hotspots" Grid.Row="0" Grid.Column="1"/>
+        </Grid>
     </Grid>
 </Window>

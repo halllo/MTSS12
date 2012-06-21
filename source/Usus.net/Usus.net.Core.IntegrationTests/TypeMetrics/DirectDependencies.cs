@@ -10,6 +10,16 @@ namespace Usus.net.Core.IntegrationTests.TypeMetrics
         class SimpleClass
         { }
 
+        [ExpectDirectDependency("Usus.net.Core.IntegrationTests.TypeMetrics.DirectDependencies.SimpleClass")]
+        class GenericClass<T> where T : SimpleClass
+        { }
+
+        [ExpectDirectDependency("Usus.net.Core.IntegrationTests.TypeMetrics.DirectDependencies.SimpleClass")]
+        class GenericClass<T, R>
+            where T : SimpleClass
+            where R : SimpleClass
+        { }
+
         [ExpectNoDirectDependency("System.Exception")]
         class ClassWithoutBase
         { }
@@ -17,7 +27,7 @@ namespace Usus.net.Core.IntegrationTests.TypeMetrics
         [ExpectDirectDependency("System.Exception")]
         class ClassWithBase : Exception
         { }
-     
+
         [ExpectDirectDependency("System.Exception")]
         [ExpectDirectDependency("System.ICloneable")]
         [ExpectDirectDependency("System.NotImplementedException")]

@@ -12,12 +12,17 @@ namespace andrena.Usus.net.Core.AssemblyNavigation
         {
             Report = new MetricsReport();
             using (var host = new PeReader.DefaultHost())
-                AnalyzeInHost(assemblyPath, host);
+                TryToAnalyzeInHost(assemblyPath, host);
         }
 
-        private void AnalyzeInHost(string toAnalyse, IMetadataHost host)
+        private void TryToAnalyzeInHost(string toAnalyse, IMetadataHost host)
         {
             var assembly = host.LoadUnitFrom(toAnalyse) as IAssembly;
+            if (assembly != null) AnalyzeInHost(toAnalyse, host, assembly);
+        }
+
+        private void AnalyzeInHost(string toAnalyse, IMetadataHost host, IAssembly assembly)
+        {
             string pdbPath = GetProgramDatabasePath(toAnalyse);
             AnalyzeAssemblyInHost(host, assembly, pdbPath);
         }

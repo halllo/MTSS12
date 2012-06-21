@@ -1,4 +1,4 @@
-﻿<hub:HubAwareControl x:Class="andrena.Usus.net.View.Cockpit"
+﻿<hub:HubAwareControl x:Class="andrena.Usus.net.View.Hotspots"
              xmlns:hub="clr-namespace:andrena.Usus.net.View.Hub"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -11,9 +11,7 @@
             <RowDefinition Height="30"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock Text=" Cockpit" Background="DarkGreen" Foreground="White" FontSize="20"/>
-        <DataGrid Grid.Row="1" IsReadOnly="True" CanUserSortColumns="False"
-                  HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray"
-                  ItemsSource="{Binding Entries}"/>
+        <TextBlock Text=" Hotspots" Background="DarkRed" Foreground="White" FontSize="20"/>
+        <!--todo-->
     </Grid>
 </hub:HubAwareControl>

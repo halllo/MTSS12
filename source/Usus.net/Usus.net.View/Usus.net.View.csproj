@@ -55,6 +55,12 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Hotspots.xaml.cs">
+      <DependentUpon>Hotspots.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Hub\HubAwareControl.cs" />
+    <Compile Include="Hub\IHubConnect.cs" />
+    <Compile Include="Hub\ViewHub.cs" />
     <Compile Include="ViewModels\Cockpit.cs" />
     <Compile Include="ViewModels\CockpitEntry.cs" />
     <Page Include="Cockpit.xaml">
@@ -65,6 +71,10 @@
       <DependentUpon>Cockpit.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Hotspots.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -90,6 +100,12 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Usus.net.Core\Usus.net.Core.csproj">
+      <Project>{F8527516-94DE-42E3-B885-C7664EE4F655}</Project>
+      <Name>Usus.net.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
