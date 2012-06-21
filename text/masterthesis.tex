@@ -890,6 +890,7 @@ Ein \texttt{AssemblyVisitor}-Objekt ist in der Lage eine PE-Datei einzulesen und
 Für jede zu bestimmende Metrik existiert eine Klasse, die die Berechnung durchführen kann. Alle Ergebnisse werden in einem \texttt{MetricsReport}-Objekt gesammelt und in Form eines Berichts im \texttt{MetricCollector}-Objekt hinterlegt. Der Aufrufer kann diesen Bericht jederzeit einsehen. Abschnitt \ref{sec:ususobjectmodel} beschreibt diesen Bericht als Bestandteil des Objektmodells ausführlicher, während Listing \ref{listing:ususnetcoreusage} einen vereinfachten Codeausschnitt aus \texttt{Usus.net.Console} zeigt, der die statische Code-Analyse durchführt und sämtliche Metriken aller Methoden einfach auf der Console ausgibt.
 \begin{lstlisting}[caption={Aufruf der Code-Analyse von \texttt{Usus.net.Core} in \texttt{Usus.net.Console}},label={listing:ususnetcoreusage}]
 var metrics = Analyze.PortableExecutable(assemblyToAnalyze);
+//alternativ: Analyze.Me();
 foreach (var method in metrics.Methods) {
 	Console.WriteLine("Signature: " + method.Signature);
 	Console.WriteLine("CyclomaticComplexity: " + method.CyclomaticComplexity);
@@ -899,7 +900,7 @@ foreach (var method in metrics.Methods) {
 Nachdem die Infrastruktur der Metrikberechnung hiermit beschrieben wurde, werden in den folgenden Unterabschnitten die konkreten Berechnungen der einzelnen Metriken vorgestellt.
 
 \subsection{Zyklomatische Komplexität}
-Die zyklomatische Komplexität einer Methode gibt an, wie viele unterschiedliche Ablaufpfade durch eine Methode existieren. In Unter-Unterabschnitt \ref{subsubsec:cyclomaticcomplexity} wurde diese Metrik ausführlicher erklärt. In Usus.net kann die Berechnung auf zwei verschiedene Arten durchgeführt werden. Zum einen kann ausschließlich \emph{CCI Metadata} verwendet und alle CIL-Anweisungen die eine Entscheidung treffen aufsummiert werden. Die Klasse \texttt{CyclomaticComplexityOfIl} implementiert diesbezüglich eine einfache Abwandlung des Algorithmus, der unter anderem von Steve Gilham vorgestellt wurde \cite{CILBasedCC} und laut ihm angeblich auch in frühen Versionen von NDepend (Abschnitt \ref{sec:ndepend}) verwendet wurde. Die andere Variante, die in Usus.net standardmäßig verwendet wird, nutzt \emph{CCI Code and AST Components}. Die Klasse \texttt{CyclomaticComplexityOfAst} erzeugt ein spezielles Besucher-Objekt vom Typ \texttt{CyclomaticComplexityCalculator}, das den aus dem Methodenrumpf erzeugten abstrakten Syntaxbaum besucht. Die Erzeugung des AST aus der Methoden-Definition übernimmt CCI. Listing \ref{listing:cyclomaticcomplexityofast} zeigt den Code der die zyklomatische Komplexität in \texttt{Usus.net.Core} bestimmt.
+Die zyklomatische Komplexität einer Methode gibt an, wie viele unterschiedliche Ablaufpfade durch eine Methode existieren. In Unter-Unterabschnitt \ref{subsubsec:cyclomaticcomplexity} wurde diese Metrik ausführlicher erklärt. In Usus.net kann die Berechnung auf zwei verschiedene Arten durchgeführt werden. Zum einen kann ausschließlich \emph{CCI Metadata} verwendet und alle CIL-Anweisungen die eine Entscheidung treffen aufsummiert werden. Die Klasse \texttt{CyclomaticComplexityOfIl} implementiert diesbezüglich eine einfache Abwandlung des Algorithmus, der unter anderem von Steve Gilham vorgestellt wurde \cite{CCperCIL} und laut ihm angeblich auch in frühen Versionen von NDepend (Abschnitt \ref{sec:ndepend}) verwendet wurde. Die andere Variante, die in Usus.net standardmäßig verwendet wird, nutzt \emph{CCI Code and AST Components}. Die Klasse \texttt{CyclomaticComplexityOfAst} erzeugt ein spezielles Besucher-Objekt vom Typ \texttt{CyclomaticComplexityCalculator}, das den aus dem Methodenrumpf erzeugten abstrakten Syntaxbaum besucht. Die Erzeugung des AST aus der Methoden-Definition übernimmt CCI. Listing \ref{listing:cyclomaticcomplexityofast} zeigt den Code der die zyklomatische Komplexität in \texttt{Usus.net.Core} bestimmt.
 \begin{lstlisting}[caption={Statement-Analyse zur Bestimmung der zyklomatischen Komplexität},label={listing:cyclomaticcomplexityofast}]
 var methodBody = method.Decompile(pdb, host);
 var cyclomaticComplexityCalculator = new CyclomaticComplexityCalculator();
@@ -1031,7 +1032,26 @@ Im vorherigen Abschnitt wurde die Berechnung der Metriken ausführlich beschriebe
 	\label{fig:metricsreport}
 \end{figure}
 
+\subsection{Methodenberichte}
+Der Metrikbericht besteht aus mehreren Methodenberichten. Diese \texttt{MethodMetricsReport}-Objekte enthalten alle relevanten Daten und Metriken jeder im System gefundenen Methode. Die eindeutige Zuordnung von Methode zu Methodenbericht ist über die Eigenschaft \texttt{Signature} möglich. Die Signatur einer Methode macht sie im System eindeutig, da neben Methodenname auch Typ- und Namespace-Name, sowie vollständige Namen des Rückgabetypen und aller Parametertypen enthalten sind. Neben der Menge aller Methodenberichte kann der Bericht zu einer bestimmten Methode in \texttt{MetricsReport} auch gesucht werden. Dazu existieren mehrere Extension Methods, die wie in Listing \ref{listing:methodpropertysearch} dargestellt, benutzt werden können.
+\begin{lstlisting}[caption={Methoden- und Property-Suche in einem \texttt{MetricsReport}-Objekt},label={listing:methodpropertysearch}]
+//Methoden
+MethodMetricsReport methodMetrics;
+methodMetrics = metrics.ForMethod(
+  "System.Void andrena.Usus.net.Console.Analyzer.AnalyzeFile(System.String)");
+methodMetrics = metrics.ForMethod(() => AnalyzeFile(null));
+//Properties
+PropertyMetricsReport propertyMetrics = metrics.ForProperty(() => Name);
+methodMetrics = metrics.ForMethod(
+  "System.String andrena.Usus.net.Console.Analyzer.Name.get()");
+\end{lstlisting}
+Methodenberichte lassen sich entweder über die Signatur der Methode finden, wie Zeile 3 zeigt. Wenn die zu suchende Methode im Scope ist, kann sie wie in Zeile 5 auch über einen \texttt{Expression}-Ausdruck angegeben werden. Microsoft beschreibt dieses Konzept in Verbindung mit den in C$\#$ integrierten Lambda-Ausdrücken in einem eigenen Artikel in der MSDN Library \cite{MSDNExpressions}. Dadurch bleibt die Methodenreferenz, im Gegensatz zur Verwendung von Strings, Ziel von automatisierten Refactorings. Eine dritte Möglichkeit erlaubt das Suchen von Methodenberichten per \texttt{MethodInfo}-Objekt aus dem .NET Framework. Das gleiche gilt auch für Properties. Da der C$\#$-Kompiler den \texttt{get}- und \texttt{set}-Teil eines Properties als Methoden kompiliert, werden diese ebenfalls auf \texttt{MethodMetricsReport}-Objekte abgebildet. Wie in Zeile 7 in Listing \ref{listing:methodpropertysearch} gezeigt, lassen sich Properties auch über einen \texttt{Expression}-Ausdruck suchen. Das resultierende \texttt{PropertyMetricsReport}-Objekt ist einfach eine Zusammenfassung zweier \texttt{MethodMetricsReport}-Objekte, nämlich eins für den \texttt{get}- und eins für den \texttt{set}-Teil des Properties. Diese \texttt{MethodMetricsReport}-Objekte der Properties lassen sich aber auch direkt über die Signatur finden, wie Zeile 8 zeigt.
 
+\subsection{Klassenberichte}
+todo
+
+\subsection{Namespace-Berichte}
+todo
 
 
 
