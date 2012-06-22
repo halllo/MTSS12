@@ -53,9 +53,12 @@ namespace andrena.Usus.net.Core.Reports
 
         internal void AddTypeReport(TypeMetricsWithMethodMetrics typeMertics)
         {
-            typeReports.Add(typeMertics.Itself.FullName, typeMertics);
-            ShareTheKnowledgeWithMethodsOf(typeMertics);
-            if (!typeMertics.Itself.CompilerGenerated) CommonKnowledge.NumberOfClasses++;
+            if (!typeReports.ContainsKey(typeMertics.Itself.FullName))
+            {
+                typeReports.Add(typeMertics.Itself.FullName, typeMertics);
+                ShareTheKnowledgeWithMethodsOf(typeMertics);
+                if (!typeMertics.Itself.CompilerGenerated) CommonKnowledge.NumberOfClasses++;
+            }
         }
 
         internal TypeMetricsReport TypeForName(string fullName)

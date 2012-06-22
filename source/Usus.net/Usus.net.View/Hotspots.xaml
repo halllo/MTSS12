@@ -11,7 +11,9 @@
             <RowDefinition Height="30"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock Text=" Hotspots" Background="DarkRed" Foreground="White" FontSize="20"/>
-        <!--todo-->
+        <TextBlock Text=" Problematic Units" Background="DarkRed" Foreground="White" FontSize="20"/>
+        <DataGrid Grid.Row="1" IsReadOnly="True" CanUserSortColumns="False"
+                  HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray"
+                  ItemsSource="{Binding Entries}"/>
     </Grid>
 </hub:HubAwareControl>

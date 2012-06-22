@@ -63,6 +63,8 @@
     <Compile Include="Hub\ViewHub.cs" />
     <Compile Include="ViewModels\Cockpit.cs" />
     <Compile Include="ViewModels\CockpitEntry.cs" />
+    <Compile Include="ViewModels\HotspotEntry.cs" />
+    <Compile Include="ViewModels\Hotspots.cs" />
     <Page Include="Cockpit.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

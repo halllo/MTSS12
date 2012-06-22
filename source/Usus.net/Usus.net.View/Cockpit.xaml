@@ -11,7 +11,7 @@
             <RowDefinition Height="30"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock Text=" Cockpit" Background="DarkGreen" Foreground="White" FontSize="20"/>
+        <TextBlock Text=" Overall Metrics" Background="DarkGreen" Foreground="White" FontSize="20"/>
         <DataGrid Grid.Row="1" IsReadOnly="True" CanUserSortColumns="False"
                   HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray"
                   ItemsSource="{Binding Entries}"/>
