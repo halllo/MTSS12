@@ -8,8 +8,6 @@ namespace andrena.Usus.net.Console
 {
     abstract class Analyzer
     {
-        public string Name { get; set; }
-
         public void AnalyzeThisAssembly()
         {
             var metrics = Analyze.Me();

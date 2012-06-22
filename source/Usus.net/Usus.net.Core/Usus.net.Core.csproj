@@ -128,6 +128,7 @@
     <Compile Include="Reports\CommonReportKnowledge.cs" />
     <Compile Include="Reports\MethodMetricsReportSearch.cs" />
     <Compile Include="Reports\MetricsReportSearch.cs" />
+    <Compile Include="Reports\NamespaceMetricsReportSearch.cs" />
     <Compile Include="Reports\NamespaceMetricsWithTypeMetrics.cs" />
     <Compile Include="Reports\NamespaceMetricsReport.cs" />
     <Compile Include="Reports\PropertyMetricsReportSearch.cs" />

@@ -54,13 +54,18 @@ namespace andrena.Usus.net.Core.Reports
         internal void AddTypeReport(TypeMetricsWithMethodMetrics typeMertics)
         {
             typeReports.Add(typeMertics.Itself.FullName, typeMertics);
-            ShareTheKnowledge(typeMertics);
+            ShareTheKnowledgeWithMethodsOf(typeMertics);
             if (!typeMertics.Itself.CompilerGenerated) CommonKnowledge.NumberOfClasses++;
         }
 
         internal TypeMetricsReport TypeForName(string fullName)
         {
             return typeReports[fullName].Itself;
+        }
+
+        internal NamespaceMetricsReport NamespaceForName(string fullName)
+        {
+            return namespaceReports[fullName].Itself;
         }
 
         internal IEnumerable<MethodMetricsReport> MethodsOf(TypeMetricsReport type)
@@ -73,7 +78,7 @@ namespace andrena.Usus.net.Core.Reports
             return namespaceReports[namespaceMetrics.Name].Types;
         }
 
-        private void ShareTheKnowledge(TypeMetricsWithMethodMetrics typeMertics)
+        private void ShareTheKnowledgeWithMethodsOf(TypeMetricsWithMethodMetrics typeMertics)
         {
             typeMertics.Itself.CommonKnowledge = CommonKnowledge;
             foreach (var method in typeMertics.Methods) method.CommonKnowledge = CommonKnowledge;

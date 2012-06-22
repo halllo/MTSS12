@@ -5,17 +5,17 @@ namespace andrena.Usus.net.Core.Graphs
 {
     public static class GraphExtensions
     {
-        public static MutableGraph<T> ToGraph<T>(this IDictionary<T, IEnumerable<T>> graphDict)
-            where T : class
+        public static MutableGraph<V> ToGraph<V>(this IDictionary<V, IEnumerable<V>> graphDict)
+            where V : class
         {
-            return new MutableGraph<T>(graphDict);
+            return new MutableGraph<V>(graphDict);
         }
 
-        public static IGraph<T> Select<T, R>(this IGraph<R> graph, Func<R, T> vertexSelector)
-            where T : class
+        public static IGraph<V> Select<V, R>(this IGraph<R> graph, Func<R, V> vertexSelector)
+            where V : class
             where R : class
         {
-            return new GraphSurrogate<T, R>(graph, vertexSelector);
+            return new GraphSurrogate<V, R>(graph, vertexSelector);
         }
     }
 }

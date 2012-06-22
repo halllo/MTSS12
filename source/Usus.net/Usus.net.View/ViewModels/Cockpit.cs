@@ -16,7 +16,7 @@ namespace andrena.Usus.net.View.ViewModels
 
         public void RegisterHub(ViewHub hub)
         {
-            hub.MetricsReady += (m) => SetNewEntries(m.Rate());
+            hub.MetricsReady += m => SetNewEntries(m.Rate());
         }
 
         private void SetNewEntries(RatedMetrics ratedMetrics)

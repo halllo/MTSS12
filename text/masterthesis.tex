@@ -952,7 +952,7 @@ var result = Enumerable.Empty<string>()
 Nachdem zu jeder Methode alle Abhängigkeiten bestimmt wurden, können die Abhängigkeiten einer Klasse einfach bestimmt werden, indem die Abhängigkeitslisten der Methoden zusammengefasst werden. Dafür verwendet Usus.net die Klasse \texttt{DirectDependencies}. Um Typen wie \texttt{object}, \texttt{string} und \texttt{int}, die in der Base Class Library (BCL) definiert sind zu ignorieren, brauchen nur die interessanten Typen betrachtet werden. Dies sind Klassen, die in der analysierten Assembly selbst deklariert und definiert wurden. Dieser Filter ist in der Klasse \texttt{InterestingDirectDependencies} definiert. Da zu diesem Zeitpunkt alle deklarierten Typen des Systems bereits bekannt sein müssen, kann der Filter erst im Rahmen der nachträglichen Bearbeitung durch die \texttt{PostProcessTypeDependencies}-Klasse angewendet werden. Jeder in der Assembly deklarierte Typ ist anschließend nur noch von anderen in der Assembly deklarierten Typen abhängig. Aus diesem Netz der Abhängigkeiten erzeugt Usus.net mithilfe der QuickGraph\footnote[1]{QuickGraph: "`Generic Graph Data Structures and Algorithms for .NET"' \url{http://quickgraph.codeplex.com/}} Bibliothek einen Abhängigkeitsgraphen auf Typ-Ebene. Um jetzt alle direkten und indirekten Abhängigkeiten einer Klasse \texttt{type} zu bestimmen, kann wie Unter-Unterabschnitt \ref{subsubsec:ccd} hergeleitet der Algorithmus \emph{Depth First Search} verwendet werden, um die Erreichbarkeitsmenge des Knoten von \texttt{type} zu finden. Wie in Listing \ref{listing:cumulatedcomponentdependency} dargestellt, ist die kumulierte Komponentenabhängigkeit einer Klasse \texttt{type} die Anzahl der nicht vom Kompiler erzeugten Typen, in der Erreichbarkeitsmenge von \texttt{type}.
 \begin{lstlisting}[caption={Typen-Analyse zur Bestimmung der kumulierten Komponentenabhängigkeit},label={listing:cumulatedcomponentdependency}]
 var result = typeGraph.Reach(type).Vertices
-		.Count(t => !t.CompilerGenerated);
+		      .Count(t => !t.CompilerGenerated);
 \end{lstlisting}
 Die Implementierung der \texttt{Reach}-Funktion verwendet die \texttt{DepthFirstSearchAlgorithm<T, Edge<T>>}-Klasse von QuickGraph und setzt den Startknoten auf $type$. Zusätzlich wird die Suche abgebrochen, nachdem die Erreichbarkeitsmenge des Startknotens gefunden wird.
 
@@ -967,11 +967,12 @@ Da jeder nicht-statische Typ immer einen Default-Konstruktor enthält, wird diese
 Die Anzahl der öffentlichen Felder, die nicht statisch sind, kann ebenfalls im Rahmen der kontextfreien Bestimmung der Klassenmetriken ermittelt werden. Diese Metrik wurde bereits in Unter-Unterabschnitt \ref{subsubsec:nonstaticpublicfields} vorgestellt. Listing \ref{listing:nonstaticpublicfields} zeigt diese bedingte Aufsummierung der Felder einer Klasse.
 \begin{lstlisting}[caption={Typen-Analyse zur Bestimmung der nicht-statischen öffentlichen Felder},label={listing:nonstaticpublicfields}]
 var result = type.Fields.Count(f => !f.IsStatic 
-		&& f.Visibility == TypeMemberVisibility.Public);
+	     && f.Visibility == TypeMemberVisibility.Public);
 \end{lstlisting}
 Auch hier ermöglicht die API der \emph{CCI Metadata} eine Iteration über alle Felder einer Typ-Definition.
 
 \subsection{Namespaces mit zyklischen Abhängigkeiten}
+\label{subsec:namespaceswithcyclicdependencies}
 Die einzige Metrik die Usus.net für Namespaces bestimmt, ist die Anzahl der zyklischen Abhängigkeiten. In Unter-Unterabschnitt \ref{subsubsec:packetswithcyclicdependencies} wurde hergeleitet, das dafür der Algorithmus \textit{Strongly Connected Components} verwendet werden kann. Die Berechnung setzt also den vollständigen Abhängigkeitsgraphen auf Namespace-Ebene voraus. Der Abhängigkeitsgraph auf Typen-Ebene wurde von Usus.net bereits für die Berechnung der kumulierten Komponentenabhängigkeit in \ref{subsec:ccdcode} erstellt. Aus diesem Graph kann der Namespace-Graph reduziert werden. Damit ist offensichtlich, das auch diese Metrik im Rahmen der nachträglichen Bearbeitung kontextabhängig bestimmt wird. Die Klasse \texttt{PostProcessNamespaceDependencies} führt die nötigen Berechnungen durch, indem zuerst der Abhängigkeitsgraph auf Namespace-Ebene erstellt wird. Danach werden die Kreise ermittelt und den entsprechenden Namespaces zugewiesen.
 \subsubsection{Namespace-Graph}
 Die Erstellung des Graphen aller Namespaces geschieht wie in Listing \ref{listing:namespacegraphcreation} dargestellt.
@@ -1033,50 +1034,67 @@ Im vorherigen Abschnitt wurde die Berechnung der Metriken ausführlich beschriebe
 \end{figure}
 
 \subsection{Methodenberichte}
-Der Metrikbericht besteht aus mehreren Methodenberichten. Diese \texttt{MethodMetricsReport}-Objekte enthalten alle relevanten Daten und Metriken jeder im System gefundenen Methode. Die eindeutige Zuordnung von Methode zu Methodenbericht ist über die Eigenschaft \texttt{Signature} möglich. Die Signatur einer Methode macht sie im System eindeutig, da neben Methodenname auch Typ- und Namespace-Name, sowie vollständige Namen des Rückgabetypen und aller Parametertypen enthalten sind. Neben der Menge aller Methodenberichte kann der Bericht zu einer bestimmten Methode in \texttt{MetricsReport} auch gesucht werden. Dazu existieren mehrere Extension Methods, die wie in Listing \ref{listing:methodpropertysearch} dargestellt, benutzt werden können.
+Der Metrikbericht besteht aus mehreren Methodenberichten. Diese \texttt{MethodMetricsReport}-Objekte enthalten alle relevanten Daten und Metriken jeder im System gefundenen Methode. Die eindeutige Zuordnung von Methode zu Methodenbericht ist über die Eigenschaft \texttt{Signature} möglich. Die Signatur einer Methode macht sie im System eindeutig, da neben Methodenname auch Typ- und Namespace-Name, sowie vollständige Namen des Rückgabetypen und aller Parametertypen enthalten sind. Neben der Menge aller Methodenberichte kann der Bericht zu einer bestimmten Methode in \texttt{MetricsReport} auch gesucht werden. Dazu existieren mehrere Extension Methods, die wie in Listing \ref{listing:methodpropertysearch} dargestellt, benutzt werden können. Die Variable \texttt{metrics} enthält die Referenz zu dem \texttt{MetricsReport}-Objekt.
 \begin{lstlisting}[caption={Methoden- und Property-Suche in einem \texttt{MetricsReport}-Objekt},label={listing:methodpropertysearch}]
 //Methoden
-MethodMetricsReport methodMetrics;
 methodMetrics = metrics.ForMethod(
   "System.Void andrena.Usus.net.Console.Analyzer.AnalyzeFile(System.String)");
 methodMetrics = metrics.ForMethod(() => AnalyzeFile(null));
 //Properties
-PropertyMetricsReport propertyMetrics = metrics.ForProperty(() => Name);
+propertyMetrics = metrics.ForProperty(() => Name);
 methodMetrics = metrics.ForMethod(
   "System.String andrena.Usus.net.Console.Analyzer.Name.get()");
 \end{lstlisting}
-Methodenberichte lassen sich entweder über die Signatur der Methode finden, wie Zeile 3 zeigt. Wenn die zu suchende Methode im Scope ist, kann sie wie in Zeile 5 auch über einen \texttt{Expression}-Ausdruck angegeben werden. Microsoft beschreibt dieses Konzept in Verbindung mit den in C$\#$ integrierten Lambda-Ausdrücken in einem eigenen Artikel in der MSDN Library \cite{MSDNExpressions}. Dadurch bleibt die Methodenreferenz, im Gegensatz zur Verwendung von Strings, Ziel von automatisierten Refactorings. Eine dritte Möglichkeit erlaubt das Suchen von Methodenberichten per \texttt{MethodInfo}-Objekt aus dem .NET Framework. Das gleiche gilt auch für Properties. Da der C$\#$-Kompiler den \texttt{get}- und \texttt{set}-Teil eines Properties als Methoden kompiliert, werden diese ebenfalls auf \texttt{MethodMetricsReport}-Objekte abgebildet. Wie in Zeile 7 in Listing \ref{listing:methodpropertysearch} gezeigt, lassen sich Properties auch über einen \texttt{Expression}-Ausdruck suchen. Das resultierende \texttt{PropertyMetricsReport}-Objekt ist einfach eine Zusammenfassung zweier \texttt{MethodMetricsReport}-Objekte, nämlich eins für den \texttt{get}- und eins für den \texttt{set}-Teil des Properties. Diese \texttt{MethodMetricsReport}-Objekte der Properties lassen sich aber auch direkt über die Signatur finden, wie Zeile 8 zeigt.
+Methodenberichte sind vom Typ \texttt{MethodMetricsReport} und lassen sich zum einen über die \texttt{Signature}-Eigenschaft der Methode finden, wie Zeile 2 zeigt. Wenn die zu suchende Methode im Scope ist (also in der Assembly deklariert ist, die den Code ausführt), kann sie wie in Zeile 4 auch über einen \texttt{Expression}-Ausdruck angegeben werden. Microsoft beschreibt dieses Konzept in Verbindung mit den in C$\#$ integrierten Lambda-Ausdrücken in einem eigenen Artikel in der MSDN Library \cite{MSDNExpressions}. Dadurch bleibt die Methodenreferenz, im Gegensatz zur Verwendung von Strings, Ziel von automatisierten Refactorings. Eine dritte Möglichkeit erlaubt das Suchen von Methodenberichten per \texttt{MethodInfo}-Objekt aus dem .NET Framework. Das gleiche gilt auch für Properties. Da der C$\#$-Kompiler den \texttt{get}- und \texttt{set}-Teil eines Properties als Methoden kompiliert, werden diese ebenfalls auf \texttt{MethodMetricsReport}-Objekte abgebildet. Wie in Zeile 6 in Listing \ref{listing:methodpropertysearch} gezeigt, lassen sich Properties auch über einen \texttt{Expression}-Ausdruck suchen. Das resultierende \texttt{PropertyMetricsReport}-Objekt ist einfach eine Zusammenfassung zweier \texttt{MethodMetricsReport}-Objekte, nämlich eins für den \texttt{get}- und eins für den \texttt{set}-Teil des Properties. Diese \texttt{MethodMetricsReport}-Objekte der Properties lassen sich aber auch direkt über die Signatur finden, wie Zeile 7 zeigt.
 
 \subsection{Klassenberichte}
-todo
+Da die Methoden, zu denen \texttt{MetricsReport} die Methodenberichte enthält, in einer Klasse deklariert sind, existiert auch ein Bericht für eben diese Klasse. Die Abbildung von Klasse zu Methode ist im Usus.net Objektmodell als Abbildung von \texttt{TypeMetricsReport}-Objekt zu \texttt{MethodeMetricsReport}-Objekten realisiert. Der Codeausschnitt in Listing \ref{listing:classmethodsearch} zeigt in Zeile 4 wie mithilfe der \texttt{MethodsOfType}-Methode alle Methodenberichte, die zu einem Klassenbericht gehören, ermittelt werden können. Die Variable \texttt{metrics} enthält wieder die Referenz zu dem \texttt{MetricsReport}-Objekt.
+\begin{lstlisting}[caption={Klassen- und Methoden-Suche in einem \texttt{MetricsReport}-Objekt},label={listing:classmethodsearch}]
+typeMetrics = metrics.ForType<Analyzer>();
+typeMetrics = metrics.ForType(typeof(Analyzer));
+typeMetrics = metrics.ForType("andrena.Usus.net.Console.Analyzer");
+foreach (var methodMetrics in metrics.MethodsOfType(typeMetrics)) {...}
+\end{lstlisting}
+Zeile 1 und 2 zeigen wie der Klassenbericht für einen Typ gesucht werden kann, der in der Assembly liegt, die den Code ausführt. Der Klassenname kann damit weiterhin von automatisierten Refactorings erreicht werden. In Zeile 3 wird der Bericht anhand der \texttt{Fullname}-Eigenschaft des Klassenberichts gesucht. Diese Eigenschaft enthält den Namespace, den Klassennamen sowie eventuelle generische Parameter und ist damit eindeutig.
+\paragraph{}
+Die Metriken auf Klassenebene, die im \texttt{TypeMetricsReport} enthalten sind, beinhalten auch die Menge aller direkten Abhängigkeiten. In Unterabschnitt \ref{subsec:ccdcode} wurde beschrieben, dass daraus ein Abhängigkeitsgraph auf Klassenebene erstellt wird. Dieser Klassengraph steht anschließend in einem schreibgeschützten Format im \texttt{MetricsReport}-Objekt zur Verfügung. Der nach außen sichtbare Typ des Graphen ist \texttt{IGraph<TypeMetricsReport>}, also ein \texttt{IGraph<V>} mit Knoten vom Typ \texttt{TypeMetricsReport}. Neben der Liste von Knoten besteht der Graph auch aus einer Liste von Kanten zwischen diesen Knoten. Eine Kante ist vom Typ \texttt{Tuple<TypeMetricsReport, TypeMetricsReport>}. Das erste Element in diesem Tuple stellt die Quelle, das zweite das Ziel der Verbindung dar. Beide Listen sind schreibgeschützt, sodass der Graph nicht ohne weiteres von außen verändert werden kann. Intern verwendet Usus.net den Typ \texttt{MutableGraph<V>}, der das \texttt{IGraph<V>}-Interface implementiert. Dieser Typ ist nicht mehr schreibgeschützt und erlaubt einige weitere Operationen. Beispielsweise lassen sich Kreise ermitteln, Erreichbarkeitsmengen bestimmen und Knoten reduzieren. Der Graph ist Bestandteil des Metrikberichts um eine Abbildung der Beziehungen zwischen den Klassen zu haben.
 
 \subsection{Namespace-Berichte}
-todo
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Neben den Methoden- und Klassenberichte enthält das \texttt{MetricsReport}-Objekt auch Namespace-Berichte vom Typ \texttt{NamespaceMetricsReport}. Diese Objekte enthalten im Vergleich zu den anderen Berichten vom Typ \texttt{TypeMetricsReport} und \texttt{MethodMetricsReport} nur wenige Informationen. Doch auch Namensräume haben einen eindeutigen Namen. Diese \texttt{Name}-Eigenschaft des Berichts wird für die Suche verwendet, wie Listing \ref{listing:namespaceclasssearch} in Zeile 1 zeigt.
+\begin{lstlisting}[caption={Namespace- und Klassen-Suche in einem \texttt{MetricsReport}-Objekt},label={listing:namespaceclasssearch}]
+namespaceMetrics = metrics.ForNamespace("andrena.Usus.net.Console");
+foreach (var typeMetrics in metrics.TypesOfNamespace(namespaceMetrics)) {...}
+\end{lstlisting}
+Da Namespaces mehrere Klassen enthalten lässt sich diese Zuordnung auch unter den Berichten auflösen. Die Schleife in Zeile 2 iteriert über alle Klassenberichte eines Namespace-Berichts, indem die \texttt{TypesOfNamespace}-Methode verwendet wird.
+\paragraph{}
+Neben dem Abhängigkeitsgraphen auf Klassenebene steht auch der Abhängigkeitsgraph auf Namespace-Ebene zur Verfügung. In Unterabschnitt \ref{subsec:namespaceswithcyclicdependencies} wurde beschrieben, wie dieser Graph aus dem Klassengraph erzeugt wird. Der Namespace-Graph besteht aus Kanten zwischen Knoten vom Typ \texttt{IGraph<NamespaceMetricsReport>}. Im Gegensatz zum Graph auf Typ Ebene verwendet Usus.net intern nicht direkt einen Graphen vom Typ \texttt{MutableGraph<NamespaceMetricsReport>} sondern einen Graphen, dessen Knoten vom Typ \texttt{NamespaceMetricsWithTypeMetrics} sind. Dies ist der Fall, da der Namespace-Graph aus dem Graph mit Klassenberichten als Knoten erzeugt wird. Um trotzdem einen schreibgeschützten Graphen vom Typ \texttt{IGraph<NamespaceMetricsReport>} zur Verfügung stellen zu können, ohne das ein neuer Graphen erzeugt werden muss, verwendet Usus.net eine Projektion des Knotentypen. Für diese Projektion wird ein Objekt vom Typ \texttt{GraphSurrogate<V, R>} verwendet, der das Interface \texttt{IGraph<V>} implementiert und einen Objekt vom Typ \texttt{IGraph<R>} kapselt. Die Knoten- und Kantenliste in diesem Typ werden über die Projektion von $R \rightarrow V$ also an den Zieltyp angepasst. Über diesen Adapter ist es möglich einen Graphen mit Knoten vom Typ \texttt{NamespaceMetricsWithTypeMetrics} als Graphen mit Knoten vom Typ \texttt{NamespaceMetricsReport} zu behandeln. Dies ist allerdings nur möglich, wenn es Abbildung von $R$ nach $V$ existiert. Da ein \texttt{NamespaceMetricsWithTypeMetrics}-Objekt den eigentlichen Namespace-Bericht sowie alle Klassenberichte in diesem Namespace enthält, ist die Abbildung einfach zu realisieren.
 
 
 \section{Metrikgewichtung}
-todo
 Statistiken
 Hotspots
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 \section{Testen}
