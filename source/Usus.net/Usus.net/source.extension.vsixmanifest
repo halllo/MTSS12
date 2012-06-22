@@ -16,5 +16,6 @@
   <References />
   <Content>
     <VsPackage>|Usus.net.Cockpit;PkgdefProjectOutputGroup|</VsPackage>
+    <VsPackage>|Usus.net.Hotspots;PkgdefProjectOutputGroup|</VsPackage>
   </Content>
 </Vsix>
