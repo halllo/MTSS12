@@ -318,6 +318,7 @@ Das Wort \emph{usus} kommt aus dem lateinischen und bedeutet "`das, was üblich i
 Das Usus-Plugin für Eclipse lässt sich über den Menü-Eintrag \texttt{Help / Install New Software} installieren, indem eine neue Software Site mit der Url \url{http://projectusus.googlecode.com/svn/updates/} hinzugefügt und anschließend \emph{Project Usus} ausgewählt wird. Nach der Installation steht die \emph{Project Usus perspective} zur Verfügung, die die folgenden Fenster enthält.
 
 \subsection{Usus Cockpit}
+\label{subsec:ususcockpit}
 In diesem Fenster werden die Usus Metriken angezeigt, die für alle Projekte, die Usus betrachtet, gelten. Zusätzlich wird der Trend pro Metrik dargestellt, also ob sich die Ausprägung der Metrik verbessert oder verschlechtert hat. Die Verbesserung wird dabei zwischen zwei erstellten Snapshots gemessen, die entweder manuell oder durch einen neuen Speichervorgang ausgelöst werden können.
 \begin{figure}[h]
 	\centering
@@ -461,8 +462,10 @@ ccd(c)&=&\text{CCD-Wert der Klasse } c\\
 Formel \ref{eq:cumulativecomponentdependencyofclass} zeigt die Berechnungsvorschrift unter Verwendung des DFS-Algorithmus. Die Berechnung des CCD-Werts einer Klasse kann also durchgeführt werden, sobald ein Abhängigkeitsgraph erzeugt werden kann. Um einen solchen Graphen zu erzeugen müssen die direkten Abhängigkeiten einer Klasse ermittelt werden können. Jede Klasse wird dann einem Knoten zugeordnet und jede Abhängigkeit einer gerichteten Kante. Eine grafische Darstellung (siehe Unterabschnitt \ref{subsec:ususgraphs}) ist dann ebenfalls möglich. Die direkten Abhängigkeiten einer Klasse können bestimmt werden, wenn die Typen aller Felder, Methodenparameter, Oberklasse und Interfaces sowie sämtlicher Methodenaufrufe entfernter Klassen identifiziert werden können. Abhängigkeiten zu Klassen, wie beispielsweise \texttt{String} oder \texttt{Object}, die im Basis-Framework definiert sind, können ignoriert werden.
 
 \subsection{Projektübergreifend}
+\label{subsec:allprojectsmetrics}
 Neben den Metriken, die Usus für Methoden und Klassen berechnet, werden im Usus Cockpit Statistiken zu der Codebasis angezeigt. Dafür werden die ermittelten Metriken bewertet, wie es Marc Philipp und Nicole Rauch in ihrem Artikel \cite{EclipseMagUsus} beschreiben. In diesem Unterabschnitt werden die verscheiden Statistiken vorgestellt und auf ihre Bewertung eingegangen. Weiterhin werden die Schwellwerte der Statistiken definiert, anhand derer eine Klasse, Methode oder Paket als Hotspot (siehe Unter-Unterabschnitt \ref{subsec:usushotspots}) eingestuft wird.
 \subsubsection{Durchschnittliche kumulierte Komponentenabhängigkeit}
+\label{subsubsec:acd}
 Die Metrik \textit{Durchschnittliche kumulierte Komponentenabhängigkeit} (engl. Average Component Dependency) ACD ist laut Peter Grogono \cite{SoftwareQControl} wie \emph{Kumulierte Komponentenabhängigkeit} (siehe Unter-Unterabschnitt \ref{subsubsec:ccd}) eine Metrik, die für Systeme und Untersysteme ermittelt wird. Dabei wird der Mittelwert des CCD-Werts des Systems wie in Formel \ref{eq:averagecomponentdependency1} berechnet, wobei $n$ die Anzahl der Klassen im System ist.
 \begin{equation}
 	acd = \frac{ccd}{n}
@@ -1071,10 +1074,42 @@ Neben dem Abhängigkeitsgraphen auf Klassenebene steht auch der Abhängigkeitsgrap
 
 
 \section{Metrikgewichtung}
-Statistiken
-Hotspots
+Nachdem in den vorherigen beiden Abschnitten beschrieben wurde, wie die Berechnung der Metriken funktioniert und in welcher Struktur das Ergebnis präsentiert wird, beschäftigt sich dieser Abschnitt mit der Weiterverarbeitung dieser Ergebnisse. Usus verwendet die Metriken beispielsweise für die in Unterabschnitt \ref{subsec:ususcockpit} vorgestellte Cockpit-Ansicht und in der in Unterabschnitt \ref{subsec:usushotspots} betrachteten Hotspots-Ansicht. Für diese beiden Ansichten werden die ermittelten Metriken gewichtet, mit Schwellwerten verglichen und Mittelwerte gebildet. Wie dies geschieht, wurde in Unterabschnitt \ref{subsec:allprojectsmetrics} ausführlich beschrieben.
+\subsection{Hotspots}
+Hotspots sind Methoden, Klassen und Namespaces dessen Metriken über einer Schwelle liegen. Usus.net kann diese Hotspots in Form eines \texttt{MetricsHotspots}-Objekts aus einem \texttt{MetricsReport}-Objekt bestimmen. Listing \ref{listing:hotspots} zeigt dies in Zeile 1. Die Variable \texttt{metrics} enthält wieder eine Referenz zu einem \texttt{MetricsReport}-Objekt. Anschließend können alle Berichte der Methoden, Klassen und Namespaces ermittelt werden, dessen Metriken über den Schwellen liegen, die in Unterabschnitt \ref{subsec:allprojectsmetrics} erwähnt wurden.
+\begin{lstlisting}[caption={Methoden-, Klassen- und Namespace-Hotspots in einem \texttt{MetricsReport}-Objekt},label={listing:hotspots}]
+MetricsHotspots hotspots = metrics.Hotspots();
+methodHotspots = hotspots.OfMethodLength();
+classHotspots = hotspots.OfClassSize();
+classHotspots = hotspots.OfCumulativeComponentDependency();
+classHotspots = hotspots.OfNumberOfNonStaticPublicFields();
+namespaceHotspots = hotspots.OfNamespacesInCycle();
+\end{lstlisting}
+Wenn wie beispielsweise in Zeile 2 alle \texttt{MethodMetricsReport}-Objekte bestimmt werden, dessen \texttt{MethodLength}-Eigenschaft über der definierten Schwelle liegt, iteriert Usus.net über alle Methoden im \texttt{MetricsReport}-Objekt. Dabei werden nur Berichte zurückgegeben, dessen Methodenlänge über dem Ergebnis der Schwellwertfunktion für Methodenlängen liegen. Die Schwellwerte der Metriken müssen nicht konstant sein. Der Schwellwert kann sich auch abhängig von der Projektgröße ändern, wie es beispielweise bei der durchschnittlichen kumulierten Komponentenabhängigkeit ACD der Fall ist (siehe Unter-Unterabschnitt \ref{subsubsec:acd}). Daher verwendet Usus.net das Konzept einer Schwellwertfunktion. Alle Schwellwertfunktionen können bei Bedarf auch zur Laufzeit geändert werden. Dafür lässt sich das \texttt{RatingFunctionLimits}-Objekt, welches die Funktionen definiert, über die statische Eigenschaft \texttt{RatingFunctions.Limits} erreichen. Listing \ref{listing:limitfunctions} zeigt die Deklaration und Definition der Schwellwertfunktionen für Methodenlänge und kumulierte Komponentenabhängigkeit mit Lambda-Ausdrücken.
+\begin{lstlisting}[caption={Schwellwertfunktionen sind abhängig von Daten eines \texttt{MetricsReport}-Objekts},label={listing:limitfunctions}]
+//Deklarationen
+Func<CommonReportKnowledge, int> MethodLength { get; set; }
+Func<CommonReportKnowledge, int> CumulativeComponentDependency { get; set; }
+...
+//Definitionen
+MethodLength = cn => 9;
+CumulativeComponentDependency = cn => cn.NumberOfClasses * 
+	(1.5 / Math.Pow(2, (Math.Log(cn.NumberOfClasses) / Math.Log(5))));
+...
+\end{lstlisting}
+Die Formel der Schwellwertfunktion \texttt{CumulativeComponentDependency} entspricht der in bereits beschriebenen Formel \ref{eq:averagecomponentdependency4}. Alle Schwellwertfunktionen sind Abbildungen von einem Objekt vom Typ \texttt{CommonReportKnowledge} auf eine Ganzzahl. \texttt{CommonReportKnowledge} ist Teil des Objektmodells des vollständigen Metrikberichts und wurde bereits in Abbildung \ref{fig:metricsreport} gezeigt. Dieses Objekt enthält einige allgemeine Daten der Metrik-Analyse wie beispielsweise die Anzahl der analysierten Klassen und Namespaces.
 
-
+\subsection{Statistiken}
+Listing \ref{listing:statistics} zeigt, das die Statistiken über alle Methoden-, Klassen- und Namespace-Berichte mithilfe der \texttt{Rate}-Methode bestimmt werden können. Die Variable \texttt{metrics} enthält wieder eine Referenz eines \texttt{MetricsReport}-Objekts.
+\begin{lstlisting}[caption={Statistiken aller Berichte in einem \texttt{MetricsReport}-Objekt},label={listing:statistics}]
+RatedMetrics statistics = metrics.Rate();
+acd = statistics.AverageComponentDependency;
+acs = statistics.AverageRatedClassSize;
+acc = statistics.AverageRatedCyclomaticComplexity;
+aml = statistics.AverageRatedMethodLength;
+anf = statistics.AverageRatedNumberOfNonStaticPublicFields;
+ncn = statistics.NamespacesWithCyclicDependencies;
+\end{lstlisting}
 
 
 
