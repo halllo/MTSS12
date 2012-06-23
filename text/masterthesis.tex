@@ -1074,7 +1074,7 @@ Neben dem Abhängigkeitsgraphen auf Klassenebene steht auch der Abhängigkeitsgrap
 
 
 \section{Metrikgewichtung}
-Nachdem in den vorherigen beiden Abschnitten beschrieben wurde, wie die Berechnung der Metriken funktioniert und in welcher Struktur das Ergebnis präsentiert wird, beschäftigt sich dieser Abschnitt mit der Weiterverarbeitung dieser Ergebnisse. Usus verwendet die Metriken beispielsweise für die in Unterabschnitt \ref{subsec:ususcockpit} vorgestellte Cockpit-Ansicht und in der in Unterabschnitt \ref{subsec:usushotspots} betrachteten Hotspots-Ansicht. Für diese beiden Ansichten werden die ermittelten Metriken gewichtet, mit Schwellwerten verglichen und Mittelwerte gebildet. Wie dies geschieht, wurde in Unterabschnitt \ref{subsec:allprojectsmetrics} ausführlich beschrieben.
+Nachdem in den vorherigen beiden Abschnitten beschrieben wurde, wie die Berechnung der Metriken funktioniert und in welcher Struktur das Ergebnis präsentiert wird, beschäftigt sich dieser Abschnitt mit der Weiterverarbeitung dieser Ergebnisse. Usus verwendet die Metriken beispielsweise für die in Unterabschnitt \ref{subsec:ususcockpit} vorgestellte Cockpit-Ansicht und in der in Unterabschnitt \ref{subsec:usushotspots} betrachteten Hotspots-Ansicht. Für diese beiden Ansichten werden die ermittelten Metriken gewichtet, mit Schwellwerten verglichen und Mittelwerte gebildet. Wie dies geschieht, wurde bereits in Unterabschnitt \ref{subsec:allprojectsmetrics} ausführlich beschrieben.
 \subsection{Hotspots}
 Hotspots sind Methoden, Klassen und Namespaces dessen Metriken über einer Schwelle liegen. Usus.net kann diese Hotspots in Form eines \texttt{MetricsHotspots}-Objekts aus einem \texttt{MetricsReport}-Objekt bestimmen. Listing \ref{listing:hotspots} zeigt dies in Zeile 1. Die Variable \texttt{metrics} enthält wieder eine Referenz zu einem \texttt{MetricsReport}-Objekt. Anschließend können alle Berichte der Methoden, Klassen und Namespaces ermittelt werden, dessen Metriken über den Schwellen liegen, die in Unterabschnitt \ref{subsec:allprojectsmetrics} erwähnt wurden.
 \begin{lstlisting}[caption={Methoden-, Klassen- und Namespace-Hotspots in einem \texttt{MetricsReport}-Objekt},label={listing:hotspots}]
@@ -1092,15 +1092,15 @@ Func<CommonReportKnowledge, int> MethodLength { get; set; }
 Func<CommonReportKnowledge, int> CumulativeComponentDependency { get; set; }
 ...
 //Definitionen
-MethodLength = cn => 9;
-CumulativeComponentDependency = cn => cn.NumberOfClasses * 
-	(1.5 / Math.Pow(2, (Math.Log(cn.NumberOfClasses) / Math.Log(5))));
+MethodLength = ck => 9;
+CumulativeComponentDependency = ck => ck.NumberOfClasses * 
+	(1.5 / Math.Pow(2, (Math.Log(ck.NumberOfClasses) / Math.Log(5))));
 ...
 \end{lstlisting}
-Die Formel der Schwellwertfunktion \texttt{CumulativeComponentDependency} entspricht der in bereits beschriebenen Formel \ref{eq:averagecomponentdependency4}. Alle Schwellwertfunktionen sind Abbildungen von einem Objekt vom Typ \texttt{CommonReportKnowledge} auf eine Ganzzahl. \texttt{CommonReportKnowledge} ist Teil des Objektmodells des vollständigen Metrikberichts und wurde bereits in Abbildung \ref{fig:metricsreport} gezeigt. Dieses Objekt enthält einige allgemeine Daten der Metrik-Analyse wie beispielsweise die Anzahl der analysierten Klassen und Namespaces.
+Die Formel der Schwellwertfunktion \texttt{CumulativeComponentDependency} entspricht der bereits beschriebenen Formel \ref{eq:averagecomponentdependency4}. Alle Schwellwertfunktionen sind Abbildungen von einem Objekt vom Typ \texttt{CommonReportKnowledge} auf eine Ganzzahl. \texttt{CommonReportKnowledge} ist Teil des Objektmodells des vollständigen Metrikberichts und wurde bereits in Abbildung \ref{fig:metricsreport} gezeigt. Dieses Objekt enthält einige allgemeine Daten der Metrik-Analyse wie beispielsweise die Anzahl der analysierten Klassen und Namespaces.
 
 \subsection{Statistiken}
-Listing \ref{listing:statistics} zeigt, das die Statistiken über alle Methoden-, Klassen- und Namespace-Berichte mithilfe der \texttt{Rate}-Methode bestimmt werden können. Die Variable \texttt{metrics} enthält wieder eine Referenz eines \texttt{MetricsReport}-Objekts.
+Die Unterscheidung zwischen Metrik und Statistik der Metrik wurde bereits in Unterabschnitt \ref{subsec:staticcodeanalysis} definiert. Die Theorie, also wie diese Statistiken in Usus entstehen und berechnet werden können, wurde in Unterabschnitt \ref{subsec:allprojectsmetrics} vorgestellt. In Usus.net lassen sich die gleichen Werte über ein \texttt{RatedMetrics}-Objekt bestimmen, welches wie in Listing \ref{listing:statistics} in Zeile 1 gezeigt, über die \texttt{Rate}-Methode erzeugt werden kann. Die Variable \texttt{metrics} enthält wieder eine Referenz eines \texttt{MetricsReport}-Objekts.
 \begin{lstlisting}[caption={Statistiken aller Berichte in einem \texttt{MetricsReport}-Objekt},label={listing:statistics}]
 RatedMetrics statistics = metrics.Rate();
 acd = statistics.AverageComponentDependency;
@@ -1110,30 +1110,43 @@ aml = statistics.AverageRatedMethodLength;
 anf = statistics.AverageRatedNumberOfNonStaticPublicFields;
 ncn = statistics.NamespacesWithCyclicDependencies;
 \end{lstlisting}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Diese Statistiken entstehen durch eine Gewichtung der Methoden-, Klassen und Namespace-Berichte, die anschließend gezählt oder gemittelt werden. Die Berichte können auch unabhängig von einander gewichtet werden. Die \texttt{Rate}-Methode existiert für die einzelnen Berichte ebenfalls und erzeugt Objekte vom Typ \texttt{RatedMethodMetrics} für Methoden, \texttt{RatedTypeMetrics} für Klassen und \texttt{RatedNamespaceMetrics} für Namespaces. Tatsächlich ruft Usus.net diese Methode für jeden Bericht auf und speichert die dadurch erzeugten Objekte in einem \texttt{RatedMetrics}-Objekt. Dort können dann die Mittelwerte der einzelnen gewichteten Metriken als projektübergreifende Statistiken bestimmt werden. Sämtliche Gewichtungsfunktionen implementieren die Formeln aus Unterabschnitt \ref{subsec:allprojectsmetrics} und sind in der Klasse \texttt{RatingFunctions} definiert. Listing \ref{listing:statisticscalc} zeigt die Berechnung der der durchschnittlichen Methodenlänge in Zeile 1, der durchschnittlichen kumulierten Komponentenabhängigkeit in den Zeilen 2 bis 4 sowie der Anzahl der Namespaces mit zyklischen Abhängigkeiten in den Zeilen 5 bis 7.
+\begin{lstlisting}[caption={Statistik-Berechnung in einem \texttt{RatedMetrics}-Objekt},label={listing:statisticscalc}]
+AverageRatedMethodLength = RatedMethods.AverageAny(m => m.RatedMethodLength);
+AverageComponentDependency = 
+	RatedTypes.AverageAny(m => m.CumulativeComponentDependency) 
+	/ metrics.CommonKnowledge.NumberOfClasses;
+NamespacesWithCyclicDependencies = 
+	RatedNamespaces.CountAny(m => m.IsInCycle) 
+	/ metrics.CommonKnowledge.NumberOfNamespaces;
+...
+\end{lstlisting}
+Obwohl die Berechnungen einfach lesbar sind, ist der Aufwand zur Bestimmung jeder Statistik $O(n)$. Für jede Statistik müssen alle Berichte des entsprechenden Typen berücksichtigt werden.
 
 \section{Testen}
+Verification Framework
+Attribute
 todo
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
