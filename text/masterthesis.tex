@@ -1124,35 +1124,38 @@ NamespacesWithCyclicDependencies =
 Obwohl die Berechnungen einfach lesbar sind, ist der Aufwand zur Bestimmung jeder Statistik $O(n)$. Für jede Statistik müssen alle Berichte des entsprechenden Typen berücksichtigt werden.
 
 \section{Testen}
-Verification Framework
-Attribute
-todo
+Nachdem in den vergagenen Abschnitten die Metrik-Analyse, das Objektmodell sowie die Statistiken von Usus.net erläutert wurden, beschäftigt sich dieser Abschnitt mit einer Möglichkeit Metriken mit Quellcode zu verbinden. !Usus.net.Core! stellt dafür eine Infrastruktur zur Verfügung, die in dieser Master-Thesis als !Verification Framework! bezeichnet wird. Das Verification Framework besteht aus einer Menge an Attributen, mit denen Methoden und Klassen dekoriert werden können. Diese Attribute beschreiben Erwartungen in Form von Metriken an die betroffene Methode oder Klasse.
 
+//Beispiel mit Methode und Attribute
+//Beispiel mit Klasse und Attribute
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Diese Erwartungen können mithilfe der Methoden der Klasse !Verify! überprüft werden. Dazu ist ein !MetricReport!-Objekt erforderlich, welches auf einfache Weise mit !Analyse.Me()! ermittelt werden kann. !Verify! ermittelt dann alle Methoden und Klassen in der aktuellen Assembly, die mit einem solchen Attribut dekoriert sind und sucht anhand der Signatur oder des Klassennamen den entsprechenden Bericht. Anschließend werden die Erwartungswerte, die über die Konstruktoren der Attribute angegeben werden, mit den tatsächlichen Metriken verglichen. Im Falle einer Abweichung wird eine !VerificationException! geworfen. Auf diese Weise können Metrik-Vorraussetzungen erzwungen werden. Dadurch kann erreicht werden, dass eine Methode oder Klasse Bedingungn an die eigene Implementierung stellt, die in Form einer Vorbedinungn auf Metrik-Basis formuliert werden können. Eine unabsichtliche Verletzung dieser Bedingungen wird dann sofort offensichtlich. Außerdem sind die erwarteten Metriken bereits im Quellcode sichtbar.
+\paragraph{}
+Usus.net nutzt das Verification Framework um die eigene Metrikberechnung und das Objektmodell zu testen. So bestehen die Integrationstests von !Usus.net.Core! aus beispielhaften Klassen, dessen tatsächliche Metriken künstlich erzeugt und mit den erwarteten Werten der Attribute verglichen werden. Snd die Werte nicht kongruent schlagen die Testfälle fehl, die die !Verify!-Klasse verwenden und ein eventueller Fehler in der Metrikberechnung wurde gefunden. Entsprechen die tatsächlichen Metriken den Werten in den Attributen, laufen die Tests erfolgreich durch und bestätigen so die Berechnungen der Metriken. Die erwähnten Integrationstests befinden sich im Projekt !Usus.net.Core.IntegrationTests!. Ein weiterer Anwendungsfall ist ein Konzept, das in dieser Master-Thesis als !Metrics Meta Testing! bezeichnet wird. Damit sind Testfälle gemeint, die die Metriken von Testfällen testen. Zum Beispiel schreibt Roy Osherove in seinem Buch !bla bla bla!, dass Testmethoden keine Logik enthalten sollen. Eine solche Anforderung an Tests kann einfach mit einem !ExpectCyclomaticComplexity(1)!-Attribut an allen Tests sichergestellt werden. Eine spezielle Testmethode erzeugt das !MetricsReport!-Objekt des Testprojekts mit !Analyze.Me()! und ruft die entsprechende Methoden auf der !Verify!-Klasse auf. Dieser spezielle Testfall testet also, ob alle Testmethoden mit dem Attribut auch wirklich keine Logik enthalten. Ein anderes Beispiel wäre die Sicherstellung, dass kein Testfall von einem bestimmten Objekt der Implementierung abhängig ist. Dafür kann die Testklasse um das Attribut !ExpectNoDirectDependencie("...")! mit dem vollständingen Klassennamen erweitert werden. Eine spezielle Testmethode würde wieder die entsprechende Methode der !Verify!-Klasse aufrufen und damit fehlschlagen, sobald eine Methode in der Klasse von dem Typ in dem Attribut abhängig ist. Das Verification Framework dient also dazu die Metriken, die eigentlich implizit im Code existieren, offen zu legen und einen Fehler zu erzeugen wenn die Implementierung nicht mit den erwarteten Metriken übereinstimmt. Der Entwickler bekommt so die Gelegenheit über ein eventuell fehlerhaftes Verhalten der Implementierung zu reflektieren und ein ansonsten verstecktes Problem schnell zu beheben.
 
 
 
 
 \chapter{Usus.net als Visual Studio Erweiterung}
 todo
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
