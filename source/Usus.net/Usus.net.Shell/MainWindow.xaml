@@ -6,10 +6,10 @@
         Title="MainWindow" Height="350" Width="525">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="30"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Grid Background="Green">
+        <Grid>
             <Button Content="Analyze" HorizontalAlignment="Right" Click="Button_Click" />
         </Grid>
         <Grid Grid.Row="1">
@@ -22,8 +22,23 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <view:Cockpit x:Name="Cockpit" Grid.Row="0" Grid.Column="0"/>
-            <view:Hotspots x:Name="Hotspots" Grid.Row="0" Grid.Column="1"/>
+            <Grid Grid.Row="0" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="15"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Cockpit"/>
+                <view:Cockpit x:Name="Cockpit" Grid.Row="1"/>
+            </Grid>
+
+            <Grid Grid.Row="0" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="15"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Hotspots"/>
+                <view:Hotspots x:Name="Hotspots" Grid.Row="1"/>
+            </Grid>
         </Grid>
     </Grid>
 </Window>

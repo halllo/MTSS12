@@ -8,10 +8,10 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="15"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock Text=" Overall Metrics" Background="DarkGreen" Foreground="White" FontSize="20"/>
+        <TextBlock Background="{Binding StatusColor}" Foreground="White"/>
         <DataGrid Grid.Row="1" IsReadOnly="True" CanUserSortColumns="False"
                   HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray"
                   ItemsSource="{Binding Entries}"/>

@@ -1,5 +1,6 @@
 ﻿using System;
 using andrena.Usus.net.Core.Reports;
+using System.Threading;
 
 namespace andrena.Usus.net.View.Hub
 {
@@ -16,6 +17,7 @@ namespace andrena.Usus.net.View.Hub
         }
 
         public event Action<MetricsReport> MetricsReady;
+        public event Action AnalysisStarted;
 
         private ViewHub()
         {
@@ -24,7 +26,12 @@ namespace andrena.Usus.net.View.Hub
 
         public void StartAnalysis(string path)
         {
-            MetricsReady(Core.Analyze.PortableExecutable(path));
+            AnalysisStarted();
+            ThreadPool.QueueUserWorkItem((c) =>
+            {
+                MetricsReport metrics = Core.Analyze.PortableExecutable(path);
+                MetricsReady(metrics);
+            });
         }
     }
 }

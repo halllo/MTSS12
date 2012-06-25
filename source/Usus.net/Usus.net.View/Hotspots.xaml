@@ -8,12 +8,43 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="15"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock Text=" Problematic Units" Background="DarkRed" Foreground="White" FontSize="20"/>
-        <DataGrid Grid.Row="1" IsReadOnly="True" CanUserSortColumns="False"
+        <TextBlock Background="{Binding StatusColor}" Foreground="White"/>
+
+        <TabControl Grid.Row="1" TabStripPlacement="Bottom">
+            <TabItem Header="Class Sizes">
+                <DataGrid IsReadOnly="True" CanUserSortColumns="False"
                   HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray"
-                  ItemsSource="{Binding Entries}"/>
+                  ItemsSource="{Binding ClassSizes}"/>
+            </TabItem>
+            <TabItem Header="CCD">
+                <DataGrid IsReadOnly="True" CanUserSortColumns="False"
+                  HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray"
+                  ItemsSource="{Binding CumulativeComponentDependencies}"/>
+            </TabItem>
+            <TabItem Header="Cyclomatic Complexities">
+                <DataGrid IsReadOnly="True" CanUserSortColumns="False"
+                  HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray"
+                  ItemsSource="{Binding CyclomaticComplexities}"/>
+            </TabItem>
+            <TabItem Header="Method Lengths">
+                <DataGrid IsReadOnly="True" CanUserSortColumns="False"
+                  HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray"
+                  ItemsSource="{Binding MethodLengths}"/>
+            </TabItem>
+            <TabItem Header="Cyclic Namespaces">
+                <DataGrid IsReadOnly="True" CanUserSortColumns="False"
+                  HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray"
+                  ItemsSource="{Binding NamespacesInCycle}"/>
+            </TabItem>
+            <TabItem Header="Public Fields">
+                <DataGrid IsReadOnly="True" CanUserSortColumns="False"
+                  HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray"
+                  ItemsSource="{Binding NonStaticPublicFields}"/>
+            </TabItem>
+        </TabControl>
+        
     </Grid>
 </hub:HubAwareControl>

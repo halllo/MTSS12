@@ -7,7 +7,7 @@ namespace andrena.Usus.net.View
         public Hotspots()
         {
             InitializeComponent();
-            DataContext = HubViewModel = new ViewModels.Hotspots();
+            DataContext = HubViewModel = new ViewModels.Hotspots { Dispatchable = this };
         }
     }
 }

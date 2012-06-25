@@ -1,11 +1,11 @@
 ﻿using System.Collections.ObjectModel;
 using andrena.Usus.net.Core.Helper;
 using andrena.Usus.net.Core.Hotspots;
-using andrena.Usus.net.View.Hub;
+using andrena.Usus.net.Core.Reports;
 
 namespace andrena.Usus.net.View.ViewModels
 {
-    public class Cockpit : IHubConnect
+    public class Cockpit : AnalysisAwareViewModel
     {
         public ObservableCollection<CockpitEntry> Entries { get; private set; }
 
@@ -14,14 +14,19 @@ namespace andrena.Usus.net.View.ViewModels
             Entries = new ObservableCollection<CockpitEntry>();
         }
 
-        public void RegisterHub(ViewHub hub)
+        protected override void AnalysisStarted()
         {
-            hub.MetricsReady += m => SetNewEntries(m.Rate());
+            Entries.Clear();
+        }
+
+        protected override void AnalysisFinished(MetricsReport metrics)
+        {
+            var ratedMetrics = metrics.Rate();
+            Dispatch(() => SetNewEntries(ratedMetrics));
         }
 
         private void SetNewEntries(RatedMetrics ratedMetrics)
         {
-            Entries.Clear();
             Entries.Add(new CockpitEntry { Metric = "Average Component Dependency", Average = ratedMetrics.AverageComponentDependency.Percent() });
             Entries.Add(new CockpitEntry { Metric = "Class Size", Average = ratedMetrics.AverageRatedClassSize.Percent() });
             Entries.Add(new CockpitEntry { Metric = "Cyclomatic Complexity", Average = ratedMetrics.AverageRatedCyclomaticComplexity.Percent() });

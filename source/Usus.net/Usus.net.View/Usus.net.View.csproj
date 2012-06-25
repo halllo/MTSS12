@@ -61,10 +61,17 @@
     <Compile Include="Hub\HubAwareControl.cs" />
     <Compile Include="Hub\IHubConnect.cs" />
     <Compile Include="Hub\ViewHub.cs" />
+    <Compile Include="ViewModels\AnalysisAwareViewModel.cs" />
     <Compile Include="ViewModels\Cockpit.cs" />
     <Compile Include="ViewModels\CockpitEntry.cs" />
-    <Compile Include="ViewModels\HotspotEntry.cs" />
+    <Compile Include="ViewModels\HotspotClassSize.cs" />
+    <Compile Include="ViewModels\HotspotCumulativeComponentDependency.cs" />
+    <Compile Include="ViewModels\HotspotCyclomaticComplexity.cs" />
+    <Compile Include="ViewModels\HotspotMethodLength.cs" />
+    <Compile Include="ViewModels\HotspotNamespaceInCycle.cs" />
+    <Compile Include="ViewModels\HotspotNonStaticPublicFields.cs" />
     <Compile Include="ViewModels\Hotspots.cs" />
+    <Compile Include="ViewModels\ViewModel.cs" />
     <Page Include="Cockpit.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

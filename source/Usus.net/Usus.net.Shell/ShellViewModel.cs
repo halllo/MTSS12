@@ -1,4 +1,5 @@
-﻿using andrena.Usus.net.View.Hub;
+﻿using System.Windows;
+using andrena.Usus.net.View.Hub;
 using Microsoft.Win32;
 
 namespace andrena.Usus.net.Shell
@@ -12,11 +13,16 @@ namespace andrena.Usus.net.Shell
             Hub = ViewHub.Instance;
         }
 
-        public void AnalyzeClicked(System.Windows.Window owner)
+        public void AnalyzeClicked(Window owner)
         {
-            var openFile = new OpenFileDialog();
-            if (openFile.ShowDialog(owner) ?? false)
-                ViewHub.Instance.StartAnalysis(openFile.FileName);
+            var openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog(owner) ?? false)
+                StartAnalysis(openFileDialog.FileName);
+        }
+
+        private void StartAnalysis(string openFile)
+        {
+            ViewHub.Instance.StartAnalysis(openFile);
         }
     }
 }
