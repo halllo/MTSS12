@@ -50,6 +50,10 @@
       <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup%3bBuiltProjectOutputGroupDependencies%3bGetCopyToOutputDirectoryItems%3bPkgdefProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
       <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly>
     </ProjectReference>
+    <ProjectReference Include="..\Usus.net.ExtensionHelper\Usus.net.ExtensionHelper.csproj">
+      <Project>{A7B2DE89-865F-44CD-B6B3-4F60C8602225}</Project>
+      <Name>Usus.net.ExtensionHelper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Usus.net.Hotspots\Usus.net.Hotspots.csproj">
       <Project>{6E8A1B85-1210-46FF-B8EC-F1242F739452}</Project>
       <Name>Usus.net.Hotspots</Name>

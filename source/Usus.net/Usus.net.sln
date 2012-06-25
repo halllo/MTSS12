@@ -26,6 +26,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Usus.net.Shell", "Usus.net.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Usus.net.Hotspots", "Usus.net.Hotspots\Usus.net.Hotspots.csproj", "{6E8A1B85-1210-46FF-B8EC-F1242F739452}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Usus.net.ExtensionHelper", "Usus.net.ExtensionHelper\Usus.net.ExtensionHelper.csproj", "{A7B2DE89-865F-44CD-B6B3-4F60C8602225}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Usus.net.vsmdi
@@ -129,6 +131,16 @@ Global
 		{6E8A1B85-1210-46FF-B8EC-F1242F739452}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{6E8A1B85-1210-46FF-B8EC-F1242F739452}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{6E8A1B85-1210-46FF-B8EC-F1242F739452}.Release|x86.ActiveCfg = Release|Any CPU
+		{A7B2DE89-865F-44CD-B6B3-4F60C8602225}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7B2DE89-865F-44CD-B6B3-4F60C8602225}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7B2DE89-865F-44CD-B6B3-4F60C8602225}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{A7B2DE89-865F-44CD-B6B3-4F60C8602225}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{A7B2DE89-865F-44CD-B6B3-4F60C8602225}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A7B2DE89-865F-44CD-B6B3-4F60C8602225}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7B2DE89-865F-44CD-B6B3-4F60C8602225}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7B2DE89-865F-44CD-B6B3-4F60C8602225}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{A7B2DE89-865F-44CD-B6B3-4F60C8602225}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{A7B2DE89-865F-44CD-B6B3-4F60C8602225}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

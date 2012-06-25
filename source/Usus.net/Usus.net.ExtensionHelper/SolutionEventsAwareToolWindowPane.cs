@@ -1,13 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.VisualStudio.Shell;
-using Microsoft.VisualStudio.Shell.Interop;
+using System;
 
-namespace andrena.Usus_net_Cockpit
+namespace andrena.Usus.net.ExtensionHelper
 {
-    public class SolutionAwareToolWindowPane : ToolWindowPane
+    public class SolutionEventsAwareToolWindowPane : SolutionAwareToolWindowPane
     {
-        public SolutionAwareToolWindowPane(IServiceProvider isp)
+        public event Action SolutionChanged;
+        public event Action SavingDone;
+        public event Action CommandDone;
+        public event Action BuildStart;
+        public event Action<bool> BuildDone;
+
+        private EnvDTE.BuildEvents buildEvents;
+        private EnvDTE.CommandEvents commandEvents;
+        private EnvDTE.DocumentEvents documentEvents;
+        private EnvDTE.SolutionEvents solutionEvents;
+
+        public SolutionEventsAwareToolWindowPane(IServiceProvider isp)
             : base(isp)
         {
             PreInitializeEvents();
@@ -19,39 +27,6 @@ namespace andrena.Usus_net_Cockpit
             SubscripeToEvents();
         }
 
-        private EnvDTE80.DTE2 GetDTE2()
-        {
-            return base.GetService(typeof(SDTE)) as EnvDTE80.DTE2;
-        }
-
-        #region Solution & Projects
-        protected EnvDTE.Solution Solution
-        {
-            get
-            {
-                return GetDTE2().Solution;
-            }
-        }
-
-        protected IEnumerable<EnvDTE.Project> Projects
-        {
-            get
-            {
-                foreach (var project in Solution.Projects)
-                {
-                    yield return project as EnvDTE.Project;
-                }
-            }
-        }
-        #endregion
-
-        #region Events
-        public event Action SolutionChanged;
-        public event Action SavingDone;
-        public event Action CommandDone;
-        public event Action BuildStart;
-        public event Action<bool> BuildDone;
-
         private void PreInitializeEvents()
         {
             SolutionChanged += () => { };
@@ -60,11 +35,6 @@ namespace andrena.Usus_net_Cockpit
             BuildDone += (s) => { };
             BuildStart += () => { };
         }
-
-        private EnvDTE.BuildEvents buildEvents;
-        private EnvDTE.CommandEvents commandEvents;
-        private EnvDTE.DocumentEvents documentEvents;
-        private EnvDTE.SolutionEvents solutionEvents;
 
         private void SubscripeToEvents()
         {
@@ -128,13 +98,12 @@ namespace andrena.Usus_net_Cockpit
 
         void BuildEvents_OnBuildDone(EnvDTE.vsBuildScope Scope, EnvDTE.vsBuildAction Action)
         {
-            BuildDone(Solution.SolutionBuild.LastBuildInfo == 0);
+            BuildDone(RawSolution.SolutionBuild.LastBuildInfo == 0);
         }
 
         void BuildEvents_OnBuildBegin(EnvDTE.vsBuildScope Scope, EnvDTE.vsBuildAction Action)
         {
             BuildStart();
         }
-        #endregion
     }
 }

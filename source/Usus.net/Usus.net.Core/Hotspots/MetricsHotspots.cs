@@ -24,17 +24,17 @@ namespace andrena.Usus.net.Core.Hotspots
 
         public IEnumerable<TypeMetricsReport> OfClassSize()
         {
-            return Metrics.TypesOverLimit(m => m.ClassSize, l => l.ClassSize);
+            return Metrics.TypesOverLimit(m => m.ClassSize, l => l.ClassSize, t => !t.CompilerGenerated);
         }
 
         public IEnumerable<TypeMetricsReport> OfNumberOfNonStaticPublicFields()
         {
-            return Metrics.TypesOverLimit(m => m.NumberOfNonStaticPublicFields, l => l.NumberOfNonStaticPublicFields);
+            return Metrics.TypesOverLimit(m => m.NumberOfNonStaticPublicFields, l => l.NumberOfNonStaticPublicFields, t => !t.CompilerGenerated);
         }
 
         public IEnumerable<TypeMetricsReport> OfCumulativeComponentDependency()
         {
-            return Metrics.TypesOverLimit(m => m.CumulativeComponentDependency, l => l.CumulativeComponentDependency);
+            return Metrics.TypesOverLimit(m => m.CumulativeComponentDependency, l => l.CumulativeComponentDependency, t => !t.CompilerGenerated);
         }
 
         public IEnumerable<NamespaceMetricsReport> OfNamespacesInCycle()

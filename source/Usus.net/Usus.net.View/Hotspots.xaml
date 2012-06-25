@@ -15,36 +15,78 @@
 
         <TabControl Grid.Row="1" TabStripPlacement="Bottom">
             <TabItem Header="Class Sizes">
-                <DataGrid IsReadOnly="True" CanUserSortColumns="False"
-                  HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray"
-                  ItemsSource="{Binding ClassSizes}"/>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="15"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Classes with more than 12 methods."/>
+                    <DataGrid Grid.Row="1" IsReadOnly="True" CanUserSortColumns="False"
+                              HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray"
+                              ItemsSource="{Binding ClassSizes}"/>
+                </Grid>
             </TabItem>
             <TabItem Header="CCD">
-                <DataGrid IsReadOnly="True" CanUserSortColumns="False"
-                  HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray"
-                  ItemsSource="{Binding CumulativeComponentDependencies}"/>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="15"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="{Binding CumulativeComponentDependenciesText}"/>
+                    <DataGrid Grid.Row="1" IsReadOnly="True" CanUserSortColumns="False"
+                              HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray"
+                              ItemsSource="{Binding CumulativeComponentDependencies}"/>
+                </Grid>
             </TabItem>
             <TabItem Header="Cyclomatic Complexities">
-                <DataGrid IsReadOnly="True" CanUserSortColumns="False"
-                  HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray"
-                  ItemsSource="{Binding CyclomaticComplexities}"/>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="15"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Methods with more than 4 different execution paths."/>
+                    <DataGrid Grid.Row="1" IsReadOnly="True" CanUserSortColumns="False"
+                              HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray"
+                              ItemsSource="{Binding CyclomaticComplexities}"/>
+                </Grid>
             </TabItem>
             <TabItem Header="Method Lengths">
-                <DataGrid IsReadOnly="True" CanUserSortColumns="False"
-                  HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray"
-                  ItemsSource="{Binding MethodLengths}"/>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="15"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Methods with more than 9 logical lines."/>
+                    <DataGrid Grid.Row="1" IsReadOnly="True" CanUserSortColumns="False"
+                              HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray"
+                              ItemsSource="{Binding MethodLengths}"/>
+                </Grid>
             </TabItem>
             <TabItem Header="Cyclic Namespaces">
-                <DataGrid IsReadOnly="True" CanUserSortColumns="False"
-                  HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray"
-                  ItemsSource="{Binding NamespacesInCycle}"/>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="15"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Namespaces in cycles."/>
+                    <DataGrid Grid.Row="1" IsReadOnly="True" CanUserSortColumns="False"
+                              HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray"
+                              ItemsSource="{Binding NamespacesInCycle}"/>
+                </Grid>
             </TabItem>
             <TabItem Header="Public Fields">
-                <DataGrid IsReadOnly="True" CanUserSortColumns="False"
-                  HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray"
-                  ItemsSource="{Binding NonStaticPublicFields}"/>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="15"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Classes with more than 0 non-static public fields."/>
+                    <DataGrid Grid.Row="1" IsReadOnly="True" CanUserSortColumns="False"
+                              HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray"
+                              ItemsSource="{Binding NonStaticPublicFields}"/>
+                </Grid>
             </TabItem>
         </TabControl>
-        
+
     </Grid>
 </hub:HubAwareControl>

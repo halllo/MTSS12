@@ -8,13 +8,14 @@ namespace andrena.Usus.net.View.ViewModels
 {
     public class Hotspots : AnalysisAwareViewModel
     {
+        public string CumulativeComponentDependenciesText { get; private set; }
         public ObservableCollection<HotspotClassSize> ClassSizes { get; private set; }
         public ObservableCollection<HotspotCumulativeComponentDependency> CumulativeComponentDependencies { get; private set; }
         public ObservableCollection<HotspotCyclomaticComplexity> CyclomaticComplexities { get; set; }
         public ObservableCollection<HotspotMethodLength> MethodLengths { get; private set; }
         public ObservableCollection<HotspotNamespaceInCycle> NamespacesInCycle { get; set; }
         public ObservableCollection<HotspotNonStaticPublicFields> NonStaticPublicFields { get; set; }
-        
+
         public Hotspots()
         {
             ClassSizes = new ObservableCollection<HotspotClassSize>();
@@ -40,6 +41,7 @@ namespace andrena.Usus.net.View.ViewModels
             var hotspots = metrics.Hotspots();
             Dispatch(() => SetClassSizes(hotspots.OfClassSize()));
             Dispatch(() => SetCumulativeComponentDependencies(hotspots.OfCumulativeComponentDependency()));
+            Dispatch(() => SetCumulativeComponentDependenciesText(hotspots.Metrics));
             Dispatch(() => SetCyclomaticComplexities(hotspots.OfCyclomaticComplexity()));
             Dispatch(() => SetMethodLengths(hotspots.OfMethodLength()));
             Dispatch(() => SetNamespacesInCycle(hotspots.OfNamespacesInCycle()));
@@ -59,6 +61,12 @@ namespace andrena.Usus.net.View.ViewModels
                 Class = m.Name,
                 Fullname = m.FullName
             });
+        }
+
+        private void SetCumulativeComponentDependenciesText(MetricsReport metrics)
+        {
+            CumulativeComponentDependenciesText = string.Format("Classes with more than {0} cumulated dependencies.", RatingFunctions.Limits.CumulativeComponentDependency(metrics.CommonKnowledge));
+            Changed(() => CumulativeComponentDependenciesText);
         }
 
         private void SetCumulativeComponentDependencies(IEnumerable<TypeMetricsReport> cumulativeComponentDependencies)
@@ -104,7 +112,7 @@ namespace andrena.Usus.net.View.ViewModels
         {
             SetHotspots(NonStaticPublicFields, nonStaticPublicFields, m => new HotspotNonStaticPublicFields
             {
-                Number = m.NumberOfNonStaticPublicFields,
+                Count = m.NumberOfNonStaticPublicFields,
                 Class = m.Name,
                 Fullname = m.FullName
             });

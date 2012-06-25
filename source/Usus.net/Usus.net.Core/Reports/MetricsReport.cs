@@ -84,7 +84,11 @@ namespace andrena.Usus.net.Core.Reports
         private void ShareTheKnowledgeWithMethodsOf(TypeMetricsWithMethodMetrics typeMertics)
         {
             typeMertics.Itself.CommonKnowledge = CommonKnowledge;
-            foreach (var method in typeMertics.Methods) method.CommonKnowledge = CommonKnowledge;
+            foreach (var method in typeMertics.Methods)
+            {
+                if (!method.CompilerGenerated) CommonKnowledge.NumberOfMethods++;
+                method.CommonKnowledge = CommonKnowledge;
+            }
         }
     }
 }

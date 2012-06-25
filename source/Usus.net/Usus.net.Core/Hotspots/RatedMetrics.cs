@@ -6,6 +6,8 @@ namespace andrena.Usus.net.Core.Hotspots
 {
     public class RatedMetrics
     {
+        public MetricsReport Metrics { get; private set; }
+
         public IEnumerable<RatedMethodMetrics> RatedMethods { get; private set; }
         public IEnumerable<RatedTypeMetrics> RatedTypes { get; private set; }
         public IEnumerable<RatedNamespaceMetrics> RatedNamespaces { get; private set; }
@@ -19,6 +21,8 @@ namespace andrena.Usus.net.Core.Hotspots
 
         internal RatedMetrics(MetricsReport metrics)
         {
+            Metrics = metrics;
+
             RatedMethods = metrics.Methods.ToList(m => m.Rate());
             RatedTypes = metrics.Types.ToList(m => m.Rate());
             RatedNamespaces = metrics.Namespaces.ToList(m => m.Rate());

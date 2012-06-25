@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Windows;
 using System.Runtime.InteropServices;
-using Microsoft.VisualStudio.Shell.Interop;
-using Microsoft.VisualStudio.Shell;
+using andrena.Usus.net.ExtensionHelper;
+using andrena.Usus.net.View;
+using andrena.Usus.net.View.Hub;
 
 namespace andrena.Usus_net_Cockpit
 {
@@ -20,7 +16,7 @@ namespace andrena.Usus_net_Cockpit
     /// implementation of the IVsUIElementPane interface.
     /// </summary>
     [Guid("e010d073-2f82-415b-beaa-bfa1655fcdb0")]
-    public class MyToolWindow : SolutionAwareToolWindowPane
+    public class MyToolWindow : BuildAwareToolWindowPane
     {
         /// <summary>
         /// Standard constructor for the tool window.
@@ -41,7 +37,9 @@ namespace andrena.Usus_net_Cockpit
             // This is the user control hosted by the tool window; Note that, even if this class implements IDisposable,
             // we are not calling Dispose on this object. This is because ToolWindowPane calls Dispose on 
             // the object returned by the Content property.
-            base.Content = new andrena.Usus.net.View.Cockpit();
+
+            BuildSuccessfull += files => ViewHub.Instance.StartAnalysis(files);
+            base.Content = new Cockpit() { Hub = ViewHub.Instance };
         }
     }
 }

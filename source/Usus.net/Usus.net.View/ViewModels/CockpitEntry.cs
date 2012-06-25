@@ -5,5 +5,6 @@ namespace andrena.Usus.net.View.ViewModels
     {
         public string Metric { get; set; }
         public string Average { get; set; }
+        public string Total { get; set; }
     }
 }

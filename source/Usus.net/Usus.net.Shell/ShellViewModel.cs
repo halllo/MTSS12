@@ -20,9 +20,9 @@ namespace andrena.Usus.net.Shell
                 StartAnalysis(openFileDialog.FileName);
         }
 
-        private void StartAnalysis(string openFile)
+        private void StartAnalysis(params string[] files)
         {
-            ViewHub.Instance.StartAnalysis(openFile);
+            ViewHub.Instance.StartAnalysis(files);
         }
     }
 }

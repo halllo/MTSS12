@@ -15,11 +15,12 @@ namespace andrena.Usus.net.Core.Hotspots
                    select method;
         }
 
-        public static IEnumerable<TypeMetricsReport> TypesOverLimit<T>(this MetricsReport metrics, Func<TypeMetricsReport, T> metricSelector, Func<RatingFunctionLimits, Func<CommonReportKnowledge, T>> limitSelector)
+        public static IEnumerable<TypeMetricsReport> TypesOverLimit<T>(this MetricsReport metrics, Func<TypeMetricsReport, T> metricSelector, Func<RatingFunctionLimits, Func<CommonReportKnowledge, T>> limitSelector, Func<TypeMetricsReport, bool> condition)
             where T : IComparable<T>
         {
             return from type in metrics.Types
                    where metricSelector(type).CompareTo(limitSelector(RatingFunctions.Limits)(metrics.CommonKnowledge)) > 0
+                   where condition(type)
                    select type;
         }
 
