@@ -38,7 +38,7 @@ namespace andrena.Usus_net_Hotspots
             // we are not calling Dispose on this object. This is because ToolWindowPane calls Dispose on 
             // the object returned by the Content property.
 
-            BuildSuccessfull += files => ViewHub.Instance.StartAnalysis(files);
+            BuildSuccessfull += files => ViewHub.Instance.TryStartAnalysis(files);
             base.Content = new Hotspots() { Hub = ViewHub.Instance };
         }
     }

@@ -18,10 +18,30 @@ namespace andrena.Usus.net.ExtensionHelper
             return base.GetService(typeof(SDTE)) as EnvDTE80.DTE2;
         }
 
-        protected EnvDTE.Solution RawSolution { get { return GetDTE2().Solution; } }
+        protected EnvDTE.Solution RawSolution
+        {
+            get
+            {
+                return GetDTE2().Solution;
+            }
+        }
 
-        protected IEnumerable<EnvDTE.Project> RawProjects { get { return RawSolution.Projects.Cast<EnvDTE.Project>(); } }
+        protected IEnumerable<EnvDTE.Project> RawProjects
+        {
+            get
+            {
+                return RawSolution.Projects.Cast<EnvDTE.Project>();
+            }
+        }
 
-        protected IEnumerable<Project> Projects { get { return from project in RawProjects select new Project(project); } }
+        protected IEnumerable<Project> Projects
+        {
+            get
+            {
+                return from project in RawProjects 
+                       where project.Properties != null
+                       select new Project(project);
+            }
+        }
     }
 }

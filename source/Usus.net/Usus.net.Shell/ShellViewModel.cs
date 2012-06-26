@@ -23,7 +23,7 @@ namespace andrena.Usus.net.Shell
 
         private void StartAnalysis(params string[] files)
         {
-            ViewHub.Instance.StartAnalysis(files);
+            ViewHub.Instance.TryStartAnalysis(files);
         }
     }
 }

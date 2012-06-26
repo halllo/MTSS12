@@ -24,10 +24,17 @@ namespace andrena.Usus.net.View.Hub
 
         private ViewHub()
         {
-            MetricsReady += (m) => { };
+            AnalysisStarted += () => analysisReady = false;
+            MetricsReady += (m) => analysisReady = true;
         }
 
-        public void StartAnalysis(IEnumerable<string> files)
+        bool analysisReady = true;
+        public void TryStartAnalysis(IEnumerable<string> files)
+        {
+            if (analysisReady) StartAnalysis(files);
+        }
+
+        private void StartAnalysis(IEnumerable<string> files)
         {
             AnalysisStarted();
             ThreadPool.QueueUserWorkItem((c) =>

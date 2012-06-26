@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace andrena.Usus.net.ExtensionHelper
 {
@@ -21,8 +22,8 @@ namespace andrena.Usus.net.ExtensionHelper
 
         private IEnumerable<string> FindCreatedFiles()
         {
-            throw new NotImplementedException("continue adding support for multiple files here!");
-            yield return "";
+            return from p in Projects
+                   select p.LatestOutputAssembly().FullName;
         }
     }
 }

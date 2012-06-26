@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -13,15 +14,25 @@ namespace andrena.Usus.net.ExtensionHelper
         internal Project(EnvDTE.Project project)
         {
             Name = project.Name;
+            ProjectFile = project.FullName;
             OutputAssembly = project.Properties.Item("OutputFileName").Value.ToString();
             ProjectPath = project.Properties.Item("FullPath").Value.ToString();
-            ProjectFile = project.FullName;
         }
 
-        public FileInfo OutputFile()
+        public FileInfo LatestOutputAssembly()
         {
-            var files = Directory.EnumerateFiles(ProjectPath, OutputAssembly, SearchOption.AllDirectories);
-            return new FileInfo(files.FirstOrDefault());
+            return OutputAssemblies().Aggregate((a, c) => a.LastWriteTime > c.LastWriteTime ? a : c);
+        }
+
+        public IEnumerable<FileInfo> OutputAssemblies()
+        {
+            return from file in AllOutputAssemblies()
+                   select new FileInfo(file);
+        }
+
+        private IEnumerable<string> AllOutputAssemblies()
+        {
+            return Directory.EnumerateFiles(ProjectPath + "bin", OutputAssembly, SearchOption.AllDirectories);
         }
     }
 }
