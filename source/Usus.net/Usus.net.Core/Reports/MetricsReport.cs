@@ -37,6 +37,14 @@ namespace andrena.Usus.net.Core.Reports
             get { return namespaceReports.Values.Select(t => t.Itself); }
         }
 
+        internal static MetricsReport Of(IEnumerable<MetricsReport> reports)
+        {
+            var combinedReport = new MetricsReport();
+            foreach (var typeMetrics in reports.SelectMany(r => r.typeReports.Values))
+                combinedReport.AddTypeReport(typeMetrics);
+            return combinedReport;
+        }
+
         internal MetricsReport()
         {
             CommonKnowledge = new CommonReportKnowledge();

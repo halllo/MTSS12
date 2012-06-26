@@ -16,8 +16,9 @@ namespace andrena.Usus.net.Shell
         public void AnalyzeClicked(Window owner)
         {
             var openFileDialog = new OpenFileDialog();
+            openFileDialog.Multiselect = true;
             if (openFileDialog.ShowDialog(owner) ?? false)
-                StartAnalysis(openFileDialog.FileName);
+                StartAnalysis(openFileDialog.FileNames);
         }
 
         private void StartAnalysis(params string[] files)

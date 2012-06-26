@@ -1,7 +1,9 @@
 ﻿using System;
-using andrena.Usus.net.Core.Reports;
-using System.Threading;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using andrena.Usus.net.Core;
+using andrena.Usus.net.Core.Reports;
 
 namespace andrena.Usus.net.View.Hub
 {
@@ -28,11 +30,10 @@ namespace andrena.Usus.net.View.Hub
         public void StartAnalysis(IEnumerable<string> files)
         {
             AnalysisStarted();
-            throw new NotImplementedException("continue adding support for multiple files here!");
             ThreadPool.QueueUserWorkItem((c) =>
             {
-                //MetricsReport metrics = Core.Analyze.PortableExecutable(files);
-                //MetricsReady(metrics);
+                MetricsReport metrics = Analyze.PortableExecutable(files.ToArray());
+                MetricsReady(metrics);
             });
         }
     }
