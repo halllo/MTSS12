@@ -44,6 +44,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Usus.net.CleanCode\Usus.net.CleanCode.csproj">
+      <Project>{47F974FF-B067-4440-BF20-3C07C83A01E5}</Project>
+      <Name>Usus.net.CleanCode</Name>
+      <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup%3bBuiltProjectOutputGroupDependencies%3bGetCopyToOutputDirectoryItems%3bPkgdefProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+      <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly>
+    </ProjectReference>
     <ProjectReference Include="..\Usus.net.Cockpit\Usus.net.Cockpit.csproj">
       <Project>{E4E3AE72-6BD6-4B75-854A-574AB793D41A}</Project>
       <Name>Usus.net.Cockpit</Name>

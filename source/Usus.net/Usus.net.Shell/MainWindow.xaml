@@ -39,6 +39,15 @@
                 <TextBlock Text="Hotspots"/>
                 <view:Hotspots x:Name="Hotspots" Grid.Row="1"/>
             </Grid>
+
+            <Grid Grid.Row="1" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="15"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Clean Code"/>
+                <view:CleanCode x:Name="CleanCode" Grid.Row="1"/>
+            </Grid>
         </Grid>
     </Grid>
 </Window>

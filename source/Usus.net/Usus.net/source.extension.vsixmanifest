@@ -17,5 +17,6 @@
   <Content>
     <VsPackage>|Usus.net.Cockpit;PkgdefProjectOutputGroup|</VsPackage>
     <VsPackage>|Usus.net.Hotspots;PkgdefProjectOutputGroup|</VsPackage>
+    <VsPackage>|Usus.net.CleanCode;PkgdefProjectOutputGroup|</VsPackage>
   </Content>
 </Vsix>

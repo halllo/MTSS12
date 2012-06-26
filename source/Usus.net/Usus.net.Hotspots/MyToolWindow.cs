@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using andrena.Usus.net.ExtensionHelper;
 using andrena.Usus.net.View;
 using andrena.Usus.net.View.Hub;
-using andrena.Usus.net.ExtensionHelper;
 
 namespace andrena.Usus_net_Hotspots
 {
@@ -32,7 +32,7 @@ namespace andrena.Usus_net_Hotspots
             // while the Index is the offset in the bitmap strip. Each image in
             // the strip being 16x16.
             this.BitmapResourceID = 301;
-            this.BitmapIndex = 1;
+            this.BitmapIndex = 2;
 
             // This is the user control hosted by the tool window; Note that, even if this class implements IDisposable,
             // we are not calling Dispose on this object. This is because ToolWindowPane calls Dispose on 

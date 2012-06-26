@@ -55,6 +55,9 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CleanCode.xaml.cs">
+      <DependentUpon>CleanCode.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Hotspots.xaml.cs">
       <DependentUpon>Hotspots.xaml</DependentUpon>
     </Compile>
@@ -62,6 +65,10 @@
     <Compile Include="Hub\IHubConnect.cs" />
     <Compile Include="Hub\ViewHub.cs" />
     <Compile Include="ViewModels\AnalysisAwareViewModel.cs" />
+    <Compile Include="ViewModels\CleanCode.cs" />
+    <Compile Include="ViewModels\CleanCodePractice.cs" />
+    <Compile Include="ViewModels\CleanCodePrinciple.cs" />
+    <Compile Include="ViewModels\CleanCodeRank.cs" />
     <Compile Include="ViewModels\Cockpit.cs" />
     <Compile Include="ViewModels\CockpitEntry.cs" />
     <Compile Include="ViewModels\HotspotClassSize.cs" />
@@ -72,6 +79,10 @@
     <Compile Include="ViewModels\HotspotNonStaticPublicFields.cs" />
     <Compile Include="ViewModels\Hotspots.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
+    <Page Include="CleanCode.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Cockpit.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

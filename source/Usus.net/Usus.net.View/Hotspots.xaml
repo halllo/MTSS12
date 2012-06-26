@@ -21,7 +21,7 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <TextBlock Text="Classes with more than 12 methods."/>
-                    <DataGrid Grid.Row="1" IsReadOnly="True" CanUserSortColumns="False"
+                    <DataGrid Grid.Row="1" IsReadOnly="True" CanUserSortColumns="True"
                               HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray"
                               ItemsSource="{Binding ClassSizes}"/>
                 </Grid>
@@ -33,7 +33,7 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <TextBlock Text="{Binding CumulativeComponentDependenciesText}"/>
-                    <DataGrid Grid.Row="1" IsReadOnly="True" CanUserSortColumns="False"
+                    <DataGrid Grid.Row="1" IsReadOnly="True" CanUserSortColumns="True"
                               HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray"
                               ItemsSource="{Binding CumulativeComponentDependencies}"/>
                 </Grid>
@@ -45,7 +45,7 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <TextBlock Text="Methods with more than 4 different execution paths."/>
-                    <DataGrid Grid.Row="1" IsReadOnly="True" CanUserSortColumns="False"
+                    <DataGrid Grid.Row="1" IsReadOnly="True" CanUserSortColumns="True"
                               HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray"
                               ItemsSource="{Binding CyclomaticComplexities}"/>
                 </Grid>
@@ -57,7 +57,7 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <TextBlock Text="Methods with more than 9 logical lines."/>
-                    <DataGrid Grid.Row="1" IsReadOnly="True" CanUserSortColumns="False"
+                    <DataGrid Grid.Row="1" IsReadOnly="True" CanUserSortColumns="True"
                               HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray"
                               ItemsSource="{Binding MethodLengths}"/>
                 </Grid>
@@ -69,7 +69,7 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <TextBlock Text="Namespaces in cycles."/>
-                    <DataGrid Grid.Row="1" IsReadOnly="True" CanUserSortColumns="False"
+                    <DataGrid Grid.Row="1" IsReadOnly="True" CanUserSortColumns="True"
                               HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray"
                               ItemsSource="{Binding NamespacesInCycle}"/>
                 </Grid>
@@ -81,7 +81,7 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <TextBlock Text="Classes with more than 0 non-static public fields."/>
-                    <DataGrid Grid.Row="1" IsReadOnly="True" CanUserSortColumns="False"
+                    <DataGrid Grid.Row="1" IsReadOnly="True" CanUserSortColumns="True"
                               HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray"
                               ItemsSource="{Binding NonStaticPublicFields}"/>
                 </Grid>
