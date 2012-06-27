@@ -23,7 +23,8 @@
                     <TextBlock Text="Classes with more than 12 methods."/>
                     <DataGrid Grid.Row="1" IsReadOnly="True" CanUserSortColumns="True"
                               HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray"
-                              ItemsSource="{Binding ClassSizes}"/>
+                              ItemsSource="{Binding ClassSizes}"
+                              MouseDoubleClick="DataGrid_MouseDoubleClick"/>
                 </Grid>
             </TabItem>
             <TabItem Header="CCD">
@@ -35,7 +36,8 @@
                     <TextBlock Text="{Binding CumulativeComponentDependenciesText}"/>
                     <DataGrid Grid.Row="1" IsReadOnly="True" CanUserSortColumns="True"
                               HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray"
-                              ItemsSource="{Binding CumulativeComponentDependencies}"/>
+                              ItemsSource="{Binding CumulativeComponentDependencies}"
+                              MouseDoubleClick="DataGrid_MouseDoubleClick"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Cyclomatic Complexities">
@@ -47,7 +49,8 @@
                     <TextBlock Text="Methods with more than 4 different execution paths."/>
                     <DataGrid Grid.Row="1" IsReadOnly="True" CanUserSortColumns="True"
                               HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray"
-                              ItemsSource="{Binding CyclomaticComplexities}"/>
+                              ItemsSource="{Binding CyclomaticComplexities}"
+                              MouseDoubleClick="DataGrid_MouseDoubleClick"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Method Lengths">
@@ -59,7 +62,8 @@
                     <TextBlock Text="Methods with more than 9 logical lines."/>
                     <DataGrid Grid.Row="1" IsReadOnly="True" CanUserSortColumns="True"
                               HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray"
-                              ItemsSource="{Binding MethodLengths}"/>
+                              ItemsSource="{Binding MethodLengths}"
+                              MouseDoubleClick="DataGrid_MouseDoubleClick"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Cyclic Namespaces">
@@ -71,7 +75,8 @@
                     <TextBlock Text="Namespaces in cycles."/>
                     <DataGrid Grid.Row="1" IsReadOnly="True" CanUserSortColumns="True"
                               HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray"
-                              ItemsSource="{Binding NamespacesInCycle}"/>
+                              ItemsSource="{Binding NamespacesInCycle}"
+                              MouseDoubleClick="DataGrid_MouseDoubleClick"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Public Fields">
@@ -83,7 +88,8 @@
                     <TextBlock Text="Classes with more than 0 non-static public fields."/>
                     <DataGrid Grid.Row="1" IsReadOnly="True" CanUserSortColumns="True"
                               HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray"
-                              ItemsSource="{Binding NonStaticPublicFields}"/>
+                              ItemsSource="{Binding NonStaticPublicFields}"
+                              MouseDoubleClick="DataGrid_MouseDoubleClick"/>
                 </Grid>
             </TabItem>
         </TabControl>

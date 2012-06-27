@@ -1,10 +1,23 @@
+using andrena.Usus.net.Core.Reports;
 
 namespace andrena.Usus.net.View.ViewModels
 {
-    public class HotspotClassSize
+    public class HotspotClassSize : IDoubleClickable
     {
-        public int Size { get; set; }
-        public string Class { get; set; }
-        public string Fullname { get; set; }
+        TypeMetricsReport Metrics;
+
+        public int Size { get { return Metrics.ClassSize; } }
+        public string Class { get { return Metrics.Name; } }
+        public string Fullname { get { return Metrics.FullName; } }
+
+        public HotspotClassSize(TypeMetricsReport metrics)
+        {
+            Metrics = metrics;
+        }
+
+        public void OnDoubleClick()
+        {
+            System.Windows.MessageBox.Show(Metrics.ToString());
+        }
     }
 }

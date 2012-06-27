@@ -2,6 +2,7 @@
 using System.Runtime.InteropServices;
 using andrena.Usus.net.ExtensionHelper;
 using andrena.Usus.net.View;
+using andrena.Usus.net.View.ExtensionPoints;
 using andrena.Usus.net.View.Hub;
 
 namespace andrena.Usus_net_Hotspots
@@ -16,7 +17,7 @@ namespace andrena.Usus_net_Hotspots
     /// implementation of the IVsUIElementPane interface.
     /// </summary>
     [Guid("a6711b19-55c8-473f-a8b2-72980bfb7c70")]
-    public class MyToolWindow : BuildAwareToolWindowPane
+    public class MyToolWindow : BuildAwareToolWindowPane, IJumpToSource
     {
         /// <summary>
         /// Standard constructor for the tool window.
@@ -39,7 +40,12 @@ namespace andrena.Usus_net_Hotspots
             // the object returned by the Content property.
 
             BuildSuccessfull += files => ViewHub.Instance.TryStartAnalysis(files);
-            base.Content = new Hotspots() { Hub = ViewHub.Instance };
+            base.Content = new Hotspots() { Hub = ViewHub.Instance, SourceLocating = this };
+        }
+
+        public void JumpToFileLocation(string path, int line, bool selection)
+        {
+            OpenFileAtLine(path, line, selection);
         }
     }
 }

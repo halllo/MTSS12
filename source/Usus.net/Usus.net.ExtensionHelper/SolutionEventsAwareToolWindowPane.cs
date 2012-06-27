@@ -38,7 +38,7 @@ namespace andrena.Usus.net.ExtensionHelper
 
         private void SubscripeToEvents()
         {
-            var events = GetDTE2().Events;
+            var events = MasterObjekt.Events;
             buildEvents = events.BuildEvents;
             commandEvents = events.CommandEvents;
             documentEvents = events.DocumentEvents;

@@ -58,6 +58,8 @@
     <Compile Include="CleanCode.xaml.cs">
       <DependentUpon>CleanCode.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\IDoubleClickable.cs" />
+    <Compile Include="ExtensionPoints\IJumpToSource.cs" />
     <Compile Include="Hotspots.xaml.cs">
       <DependentUpon>Hotspots.xaml</DependentUpon>
     </Compile>
@@ -78,6 +80,7 @@
     <Compile Include="ViewModels\HotspotNamespaceInCycle.cs" />
     <Compile Include="ViewModels\HotspotNonStaticPublicFields.cs" />
     <Compile Include="ViewModels\Hotspots.cs" />
+    <Compile Include="ViewModels\HotspotsCollection.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
     <Page Include="CleanCode.xaml">
       <SubType>Designer</SubType>
