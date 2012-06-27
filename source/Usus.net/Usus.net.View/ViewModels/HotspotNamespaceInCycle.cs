@@ -2,7 +2,7 @@ using andrena.Usus.net.Core.Reports;
 
 namespace andrena.Usus.net.View.ViewModels
 {
-    public class HotspotNamespaceInCycle : IDoubleClickable
+    public class HotspotNamespaceInCycle : IDoubleClickable<object>
     {
         NamespaceMetricsReport Metrics;
 
@@ -14,9 +14,8 @@ namespace andrena.Usus.net.View.ViewModels
             Metrics = metrics;
         }
 
-        public void OnDoubleClick()
+        public void OnDoubleClick(object o)
         {
-            System.Windows.MessageBox.Show(Metrics.ToString());
         }
     }
 }

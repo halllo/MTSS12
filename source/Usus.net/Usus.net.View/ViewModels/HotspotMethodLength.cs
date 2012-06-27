@@ -1,8 +1,9 @@
 using andrena.Usus.net.Core.Reports;
+using andrena.Usus.net.View.ExtensionPoints;
 
 namespace andrena.Usus.net.View.ViewModels
 {
-    public class HotspotMethodLength : IDoubleClickable
+    public class HotspotMethodLength : IDoubleClickable<IJumpToSource>
     {
         MethodMetricsReport Metrics;
 
@@ -15,9 +16,12 @@ namespace andrena.Usus.net.View.ViewModels
             Metrics = metrics;
         }
 
-        public void OnDoubleClick()
+        public void OnDoubleClick(IJumpToSource jumper)
         {
-            System.Windows.MessageBox.Show(Metrics.ToString());
+            if (Metrics.SourceLocation.IsAvailable)
+                jumper.JumpToFileLocation(
+                    Metrics.SourceLocation.Filename, 
+                    Metrics.SourceLocation.Line, true);
         }
     }
 }

@@ -1,8 +1,9 @@
 using andrena.Usus.net.Core.Reports;
+using System;
 
 namespace andrena.Usus.net.View.ViewModels
 {
-    public class HotspotClassSize : IDoubleClickable
+    public class HotspotClassSize : IDoubleClickable<object>
     {
         TypeMetricsReport Metrics;
 
@@ -15,9 +16,8 @@ namespace andrena.Usus.net.View.ViewModels
             Metrics = metrics;
         }
 
-        public void OnDoubleClick()
+        public void OnDoubleClick(object o)
         {
-            System.Windows.MessageBox.Show(Metrics.ToString());
         }
     }
 }

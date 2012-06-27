@@ -97,6 +97,8 @@
     <Compile Include="Hotspots\RatedTypeMetrics.cs" />
     <Compile Include="Hotspots\RatingFunctionLimits.cs" />
     <Compile Include="Hotspots\RatingFunctions.cs" />
+    <Compile Include="Metrics\SourceCodeLocating.cs" />
+    <Compile Include="Reports\SourceCodeLocation.cs" />
     <Compile Include="Metrics\CreateGraph.cs" />
     <Compile Include="Metrics\Methods\CyclomaticComplexityOfAst.cs" />
     <Compile Include="Metrics\Methods\CyclomaticComplexityCalculator.cs" />

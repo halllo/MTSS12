@@ -25,5 +25,12 @@ namespace andrena.Usus.net.View.ViewModels
             CumulativeComponentDependenciesText = string.Format("Classes with more than {0} cumulated dependencies.", RatingFunctions.Limits.CumulativeComponentDependency(metrics.CommonKnowledge));
             Changed(() => CumulativeComponentDependenciesText);
         }
+
+        public void DoubleClick(object clickedOn)
+        {
+            var clickable = clickedOn as IDoubleClickable<IJumpToSource>;
+            if (clickable != null && Jumper != null) 
+                clickable.OnDoubleClick(Jumper);
+        }
     }
 }

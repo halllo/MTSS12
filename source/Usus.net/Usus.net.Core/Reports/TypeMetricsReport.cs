@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System;
 
 namespace andrena.Usus.net.Core.Reports
 {
@@ -11,6 +10,7 @@ namespace andrena.Usus.net.Core.Reports
         public string FullName { get; internal set; }
         public IEnumerable<string> Namespaces { get; internal set; }
         public bool CompilerGenerated { get; internal set; }
+        public SourceCodeLocation SourceLocation { get; internal set; }
 
         public int NumberOfNonStaticPublicFields { get; internal set; }
         public int NumberOfMethods { get; internal set; }

@@ -1,8 +1,8 @@
 
 namespace andrena.Usus.net.View.ViewModels
 {
-    public interface IDoubleClickable
+    public interface IDoubleClickable<T> where T : class
     {
-        void OnDoubleClick();
+        void OnDoubleClick(T t);
     }
 }
