@@ -62,6 +62,8 @@
       <DependentUpon>Current.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Current\Current.cs" />
+    <Compile Include="ViewModels\Current\CurrentEntry.cs" />
+    <Compile Include="ViewModels\Current\LineLocation.cs" />
     <Compile Include="ViewModels\Hotspots\Hotspot.cs" />
     <Compile Include="ViewModels\Hotspots\IDoubleClickable.cs" />
     <Compile Include="ExtensionPoints\IJumpToSource.cs" />

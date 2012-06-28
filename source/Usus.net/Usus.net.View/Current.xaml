@@ -7,6 +7,14 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <TextBlock Text="nothing here yet" FontSize="20"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="15"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBlock Background="{Binding StatusColor}" Foreground="White"/>
+        <DataGrid Grid.Row="1" IsReadOnly="True" CanUserSortColumns="False"
+                  HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray"
+                  ItemsSource="{Binding Entries}"
+                  MouseLeftButtonDown="DataGrid_MouseLeftButtonDown" ColumnHeaderHeight="1" />
     </Grid>
 </hub:HubAwareControl>

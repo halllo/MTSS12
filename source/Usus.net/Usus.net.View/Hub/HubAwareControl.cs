@@ -18,11 +18,15 @@ namespace andrena.Usus.net.View.Hub
             if (e.NewValue is ViewHub) (dpe as HubAwareControl).HubAssigned(e.NewValue as ViewHub);
         }
 
-        public IHubConnect HubViewModel { get; protected set; }
+        IHubConnect hubViewModel;
+        protected void RegisterViewModel(IHubConnect hubViewModel)
+        {
+            DataContext = this.hubViewModel = hubViewModel;
+        }
 
         private void HubAssigned(ViewHub hub)
         {
-            if (HubViewModel != null) HubViewModel.RegisterHub(hub);
+            if (hubViewModel != null) hubViewModel.RegisterHub(hub);
         }
     }
 }

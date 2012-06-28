@@ -23,7 +23,8 @@ namespace andrena.Usus.net.View.ViewModels
 
         public void Changed(string property)
         {
-            PropertyChanged(this, new PropertyChangedEventArgs(property));
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(property));
         }
 
         private string GetNameForLocator(LambdaExpression locator)

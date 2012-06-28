@@ -6,6 +6,9 @@ namespace andrena.Usus.net.ExtensionHelper
 {
     public class DtAwareToolWindow : ToolWindowPane
     {
+        private EnvDTE.Document CurrentWindow { get { return MasterObjekt.ActiveDocument; } }
+        private EnvDTE.TextSelection CurrentText { get { return (CurrentWindow.Selection as EnvDTE.TextSelection); } }
+
         private EnvDTE80.DTE2 CachedDt2;
         protected EnvDTE80.DTE2 MasterObjekt
         {
@@ -24,8 +27,17 @@ namespace andrena.Usus.net.ExtensionHelper
         protected void OpenFileAtLine(string fileName, int line, bool select)
         {
             MasterObjekt.ItemOperations.OpenFile(fileName, EnvDTE.Constants.vsViewKindTextView);
-            EnvDTE.TextSelection sourceText = MasterObjekt.ActiveDocument.Selection as EnvDTE.TextSelection;
-            sourceText.GotoLine(line, select);
+            CurrentText.GotoLine(line, select);
+        }
+
+        protected CursorPosition CurrentCursor { get { return CurrentWindow != null ? CreateNewPosition() : null; } }
+        private CursorPosition CreateNewPosition()
+        {
+            return new CursorPosition
+            {
+                File = CurrentWindow.FullName,
+                Line = CurrentText.CurrentLine
+            };
         }
     }
 }

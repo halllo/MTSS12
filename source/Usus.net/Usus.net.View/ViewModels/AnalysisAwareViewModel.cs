@@ -22,6 +22,8 @@ namespace andrena.Usus.net.View.ViewModels
         {
             hub.AnalysisStarted += () => OnAnalysisStarted();
             hub.MetricsReady += m => OnAnalysisFinished(m);
+            if (hub.MostRecentMetrics != null)
+                OnAnalysisFinished(hub.MostRecentMetrics);
         }
 
         private void OnAnalysisStarted()

@@ -22,10 +22,13 @@ namespace andrena.Usus.net.View.Hub
         public event Action<MetricsReport> MetricsReady;
         public event Action AnalysisStarted;
 
+        public MetricsReport MostRecentMetrics { get; private set; }
+
         private ViewHub()
         {
             AnalysisStarted += () => analysisReady = false;
             MetricsReady += (m) => analysisReady = true;
+            MetricsReady += (m) => MostRecentMetrics = m;
         }
 
         bool analysisReady = true;

@@ -7,7 +7,7 @@ namespace andrena.Usus.net.View
         public Cockpit()
         {
             InitializeComponent();
-            DataContext = HubViewModel = new ViewModels.Cockpit.Cockpit { Dispatchable = this };
+            RegisterViewModel(new ViewModels.Cockpit.Cockpit { Dispatchable = this });
         }
     }
 }

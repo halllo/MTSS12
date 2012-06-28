@@ -6,7 +6,7 @@ namespace andrena.Usus.net.View.ViewModels.Hotspots
 {
     public class Hotspots : HotspotsCollection
     {
-        public IJumpToSource Jumper { private get; set; }
+        public IJumpToSource SourceLocating { private get; set; }
 
         public string CumulativeComponentDependenciesText { get; private set; }
 
@@ -29,8 +29,8 @@ namespace andrena.Usus.net.View.ViewModels.Hotspots
         public void DoubleClick(object clickedOn)
         {
             var clickable = clickedOn as IDoubleClickable<IJumpToSource>;
-            if (clickable != null && Jumper != null) 
-                clickable.OnDoubleClick(Jumper);
+            if (clickable != null && SourceLocating != null) 
+                clickable.OnDoubleClick(SourceLocating);
         }
     }
 }
