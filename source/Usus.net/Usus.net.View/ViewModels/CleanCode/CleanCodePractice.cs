@@ -1,5 +1,5 @@
 
-namespace andrena.Usus.net.View.ViewModels
+namespace andrena.Usus.net.View.ViewModels.CleanCode
 {
     public class CleanCodePractice
     {

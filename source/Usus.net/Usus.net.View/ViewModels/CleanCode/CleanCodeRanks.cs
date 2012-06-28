@@ -1,13 +1,13 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Media;
 
-namespace andrena.Usus.net.View.ViewModels
+namespace andrena.Usus.net.View.ViewModels.CleanCode
 {
-    public class CleanCode
+    public class CleanCodeRanks
     {
         public ObservableCollection<CleanCodeRank> Ranks { get; private set; }
 
-        public CleanCode()
+        public CleanCodeRanks()
         {
             Ranks = new ObservableCollection<CleanCodeRank>();
             InitializeRanks();

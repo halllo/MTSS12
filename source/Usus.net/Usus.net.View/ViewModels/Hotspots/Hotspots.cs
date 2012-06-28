@@ -2,7 +2,7 @@ using andrena.Usus.net.Core.Hotspots;
 using andrena.Usus.net.Core.Reports;
 using andrena.Usus.net.View.ExtensionPoints;
 
-namespace andrena.Usus.net.View.ViewModels
+namespace andrena.Usus.net.View.ViewModels.Hotspots
 {
     public class Hotspots : HotspotsCollection
     {

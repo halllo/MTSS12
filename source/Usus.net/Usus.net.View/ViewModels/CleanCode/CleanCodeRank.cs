@@ -1,7 +1,7 @@
 using System.Collections.ObjectModel;
 using System.Windows.Media;
 
-namespace andrena.Usus.net.View.ViewModels
+namespace andrena.Usus.net.View.ViewModels.CleanCode
 {
     public class CleanCodeRank
     {

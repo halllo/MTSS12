@@ -1,5 +1,5 @@
 
-namespace andrena.Usus.net.View.ViewModels
+namespace andrena.Usus.net.View.ViewModels.Hotspots
 {
     public interface IDoubleClickable<T> where T : class
     {

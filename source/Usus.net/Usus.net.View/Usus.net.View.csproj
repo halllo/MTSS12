@@ -58,7 +58,8 @@
     <Compile Include="CleanCode.xaml.cs">
       <DependentUpon>CleanCode.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\IDoubleClickable.cs" />
+    <Compile Include="ViewModels\Hotspots\Hotspot.cs" />
+    <Compile Include="ViewModels\Hotspots\IDoubleClickable.cs" />
     <Compile Include="ExtensionPoints\IJumpToSource.cs" />
     <Compile Include="Hotspots.xaml.cs">
       <DependentUpon>Hotspots.xaml</DependentUpon>
@@ -67,20 +68,22 @@
     <Compile Include="Hub\IHubConnect.cs" />
     <Compile Include="Hub\ViewHub.cs" />
     <Compile Include="ViewModels\AnalysisAwareViewModel.cs" />
-    <Compile Include="ViewModels\CleanCode.cs" />
-    <Compile Include="ViewModels\CleanCodePractice.cs" />
-    <Compile Include="ViewModels\CleanCodePrinciple.cs" />
-    <Compile Include="ViewModels\CleanCodeRank.cs" />
-    <Compile Include="ViewModels\Cockpit.cs" />
-    <Compile Include="ViewModels\CockpitEntry.cs" />
-    <Compile Include="ViewModels\HotspotClassSize.cs" />
-    <Compile Include="ViewModels\HotspotCumulativeComponentDependency.cs" />
-    <Compile Include="ViewModels\HotspotCyclomaticComplexity.cs" />
-    <Compile Include="ViewModels\HotspotMethodLength.cs" />
-    <Compile Include="ViewModels\HotspotNamespaceInCycle.cs" />
-    <Compile Include="ViewModels\HotspotNonStaticPublicFields.cs" />
-    <Compile Include="ViewModels\Hotspots.cs" />
-    <Compile Include="ViewModels\HotspotsCollection.cs" />
+    <Compile Include="ViewModels\CleanCode\CleanCodeRanks.cs" />
+    <Compile Include="ViewModels\CleanCode\CleanCodePractice.cs" />
+    <Compile Include="ViewModels\CleanCode\CleanCodePrinciple.cs" />
+    <Compile Include="ViewModels\CleanCode\CleanCodeRank.cs" />
+    <Compile Include="ViewModels\Cockpit\Cockpit.cs" />
+    <Compile Include="ViewModels\Cockpit\CockpitEntry.cs" />
+    <Compile Include="ViewModels\Hotspots\HotspotClassSize.cs" />
+    <Compile Include="ViewModels\Hotspots\HotspotCumulativeComponentDependency.cs" />
+    <Compile Include="ViewModels\Hotspots\HotspotCyclomaticComplexity.cs" />
+    <Compile Include="ViewModels\Hotspots\HotspotMethodLength.cs" />
+    <Compile Include="ViewModels\Hotspots\HotspotNamespaceInCycle.cs" />
+    <Compile Include="ViewModels\Hotspots\HotspotNonStaticPublicFields.cs" />
+    <Compile Include="ViewModels\Hotspots\Hotspots.cs" />
+    <Compile Include="ViewModels\Hotspots\HotspotsCollection.cs" />
+    <Compile Include="ViewModels\Hotspots\MethodHotspot.cs" />
+    <Compile Include="ViewModels\Hotspots\TypeHotspot.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
     <Page Include="CleanCode.xaml">
       <SubType>Designer</SubType>
@@ -130,6 +133,7 @@
       <Name>Usus.net.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -3,7 +3,7 @@ using andrena.Usus.net.Core.Helper;
 using andrena.Usus.net.Core.Hotspots;
 using andrena.Usus.net.Core.Reports;
 
-namespace andrena.Usus.net.View.ViewModels
+namespace andrena.Usus.net.View.ViewModels.Cockpit
 {
     public class Cockpit : AnalysisAwareViewModel
     {

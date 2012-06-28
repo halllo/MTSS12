@@ -8,7 +8,7 @@ namespace andrena.Usus.net.View
         public CleanCode()
         {
             InitializeComponent();
-            DataContext = new ViewModels.CleanCode();
+            DataContext = new ViewModels.CleanCode.CleanCodeRanks();
         }
 
         private void Hyperlink_RequestNavigate(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)

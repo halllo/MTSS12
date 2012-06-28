@@ -6,12 +6,12 @@ namespace andrena.Usus.net.View
 {
     public partial class Hotspots : HubAwareControl
     {
-        ViewModels.Hotspots viewModel;
+        ViewModels.Hotspots.Hotspots viewModel;
 
         public Hotspots()
         {
             InitializeComponent();
-            viewModel = new ViewModels.Hotspots { Dispatchable = this };
+            viewModel = new ViewModels.Hotspots.Hotspots { Dispatchable = this };
             DataContext = HubViewModel = viewModel;
         }
 
