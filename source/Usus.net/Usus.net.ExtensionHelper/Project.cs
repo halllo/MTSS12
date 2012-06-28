@@ -21,7 +21,7 @@ namespace andrena.Usus.net.ExtensionHelper
 
         public FileInfo LatestOutputAssembly()
         {
-            return OutputAssemblies().Aggregate((a, c) => a.LastWriteTime > c.LastWriteTime ? a : c);
+            return OutputAssemblies().WithMax(a => a.LastWriteTime);
         }
 
         public IEnumerable<FileInfo> OutputAssemblies()
