@@ -60,6 +60,12 @@
       <Project>{F8527516-94DE-42E3-B885-C7664EE4F655}</Project>
       <Name>Usus.net.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Usus.net.Current\Usus.net.Current.csproj">
+      <Project>{312E55D0-4DA0-4039-BD95-E9ED234DD3B8}</Project>
+      <Name>Usus.net.Current</Name>
+      <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup%3bBuiltProjectOutputGroupDependencies%3bGetCopyToOutputDirectoryItems%3bPkgdefProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+      <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly>
+    </ProjectReference>
     <ProjectReference Include="..\Usus.net.ExtensionHelper\Usus.net.ExtensionHelper.csproj">
       <Project>{A7B2DE89-865F-44CD-B6B3-4F60C8602225}</Project>
       <Name>Usus.net.ExtensionHelper</Name>

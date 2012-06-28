@@ -46,7 +46,16 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <TextBlock Text="Clean Code"/>
-                <view:CleanCode x:Name="CleanCode" Grid.Row="1"/>
+                <view:CleanCode Grid.Row="1"/>
+            </Grid>
+
+            <Grid Grid.Row="1" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="15"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Current"/>
+                <view:Current x:Name="Current" Grid.Row="1"/>
             </Grid>
         </Grid>
     </Grid>

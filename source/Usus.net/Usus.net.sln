@@ -30,6 +30,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Usus.net.ExtensionHelper", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Usus.net.CleanCode", "Usus.net.CleanCode\Usus.net.CleanCode.csproj", "{47F974FF-B067-4440-BF20-3C07C83A01E5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Usus.net.Current", "Usus.net.Current\Usus.net.Current.csproj", "{312E55D0-4DA0-4039-BD95-E9ED234DD3B8}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Usus.net.vsmdi
@@ -153,6 +155,16 @@ Global
 		{47F974FF-B067-4440-BF20-3C07C83A01E5}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{47F974FF-B067-4440-BF20-3C07C83A01E5}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{47F974FF-B067-4440-BF20-3C07C83A01E5}.Release|x86.ActiveCfg = Release|Any CPU
+		{312E55D0-4DA0-4039-BD95-E9ED234DD3B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{312E55D0-4DA0-4039-BD95-E9ED234DD3B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{312E55D0-4DA0-4039-BD95-E9ED234DD3B8}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{312E55D0-4DA0-4039-BD95-E9ED234DD3B8}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{312E55D0-4DA0-4039-BD95-E9ED234DD3B8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{312E55D0-4DA0-4039-BD95-E9ED234DD3B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{312E55D0-4DA0-4039-BD95-E9ED234DD3B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{312E55D0-4DA0-4039-BD95-E9ED234DD3B8}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{312E55D0-4DA0-4039-BD95-E9ED234DD3B8}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{312E55D0-4DA0-4039-BD95-E9ED234DD3B8}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

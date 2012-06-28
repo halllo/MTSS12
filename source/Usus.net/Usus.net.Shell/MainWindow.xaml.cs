@@ -17,6 +17,7 @@ namespace andrena.Usus.net.Shell
         {
             Cockpit.Hub = ViewModel.Hub;
             Hotspots.Hub = ViewModel.Hub;
+            Current.Hub = ViewModel.Hub;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

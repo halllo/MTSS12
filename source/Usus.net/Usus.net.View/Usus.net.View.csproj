@@ -58,6 +58,10 @@
     <Compile Include="CleanCode.xaml.cs">
       <DependentUpon>CleanCode.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Current.xaml.cs">
+      <DependentUpon>Current.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\Current\Current.cs" />
     <Compile Include="ViewModels\Hotspots\Hotspot.cs" />
     <Compile Include="ViewModels\Hotspots\IDoubleClickable.cs" />
     <Compile Include="ExtensionPoints\IJumpToSource.cs" />
@@ -97,6 +101,10 @@
       <DependentUpon>Cockpit.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Current.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Hotspots.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
