@@ -10,7 +10,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid>
-            <Button Content="Analyze" HorizontalAlignment="Right" Click="Button_Click" />
+            <Button Content="Analyze" HorizontalAlignment="Right" Click="StartAnalysis" />
         </Grid>
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
@@ -54,8 +54,8 @@
                     <RowDefinition Height="15"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <TextBlock Text="Current"/>
-                <view:Current x:Name="Current" Grid.Row="1"/>
+                <TextBlock Text="Distributions"/>
+                <view:Distributions x:Name="Distributions" Grid.Row="1"/>
             </Grid>
         </Grid>
     </Grid>

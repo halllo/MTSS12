@@ -37,6 +37,9 @@
     <AssemblyOriginatorKeyFile>Key.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MathNet.Numerics">
+      <HintPath>..\Libs\MathNet.Numerics.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Cci.CodeModel">
       <HintPath>..\Libs\Microsoft.Cci.CodeModel.dll</HintPath>
     </Reference>
@@ -98,6 +101,7 @@
     <Compile Include="Hotspots\RatingFunctionLimits.cs" />
     <Compile Include="Hotspots\RatingFunctions.cs" />
     <Compile Include="Metrics\SourceCodeLocating.cs" />
+    <Compile Include="Reports\Distributions.cs" />
     <Compile Include="Reports\SourceCodeLocation.cs" />
     <Compile Include="Metrics\CreateGraph.cs" />
     <Compile Include="Metrics\Methods\CyclomaticComplexityOfAst.cs" />

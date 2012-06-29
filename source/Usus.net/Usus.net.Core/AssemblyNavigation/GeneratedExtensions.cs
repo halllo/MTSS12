@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Cci;
 
@@ -6,13 +5,18 @@ namespace andrena.Usus.net.Core.AssemblyNavigation
 {
     internal static class GeneratedExtensions
     {
-        public static IEnumerable<INamedTypeDefinition> GetTypes(this IAssembly assembly)
+        public static bool IsGeneratedCode(this IReference r)
         {
-            return from t in assembly.GetAllTypes()
-                   select t;
+            return r.HasGeneratedCodeAttributes() 
+                || r.HasWeirdName();
         }
 
-        public static bool HasAnyGeneratedCodeAttributes(this IReference r)
+        private static bool HasWeirdName(this IReference r)
+        {
+            return r.ToString().Contains("<>");
+        }
+
+        private static bool HasGeneratedCodeAttributes(this IReference r)
         {
             return r.Attributes.Any((a => a.IsGeneratedCodeAttribute()));
         }
@@ -20,12 +24,6 @@ namespace andrena.Usus.net.Core.AssemblyNavigation
         private static bool IsGeneratedCodeAttribute(this ICustomAttribute a)
         {
             return a.Type.ToString().Contains("CompilerGeneratedAttribute");
-        }
-
-        public static IEnumerable<IMethodDefinition> GetMethods(this INamedTypeDefinition type)
-        {
-            return from t in type.Methods
-                   select t;
         }
     }
 }

@@ -16,7 +16,7 @@ namespace andrena.Usus.net.Core.Metrics
                 Name = type.Name(),
                 FullName = type.FullName(),
                 Namespaces = type.Namespaces(),
-                CompilerGenerated = type.HasAnyGeneratedCodeAttributes(),
+                CompilerGenerated = type.IsGeneratedCode(),
                 NumberOfNonStaticPublicFields = NumberOfNonStaticPublicFields.Of(type),
                 NumberOfMethods = NumberOfMethods.Of(type),
                 DirectDependencies = DirectDependencies.Of(type, methods)
@@ -29,7 +29,7 @@ namespace andrena.Usus.net.Core.Metrics
             {
                 Name = method.Name(),
                 Signature = method.Signature(),
-                CompilerGenerated = method.HasAnyGeneratedCodeAttributes(),
+                CompilerGenerated = method.IsGeneratedCode(),
                 OnlyDeclaration = method.IsOnlyDeclaration(),
                 SourceLocation = SourceCodeLocating.Of(method, pdb),
                 CyclomaticComplexity = CyclomaticComplexityOfAst.Of(method, pdb, host),

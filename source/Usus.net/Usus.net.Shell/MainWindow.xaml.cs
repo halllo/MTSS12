@@ -17,10 +17,10 @@ namespace andrena.Usus.net.Shell
         {
             Cockpit.Hub = ViewModel.Hub;
             Hotspots.Hub = ViewModel.Hub;
-            Current.Hub = ViewModel.Hub;
+            Distributions.Hub = ViewModel.Hub;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void StartAnalysis(object sender, RoutedEventArgs e)
         {
             ViewModel.AnalyzeClicked(this);
         }
