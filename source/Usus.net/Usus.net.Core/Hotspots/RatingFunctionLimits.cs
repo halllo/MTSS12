@@ -18,7 +18,7 @@ namespace andrena.Usus.net.Core.Hotspots
             MethodLength = cn => 9;
             ClassSize = cn => 12;
             NumberOfNonStaticPublicFields = cn => 0;
-            CumulativeComponentDependency = cn => (int)(cn.NumberOfClasses * (1.5 / Math.Pow(2, (Math.Log(cn.NumberOfClasses) / Math.Log(5)))));
+            CumulativeComponentDependency = cn => (int)(cn.NumberOfClasses * (1.5 / System.Math.Pow(2, (System.Math.Log(cn.NumberOfClasses) / System.Math.Log(5)))));
             NumberOfNamespacesInCycle = cn => 1;
         }
     }

@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using andrena.Usus.net.Core.Reports;
-using MathNet.Numerics.Statistics;
-using System;
+using andrena.Usus.net.Core.Math;
 
 namespace andrena.Usus.net.View.ViewModels.Distributions
 {
@@ -45,12 +44,12 @@ namespace andrena.Usus.net.View.ViewModels.Distributions
             Histogram(NonStaticPublicFields, metrics.TypeDistribution(t => t.NumberOfNonStaticPublicFields));
         }
 
-        private void Histogram(ObservableCollection<KeyValuePair<double, double>> target, Histogram histogram)
+        private void Histogram(ObservableCollection<KeyValuePair<double, double>> target, IHistogram histogram)
         {
             Dispatch(() =>
             {
-                for (int i = 0; i < Math.Min(50, histogram.BucketCount); i++)
-                    target.Add(new KeyValuePair<double, double>(i, histogram[i].Count));
+                for (int i = 0; i < Math.Min(50, histogram.BinCount); i++)
+                    target.Add(new KeyValuePair<double, double>(i, histogram.ElementsInBin(i)));
             });
         }
     }

@@ -24,7 +24,7 @@ namespace andrena.Usus.net.Core.Metrics.Methods
             if (!locations.GetAllValidLines(l => l.EndLine).Any()) return 0;
             var firstLine = locations.GetAllValidLines(l => l.EndLine).Min();
             var lastLine = locations.GetAllValidLines(l => l.EndLine).Max();
-            return Math.Max(0, lastLine - firstLine - 1);
+            return System.Math.Max(0, lastLine - firstLine - 1);
         }
 
         private static IEnumerable<int> GetAllValidLines(this IEnumerable<OperationLocation> locations, Func<IPrimarySourceLocation, int> line)

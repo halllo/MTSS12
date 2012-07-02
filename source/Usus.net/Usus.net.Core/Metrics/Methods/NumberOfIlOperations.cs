@@ -19,9 +19,9 @@ namespace andrena.Usus.net.Core.Metrics.Methods
             }
             if (flag)
             {
-                num = (int)Math.Max((double)num, 5.0);
+                num = (int)System.Math.Max((double)num, 5.0);
             }
-            return (int)Math.Round((double)(((double)num) / 5.0));
+            return (int)System.Math.Round((double)(((double)num) / 5.0));
         }
     }
 }
