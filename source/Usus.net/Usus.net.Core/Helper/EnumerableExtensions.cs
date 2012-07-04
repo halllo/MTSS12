@@ -10,7 +10,7 @@ namespace andrena.Usus.net.Core.Helper
         {
             yield return start;
         }
-     
+
         public static IEnumerable<R> ToList<T, R>(this IEnumerable<T> sequence, Func<T, R> selector)
         {
             return sequence.Select(selector).ToList();
@@ -37,14 +37,24 @@ namespace andrena.Usus.net.Core.Helper
             return turnedAround;
         }
 
-        public static T WithMin<T, R>(this IEnumerable<T> sequence, Func<T, R> selector) where R : IComparable
+        public static T WithMin<T, R>(this IEnumerable<T> sequence, Func<T, R> selector)
+            where T : class
+            where R : IComparable
         {
-            return sequence.Aggregate((a, c) => selector(a).CompareTo(selector(c)) < 0 ? a : c);
+            if (!sequence.Any())
+                return null;
+            else
+                return sequence.Aggregate((a, c) => selector(a).CompareTo(selector(c)) < 0 ? a : c);
         }
 
-        public static T WithMax<T, R>(this IEnumerable<T> sequence, Func<T, R> selector) where R : IComparable
+        public static T WithMax<T, R>(this IEnumerable<T> sequence, Func<T, R> selector)
+            where T : class
+            where R : IComparable
         {
-            return sequence.Aggregate((a, c) => selector(a).CompareTo(selector(c)) > 0 ? a : c);
+            if (!sequence.Any())
+                return null;
+            else
+                return sequence.Aggregate((a, c) => selector(a).CompareTo(selector(c)) > 0 ? a : c);
         }
     }
 }

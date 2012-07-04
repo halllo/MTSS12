@@ -11,6 +11,12 @@ namespace andrena.Usus.net.ExtensionHelper
         public string ProjectFile { get; set; }
         public string OutputAssembly { get; set; }
 
+        internal static bool IsValid(EnvDTE.Project project)
+        {
+            return project.Properties != null 
+                && !string.IsNullOrEmpty(project.FullName);
+        }
+
         internal Project(EnvDTE.Project project)
         {
             Name = project.Name;

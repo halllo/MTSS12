@@ -19,7 +19,7 @@ namespace andrena.Usus.net.ExtensionHelper
             get
             {
                 return from project in RawProjects
-                       where project.Properties != null
+                       where Project.IsValid(project)
                        select new Project(project);
             }
         }

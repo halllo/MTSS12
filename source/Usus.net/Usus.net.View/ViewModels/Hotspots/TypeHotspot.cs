@@ -36,8 +36,7 @@ namespace andrena.Usus.net.View.ViewModels.Hotspots
 
         private MethodMetricsReport FirstMethodInType()
         {
-            var firstMethod = AllJumpableMethods().WithMin(m => m.SourceLocation.Line);
-            return firstMethod;
+            return AllJumpableMethods().WithMin(m => m.SourceLocation.Line);
         }
 
         private IEnumerable<MethodMetricsReport> AllJumpableMethods()
