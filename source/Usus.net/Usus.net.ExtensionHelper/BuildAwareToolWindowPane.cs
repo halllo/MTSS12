@@ -23,6 +23,7 @@ namespace andrena.Usus.net.ExtensionHelper
         private IEnumerable<string> FindCreatedFiles()
         {
             return from p in Projects
+                   where p.HasLatestOutputAssembly
                    select p.LatestOutputAssembly().FullName;
         }
     }

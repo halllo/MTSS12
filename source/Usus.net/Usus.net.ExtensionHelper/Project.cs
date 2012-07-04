@@ -25,6 +25,14 @@ namespace andrena.Usus.net.ExtensionHelper
             ProjectPath = project.Properties.Item("FullPath").Value.ToString();
         }
 
+        public bool HasLatestOutputAssembly
+        {
+            get
+            {
+                return OutputAssemblies().Any();
+            }
+        }
+
         public FileInfo LatestOutputAssembly()
         {
             return OutputAssemblies().WithMax(a => a.LastWriteTime);
