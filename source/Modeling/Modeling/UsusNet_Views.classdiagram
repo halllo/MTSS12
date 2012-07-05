@@ -1,0 +1,308 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm10="http://schemas.microsoft.com/dsltools/UseCaseModel" dslVersion="1.0.0.0" Id="2bc89498-bbb1-452f-ae42-e0abd637c0aa" name="UsusNet_Views" linkedPackageId="d8e7a7d4-c92a-4209-bfbd-caf7cdfca54e" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
+  <profileInstances>
+    <packageHasProfileInstances Id="2426071c-15e3-45dd-ac44-c7d3007a705d">
+      <profileInstance Id="6ced4486-2845-4396-9737-6a36e9e7dc25" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="47b4686a-0aa9-47f8-8e11-95860bbd03e8">
+      <profileInstance Id="8b332cdf-c533-4e3c-865e-db7aedef7e6f" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="d4da4dad-4421-4312-999b-2ef11440edd4" name="ViewHub" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="7a926f85-cf7d-4604-8d43-c07df2825aef" />
+        <ownedAttributesInternal>
+          <property Id="fc170770-b9a6-4a4b-b349-e15093b7de9f" name="MetricsReady" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="188131ea-75e9-41c1-a41e-40eb695232ed" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="9dbe4c9d-342c-4ec1-84b6-77e7b9e11af1" LastKnownName="Action&lt;MetricsReport&gt;" />
+            </type_NamedElement>
+          </property>
+          <property Id="43ba34e5-4711-4de7-b1b5-81dd7b71ca47" name="AnalysisStarted" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="5702a09c-2dfb-4b1d-9ce4-0bc66b5e6999" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="f57f9443-33be-435c-a5de-037c4492d681" LastKnownName="Action" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation Id="96e8f54b-0d15-4b6d-85cf-09bdb75d16b1" name="Instance" isLeaf="false" isStatic="true" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="630eaab6-1393-45de-b2be-93978afc0d94" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="00622f93-b581-49e0-9200-1bd1ff462806" direction="Return">
+                  <elementDefinition Id="64905664-ce7e-470b-b280-d1eedf095e6a" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="d463a4f2-cc96-4f3e-afbe-0be75d1404cd" LastKnownName="ViewHub" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="7aa0d521-0ddf-4b7b-8c86-916e475daed9" name="TryStartAnalysis" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="f4199c0d-560b-4611-8de8-b19501cdd98a" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="761ef89a-c81f-4911-a0cc-8566059dc202" name="IEnumerable&lt;string&gt;" direction="In" isUnique="false">
+                  <elementDefinition Id="e64807b0-ad65-4dc7-8042-ad2b0d97d36f" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="9dbe4c9d-342c-4ec1-84b6-77e7b9e11af1" name="Action&lt;MetricsReport&gt;" isAbstract="false" isLeaf="false" cachedFullName="Action&lt;MetricsReport&gt;">
+        <elementDefinition Id="58baeed6-df4e-41eb-884e-304dd6ad837b" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="f57f9443-33be-435c-a5de-037c4492d681" name="Action" isAbstract="false" isLeaf="false" cachedFullName="Action">
+        <elementDefinition Id="46a9e7bd-b52f-4508-bc02-f0136948cc3b" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="d463a4f2-cc96-4f3e-afbe-0be75d1404cd" name="ViewHub" isAbstract="false" isLeaf="false" cachedFullName="Modeling::ViewHub">
+        <elementDefinition Id="7a926f85-cf7d-4604-8d43-c07df2825aef" />
+      </referencedType>
+    </packageHasNamedElement>
+    <logicalClassDesignerModelHasTypes>
+      <Interface Id="5b3f4662-6483-4857-833c-b7357495e308" name="IHubConnect" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="07896b90-cebf-4b72-a579-991e9b40582d" />
+        <ownedOperations>
+          <operation Id="3f8759e2-1566-4315-9caf-256cf9b520b2" name="RegisterHub" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="a33d0687-07d9-4bd1-9478-469eabcaaedf" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="f9265dc1-585b-418e-9adb-5bf7a7082cbe" name="ViewHub" direction="In" isUnique="false">
+                  <elementDefinition Id="fab7ca83-7c14-48e3-a08f-e7c458f320f3" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperations>
+      </Interface>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="1b302751-3934-4cf9-82fe-f2fbff177501" name="HubAwareControl" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="9d10dcc8-aafb-4226-be9f-a4ac2669db38" />
+        <suppliersInternal>
+          <dependency Id="fb7a60a3-2901-4156-9335-70f45a14359d" name="&lt;&lt;uses&gt;&gt;">
+            <interfaceMoniker Id="5b3f4662-6483-4857-833c-b7357495e308" LastKnownName="IHubConnect" />
+            <elementDefinition Id="cce7db7e-a9fb-45f4-a9da-d47892b29a0e" />
+          </dependency>
+        </suppliersInternal>
+        <generalsInternal>
+          <generalization Id="2a9066b2-dd47-4150-ae32-265b782f04b2" isSubstitutable="false">
+            <classMoniker Id="217bd62b-a85e-4165-9fae-5e6a7a64806f" LastKnownName="UserControl" />
+            <elementDefinition Id="570a3b32-8a5b-4a8a-bfcb-281642ece340" />
+          </generalization>
+        </generalsInternal>
+        <targetEnds>
+          <association Id="96669cd5-0fdb-475a-afb6-3fe9ebc50abb" isDerived="false" sourceEndRoleName="" targetEndRoleName="Hub" isLeaf="false" isAbstract="false">
+            <classMoniker Id="d4da4dad-4421-4312-999b-2ef11440edd4" LastKnownName="ViewHub" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="ab13a0f8-a71d-48ad-9402-57d7f94313e0" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Shared" isComposite="false" isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString Id="4351f524-5ed3-40b4-b527-d9e947642829" name="Lower" value="*">
+                      <elementDefinition Id="0fb78792-e812-4b68-980d-168efdcaeeb0" />
+                    </literalString>
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString Id="84667d80-64b6-49e5-919b-e30fc3629d8b" name="Upper" value="*">
+                      <elementDefinition Id="06e0b23b-84c0-41ad-8df9-6af9757aeb12" />
+                    </literalString>
+                  </upperValueInternal>
+                  <elementDefinition Id="75751beb-c70c-4a3b-abee-318f77db83d4" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="0aeee2a2-be15-4f3d-afee-e51e3935866e" name="Hub" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="eaadf43f-c1a1-4f47-af58-ef982b204145" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="2156fac7-f31d-4686-98bd-d61cb1a41543" />
+          </association>
+        </targetEnds>
+        <ownedOperationsInternal>
+          <operation Id="68a56c58-3884-4a5e-8e8e-96b3ee36a0e8" name="RegisterViewModel" visibility="Protected" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="05919c37-dec5-4f8d-8e5a-a76840766a8d" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="8874d907-46f7-4574-a670-95e34aee5a4f" name="IHubConnect" direction="In" isUnique="false">
+                  <elementDefinition Id="c822e3c6-5c37-4243-91ee-634316b0a92b" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="fcbedf02-728a-464e-82a5-876c130d9cea" name="AnalysisAwareViewModel" isAbstract="true" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="1344ce4c-1873-4bcd-90fe-058f300b50c7" />
+        <suppliersInternal>
+          <interfaceRealization Id="c3c422c8-7bbf-498b-9b1f-ec3c06d5963f">
+            <interfaceMoniker Id="5b3f4662-6483-4857-833c-b7357495e308" LastKnownName="IHubConnect" />
+            <elementDefinition Id="468c0eb5-a9d7-431f-943b-50a7ca754874" />
+          </interfaceRealization>
+        </suppliersInternal>
+        <ownedOperationsInternal>
+          <operation Id="edf736be-28fb-4541-a4c2-4819d9b515bf" name="RegisterHub" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="f990216a-e67b-4569-a01e-2c0a94ec2270" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="eb42d035-81b5-4352-a737-1759077a09c4" name="ViewHub" direction="In" isUnique="false">
+                  <elementDefinition Id="283ac71e-91af-447c-bbe4-fceedcd24915" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="41a88fe4-15e4-4d59-97c7-242a8f15aaff" name="AnalysisStarted" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="3675d118-1951-4afc-8bdd-8c0a34635db0" />
+          </operation>
+          <operation Id="c0911568-3f5a-4b40-8410-30d72e2445ab" name="AnalysisFinished" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="77d0286b-f072-4efe-8a8c-8b412866199b" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="b230b4ca-6332-4278-9556-8b51aae1c17b" name="MetricsReport" direction="In" isUnique="false">
+                  <elementDefinition Id="12ac9cfd-7737-4985-8ffb-e275f5a20d1a" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="3bb0da20-c159-4c48-804d-536c86c20ad0" name="Cockpit" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="e83c2460-6a39-4107-92da-4b5d68ea29be" />
+        <suppliersInternal>
+          <dependency Id="974da912-93b5-455f-b376-d19a92e59cb3" name="&lt;&lt;creates&gt;&gt;">
+            <classMoniker Id="9369d85d-176b-4ac3-b1b7-c360526043c3" LastKnownName="CockpitViewModel" />
+            <elementDefinition Id="0a4585fd-2f68-46e7-b7de-89257e17c350" />
+          </dependency>
+        </suppliersInternal>
+        <generalsInternal>
+          <generalization Id="49901f5f-90cc-4a6b-aa16-2aec604224b5" isSubstitutable="false">
+            <classMoniker Id="1b302751-3934-4cf9-82fe-f2fbff177501" LastKnownName="HubAwareControl" />
+            <elementDefinition Id="d9cc0325-3f02-48f5-af38-9894a43ba7f4" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="21814d71-8905-428b-a964-32ff45f67c3e" name="Hotspots" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="c38ed448-9360-4fd0-b54a-3a208dc9fd39" />
+        <suppliersInternal>
+          <dependency Id="32b4d411-62a7-4b9c-9f15-917d3e1fe4df" name="&lt;&lt;creates&gt;&gt;">
+            <classMoniker Id="134e8346-7a3f-42dd-b141-bf908b25fe89" LastKnownName="HotspotsViewModel" />
+            <elementDefinition Id="fc5640e1-feca-4e72-a0c9-770e742ffaae" />
+          </dependency>
+        </suppliersInternal>
+        <generalsInternal>
+          <generalization Id="582428ca-f80a-429a-8734-aa19dbac9fb9" isSubstitutable="false">
+            <classMoniker Id="1b302751-3934-4cf9-82fe-f2fbff177501" LastKnownName="HubAwareControl" />
+            <elementDefinition Id="d718f178-1ca5-4a31-ba23-894fca04c797" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="72609008-7bde-475a-a9f5-35655484327a" name="Distributions" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="96eff547-e63c-45c3-a3dc-7e6748b3de32" />
+        <suppliersInternal>
+          <dependency Id="34370c58-37ca-4894-9c8f-1abcaa856d63" name="&lt;&lt;creates&gt;&gt;">
+            <classMoniker Id="942539a5-82d2-4cc2-8a26-8ac26350fd54" LastKnownName="DistributionsViewModel" />
+            <elementDefinition Id="33a01f77-fc16-4063-9ee2-ed56c2160ce5" />
+          </dependency>
+        </suppliersInternal>
+        <generalsInternal>
+          <generalization Id="30ed73be-4ddf-4955-80b9-a1101a9b6633" isSubstitutable="false">
+            <classMoniker Id="1b302751-3934-4cf9-82fe-f2fbff177501" LastKnownName="HubAwareControl" />
+            <elementDefinition Id="07caea35-2c32-4b23-a159-a466e66e2544" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="a5f77d46-06b4-4a76-9d0f-b016b6443879" name="CleanCode" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="d2e45437-0fcb-43fd-8746-f7f91c4a44de" />
+        <suppliersInternal>
+          <dependency Id="fa634964-0963-40fe-b446-95f14546026f" name="&lt;&lt;creates&gt;&gt;">
+            <classMoniker Id="efa9d9ca-40e3-4e08-b4df-0a91e69abce0" LastKnownName="CleanCodeViewModel" />
+            <elementDefinition Id="4dd6738b-bc96-48be-bcc0-cda64eeaa7df" />
+          </dependency>
+        </suppliersInternal>
+        <generalsInternal>
+          <generalization Id="dc786add-b8cf-45d3-8cb9-a50638c7e80b" isSubstitutable="false">
+            <classMoniker Id="1b302751-3934-4cf9-82fe-f2fbff177501" LastKnownName="HubAwareControl" />
+            <elementDefinition Id="d63604c5-df63-4e3b-bffb-7c3d2e14b587" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="217bd62b-a85e-4165-9fae-5e6a7a64806f" name="UserControl" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="cc8c90a2-2724-425c-ab24-ec4e54e5e1e3" />
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="9369d85d-176b-4ac3-b1b7-c360526043c3" name="CockpitViewModel" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="769a4662-3525-41ba-a594-44c9d58ca642" />
+        <generalsInternal>
+          <generalization Id="d15f3a48-2f4d-4730-aa04-6dd46744347e" isSubstitutable="false">
+            <classMoniker Id="fcbedf02-728a-464e-82a5-876c130d9cea" LastKnownName="AnalysisAwareViewModel" />
+            <elementDefinition Id="7771f495-67b7-4e2b-96c8-af6e6b2e652d" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="134e8346-7a3f-42dd-b141-bf908b25fe89" name="HotspotsViewModel" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="0eec1348-3440-4978-8229-a76c21e31b46" />
+        <generalsInternal>
+          <generalization Id="b8b3b2c8-48d7-4459-a248-6e084e0fb73a" isSubstitutable="false">
+            <classMoniker Id="fcbedf02-728a-464e-82a5-876c130d9cea" LastKnownName="AnalysisAwareViewModel" />
+            <elementDefinition Id="cf6ff654-3d30-44e0-a4aa-9876cecaf467" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="942539a5-82d2-4cc2-8a26-8ac26350fd54" name="DistributionsViewModel" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="5c6d1302-7370-4a7b-a423-cfae6dff3765" />
+        <generalsInternal>
+          <generalization Id="3c80b5c0-0375-47fc-8a64-18b6e094eb1e" isSubstitutable="false">
+            <classMoniker Id="fcbedf02-728a-464e-82a5-876c130d9cea" LastKnownName="AnalysisAwareViewModel" />
+            <elementDefinition Id="1472e30b-dbdf-4ad0-ad40-8d4ef51fb2d2" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="efa9d9ca-40e3-4e08-b4df-0a91e69abce0" name="CleanCodeViewModel" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="d054e828-443a-4296-a2ea-a19f711202a5" />
+        <generalsInternal>
+          <generalization Id="10b77dbe-e1ad-40bc-9257-2c944911e1dc" isSubstitutable="false">
+            <classMoniker Id="fcbedf02-728a-464e-82a5-876c130d9cea" LastKnownName="AnalysisAwareViewModel" />
+            <elementDefinition Id="af07ec84-0a01-4fc5-ac68-c082c33b3fce" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+  </packagedElements>
+  <package Id="d8e7a7d4-c92a-4209-bfbd-caf7cdfca54e" name="Modeling">
+    <elementDefinition Id="eba52b28-def3-4521-87af-2d11f5403a2b" />
+  </package>
+</logicalClassDesignerModel>

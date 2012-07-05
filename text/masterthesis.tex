@@ -102,19 +102,20 @@ Another metric analysis is performed in order to find heuristics or rules with s
 \chapter{Einführung}
 \pagenumbering{arabic}
 \setcounter{page}{1}
-bla bla bla Softwarequalität
+\textcolor[rgb]{1,0,0}{bla bla bla Softwarequalität
 bla bla bla Metriken
 bla bla bla Entwicklerfeedback
 bla bla bla Übersicht über Codebasis
 bla bla bla direkt in Visual Studio
-bla bla bla
+bla bla bla}
 
 \section{andrena objects ag}
 \label{sec:andrena}
-Diese Master-Thesis wird bei dem Software-Unternehmen andrena objects ag durchgeführt. bla bla bla.
+Diese Master-Thesis wird bei dem Software-Unternehmen andrena objects ag durchgeführt. 
+\textcolor[rgb]{1,0,0}{bla bla bla.}
 
 \section{Aufbau der Thesis}
-bla bla bla.
+\textcolor[rgb]{1,0,0}{bla bla bla.}
 
 
 
@@ -315,6 +316,7 @@ Das Wort \emph{usus} kommt aus dem lateinischen und bedeutet "`das, was üblich i
 
 
 \section{Eclipse Plugin}
+\label{sec:eclipseusus}
 Das Usus-Plugin für Eclipse lässt sich über den Menü-Eintrag \texttt{Help / Install New Software} installieren, indem eine neue Software Site mit der Url \url{http://projectusus.googlecode.com/svn/updates/} hinzugefügt und anschließend \emph{Project Usus} ausgewählt wird. Nach der Installation steht die \emph{Project Usus perspective} zur Verfügung, die die folgenden Fenster enthält.
 
 \subsection{Usus Cockpit}
@@ -869,6 +871,7 @@ Zusammenfassend ist zu sagen, das die \emph{Common Compiler Infrastructure} (CCI
 
 
 \chapter{Usus.net}
+\label{chap:ususnet}
 Nachdem das Usus-Plugin für Java einfach \emph{Usus} heißt, wird die Visual Studio Erweiterung, die in der vorliegenden Master-Thesis entwickelt wird, im weiteren Verlauf als \emph{Usus.net} bezeichnet. Die Architektur von Usus.net, das in Abschnitt \ref{sec:architecture} noch grob als System bezeichnet wurde, besteht aus drei Teilen, die in Abbildung \ref{fig:architecture2} abgebildet sind.
 \begin{figure}[h]
 	\centering
@@ -881,7 +884,7 @@ Nachdem das Usus-Plugin für Java einfach \emph{Usus} heißt, wird die Visual Stud
 
 \section{Metrikberechnung}
 \label{sec:metriccalc}
-In diesem Abschnitt wird vorgestellt, wie die Usus-Metriken aus Abschnitt \ref{sec:metrics} von Usus.net berechnet werden. In Abschnitt \ref{sec:cci} wurde erklärt das CCI Assemblies analysiert. Deswegen beginnt auch die Berechnung der Metriken mit einem Pfad zu einer \emph{Portable Executable}-Datei, wie sie in Unterabschnitt \ref{subsec:ccimetadata} definiert wurde. Abbildung \ref{fig:metriccalc} zeigt die Klassen, die an der Berechnung beteiligt sind.
+In diesem Abschnitt wird vorgestellt, wie die Usus-Metriken aus Abschnitt \ref{sec:metrics} von Usus.net berechnet werden. In Abschnitt \ref{sec:cci} wurde erklärt das CCI Assemblies analysiert. Deswegen beginnt auch die Berechnung der Metriken mit einem Pfad zu einer \emph{Portable Executable}-Datei, wie sie in Unterabschnitt \ref{subsec:ccimetadata} definiert wurde. Abbildung \ref{fig:metriccalc} zeigt die Klassen, die an der Berechnung beteiligt sind. Alle diese Klassen befinden sich im Namespace \texttt{andrena.Usus.net.Core.Metrics}.
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=17cm]{images/metriccalc.jpg}
@@ -1028,7 +1031,7 @@ Nachdem alle Namespaces Informationen über die Kreise, auf denen sie sich eventu
 
 \section{Objektmodell}
 \label{sec:ususobjectmodel}
-Im vorherigen Abschnitt wurde die Berechnung der Metriken ausführlich beschrieben. Dieser Abschnitt stellt das Objektmodell des Metrikberichts näher vor. Abbildung \ref{fig:metriccalc} zeigt, dass das zentrale Datenobjekt \texttt{MetricsReport} ist. Wie in Abschnitt \ref{sec:metriccalc} beschrieben, wird dieses Objekt zunächst mit den Daten befüllt, die das \texttt{MetricsCollector}-Objekt sammelt. Anschließend werden im Rahmen der nachträglichen Bearbeitung weitere Berechnungen vorgenommen um auch die kontextabhängigen Metriken zu bestimmen. Diese komplette Metrik-Analyse wird durch die statischen Methoden der \texttt{Analyze}-Klasse gestartet. Diese Methoden liefern das \texttt{MetricsReport}-Objekt als Ergebnis an den Aufrufer zurück. In diesem Abschnitt wird genau dieses Objekt genauer betrachtet. Abbildung \ref{fig:metricsreport} zeigt alle Klassen, aus denen dieser Bericht besteht.
+Im vorherigen Abschnitt wurde die Berechnung der Metriken ausführlich beschrieben. Dieser Abschnitt stellt das Objektmodell des Metrikberichts näher vor. Alle Klassen dieses Modells befinden sich im Namespace \texttt{andrena.Usus.net.Core.Reports}. Abbildung \ref{fig:metriccalc} zeigt, dass das zentrale Datenobjekt \texttt{MetricsReport} ist. Wie in Abschnitt \ref{sec:metriccalc} beschrieben, wird dieses Objekt zunächst mit den Daten befüllt, die das \texttt{MetricsCollector}-Objekt sammelt. Anschließend werden im Rahmen der nachträglichen Bearbeitung weitere Berechnungen vorgenommen um auch die kontextabhängigen Metriken zu bestimmen. Diese komplette Metrik-Analyse wird durch die statischen Methoden der \texttt{Analyze}-Klasse gestartet. Diese Methoden liefern das \texttt{MetricsReport}-Objekt als Ergebnis an den Aufrufer zurück. In diesem Abschnitt wird genau dieses Objekt genauer betrachtet. Abbildung \ref{fig:metricsreport} zeigt alle Klassen, aus denen dieser Bericht besteht.
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=17cm]{images/metricsreport.jpg}
@@ -1037,7 +1040,7 @@ Im vorherigen Abschnitt wurde die Berechnung der Metriken ausführlich beschriebe
 \end{figure}
 
 \subsection{Methodenberichte}
-Der Metrikbericht besteht aus mehreren Methodenberichten. Diese \texttt{MethodMetricsReport}-Objekte enthalten alle relevanten Daten und Metriken jeder im System gefundenen Methode. Die eindeutige Zuordnung von Methode zu Methodenbericht ist über die Eigenschaft \texttt{Signature} möglich. Die Signatur einer Methode macht sie im System eindeutig, da neben Methodenname auch Typ- und Namespace-Name, sowie vollständige Namen des Rückgabetypen und aller Parametertypen enthalten sind. Neben der Menge aller Methodenberichte kann der Bericht zu einer bestimmten Methode in \texttt{MetricsReport} auch gesucht werden. Dazu existieren mehrere Extension Methods\footnote[1]{Mehr über Extension Methods: "`add methods to existing types"' \url{http://msdn.microsoft.com/en-us/library/bb383977.aspx}}, die wie in Listing \ref{listing:methodpropertysearch} dargestellt, benutzt werden können. Die Variable \texttt{metrics} enthält die Referenz zu dem \texttt{MetricsReport}-Objekt.
+Der Metrikbericht besteht aus mehreren Methodenberichten. Diese \texttt{MethodMetricsReport}-Objekte enthalten alle relevanten Daten und Metriken jeder im System gefundenen Methode. Die eindeutige Zuordnung von Methode zu Methodenbericht ist über die Eigenschaft \texttt{Signature} möglich. Die Signatur einer Methode macht sie im System eindeutig, da neben Methodenname auch Typ- und Namespace-Name, sowie vollständige Namen des Rückgabetypen und aller Parametertypen enthalten sind. Neben der Menge aller Methodenberichte kann der Bericht zu einer bestimmten Methode in \texttt{MetricsReport} auch gesucht werden. Dazu existieren mehrere Extension Methods\footnote[1]{Mehr über Extension Methods: "`add methods to existing types"' \url{http://msdn.microsoft.com/en-us/library/bb383977.aspx}}, die wie in Listing \ref{listing:methodpropertysearch} dargestellt, benutzt werden können. Die Variable \texttt{metrics} enthält die Referenz zu dem \texttt{MetricsReport}-Objekt. Methodenberichte sind vom Typ \texttt{MethodMetricsReport} und lassen sich zum einen über die \texttt{Signature}-Eigenschaft der Methode finden, wie Zeile 2 zeigt. Wenn die zu suchende Methode im Scope ist (also in der Assembly deklariert ist, die den Code ausführt), kann sie wie in Zeile 4 auch über einen \texttt{Expression}-Ausdruck angegeben werden. Microsoft beschreibt dieses Konzept in Verbindung mit den in C$\#$ integrierten Lambda-Ausdrücken in einem eigenen Artikel in der MSDN Library \cite{MSDNExpressions}. Dadurch bleibt die Methodenreferenz, im Gegensatz zur Verwendung von Strings, Ziel von automatisierten Refactorings. Eine dritte Möglichkeit erlaubt das Suchen von Methodenberichten per \texttt{MethodInfo}-Objekt aus dem .NET Framework.
 \begin{lstlisting}[caption={Methoden- und Property-Suche in einem \texttt{MetricsReport}-Objekt},label={listing:methodpropertysearch}]
 //Methoden
 methodMetrics = metrics.ForMethod(
@@ -1048,7 +1051,7 @@ propertyMetrics = metrics.ForProperty(() => Name);
 methodMetrics = metrics.ForMethod(
   "System.String andrena.Usus.net.Console.Analyzer.Name.get()");
 \end{lstlisting}
-Methodenberichte sind vom Typ \texttt{MethodMetricsReport} und lassen sich zum einen über die \texttt{Signature}-Eigenschaft der Methode finden, wie Zeile 2 zeigt. Wenn die zu suchende Methode im Scope ist (also in der Assembly deklariert ist, die den Code ausführt), kann sie wie in Zeile 4 auch über einen \texttt{Expression}-Ausdruck angegeben werden. Microsoft beschreibt dieses Konzept in Verbindung mit den in C$\#$ integrierten Lambda-Ausdrücken in einem eigenen Artikel in der MSDN Library \cite{MSDNExpressions}. Dadurch bleibt die Methodenreferenz, im Gegensatz zur Verwendung von Strings, Ziel von automatisierten Refactorings. Eine dritte Möglichkeit erlaubt das Suchen von Methodenberichten per \texttt{MethodInfo}-Objekt aus dem .NET Framework. Das gleiche gilt auch für Properties. Da der C$\#$-Kompiler den \texttt{get}- und \texttt{set}-Teil eines Properties als Methoden kompiliert, werden diese ebenfalls auf \texttt{MethodMetricsReport}-Objekte abgebildet. Wie in Zeile 6 in Listing \ref{listing:methodpropertysearch} gezeigt, lassen sich Properties auch über einen \texttt{Expression}-Ausdruck suchen. Das resultierende \texttt{PropertyMetricsReport}-Objekt ist einfach eine Zusammenfassung zweier \texttt{MethodMetricsReport}-Objekte, nämlich eins für den \texttt{get}- und eins für den \texttt{set}-Teil des Properties. Diese \texttt{MethodMetricsReport}-Objekte der Properties lassen sich aber auch direkt über die Signatur finden, wie Zeile 7 zeigt.
+Das gleiche gilt auch für Properties. Da der C$\#$-Kompiler den \texttt{get}- und \texttt{set}-Teil eines Properties als Methoden kompiliert, werden diese ebenfalls auf \texttt{MethodMetricsReport}-Objekte abgebildet. Wie in Zeile 6 in Listing \ref{listing:methodpropertysearch} gezeigt, lassen sich Properties auch über einen \texttt{Expression}-Ausdruck suchen. Das resultierende \texttt{PropertyMetricsReport}-Objekt ist einfach eine Zusammenfassung zweier \texttt{MethodMetricsReport}-Objekte, nämlich eins für den \texttt{get}- und eins für den \texttt{set}-Teil des Properties. Diese \texttt{MethodMetricsReport}-Objekte der Properties lassen sich aber auch direkt über die Signatur finden, wie Zeile 7 zeigt.
 
 \subsection{Klassenberichte}
 Da die Methoden, zu denen \texttt{MetricsReport} die Methodenberichte enthält, in einer Klasse deklariert sind, existiert auch ein Bericht für eben diese Klasse. Die Abbildung von Klasse zu Methode ist im Usus.net Objektmodell als Abbildung von \texttt{TypeMetricsReport}-Objekt zu \texttt{MethodeMetricsReport}-Objekten realisiert. Der Codeausschnitt in Listing \ref{listing:classmethodsearch} zeigt in Zeile 4 wie mithilfe der \texttt{MethodsOfType}-Methode alle Methodenberichte, die zu einem Klassenbericht gehören, ermittelt werden können. Die Variable \texttt{metrics} enthält wieder die Referenz zu dem \texttt{MetricsReport}-Objekt.
@@ -1070,11 +1073,12 @@ foreach (var typeMetrics in metrics.TypesOfNamespace(namespaceMetrics)) {...}
 \end{lstlisting}
 Da Namespaces mehrere Klassen enthalten lässt sich diese Zuordnung auch unter den Berichten auflösen. Die Schleife in Zeile 2 iteriert über alle Klassenberichte eines Namespace-Berichts, indem die \texttt{TypesOfNamespace}-Methode verwendet wird.
 \paragraph{}
-Neben dem Abhängigkeitsgraphen auf Klassenebene steht auch der Abhängigkeitsgraph auf Namespace-Ebene zur Verfügung. In Unterabschnitt \ref{subsec:namespaceswithcyclicdependencies} wurde beschrieben, wie dieser Graph aus dem Klassengraph erzeugt wird. Der Namespace-Graph besteht aus Kanten zwischen Knoten vom Typ \texttt{IGraph<NamespaceMetricsReport>}. Im Gegensatz zum Graph auf Typ Ebene verwendet Usus.net intern nicht direkt einen Graphen vom Typ \texttt{MutableGraph<NamespaceMetricsReport>} sondern einen Graphen, dessen Knoten vom Typ \texttt{NamespaceMetricsWithTypeMetrics} sind. Dies ist der Fall, da der Namespace-Graph aus dem Graph mit Klassenberichten als Knoten erzeugt wird. Um trotzdem einen schreibgeschützten Graphen vom Typ \texttt{IGraph<NamespaceMetricsReport>} zur Verfügung stellen zu können, ohne das ein neuer Graphen erzeugt werden muss, verwendet Usus.net eine Projektion des Knotentypen. Für diese Projektion wird ein Objekt vom Typ \texttt{GraphSurrogate<V, R>} verwendet, der das Interface \texttt{IGraph<V>} implementiert und einen Objekt vom Typ \texttt{IGraph<R>} kapselt. Die Knoten- und Kantenliste in diesem Typ werden über die Projektion von $R \rightarrow V$ also an den Zieltyp angepasst. Über diesen Adapter ist es möglich einen Graphen mit Knoten vom Typ \texttt{NamespaceMetricsWithTypeMetrics} als Graphen mit Knoten vom Typ \texttt{NamespaceMetricsReport} zu behandeln. Dies ist allerdings nur möglich, wenn es Abbildung von $R$ nach $V$ existiert. Da ein \texttt{NamespaceMetricsWithTypeMetrics}-Objekt den eigentlichen Namespace-Bericht sowie alle Klassenberichte in diesem Namespace enthält, ist die Abbildung einfach zu realisieren.
+Neben dem Abhängigkeitsgraphen auf Klassenebene steht auch der Abhängigkeitsgraph auf Namespace-Ebene zur Verfügung. In Unterabschnitt \ref{subsec:namespaceswithcyclicdependencies} wurde beschrieben, wie dieser Graph aus dem Klassengraph erzeugt wird. Der Namespace-Graph besteht aus Kanten zwischen Knoten vom Typ \texttt{IGraph<NamespaceMetricsReport>}. Im Gegensatz zum Graph auf Typ Ebene verwendet Usus.net intern keinen Graphen vom Typ \texttt{MutableGraph<NamespaceMetricsReport>} sondern einen Graphen, dessen Knoten vom Typ \texttt{NamespaceMetricsWithTypeMetrics} sind. Dies ist der Fall, da der Namespace-Graph aus dem Graph mit Klassenberichten als Knoten erzeugt wird. Um trotzdem einen schreibgeschützten Graphen vom Typ \texttt{IGraph<NamespaceMetricsReport>} zur Verfügung stellen zu können, ohne das ein neuer Graphen erzeugt werden muss, verwendet Usus.net eine Projektion des Knotentypen. Für diese Projektion wird ein Objekt vom Typ \texttt{GraphSurrogate<V, R>} verwendet, der das Interface \texttt{IGraph<V>} implementiert und einen Objekt vom Typ \texttt{IGraph<R>} kapselt. Die Knoten- und Kantenliste in diesem Typ werden über die Projektion von $R \rightarrow V$ also an den Zieltyp angepasst. Über diesen Adapter ist es möglich einen Graphen mit Knoten vom Typ \texttt{NamespaceMetricsWithTypeMetrics} als Graphen mit Knoten vom Typ \texttt{NamespaceMetricsReport} zu behandeln. Dies ist allerdings nur möglich, wenn es Abbildung von $R$ nach $V$ existiert. Da ein \texttt{NamespaceMetricsWithTypeMetrics}-Objekt den eigentlichen Namespace-Bericht sowie alle Klassenberichte in diesem Namespace enthält, ist die Abbildung einfach zu realisieren.
 
 
 \section{Metrikgewichtung}
-Nachdem in den vorherigen beiden Abschnitten beschrieben wurde, wie die Berechnung der Metriken funktioniert und in welcher Struktur das Ergebnis präsentiert wird, beschäftigt sich dieser Abschnitt mit der Weiterverarbeitung dieser Ergebnisse. Usus verwendet die Metriken beispielsweise für die in Unterabschnitt \ref{subsec:ususcockpit} vorgestellte Cockpit-Ansicht und in der in Unterabschnitt \ref{subsec:usushotspots} betrachteten Hotspots-Ansicht. Für diese beiden Ansichten werden die ermittelten Metriken gewichtet, mit Schwellwerten verglichen und Mittelwerte gebildet. Wie dies geschieht, wurde bereits in Unterabschnitt \ref{subsec:allprojectsmetrics} ausführlich beschrieben.
+Nachdem in den vorherigen beiden Abschnitten beschrieben wurde, wie die Berechnung der Metriken funktioniert und in welcher Struktur das Ergebnis präsentiert wird, beschäftigt sich dieser Abschnitt mit der Weiterverarbeitung dieser Ergebnisse. Usus verwendet die Metriken beispielsweise für die in Unterabschnitt \ref{subsec:ususcockpit} vorgestellte Cockpit-Ansicht und in der in Unterabschnitt \ref{subsec:usushotspots} betrachteten Hotspots-Ansicht. Für diese beiden Ansichten werden die ermittelten Metriken gewichtet, mit Schwellwerten verglichen und Mittelwerte gebildet. Wie dies geschieht, wurde bereits in Unterabschnitt \ref{subsec:allprojectsmetrics} ausführlich beschrieben. Die im folgenden vorgestellten Klassen befinden sich alle im Namespace \texttt{andrena.Usus.net.Core.Hotspots}.
+
 \subsection{Hotspots}
 Hotspots sind Methoden, Klassen und Namespaces dessen Metriken über einer Schwelle liegen. Usus.net kann diese Hotspots in Form eines \texttt{MetricsHotspots}-Objekts aus einem \texttt{MetricsReport}-Objekt bestimmen. Listing \ref{listing:hotspots} zeigt dies in Zeile 1. Die Variable \texttt{metrics} enthält wieder eine Referenz zu einem \texttt{MetricsReport}-Objekt. Anschließend können alle Berichte der Methoden, Klassen und Namespaces ermittelt werden, dessen Metriken über den Schwellen liegen, die in Unterabschnitt \ref{subsec:allprojectsmetrics} erwähnt wurden.
 \begin{lstlisting}[caption={Methoden-, Klassen- und Namespace-Hotspots in einem \texttt{MetricsReport}-Objekt},label={listing:hotspots}]
@@ -1085,7 +1089,7 @@ classHotspots = hotspots.OfCumulativeComponentDependency();
 classHotspots = hotspots.OfNumberOfNonStaticPublicFields();
 namespaceHotspots = hotspots.OfNamespacesInCycle();
 \end{lstlisting}
-Wenn wie beispielsweise in Zeile 2 alle \texttt{MethodMetricsReport}-Objekte bestimmt werden, dessen \texttt{MethodLength}-Eigenschaft über der definierten Schwelle liegt, iteriert Usus.net über alle Methoden im \texttt{MetricsReport}-Objekt. Dabei werden nur Berichte zurückgegeben, dessen Methodenlänge über dem Ergebnis der Schwellwertfunktion für Methodenlängen liegen. Die Schwellwerte der Metriken müssen nicht konstant sein. Der Schwellwert kann sich auch abhängig von der Projektgröße ändern, wie es beispielweise bei der durchschnittlichen kumulierten Komponentenabhängigkeit ACD der Fall ist (siehe Unter-Unterabschnitt \ref{subsubsec:acd}). Daher verwendet Usus.net das Konzept einer Schwellwertfunktion. Alle Schwellwertfunktionen können bei Bedarf auch zur Laufzeit geändert werden. Dafür lässt sich das \texttt{RatingFunctionLimits}-Objekt, welches die Funktionen definiert, über die statische Eigenschaft \texttt{RatingFunctions.Limits} erreichen. Listing \ref{listing:limitfunctions} zeigt die Deklaration und Definition der Schwellwertfunktionen für Methodenlänge und kumulierte Komponentenabhängigkeit mit Lambda-Ausdrücken.
+Wenn wie beispielsweise in Zeile 2 alle \texttt{MethodMetricsReport}-Objekte bestimmt werden, dessen \texttt{MethodLength}-Eigenschaft über der definierten Schwelle liegt, iteriert Usus.net über alle Methoden im \texttt{MetricsReport}-Objekt. Dabei werden nur Berichte zurückgegeben, dessen Methodenlänge über dem Ergebnis der Schwellwertfunktion für Methodenlängen liegen. Die Schwellwerte der Metriken müssen nicht konstant sein. Der Schwellwert kann sich auch abhängig von der Projektgröße ändern, wie es beispielweise bei der durchschnittlichen kumulierten Komponentenabhängigkeit ACD der Fall ist (siehe Unter-Unterabschnitt \ref{subsubsec:acd}). Daher verwendet Usus.net das Konzept einer Schwellwertfunktion. Alle Schwellwertfunktionen können bei Bedarf auch zur Laufzeit geändert werden. Dafür lässt sich das \texttt{RatingFunctionLimits}-Objekt, welches die Funktionen definiert, über die statische Eigenschaft \texttt{RatingFunctions.Limits} erreichen. Listing \ref{listing:limitfunctions} zeigt die Deklaration und Definition der Schwellwertfunktionen für Methodenlänge und kumulierte Komponentenabhängigkeit mit Lambda-Ausdrücken. Die Formel der Schwellwertfunktion \texttt{CumulativeComponentDependency} entspricht der bereits beschriebenen Formel \ref{eq:averagecomponentdependency4}.
 \begin{lstlisting}[caption={Schwellwertfunktionen sind abhängig von Daten eines \texttt{MetricsReport}-Objekts},label={listing:limitfunctions}]
 //Deklarationen
 Func<CommonReportKnowledge, int> MethodLength { get; set; }
@@ -1097,9 +1101,10 @@ CumulativeComponentDependency = ck => ck.NumberOfClasses *
 	(1.5 / Math.Pow(2, (Math.Log(ck.NumberOfClasses) / Math.Log(5))));
 ...
 \end{lstlisting}
-Die Formel der Schwellwertfunktion \texttt{CumulativeComponentDependency} entspricht der bereits beschriebenen Formel \ref{eq:averagecomponentdependency4}. Alle Schwellwertfunktionen sind Abbildungen von einem Objekt vom Typ \texttt{CommonReportKnowledge} auf eine Ganzzahl. \texttt{CommonReportKnowledge} ist Teil des Objektmodells des vollständigen Metrikberichts und wurde bereits in Abbildung \ref{fig:metricsreport} gezeigt. Dieses Objekt enthält einige allgemeine Daten der Metrik-Analyse wie beispielsweise die Anzahl der analysierten Klassen und Namespaces.
+Alle Schwellwertfunktionen sind Abbildungen von einem Objekt vom Typ \texttt{CommonReportKnowledge} auf eine Ganzzahl. \texttt{CommonReportKnowledge} ist Teil des Objektmodells des vollständigen Metrikberichts und wurde bereits in Abbildung \ref{fig:metricsreport} gezeigt. Dieses Objekt enthält einige allgemeine Daten der Metrik-Analyse wie beispielsweise die Anzahl der analysierten Klassen und Namespaces.
 
 \subsection{Statistiken}
+\label{subsec:statistics}
 Die Unterscheidung zwischen Metrik und Statistik der Metrik wurde bereits in Unterabschnitt \ref{subsec:staticcodeanalysis} definiert. Die Theorie, also wie diese Statistiken in Usus entstehen und berechnet werden können, wurde in Unterabschnitt \ref{subsec:allprojectsmetrics} vorgestellt. In Usus.net lassen sich die gleichen Werte über ein \texttt{RatedMetrics}-Objekt bestimmen, welches wie in Listing \ref{listing:statistics} in Zeile 1 gezeigt, über die \texttt{Rate}-Methode erzeugt werden kann. Die Variable \texttt{metrics} enthält wieder eine Referenz eines \texttt{MetricsReport}-Objekts.
 \begin{lstlisting}[caption={Statistiken aller Berichte in einem \texttt{MetricsReport}-Objekt},label={listing:statistics}]
 RatedMetrics statistics = metrics.Rate();
@@ -1110,7 +1115,7 @@ aml = statistics.AverageRatedMethodLength;
 anf = statistics.AverageRatedNumberOfNonStaticPublicFields;
 ncn = statistics.NamespacesWithCyclicDependencies;
 \end{lstlisting}
-Diese Statistiken entstehen durch eine Gewichtung der Methoden-, Klassen und Namespace-Berichte, die anschließend gezählt oder gemittelt werden. Die Berichte können auch unabhängig von einander gewichtet werden. Die \texttt{Rate}-Methode existiert für die einzelnen Berichte ebenfalls und erzeugt Objekte vom Typ \texttt{RatedMethodMetrics} für Methoden, \texttt{RatedTypeMetrics} für Klassen und \texttt{RatedNamespaceMetrics} für Namespaces. Tatsächlich ruft Usus.net diese Methode für jeden Bericht auf und speichert die dadurch erzeugten Objekte in einem \texttt{RatedMetrics}-Objekt. Dort können dann die Mittelwerte der einzelnen gewichteten Metriken als projektübergreifende Statistiken bestimmt werden. Sämtliche Gewichtungsfunktionen implementieren die Formeln aus Unterabschnitt \ref{subsec:allprojectsmetrics} und sind in der Klasse \texttt{RatingFunctions} definiert. Listing \ref{listing:statisticscalc} zeigt die Berechnung der der durchschnittlichen Methodenlänge in Zeile 1, der durchschnittlichen kumulierten Komponentenabhängigkeit in den Zeilen 2 bis 4 sowie der Anzahl der Namespaces mit zyklischen Abhängigkeiten in den Zeilen 5 bis 7.
+Diese Statistiken entstehen durch eine Gewichtung der Methoden-, Klassen und Namespace-Berichte, die anschließend gezählt oder gemittelt werden. Die Berichte können auch unabhängig von einander gewichtet werden. Die \texttt{Rate}-Methode existiert für die einzelnen Berichte ebenfalls und erzeugt Objekte vom Typ \texttt{RatedMethodMetrics} für Methoden, \texttt{RatedTypeMetrics} für Klassen und \texttt{RatedNamespaceMetrics} für Namespaces. Tatsächlich ruft Usus.net diese Methode für jeden Bericht auf und speichert die dadurch erzeugten Objekte in einem \texttt{RatedMetrics}-Objekt. Dort können dann die Mittelwerte der einzelnen gewichteten Metriken als projektübergreifende Statistiken bestimmt werden. Sämtliche Gewichtungsfunktionen implementieren die Formeln aus Unterabschnitt \ref{subsec:allprojectsmetrics} und sind in der Klasse \texttt{RatingFunctions} definiert.
 \begin{lstlisting}[caption={Statistik-Berechnung in einem \texttt{RatedMetrics}-Objekt},label={listing:statisticscalc}]
 AverageRatedMethodLength = RatedMethods.AverageAny(m => m.RatedMethodLength);
 AverageComponentDependency = 
@@ -1119,12 +1124,22 @@ AverageComponentDependency =
 NamespacesWithCyclicDependencies = 
 	RatedNamespaces.CountAny(m => m.IsInCycle) 
 	/ metrics.CommonKnowledge.NumberOfNamespaces;
-...
 \end{lstlisting}
-Obwohl die Berechnungen einfach lesbar sind, ist der Aufwand zur Bestimmung jeder Statistik $O(n)$. Für jede Statistik müssen alle Berichte des entsprechenden Typen berücksichtigt werden.
+Listing \ref{listing:statisticscalc} zeigt die Berechnung der durchschnittlichen Methodenlänge in Zeile 1, der durchschnittlichen kumulierten Komponentenabhängigkeit in den Zeilen 2 bis 4 sowie der Anzahl der Namespaces mit zyklischen Abhängigkeiten in den Zeilen 5 bis 7. Obwohl die Berechnungen einfach lesbar sind, ist der Aufwand zur Bestimmung jeder Statistik $O(n)$. Für jede Statistik müssen alle Methoden oder Klassen-Berichte, die die Metrik enthalten, berücksichtigt werden.
+
+\subsection{Ignorierbares}
+In Unterabschnitt \ref{subsec:statistics} wurde beschrieben, dass alle Methoden-Berichte berücksichtigt werden müssen, wenn eine Methoden-Metrik-Statistik bestimmt werden soll. Allerdings existieren in einer Assembly Methoden, die keinen keine relevanten Metriken enthalten. Alle Methoden und Klassen, die vom Kompiler erzeugt wurden, also durch ein \texttt{[CompilerGenerated]}-Attribut gekennzeichnet sind, werden von Usus.net in der Berechnung der Statistiken und der Hotspots ignoriert. Da diese Methoden und Klassen im Quellcode nicht offensichtlich sind, würde ein Hotspot an einer solchen Stelle den Entwickler auf etwas nicht nachvollziehbares hinweisen. Beispielsweise erzeugt der Kompiler aus einem \texttt{yield return}-Statement eine Klasse, die den Zustand der Methode verwaltet. Die erzeugte Logik ist kein Hotspot und sollte die Statistik auch nicht beeinflussen, da ein daraus resultierender Komplexitätsanstieg nicht nachvollziehbar ist.
+
+\textcolor[rgb]{1,0,0}{Lambdas? TODO}
+
+\paragraph{}
+Außerdem werden auch nur Methoden betrachtet, die einen Methodenrumpf besitzen. Abstrakte Methoden und Methoden-Deklarationen in Interfaces haben offensichtlich eine Methodenlänge und zyklomatische Komplexität von 0. Sie werden ebenfalls nicht in die Berechnung der Statistiken miteinbezogen, da sie das Ergebnis verfälschen. Eine Methoden-Deklaration ist weder gut noch schlecht, würde aber als sehr gute Methode die Statistik ungewollt verbessern. 
+\paragraph{}
+Die Methoden- und Klassenberichte im Usus.net Objektmodell aus Abschnitt \ref{sec:ususobjectmodel} bieten die Eigenschaften \texttt{CompilerGenerated} und \texttt{OnlyDeclaration} an, um die ignorierbaren Methoden und Klassen zu finden. Das in Abschnitt \ref{sec:eclipseusus} vorgestellte Usus-Plugin für Eclipse nimmt diese Unterscheidung nicht vor und behandelt abstrakte Methoden und Interface-Deklarationen wie normale Methoden, was zu einer trügerischen Verbesserung der Statistiken führt, wenn viele Interfaces und abstrakte Methoden vorhanden sind.
+
 
 \section{Testen}
-Nachdem in den vorherigen Abschnitten die Metrik-Analyse, das Objektmodell sowie die Statistiken von Usus.net erläutert wurden, beschäftigt sich dieser Abschnitt mit einer Möglichkeit Metriken mit Quellcode zu verbinden. \texttt{Usus.net.Core} stellt dafür eine Infrastruktur zur Verfügung, die in dieser Master-Thesis als \emph{Verification Framework} bezeichnet wird. Das Verification Framework besteht aus einer Menge an Attributen, mit denen Methoden und Klassen dekoriert werden können. Diese Attribute beschreiben Erwartungen in Form von Metriken an die betroffene Methode oder Klasse, wie in Listing \ref{listing:expectedmetrics} gezeigt.
+Nachdem in den vorherigen Abschnitten die Metrik-Analyse, das Objektmodell sowie die Statistiken von Usus.net erläutert wurden, beschäftigt sich dieser Abschnitt mit einer Möglichkeit Metriken mit Quellcode zu verbinden. \texttt{Usus.net.Core} stellt dafür eine Infrastruktur zur Verfügung, die in dieser Master-Thesis als \emph{Verification Framework} bezeichnet wird. Das Verification Framework befindet sich im Namespace \texttt{andrena.Usus.net.Core.Verification} und besteht aus einer Menge an Attributen, mit denen Methoden und Klassen dekoriert werden können. Diese Attribute beschreiben Erwartungen in Form von Metriken an die betroffene Methode oder Klasse, wie in Listing \ref{listing:expectedmetrics} gezeigt.
 \begin{lstlisting}[caption={Metrik-Erwartungswerte für Methoden und Klassen per Attribut definieren},label={listing:expectedmetrics}]
 [ExpectDirectDependency("System.Exception")]
 class ClassWithOneMethod
@@ -1147,13 +1162,76 @@ Usus.net nutzt das Verification Framework um die eigene Metrikberechnung und das
 
 
 \chapter{Usus.net als Visual Studio Erweiterung}
-todo
+Abbildung \ref{fig:architecture2} zeigt die Verwendung der in Kapitel \ref{chap:ususnet} beschrieben Funktionen von \texttt{Usus.net.Core}. \texttt{Usus.net.Core} steht als Bibliothek in Form einer Assembly zur Verfügung und wird von der Bibliothek \texttt{Usus.net.View} genutzt. Diese Bibliothek enthält alle grafischen Oberflächen von Usus.net und wird von der \texttt{Usus.net} Visual Studio Erweiterung verwendet. Die Erweiterung stellt dann nur noch die Fenster-Infrastruktur für die Usus.net Oberflächen zur Verfügung. In diesem Kapitel werden zunächst die Steuerelemente von \texttt{Usus.net.View} vorgestellt. Anschließend wird auf die Integration mit Visual Studio eingegangen.
+
+
+\section{Oberflächen}
+Die Oberfläche von Usus.net besteht genau wie das Usus für Eclipse (Kapitel \ref{chap:usus}) aus mehreren grafischen Benutzeroberflächen. Alle diese Oberflächen bieten besondere Sichten auf eine gemeinsame Datenquelle. Der Metrikbericht aus Abschnitt \ref{sec:ususobjectmodel} ist als Ergebnis der statischen Code-Analyse aus Abschnitt \ref{sec:metriccalc} das zentrale Objekt. Sobald dieses Objekt vom Typ \texttt{MetricsReport} zur Verfügung steht, müssen sich alle Sichten aktualisieren und die Daten des neuen Berichts verwenden. In diesem Abschnitt wird zunächst die Infrastruktur beschrieben, die es den Usus.net Oberflächen erlaubt eine gemeinsame Datenquelle zu verwenden. Anschließend werden die Implementierungen der Ansichten beschrieben, die bereits für das Usus für Eclipse vorgestellt wurden.
+
+\subsection{Hubs}
+Abbildung \ref{fig:viewhub} ...
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=17cm]{images/viewhub.jpg}
+	\caption{Oberflächen und \emph{ViewModels} in Verbindung zum \texttt{ViewHub}-Objekt}
+	\label{fig:viewhub}
+\end{figure}
 
 
 
 
 
 
+
+
+\textcolor[rgb]{1,0,0}{todo}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Cockpit}
+\textcolor[rgb]{1,0,0}{todo}
+
+\subsection{Hotspots}
+\textcolor[rgb]{1,0,0}{todo}
+
+\subsection{Histogramm}
+\textcolor[rgb]{1,0,0}{todo}
+
+\subsection{Clean Code Grade}
+\textcolor[rgb]{1,0,0}{todo}
+
+
+\section{Visual Studio Integration}
+\textcolor[rgb]{1,0,0}{todo}
+
+\subsection{Menüpunkt}
+\textcolor[rgb]{1,0,0}{todo}
+
+\subsection{Fenster}
+\textcolor[rgb]{1,0,0}{todo}
+
+\subsection{Events}
+\textcolor[rgb]{1,0,0}{todo}
+
+\subsection{Editor Adorner}
+\textcolor[rgb]{1,0,0}{todo}
 
 
 
@@ -1171,50 +1249,53 @@ todo
 
 
 \chapter{Clean Code Unterstützung}
-todo
-
-
-\section{Achievements System}
-todo
-
-
-\section{Fallbeispiel Andrena-Kurs}
-todo
-
-
-
-
-\chapter{Code-Qualität Bewertung}
-todo
+\textcolor[rgb]{1,0,0}{todo}
 
 
 \section{Histogram}
-todo
+\textcolor[rgb]{1,0,0}{todo}
 
+\subsection{Exponentialverteilung}
+\textcolor[rgb]{1,0,0}{todo}
 
-\section{Exponentialverteilungen}
-todo
-
-
-\section{Heuristiken}
-todo
+\subsection{Heuristiken}
+\textcolor[rgb]{1,0,0}{todo}
 
 
 \section{Andrena Software Qualitäts Index}
-todo
+\textcolor[rgb]{1,0,0}{todo}
+
+
+\section{Metrik-Veränderung}
+\textcolor[rgb]{1,0,0}{todo}
+
+
+
+
+\chapter{In Aktion}
+\textcolor[rgb]{1,0,0}{todo}
+
+
+\section{Usus.net Performance}
+\textcolor[rgb]{1,0,0}{todo}
+
+
+\section{Fallbeispiel Andrena-Kurs}
+\textcolor[rgb]{1,0,0}{todo}
 
 
 
 
 \chapter{Zusammenfassung}
-todo
+\textcolor[rgb]{1,0,0}{todo}
+Use Cases erfüllt, bla bla
 
 
 
 
-\chapter{Fazit}
-todo
-
+\chapter{Ausblick}
+\textcolor[rgb]{1,0,0}{todo}
+automatische Refaktorings, bla bla
 
 
 
