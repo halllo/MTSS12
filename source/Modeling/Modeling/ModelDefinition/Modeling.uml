@@ -2049,7 +2049,7 @@
             isSubstitutable="false">
             <classMoniker
               Id="cc8c90a2-2724-425c-ab24-ec4e54e5e1e3"
-              LastKnownName="UserControl"
+              LastKnownName="ViewFactory"
               LastKnownLocation="Modeling.uml" />
           </generalization>
         </generalsInternal>
@@ -2153,6 +2153,69 @@
               LastKnownLocation="Modeling.uml" />
           </interfaceRealization>
         </suppliersInternal>
+        <generalsInternal>
+          <generalization
+            Id="b70890ff-6ac1-46c8-acf5-07113909c382"
+            isSubstitutable="false">
+            <classMoniker
+              Id="80eee2e8-4fa3-4837-ab40-6b4137aff80b"
+              LastKnownName="ViewModel"
+              LastKnownLocation="Modeling.uml" />
+          </generalization>
+        </generalsInternal>
+        <targetEnds>
+          <association
+            Id="9d4edb18-4d4a-4e8b-a8af-fac04016289a"
+            isDerived="false"
+            sourceEndRoleName=""
+            targetEndRoleName="Hub"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="7a926f85-cf7d-4604-8d43-c07df2825aef"
+              LastKnownName="ViewHub"
+              LastKnownLocation="Modeling.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="cbdc26d8-424a-4889-9d1f-f5fb1bfb8b25"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="Shared"
+                  isComposite="false"
+                  isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="b09d0210-c5c9-48b7-956a-590f468dc3f2"
+                      name="Lower"
+                      value="*" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="8d00c09f-c11a-46fd-a79a-80d1c7b89480"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="42a66b65-89d7-4ff8-9976-60fd938e816a"
+                  name="Hub"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
         <ownedOperationsInternal>
           <operation
             Id="f990216a-e67b-4569-a01e-2c0a94ec2270"
@@ -2208,26 +2271,45 @@
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
-        <suppliersInternal>
-          <dependency
-            Id="0a4585fd-2f68-46e7-b7de-89257e17c350"
-            name="&lt;&lt;creates&gt;&gt;">
+        <targetEnds>
+          <association
+            Id="90efa07a-6559-4e86-954e-9e37cc2354e3"
+            isDerived="false"
+            sourceEndRoleName=""
+            targetEndRoleName=""
+            isLeaf="false"
+            isAbstract="false">
             <classMoniker
               Id="769a4662-3525-41ba-a594-44c9d58ca642"
               LastKnownName="CockpitViewModel"
               LastKnownLocation="Modeling.uml" />
-          </dependency>
-        </suppliersInternal>
-        <generalsInternal>
-          <generalization
-            Id="d9cc0325-3f02-48f5-af38-9894a43ba7f4"
-            isSubstitutable="false">
-            <classMoniker
-              Id="9d10dcc8-aafb-4226-be9f-a4ac2669db38"
-              LastKnownName="HubAwareControl"
-              LastKnownLocation="Modeling.uml" />
-          </generalization>
-        </generalsInternal>
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="51bc76fa-a48f-4392-bda9-3921d531a963"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="667085d6-408e-4c97-a578-e4b5213c21a8"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
       </class>
     </packageHasNamedElement>
     <packageHasNamedElement>
@@ -2237,26 +2319,45 @@
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
-        <suppliersInternal>
-          <dependency
-            Id="fc5640e1-feca-4e72-a0c9-770e742ffaae"
-            name="&lt;&lt;creates&gt;&gt;">
+        <targetEnds>
+          <association
+            Id="baec8002-78fd-43d1-8051-05c61f6fa926"
+            isDerived="false"
+            sourceEndRoleName=""
+            targetEndRoleName=""
+            isLeaf="false"
+            isAbstract="false">
             <classMoniker
               Id="0eec1348-3440-4978-8229-a76c21e31b46"
               LastKnownName="HotspotsViewModel"
               LastKnownLocation="Modeling.uml" />
-          </dependency>
-        </suppliersInternal>
-        <generalsInternal>
-          <generalization
-            Id="d718f178-1ca5-4a31-ba23-894fca04c797"
-            isSubstitutable="false">
-            <classMoniker
-              Id="9d10dcc8-aafb-4226-be9f-a4ac2669db38"
-              LastKnownName="HubAwareControl"
-              LastKnownLocation="Modeling.uml" />
-          </generalization>
-        </generalsInternal>
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="a49570b2-bb73-4df1-beea-0dd3e6b0d7be"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="fca509cc-018d-4f81-a1b0-4a71e98b6e2f"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
       </class>
     </packageHasNamedElement>
     <packageHasNamedElement>
@@ -2266,26 +2367,45 @@
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
-        <suppliersInternal>
-          <dependency
-            Id="33a01f77-fc16-4063-9ee2-ed56c2160ce5"
-            name="&lt;&lt;creates&gt;&gt;">
+        <targetEnds>
+          <association
+            Id="48e73c59-e23f-43c3-8a69-20b24bc994d0"
+            isDerived="false"
+            sourceEndRoleName=""
+            targetEndRoleName=""
+            isLeaf="false"
+            isAbstract="false">
             <classMoniker
               Id="5c6d1302-7370-4a7b-a423-cfae6dff3765"
               LastKnownName="DistributionsViewModel"
               LastKnownLocation="Modeling.uml" />
-          </dependency>
-        </suppliersInternal>
-        <generalsInternal>
-          <generalization
-            Id="07caea35-2c32-4b23-a159-a466e66e2544"
-            isSubstitutable="false">
-            <classMoniker
-              Id="9d10dcc8-aafb-4226-be9f-a4ac2669db38"
-              LastKnownName="HubAwareControl"
-              LastKnownLocation="Modeling.uml" />
-          </generalization>
-        </generalsInternal>
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="a59d77ab-7e9b-4c0c-a202-6606c8e93b91"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="ef7d437e-243e-45c2-b1f4-e57421ea1e7a"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
       </class>
     </packageHasNamedElement>
     <packageHasNamedElement>
@@ -2295,35 +2415,137 @@
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="f521cb8f-4f99-492b-badd-541d1837f0c3"
+            isDerived="false"
+            sourceEndRoleName=""
+            targetEndRoleName=""
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="d054e828-443a-4296-a2ea-a19f711202a5"
+              LastKnownName="CleanCodeViewModel"
+              LastKnownLocation="Modeling.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="f5718d58-6429-4c37-9a5d-426dd6c1a8c5"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="f6667654-76fe-4963-bb6a-4855030b34e0"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="cc8c90a2-2724-425c-ab24-ec4e54e5e1e3"
+        name="ViewFactory"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
         <suppliersInternal>
           <dependency
-            Id="4dd6738b-bc96-48be-bcc0-cda64eeaa7df"
+            Id="b0c456a0-8e06-4bfc-a579-7dea700bb897"
+            name="&lt;&lt;creates&gt;&gt;">
+            <classMoniker
+              Id="5c6d1302-7370-4a7b-a423-cfae6dff3765"
+              LastKnownName="DistributionsViewModel"
+              LastKnownLocation="Modeling.uml" />
+          </dependency>
+          <dependency
+            Id="4044d753-8b55-4870-b8f0-ba7dca8b1d88"
+            name="&lt;&lt;creates&gt;&gt;">
+            <classMoniker
+              Id="0eec1348-3440-4978-8229-a76c21e31b46"
+              LastKnownName="HotspotsViewModel"
+              LastKnownLocation="Modeling.uml" />
+          </dependency>
+          <dependency
+            Id="64fecac8-e540-4dba-9d7c-07183af83bcc"
             name="&lt;&lt;creates&gt;&gt;">
             <classMoniker
               Id="d054e828-443a-4296-a2ea-a19f711202a5"
               LastKnownName="CleanCodeViewModel"
               LastKnownLocation="Modeling.uml" />
           </dependency>
-        </suppliersInternal>
-        <generalsInternal>
-          <generalization
-            Id="d63604c5-df63-4e3b-bffb-7c3d2e14b587"
-            isSubstitutable="false">
+          <dependency
+            Id="f2c451de-74ad-4ef4-9a7f-7eed36c39e8f"
+            name="&lt;&lt;creates&gt;&gt;">
             <classMoniker
-              Id="9d10dcc8-aafb-4226-be9f-a4ac2669db38"
-              LastKnownName="HubAwareControl"
+              Id="96eff547-e63c-45c3-a3dc-7e6748b3de32"
+              LastKnownName="Distributions"
               LastKnownLocation="Modeling.uml" />
-          </generalization>
-        </generalsInternal>
+          </dependency>
+          <dependency
+            Id="499d64dd-51bd-45f4-8d47-082bcfd34235"
+            name="&lt;&lt;creates&gt;&gt;">
+            <classMoniker
+              Id="d2e45437-0fcb-43fd-8746-f7f91c4a44de"
+              LastKnownName="CleanCode"
+              LastKnownLocation="Modeling.uml" />
+          </dependency>
+          <dependency
+            Id="2da47c89-0747-4681-86d9-d1d065d53a85"
+            name="&lt;&lt;creates&gt;&gt;">
+            <classMoniker
+              Id="e83c2460-6a39-4107-92da-4b5d68ea29be"
+              LastKnownName="Cockpit"
+              LastKnownLocation="Modeling.uml" />
+          </dependency>
+          <dependency
+            Id="9b468dd8-dae1-4b83-b9e7-49142e095b00"
+            name="&lt;&lt;creates&gt;&gt;">
+            <classMoniker
+              Id="c38ed448-9360-4fd0-b54a-3a208dc9fd39"
+              LastKnownName="Hotspots"
+              LastKnownLocation="Modeling.uml" />
+          </dependency>
+          <dependency
+            Id="afaf0faf-a246-4712-9eb9-036aa778fd95"
+            name="&lt;&lt;uses&gt;&gt;">
+            <interfaceMoniker
+              Id="07896b90-cebf-4b72-a579-991e9b40582d"
+              LastKnownName="IHubConnect"
+              LastKnownLocation="Modeling.uml" />
+          </dependency>
+          <dependency
+            Id="cf2596b3-d943-48e8-a413-f5ea68cca54d"
+            name="&lt;&lt;uses&gt;&gt;">
+            <classMoniker
+              Id="7a926f85-cf7d-4604-8d43-c07df2825aef"
+              LastKnownName="ViewHub"
+              LastKnownLocation="Modeling.uml" />
+          </dependency>
+          <dependency
+            Id="4396c960-9631-459b-a152-ee283cb4719f"
+            name="&lt;&lt;creates&gt;&gt;">
+            <classMoniker
+              Id="769a4662-3525-41ba-a594-44c9d58ca642"
+              LastKnownName="CockpitViewModel"
+              LastKnownLocation="Modeling.uml" />
+          </dependency>
+        </suppliersInternal>
       </class>
-    </packageHasNamedElement>
-    <packageHasNamedElement>
-      <class
-        Id="cc8c90a2-2724-425c-ab24-ec4e54e5e1e3"
-        name="UserControl"
-        isAbstract="false"
-        isLeaf="false"
-        isActiveClass="false" />
     </packageHasNamedElement>
     <packageHasNamedElement>
       <class
@@ -2400,6 +2622,14 @@
           </generalization>
         </generalsInternal>
       </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="80eee2e8-4fa3-4837-ab40-6b4137aff80b"
+        name="ViewModel"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
     </packageHasNamedElement>
   </packagedElements>
   <primitiveType

@@ -1173,41 +1173,23 @@ Abbildung \ref{fig:architecture2} zeigt die Verwendung der in Kapitel \ref{chap:
 Die Oberfläche von Usus.net besteht genau wie das Usus für Eclipse (Kapitel \ref{chap:usus}) aus mehreren grafischen Benutzeroberflächen. Alle diese Oberflächen bieten besondere Sichten auf eine gemeinsame Datenquelle. Der Metrikbericht aus Abschnitt \ref{sec:ususobjectmodel} ist als Ergebnis der statischen Code-Analyse aus Abschnitt \ref{sec:metriccalc} das zentrale Objekt. Sobald dieses Objekt vom Typ \texttt{MetricsReport} zur Verfügung steht, müssen sich alle Sichten aktualisieren und die Daten des neuen Berichts verwenden. In diesem Abschnitt wird zunächst die Infrastruktur beschrieben, die es den Usus.net Oberflächen erlaubt eine gemeinsame Datenquelle zu verwenden. Anschließend werden die Implementierungen der Ansichten beschrieben, die bereits für das Usus für Eclipse vorgestellt wurden.
 
 \subsection{Hubs}
-Abbildung \ref{fig:viewhub} ...
-
+Usus.net besteht aus mehreren Fenstern mit einer gemeinsamen Datenquelle. Jedes Fenster enthält ein Steuerelement vom Typ \texttt{UserControl}\footnote[1]{Mehr über Windows Presentation Foundation \url{http://msdn.microsoft.com/de-de/library/ms754130.aspx}}. Um alle diese Steuerelemente mit einem zentralen Objekt zu verknüpfen, bietet die Bibliothek \texttt{Usus.net.View} die Klasse \texttt{ViewHub} an, welche nur in Form einer einzigen Instanz existieren kann. Die Ansichten \texttt{Cockpit}, \texttt{Hotspots}, \texttt{Distribution} und \texttt{CleanCode} werden von der \texttt{ViewFactory} in Kombination mit den entsprechenden ViewModels erzeugt. Das \texttt{ViewHub}-Objekt wird dabei bei den ViewModels bekannt gemacht. Diese können sich dann für die Events \texttt{AnalysisStarted} und \texttt{MetricsReady} registrieren. Ein Aufruf der \texttt{TryStartAnalysis}-Methode mit einer Liste an Assembly-Pfaden startet die statische Code-Analyse und teilt allen registrierten Objekten das neue Ergebnis-Objekt vom Typ \texttt{MetricsReport} mit. In Abbildung \ref{fig:viewhub} sind die Beziehungen zwischen den Views und den ViewModels in Bezug auf die Hub-Infratstuktur verdeutlicht. Die Oberflächen besitzen eigene ViewModels und implementieren damit das MVVM-Muster, welches Josh Smith in seinem Artikel \cite{WPFMVVM} ausführlich beschreibt.
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=17cm]{images/viewhub.jpg}
 	\caption{Oberflächen und \emph{ViewModels} in Verbindung zum \texttt{ViewHub}-Objekt}
 	\label{fig:viewhub}
 \end{figure}
-
-
-
-
-
-
-
-
-\textcolor[rgb]{1,0,0}{todo}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Nachdem die Steuerelemente erzeugt wurden, erreichen die Events \texttt{AnalysisStarted} und \texttt{MetricsReady} des einen \texttt{ViewHub}-Objekts die ViewModels aller Oberflächen in Usus.net. In der \texttt{TryStartAnalysis}-Methode wird sichergestellt, dass eine Analyse nur dann gestartet werden kann, wenn sie nicht schon läuft. Wie die Analyse dann gestartet wird, ist in Listing \ref{listing:startanalysis} zu sehen.
+\begin{lstlisting}[caption={Start der statischen Code-Analyse in der \texttt{TryStartAnalysis}-Methode},label={listing:startanalysis}]
+AnalysisStarted();
+ThreadPool.QueueUserWorkItem((c) =>
+{
+	MetricsReport metrics = Analyze.PortableExecutable(files.ToArray());
+	MetricsReady(metrics);
+});
+\end{lstlisting}
+Zu Beginn wird das Event \texttt{AnalysisStarted} gefeuert. Alles weitere findet asynchron in einem eigenen Thread statt, der über den \texttt{ThreadPool} erzeugt wird. Dadurch muss der Aufrufer der \texttt{TryStartAnalysis}-Methode nicht warten, da die Analyse im Hintergrund ausgeführt wird. Die Klasse \texttt{Analyse} ist bereits aus Abschnitt \ref{sec:metriccalc} bekannt. Sobald der Bericht vom Typ \texttt{MetricsReport} erzeugt wurde, wird dieser über das Event \texttt{MetricsReady} an alle ViewModels übergeben. Diese müssen sich beim Anzeigen der Daten des Berichts nur noch darum kümmern, dass sie die Daten mit dem Thread der Oberfläche synchronisieren. Die grafischen Steuerelemente und die Factory befinden sich im Namespace \texttt{andrena.Usus.net.View}. Die Hub-Infrastruktur befindet sich in \texttt{andrena.Usus.net.View.Hub}. Die ViewModels der Oberflächen sind im Namespace \texttt{andrena.Usus.net.View.ViewModels} zu finden.
 
 \subsection{Cockpit}
 \textcolor[rgb]{1,0,0}{todo}
