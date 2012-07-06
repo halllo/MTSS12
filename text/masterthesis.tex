@@ -1245,7 +1245,7 @@ Abbildung \ref{fig:ususnet_histogram} zeigt die Häufigkeitsverteilungen aller Be
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=14cm]{images/ususnet_histogram.png}
-	\caption{Usus.net Hotspots}
+	\caption{Usus.net Histogramm}
 	\label{fig:ususnet_histogram}
 \end{figure}
 Ähnlich wie das Hotspots-Fenster, ist auch das Verteilungs-Fenster in Registerkarten eingeteilt. Um die Histogramme zu bestimmen, werden die Funktionen verwendet, die bereits in Abschnitt \ref{sec:distributions} vorgestellt wurden. Diese Verteilungen können anschließend angezeigt werden. Dazu verwendet Usus.net das Spalten-Diagramm des WPF Toolkits\footnote[1]{Windows Presentation Foundation Toolkit \url{http://wpf.codeplex.com/releases/view/40535}}.
@@ -1255,7 +1255,7 @@ Ein Usus.net Fenster, das es nicht in der Eclipse Version gibt, ist \emph{Usus.n
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=12cm]{images/ususnet_cleancode.png}
-	\caption{Usus.net Clean Code}
+	\caption{Usus.net Clean Code Grade}
 	\label{fig:ususnet_cleancode}
 \end{figure}
 Zu jedem Grad werden die Prinzipien (Unterabschnitt \ref{subsec:ccdprinciples}) und Parktiken (Unterabschnitt \ref{subsec:ccdpractices}) als Hyperlinks aufgelistet. Über diese Hyperlinks lassen sich die Internetseiten von Westphal und Lieser öffnen, die ausführliche Beschreibungen der Grade enthalten. 
@@ -1264,17 +1264,41 @@ Zu jedem Grad werden die Prinzipien (Unterabschnitt \ref{subsec:ccdprinciples}) 
 \section{Visual Studio Integration}
 \textcolor[rgb]{1,0,0}{todo}
 
-\subsection{Menüpunkt}
-\textcolor[rgb]{1,0,0}{todo}
+\subsection{Events}
+Um auf Ereignisse in Visual Studio zu reagieren, wird eine Referenz auf das \texttt{DTE2}-Objekt benötigt. Laut Microsoft ist dieses Objekt, als Bestandteil des \texttt{EnvDTE}-Namespace, Teil der COM-Bibliothek, die für die Automatisierung von Visual Studio verwendet werden kann \cite{MSDNDTE2}. Listing \ref{listing:getdte2} zeigt, wie eine Referenz zu diesem Objekt erstellt werden kann. Dafür muss dieser Code innerhalb einer Klasse die von \texttt{ToolWindowPane} erbt ausgeführt werden, sodass sich \texttt{base} auf ein Objekt vom Typ \texttt{WindowPane} bezieht.
+\begin{lstlisting}[caption={Zentrales Visual Studio Objekt \texttt{DTE2} erhalten},label={listing:getdte2}]
+EnvDTE80.DTE2 dt2 = base.GetService(typeof(SDTE)) as EnvDTE80.DTE2;
+\end{lstlisting}
+Sobald eine Referenz zu dem \texttt{DTE2}-Objekt verfügbar ist, kann die aktuelle Solution in der Visual Studio Instanz mit \texttt{dt2.Solution} ermittelt werden. Über dieses \texttt{Solution}-Objekt können dann alle Projekte in dieser Solution bestimmt werden. Mit \texttt{dt2.Events} kann außerdem ein Objekt erhalten werden, über welches Eventhandler für sämtliche Ereignisse definiert werden können. Für Usus.net ist das Ereignis \texttt{dt2.Events.BuildEvents.OnBuildDone} das wichtigste, da die statische Code-Analyse nach einem erfolgreichen Kompiliervorgang gestartet werden soll. Ob der Build erfolgreich war kann mit \texttt{dt2.Solution.SolutionBuild.LastBuildInfo} ermittelt werden.
 
 \subsection{Fenster}
+Ein Visual Studio Fenster ist eine Klasse, die von \texttt{ToolWindowPane} erbt. Alle Fenster von Usus.net sollen auf das Build-Ereignis reagieren, alle Projekte der aktuellen Solution und deren erzeugte Assemblies bestimmen können. Um diese Logik für alle Usus.net Fenster wiederverwenden zu können, stellt Usus.net einige Oberklassen zur Verfügung, die die benötigten Funktionen bereitstellen. Diese Klassen befinden sich im Namespace \texttt{andrena.Usus.net.ExtensionHelper}.
+
+
+DtAwareToolWindow mit MasterObjekt dt2
+
+SolutionAwareToolWindowPane mit RawSolution EnvDTE.Solution, RawProjects IEnumerable<EnvDTE.Project> und Projects IEnumerable<Project>
+
+SolutionEventsAwareToolWindowPane mit Ereignissen SolutionChanged, SavingDone, CommandDone, BuildStart, BuildDone
+
+BuildAwareToolWindowPane mit Ereignis BuildSuccessfull und Parameter IEnumerable<string>
+
+
 \textcolor[rgb]{1,0,0}{todo}
 
-\subsection{Events}
+\subsection{Menüpunkt}
 \textcolor[rgb]{1,0,0}{todo}
 
 \subsection{Zeilensprünge}
 \label{subsec:vsrowjumps}
+Listing \ref{listing:openfilejumprow} zeigt, wie Visual Studio mithilfe des \texttt{DTE2}-Objekts eine Datei öffnen und zu einer Zeile in dieser Datei springen kann.
+\begin{lstlisting}[caption={Datei öffnen und an Zeile springen},label={listing:openfilejumprow}]
+MasterObjekt.ItemOperations.OpenFile(fileName, 
+	EnvDTE.Constants.vsViewKindTextView);
+var file = MasterObjekt.ActiveDocument.Selection as EnvDTE.TextSelection;
+file.GotoLine(fileLine, selectLine);
+\end{lstlisting}
+Die Variable \texttt{fileName} enthält den vollständigen Pfad der zu öffnenden Datei und die Variable \texttt{fileLine} die Zeilennummer der zu markierenden Zeile.
 \textcolor[rgb]{1,0,0}{todo}
 
 \subsection{Editor Adorner}
