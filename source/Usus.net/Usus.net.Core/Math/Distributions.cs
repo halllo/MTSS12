@@ -32,10 +32,12 @@ namespace andrena.Usus.net.Core.Math
 
         private static IEnumerable<T> MethodsNotGenerated<T>(this MetricsReport metrics, Func<MethodMetricsReport, T> selector)
         {
-            return from t in metrics.Methods
-                   where !t.CompilerGenerated
-                   where !t.OnlyDeclaration
-                   select selector(t);
+            return from m in metrics.Methods
+                   where !m.CompilerGenerated
+                   where !m.OnlyDeclaration
+                   where m.CyclomaticComplexity > 0
+                   where m.MethodLength > 0
+                   select selector(m);
         }
     }
 }

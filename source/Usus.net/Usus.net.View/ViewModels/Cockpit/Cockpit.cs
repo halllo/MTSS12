@@ -21,7 +21,7 @@ namespace andrena.Usus.net.View.ViewModels.Cockpit
 
         protected override void AnalysisFinished(MetricsReport metrics)
         {
-            var ratedMetrics = metrics.Rate();
+            RatedMetrics ratedMetrics = metrics.Rate();
             Dispatch(() => SetNewEntries(ratedMetrics));
         }
 

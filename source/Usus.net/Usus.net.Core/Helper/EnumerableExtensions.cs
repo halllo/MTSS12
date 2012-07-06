@@ -13,12 +13,22 @@ namespace andrena.Usus.net.Core.Helper
 
         public static IEnumerable<R> ToList<T, R>(this IEnumerable<T> sequence, Func<T, R> selector)
         {
-            return sequence.Select(selector).ToList();
+            return sequence.ToList(selector, t => true);
+        }
+
+        public static IEnumerable<R> ToList<T, R>(this IEnumerable<T> sequence, Func<T, R> selector, Func<T, bool> condition)
+        {
+            return sequence.Where(condition).Select(selector).ToList();
         }
 
         public static double AverageAny<T>(this IEnumerable<T> sequence, Func<T, double> selector)
         {
-            return sequence.Any() ? sequence.Average(selector) : 0.0;
+            return sequence.AverageAny(selector, t => true);
+        }
+
+        public static double AverageAny<T>(this IEnumerable<T> sequence, Func<T, double> selector, Func<T, bool> condition)
+        {
+            return sequence.Where(condition).Any() ? sequence.Where(condition).Average(selector) : 0.0;
         }
 
         public static int CountAny<T>(this IEnumerable<T> sequence, Func<T, bool> selector)

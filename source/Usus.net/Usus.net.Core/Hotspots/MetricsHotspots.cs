@@ -14,12 +14,12 @@ namespace andrena.Usus.net.Core.Hotspots
 
         public IEnumerable<MethodMetricsReport> OfCyclomaticComplexity()
         {
-            return Metrics.MethodsOverLimit(m => m.CyclomaticComplexity, l => l.CyclomaticComplexity);
+            return Metrics.MethodsOverLimit(m => m.CyclomaticComplexity, l => l.CyclomaticComplexity, m => !m.CompilerGenerated);
         }
 
         public IEnumerable<MethodMetricsReport> OfMethodLength()
         {
-            return Metrics.MethodsOverLimit(m => m.MethodLength, l => l.MethodLength);
+            return Metrics.MethodsOverLimit(m => m.MethodLength, l => l.MethodLength, m => !m.CompilerGenerated);
         }
 
         public IEnumerable<TypeMetricsReport> OfClassSize()

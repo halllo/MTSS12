@@ -1084,6 +1084,7 @@ Neben dem Abhängigkeitsgraphen auf Klassenebene steht auch der Abhängigkeitsgrap
 Nachdem in den vorherigen beiden Abschnitten beschrieben wurde, wie die Berechnung der Metriken funktioniert und in welcher Struktur das Ergebnis präsentiert wird, beschäftigt sich dieser Abschnitt mit der Weiterverarbeitung dieser Ergebnisse. Usus verwendet die Metriken beispielsweise für die in Unterabschnitt \ref{subsec:ususcockpit} vorgestellte Cockpit-Ansicht und in der in Unterabschnitt \ref{subsec:usushotspots} betrachteten Hotspots-Ansicht. Für diese beiden Ansichten werden die ermittelten Metriken gewichtet, mit Schwellwerten verglichen und Mittelwerte gebildet. Wie dies geschieht, wurde bereits in Unterabschnitt \ref{subsec:allprojectsmetrics} ausführlich beschrieben. Die im folgenden vorgestellten Klassen befinden sich alle im Namespace \texttt{andrena.Usus.net.Core.Hotspots}.
 
 \subsection{Hotspots}
+\label{subsec:hotspots}
 Hotspots sind Methoden, Klassen und Namespaces dessen Metriken über einer Schwelle liegen. Usus.net kann diese Hotspots in Form eines \texttt{MetricsHotspots}-Objekts aus einem \texttt{MetricsReport}-Objekt bestimmen. Listing \ref{listing:hotspots} zeigt dies in Zeile 1. Die Variable \texttt{metrics} enthält wieder eine Referenz zu einem \texttt{MetricsReport}-Objekt. Anschließend können alle Berichte der Methoden, Klassen und Namespaces ermittelt werden, dessen Metriken über den Schwellen liegen, die in Unterabschnitt \ref{subsec:allprojectsmetrics} erwähnt wurden.
 \begin{lstlisting}[caption={Methoden-, Klassen- und Namespace-Hotspots in einem \texttt{MetricsReport}-Objekt},label={listing:hotspots}]
 MetricsHotspots hotspots = metrics.Hotspots();
@@ -1137,7 +1138,7 @@ In Unterabschnitt \ref{subsec:statistics} wurde beschrieben, dass alle Methoden-
 \textcolor[rgb]{1,0,0}{Lambdas? TODO}
 
 \paragraph{}
-Außerdem werden auch nur Methoden betrachtet, die einen Methodenrumpf besitzen. Abstrakte Methoden und Methoden-Deklarationen in Interfaces haben offensichtlich eine Methodenlänge und zyklomatische Komplexität von 0. Sie werden ebenfalls nicht in die Berechnung der Statistiken miteinbezogen, da sie das Ergebnis verfälschen. Eine Methoden-Deklaration ist weder gut noch schlecht, würde aber als sehr gute Methode die Statistik ungewollt verbessern. 
+Außerdem werden auch nur Methoden betrachtet, die einen nicht leeren Methodenrumpf besitzen. Abstrakte Methoden und Methoden-Deklarationen in Interfaces haben offensichtlich eine Methodenlänge und zyklomatische Komplexität von 0. Sie werden ebenfalls nicht in die Berechnung der Statistiken miteinbezogen, da sie das Ergebnis verfälschen. Eine Methoden-Deklaration ist weder gut noch schlecht, würde aber als sehr gute Methode die Statistik ungewollt verbessern. 
 \paragraph{}
 Die Methoden- und Klassenberichte im Usus.net Objektmodell aus Abschnitt \ref{sec:ususobjectmodel} bieten die Eigenschaften \texttt{CompilerGenerated} und \texttt{OnlyDeclaration} an, um die ignorierbaren Methoden und Klassen zu finden. Das in Abschnitt \ref{sec:eclipseusus} vorgestellte Usus-Plugin für Eclipse nimmt diese Unterscheidung nicht vor und behandelt abstrakte Methoden und Interface-Deklarationen wie normale Methoden, was zu einer trügerischen Verbesserung der Statistiken führt, wenn viele Interfaces und abstrakte Methoden vorhanden sind.
 
@@ -1192,15 +1193,42 @@ ThreadPool.QueueUserWorkItem((c) =>
 Zu Beginn wird das Event \texttt{AnalysisStarted} gefeuert. Alles weitere findet asynchron in einem eigenen Thread statt, der über den \texttt{ThreadPool} erzeugt wird. Dadurch muss der Aufrufer der \texttt{TryStartAnalysis}-Methode nicht warten, da die Analyse im Hintergrund ausgeführt wird. Die Klasse \texttt{Analyse} ist bereits aus Abschnitt \ref{sec:metriccalc} bekannt. Sobald der Bericht vom Typ \texttt{MetricsReport} erzeugt wurde, wird dieser über das Event \texttt{MetricsReady} an alle ViewModels übergeben. Diese müssen sich beim Anzeigen der Daten des Berichts nur noch darum kümmern, dass sie die Daten mit dem Thread der Oberfläche synchronisieren. Die grafischen Steuerelemente und die Factory befinden sich im Namespace \texttt{andrena.Usus.net.View}. Die Hub-Infrastruktur befindet sich in \texttt{andrena.Usus.net.View.Hub}. Die ViewModels der Oberflächen sind im Namespace \texttt{andrena.Usus.net.View.ViewModels} zu finden.
 
 \subsection{Cockpit}
-\textcolor[rgb]{1,0,0}{todo}
+Das Fenster mit den am weitesten aggregierte Metriken ist \emph{Usus.net Cockpit}. Nach dem Vorbild aus Unterabschnitt \ref{subsec:ususcockpit} enthält die Oberfläche eine einfache Tabelle und zeigt alle Statistiken an, die bereits in Unterabschnitt \ref{subsec:statistics} vorgestellt wurden. Abbildung \ref{fig:ususnet_cockpit} zeigt das Cockpit-Steuerelement als Fenster in Visual Studio.
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=14cm]{images/ususnet_cockpit.png}
+	\caption{Usus.net Cockpit}
+	\label{fig:ususnet_cockpit}
+\end{figure}
+Dieses Fenster verhält sich wie alle anderen Fenster und kann in Visual Studio beliebig angedockt werden. Das ViewModel reagiert auf einen verfügbaren Metrikbericht, indem es die Einträge der Tabelle durch neue Einträge für die Statistiken ersetzt. Als Tabelle wird ein \texttt{DataGrid}-Objekt verwendet.
 
 \subsection{Hotspots}
-\textcolor[rgb]{1,0,0}{todo}
+Abbildung \ref{fig:ususnet_hotspots} zeigt alle Hotspots in der Codebasis.
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=14cm]{images/ususnet_hotspots.png}
+	\caption{Usus.net Hotspots}
+	\label{fig:ususnet_hotspots}
+\end{figure}
+Wie die Oberfläche in Unterabschnitt \ref{subsec:usushotspots}, lassen sich zu jeder Metrik genau die Methoden, Klassen und Namespaces anzeigen, dessen Metriken über den definierten Schwellen aus Abschnitt \ref{sec:metrics} liegen. Dazu wird die API verwendet, die bereits in Unterabschnitt \ref{subsec:hotspots} vorgestellt wurde. Diese Problemfälle sind nach Metrik gruppiert und lassen sich über den Reiter der entsprechenden Metrik anzeigen.
 
 \subsection{Histogramm}
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=14cm]{images/ususnet_histogram.png}
+	\caption{Usus.net Hotspots}
+	\label{fig:ususnet_histogram}
+\end{figure}
 \textcolor[rgb]{1,0,0}{todo}
 
+
 \subsection{Clean Code Grade}
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=14cm]{images/ususnet_cleancode.png}
+	\caption{Usus.net Clean Code}
+	\label{fig:ususnet_cleancode}
+\end{figure}
 \textcolor[rgb]{1,0,0}{todo}
 
 

@@ -81,7 +81,6 @@
     <Compile Include="Hotspots.xaml.cs">
       <DependentUpon>Hotspots.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Hub\IHubConnect.cs" />
     <Compile Include="Hub\ViewHub.cs" />
     <Compile Include="ViewModels\AnalysisAwareViewModel.cs" />
     <Compile Include="ViewModels\CleanCode\CleanCodeRanks.cs" />

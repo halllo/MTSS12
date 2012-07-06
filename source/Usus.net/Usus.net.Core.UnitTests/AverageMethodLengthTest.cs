@@ -21,7 +21,7 @@ namespace Usus.net.Core.UnitTests
         [TestMethod]
         public void Rate_31MethodLengths_AverageRatedPoint0143()
         {
-            Assert.AreEqual(0.0143, CreateAverage.RatedMethodLength(
+            Assert.AreEqual(0.0148, CreateAverage.RatedMethodLength(
                 13, 8, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), Constants.DELTA);
         }
     }

@@ -1,5 +1,4 @@
-﻿using andrena.Usus.net.View.Hub;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 
 namespace andrena.Usus.net.View
 {

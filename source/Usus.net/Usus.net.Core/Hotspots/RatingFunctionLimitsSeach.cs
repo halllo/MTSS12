@@ -7,10 +7,11 @@ namespace andrena.Usus.net.Core.Hotspots
 {
     internal static class RatingFunctionLimitsSeach
     {
-        public static IEnumerable<MethodMetricsReport> MethodsOverLimit<T>(this MetricsReport metrics, Func<MethodMetricsReport, T> metricSelector, Func<RatingFunctionLimits, Func<CommonReportKnowledge, T>> limitSelector)
+        public static IEnumerable<MethodMetricsReport> MethodsOverLimit<T>(this MetricsReport metrics, Func<MethodMetricsReport, T> metricSelector, Func<RatingFunctionLimits, Func<CommonReportKnowledge, T>> limitSelector, Func<MethodMetricsReport, bool> condition)
             where T : IComparable<T>
         {
             return from method in metrics.Methods
+                   where condition(method)
                    where metricSelector(method).CompareTo(limitSelector(RatingFunctions.Limits)(metrics.CommonKnowledge)) > 0
                    select method;
         }
@@ -19,8 +20,8 @@ namespace andrena.Usus.net.Core.Hotspots
             where T : IComparable<T>
         {
             return from type in metrics.Types
-                   where metricSelector(type).CompareTo(limitSelector(RatingFunctions.Limits)(metrics.CommonKnowledge)) > 0
                    where condition(type)
+                   where metricSelector(type).CompareTo(limitSelector(RatingFunctions.Limits)(metrics.CommonKnowledge)) > 0
                    select type;
         }
 

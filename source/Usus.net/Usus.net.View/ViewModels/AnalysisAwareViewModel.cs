@@ -4,7 +4,7 @@ using andrena.Usus.net.View.Hub;
 
 namespace andrena.Usus.net.View.ViewModels
 {
-    public abstract class AnalysisAwareViewModel : ViewModel, IHubConnect
+    public abstract class AnalysisAwareViewModel : ViewModel
     {
         public SolidColorBrush ReadyColor { get; protected set; }
         public SolidColorBrush NotReadyColor { get; protected set; }

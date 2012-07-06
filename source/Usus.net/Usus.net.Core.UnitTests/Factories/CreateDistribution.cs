@@ -12,5 +12,14 @@ namespace Usus.net.Core.UnitTests.Factories
             var report = Create.MetricsReport(methods);
             return report.MethodDistribution(selector);
         }
+
+        public static MethodMetricsReport Report(int methodLength)
+        {
+            return new MethodMetricsReport
+            {
+                CyclomaticComplexity = 1,
+                NumberOfLogicalLines = methodLength
+            };
+        }
     }
 }
