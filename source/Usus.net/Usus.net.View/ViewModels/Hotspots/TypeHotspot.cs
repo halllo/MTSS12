@@ -29,6 +29,7 @@ namespace andrena.Usus.net.View.ViewModels.Hotspots
                 firstMethod.SourceLocation.Filename,
                 firstMethod.SourceLocation.Line, true);
         }
+
         private bool HasJumpableLocation(MethodMetricsReport firstMethod)
         {
             return firstMethod != null && firstMethod.SourceLocation.IsAvailable;

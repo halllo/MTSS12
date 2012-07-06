@@ -651,9 +651,11 @@ Robert C. Martin beschreibt eine Kategorie, die in der Haupt-Sequenz liegt, als 
 
 
 \section{CCD-Addin}
+\label{sec:ccdaddin}
 In Kapitel \ref{chap:requirements} wurde im Rahmen der Anforderungsanalyse der Anwendungsfall "`Clean Code Hilfe bekommen"' identifiziert. Das Visual Studio Addin \emph{CcdAddIn}\footnote[1]{"`CcdAddIn is a visual Studio Add-In that displays the CCD values according to your current CCD Grade"' \url{https://github.com/AlexZeitler/CcdAddIn}} von Alexander Zeitler versucht eine solche Hilfestellung in passiver Form zu geben. In Unterabschnitt \ref{subsec:cleancode} wurde die Idee von Clean Code bereits erläutert und auf das sieben-Grade-System von Ralf Westphal und Stefan Lieser \cite{CleanCodeDeveloper} eingegangen. Das Programm integriert sich in die IDE und zeigt zu jedem Grad die entsprechenden Prinzipien und Praktiken an, sodass der Entwickler immer an seinen aktuellen Grad und an die damit verbundenen "`Regeln"' erinnert wird. Jede Praktik und jedes Prinzip ist anklickbar, sodass das Addin weitere Informationen anzeigen kann. Leider zeigt das Addin die Informationen nur an und bietet sonst kein weitere Hilfestellung.
 
 \subsection{Prinzipien}
+\label{subsec:ccdprinciples}
 In diesem Unterabschnitt werden die einzelnen Grade vorgestellt. Da der \emph{schwarze} Grad lediglich einer Interessenbekundung entspricht und der \emph{weiße} Grad das komplette Spektrum abdeckt, werden im Folgenden nur die verbleibenden fünf Grade erwähnt. Die folgenden Prinzipien wurden direkt von Westphal und Lieser \cite{CleanCodeDeveloper} übernommen.
 \begin{description}
 	\item[Rot] \emph{Don´t Repeat Yourself} (DRY), \emph{Keep it simple, stupid} (KISS), Vorsicht vor Optimierungen!, \emph{Favour Composition over Inheritance} (FCoI)
@@ -664,6 +666,7 @@ In diesem Unterabschnitt werden die einzelnen Grade vorgestellt. Da der \emph{sc
 \end{description}
 
 \subsection{Praktiken}
+\label{subsec:ccdpractices}
 Neben den Prinzipien existieren zu jedem Grad auf Praktiken, die ebenfalls direkt von Westphal und Lieser \cite{CleanCodeDeveloper} übernommen wurden.
 \begin{description}
 	\item[Rot] die Pfadfinderregel beachten, \emph{Root Cause Analysis}, ein Versionskontrollsystem einsetzen, einfache Refaktorisierungsmuster anwenden, Täglich reflektieren
@@ -1113,12 +1116,12 @@ Alle Schwellwertfunktionen sind Abbildungen von einem Objekt vom Typ \texttt{Com
 Die Unterscheidung zwischen Metrik und Statistik der Metrik wurde bereits in Unterabschnitt \ref{subsec:staticcodeanalysis} definiert. Die Theorie, also wie diese Statistiken in Usus entstehen und berechnet werden können, wurde in Unterabschnitt \ref{subsec:allprojectsmetrics} vorgestellt. In Usus.net lassen sich die gleichen Werte über ein \texttt{RatedMetrics}-Objekt bestimmen, welches wie in Listing \ref{listing:statistics} in Zeile 1 gezeigt, über die \texttt{Rate}-Methode erzeugt werden kann. Die Variable \texttt{metrics} enthält wieder eine Referenz eines \texttt{MetricsReport}-Objekts.
 \begin{lstlisting}[caption={Statistiken aller Berichte in einem \texttt{MetricsReport}-Objekt},label={listing:statistics}]
 RatedMetrics statistics = metrics.Rate();
-acd = statistics.AverageComponentDependency;
-acs = statistics.AverageRatedClassSize;
-acc = statistics.AverageRatedCyclomaticComplexity;
-aml = statistics.AverageRatedMethodLength;
-anf = statistics.AverageRatedNumberOfNonStaticPublicFields;
-ncn = statistics.NamespacesWithCyclicDependencies;
+double acd = statistics.AverageComponentDependency;
+double acs = statistics.AverageRatedClassSize;
+double acc = statistics.AverageRatedCyclomaticComplexity;
+double aml = statistics.AverageRatedMethodLength;
+double anf = statistics.AverageRatedNumberOfNonStaticPublicFields;
+double ncn = statistics.NamespacesWithCyclicDependencies;
 \end{lstlisting}
 Diese Statistiken entstehen durch eine Gewichtung der Methoden-, Klassen und Namespace-Berichte, die anschließend gezählt oder gemittelt werden. Die Berichte können auch unabhängig von einander gewichtet werden. Die \texttt{Rate}-Methode existiert für die einzelnen Berichte ebenfalls und erzeugt Objekte vom Typ \texttt{RatedMethodMetrics} für Methoden, \texttt{RatedTypeMetrics} für Klassen und \texttt{RatedNamespaceMetrics} für Namespaces. Tatsächlich ruft Usus.net diese Methode für jeden Bericht auf und speichert die dadurch erzeugten Objekte in einem \texttt{RatedMetrics}-Objekt. Dort können dann die Mittelwerte der einzelnen gewichteten Metriken als projektübergreifende Statistiken bestimmt werden. Sämtliche Gewichtungsfunktionen implementieren die Formeln aus Unterabschnitt \ref{subsec:allprojectsmetrics} und sind in der Klasse \texttt{RatingFunctions} definiert.
 \begin{lstlisting}[caption={Statistik-Berechnung in einem \texttt{RatedMetrics}-Objekt},label={listing:statisticscalc}]
@@ -1133,7 +1136,7 @@ NamespacesWithCyclicDependencies =
 Listing \ref{listing:statisticscalc} zeigt die Berechnung der durchschnittlichen Methodenlänge in Zeile 1, der durchschnittlichen kumulierten Komponentenabhängigkeit in den Zeilen 2 bis 4 sowie der Anzahl der Namespaces mit zyklischen Abhängigkeiten in den Zeilen 5 bis 7. Obwohl die Berechnungen einfach lesbar sind, ist der Aufwand zur Bestimmung jeder Statistik $O(n)$. Für jede Statistik müssen alle Methoden oder Klassen-Berichte, die die Metrik enthalten, berücksichtigt werden.
 
 \subsection{Ignorierbares}
-In Unterabschnitt \ref{subsec:statistics} wurde beschrieben, dass alle Methoden-Berichte berücksichtigt werden müssen, wenn eine Methoden-Metrik-Statistik bestimmt werden soll. Allerdings existieren in einer Assembly Methoden, die keinen keine relevanten Metriken enthalten. Alle Methoden und Klassen, die vom Kompiler erzeugt wurden, also durch ein \texttt{[CompilerGenerated]}-Attribut gekennzeichnet sind, werden von Usus.net in der Berechnung der Statistiken und der Hotspots ignoriert. Da diese Methoden und Klassen im Quellcode nicht offensichtlich sind, würde ein Hotspot an einer solchen Stelle den Entwickler auf etwas nicht nachvollziehbares hinweisen. Beispielsweise erzeugt der Kompiler aus einem \texttt{yield return}-Statement eine Klasse, die den Zustand der Methode verwaltet. Die erzeugte Logik ist kein Hotspot und sollte die Statistik auch nicht beeinflussen, da ein daraus resultierender Komplexitätsanstieg nicht nachvollziehbar ist.
+In Unterabschnitt \ref{subsec:statistics} wurde beschrieben, dass alle Methodenberichte berücksichtigt werden müssen, wenn eine Methoden-Metrik-Statistik bestimmt werden soll. Allerdings existieren in einer Assembly Methoden, die keinen keine relevanten Metriken enthalten. Alle Methoden und Klassen, die vom Kompiler erzeugt wurden, also durch ein \texttt{[CompilerGenerated]}-Attribut gekennzeichnet sind, werden von Usus.net in der Berechnung der Statistiken und der Hotspots ignoriert. Da diese Methoden und Klassen im Quellcode nicht offensichtlich sind, würde ein Hotspot an einer solchen Stelle den Entwickler auf etwas nicht nachvollziehbares hinweisen. Beispielsweise erzeugt der Kompiler aus einem \texttt{yield return}-Statement eine Klasse, die den Zustand der Methode verwaltet. Die erzeugte Logik ist kein Hotspot und sollte die Statistik auch nicht beeinflussen, da ein daraus resultierender Komplexitätsanstieg nicht nachvollziehbar ist.
 
 \textcolor[rgb]{1,0,0}{Lambdas? TODO}
 
@@ -1141,6 +1144,24 @@ In Unterabschnitt \ref{subsec:statistics} wurde beschrieben, dass alle Methoden-
 Außerdem werden auch nur Methoden betrachtet, die einen nicht leeren Methodenrumpf besitzen. Abstrakte Methoden und Methoden-Deklarationen in Interfaces haben offensichtlich eine Methodenlänge und zyklomatische Komplexität von 0. Sie werden ebenfalls nicht in die Berechnung der Statistiken miteinbezogen, da sie das Ergebnis verfälschen. Eine Methoden-Deklaration ist weder gut noch schlecht, würde aber als sehr gute Methode die Statistik ungewollt verbessern. 
 \paragraph{}
 Die Methoden- und Klassenberichte im Usus.net Objektmodell aus Abschnitt \ref{sec:ususobjectmodel} bieten die Eigenschaften \texttt{CompilerGenerated} und \texttt{OnlyDeclaration} an, um die ignorierbaren Methoden und Klassen zu finden. Das in Abschnitt \ref{sec:eclipseusus} vorgestellte Usus-Plugin für Eclipse nimmt diese Unterscheidung nicht vor und behandelt abstrakte Methoden und Interface-Deklarationen wie normale Methoden, was zu einer trügerischen Verbesserung der Statistiken führt, wenn viele Interfaces und abstrakte Methoden vorhanden sind.
+
+
+\section{Metrikverteilung}
+\label{sec:distributions}
+Im Namespace \texttt{andrena.Usus.net.Core.Math} existiert die Klasse \texttt{Distributions}. In dieser Klassen sind mehrere Extensions Methods definiert, die Verteilungen von Methoden- und Klassen-Metriken bestimmen können. Listing \ref{listing:methodtypedistributions} zeigt, wie diese Methoden verwendet werden können.
+\begin{lstlisting}[caption={Verteilungen von Methoden- und Klassen-Berichten erstellen},label={listing:methodtypedistributions}]
+IHistogram css = Metrics.TypeDistribution(t => t.ClassSize);
+IHistogram ccs = Metrics.MethodDistribution(m => m.CyclomaticComplexity);
+...
+\end{lstlisting}
+Die Variable \texttt{Metrics} enthält eine Referenz auf ein \texttt{MetricsReport}-Objekt. Das Histogramm wird in Form eines Objekts der Klasse \texttt{Distribution} erzeugt. Diese Klasse implementiert das Interface \texttt{IHistogram}. Über den Konstruktor kann eine Sequenz von \texttt{int}-Werten übergeben werden, aus denen die Verteilung erstellt wird. Ein Histogramm ist ein einfaches Schaubild, das auf der x-Achse die diskreten Werte einer Sequenz enthält. Auf der y-Achse wird die Häufigkeit des Auftretens des entsprechenden x-Werts abgebildet. Dadurch wird ersichtlich, wie oft ein bestimmter Wert in der Sequenz enthalten ist. Die \texttt{Distribution}-Klasse verwendet Funktionalität der öffentlichen Bibliothek Math.NET\footnote[1]{Math.NET Numerics "`numerical library"' \url{http://mathnetnumerics.codeplex.com/}} um das Histogramm zu erzeugen, wie in Listing \ref{listing:distributioncreation} gezeigt.
+\begin{lstlisting}[caption={Histogramm-Erzeugung mit Math.NET},label={listing:distributioncreation}]
+var maxValue = data.Max();
+for (int i = 0; i <= maxValue; i++)
+	histogram.AddBucket(new Bucket(-0.5 + i, 0.5 + i));
+histogram.AddData(data.Select(d => d * 1.0));
+\end{lstlisting}
+Die Variable \texttt{data} enthält die erwähnte Sequenz von Ganzzahlen (\texttt{IEnumerable<int>}), die über den Konstruktor übergeben wird. Usus.net unterstützt nur Histogramme mit positiven Werten. Ein fertiges Histogramm liegt in Form eines \texttt{IHistogram}-Objekts vor.  Die Werte der x-Achse können mithilfe der Eigenschaft \texttt{BinCount} auf 0 bis \texttt{BinCount}-1 bestimmt werden. Um den y-Wert zu einem x-Wert zu bestimmen, kann die Methode \texttt{ElementsInBin(x)} mit dem x-Wert als Parameter aufgerufen werden.
 
 
 \section{Testen}
@@ -1210,26 +1231,34 @@ Abbildung \ref{fig:ususnet_hotspots} zeigt alle Hotspots in der Codebasis.
 	\caption{Usus.net Hotspots}
 	\label{fig:ususnet_hotspots}
 \end{figure}
-Wie die Oberfläche in Unterabschnitt \ref{subsec:usushotspots}, lassen sich zu jeder Metrik genau die Methoden, Klassen und Namespaces anzeigen, dessen Metriken über den definierten Schwellen aus Abschnitt \ref{sec:metrics} liegen. Dazu wird die API verwendet, die bereits in Unterabschnitt \ref{subsec:hotspots} vorgestellt wurde. Diese Problemfälle sind nach Metrik gruppiert und lassen sich über den Reiter der entsprechenden Metrik anzeigen.
+Wie die Oberfläche in Unterabschnitt \ref{subsec:usushotspots}, lassen sich zu jeder Metrik genau die Methoden, Klassen und Namespaces anzeigen, dessen Metriken über den definierten Schwellen aus Abschnitt \ref{sec:metrics} liegen. Dazu wird die API verwendet, die bereits in Unterabschnitt \ref{subsec:hotspots} vorgestellt wurde. Diese Problemfälle sind nach Metrik gruppiert und lassen sich über den Reiter der entsprechenden Metrik anzeigen. Mit einen Doppelklick auf einen Methoden- oder Klassen-Hotspot springt Visual Studio an die Problemstelle im Quellcode. Dies ist möglich, da im Rahmen der Metrikberechnung aus Abschnitt \ref{sec:metriccalc} die Zeilen-Informationen aus der pdb-Datei den Methodenberichten zugeordnet werden. Das ViewModel von \emph{Usus.net Hotspots} verwendet das Interface \texttt{IJumpToSource}, um an beliebige Zeilen von beliebigen Dateien zu springen. Auf Visual Studio Seite implementiert das Fenster, dass das Hotspots-Element enthält, dieses Interface. Wie eine Zeile in einer Visual Studio Erweiterung abgesprungen werden kann, beschreibt Unterabschnitt \ref{subsec:vsrowjumps}. Listing \ref{listing:jumptomethod} zeigt den Sprung von der Seite des Hostspots-ViewModel.
+\begin{lstlisting}[caption={Zu der Methode eines \texttt{MethodMetricsReport}-Objekt springen},label={listing:jumptomethod}]
+if (Report.SourceLocation.IsAvailable)
+	jumper.JumpToFileLocation(
+		Report.SourceLocation.Filename,
+		Report.SourceLocation.Line, true);
+\end{lstlisting}
+Die Variable \texttt{Report} enthält eine Referenz auf das \texttt{MethodMetricsReport}-Objekt eines Hotspots. Der letzte Parameter des Methodenaufrufs gibt an, dass die entsprechende Zeile selektiert werden soll und damit schneller sichtbar wird. Die pdb-Datei einer Assembly enthält keine Zeileninformationen für Klassen. Um per Doppelklick zu einem Klassen-Hotspot zu springen, ermittelt das ViewModel die erste Methode dieser Klasse und springt zu dieser.
 
 \subsection{Histogramm}
+Abbildung \ref{fig:ususnet_histogram} zeigt die Häufigkeitsverteilungen aller Berichte des Objektmodells aus Abschnitt \ref{sec:ususobjectmodel} in Bezug auf die Metriken an.
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=14cm]{images/ususnet_histogram.png}
 	\caption{Usus.net Hotspots}
 	\label{fig:ususnet_histogram}
 \end{figure}
-\textcolor[rgb]{1,0,0}{todo}
-
+Ähnlich wie das Hotspots-Fenster, ist auch das Verteilungs-Fenster in Registerkarten eingeteilt. Um die Histogramme zu bestimmen, werden die Funktionen verwendet, die bereits in Abschnitt \ref{sec:distributions} vorgestellt wurden. Diese Verteilungen können anschließend angezeigt werden. Dazu verwendet Usus.net das Spalten-Diagramm des WPF Toolkits\footnote[1]{Windows Presentation Foundation Toolkit \url{http://wpf.codeplex.com/releases/view/40535}}.
 
 \subsection{Clean Code Grade}
+Ein Usus.net Fenster, das es nicht in der Eclipse Version gibt, ist \emph{Usus.net CleanClode}. Damit ist Alexander Zeitler's Idee die Clean Code Grade von Ralf Westphal und Stefan Lieser \cite{CleanCodeDeveloper} immer direkt in der IDE zu sehen, in Usus.net integriert. Zeitlers Idee wurde bereits in Abschnitt \ref{sec:ccdaddin} vorgestellt. Abbildung \ref{fig:ususnet_cleancode} zeigt die Liste, mit den verschiedenen Graden.
 \begin{figure}[h]
 	\centering
-		\includegraphics[width=14cm]{images/ususnet_cleancode.png}
+		\includegraphics[width=12cm]{images/ususnet_cleancode.png}
 	\caption{Usus.net Clean Code}
 	\label{fig:ususnet_cleancode}
 \end{figure}
-\textcolor[rgb]{1,0,0}{todo}
+Zu jedem Grad werden die Prinzipien (Unterabschnitt \ref{subsec:ccdprinciples}) und Parktiken (Unterabschnitt \ref{subsec:ccdpractices}) als Hyperlinks aufgelistet. Über diese Hyperlinks lassen sich die Internetseiten von Westphal und Lieser öffnen, die ausführliche Beschreibungen der Grade enthalten. 
 
 
 \section{Visual Studio Integration}
@@ -1242,6 +1271,10 @@ Wie die Oberfläche in Unterabschnitt \ref{subsec:usushotspots}, lassen sich zu j
 \textcolor[rgb]{1,0,0}{todo}
 
 \subsection{Events}
+\textcolor[rgb]{1,0,0}{todo}
+
+\subsection{Zeilensprünge}
+\label{subsec:vsrowjumps}
 \textcolor[rgb]{1,0,0}{todo}
 
 \subsection{Editor Adorner}
