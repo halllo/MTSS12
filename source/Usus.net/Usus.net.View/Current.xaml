@@ -1,5 +1,4 @@
-﻿<hub:HubAwareControl x:Class="andrena.Usus.net.View.Current"
-             xmlns:hub="clr-namespace:andrena.Usus.net.View.Hub"
+﻿<UserControl x:Class="andrena.Usus.net.View.Current"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -17,4 +16,4 @@
                   ItemsSource="{Binding Entries}"
                   MouseLeftButtonDown="DataGrid_MouseLeftButtonDown" ColumnHeaderHeight="1" />
     </Grid>
-</hub:HubAwareControl>
+</UserControl>

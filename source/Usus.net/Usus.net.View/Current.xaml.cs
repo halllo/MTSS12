@@ -1,15 +1,14 @@
-﻿using andrena.Usus.net.View.Hub;
+﻿using System.Windows.Controls;
 
 namespace andrena.Usus.net.View
 {
-    public partial class Current : HubAwareControl
+    public partial class Current : UserControl
     {
-        public ViewModels.Current.Current ViewModel { get; private set; }
+        public ViewModels.Current.Current ViewModel { get { return DataContext as ViewModels.Current.Current; } }
 
         public Current()
         {
             InitializeComponent();
-            RegisterViewModel(ViewModel = new ViewModels.Current.Current { Dispatchable = this });
         }
 
         private void DataGrid_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)

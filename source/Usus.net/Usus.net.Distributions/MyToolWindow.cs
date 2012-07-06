@@ -16,7 +16,8 @@ namespace andrena.Usus_net_Distributions
             this.BitmapResourceID = 301;
             this.BitmapIndex = 2;
 
-            base.Content = new Distributions() { Hub = ViewHub.Instance };
+            BuildSuccessfull += files => ViewHub.Instance.TryStartAnalysis(files);
+            base.Content = ViewFactory.CreateDistributions(ViewHub.Instance);
         }
     }
 }

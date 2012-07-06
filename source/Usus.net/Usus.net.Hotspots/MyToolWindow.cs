@@ -18,14 +18,7 @@ namespace andrena.Usus_net_Hotspots
             this.BitmapIndex = 2;
 
             BuildSuccessfull += files => ViewHub.Instance.TryStartAnalysis(files);
-            base.Content = CreateHotspotsView();
-        }
-
-        private Hotspots CreateHotspotsView()
-        {
-            var hotspotsView = new Hotspots() { Hub = ViewHub.Instance };
-            hotspotsView.ViewModel.SourceLocating = this;
-            return hotspotsView;
+            base.Content = ViewFactory.CreateHotspots(ViewHub.Instance, this);
         }
 
         public void JumpToFileLocation(string path, int line, bool selection)

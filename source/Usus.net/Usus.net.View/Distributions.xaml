@@ -1,5 +1,4 @@
-﻿<hub:HubAwareControl x:Class="andrena.Usus.net.View.Distributions"
-             xmlns:hub="clr-namespace:andrena.Usus.net.View.Hub"
+﻿<UserControl x:Class="andrena.Usus.net.View.Distributions"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -76,4 +75,4 @@
         </TabControl>
         
     </Grid>
-</hub:HubAwareControl>
+</UserControl>

@@ -17,7 +17,7 @@ namespace andrena.Usus_net_Cockpit
             this.BitmapIndex = 2;
 
             BuildSuccessfull += files => ViewHub.Instance.TryStartAnalysis(files);
-            base.Content = new Cockpit() { Hub = ViewHub.Instance };
+            base.Content = ViewFactory.CreateCockpit(ViewHub.Instance);
         }
     }
 }

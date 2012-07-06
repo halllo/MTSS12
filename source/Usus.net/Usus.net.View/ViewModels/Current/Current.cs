@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using andrena.Usus.net.Core.Reports;
+using andrena.Usus.net.View.ExtensionPoints;
 
 namespace andrena.Usus.net.View.ViewModels.Current
 {
@@ -27,7 +28,7 @@ namespace andrena.Usus.net.View.ViewModels.Current
             this.metrics = metrics;
         }
 
-        public Func<LineLocation> RequestCurosrPosition { private get; set; }
+        internal IKnowSourceLocation SourceLocations { private get; set; }
 
         internal void RequestMetrics()
         {
@@ -36,14 +37,14 @@ namespace andrena.Usus.net.View.ViewModels.Current
 
         private bool EnoughDataAvailable()
         {
-            return RequestCurosrPosition != null
-                && !lastLocation.IsSameAs(RequestCurosrPosition())
+            return SourceLocations != null
+                && !lastLocation.IsSameAs(SourceLocations.GetCursorPositon())
                 && metrics != null;
         }
 
         private void DisplayMetricsOfMethod()
         {
-            var method = GetLastMethodOf(RequestCurosrPosition());
+            var method = GetLastMethodOf(SourceLocations.GetCursorPositon());
             if (method != null) DisplayMetrics(method);
         }
 
@@ -65,7 +66,7 @@ namespace andrena.Usus.net.View.ViewModels.Current
         {
             return !method.CompilerGenerated
                 && method.SourceLocation.IsAvailable
-                && method.SourceLocation.Filename == location.File
+                && String.Compare(method.SourceLocation.Filename, location.File, true) == 0
                 && method.SourceLocation.Line <= location.Line;
         }
 

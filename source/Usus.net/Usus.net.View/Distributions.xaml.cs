@@ -1,13 +1,12 @@
-﻿using andrena.Usus.net.View.Hub;
+﻿using System.Windows.Controls;
 
 namespace andrena.Usus.net.View
 {
-    public partial class Distributions : HubAwareControl
+    public partial class Distributions : UserControl
     {
         public Distributions()
         {
             InitializeComponent();
-            RegisterViewModel(new ViewModels.Distributions.Distributions { Dispatchable = this });
         }
     }
 }

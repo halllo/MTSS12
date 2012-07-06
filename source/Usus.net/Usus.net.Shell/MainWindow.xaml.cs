@@ -15,9 +15,30 @@ namespace andrena.Usus.net.Shell
 
         void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            Cockpit.Hub = ViewModel.Hub;
-            Hotspots.Hub = ViewModel.Hub;
-            Distributions.Hub = ViewModel.Hub;
+            Cockpit.DataContext = CreateCockpitViewModel();
+            Hotspots.DataContext = CreateHotspotsViewModel();
+            Distributions.DataContext = CreateDistribtionsViewModel();
+        }
+
+        private View.ViewModels.Cockpit.Cockpit CreateCockpitViewModel()
+        {
+            var cockpit = new View.ViewModels.Cockpit.Cockpit { Dispatchable = Cockpit };
+            cockpit.RegisterHub(ViewModel.Hub);
+            return cockpit;
+        }
+
+        private View.ViewModels.Hotspots.Hotspots CreateHotspotsViewModel()
+        {
+            var hotspots = new View.ViewModels.Hotspots.Hotspots { Dispatchable = Hotspots };
+            hotspots.RegisterHub(ViewModel.Hub);
+            return hotspots;
+        }
+
+        private View.ViewModels.Distributions.Distributions CreateDistribtionsViewModel()
+        {
+            var distributions = new View.ViewModels.Distributions.Distributions { Dispatchable = Distributions };
+            distributions.RegisterHub(ViewModel.Hub);
+            return distributions;
         }
 
         private void StartAnalysis(object sender, RoutedEventArgs e)

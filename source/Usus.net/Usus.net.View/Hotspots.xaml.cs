@@ -1,16 +1,15 @@
-﻿using System.Windows.Controls.Primitives;
-using andrena.Usus.net.View.Hub;
+﻿using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 
 namespace andrena.Usus.net.View
 {
-    public partial class Hotspots : HubAwareControl
+    public partial class Hotspots : UserControl
     {
-        public ViewModels.Hotspots.Hotspots ViewModel { get; private set; }
+        public ViewModels.Hotspots.Hotspots ViewModel { get { return DataContext as ViewModels.Hotspots.Hotspots; } }
 
         public Hotspots()
         {
             InitializeComponent();
-            RegisterViewModel(ViewModel = new ViewModels.Hotspots.Hotspots { Dispatchable = this });
         }
 
         private void DataGrid_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)

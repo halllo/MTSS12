@@ -68,6 +68,8 @@
     <Compile Include="Distributions.xaml.cs">
       <DependentUpon>Distributions.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ExtensionPoints\IKnowSourceLocation.cs" />
+    <Compile Include="ViewFactory.cs" />
     <Compile Include="ViewModels\Current\Current.cs" />
     <Compile Include="ViewModels\Current\CurrentEntry.cs" />
     <Compile Include="ViewModels\Current\LineLocation.cs" />
@@ -79,7 +81,6 @@
     <Compile Include="Hotspots.xaml.cs">
       <DependentUpon>Hotspots.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Hub\HubAwareControl.cs" />
     <Compile Include="Hub\IHubConnect.cs" />
     <Compile Include="Hub\ViewHub.cs" />
     <Compile Include="ViewModels\AnalysisAwareViewModel.cs" />
