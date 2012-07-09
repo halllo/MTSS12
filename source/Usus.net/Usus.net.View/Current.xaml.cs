@@ -10,10 +10,5 @@ namespace andrena.Usus.net.View
         {
             InitializeComponent();
         }
-
-        private void DataGrid_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            ViewModel.RequestMetrics();
-        }
     }
 }

@@ -20,5 +20,6 @@
     <VsPackage>|Usus.net.CleanCode;PkgdefProjectOutputGroup|</VsPackage>
     <VsPackage>|Usus.net.Current;PkgdefProjectOutputGroup|</VsPackage>
     <VsPackage>|Usus.net.Distributions;PkgdefProjectOutputGroup|</VsPackage>
+    <MefComponent>|Usus.net.EditorAdornment|</MefComponent>
   </Content>
 </Vsix>

@@ -15,8 +15,7 @@
         </Grid.RowDefinitions>
         <ProgressBar Style="{StaticResource AnalysisProgress}"/>
         <DataGrid Grid.Row="1" Style="{StaticResource DisplayGrid}" 
-                  CanUserSortColumns="False" ColumnHeaderHeight="1"
-                  ItemsSource="{Binding Entries}"
-                  MouseLeftButtonDown="DataGrid_MouseLeftButtonDown" />
+                  CanUserSortColumns="False" ColumnHeaderHeight="0"
+                  ItemsSource="{Binding Entries}"/>
     </Grid>
 </UserControl>

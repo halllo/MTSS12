@@ -1,6 +1,8 @@
 ﻿using System.Windows;
 using andrena.Usus.net.View.ExtensionPoints;
 using andrena.Usus.net.View.Hub;
+using andrena.Usus.net.View.ViewModels.Current;
+using System;
 
 namespace andrena.Usus.net.View
 {
@@ -24,12 +26,12 @@ namespace andrena.Usus.net.View
             return distributionsView;
         }
 
-        public static FrameworkElement CreateCurrent(ViewHub hub, IKnowSourceLocation knowCursorPositon)
+        public static FrameworkElement CreateCurrent(ViewHub hub, Action<Action<LineLocation>> lineRequestor)
         {
             var currentView = new View.Current();
             var currentViewModel = new View.ViewModels.Current.Current { Dispatchable = currentView };
             currentViewModel.RegisterHub(hub);
-            currentViewModel.SourceLocations = knowCursorPositon;
+            lineRequestor(currentViewModel.RequestLineHandler());
             currentView.DataContext = currentViewModel;
             return currentView;
         }

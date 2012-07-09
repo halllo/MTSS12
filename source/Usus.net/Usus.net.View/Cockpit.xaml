@@ -13,7 +13,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <ProgressBar Style="{StaticResource AnalysisProgress}" SmallChange="true"/>
+        <ProgressBar Style="{StaticResource AnalysisProgress}"/>
         <DataGrid Grid.Row="1" Style="{StaticResource DisplayGrid}" CanUserSortColumns="False"
                   ItemsSource="{Binding Entries}"/>
     </Grid>
