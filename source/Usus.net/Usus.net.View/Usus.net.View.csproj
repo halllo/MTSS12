@@ -70,6 +70,7 @@
     </Compile>
     <Compile Include="ExtensionPoints\IKnowSourceLocation.cs" />
     <Compile Include="ViewFactory.cs" />
+    <Compile Include="ViewModels\BindingConverter.cs" />
     <Compile Include="ViewModels\Current\Current.cs" />
     <Compile Include="ViewModels\Current\CurrentEntry.cs" />
     <Compile Include="ViewModels\Current\LineLocation.cs" />
@@ -99,6 +100,7 @@
     <Compile Include="ViewModels\Hotspots\HotspotsCollection.cs" />
     <Compile Include="ViewModels\Hotspots\MethodHotspot.cs" />
     <Compile Include="ViewModels\Hotspots\TypeHotspot.cs" />
+    <Compile Include="ViewModels\TrueToVisibleConverter.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
     <Page Include="CleanCode.xaml">
       <SubType>Designer</SubType>
@@ -121,6 +123,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Hotspots.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewResources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

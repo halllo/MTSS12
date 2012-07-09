@@ -1,4 +1,3 @@
-using System.Windows.Media;
 using andrena.Usus.net.Core.Reports;
 using andrena.Usus.net.View.Hub;
 
@@ -6,16 +5,11 @@ namespace andrena.Usus.net.View.ViewModels
 {
     public abstract class AnalysisAwareViewModel : ViewModel
     {
-        public SolidColorBrush ReadyColor { get; protected set; }
-        public SolidColorBrush NotReadyColor { get; protected set; }
-
-        public SolidColorBrush StatusColor { get; private set; }
+        public bool AnalysisRunning { get; private set; }
 
         public AnalysisAwareViewModel()
         {
-            ReadyColor = new SolidColorBrush(Colors.DarkGreen);
-            NotReadyColor = new SolidColorBrush(Colors.LightGray);
-            StatusColor = ReadyColor;
+            AnalysisRunning = false;
         }
 
         public void RegisterHub(ViewHub hub)
@@ -30,8 +24,8 @@ namespace andrena.Usus.net.View.ViewModels
         {
             Dispatch(() =>
             {
-                StatusColor = NotReadyColor;
-                Changed(() => StatusColor);
+                AnalysisRunning = true;
+                Changed(() => AnalysisRunning);
             });
             AnalysisStarted();
         }
@@ -41,8 +35,8 @@ namespace andrena.Usus.net.View.ViewModels
             AnalysisFinished(m);
             Dispatch(() =>
             {
-                StatusColor = ReadyColor;
-                Changed(() => StatusColor);
+                AnalysisRunning = false;
+                Changed(() => AnalysisRunning);
             });
         }
 

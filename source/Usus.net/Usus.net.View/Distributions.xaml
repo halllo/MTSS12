@@ -8,71 +8,58 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
-        <ControlTemplate x:Key="NoChartPadding" TargetType="dvc:Chart">
-            <Border Background="{TemplateBinding Background}" 
-                    BorderBrush="{TemplateBinding BorderBrush}" 
-                    BorderThickness="{TemplateBinding BorderThickness}" 
-                    Padding="{TemplateBinding Padding}">
-                <Grid>
-                    <chartingprimitives:EdgePanel x:Name="ChartArea" Style="{TemplateBinding ChartAreaStyle}">
-                        <Grid Canvas.ZIndex="-1" Style="{TemplateBinding PlotAreaStyle}" />
-                        <Border Canvas.ZIndex="10" BorderBrush="#FF919191" BorderThickness="1" />
-                    </chartingprimitives:EdgePanel>
-                </Grid>
-            </Border>
-        </ControlTemplate>
+        <ResourceDictionary Source="ViewResources.xaml"/>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="15"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock Background="{Binding StatusColor}" Foreground="White"/>
-
-        <TabControl Grid.Row="1" TabStripPlacement="Bottom">
+        <ProgressBar Style="{StaticResource AnalysisProgress}"/>
+        <TabControl Grid.Row="1" Style="{StaticResource BottomTabs}">
             <TabItem Header="Class Sizes">
-                <dvc:Chart Grid.Row="1" Template="{StaticResource NoChartPadding}" Margin="-5" Padding="0" BorderThickness="0">
+                <dvc:Chart Grid.Row="1" Style="{StaticResource NoWhitespaceChart}">
                     <dvc:Chart.Series>
                         <dvc:ColumnSeries ItemsSource="{Binding ClassSizes}" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}" />
                     </dvc:Chart.Series>
                 </dvc:Chart>
             </TabItem>
             <TabItem Header="CCD">
-                <dvc:Chart Grid.Row="1" Template="{StaticResource NoChartPadding}" Margin="-5" Padding="0" BorderThickness="0">
+                <dvc:Chart Grid.Row="1" Style="{StaticResource NoWhitespaceChart}">
                     <dvc:Chart.Series>
                         <dvc:ColumnSeries ItemsSource="{Binding CumulativeComponentDependencies}" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}" />
                     </dvc:Chart.Series>
                 </dvc:Chart>
             </TabItem>
             <TabItem Header="Cyclomatic Complexities">
-                <dvc:Chart Grid.Row="1" Template="{StaticResource NoChartPadding}" Margin="-5" Padding="0" BorderThickness="0">
+                <dvc:Chart Grid.Row="1" Style="{StaticResource NoWhitespaceChart}">
                     <dvc:Chart.Series>
                         <dvc:ColumnSeries ItemsSource="{Binding CyclomaticComplexities}" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}" />
                     </dvc:Chart.Series>
                 </dvc:Chart>
             </TabItem>
             <TabItem Header="Method Lengths">
-                <dvc:Chart Grid.Row="1" Template="{StaticResource NoChartPadding}" Margin="-5" Padding="0" BorderThickness="0">
+                <dvc:Chart Grid.Row="1" Style="{StaticResource NoWhitespaceChart}">
                     <dvc:Chart.Series>
                         <dvc:ColumnSeries ItemsSource="{Binding MethodLengths}" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}" />
                     </dvc:Chart.Series>
                 </dvc:Chart>
             </TabItem>
             <TabItem Header="Namespace Dependencies">
-                <dvc:Chart Grid.Row="1" Template="{StaticResource NoChartPadding}" Margin="-5" Padding="0" BorderThickness="0">
+                <dvc:Chart Grid.Row="1" Style="{StaticResource NoWhitespaceChart}">
                     <dvc:Chart.Series>
                         <dvc:ColumnSeries ItemsSource="{Binding NamespacesInCycle}" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}" />
                     </dvc:Chart.Series>
                 </dvc:Chart>
             </TabItem>
             <TabItem Header="Public Fields">
-                <dvc:Chart Grid.Row="1" Template="{StaticResource NoChartPadding}" Margin="-5" Padding="0" BorderThickness="0">
+                <dvc:Chart Grid.Row="1" Style="{StaticResource NoWhitespaceChart}">
                     <dvc:Chart.Series>
                         <dvc:ColumnSeries ItemsSource="{Binding NonStaticPublicFields}" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}" />
                     </dvc:Chart.Series>
                 </dvc:Chart>
             </TabItem>
         </TabControl>
-        
+
     </Grid>
 </UserControl>

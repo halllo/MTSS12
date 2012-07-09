@@ -5,14 +5,16 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <ResourceDictionary Source="ViewResources.xaml"/>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="15"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock Background="{Binding StatusColor}" Foreground="White"/>
-
-        <TabControl Grid.Row="1" TabStripPlacement="Bottom">
+        <ProgressBar Style="{StaticResource AnalysisProgress}"/>
+        <TabControl Grid.Row="1" Style="{StaticResource BottomTabs}">
             <TabItem Header="Class Sizes">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -20,8 +22,7 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <TextBlock Text="Classes with more than 12 methods."/>
-                    <DataGrid Grid.Row="1" IsReadOnly="True" CanUserSortColumns="True"
-                              HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray"
+                    <DataGrid Grid.Row="1" Style="{StaticResource DisplayGrid}"
                               ItemsSource="{Binding ClassSizes}"
                               MouseDoubleClick="DataGrid_MouseDoubleClick"/>
                 </Grid>
@@ -33,8 +34,7 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <TextBlock Text="{Binding CumulativeComponentDependenciesText}"/>
-                    <DataGrid Grid.Row="1" IsReadOnly="True" CanUserSortColumns="True"
-                              HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray"
+                    <DataGrid Grid.Row="1" Style="{StaticResource DisplayGrid}"
                               ItemsSource="{Binding CumulativeComponentDependencies}"
                               MouseDoubleClick="DataGrid_MouseDoubleClick"/>
                 </Grid>
@@ -46,8 +46,7 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <TextBlock Text="Methods with more than 4 different execution paths."/>
-                    <DataGrid Grid.Row="1" IsReadOnly="True" CanUserSortColumns="True"
-                              HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray"
+                    <DataGrid Grid.Row="1" Style="{StaticResource DisplayGrid}"
                               ItemsSource="{Binding CyclomaticComplexities}"
                               MouseDoubleClick="DataGrid_MouseDoubleClick"/>
                 </Grid>
@@ -59,8 +58,7 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <TextBlock Text="Methods with more than 9 logical lines."/>
-                    <DataGrid Grid.Row="1" IsReadOnly="True" CanUserSortColumns="True"
-                              HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray"
+                    <DataGrid Grid.Row="1" Style="{StaticResource DisplayGrid}"
                               ItemsSource="{Binding MethodLengths}"
                               MouseDoubleClick="DataGrid_MouseDoubleClick"/>
                 </Grid>
@@ -72,8 +70,7 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <TextBlock Text="Namespaces in cycles."/>
-                    <DataGrid Grid.Row="1" IsReadOnly="True" CanUserSortColumns="True"
-                              HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray"
+                    <DataGrid Grid.Row="1" Style="{StaticResource DisplayGrid}"
                               ItemsSource="{Binding NamespacesInCycle}"
                               MouseDoubleClick="DataGrid_MouseDoubleClick"/>
                 </Grid>
@@ -85,8 +82,7 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <TextBlock Text="Classes with more than 0 non-static public fields."/>
-                    <DataGrid Grid.Row="1" IsReadOnly="True" CanUserSortColumns="True"
-                              HorizontalGridLinesBrush="LightGray" VerticalGridLinesBrush="LightGray"
+                    <DataGrid Grid.Row="1" Style="{StaticResource DisplayGrid}"
                               ItemsSource="{Binding NonStaticPublicFields}"
                               MouseDoubleClick="DataGrid_MouseDoubleClick"/>
                 </Grid>
