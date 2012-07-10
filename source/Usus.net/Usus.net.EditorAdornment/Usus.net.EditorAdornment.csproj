@@ -36,6 +36,7 @@
     <Reference Include="Microsoft.VisualStudio.CoreUtility">
       <Private>False</Private>
     </Reference>
+    <Reference Include="Microsoft.VisualStudio.Shell.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <Reference Include="Microsoft.VisualStudio.Text.Data">
       <Private>False</Private>
     </Reference>
@@ -75,9 +76,9 @@
     <Resource Include="Resources\metricstag.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Usus.net.Current\Usus.net.Current.csproj">
-      <Project>{312E55D0-4DA0-4039-BD95-E9ED234DD3B8}</Project>
-      <Name>Usus.net.Current</Name>
+    <ProjectReference Include="..\Usus.net.ExtensionHelper\Usus.net.ExtensionHelper.csproj">
+      <Project>{A7B2DE89-865F-44CD-B6B3-4F60C8602225}</Project>
+      <Name>Usus.net.ExtensionHelper</Name>
     </ProjectReference>
     <ProjectReference Include="..\Usus.net.View\Usus.net.View.csproj">
       <Project>{08D9B61E-6197-4775-B90E-9F685C731BFB}</Project>

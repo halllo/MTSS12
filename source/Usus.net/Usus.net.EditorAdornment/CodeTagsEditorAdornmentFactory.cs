@@ -14,6 +14,10 @@ namespace andrena.Usus_net_EditorAdornment
     [TextViewRole(PredefinedTextViewRoles.Document)]
     internal sealed class CodeTagsEditorAdornmentFactory : IWpfTextViewCreationListener
     {
+        public CodeTagsEditorAdornmentFactory()
+        {
+        }
+
         /// <summary>
         /// Defines the adornment layer for the adornment. This layer is ordered 
         /// after the selection layer in the Z-order
@@ -23,7 +27,7 @@ namespace andrena.Usus_net_EditorAdornment
         [Order(After = PredefinedAdornmentLayers.Selection, Before = PredefinedAdornmentLayers.Text)]
         [TextViewRole(PredefinedTextViewRoles.Document)]
         public AdornmentLayerDefinition editorAdornmentLayer = null;
-
+        
         /// <summary>
         /// Instantiates a Usus.net.EditorAdornment manager when a textView is created.
         /// </summary>

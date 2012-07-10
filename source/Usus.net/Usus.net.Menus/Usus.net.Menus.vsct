@@ -28,7 +28,7 @@
 
   <!--The Commands section is where we the commands, menus and menu groups are defined.
       This section uses a Guid to identify the package that provides the command defined inside it. -->
-  <Commands package="guidUsus_net_DistributionsPkg">
+  <Commands package="guidUsus_net_MenusPkg">
     <!-- Inside this section we have different sub-sections: one for the menus, another  
     for the menu groups, one for the buttons (the actual commands), one for the combos 
     and the last one for the bitmaps used. Each element is identified by a command id that  
@@ -37,12 +37,27 @@
     group; your package should define its own command set in order to avoid collisions  
     with command ids defined by other packages. -->
 
+    <Menus>
+      <Menu guid="guidUsus_net_MenusCmdSet" id="TopLevelMenu" priority="0x700" type="Menu">
+        <Parent guid="guidSHLMainMenu" id="IDG_VS_MM_TOOLSADDINS" />
+        <Strings>
+          <ButtonText>Usus.net</ButtonText>
+          <CommandName>Usus.net</CommandName>
+        </Strings>
+      </Menu>
+
+    </Menus>
     
     <!-- In this section you can define new menu groups. A menu group is a container for 
          other menus or buttons (commands); from a visual point of view you can see the 
          group as the part of a menu contained between two lines. The parent of a group 
          must be a menu. -->
     <Groups>
+
+      <Group guid="guidUsus_net_MenusCmdSet" id="MyMenuGroup" priority="0x0600">
+        <Parent guid="guidUsus_net_MenusCmdSet" id="TopLevelMenu"/>
+      </Group>
+      
 
 
     </Groups>
@@ -59,16 +74,51 @@
               <CommandFlag>DynamicVisibility</CommandFlag>
           If you do not want an image next to your command, remove the Icon node or set it to <Icon guid="guidOfficeIcon" id="msotcidNoIcon" /> -->
 
+      <Button guid="guidUsus_net_MenusCmdSet" id="cmdidUsusNetCockpit" priority="0x0100" type="Button">
+        <Parent guid="guidUsus_net_MenusCmdSet" id="MyMenuGroup" />
+        <Icon guid="guidImages" id="bmpPicSearch" />
+        <Strings>
+          <CommandName>cmdidUsusNetCockpit</CommandName>
+          <ButtonText>Usus.net Cockpit</ButtonText>
+        </Strings>
+      </Button>
+      
+      <Button guid="guidUsus_net_MenusCmdSet" id="cmdidUsusNetHotspots" priority="0x0100" type="Button">
+        <Parent guid="guidUsus_net_MenusCmdSet" id="MyMenuGroup" />
+        <Icon guid="guidImages" id="bmpPicSearch" />
+        <Strings>
+          <CommandName>cmdidUsusNetHotspots</CommandName>
+          <ButtonText>Usus.net Hotspots</ButtonText>
+        </Strings>
+      </Button>
 
-      <!--<Button guid="guidUsus_net_DistributionsCmdSet" id="cmdidUsusNetDistributions" priority="0x0100" type="Button">
-        <Parent guid="guidSHLMainMenu" id="IDG_VS_WNDO_OTRWNDWS1"/>
+      <Button guid="guidUsus_net_MenusCmdSet" id="cmdidUsusNetDistributions" priority="0x0100" type="Button">
+        <Parent guid="guidUsus_net_MenusCmdSet" id="MyMenuGroup" />
         <Icon guid="guidImages" id="bmpPicSearch" />
         <Strings>
           <CommandName>cmdidUsusNetDistributions</CommandName>
           <ButtonText>Usus.net Distributions</ButtonText>
         </Strings>
-      </Button>-->
+      </Button>
 
+      <Button guid="guidUsus_net_MenusCmdSet" id="cmdidUsusNetCleanCode" priority="0x0100" type="Button">
+        <Parent guid="guidUsus_net_MenusCmdSet" id="MyMenuGroup" />
+        <Icon guid="guidImages" id="bmpPicSearch" />
+        <Strings>
+          <CommandName>cmdidUsusNetCleanCode</CommandName>
+          <ButtonText>Usus.net CleanCode</ButtonText>
+        </Strings>
+      </Button>
+
+      <Button guid="guidUsus_net_MenusCmdSet" id="cmdidUsusNetCurrent" priority="0x0100" type="Button">
+        <Parent guid="guidUsus_net_MenusCmdSet" id="MyMenuGroup" />
+        <Icon guid="guidImages" id="bmpPicSearch" />
+        <Strings>
+          <CommandName>cmdidUsusNetCurrent</CommandName>
+          <ButtonText>Usus.net Current</ButtonText>
+        </Strings>
+      </Button>
+      
 
     </Buttons>
    
@@ -91,18 +141,23 @@
 
   <Symbols>
     <!-- This is the package guid. -->
-    <GuidSymbol name="guidUsus_net_DistributionsPkg" value="{c93eb0d8-9e3a-4ba8-a92b-f2d472afda5f}" />
+    <GuidSymbol name="guidUsus_net_MenusPkg" value="{878c3460-4336-4f49-bca9-402256be81a9}" />
     
     <!-- This is the guid used to group the menu commands together -->
-    <GuidSymbol name="guidUsus_net_DistributionsCmdSet" value="{e882a31a-7d72-4ef6-8da5-e1c26af520cb}">
-
+    <GuidSymbol name="guidUsus_net_MenusCmdSet" value="{20c664c5-7165-476a-9cec-543dd3847fb0}">
       <IDSymbol name="MyMenuGroup" value="0x1020" />
-      <IDSymbol name="cmdidUsusNetDistributions" value="0x0101" />
+      <IDSymbol name="TopLevelMenu" value="0x1021"/>
+      <IDSymbol name="cmdidUsusNetCockpit" value="0x0100" />
+      <IDSymbol name="cmdidUsusNetHotspots" value="0x0110" />
+      <IDSymbol name="cmdidUsusNetDistributions" value="0x0120" />
+      <IDSymbol name="cmdidUsusNetCleanCode" value="0x0130" />
+      <IDSymbol name="cmdidUsusNetCurrent" value="0x0140" />
     </GuidSymbol>
+
     
     
     
-    <GuidSymbol name="guidImages" value="{21e680fa-168a-4422-97dc-3015bcaffbb3}" >
+    <GuidSymbol name="guidImages" value="{22166191-fd43-4e08-9a9d-bb3ae3dedf22}" >
       <IDSymbol name="bmpPic1" value="1" />
       <IDSymbol name="bmpPic2" value="2" />
       <IDSymbol name="bmpPicSearch" value="3" />

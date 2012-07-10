@@ -17,7 +17,7 @@ namespace andrena.Usus_net_Current
 
         internal void Push(LineLocation location)
         {
-            if (pushHandler != null) pushHandler(location);
+            if (pushHandler != null && location != null) pushHandler(location);
         }
     }
 }

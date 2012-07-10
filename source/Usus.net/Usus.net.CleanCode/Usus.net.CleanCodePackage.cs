@@ -1,13 +1,11 @@
 ﻿using System;
+using System.ComponentModel.Design;
 using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.InteropServices;
-using System.ComponentModel.Design;
-using Microsoft.Win32;
-using Microsoft.VisualStudio;
-using Microsoft.VisualStudio.Shell.Interop;
-using Microsoft.VisualStudio.OLE.Interop;
+using andrena.Usus.net.ExtensionHelper;
 using Microsoft.VisualStudio.Shell;
+using Microsoft.VisualStudio.Shell.Interop;
 
 namespace andrena.Usus_net_CleanCode
 {
@@ -44,6 +42,7 @@ namespace andrena.Usus_net_CleanCode
         public Usus_net_CleanCodePackage()
         {
             Trace.WriteLine(string.Format(CultureInfo.CurrentCulture, "Entering constructor for: {0}", this.ToString()));
+            GlobalEventManager.Instance.RegisterEvent(UsusNetWindow.CleanCode, p => ShowToolWindow(null, null));
         }
 
         /// <summary>

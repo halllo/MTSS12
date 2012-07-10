@@ -33,8 +33,7 @@ namespace andrena.Usus.net.View.ViewModels.Current
         private void DisplayMetricsOfMethodAtDefinition(LineLocation location)
         {
             if (lastLocation.IsSameAs(location)) return;
-            var method = GetMethodOfDefiniton(location);
-            if (method != null) DisplayMetrics(method);
+            DisplayMetrics(GetMethodOfDefiniton(location));
         }
 
         private MethodAndTypeMetrics GetMethodOfDefiniton(LineLocation location)
@@ -46,10 +45,22 @@ namespace andrena.Usus.net.View.ViewModels.Current
         private void DisplayMetrics(MethodAndTypeMetrics method)
         {
             Entries.Clear();
+            if (method == null)
+                DisplayNoMetricsInfo();
+            else
+                DisplayMetricsInfo(method);
+        }
+
+        private void DisplayNoMetricsInfo()
+        {
+            lastLocation = new LineLocation();
+            Entries.Add(new CurrentEntry { Metric = "no metrics yet, consider compiling", Value = "" });
+        }
+
+        private void DisplayMetricsInfo(MethodAndTypeMetrics method)
+        {
             foreach (var info in method.Info)
-            {
                 Entries.Add(new CurrentEntry { Metric = info.Item1, Value = info.Item2 });
-            }
         }
     }
 }

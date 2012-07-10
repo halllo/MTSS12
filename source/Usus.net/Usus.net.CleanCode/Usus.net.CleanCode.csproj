@@ -157,6 +157,10 @@
     <Content Include="Resources\Package.ico" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Usus.net.ExtensionHelper\Usus.net.ExtensionHelper.csproj">
+      <Project>{A7B2DE89-865F-44CD-B6B3-4F60C8602225}</Project>
+      <Name>Usus.net.ExtensionHelper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Usus.net.View\Usus.net.View.csproj">
       <Project>{08D9B61E-6197-4775-B90E-9F685C731BFB}</Project>
       <Name>Usus.net.View</Name>

@@ -1,13 +1,12 @@
 ﻿using System;
+using System.ComponentModel.Design;
 using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.InteropServices;
-using System.ComponentModel.Design;
-using Microsoft.Win32;
-using Microsoft.VisualStudio;
-using Microsoft.VisualStudio.Shell.Interop;
-using Microsoft.VisualStudio.OLE.Interop;
+using andrena.Usus.net.ExtensionHelper;
+using andrena.Usus.net.View.ViewModels.Current;
 using Microsoft.VisualStudio.Shell;
+using Microsoft.VisualStudio.Shell.Interop;
 
 namespace andrena.Usus_net_Current
 {
@@ -44,7 +43,11 @@ namespace andrena.Usus_net_Current
         public Usus_net_CurrentPackage()
         {
             Trace.WriteLine(string.Format(CultureInfo.CurrentCulture, "Entering constructor for: {0}", this.ToString()));
-            Relay.PackageInstance = this;
+            GlobalEventManager.Instance.RegisterEvent(UsusNetWindow.Current, p =>
+            {
+                MyToolWindow.LocationEvent.Push(p as LineLocation);
+                ShowToolWindow(null, null);
+            });
         }
 
         /// <summary>
@@ -91,10 +94,5 @@ namespace andrena.Usus_net_Current
             }
         }
         #endregion
-
-        internal void ShowToolWindow()
-        {
-            ShowToolWindow(null, null);
-        }
     }
 }

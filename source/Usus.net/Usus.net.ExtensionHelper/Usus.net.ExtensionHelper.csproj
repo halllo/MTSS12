@@ -72,6 +72,8 @@
   <ItemGroup>
     <Compile Include="BuildAwareToolWindowPane.cs" />
     <Compile Include="CursorPosition.cs" />
+    <Compile Include="GlobalEventManager.cs" />
+    <Compile Include="UsusNetWindow.cs" />
     <Compile Include="DtAwareToolWindow.cs" />
     <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="Project.cs" />

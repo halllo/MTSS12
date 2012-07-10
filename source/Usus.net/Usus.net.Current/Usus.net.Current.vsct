@@ -60,14 +60,14 @@
           If you do not want an image next to your command, remove the Icon node or set it to <Icon guid="guidOfficeIcon" id="msotcidNoIcon" /> -->
 
 
-      <Button guid="guidUsus_net_CurrentCmdSet" id="cmdidUsusNetCurrent" priority="0x0100" type="Button">
+      <!--<Button guid="guidUsus_net_CurrentCmdSet" id="cmdidUsusNetCurrent" priority="0x0100" type="Button">
         <Parent guid="guidSHLMainMenu" id="IDG_VS_WNDO_OTRWNDWS1"/>
         <Icon guid="guidImages" id="bmpPicSearch" />
         <Strings>
           <CommandName>cmdidUsusNetCurrent</CommandName>
           <ButtonText>Usus.net Current</ButtonText>
         </Strings>
-      </Button>
+      </Button>-->
 
 
     </Buttons>

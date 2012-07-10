@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
-using andrena.Usus.net.View.Hub;
+using andrena.Usus.net.ExtensionHelper;
 using andrena.Usus.net.View.ViewModels.Current;
 
 namespace andrena.Usus_net_EditorAdornment
@@ -35,11 +35,8 @@ namespace andrena.Usus_net_EditorAdornment
 
         private static void DisplayMethodInfo(Func<string> file, int line)
         {
-            Usus_net_Current.Relay.Show(new LineLocation
-            {
-                File = file(),
-                Line = line
-            });
+            GlobalEventManager.Instance.FireEvent(UsusNetWindow.Current, 
+                new LineLocation { Line = line, File = file() });
         }
     }
 }

@@ -1,6 +1,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using andrena.Usus.net.ExtensionHelper;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Editor;
 using Microsoft.VisualStudio.Text.Formatting;
@@ -11,15 +12,32 @@ namespace andrena.Usus_net_EditorAdornment
     {
         IAdornmentLayer _layer;
         IWpfTextView _view;
+        static bool _enabled = false;
 
         public CodeTagsEditorAdornment(IWpfTextView view)
         {
             _view = view;
             _layer = view.GetAdornmentLayer("Usus.net.EditorAdornment");
             _view.LayoutChanged += OnLayoutChanged;
+
+            Initialize();
+        }
+
+        private void Initialize()
+        {
+            _enabled = GlobalEventManager.Instance.HasEvent(UsusNetWindow.Current);
+            GlobalEventManager.Instance.RegisterEvent("CodeTagsEditorAdornmentRequested", p =>
+            {
+                _enabled = true;
+            });
         }
 
         private void OnLayoutChanged(object sender, TextViewLayoutChangedEventArgs e)
+        {
+            if (_enabled) CreateLineVisuals(e);
+        }
+
+        private void CreateLineVisuals(TextViewLayoutChangedEventArgs e)
         {
             foreach (ITextViewLine line in e.NewOrReformattedLines)
             {
@@ -56,7 +74,7 @@ namespace andrena.Usus_net_EditorAdornment
         private string GetFilename()
         {
             ITextDocument document;
-            if (_view == null  || !_view.TextDataModel.DocumentBuffer.Properties.TryGetProperty(typeof(ITextDocument), out document))
+            if (_view == null || !_view.TextDataModel.DocumentBuffer.Properties.TryGetProperty(typeof(ITextDocument), out document))
                 return string.Empty;
             return document != null ? document.FilePath : string.Empty;
         }
