@@ -1287,6 +1287,9 @@ BuildAwareToolWindowPane mit Ereignis BuildSuccessfull und Parameter IEnumerable
 \textcolor[rgb]{1,0,0}{todo}
 
 \subsection{Menüpunkt}
+\cite{MSDNMenuBar}
+\cite{MSDNForcePackageLoad}
+
 \textcolor[rgb]{1,0,0}{todo}
 
 \subsection{Zeilensprünge}
@@ -1302,6 +1305,16 @@ Die Variable \texttt{fileName} enthält den vollständigen Pfad der zu öffnenden D
 \textcolor[rgb]{1,0,0}{todo}
 
 \subsection{Editor Adorner}
+
+\verb/^\"((\w|\s)+)\"$/
+\begin{lstlisting}[caption={Zu der Methode eines \texttt{MethodMetricsReport}-Objekt springen},label={listing:methodmatching}]
+"^{0}{1} {1}\\((((out |ref |this |params )?{1} {2})?(,[ ]?(out |ref |params )?{1} {2})*)\\)$"
+"(private |protected |public |internal )?(static |virtual new |virtual |new |override |override sealed )?"
+"([_a-zA-Z]+[\\._a-zA-Z0-9\\[\\]]*(<.*>)?)"
+"([_a-zA-Z]+[_a-zA-Z0-9]*([ ]?=[ ]?[^,<> ]*)?)"
+\end{lstlisting}
+
+
 \textcolor[rgb]{1,0,0}{todo}
 
 
