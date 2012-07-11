@@ -70,7 +70,7 @@ namespace andrena.Usus_net_Current {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Usus.net Current.
+        ///   Looks up a localized string similar to Usus.net Info.
         /// </summary>
         internal static string ToolWindowTitle {
             get {

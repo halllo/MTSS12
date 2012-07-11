@@ -79,7 +79,7 @@
         <Icon guid="guidImages" id="bmpPicSearch" />
         <Strings>
           <CommandName>cmdidUsusNetCockpit</CommandName>
-          <ButtonText>Usus.net Cockpit</ButtonText>
+          <ButtonText>Cockpit</ButtonText>
         </Strings>
       </Button>
       
@@ -88,7 +88,7 @@
         <Icon guid="guidImages" id="bmpPicSearch" />
         <Strings>
           <CommandName>cmdidUsusNetHotspots</CommandName>
-          <ButtonText>Usus.net Hotspots</ButtonText>
+          <ButtonText>Hotspots</ButtonText>
         </Strings>
       </Button>
 
@@ -97,7 +97,7 @@
         <Icon guid="guidImages" id="bmpPicSearch" />
         <Strings>
           <CommandName>cmdidUsusNetDistributions</CommandName>
-          <ButtonText>Usus.net Distributions</ButtonText>
+          <ButtonText>Distributions</ButtonText>
         </Strings>
       </Button>
 
@@ -106,7 +106,7 @@
         <Icon guid="guidImages" id="bmpPicSearch" />
         <Strings>
           <CommandName>cmdidUsusNetCleanCode</CommandName>
-          <ButtonText>Usus.net CleanCode</ButtonText>
+          <ButtonText>CleanCode</ButtonText>
         </Strings>
       </Button>
 
@@ -115,7 +115,7 @@
         <Icon guid="guidImages" id="bmpPicSearch" />
         <Strings>
           <CommandName>cmdidUsusNetCurrent</CommandName>
-          <ButtonText>Usus.net Current</ButtonText>
+          <ButtonText>Method Info</ButtonText>
         </Strings>
       </Button>
       

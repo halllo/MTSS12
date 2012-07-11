@@ -335,6 +335,7 @@ In diesem Fenster werden die Usus Metriken angezeigt, die für alle Projekte, die
 Die in Abbildung \ref{fig:usus_cockpit} dargestellten Statistiken der Metriken errechnen sich aus der Aggregation der Paket-, Klassen- oder Methoden-Eigenschaften.
 
 \subsection{Usus Info}
+\label{subsec:ususinfo}
 Dieses Fenster lässt sich im Kontext einer Methode oder einer Klasse öffnen und zeigt Metriken, die anhand der Eigenschaften des Kontextes ermittelt werden können.
 \begin{figure}[h]
 	\centering
@@ -1223,6 +1224,16 @@ Das Fenster mit den am weitesten aggregierte Metriken ist \emph{Usus.net Cockpit
 \end{figure}
 Dieses Fenster verhält sich wie alle anderen Fenster und kann in Visual Studio beliebig angedockt werden. Das ViewModel reagiert auf einen verfügbaren Metrikbericht, indem es die Einträge der Tabelle durch neue Einträge für die Statistiken ersetzt. Als Tabelle wird ein \texttt{DataGrid}-Objekt verwendet.
 
+\subsection{Info}
+Das nächste Usus.net Fenster entspricht dem Usus Info-Fenster aus Unterabschnitt \ref{subsec:ususinfo}. Dieses Fenster zeigt die Metriken einer Methode an in Verbindung mit der Klasse an. Im Gegensatz zu der Eclipse Variante, lässt sich dieses Fenster nicht mit dem Shortcut \texttt{Ctrl-U} öffnen. Usus.net platziert einen kleinen Button rechts neben jeder Methodendeklaration, wie in Abbildung \ref{fig:ususnet_info} dargestellt.
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=14cm]{images/ususnet_info.png}
+	\caption{Usus.net Info}
+	\label{fig:ususnet_info}
+\end{figure}
+Ein einfacher Mausklick öffnet das Usus.net Info-Fenster und zeigt die Metriken der entsprechenden Methode an. Die Metriken der Klasse sind ebenfalls sichtbar. Wie der Button im Code-Editor angezeigt wird ist in Unterabschnitt \ref{subsec:editoradornment} beschrieben. Der Button erscheint nur neben Methoden und nicht neben Properties oder Klassen. Daher lässt sich das Info-Fenster auch nur für Methoden öffnen. Dies ist ausreichend, da die Klassen-Metriken ja ebenfalls angezeigt werden. Das Info-Fenster in der Eclipse Variante lässt sich zusätzlich auch für Klassen direkt öffnen. 
+
 \subsection{Hotspots}
 Abbildung \ref{fig:ususnet_hotspots} zeigt alle Hotspots in der Codebasis.
 \begin{figure}[h]
@@ -1259,6 +1270,9 @@ Ein Usus.net Fenster, das es nicht in der Eclipse Version gibt, ist \emph{Usus.n
 	\label{fig:ususnet_cleancode}
 \end{figure}
 Zu jedem Grad werden die Prinzipien (Unterabschnitt \ref{subsec:ccdprinciples}) und Parktiken (Unterabschnitt \ref{subsec:ccdpractices}) als Hyperlinks aufgelistet. Über diese Hyperlinks lassen sich die Internetseiten von Westphal und Lieser öffnen, die ausführliche Beschreibungen der Grade enthalten. 
+
+\subsection{Class Graph \& Package Graph}
+In Unterabschnitt \ref{subsec:ususgraphs} wurde vorgestellt, wie Usus für Eclipse die Abhängigkeitsgraphen auf Klassen- und Package-Ebene visualisiert. Usus.net erstellt diese Graphen ebenfalls und veröffentlicht sie als Teil des Objektmodells, wie in Abschnitt \ref{sec:ususobjectmodel} beschrieben. Eine grafische Visualisierung dieser Graphen in Form eines Fensters in Visual Studio wird von Usus.net noch nicht unterstützt. Dieses Fenster kann im Rahmen dieser Master-Thesis aus Zeitgründen leider nicht mehr implementiert werden.
 
 
 \section{Visual Studio Integration}
@@ -1304,7 +1318,8 @@ file.GotoLine(fileLine, selectLine);
 Die Variable \texttt{fileName} enthält den vollständigen Pfad der zu öffnenden Datei und die Variable \texttt{fileLine} die Zeilennummer der zu markierenden Zeile.
 \textcolor[rgb]{1,0,0}{todo}
 
-\subsection{Editor Adorner}
+\subsection{Editor Adornment}
+\label{subsec:editoradornment}
 
 \verb/^\"((\w|\s)+)\"$/
 \begin{lstlisting}[caption={Zu der Methode eines \texttt{MethodMetricsReport}-Objekt springen},label={listing:methodmatching}]
@@ -1373,6 +1388,7 @@ Die Variable \texttt{fileName} enthält den vollständigen Pfad der zu öffnenden D
 \chapter{Zusammenfassung}
 \textcolor[rgb]{1,0,0}{todo}
 Use Cases erfüllt, bla bla
+Graphen Visualisierung weggelassen
 
 
 
