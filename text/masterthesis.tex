@@ -152,7 +152,7 @@ Eclipse\footnote[1]{"`Eclipse - The Eclipse Foundation open source community web
 \label{subsec:visualstudio}
 Visual Studio\footnote[3]{"`Die Microsoft Visual Studio 2010 Produktfamilie"' \url{http://www.microsoft.com/germany/visualstudio/products/default.aspx}} ist eine integrierte Entwicklungsumgebung von Microsoft. Im Gegensatz zu Eclipse ist Visual Studio ab der Professional Version ein kommerzielles Produkt. Die Entwicklung für das .NET-Framework\footnote[4]{"`Microsoft .NET Framework"' \url{http://www.microsoft.com/net}} von Microsoft kann mit Visual Studio durchgeführt werden, wobei mehrere Programmiersprachen unterstützt werden. Zu den bekanntesten und am weitesten verbreiteten Sprachen für das .NET-Framework zählen C\# und Viusal Basic.NET.
 \paragraph{}
-Visual Studio erlaubt die Installation von externen Erweiterungen als Addin oder Erweiterung ab der Professional Version. Die kostenfreie Express Edition besitzt einen sehr eingeschränkten Funktionsumfang. Der Unterschied zwischen einem Visual Studio Addin und einer Visual Studio Erweiterung ist der, dass Addins bereits in früheren Versionen unterstützt wurden und ein Entwickler die Schnittstellen in Visual Studio direkt anprogrammieren kann. Die Erweiterungen werden ab Visual Studio 2010 unterstützt und benötigen zur Entwicklung das \textit{Visual Studio 2010 SDK}\footnote[5]{Download: "`Visual Studio 2010 SP1 SDK"'\url{http://www.microsoft.com/download/en/details.aspx?id=21835}}, erlauben aber eine modernere Klassenbibliothek. Aaron Marten beschreibt in seinem Artikel \cite{VSCustomExtensions} die Möglichkeiten, wie mit der neuen Erweiterungstechnologie (VSIX) Addin-ähnliche Erweiterungen erstellt werden können.
+Visual Studio erlaubt die Installation von externen Erweiterungen als Addin oder Erweiterung ab der Professional Version. Die kostenfreie Express Edition besitzt einen sehr eingeschränkten Funktionsumfang. Der Unterschied zwischen einem Visual Studio Addin und einer Visual Studio Erweiterung ist der, dass Addins bereits in früheren Versionen unterstützt wurden und ein Entwickler die Schnittstellen in Visual Studio direkt anprogrammieren kann. Die Erweiterungen werden ab Visual Studio 2010 unterstützt und benötigen zur Entwicklung das \textit{Visual Studio 2010 SDK}\footnote[5]{Download: "`Visual Studio 2010 SP1 SDK"' \url{http://www.microsoft.com/download/en/details.aspx?id=21835}}, erlauben aber eine modernere Klassenbibliothek. Aaron Marten beschreibt in seinem Artikel \cite{VSCustomExtensions} die Möglichkeiten, wie mit der neuen Erweiterungstechnologie (VSIX) Addin-ähnliche Erweiterungen erstellt werden können.
 
 
 \section{Technische Grundlagen}
@@ -1189,13 +1189,15 @@ Usus.net nutzt das Verification Framework um die eigene Metrikberechnung und das
 
 
 \chapter{Usus.net als Visual Studio Erweiterung}
-Abbildung \ref{fig:architecture2} zeigt die Verwendung der in Kapitel \ref{chap:ususnet} beschrieben Funktionen von \texttt{Usus.net.Core}. \texttt{Usus.net.Core} steht als Bibliothek in Form einer Assembly zur Verfügung und wird von der Bibliothek \texttt{Usus.net.View} genutzt. Diese Bibliothek enthält alle grafischen Oberflächen von Usus.net und wird von der \texttt{Usus.net} Visual Studio Erweiterung verwendet. Die Erweiterung stellt dann nur noch die Fenster-Infrastruktur für die Usus.net Oberflächen zur Verfügung. In diesem Kapitel werden zunächst die Steuerelemente von \texttt{Usus.net.View} vorgestellt. Anschließend wird auf die Integration mit Visual Studio eingegangen.
+Abbildung \ref{fig:architecture2} zeigt die Verwendung der in Kapitel \ref{chap:ususnet} beschrieben Funktionen von \texttt{Usus.net.Core}. \texttt{Usus.net.Core} steht als Bibliothek in Form einer Assembly zur Verfügung und wird von der Bibliothek \texttt{Usus.net.View} genutzt. Diese Bibliothek enthält alle grafischen Oberflächen von Usus.net und wird von der \texttt{Usus.net} Visual Studio Erweiterung verwendet. Die Erweiterung stellt dann nur noch die Fenster-Infrastruktur für die Usus.net Oberflächen zur Verfügung. Usus.net ist kein Addin im Sinne von Unterabschnitt \ref{subsec:visualstudio}, sondern eine Erweiterung. In diesem Kapitel werden zunächst die Steuerelemente von \texttt{Usus.net.View} vorgestellt. Anschließend wird auf die Integration mit Visual Studio eingegangen.
 
 
 \section{Oberflächen}
+\label{sec:ususnetviews}
 Die Oberfläche von Usus.net besteht genau wie das Usus für Eclipse (Kapitel \ref{chap:usus}) aus mehreren grafischen Benutzeroberflächen. Alle diese Oberflächen bieten besondere Sichten auf eine gemeinsame Datenquelle. Der Metrikbericht aus Abschnitt \ref{sec:ususobjectmodel} ist als Ergebnis der statischen Code-Analyse aus Abschnitt \ref{sec:metriccalc} das zentrale Objekt. Sobald dieses Objekt vom Typ \texttt{MetricsReport} zur Verfügung steht, müssen sich alle Sichten aktualisieren und die Daten des neuen Berichts verwenden. In diesem Abschnitt wird zunächst die Infrastruktur beschrieben, die es den Usus.net Oberflächen erlaubt eine gemeinsame Datenquelle zu verwenden. Anschließend werden die Implementierungen der Ansichten beschrieben, die bereits für das Usus für Eclipse vorgestellt wurden.
 
 \subsection{Hubs}
+\label{subsec:ususnethubs}
 Usus.net besteht aus mehreren Fenstern mit einer gemeinsamen Datenquelle. Jedes Fenster enthält ein Steuerelement vom Typ \texttt{UserControl}\footnote[1]{Mehr über Windows Presentation Foundation \url{http://msdn.microsoft.com/de-de/library/ms754130.aspx}}. Um alle diese Steuerelemente mit einem zentralen Objekt zu verknüpfen, bietet die Bibliothek \texttt{Usus.net.View} die Klasse \texttt{ViewHub} an, welche nur in Form einer einzigen Instanz existieren kann. Die Ansichten \texttt{Cockpit}, \texttt{Hotspots}, \texttt{Distribution} und \texttt{CleanCode} werden von der \texttt{ViewFactory} in Kombination mit den entsprechenden ViewModels erzeugt. Das \texttt{ViewHub}-Objekt wird dabei bei den ViewModels bekannt gemacht. Diese können sich dann für die Events \texttt{AnalysisStarted} und \texttt{MetricsReady} registrieren. Ein Aufruf der \texttt{TryStartAnalysis}-Methode mit einer Liste an Assembly-Pfaden startet die statische Code-Analyse und teilt allen registrierten Objekten das neue Ergebnis-Objekt vom Typ \texttt{MetricsReport} mit. In Abbildung \ref{fig:viewhub} sind die Beziehungen zwischen den Views und den ViewModels in Bezug auf die Hub-Infratstuktur verdeutlicht. Die Oberflächen besitzen eigene ViewModels und implementieren damit das MVVM-Muster, welches Josh Smith in seinem Artikel \cite{WPFMVVM} ausführlich beschreibt.
 \begin{figure}[h]
 	\centering
@@ -1219,7 +1221,7 @@ Das Fenster mit den am weitesten aggregierte Metriken ist \emph{Usus.net Cockpit
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=14cm]{images/ususnet_cockpit.png}
-	\caption{Usus.net Cockpit}
+	\caption{Usus.net Cockpit-Fenster}
 	\label{fig:ususnet_cockpit}
 \end{figure}
 Dieses Fenster verhält sich wie alle anderen Fenster und kann in Visual Studio beliebig angedockt werden. Das ViewModel reagiert auf einen verfügbaren Metrikbericht, indem es die Einträge der Tabelle durch neue Einträge für die Statistiken ersetzt. Als Tabelle wird ein \texttt{DataGrid}-Objekt verwendet.
@@ -1229,7 +1231,7 @@ Das nächste Usus.net Fenster entspricht dem Usus Info-Fenster aus Unterabschnitt
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=14cm]{images/ususnet_info.png}
-	\caption{Usus.net Info}
+	\caption{Usus.net Info-Fenster}
 	\label{fig:ususnet_info}
 \end{figure}
 Ein einfacher Mausklick öffnet das Usus.net Info-Fenster und zeigt die Metriken der entsprechenden Methode an. Die Metriken der Klasse sind ebenfalls sichtbar. Wie der Button im Code-Editor angezeigt wird ist in Unterabschnitt \ref{subsec:editoradornment} beschrieben. Der Button erscheint nur neben Methoden und nicht neben Properties oder Klassen. Daher lässt sich das Info-Fenster auch nur für Methoden öffnen. Dies ist ausreichend, da die Klassen-Metriken ja ebenfalls angezeigt werden. Das Info-Fenster in der Eclipse Variante lässt sich zusätzlich auch für Klassen direkt öffnen. 
@@ -1239,7 +1241,7 @@ Abbildung \ref{fig:ususnet_hotspots} zeigt alle Hotspots in der Codebasis.
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=14cm]{images/ususnet_hotspots.png}
-	\caption{Usus.net Hotspots}
+	\caption{Usus.net Hotspots-Fenster}
 	\label{fig:ususnet_hotspots}
 \end{figure}
 Wie die Oberfläche in Unterabschnitt \ref{subsec:usushotspots}, lassen sich zu jeder Metrik genau die Methoden, Klassen und Namespaces anzeigen, dessen Metriken über den definierten Schwellen aus Abschnitt \ref{sec:metrics} liegen. Dazu wird die API verwendet, die bereits in Unterabschnitt \ref{subsec:hotspots} vorgestellt wurde. Diese Problemfälle sind nach Metrik gruppiert und lassen sich über den Reiter der entsprechenden Metrik anzeigen. Mit einen Doppelklick auf einen Methoden- oder Klassen-Hotspot springt Visual Studio an die Problemstelle im Quellcode. Dies ist möglich, da im Rahmen der Metrikberechnung aus Abschnitt \ref{sec:metriccalc} die Zeilen-Informationen aus der pdb-Datei den Methodenberichten zugeordnet werden. Das ViewModel von \emph{Usus.net Hotspots} verwendet das Interface \texttt{IJumpToSource}, um an beliebige Zeilen von beliebigen Dateien zu springen. Auf Visual Studio Seite implementiert das Fenster, dass das Hotspots-Element enthält, dieses Interface. Wie eine Zeile in einer Visual Studio Erweiterung abgesprungen werden kann, beschreibt Unterabschnitt \ref{subsec:vsrowjumps}. Listing \ref{listing:jumptomethod} zeigt den Sprung von der Seite des Hostspots-ViewModel.
@@ -1256,7 +1258,7 @@ Abbildung \ref{fig:ususnet_histogram} zeigt die Häufigkeitsverteilungen aller Be
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=14cm]{images/ususnet_histogram.png}
-	\caption{Usus.net Histogramm}
+	\caption{Usus.net Histogramm-Fenster}
 	\label{fig:ususnet_histogram}
 \end{figure}
 Ähnlich wie das Hotspots-Fenster, ist auch das Verteilungs-Fenster in Registerkarten eingeteilt. Um die Histogramme zu bestimmen, werden die Funktionen verwendet, die bereits in Abschnitt \ref{sec:distributions} vorgestellt wurden. Diese Verteilungen können anschließend angezeigt werden. Dazu verwendet Usus.net das Spalten-Diagramm des WPF Toolkits\footnote[1]{Windows Presentation Foundation Toolkit \url{http://wpf.codeplex.com/releases/view/40535}}.
@@ -1266,7 +1268,7 @@ Ein Usus.net Fenster, das es nicht in der Eclipse Version gibt, ist \emph{Usus.n
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=12cm]{images/ususnet_cleancode.png}
-	\caption{Usus.net Clean Code Grade}
+	\caption{Usus.net Clean Code Grade-Fenster}
 	\label{fig:ususnet_cleancode}
 \end{figure}
 Zu jedem Grad werden die Prinzipien (Unterabschnitt \ref{subsec:ccdprinciples}) und Parktiken (Unterabschnitt \ref{subsec:ccdpractices}) als Hyperlinks aufgelistet. Über diese Hyperlinks lassen sich die Internetseiten von Westphal und Lieser öffnen, die ausführliche Beschreibungen der Grade enthalten. 
@@ -1279,7 +1281,8 @@ In Unterabschnitt \ref{subsec:ususgraphs} wurde vorgestellt, wie Usus für Eclips
 \textcolor[rgb]{1,0,0}{todo}
 
 \subsection{Events}
-Um auf Ereignisse in Visual Studio zu reagieren, wird eine Referenz auf das \texttt{DTE2}-Objekt benötigt. Laut Microsoft ist dieses Objekt, als Bestandteil des \texttt{EnvDTE}-Namespace, Teil der COM-Bibliothek, die für die Automatisierung von Visual Studio verwendet werden kann \cite{MSDNDTE2}. Listing \ref{listing:getdte2} zeigt, wie eine Referenz zu diesem Objekt erstellt werden kann. Dafür muss dieser Code innerhalb einer Klasse die von \texttt{ToolWindowPane} erbt ausgeführt werden, sodass sich \texttt{base} auf ein Objekt vom Typ \texttt{WindowPane} bezieht.
+\label{subsec:vsievents}
+Um auf Ereignisse in Visual Studio zu reagieren, wird eine Referenz auf das \texttt{DTE2}-Objekt benötigt. Laut Microsoft ist dieses Objekt, als Bestandteil des \texttt{EnvDTE}-Namespace, Teil der COM\footnote[1]{Mehr über COM: "`What is COM?"' \url{http://www.microsoft.com/com/default.mspx}}-Bibliothek, die für die Automatisierung von Visual Studio verwendet werden kann \cite{MSDNDTE2}. Listing \ref{listing:getdte2} zeigt, wie eine Referenz zu diesem Objekt erstellt werden kann. Dafür muss dieser Code innerhalb einer Klasse die von \texttt{ToolWindowPane} erbt ausgeführt werden, sodass sich \texttt{base} auf ein Objekt vom Typ \texttt{WindowPane} bezieht.
 \begin{lstlisting}[caption={Zentrales Visual Studio Objekt \texttt{DTE2} erhalten},label={listing:getdte2}]
 EnvDTE80.DTE2 dt2 = base.GetService(typeof(SDTE)) as EnvDTE80.DTE2;
 \end{lstlisting}
@@ -1287,24 +1290,42 @@ Sobald eine Referenz zu dem \texttt{DTE2}-Objekt verfügbar ist, kann die aktuell
 
 \subsection{Fenster}
 Ein Visual Studio Fenster ist eine Klasse, die von \texttt{ToolWindowPane} erbt. Alle Fenster von Usus.net sollen auf das Build-Ereignis reagieren, alle Projekte der aktuellen Solution und deren erzeugte Assemblies bestimmen können. Um diese Logik für alle Usus.net Fenster wiederverwenden zu können, stellt Usus.net einige Oberklassen zur Verfügung, die die benötigten Funktionen bereitstellen. Diese Klassen befinden sich im Namespace \texttt{andrena.Usus.net.ExtensionHelper}.
-
-
-DtAwareToolWindow mit MasterObjekt dt2
-
-SolutionAwareToolWindowPane mit RawSolution EnvDTE.Solution, RawProjects IEnumerable<EnvDTE.Project> und Projects IEnumerable<Project>
-
-SolutionEventsAwareToolWindowPane mit Ereignissen SolutionChanged, SavingDone, CommandDone, BuildStart, BuildDone
-
-BuildAwareToolWindowPane mit Ereignis BuildSuccessfull und Parameter IEnumerable<string>
-
-
-\textcolor[rgb]{1,0,0}{todo}
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=16cm]{images/windows.jpg}
+	\caption{Usus.net Fenster-Oberklassen}
+	\label{fig:windows}
+\end{figure}
+Abbildung \ref{fig:windows} zeigt, dass die oberste Klasse \texttt{DtAwareToolWindow} ist. Diese Klasse erbt von \texttt{ToolWindowPane} und stellt das in Unterabschnitt \ref{subsec:vsievents} beschriebene \texttt{DT2}-Objekt zur Verfügung. \texttt{SolutionAwareToolWindowPane} erbt von \texttt{DtAwareToolWindow} und nutzt das dort verfügbare Automatisierungsobjekt um eine Referenz auf die aktuelle Solution, sowie alle Projekte dieser Solution zu ermitteln. Da die Projekt-Objekte alle als COM-Objekte vorliegen, werden diese in einfache Objekte vom Typ \texttt{Project} konvertiert. Die Klasse \texttt{SolutionEventsAwareToolWindowPane} erbt von \texttt{SolutionAwareToolWindowPane} und verwendet die COM-Objekte der Oberklassen um Ereignisse in Visual Studio verfügbar zu machen. Diese Ereignisse wurden bereits in Unterabschnitt \ref{subsec:vsievents} erwähnt. Alle Klassen die von dieser Klasse ableiten, können damit informiert werden, wenn der Entwickler einen Speicher- oder Kompiliervorgang ausführt. Zusätzlich können alle betroffenen Projekte dieses Kompiliervorgangs bestimmt werden. Um über die tatsächlich erzeugten Assembly-Dateien im Falle eines Builds benachrichtigt werden zu können, erbt die Klasse \texttt{BuildAwareToolWindowPane} abschließend von \texttt{SolutionEventsAwareToolWindowPane}. Diese Klasse stellt ein Ereignis zur Verfügung, welches nur nach einem erfolgreichen Kompilieren ausgeführt wird, und welchem eine Liste an Dateipfaden übergeben wird. Diese Liste enthält zu jedem Projekt die aktuellste Assembly. Wenn ein Projekt keine Assembly-Datei erzeugt, wird es ignoriert. Die aktuellste Assembly wird von der Methode \texttt{LatestOutputAssembly} der Klasse \texttt{Project} gefunden. Auf diese Weise wird sichergestellt, dass immer der aktuellste Build berücksichtigt wird, unabhängig ob die Dateien im \emph{build}- oder \emph{debug}-Verzeichnis erstellt werden.
+\paragraph{}
+Die in Abschnitt \ref{sec:ususnetviews} vorgestellten Oberflächen von Usus.net sind also Fenster-Klassen vom Typ \texttt{BuildAwareToolWindowPane}. Diese Fenster erzeugen in ihren Konstruktoren die entsprechenden ViewModels, registrieren sich für das \texttt{BuildSuccessfull}-Ereignis und leiten dessen Dateipfad-Liste an die \texttt{TryStartAnalysis}-Methode der Hub-Infrastruktur aus Unterabschnitt \ref{subsec:ususnethubs} weiter. Alle Fenster werden also über die Build-Vorgänge informiert und benachrichtigen die \texttt{ViewHub}-Instanz. Listing \ref{listing:ususnetwindowsetup} zeigt diese Initialisierung exemplarisch im Konstruktor des Cockpit-Fenster.
+\begin{lstlisting}[caption={Initialisierung eines Usus.net-Fenster},label={listing:ususnetwindowsetup}]
+BuildSuccessfull += files => ViewHub.Instance.TryStartAnalysis(files);
+base.Content = ViewFactory.CreateCockpit(ViewHub.Instance);
+\end{lstlisting}
+Usus.net ist als Erweiterung im Sinne von Unterabschnitt \ref{subsec:visualstudio} implementiert. Dadurch können alle Usus.net-Fenster als separate Projekte mit der Projektvorlage \emph{VSPackage} realisiert werden. In einem speziellen Container-Projekt werden alle Usus.net \emph{VSPackage}-Projekte dann zu einer VSIX-Datei zusammengefasst werden.
 
 \subsection{Menüpunkt}
-\cite{MSDNMenuBar}
-\cite{MSDNForcePackageLoad}
-
-\textcolor[rgb]{1,0,0}{todo}
+Standardmäßig werden alle selbsterstellten Visual Studio Tool Windows unter \texttt{View / Other Windows} aufgeführt. Für Usus.net sollen die in Abschnitt \ref{sec:ususnetviews} beschriebenen Fenster aber einen besonderen Stellenwert genießen. Microsoft beschreibt in der MSDN Library wie ein solcher Menüpunkt in Form eines \emph{VSPackage}-Projekts implementiert werde kann \cite{MSDNMenuBar}. Abbildung \ref{fig:ususnet_menu} zeigt diesen Menüeintrag direkt in Visual Studio.
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=8cm]{images/ususnet_menu.png}
+	\caption{Usus.net Menüpunkt in der Menüleiste von Visual Studio}
+	\label{fig:ususnet_menu}
+\end{figure}
+Um die einzelnen Fenster zu öffnen muss das \emph{VSPackage} des Fensters erst gestartet werden. Dies ist der Fall, da Visual Studio Erweiterungen erst dann gestartet werden, wenn sie das erste Mal durch den Entwickler verwendet werden. Microsoft beschreibt in der MSDN Library wie ein Paket manuell gestartet werden kann \cite{MSDNForcePackageLoad}. Sobald das Paket des Fensters gestartet wurde, kann dieses Fenster angezeigt werden. Um das Anzeigen von Usus.net-Fenstern zu vereinfachen, steht die Klasse \texttt{UsusNetWindow} im Namensraum \texttt{andrena.Usus.net.ExtensionHelper} zur Verfügung. Diese Klasse enthält für jedes Usus.net-Fenster die eindeutige Identifikationsnummer des dazugehörigen \emph{VSPackage} in Form einer GUID\footnote[1]{Mehr über GUID: "`???"' \url{???}}. Listing \ref{listing:ususnetdisplaywindows} zeigt wie anhand dieser Identifikationsnummer das Paket geladen werden kann.
+\begin{lstlisting}[caption={Anzeigen eines Usus.net-Fenster},label={listing:ususnetdisplaywindows}]
+Guid PackageToBeLoadedGuid = new Guid(guid);
+shell.LoadPackage(ref PackageToBeLoadedGuid, out package);
+GlobalEventManager.Instance.FireEvent(guid, parameter);
+\end{lstlisting}
+Nachdem das Paket des Fensters in Zeile 2 geladen wurde, kann das Fenster in Visual Studio geöffnet werden. Dazu verwendet Usus.net ein Objekt vom Typ \texttt{GlobalEventManager}. Sobald das Paket eines Fensters geladen wird, registriert dieses Paket eine Ereignisbehandlung bei der einzigen Instanz der \texttt{GlobalEventManager}-Klasse. Die Ereignisbehandlung kann mit der GUID des \emph{VSPackage} ausgeführt werden, was in Lisiting \ref{listing:ususnetdisplaywindows} in Zeile 3 zu sehen ist. Listing \ref{listing:ususnetdisplaywindowsevent} zeigt exemplarisch wie das Paket des Usus.net Cockpit-Fenster die Ereignisbehandlung zum Anzeigen des Fensters registriert.
+\begin{lstlisting}[caption={Registrierung des Anzeigen-Ereignis beim \texttt{GlobalEventManager}-Objekt},label={listing:ususnetdisplaywindowsevent}]
+GlobalEventManager.Instance.RegisterEvent(
+	UsusNetWindow.Cockpit,
+	p => ShowToolWindow(null, null));
+\end{lstlisting}
+Alle \emph{VSPackage}-Projekte, die zur der einen VSIX-Datei zusammengefasst werden teilen sich also die gleiche Instanz des \texttt{GlobalEventManager}-Objekts. Dadurch können Fenster- und Menüübergreifende Ereignisse definiert und ausgeführt werden. Dies ist die einzige Möglichkeit der Inter-Fenster-Menü-Kommunikation im Kontext von Usus.net.
 
 \subsection{Zeilensprünge}
 \label{subsec:vsrowjumps}
