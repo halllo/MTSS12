@@ -283,5 +283,12 @@ namespace Usus.net.Core.IntegrationTests.MethodMetrics
                 Console.WriteLine();
             return a;
         }
+
+        [ExpectCyclomaticComplexity(2)]
+        public static void MethodWithTernaryExpression()
+        {
+            bool c1 = true;
+            Console.WriteLine(c1 ? "true!" : "false!");
+        }
     }
 }
