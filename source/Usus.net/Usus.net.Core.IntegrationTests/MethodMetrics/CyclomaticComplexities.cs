@@ -252,5 +252,36 @@ namespace Usus.net.Core.IntegrationTests.MethodMetrics
                     Console.WriteLine(i); break;
             }
         }
+
+        [ExpectCyclomaticComplexity(3)]
+        public static void MethodWithIfInLambda()
+        {
+            bool c1 = true;
+            Action a = () =>
+            {
+                bool c2 = true;
+                if (c1 && c2)
+                    Console.WriteLine();
+                else
+                    Console.WriteLine();
+            };
+        }
+
+        [ExpectCyclomaticComplexity(4)]
+        public static Action MethodWithIfInAndOutLambda()
+        {
+            bool c1 = true;
+            Action a = () =>
+            {
+                bool c2 = true;
+                if (c1 && c2)
+                    Console.WriteLine();
+                else
+                    Console.WriteLine();
+            };
+            if (c1)
+                Console.WriteLine();
+            return a;
+        }
     }
 }
