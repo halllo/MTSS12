@@ -925,6 +925,7 @@ var result = cyclomaticComplexityCalculator.Result;
 Das \texttt{CyclomaticComplexityCalculator}-Objekt erbt die Funktionalität, sämtliche Anweisungen (engl. Statements) in einem Methodenrumpf zu besuchen, von \texttt{CodeTraverser}, einer Klasse in der CCI. Jede Bedingung, jede \texttt{if}-, \texttt{while}-, \texttt{for}-, \texttt{case}- und \texttt{catch}-Anweisung erhöht einen anfangs mit 1 initiierten Zähler. Obwohl \texttt{CodeTraverser} auch eine Behandlungsroutine für \texttt{foreach}-Anweisungen anbietet, ist die CCI momentan nicht in der Lage diese als solche erfolgreich zu erkennen. Dies hat zur Folge, das \texttt{foreach}-Anweisungen, die vom Compiler in \texttt{while}/\texttt{if}/\texttt{finally}-Anweisungen übersetzt werden, auch also solche erkannt werden. Durch das \texttt{while} und das \texttt{if} entstehen also zwei Stellen, die eine Entscheidung treffen, während im Quellcode mit \texttt{foreach} nur eine erkennbar ist. Die in Usus.net berechnete zyklomatische Komplexität einer Methode entspricht also der Komplexität, die der Compiler generiert und nicht der, die durch den Quellcode suggeriert wird.
 
 \subsection{Methodenlänge}
+\label{subsec:methodlength}
 Die Länge einer Methode sagt etwas darüber aus, wie viele Dinge diese Methode ausführt. Eine kurze Methode ist einfacher zu verstehen und zu verändern als eine lange. In Unter-Unterabschnitt \ref{subsubsec:methodlength} wurde diese Metrik und ihre Varianten genauer beschrieben. Usus.net bestimmt drei verschiedene Methodenlängen.
 \paragraph{}
 Als sehr nachvollziehbare Längenangabe wird wohl die Anzahl der Codezeilen gesehen, die Logik enthalten. Dieser Wert wird von der Klasse \texttt{NumberOfLogicalLines} bestimmt und ausschließlicher Verwendung von \emph{CCI Metadata}. Alle CIL-Anweisungen, außer leeren Anweisungen (\texttt{Nop}), Block-Verlassen-Anweisungen (\texttt{Leave.S}) und Methoden-Rückgabe-Anweisungen (\texttt{Ret}) werden dabei betrachtet. Listing \ref{listing:numberoflogicallines} zeigt den Code, der die Codezeilen der betroffenen CIL-Anweisungen (Operationen) findet, doppelte Werte entfernt und deren Anzahl bestimmt.
@@ -1246,6 +1247,7 @@ Das nächste Usus.net Fenster entspricht dem Usus Info-Fenster aus Unterabschnitt
 Ein einfacher Mausklick öffnet das Usus.net Info-Fenster und zeigt die Metriken der entsprechenden Methode an. Die Metriken der Klasse sind ebenfalls sichtbar. Wie der Button im Code-Editor angezeigt wird ist in Unterabschnitt \ref{subsec:editoradornment} beschrieben. Der Button erscheint nur neben Methoden und nicht neben Properties oder Klassen. Daher lässt sich das Info-Fenster auch nur für Methoden öffnen. Dies ist ausreichend, da die Klassen-Metriken ja ebenfalls angezeigt werden. Das Info-Fenster in der Eclipse Variante lässt sich zusätzlich auch für Klassen direkt öffnen. 
 
 \subsection{Hotspots}
+\label{subsec:ususnethotspots}
 Abbildung \ref{fig:ususnet_hotspots} zeigt alle Hotspots in der Codebasis.
 \begin{figure}[h]
 	\centering
@@ -1338,14 +1340,14 @@ Alle \emph{VSPackage}-Projekte, die zur der einen VSIX-Datei zusammengefasst wer
 
 \subsection{Zeilensprünge}
 \label{subsec:vsrowjumps}
-Listing \ref{listing:openfilejumprow} zeigt, wie Visual Studio mithilfe des \texttt{DTE2}-Objekts eine Datei öffnen und zu einer Zeile in dieser Datei springen kann.
+In Unterabschnitt \ref{subsec:ususnethotspots} wurde das Hotspots-Fenster vorgestellt. Nach einem Doppelklick auf einen Hotspot soll Visual Studio zu der entsprechenden Methode oder Klasse springen. Listing \ref{listing:openfilejumprow} zeigt, wie Visual Studio mithilfe des in Unterabschnitt \ref{subsec:vsievents} vorgestellten \texttt{DTE2}-Objekts eine Datei öffnen und zu einer Zeile in dieser Datei springen kann. Das \texttt{DT2-Objekt} wird durch das \texttt{MasterObjekt}-Property der Klasse \texttt{DtAwareToolWindow} ermittelt.
 \begin{lstlisting}[caption={Datei öffnen und an Zeile springen},label={listing:openfilejumprow}]
 MasterObjekt.ItemOperations.OpenFile(fileName, 
 	EnvDTE.Constants.vsViewKindTextView);
 var file = MasterObjekt.ActiveDocument.Selection as EnvDTE.TextSelection;
 file.GotoLine(fileLine, selectLine);
 \end{lstlisting}
-Die Variable \texttt{fileName} enthält den vollständigen Pfad der zu öffnenden Datei und die Variable \texttt{fileLine} die Zeilennummer der zu markierenden Zeile.
+Dieser Code befindet sich in der \texttt{DtAwareToolWindow}-Klasse und lässt sich über die Methode \texttt{OpenFileAtLine} aufrufen. Die Variable \texttt{fileName} enthält den vollständigen Pfad der zu öffnenden Datei und die Variable \texttt{fileLine} die Zeilennummer der zu markierenden Zeile. Ob der Code in der Zeile tatsächlich markiert werden soll, kann über den Parameter \texttt{selectLine} festgelegt werden.
 \textcolor[rgb]{1,0,0}{todo}
 
 \subsection{Editor Adornment}
@@ -1394,6 +1396,9 @@ Die Variable \texttt{fileName} enthält den vollständigen Pfad der zu öffnenden D
 \section{Andrena Software Qualitäts Index}
 \textcolor[rgb]{1,0,0}{todo}
 
+\subsection{Relevante Code-Zeilen}
+ISIS verwendet eine einheitliche Größe für Codebasen, nämlich RLOC (engl. Relevant Lines Of Code). Dieser Wert entspricht der Anzahl aller Codezeilen in allen Code-Dokumenten ohne Kommentare und wird in dem \texttt{CommonReportKnowledge}-Objekt des Metrikberichts gespeichert (siehe Abschnitt \ref{sec:ususobjectmodel}). \emph{CCI Metadata} erlaubt es die Zeileninformationen der CIL-Anweisungen innerhalb einer Methoden mithilfe der \texttt{PeReader}-Klasse zu bestimmen. In Unterabschnitt \ref{subsec:methodlength} wurde beschrieben, dass Usus.net auf diese Weise auch die Methodenlänge eine Methode berechnet. Die Zeileninformationen von Methoden- und Klassendefinitionen können über das \texttt{PeReader}-Objekt nicht ermittelt werden. \emph{CCI Metadata} kann die Anzahl der relevanten Codezeilen also nicht direkt aus einer Assembly bestimmen. Aus diesem Grund versucht Usus.net den RLOC-Wert auszurechnen. Die Methodenlänge bildet dabei die Grundlage. Für jede Methode im \texttt{MetricsReport}-Objekt addiert Usus.net die Methodenlänge sowie eine weitere Zeile (Methodendefiniton) zu dem \texttt{RelevantLinesOfCode}-Property in dem \texttt{CommonReportKnowledge}-Objekt. Für jede Klasse wird dieses Property um zwei weitere Zeilen erhöht, welche für die Klassendefinition sowie die Namespace-Zugehörigkeit stehen. Mehrzeilige Methodensignaturen und Klassendefinitionen werden also trotzdem mit nur jeweils einer Zeile gerechnet. Die \texttt{using}-Angaben am Anfang jeder Quellcode-Datei werden ignoriert.
+
 
 \section{Metrik-Veränderung}
 \textcolor[rgb]{1,0,0}{todo}
@@ -1405,7 +1410,13 @@ Die Variable \texttt{fileName} enthält den vollständigen Pfad der zu öffnenden D
 \textcolor[rgb]{1,0,0}{todo}
 
 
+\section{Metrik-Vergleich}
+Stimmen die Werte, die Usus.net bestimmt mit denen der anderen Werkzeuge überein? Eclipse Usus, FxCop, Code Metrics PowerTool
+\textcolor[rgb]{1,0,0}{todo}
+
+
 \section{Usus.net Performance}
+Wie schnell arbeitet Usus.net im Vergleich zu anderen Werkzeugen? Wird Zeit gespart, da kein Kontextswitch erforderlich ist und das Tool in die IDE integriert ist?
 \textcolor[rgb]{1,0,0}{todo}
 
 

@@ -56,7 +56,7 @@ namespace andrena.Usus.net.Core.Reports
         {
             namespaceReports.Add(namespaceMertics.Itself.Name, namespaceMertics);
             namespaceMertics.Itself.CommonKnowledge = CommonKnowledge;
-            CommonKnowledge.NumberOfNamespaces++;
+            CommonKnowledge.UpdateFor(namespaceMertics);
         }
 
         internal void AddTypeReport(TypeMetricsWithMethodMetrics typeMertics)
@@ -65,7 +65,7 @@ namespace andrena.Usus.net.Core.Reports
             {
                 typeReports.Add(typeMertics.Itself.FullName, typeMertics);
                 ShareTheKnowledgeWithMethodsOf(typeMertics);
-                if (!typeMertics.Itself.CompilerGenerated) CommonKnowledge.NumberOfClasses++;
+                CommonKnowledge.UpdateFor(typeMertics.Itself);
             }
         }
 
@@ -94,7 +94,7 @@ namespace andrena.Usus.net.Core.Reports
             typeMertics.Itself.CommonKnowledge = CommonKnowledge;
             foreach (var method in typeMertics.Methods)
             {
-                if (!method.CompilerGenerated) CommonKnowledge.NumberOfMethods++;
+                CommonKnowledge.UpdateFor(method);
                 method.CommonKnowledge = CommonKnowledge;
             }
         }

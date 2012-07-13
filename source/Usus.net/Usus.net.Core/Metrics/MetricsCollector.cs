@@ -31,6 +31,7 @@ namespace andrena.Usus.net.Core.Metrics
                 Signature = method.Signature(),
                 CompilerGenerated = method.IsGeneratedCode(),
                 OnlyDeclaration = method.IsOnlyDeclaration(),
+                DefaultConstructor = method.IsDefaultCtor(),
                 SourceLocation = SourceCodeLocating.Of(method, pdb),
                 CyclomaticComplexity = CyclomaticComplexityOfAst.Of(method, pdb, host),
                 NumberOfStatements = NumberOfStatements.Of(method, pdb, host),

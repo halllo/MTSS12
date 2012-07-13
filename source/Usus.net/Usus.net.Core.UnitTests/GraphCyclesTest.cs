@@ -5,7 +5,7 @@ using Usus.net.Core.UnitTests.Factories;
 namespace Usus.net.Core.UnitTests
 {
     [TestClass]
-    public class GraphCyclesTests
+    public class GraphCyclesTest
     {
         [TestMethod]
         public void Cylces_StraightGraph_None()

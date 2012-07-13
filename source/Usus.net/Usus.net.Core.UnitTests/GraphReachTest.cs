@@ -5,7 +5,7 @@ using Usus.net.Core.UnitTests.Factories;
 namespace Usus.net.Core.UnitTests
 {
     [TestClass]
-    public class GraphReachTests
+    public class GraphReachTest
     {
         [TestMethod]
         public void Reach_CircleGraph_All()

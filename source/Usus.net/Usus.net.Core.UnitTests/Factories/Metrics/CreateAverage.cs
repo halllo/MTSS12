@@ -1,5 +1,4 @@
 using andrena.Usus.net.Core.Reports;
-using System;
 
 namespace Usus.net.Core.UnitTests.Factories.Metrics
 {
@@ -7,37 +6,37 @@ namespace Usus.net.Core.UnitTests.Factories.Metrics
     {
         public static double RatedCyclomaticComplexity(params int[] ccs)
         {
-            return Create.ManyRatedMetrics(m => new MethodMetricsReport { CyclomaticComplexity = m }, ccs)
+            return CreateMany.RatedMetrics(m => new MethodMetricsReport { CyclomaticComplexity = m }, ccs)
                 .AverageRatedCyclomaticComplexity;
         }
 
         public static double RatedMethodLength(params int[] mls)
         {
-            return Create.ManyRatedMetrics(m => new MethodMetricsReport { NumberOfLogicalLines = m }, mls)
+            return CreateMany.RatedMetrics(m => new MethodMetricsReport { NumberOfLogicalLines = m }, mls)
                 .AverageRatedMethodLength;
         }
 
         public static double RatedClassSize(params int[] css)
         {
-            return Create.ManyRatedMetrics(m => new TypeMetricsReport { FullName = Create.RandomName(), NumberOfMethods = m }, css)
+            return CreateMany.RatedMetrics(m => new TypeMetricsReport { FullName = Create.RandomName(), NumberOfMethods = m }, css)
                 .AverageRatedClassSize;
         }
 
         public static double RatedNumberOfNonStaticPublicFields(params int[] nspfs)
         {
-            return Create.ManyRatedMetrics(m => new TypeMetricsReport { FullName = Create.RandomName(), NumberOfNonStaticPublicFields = m }, nspfs)
+            return CreateMany.RatedMetrics(m => new TypeMetricsReport { FullName = Create.RandomName(), NumberOfNonStaticPublicFields = m }, nspfs)
                 .AverageRatedNumberOfNonStaticPublicFields;
         }
 
         public static double CumulativeComponentDependency(params int[] ccds)
         {
-            return Create.ManyRatedMetrics(m => new TypeMetricsReport { FullName = Create.RandomName(), CumulativeComponentDependency = m }, ccds)
+            return CreateMany.RatedMetrics(m => new TypeMetricsReport { FullName = Create.RandomName(), CumulativeComponentDependency = m }, ccds)
                 .AverageComponentDependency;
         }
 
         public static double RatedNumberOfNamespacesInCycle(params int[] nonics)
         {
-            return Create.ManyRatedMetrics(m => new NamespaceMetricsReport { Name = Create.RandomName(), CyclicDependencies = Create.Default<string>(m) }, nonics)
+            return CreateMany.RatedMetrics(m => new NamespaceMetricsReport { Name = Create.RandomName(), CyclicDependencies = Create.Default<string>(m) }, nonics)
                 .NamespacesWithCyclicDependencies;
         }
     }

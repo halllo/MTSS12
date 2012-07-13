@@ -6,7 +6,7 @@ using Usus.net.Core.UnitTests.Factories;
 namespace Usus.net.Core.UnitTests
 {
     [TestClass]
-    public class GraphReduceTests
+    public class GraphReduceTest
     {
         [TestMethod]
         public void Reduce_TriangleGraph_SingleEdge()

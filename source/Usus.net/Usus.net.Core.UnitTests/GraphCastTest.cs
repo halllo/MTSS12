@@ -6,7 +6,7 @@ using Usus.net.Core.UnitTests.Factories;
 namespace Usus.net.Core.UnitTests
 {
     [TestClass]
-    public class GraphCastTests
+    public class GraphCastTest
     {
         [TestMethod]
         public void Cast_EmptyGraph_EmptyGraph()

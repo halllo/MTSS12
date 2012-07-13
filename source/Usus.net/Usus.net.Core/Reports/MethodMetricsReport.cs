@@ -10,6 +10,7 @@ namespace andrena.Usus.net.Core.Reports
         public string Signature { get; internal set; }
         public bool CompilerGenerated { get; internal set; }
         public bool OnlyDeclaration { get; internal set; }
+        public bool DefaultConstructor { get; internal set; }
         public SourceCodeLocation SourceLocation { get; internal set; }
 
         public int CyclomaticComplexity { get; internal set; }
