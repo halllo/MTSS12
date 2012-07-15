@@ -1237,6 +1237,7 @@ Das Fenster mit den am weitesten aggregierte Metriken ist \emph{Usus.net Cockpit
 Dieses Fenster verhält sich wie alle anderen Fenster und kann in Visual Studio beliebig angedockt werden. Das ViewModel reagiert auf einen verfügbaren Metrikbericht, indem es die Einträge der Tabelle durch neue Einträge für die Statistiken ersetzt. Als Tabelle wird ein \texttt{DataGrid}-Objekt verwendet.
 
 \subsection{Info}
+\label{subsec:ususnetinfo}
 Das nächste Usus.net Fenster entspricht dem Usus Info-Fenster aus Unterabschnitt \ref{subsec:ususinfo}. Dieses Fenster zeigt die Metriken einer Methode an in Verbindung mit der Klasse an. Im Gegensatz zu der Eclipse Variante, lässt sich dieses Fenster nicht mit dem Shortcut \texttt{Ctrl-U} öffnen. Usus.net platziert einen kleinen Button rechts neben jeder Methodendeklaration, wie in Abbildung \ref{fig:ususnet_info} dargestellt.
 \begin{figure}[h]
 	\centering
@@ -1244,7 +1245,7 @@ Das nächste Usus.net Fenster entspricht dem Usus Info-Fenster aus Unterabschnitt
 	\caption{Usus.net Info-Fenster}
 	\label{fig:ususnet_info}
 \end{figure}
-Ein einfacher Mausklick öffnet das Usus.net Info-Fenster und zeigt die Metriken der entsprechenden Methode an. Die Metriken der Klasse sind ebenfalls sichtbar. Wie der Button im Code-Editor angezeigt wird ist in Unterabschnitt \ref{subsec:editoradornment} beschrieben. Der Button erscheint nur neben Methoden und nicht neben Properties oder Klassen. Daher lässt sich das Info-Fenster auch nur für Methoden öffnen. Dies ist ausreichend, da die Klassen-Metriken ja ebenfalls angezeigt werden. Das Info-Fenster in der Eclipse Variante lässt sich zusätzlich auch für Klassen direkt öffnen. 
+Ein einfacher Mausklick öffnet das Usus.net Info-Fenster und zeigt die Metriken der entsprechenden Methode an. Die Metriken der Klasse sind ebenfalls sichtbar. Wie der Button im Code-Editor angezeigt wird ist in Unterabschnitt \ref{subsec:editoradornment} beschrieben. Der Button erscheint nur neben Methoden und nicht neben Properties oder Klassen. Daher lässt sich das Info-Fenster auch nur für Methoden öffnen. Dies ist ausreichend, da die Klassen-Metriken ja ebenfalls angezeigt werden. Das Info-Fenster in der Eclipse Variante lässt sich zusätzlich auch für Klassen direkt öffnen. Wenn der Entwickler auf den Button klickt, werden die Zeilennummer sowie der Name der Datei an das ViewModel des Info-Fensters übertragen. Beide Informationen kommen dort in Form eines \texttt{LineLocation}-Objekts an. Obwohl die Editor-Buttons und das Fenster in separaten Erweiterungsprojekten implementiert sind, ist diese Übertragung über das in Unterabschnitt \ref{subsec:vsmenus} beschriebene Event-System möglich. Um den Methoden- und Klassenbericht zu einer Datei und Zeile zu ermitteln, wird die Klasse \texttt{CurrentMethodInfoCalculator} verwendet. Jeder Methodenbericht erhält durch die Metrikberechnung aus Abschnitt \ref{sec:metriccalc} die Zeilen-Informationen der pdb-Datei in Form eines \texttt{SourceCodeLocation}-Objekts. Usus.net kann dadurch anhand der Zeilennummer und dem Dateipfad des geklickten Button den entsprechenden Methodenbericht finden und dessen Metriken anzeigen.
 
 \subsection{Hotspots}
 \label{subsec:ususnethotspots}
@@ -1255,7 +1256,7 @@ Abbildung \ref{fig:ususnet_hotspots} zeigt alle Hotspots in der Codebasis.
 	\caption{Usus.net Hotspots-Fenster}
 	\label{fig:ususnet_hotspots}
 \end{figure}
-Wie die Oberfläche in Unterabschnitt \ref{subsec:usushotspots}, lassen sich zu jeder Metrik genau die Methoden, Klassen und Namespaces anzeigen, dessen Metriken über den definierten Schwellen aus Abschnitt \ref{sec:metrics} liegen. Dazu wird die API verwendet, die bereits in Unterabschnitt \ref{subsec:hotspots} vorgestellt wurde. Diese Problemfälle sind nach Metrik gruppiert und lassen sich über den Reiter der entsprechenden Metrik anzeigen. Mit einen Doppelklick auf einen Methoden- oder Klassen-Hotspot springt Visual Studio an die Problemstelle im Quellcode. Dies ist möglich, da im Rahmen der Metrikberechnung aus Abschnitt \ref{sec:metriccalc} die Zeilen-Informationen aus der pdb-Datei den Methodenberichten zugeordnet werden. Das ViewModel von \emph{Usus.net Hotspots} verwendet das Interface \texttt{IJumpToSource}, um an beliebige Zeilen von beliebigen Dateien zu springen. Auf Visual Studio Seite implementiert das Fenster, dass das Hotspots-Element enthält, dieses Interface. Wie eine Zeile in einer Visual Studio Erweiterung abgesprungen werden kann, beschreibt Unterabschnitt \ref{subsec:vsrowjumps}. Listing \ref{listing:jumptomethod} zeigt den Sprung von der Seite des Hostspots-ViewModel.
+Wie die Oberfläche in Unterabschnitt \ref{subsec:usushotspots}, lassen sich zu jeder Metrik genau die Methoden, Klassen und Namespaces anzeigen, dessen Metriken über den definierten Schwellen aus Abschnitt \ref{sec:metrics} liegen. Dazu wird die API verwendet, die bereits in Unterabschnitt \ref{subsec:hotspots} vorgestellt wurde. Diese Problemfälle sind nach Metrik gruppiert und lassen sich über den Reiter der entsprechenden Metrik anzeigen. Mit einen Doppelklick auf einen Methoden- oder Klassen-Hotspot springt Visual Studio an die Problemstelle im Quellcode. Dies ist möglich, da alle Methodenberichte ja ein \texttt{SourceCodeLocation}-Objekt beinhalten. Das ViewModel von \emph{Usus.net Hotspots} verwendet das Interface \texttt{IJumpToSource}, um an beliebige Zeilen von beliebigen Dateien zu springen. Auf Visual Studio Seite implementiert das Fenster, dass das Hotspots-Element enthält, dieses Interface. Wie eine Zeile in einer Visual Studio Erweiterung abgesprungen werden kann, beschreibt Unterabschnitt \ref{subsec:vsrowjumps}. Listing \ref{listing:jumptomethod} zeigt den Sprung von der Seite des Hostspots-ViewModel.
 \begin{lstlisting}[caption={Zu der Methode eines \texttt{MethodMetricsReport}-Objekt springen},label={listing:jumptomethod}]
 if (Report.SourceLocation.IsAvailable)
 	jumper.JumpToFileLocation(
@@ -1289,6 +1290,7 @@ Zu jedem Grad werden die Prinzipien (Unterabschnitt \ref{subsec:ccdprinciples}) 
 
 
 \section{Visual Studio Integration}
+welche Projekte gibt es, welches sind die Fenster, welches das Editor Paket und in welchem werden alle dann integriert?
 \textcolor[rgb]{1,0,0}{todo}
 
 \subsection{Events}
@@ -1317,6 +1319,7 @@ base.Content = ViewFactory.CreateCockpit(ViewHub.Instance);
 Usus.net ist als Erweiterung im Sinne von Unterabschnitt \ref{subsec:visualstudio} implementiert. Dadurch können alle Usus.net-Fenster als separate Projekte mit der Projektvorlage \emph{VSPackage} realisiert werden. In einem speziellen Container-Projekt werden alle Usus.net \emph{VSPackage}-Projekte dann zu einer VSIX-Datei zusammengefasst werden.
 
 \subsection{Menüpunkt}
+\label{subsec:vsmenus}
 Standardmäßig werden alle selbsterstellten Visual Studio Tool Windows unter \texttt{View / Other Windows} aufgeführt. Für Usus.net sollen die in Abschnitt \ref{sec:ususnetviews} beschriebenen Fenster aber einen besonderen Stellenwert genießen. Microsoft beschreibt in der MSDN Library wie ein solcher Menüpunkt in Form eines \emph{VSPackage}-Projekts implementiert werde kann \cite{MSDNMenuBar}. Abbildung \ref{fig:ususnet_menu} zeigt diesen Menüeintrag direkt in Visual Studio.
 \begin{figure}[h]
 	\centering
@@ -1340,42 +1343,53 @@ Alle \emph{VSPackage}-Projekte, die zur der einen VSIX-Datei zusammengefasst wer
 
 \subsection{Zeilensprünge}
 \label{subsec:vsrowjumps}
-In Unterabschnitt \ref{subsec:ususnethotspots} wurde das Hotspots-Fenster vorgestellt. Nach einem Doppelklick auf einen Hotspot soll Visual Studio zu der entsprechenden Methode oder Klasse springen. Listing \ref{listing:openfilejumprow} zeigt, wie Visual Studio mithilfe des in Unterabschnitt \ref{subsec:vsievents} vorgestellten \texttt{DTE2}-Objekts eine Datei öffnen und zu einer Zeile in dieser Datei springen kann. Das \texttt{DT2-Objekt} wird durch das \texttt{MasterObjekt}-Property der Klasse \texttt{DtAwareToolWindow} ermittelt.
+In Unterabschnitt \ref{subsec:ususnethotspots} wurde das Hotspots-Fenster vorgestellt. Nach einem Doppelklick auf einen Hotspot soll Visual Studio zu der entsprechenden Methode oder Klasse springen. Listing \ref{listing:openfilejumprow} zeigt, wie Visual Studio mithilfe des in Unterabschnitt \ref{subsec:vsievents} vorgestellten \texttt{DTE2}-Objekts eine Datei öffnen und zu einer Zeile in dieser Datei springen kann. Das \texttt{DTE2-Objekt} wird durch das \texttt{MasterObjekt}-Property der Klasse \texttt{DtAwareToolWindow} ermittelt.
 \begin{lstlisting}[caption={Datei öffnen und an Zeile springen},label={listing:openfilejumprow}]
 MasterObjekt.ItemOperations.OpenFile(fileName, 
 	EnvDTE.Constants.vsViewKindTextView);
 var file = MasterObjekt.ActiveDocument.Selection as EnvDTE.TextSelection;
 file.GotoLine(fileLine, selectLine);
 \end{lstlisting}
-Dieser Code befindet sich in der \texttt{DtAwareToolWindow}-Klasse und lässt sich über die Methode \texttt{OpenFileAtLine} aufrufen. Die Variable \texttt{fileName} enthält den vollständigen Pfad der zu öffnenden Datei und die Variable \texttt{fileLine} die Zeilennummer der zu markierenden Zeile. Ob der Code in der Zeile tatsächlich markiert werden soll, kann über den Parameter \texttt{selectLine} festgelegt werden.
-\textcolor[rgb]{1,0,0}{todo}
+Dieser Code befindet sich in der \texttt{DtAwareToolWindow}-Klasse und lässt sich über die Methode \texttt{OpenFileAtLine} aufrufen. Die Variable \texttt{fileName} enthält den vollständigen Pfad der zu öffnenden Datei und die Variable \texttt{fileLine} die Zeilennummer der zu markierenden Zeile. Ob der Code in der Zeile tatsächlich markiert werden soll, kann über den Parameter \texttt{selectLine} festgelegt werden. Sollte Visual Studio das Dokument bereits geöffnet haben, bringt es dies bei Bedarf in den Vordergrund und springt nur zu der betroffenen Zeile.
 
 \subsection{Editor Adornment}
 \label{subsec:editoradornment}
-
-\verb/^\"((\w|\s)+)\"$/
-\begin{lstlisting}[caption={Zu der Methode eines \texttt{MethodMetricsReport}-Objekt springen},label={listing:methodmatching}]
-"^{0}{1} {1}\\((((out |ref |this |params )?{1} {2})?(,[ ]?(out |ref |params )?{1} {2})*)\\)$"
-"(private |protected |public |internal )?(static |virtual new |virtual |new |override |override sealed )?"
-"([_a-zA-Z]+[\\._a-zA-Z0-9\\[\\]]*(<.*>)?)"
-"([_a-zA-Z]+[_a-zA-Z0-9]*([ ]?=[ ]?[^,<> ]*)?)"
+In Unterabschnitt \ref{subsec:ususnetinfo} wurde beschrieben, dass das Info-Fenster von Usus.net über Buttons aufgerufen wird, die sich direkt neben den Methodensignaturen befinden. Das Erweiterungsmodell von Visual Studio unterstützt das Zeichnen von beliebigen WPF-Elementen im Code-Editor. Über die Projektvorlage \emph{Editor Adornment} (Editor Verzierung) kann eine Erweiterung erstellt werden, welche auf die aktuell sichtbaren Codezeilen reagieren kann. In dem von der Projektvorlage generierten Code existiert die Methode \texttt{CreateVisuals}, die einen Parameter vom Typ \texttt{ITextViewLine} übergeben bekommt. In dieser Methode kann die Logik implementiert werden, die ein grafisches Element in der übergebenen Zeile anzeigt. Im Fall von Usus.net ist dies ein kleiner Button, der in der Klasse \texttt{CodeTag} implementiert ist. Dieser Button wird nur neben einer Methodensignatur dargestellt. Usus.net stellt dies durch einen regulären Ausdruck sicher. Dieser Ausdruck besteht aus vier Komponenten. Die erste Komponente ist in Listing \ref{listing:methodregex1} zu sehen und stellt eine Form dar, die die anderen drei Komponenten mehrfach wiederverwendet. \{0\} ist der Platzhalter für die zweite Komponente, während \{1\} für die dritte und \{2\} für die vierte Komponente steht.
+\begin{lstlisting}[caption={Muster einer gültigen Methodensignatur in C$\#$},label={listing:methodregex1}]
+^{0}{1} {1}\\((((out |ref |this |params )?{1} {2})?(,[ ]?(out |ref |params )?
+{1} {2})*)\\)\$
 \end{lstlisting}
-
-
-\textcolor[rgb]{1,0,0}{todo}
-
-
-
-
-
-
-
-
-
-
-
-
-
+Listing \ref{listing:methodregex2} zeigt die zweite Komponente des regulären Ausdrucks, welche die Sichtbarkeit einer Methode beschreibt.
+\begin{lstlisting}[caption={Muster einer gültigen Zugriffseinschränkung in C$\#$},label={listing:methodregex2}]
+(private |protected |public |internal )?(static |virtual new |virtual |new 
+|override |override sealed )?
+\end{lstlisting}
+Die dritte Komponente beschreibt die Syntax eines Typen und die vierte beschreibt einen Variablennamen. Beide Ausdrücke sind in Listing \ref{listing:methodregex3} abgebildet.
+\begin{lstlisting}[caption={Muster eines gültigen Klassen- und Parameternamen in C$\#$},label={listing:methodregex3}]
+Klassenname:	([_a-zA-Z]+[\\._a-zA-Z0-9\\[\\]]*(<.*>)?)
+Parametername:	([_a-zA-Z]+[_a-zA-Z0-9]*([ ]?=[ ]?[^,<> ]*)?)
+\end{lstlisting}
+Zusammengesetzt entsteht ein Ausdruck, der nahezu alle gültigen Methodensignaturen zuverlässig erkennen kann und gleichzeitig weitgehend immun gegenüber Fehlern bleibt. Eine 100\%ige Korrektheit wurde nicht angestrebt und würde im zeitlichen Rahmen dieser Master-Thesis auch nicht erstellt werden können. Arrays, generische Typen, Standardwerte und automatische Arrays werden aber alle korrekt erkannt. Die Erkennung der Methoden wurde mit Unit Tests spezifiziert und getestet.
+\paragraph{}
+Wenn eine Methode als solche erkannt wurde, wird die Zeilennummer und der Pfad der Code-Datei ermittelt und innerhalb des Buttons gespeichert. Beide Informationen sind erforderlich um eine Methodensignatur der Quellcode-Datei mit einem Methodenbericht des Usus.net-Objektmodells zu verbinden. Usus.net kann diese Zuordnung noch nicht anhand der Signatur vornehmen. Die Signatur, die durch Analyse der Assembly mittels \emph{CCI Metadata} bestimmt werden kann, besteht aus voll-qualifizierten Namen und unterscheidet sich im schlimmsten Falle zu sehr von der Signatur die im Quelltext steht. Obwohl ein Ähnlichkeitsvergleich prinzipiell möglich ist, würde dies doch den zeitlichen Rahmen dieser Master-Thesis sprengen. Idealerweise könnte dazu der reguläre Ausdruck aus Listing \ref{listing:methodregex1}, \ref{listing:methodregex2} und \ref{listing:methodregex3} mit einer leichten Anpassung verwendet werden. Wenn eine pdb-Dateil vorhanden ist, funktioniert der zeilenbasierte Ansatz allerdings auch sehr gut. Da die Buttons ja sowieso nur in Visual Studio zu sehen sind und Visual Studio auch die Kompilierung des Codes vornimmt, wird eine solche pdb-Datei auch immer erzeugt. Listing \ref{listing:getlinenr} zeigt, wie in einer \emph{Editor Adornment}-Erweiterung die aktuelle Zeilennummer ermittelt werden kann.
+\begin{lstlisting}[caption={Bestimmung der tatsächlichen Zeilennummer eines \texttt{ITextViewLine}-Objekts},label={listing:getlinenr}]
+int lineNumber = _view.TextSnapshot
+		.GetLineNumberFromPosition(line.Start.Position) + 1;
+\end{lstlisting}
+Die Variable \texttt{line} enthält das Objekt vom Typ \texttt{ITextViewLine}. Die Variable \texttt{\_view} enthält eine Referenz auf ein \texttt{IWpfTextView}-Objekt. Listing \ref{listing:getfile} zeigt wie zusätzlich noch der Pfad der aktuellen Datei ermittelt werden kann. Es ist zu beachten, dass dafür die Zeile nicht erforderlich ist. Visual Studio kann den Dateinamen allein anhand des \texttt{IWpfTextView}-Objekts bestimmen.
+\begin{lstlisting}[caption={Bestimmung des Datei-Pfads eines \texttt{IWpfTextView}-Objekts},label={listing:getfile}]
+ITextDocument document;
+string filePath = string.Empty;
+if (_view != null && _view.TextDataModel.DocumentBuffer.Properties
+		.TryGetProperty(typeof(ITextDocument), out document))
+	string filePath = document.FilePath;
+\end{lstlisting}
+Nachdem jede Methodensignatur eine Kompination aus Zeilennummer und Dateinamen zugewiesen bekommen hat, ist der Button bereit aus das Klick-Ereignis zu reagieren. Sobald der Entwickler auf den Button klickt, wird die Zeileninformation verpackt und über die Event-Infrastruktur aus Unterabschnitt \ref{subsec:vsmenus} an das \emph{VsPackage} geschickt, welches das Info-Fenster enthält und daraufhin anzeigt. Listing \ref{listing:sendlineandfiletoinfo} zeigt wie ein Methodensignatur-Button seine Daten an das Info-Fenster aus Unterabschnitt \ref{subsec:ususnetinfo} sendet. \texttt{UsusNetWindow.Current} enthält die GUID des Info-Fensters, sodass standardmäßig die Fenster-Öffnen-Ereginisbehandlung ausgeführt wird. Diese Behandlung wird auch von dem Menüpunkt verwendet.
+\begin{lstlisting}[caption={Öffnen des Info-Fensters mit einem \texttt{LineLocation}-Objekt},label={listing:sendlineandfiletoinfo}]
+GlobalEventManager.Instance.FireEvent(UsusNetWindow.Current, 
+	new LineLocation { Line = lineNumber, File = filePath });
+\end{lstlisting}
+Im Gegensatz zu dem Menüpunkt, öffnet der Button das Fenster mit einem Parameter. Die Behandlung auf der Seite des Fensters muss also unabhängig davon funktionieren, ob eine Zeilen-Information übergeben wird oder nicht.
 
 
 
