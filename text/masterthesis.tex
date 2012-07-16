@@ -1392,9 +1392,39 @@ Listing \ref{listing:sendlineandfiletoinfo} zeigt wie ein Methodensignatur-Butto
 
 
 
-\chapter{Clean Code Unterstützung}
-\textcolor[rgb]{1,0,0}{todo}
 
+\chapter{Clean Code Unterstützung}
+Exponentialverteilung \url{http://mathworld.wolfram.com/ExponentialDistribution.html}
+\begin{equation}
+\lambda e^{-\lambda x}
+\label{eq:edistribution}
+\end{equation}
+Exponentialverteilung abgeleitet \url{http://www.wolframalpha.com/input/?i=d%2Fdz%28ze%5E%28-z*x%29%29}
+\begin{equation}
+\frac{\partial}{\partial \lambda}\big(\lambda e^{-\lambda x}\big) = e^{-\lambda x}(1- x \lambda)
+\label{eq:edistributionderived}
+\end{equation}
+LeastSquaresFitting \url{http://mathworld.wolfram.com/LeastSquaresFitting.html}
+\begin{equation}
+\sum_{i=1}^n\big(y_i - f(x_i)\big)^2
+\label{eq:leastsquares}
+\end{equation}
+Exponentialverteilung und LeastSquares
+\begin{equation}
+\sum_{i=1}^n\big(y_i - (\lambda e^{-\lambda x_i})\big)^2
+\label{eq:leastsquareswithedist}
+\end{equation}
+Exponentialverteilung und LeastSquares abgeleitet
+\begin{equation}
+\frac{\partial}{\partial \lambda}\Big(\sum_{i=1}^n\big(y_i - (\lambda e^{-\lambda x_i})\big)^2\Big) = -2 \sum_{i=1}^n \big(y_i - (\lambda e^{-\lambda x_i}) \big)e^{-\lambda x_i}(1- x_i \lambda)
+\label{eq:leastsquareswithedistderived}
+\end{equation}
+Exponentialverteilung und LeastSquares abgeleitet und Nullstellen ermittelt
+\begin{eqnarray}
+0&=&-2 \sum_{i=1}^n \big(y_i - (\lambda e^{-\lambda x_i}) \big)e^{-\lambda x_i}(1- x_i \lambda)\\
+\lambda&=& \text{\textcolor[rgb]{1,0,0}{todo}}
+\label{eq:leastsquareswithedistderivedminimized}
+\end{eqnarray}
 
 \section{Histogram}
 \textcolor[rgb]{1,0,0}{todo}
