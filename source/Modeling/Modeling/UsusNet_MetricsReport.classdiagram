@@ -1,19 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm10="http://schemas.microsoft.com/dsltools/UseCaseModel" dslVersion="1.0.0.0" Id="564e7743-9997-41a4-8d7f-b327c84a723e" name="UsusNet_MetricsReport" linkedPackageId="c7531525-1346-4942-81b9-47e8e5266e1d" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
-  <profileInstances>
-    <packageHasProfileInstances Id="a87e1ad2-c58c-4985-891a-6d279d508a0d">
-      <profileInstance Id="b52282f1-2bda-4edc-bf05-ac43d9bfbb49" name="StandardProfileL2">
-        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
-      </profileInstance>
-      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
-    </packageHasProfileInstances>
-    <packageHasProfileInstances Id="60a7a6fa-c080-4b56-93c1-72180ffaf6a1">
-      <profileInstance Id="6a659ec0-4558-497b-9b8c-c674fe6498d0" name="StandardProfileL3">
-        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
-      </profileInstance>
-      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
-    </packageHasProfileInstances>
-  </profileInstances>
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="564e7743-9997-41a4-8d7f-b327c84a723e" name="UsusNet_MetricsReport" linkedPackageId="c7531525-1346-4942-81b9-47e8e5266e1d" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
   <packagedElements>
     <logicalClassDesignerModelHasTypes>
       <class Id="844d49cd-ee65-4503-8c1f-33a14bf6307d" name="MetricsReport" isAbstract="false" isLeaf="false" isActiveClass="false">
@@ -212,6 +198,12 @@
               <referencedTypeMoniker Id="3fd7fe51-2e51-448e-a38d-e2042cb88831" LastKnownName="int" />
             </type_NamedElement>
           </property>
+          <property Id="da0095da-60bb-417b-82c5-a883c81e8f88" name="SourceLocation" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="a32db089-812d-4964-a116-c8379f16a6f4" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="009515f9-1ef9-4284-b30d-bb12df4c7884" LastKnownName="SourceCodeLocation" />
+            </type_NamedElement>
+          </property>
         </ownedAttributesInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
@@ -371,6 +363,18 @@
             <elementDefinition Id="53ec4992-8614-46c9-ac5e-2c114610f2d9" />
             <type_NamedElement>
               <referencedTypeMoniker Id="faf3ffb7-0b93-4b50-a1aa-a37bea29b8a3" LastKnownName="int" />
+            </type_NamedElement>
+          </property>
+          <property Id="4faabfb0-5fa1-4887-9e52-acd328a85019" name="NumberOfMethods" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="e601d14b-ff3f-40dd-b758-adc94b671f36" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="c99a618c-e7c6-45bf-add8-bdc78481b352" LastKnownName="int" />
+            </type_NamedElement>
+          </property>
+          <property Id="ea78a6a1-7535-4a70-b9e1-ab06d1396852" name="RelevantLinesOfCode" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="430f227b-923c-40d7-a799-71040ac57363" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="c99a618c-e7c6-45bf-add8-bdc78481b352" LastKnownName="int" />
             </type_NamedElement>
           </property>
         </ownedAttributesInternal>
@@ -547,8 +551,27 @@
         <elementDefinition Id="251f0e86-fd3a-4a6d-bf41-e63d32d3e3d9" />
       </referencedType>
     </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="009515f9-1ef9-4284-b30d-bb12df4c7884" name="SourceCodeLocation" isAbstract="false" isLeaf="false" cachedFullName="SourceCodeLocation">
+        <elementDefinition Id="117b5a32-f912-4ead-851d-0c959b55d651" />
+      </referencedType>
+    </packageHasNamedElement>
   </packagedElements>
   <package Id="c7531525-1346-4942-81b9-47e8e5266e1d" name="Modeling">
     <elementDefinition Id="eba52b28-def3-4521-87af-2d11f5403a2b" />
+    <profileInstances>
+      <packageHasProfileInstances Id="a87e1ad2-c58c-4985-891a-6d279d508a0d">
+        <profileInstance Id="b52282f1-2bda-4edc-bf05-ac43d9bfbb49" name="StandardProfileL2">
+          <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+        </profileInstance>
+        <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="60a7a6fa-c080-4b56-93c1-72180ffaf6a1">
+        <profileInstance Id="6a659ec0-4558-497b-9b8c-c674fe6498d0" name="StandardProfileL3">
+          <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+        </profileInstance>
+        <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+      </packageHasProfileInstances>
+    </profileInstances>
   </package>
 </logicalClassDesignerModel>
