@@ -7,5 +7,10 @@ namespace andrena.Usus.net.Core.Helper
         {
             return value.ToString("0.0%");
         }
+
+        public static string Value(this double value)
+        {
+            return value.ToString("0.00");
+        }
     }
 }

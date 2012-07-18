@@ -101,6 +101,7 @@
     <Compile Include="Hotspots\RatingFunctionLimits.cs" />
     <Compile Include="Hotspots\RatingFunctions.cs" />
     <Compile Include="Math\Distribution.cs" />
+    <Compile Include="Math\DistributionFitter.cs" />
     <Compile Include="Math\IHistogram.cs" />
     <Compile Include="Metrics\SourceCodeLocating.cs" />
     <Compile Include="Math\Distributions.cs" />

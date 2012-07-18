@@ -33,6 +33,7 @@ namespace andrena.Usus.net.View.ViewModels.Cockpit
             Entries.Add(new CockpitEntry { Metric = "Method Length", Average = ratedMetrics.AverageRatedMethodLength.Percent(), Total = AllMethods(ratedMetrics) });
             Entries.Add(new CockpitEntry { Metric = "Number Of Non-Static Public Fields", Average = ratedMetrics.AverageRatedNumberOfNonStaticPublicFields.Percent(), Total = AllClasses(ratedMetrics) });
             Entries.Add(new CockpitEntry { Metric = "Namespaces with Cycles", Average = ratedMetrics.NamespacesWithCyclicDependencies.Percent(), Total = AllNamespaces(ratedMetrics) });
+            Entries.Add(new CockpitEntry { Metric = "Relevant Lines Of Code", Average = "", Total = ratedMetrics.Metrics.CommonKnowledge.RelevantLinesOfCode.ToString() });
         }
 
         private string AllMethods(RatedMetrics ratedMetrics)

@@ -1174,6 +1174,9 @@ histogram.AddData(data.Select(d => d * 1.0));
 \end{lstlisting}
 Die Variable \texttt{data} enthält die erwähnte Sequenz von Ganzzahlen (\texttt{IEnumerable<int>}), die über den Konstruktor übergeben wird. Usus.net unterstützt nur Histogramme mit positiven Werten. Ein fertiges Histogramm liegt in Form eines \texttt{IHistogram}-Objekts vor.  Die Werte der x-Achse können mithilfe der Eigenschaft \texttt{BinCount} auf 0 bis \texttt{BinCount}-1 bestimmt werden. Um den y-Wert zu einem x-Wert zu bestimmen, kann die Methode \texttt{ElementsInBin(x)} mit dem x-Wert als Parameter aufgerufen werden.
 
+\textcolor[rgb]{1,0,0}{todo}
+Wie die Verteilungen interpretiert werden können wird in Abschnitt \ref{sec:histogramanalysis} beschrieben.
+
 
 \section{Testen}
 Nachdem in den vorherigen Abschnitten die Metrik-Analyse, das Objektmodell sowie die Statistiken von Usus.net erläutert wurden, beschäftigt sich dieser Abschnitt mit einer Möglichkeit Metriken mit Quellcode zu verbinden. \texttt{Usus.net.Core} stellt dafür eine Infrastruktur zur Verfügung, die in dieser Master-Thesis als \emph{Verification Framework} bezeichnet wird. Das Verification Framework befindet sich im Namespace \texttt{andrena.Usus.net.Core.Verification} und besteht aus einer Menge an Attributen, mit denen Methoden und Klassen dekoriert werden können. Diese Attribute beschreiben Erwartungen in Form von Metriken an die betroffene Methode oder Klasse, wie in Listing \ref{listing:expectedmetrics} gezeigt.
@@ -1266,6 +1269,7 @@ if (Report.SourceLocation.IsAvailable)
 Die Variable \texttt{Report} enthält eine Referenz auf das \texttt{MethodMetricsReport}-Objekt eines Hotspots. Der letzte Parameter des Methodenaufrufs gibt an, dass die entsprechende Zeile selektiert werden soll und damit schneller sichtbar wird. Die pdb-Datei einer Assembly enthält keine Zeileninformationen für Klassen. Um per Doppelklick zu einem Klassen-Hotspot zu springen, ermittelt das ViewModel die erste Methode dieser Klasse und springt zu dieser.
 
 \subsection{Histogramm}
+\label{subsec:ususnethostigram}
 Abbildung \ref{fig:ususnet_histogram} zeigt die Häufigkeitsverteilungen aller Berichte des Objektmodells aus Abschnitt \ref{sec:ususobjectmodel} in Bezug auf die Metriken an.
 \begin{figure}[h]
 	\centering
@@ -1397,7 +1401,8 @@ Listing \ref{listing:sendlineandfiletoinfo} zeigt wie ein Methodensignatur-Butto
 \textcolor[rgb]{1,0,0}{todo}
 
 \section{Histogramm-Analyse}
-Exponentialverteilung \url{http://mathworld.wolfram.com/ExponentialDistribution.html}
+\label{sec:histogramanalysis}
+In Abschnitt \ref{sec:distributions} wurde beschrieben, das Usus.net Histogramme für alle Metriken erstellen kann. Dieser Abschnitt beschäftigt sich mit der Analyse ebendieser Metrik-Histogramme und wie die Metriken tatsächliche verteilt sind. Nach einer ersten Überlegung folgen beispielsweise Methodenlängen einer Exponentialverteilung. "`Kurz"' ist das Erste, was Robert C. Martin über Methoden schreibt \cite{CleanCode}. In einem Softwaresystem, das mit dieser Einstellung bezüglich Clean Code entwickelt wurde, wird also sehr viele sehr kurze Methoden haben, viele kurze und wenig lange Methoden. Die Methodenlänge nimmt also exponentiell ab und diese Entwicklung sollte auch im Histogramm der Methodenlängen zu sehen sein. Die Funktion der Exponentialverteilung ist laut Eric W. Weisstein wie in Formel \ref{eq:edistribution} definiert \cite{ExponentialDist}.
 \begin{equation}
 f_\lambda(x) = 
 	\begin{cases}
@@ -1406,14 +1411,45 @@ f_\lambda(x) =
 	\end{cases}
 \label{eq:edistribution}
 \end{equation}
-Maximum Likelihood \url{http://mathworld.wolfram.com/MaximumLikelihood.html} Schätzer der Exponentialverteilung \url{http://mars.wiwi.hu-berlin.de/mediawiki/statwiki/index.php/Exponentialverteilung}
+Da alle Metriken ganzen Zahlen sind (es gibt keine Methodenlänge mit 1,5 logischen Zeilen), enthalten auch die Metrik-Histogramme nur diskrete Werte auf der x-Achse. Für die analytische Annäherung einer Verteilungsfunktion empfiehlt sich daher auch die Verwendung einer diskreten Verteilung. Laut Eric W. Weisstein ist das diskrete Gegenstück der kontinuierlichen Exponentialverteilung die geometrische Verteilung \cite{GeometricsDist}. Die Funktion der geometrische Verteilung ist in Formel \ref{eq:gdistribution} zu sehen.
+\begin{equation}
+f_\lambda(x) = 
+	\begin{cases}
+		\lambda (1 - \lambda)^{x-1}&0 < x \wedge x <= 1  \\
+		0&\text{sonst}\\
+	\end{cases}
+\label{eq:gdistribution}
+\end{equation}
+Beide Funktionen sind von dem Parameter $\lambda$ abhängig. Die eigentliche Histogramm-Analyse besteht darin, diesen Parameter so zu bestimmen, dass die Funktionen das Histogramm möglichst genau beschreibt. Eine Methode das $\lambda$ zu berechnen ist die Maximum Likelyhood-Methode, die Weisstein ebenfalls in seinem MathWorld-Eintrag beschreibt \cite{MaximumLikelihood}. Mit dieser Methode kann eine Schätzer-Funktion errechnet werden, die in Abhängigkeit der Werte des Histogramms den Parameter $\lambda$ bestimmt. Sigbert Klinke, Patrick Lehmann, Bernd Rönz, Sibylle Schmerbach und Olga Zlatkin-Troitschanskaia haben den Schätzer für die Exponentialverteilung bereits bestimmt \cite{MLExponentialDist}. Den Schätzer der geometrischen Verteilung wurde von Künzer, Meister und Nebe berechnet \cite{MLGeometricsDist}. Beide Schätzer-Funktion sind identisch und sind in Formel \ref{eq:edistributionml} dargestellt.
 \begin{equation}
 \lambda = \frac{n}{\sum_{i=1}^n x_i} = \frac{1}{\bar{x}}
 \label{eq:edistributionml}
 \end{equation}
-Fällt gut $\lambda = 2$ \url{http://www.wolframalpha.com/input/?i=2e%5E%28-2x%29+x%3D0to10}
-Fällt schlecht $\lambda = 0.2$ \url{http://www.wolframalpha.com/input/?i=0.2e%5E%28-0.2x%29+x%3D0to10}
-Ergebnis= Mittelwert möglichst klein -> $\lambda$ möglichst groß
+Der Parameter $\lambda$ der Exponentialverteilung entspricht also dem reziproken Mittelwert. Je mehr kurze Methoden der Quellcode enthält, dest niedriger ist der Mittelwert. Für ein großes $\lambda$ ist der Mittelwert klein und umgekehrt. Auf das Histogramm bezogen bedeutet ein großes $\lambda$, dass die Exponentialfunktion der Verteilung schnell fällt (sehr viele kurze und sehr wenige lange Methoden). Abbildung \ref{fig:edist} zeigt die wünschenswerte Verteilung in rot und die weniger optimale in blau. Das Schaubild geht von einer Stichprobe mit 100 Werten aus, beispielsweise Methodenlängen.
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=11cm]{images/edist.png}
+	\caption{Exponentialverteilung für großes und kleines $\lambda$}
+	\label{fig:edist}
+\end{figure}
+Die Funktion der geometrischen Verteilung verhält sich genauso, da sie den gleichen Maximum Likelihood-Schätzer wie die Exponentialverteilung hat. Abbildung \ref{fig:gdist} zeigt wieder die wünschenswerte Verteilung in rot und die weniger optimale in blau. Auch hier besteht die Stichprobe aus 100 Werten.
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=11cm]{images/gdist.png}
+	\caption{Geometrische Verteilung für großes und kleines $\lambda$}
+	\label{fig:gdist}
+\end{figure}
+Obwohl die Exponentialverteilung und die geometrische Verteilung nicht identisch sind, kann der Parameter, von dem beide abhängig sind auf die gleiche Art berechnet werden. Das Ergebnis verhält sich in beiden Verteilungen vergleichbar. Im Kontext der Software-Metriken gilt: je größer das $\lambda$, desto extremer entspricht der Code dem Clean Code Paradigma von Robert C. Martin. Martin befürwortet sehr einfache und sehr kurze Methoden, sowie Klassen mit sehr wenig Abhängigkeiten \cite{CleanCode}.
+\paragraph{}
+Usus.net berechnet das $\lambda$ nach Formel \ref{eq:edistributionml}. Die Komponenten, die für diese Berechnung zuständig sind, wurden bereits in Abschnitt \ref{sec:distributions} vorgestellt. Das Ergebnis kann anschließend in der Histogramm-Oberfläche aus Unterabschnitt \ref{subsec:ususnethostigram} angezeigt werden. Abbildung \ref{fig:gdistususnet} zeigt beispielsweise die Verteilung der zyklomatischen Komplexität einer Beispielanwendung.
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=14cm]{images/gdistususnet.png}
+	\caption{Usus.net Histogramm-Fenster mit $\lambda$ der geometrischen Verteilung}
+	\label{fig:gdistususnet}
+\end{figure}
+In Kapitel \ref{chap:inaction} werden konkretere Beispiele betrachtet und mit Usus.net analysiert.
+
 
 \section{Andrena Software Qualitäts Index}
 \textcolor[rgb]{1,0,0}{todo}
@@ -1429,6 +1465,7 @@ ISIS verwendet eine einheitliche Größe für Codebasen, nämlich RLOC (engl. Releva
 
 
 \chapter{In Aktion}
+\label{chap:inaction}
 \textcolor[rgb]{1,0,0}{todo}
 
 

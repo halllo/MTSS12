@@ -18,46 +18,88 @@
         <ProgressBar Style="{StaticResource AnalysisProgress}"/>
         <TabControl Grid.Row="1" Style="{StaticResource BottomTabs}">
             <TabItem Header="Class Sizes">
-                <dvc:Chart Grid.Row="1" Style="{StaticResource NoWhitespaceChart}">
-                    <dvc:Chart.Series>
-                        <dvc:ColumnSeries ItemsSource="{Binding ClassSizes}" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}" />
-                    </dvc:Chart.Series>
-                </dvc:Chart>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="{Binding ClassSizesText}"/>
+                    <dvc:Chart Grid.Row="1" Style="{StaticResource NoWhitespaceChart}">
+                        <dvc:Chart.Series>
+                            <dvc:ColumnSeries ItemsSource="{Binding ClassSizes}" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}" />
+                        </dvc:Chart.Series>
+                    </dvc:Chart>
+                </Grid>
             </TabItem>
             <TabItem Header="CCD">
-                <dvc:Chart Grid.Row="1" Style="{StaticResource NoWhitespaceChart}">
-                    <dvc:Chart.Series>
-                        <dvc:ColumnSeries ItemsSource="{Binding CumulativeComponentDependencies}" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}" />
-                    </dvc:Chart.Series>
-                </dvc:Chart>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="{Binding CumulativeComponentDependenciesText}"/>
+                    <dvc:Chart Grid.Row="1" Style="{StaticResource NoWhitespaceChart}">
+                        <dvc:Chart.Series>
+                            <dvc:ColumnSeries ItemsSource="{Binding CumulativeComponentDependencies}" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}"/>
+                        </dvc:Chart.Series>
+                    </dvc:Chart>
+                </Grid>
             </TabItem>
             <TabItem Header="Cyclomatic Complexities">
-                <dvc:Chart Grid.Row="1" Style="{StaticResource NoWhitespaceChart}">
-                    <dvc:Chart.Series>
-                        <dvc:ColumnSeries ItemsSource="{Binding CyclomaticComplexities}" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}" />
-                    </dvc:Chart.Series>
-                </dvc:Chart>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="{Binding CyclomaticComplexitiesText}"/>
+                    <dvc:Chart Grid.Row="1" Style="{StaticResource NoWhitespaceChart}">
+                        <dvc:Chart.Series>
+                            <dvc:ColumnSeries ItemsSource="{Binding CyclomaticComplexities}" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}"/>
+                        </dvc:Chart.Series>
+                    </dvc:Chart>
+                </Grid>
             </TabItem>
             <TabItem Header="Method Lengths">
-                <dvc:Chart Grid.Row="1" Style="{StaticResource NoWhitespaceChart}">
-                    <dvc:Chart.Series>
-                        <dvc:ColumnSeries ItemsSource="{Binding MethodLengths}" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}" />
-                    </dvc:Chart.Series>
-                </dvc:Chart>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="{Binding MethodLengthsText}"/>
+                    <dvc:Chart Grid.Row="1" Style="{StaticResource NoWhitespaceChart}">
+                        <dvc:Chart.Series>
+                            <dvc:ColumnSeries ItemsSource="{Binding MethodLengths}" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}"/>
+                        </dvc:Chart.Series>
+                    </dvc:Chart>
+                </Grid>
             </TabItem>
             <TabItem Header="Namespace Dependencies">
-                <dvc:Chart Grid.Row="1" Style="{StaticResource NoWhitespaceChart}">
-                    <dvc:Chart.Series>
-                        <dvc:ColumnSeries ItemsSource="{Binding NamespacesInCycle}" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}" />
-                    </dvc:Chart.Series>
-                </dvc:Chart>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="{Binding NamespacesInCycleText}"/>
+                    <dvc:Chart Grid.Row="1" Style="{StaticResource NoWhitespaceChart}">
+                        <dvc:Chart.Series>
+                            <dvc:ColumnSeries ItemsSource="{Binding NamespacesInCycle}" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}"/>
+                        </dvc:Chart.Series>
+                    </dvc:Chart>
+                </Grid>
             </TabItem>
             <TabItem Header="Public Fields">
-                <dvc:Chart Grid.Row="1" Style="{StaticResource NoWhitespaceChart}">
-                    <dvc:Chart.Series>
-                        <dvc:ColumnSeries ItemsSource="{Binding NonStaticPublicFields}" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}" />
-                    </dvc:Chart.Series>
-                </dvc:Chart>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="{Binding NonStaticPublicFieldsText}"/>
+                    <dvc:Chart Grid.Row="1" Style="{StaticResource NoWhitespaceChart}">
+                        <dvc:Chart.Series>
+                            <dvc:ColumnSeries ItemsSource="{Binding NonStaticPublicFields}" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}"/>
+                        </dvc:Chart.Series>
+                    </dvc:Chart>
+                </Grid>
             </TabItem>
         </TabControl>
 

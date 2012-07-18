@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using andrena.Usus.net.Core.Math;
+using andrena.Usus.net.Core.Helper;
 
 namespace andrena.Usus.net.View.ViewModels.Distributions
 {
@@ -13,6 +14,13 @@ namespace andrena.Usus.net.View.ViewModels.Distributions
         public ObservableCollection<KeyValuePair<double, double>> MethodLengths { get; private set; }
         public ObservableCollection<KeyValuePair<double, double>> NamespacesInCycle { get; set; }
         public ObservableCollection<KeyValuePair<double, double>> NonStaticPublicFields { get; set; }
+
+        public string ClassSizesText { get; private set; }
+        public string CumulativeComponentDependenciesText { get; private set; }
+        public string CyclomaticComplexitiesText { get; set; }
+        public string MethodLengthsText { get; private set; }
+        public string NamespacesInCycleText { get; set; }
+        public string NonStaticPublicFieldsText { get; set; }
 
         public Distributions()
         {
@@ -36,21 +44,38 @@ namespace andrena.Usus.net.View.ViewModels.Distributions
 
         protected override void AnalysisFinished(Core.Reports.MetricsReport metrics)
         {
-            Histogram(ClassSizes, metrics.TypeDistribution(t => t.ClassSize));
-            Histogram(CumulativeComponentDependencies, metrics.TypeDistribution(t => t.CumulativeComponentDependency));
-            Histogram(CyclomaticComplexities, metrics.MethodDistribution(m => m.CyclomaticComplexity));
-            Histogram(MethodLengths, metrics.MethodDistribution(m => m.MethodLength));
-            Histogram(NamespacesInCycle, metrics.NamespaceDistribution(n => n.NumberOfNamespacesInCycle));
-            Histogram(NonStaticPublicFields, metrics.TypeDistribution(t => t.NumberOfNonStaticPublicFields));
+            ClassSizesText = Fit(HistogramOf(ClassSizes, metrics.TypeDistribution(t => t.ClassSize)));
+            CumulativeComponentDependenciesText = Fit(HistogramOf(CumulativeComponentDependencies, metrics.TypeDistribution(t => t.CumulativeComponentDependency)));
+            CyclomaticComplexitiesText = Fit(HistogramOf(CyclomaticComplexities, metrics.MethodDistribution(m => m.CyclomaticComplexity)));
+            MethodLengthsText = Fit(HistogramOf(MethodLengths, metrics.MethodDistribution(m => m.MethodLength)));
+            NamespacesInCycleText = Fit(HistogramOf(NamespacesInCycle, metrics.NamespaceDistribution(n => n.NumberOfNamespacesInCycle)));
+            NonStaticPublicFieldsText = Fit(HistogramOf(NonStaticPublicFields, metrics.TypeDistribution(t => t.NumberOfNonStaticPublicFields)));
+            ChangeAllTexts();
         }
 
-        private void Histogram(ObservableCollection<KeyValuePair<double, double>> target, IHistogram histogram)
+        private void ChangeAllTexts()
+        {
+            Changed(() => ClassSizesText);
+            Changed(() => CumulativeComponentDependenciesText);
+            Changed(() => CyclomaticComplexitiesText);
+            Changed(() => MethodLengthsText);
+            Changed(() => NamespacesInCycleText);
+            Changed(() => NonStaticPublicFieldsText);
+        }
+
+        private string Fit(IHistogram histogram)
+        {
+            return "Geometric Distribution (\u03BB(1 - \u03BB)^(x-1)): \u03BB = " + histogram.FitExponentialDistribution().Value();
+        }
+
+        private IHistogram HistogramOf(ObservableCollection<KeyValuePair<double, double>> target, IHistogram histogram)
         {
             Dispatch(() =>
             {
                 for (int i = 0; i < Math.Min(50, histogram.BinCount); i++)
                     target.Add(new KeyValuePair<double, double>(i, histogram.ElementsInBin(i)));
             });
+            return histogram;
         }
     }
 }

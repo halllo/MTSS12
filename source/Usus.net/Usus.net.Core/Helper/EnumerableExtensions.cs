@@ -11,12 +11,12 @@ namespace andrena.Usus.net.Core.Helper
             yield return start;
         }
 
-        public static IEnumerable<R> ToList<T, R>(this IEnumerable<T> sequence, Func<T, R> selector)
+        public static List<R> ToList<T, R>(this IEnumerable<T> sequence, Func<T, R> selector)
         {
             return sequence.ToList(selector, t => true);
         }
 
-        public static IEnumerable<R> ToList<T, R>(this IEnumerable<T> sequence, Func<T, R> selector, Func<T, bool> condition)
+        public static List<R> ToList<T, R>(this IEnumerable<T> sequence, Func<T, R> selector, Func<T, bool> condition)
         {
             return sequence.Where(condition).Select(selector).ToList();
         }

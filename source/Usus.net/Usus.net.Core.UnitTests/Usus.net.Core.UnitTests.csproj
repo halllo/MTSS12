@@ -56,6 +56,7 @@
     <Compile Include="AverageNumberOfNamespacesInCycleTest.cs" />
     <Compile Include="AverageNumberOfNonStaticPublicFieldsTest.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="DistributionFittingTests.cs" />
     <Compile Include="DistributionTests.cs" />
     <Compile Include="Factories\CreateDistribution.cs" />
     <Compile Include="Factories\CreateGraph.cs" />

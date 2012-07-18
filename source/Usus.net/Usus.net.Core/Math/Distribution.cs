@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using andrena.Usus.net.Core.Helper;
 using MathNet.Numerics.Statistics;
 
 namespace andrena.Usus.net.Core.Math
@@ -7,26 +8,28 @@ namespace andrena.Usus.net.Core.Math
     public class Distribution : IHistogram
     {
         Histogram histogram;
+        List<double> data;
 
         public Distribution(IEnumerable<int> data)
         {
+            this.data = data.ToList(d => d * 1.0);
             histogram = new Histogram();
-            InitializeBins(data);
-            InitializeData(data);
+            InitializeBins();
+            InitializeData();
         }
 
-        private void InitializeBins(IEnumerable<int> data)
+        private void InitializeBins()
         {
             var maxValue = data.Max();
             for (int i = 0; i <= maxValue; i++)
                 histogram.AddBucket(new Bucket(-0.5 + i, 0.5 + i));
         }
-  
-        private void InitializeData(IEnumerable<int> data)
+
+        private void InitializeData()
         {
-            histogram.AddData(data.Select(d => d * 1.0));
+            histogram.AddData(data);
         }
-  
+
         public int BinCount
         {
             get { return histogram.BucketCount; }
@@ -35,6 +38,11 @@ namespace andrena.Usus.net.Core.Math
         public double ElementsInBin(int index)
         {
             return histogram[index].Count;
+        }
+
+        public double Mean
+        {
+            get { return new DescriptiveStatistics(data).Mean; }
         }
     }
 }
