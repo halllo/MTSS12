@@ -5,15 +5,21 @@ using MathNet.Numerics.Statistics;
 
 namespace andrena.Usus.net.Core.Math
 {
-    public class Distribution : IHistogram
+    public class Histogram : IHistogram
     {
-        Histogram histogram;
+        MathNet.Numerics.Statistics.Histogram histogram;
         List<double> data;
 
-        public Distribution(IEnumerable<int> data)
+        public Histogram(IEnumerable<int> data)
         {
             this.data = data.ToList(d => d * 1.0);
-            histogram = new Histogram();
+            Initialize();
+        }
+
+        private void Initialize()
+        {
+            histogram = new MathNet.Numerics.Statistics.Histogram();
+            Fitting = new FittingReport(this);
             InitializeBins();
             InitializeData();
         }
@@ -40,9 +46,11 @@ namespace andrena.Usus.net.Core.Math
             return histogram[index].Count;
         }
 
-        public double Mean
+        public IEnumerable<double> Data
         {
-            get { return new DescriptiveStatistics(data).Mean; }
+            get { return data; }
         }
+
+        public FittingReport Fitting { get; private set; }
     }
 }

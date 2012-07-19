@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using andrena.Usus.net.Core.Reports;
+using andrena.Usus.net.View.Hub;
 
 namespace andrena.Usus.net.View.ViewModels.Current
 {
     public class Current : AnalysisAwareViewModel
     {
-        MetricsReport metrics;
+        PreparedMetricsReport metrics;
         LineLocation lastLocation = new LineLocation();
 
         public ObservableCollection<CurrentEntry> Entries { get; private set; }
@@ -20,7 +20,7 @@ namespace andrena.Usus.net.View.ViewModels.Current
         {
         }
 
-        protected override void AnalysisFinished(MetricsReport metrics)
+        protected override void AnalysisFinished(PreparedMetricsReport metrics)
         {
             this.metrics = metrics;
         }
@@ -39,7 +39,7 @@ namespace andrena.Usus.net.View.ViewModels.Current
         private MethodAndTypeMetrics GetMethodOfDefiniton(LineLocation location)
         {
             lastLocation = location;
-            return metrics.MethodOfLine(location);
+            return metrics.Report.MethodOfLine(location);
         }
 
         private void DisplayMetrics(MethodAndTypeMetrics method)

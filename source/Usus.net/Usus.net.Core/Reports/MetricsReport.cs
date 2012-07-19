@@ -23,6 +23,7 @@ namespace andrena.Usus.net.Core.Reports
         {
             get { return GraphOfTypes; }
         }
+
         public IEnumerable<TypeMetricsReport> Types
         {
             get { return typeReports.Values.Select(t => t.Itself); }
@@ -32,6 +33,7 @@ namespace andrena.Usus.net.Core.Reports
         {
             get { return GraphOfNamespaces.Select(n => n.Itself); }
         }
+
         public IEnumerable<NamespaceMetricsReport> Namespaces
         {
             get { return namespaceReports.Values.Select(t => t.Itself); }

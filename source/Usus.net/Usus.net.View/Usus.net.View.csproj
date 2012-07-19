@@ -68,6 +68,7 @@
     <Compile Include="Distributions.xaml.cs">
       <DependentUpon>Distributions.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Hub\PreparedMetricsReport.cs" />
     <Compile Include="ViewFactory.cs" />
     <Compile Include="ViewModels\BindingConverter.cs" />
     <Compile Include="ViewModels\Current\Current.cs" />

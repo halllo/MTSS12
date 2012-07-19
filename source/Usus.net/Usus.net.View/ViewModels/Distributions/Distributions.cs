@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using andrena.Usus.net.Core.Math;
 using andrena.Usus.net.Core.Helper;
+using andrena.Usus.net.Core.Math;
+using andrena.Usus.net.View.Hub;
 
 namespace andrena.Usus.net.View.ViewModels.Distributions
 {
@@ -42,14 +43,14 @@ namespace andrena.Usus.net.View.ViewModels.Distributions
             NonStaticPublicFields.Clear();
         }
 
-        protected override void AnalysisFinished(Core.Reports.MetricsReport metrics)
+        protected override void AnalysisFinished(PreparedMetricsReport metrics)
         {
-            ClassSizesText = Fit(HistogramOf(ClassSizes, metrics.TypeDistribution(t => t.ClassSize)));
-            CumulativeComponentDependenciesText = Fit(HistogramOf(CumulativeComponentDependencies, metrics.TypeDistribution(t => t.CumulativeComponentDependency)));
-            CyclomaticComplexitiesText = Fit(HistogramOf(CyclomaticComplexities, metrics.MethodDistribution(m => m.CyclomaticComplexity)));
-            MethodLengthsText = Fit(HistogramOf(MethodLengths, metrics.MethodDistribution(m => m.MethodLength)));
-            NamespacesInCycleText = Fit(HistogramOf(NamespacesInCycle, metrics.NamespaceDistribution(n => n.NumberOfNamespacesInCycle)));
-            NonStaticPublicFieldsText = Fit(HistogramOf(NonStaticPublicFields, metrics.TypeDistribution(t => t.NumberOfNonStaticPublicFields)));
+            ClassSizesText = Fit(HistogramOf(ClassSizes, metrics.ClassSizeHistogram));
+            CumulativeComponentDependenciesText = Fit(HistogramOf(CumulativeComponentDependencies, metrics.CumulativeComponentDependencyHistogram));
+            CyclomaticComplexitiesText = Fit(HistogramOf(CyclomaticComplexities, metrics.CyclomaticComplexityHistogram));
+            MethodLengthsText = Fit(HistogramOf(MethodLengths, metrics.MethodLengthHistogram));
+            NamespacesInCycleText = Fit(HistogramOf(NamespacesInCycle, metrics.NumberOfNamespacesInCycleHistogram));
+            NonStaticPublicFieldsText = Fit(HistogramOf(NonStaticPublicFields, metrics.NumberOfNonStaticPublicFieldsHistogram));
             ChangeAllTexts();
         }
 
@@ -65,7 +66,7 @@ namespace andrena.Usus.net.View.ViewModels.Distributions
 
         private string Fit(IHistogram histogram)
         {
-            return "Geometric Distribution (\u03BB(1 - \u03BB)^(x-1)): \u03BB = " + histogram.FitExponentialDistribution().Value();
+            return "Geometric Distribution (\u03BB(1 - \u03BB)^(x-1)): \u03BB = " + histogram.Fitting.ForGeometricalDistribution.Value();
         }
 
         private IHistogram HistogramOf(ObservableCollection<KeyValuePair<double, double>> target, IHistogram histogram)

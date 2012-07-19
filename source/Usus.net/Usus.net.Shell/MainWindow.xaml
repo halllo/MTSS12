@@ -54,7 +54,7 @@
                     <RowDefinition Height="15"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <TextBlock Text="Distributions"/>
+                <TextBlock Text="Histograms"/>
                 <view:Distributions x:Name="Distributions" Grid.Row="1"/>
             </Grid>
         </Grid>

@@ -12,9 +12,13 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
+            <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
         <ProgressBar Style="{StaticResource AnalysisProgress}"/>
         <DataGrid Grid.Row="1" Style="{StaticResource DisplayGrid}" CanUserSortColumns="False"
                   ItemsSource="{Binding Entries}"/>
+        <Border Grid.Row="2" Background="LightGray">
+            <TextBlock Text="{Binding Rloc}" HorizontalAlignment="Right" Margin="0 2 10 0"/>
+        </Border>
     </Grid>
 </UserControl>

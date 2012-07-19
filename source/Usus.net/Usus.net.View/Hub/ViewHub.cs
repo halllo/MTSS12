@@ -19,10 +19,10 @@ namespace andrena.Usus.net.View.Hub
             }
         }
 
-        public event Action<MetricsReport> MetricsReady;
+        public event Action<PreparedMetricsReport> MetricsReady;
         public event Action AnalysisStarted;
 
-        public MetricsReport MostRecentMetrics { get; private set; }
+        public PreparedMetricsReport MostRecentMetrics { get; private set; }
 
         private ViewHub()
         {
@@ -43,7 +43,7 @@ namespace andrena.Usus.net.View.Hub
             ThreadPool.QueueUserWorkItem((c) =>
             {
                 MetricsReport metrics = Analyze.PortableExecutable(files.ToArray());
-                MetricsReady(metrics);
+                MetricsReady(new PreparedMetricsReport(metrics));
             });
         }
     }

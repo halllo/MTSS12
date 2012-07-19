@@ -1,6 +1,7 @@
 using andrena.Usus.net.Core.Hotspots;
 using andrena.Usus.net.Core.Reports;
 using andrena.Usus.net.View.ExtensionPoints;
+using andrena.Usus.net.View.Hub;
 
 namespace andrena.Usus.net.View.ViewModels.Hotspots
 {
@@ -14,15 +15,15 @@ namespace andrena.Usus.net.View.ViewModels.Hotspots
         {
         }
 
-        protected override void AnalysisFinished(MetricsReport metrics)
+        protected override void AnalysisFinished(PreparedMetricsReport metrics)
         {
             base.AnalysisFinished(metrics);
-            Dispatch(() => SetCumulativeComponentDependenciesText(metrics));
+            Dispatch(() => SetCumulativeComponentDependenciesText(metrics.CommonKnowledge));
         }
 
-        private void SetCumulativeComponentDependenciesText(MetricsReport metrics)
+        private void SetCumulativeComponentDependenciesText(CommonReportKnowledge reportKnowledge)
         {
-            CumulativeComponentDependenciesText = string.Format("Classes with more than {0} cumulated dependencies.", RatingFunctions.Limits.CumulativeComponentDependency(metrics.CommonKnowledge));
+            CumulativeComponentDependenciesText = string.Format("Classes with more than {0} cumulated dependencies.", RatingFunctions.Limits.CumulativeComponentDependency(reportKnowledge));
             Changed(() => CumulativeComponentDependenciesText);
         }
 

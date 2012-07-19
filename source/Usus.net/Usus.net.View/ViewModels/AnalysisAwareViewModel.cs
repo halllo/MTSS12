@@ -1,4 +1,3 @@
-using andrena.Usus.net.Core.Reports;
 using andrena.Usus.net.View.Hub;
 
 namespace andrena.Usus.net.View.ViewModels
@@ -30,7 +29,7 @@ namespace andrena.Usus.net.View.ViewModels
             AnalysisStarted();
         }
 
-        private void OnAnalysisFinished(MetricsReport m)
+        private void OnAnalysisFinished(PreparedMetricsReport m)
         {
             AnalysisFinished(m);
             Dispatch(() =>
@@ -42,6 +41,6 @@ namespace andrena.Usus.net.View.ViewModels
 
         protected abstract void AnalysisStarted();
 
-        protected abstract void AnalysisFinished(MetricsReport metrics);
+        protected abstract void AnalysisFinished(PreparedMetricsReport metrics);
     }
 }

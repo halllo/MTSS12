@@ -36,6 +36,11 @@ namespace andrena.Usus.net.Core.Helper
             return sequence.Count(selector);
         }
 
+        public static string Number<T>(this IEnumerable<T> sequence)
+        {
+            return sequence.Count().ToString();
+        }
+
         public static IDictionary<R, List<T>> TurnAround<T, R>(this IDictionary<T, R> dictionary)
         {
             Dictionary<R, List<T>> turnedAround = new Dictionary<R, List<T>>();

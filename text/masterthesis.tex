@@ -1159,23 +1159,21 @@ Außerdem betrachtet Usus.net nur Methoden, die einen nicht leeren Methodenrumpf 
 
 \section{Metrikverteilung}
 \label{sec:distributions}
-Im Namespace \texttt{andrena.Usus.net.Core.Math} existiert die Klasse \texttt{Distributions}. In dieser Klassen sind mehrere Extensions Methods definiert, die Verteilungen von Methoden- und Klassen-Metriken bestimmen können. Listing \ref{listing:methodtypedistributions} zeigt, wie diese Methoden verwendet werden können.
+Im Namespace \texttt{andrena.Usus.net.Core.Math} existiert die Klasse \texttt{Histograms}. In dieser Klassen sind mehrere Extensions Methods definiert, die Histogramme von Methoden- und Klassen-Metriken bestimmen können. Listing \ref{listing:methodtypedistributions} zeigt, wie diese Methoden verwendet werden können.
 \begin{lstlisting}[caption={Verteilungen von Methoden- und Klassen-Berichten erstellen},label={listing:methodtypedistributions}]
-IHistogram css = Metrics.TypeDistribution(t => t.ClassSize);
-IHistogram ccs = Metrics.MethodDistribution(m => m.CyclomaticComplexity);
-...
+IHistogram css = Metrics.TypeHistogram(t => t.ClassSize);
+IHistogram ccs = Metrics.MethodHistogram(m => m.CyclomaticComplexity);
 \end{lstlisting}
-Die Variable \texttt{Metrics} enthält eine Referenz auf ein \texttt{MetricsReport}-Objekt. Das Histogramm wird in Form eines Objekts der Klasse \texttt{Distribution} erzeugt. Diese Klasse implementiert das Interface \texttt{IHistogram}. Über den Konstruktor kann eine Sequenz von \texttt{int}-Werten übergeben werden, aus denen die Verteilung erstellt wird. Ein Histogramm ist ein einfaches Schaubild, das auf der x-Achse die diskreten Werte einer Sequenz enthält. Auf der y-Achse wird die Häufigkeit des Auftretens des entsprechenden x-Werts abgebildet. Dadurch wird ersichtlich, wie oft ein bestimmter Wert in der Sequenz enthalten ist. Die \texttt{Distribution}-Klasse verwendet Funktionalität der öffentlichen Bibliothek Math.NET\footnote[1]{Math.NET Numerics "`numerical library"' \url{http://mathnetnumerics.codeplex.com/}} um das Histogramm zu erzeugen, wie in Listing \ref{listing:distributioncreation} gezeigt.
+Die Variable \texttt{Metrics} enthält eine Referenz auf ein \texttt{MetricsReport}-Objekt. Das Histogramm wird in Form eines Objekts der Klasse \texttt{Histogram} erzeugt. Diese Klasse implementiert das Interface \texttt{IHistogram} und bekommt über den Konstruktor eine Sequenz von \texttt{int}-Werten übergeben. Ein Histogramm ist ein einfaches Schaubild, das auf der x-Achse die diskreten Werte einer Sequenz enthält. Auf der y-Achse wird die Häufigkeit des Auftretens des entsprechenden x-Werts abgebildet. Dadurch wird ersichtlich, wie oft ein bestimmter Wert in der Sequenz enthalten ist. Die \texttt{Histogram}-Klasse verwendet Funktionalität der öffentlichen Bibliothek Math.NET\footnote[1]{Math.NET Numerics "`numerical library"' \url{http://mathnetnumerics.codeplex.com/}} um das Histogramm zu erzeugen. Diese Erzeugung ist in Listing \ref{listing:distributioncreation} dargestellt.
 \begin{lstlisting}[caption={Histogramm-Erzeugung mit Math.NET},label={listing:distributioncreation}]
 var maxValue = data.Max();
 for (int i = 0; i <= maxValue; i++)
 	histogram.AddBucket(new Bucket(-0.5 + i, 0.5 + i));
 histogram.AddData(data.Select(d => d * 1.0));
 \end{lstlisting}
-Die Variable \texttt{data} enthält die erwähnte Sequenz von Ganzzahlen (\texttt{IEnumerable<int>}), die über den Konstruktor übergeben wird. Usus.net unterstützt nur Histogramme mit positiven Werten. Ein fertiges Histogramm liegt in Form eines \texttt{IHistogram}-Objekts vor.  Die Werte der x-Achse können mithilfe der Eigenschaft \texttt{BinCount} auf 0 bis \texttt{BinCount}-1 bestimmt werden. Um den y-Wert zu einem x-Wert zu bestimmen, kann die Methode \texttt{ElementsInBin(x)} mit dem x-Wert als Parameter aufgerufen werden.
-
-\textcolor[rgb]{1,0,0}{todo}
-Wie die Verteilungen interpretiert werden können wird in Abschnitt \ref{sec:histogramanalysis} beschrieben.
+Die Variable \texttt{data} enthält die erwähnte Sequenz von Ganzzahlen (\texttt{IEnumerable<int>}), die über den Konstruktor übergeben wird. Usus.net unterstützt nur Histogramme mit positiven Werten. Ein fertiges Histogramm kann in Form eines \texttt{IHistogram}-Objekts weitergegeben und analysiert werden. Die Werte der x-Achse können mithilfe der Eigenschaft \texttt{BinCount} auf 0 bis \texttt{BinCount}-1 bestimmt werden. Um den y-Wert, also die absolute Häufigkeit zu einem x-Wert zu bestimmen, kann die Methode \texttt{ElementsInBin(x)} mit dem x-Wert als Parameter aufgerufen werden.
+\paragraph{}
+Usus.net nutzt Mechanismen um das Histogramm zu analysieren. Das Interface \texttt{IHistogram} definiert das Property \texttt{Fitting}, welches ein \texttt{FittingReport}-Objekt zurückgibt. Wenn ein Histogramm erzeugt wird, wird auch immer dieser Bericht erstellt. Durch das \texttt{FittingReport}-Objekt lassen sich die Informationen bestimmen, die über die Verteilung der Metriken Aufschluss geben können. So lässt sich beispielsweise mit dem \texttt{ForGeometricalDistribution}-Property der Parameter $\lambda$ der geometrischen Verteilung \ref{eq:gdistribution} bestimmen. Um die Parameter der Verteilungen zu bestimmen berechnet Usus.net statistische Kennzahlen (beispielsweise den Mittelwert) der Histogramm-Sequenz wieder mithilfe von Math.NET-Bibliothek. Wie diese Analyse genau begründet ist, wird in Abschnitt \ref{sec:histogramanalysis} beschrieben.
 
 
 \section{Testen}
@@ -1237,14 +1235,14 @@ Das Fenster mit den am weitesten aggregierte Metriken ist \emph{Usus.net Cockpit
 	\caption{Usus.net Cockpit-Fenster}
 	\label{fig:ususnet_cockpit}
 \end{figure}
-Dieses Fenster verhält sich wie alle anderen Fenster und kann in Visual Studio beliebig angedockt werden. Das ViewModel reagiert auf einen verfügbaren Metrikbericht, indem es die Einträge der Tabelle durch neue Einträge für die Statistiken ersetzt. Als Tabelle wird ein \texttt{DataGrid}-Objekt verwendet.
+Dieses Fenster verhält sich wie alle anderen Fenster und kann in Visual Studio beliebig angedockt werden. Das ViewModel reagiert auf einen verfügbaren Metrikbericht, indem es die Einträge der Tabelle durch neue Einträge für die Statistiken ersetzt. Als Tabelle wird ein \texttt{DataGrid}-Objekt verwendet. Neben der Anzahl der Hotspots wird zu jeder Metrik die Verteilungsinformation angezeigt, die ausführlicher in Abschnitt \ref{sec:histogramanalysis} beschrieben wird. Außerdem ist mit einem Blick ersichtlich wie viele relevante Codezeilen die analysierte Codebasis enthält. Abschnitt \ref{subsec:rloc} beschreibt wie sich dieser Wert zusammensetzt.
 
 \subsection{Info}
 \label{subsec:ususnetinfo}
 Das nächste Usus.net Fenster entspricht dem Usus Info-Fenster aus Unterabschnitt \ref{subsec:ususinfo}. Dieses Fenster zeigt die Metriken einer Methode an in Verbindung mit der Klasse an. Im Gegensatz zu der Eclipse Variante, lässt sich dieses Fenster nicht mit dem Shortcut \texttt{Ctrl-U} öffnen. Usus.net platziert einen kleinen Button rechts neben jeder Methodendeklaration, wie in Abbildung \ref{fig:ususnet_info} dargestellt.
 \begin{figure}[h]
 	\centering
-		\includegraphics[width=14cm]{images/ususnet_info.png}
+		\includegraphics[width=13cm]{images/ususnet_info.png}
 	\caption{Usus.net Info-Fenster}
 	\label{fig:ususnet_info}
 \end{figure}
@@ -1277,7 +1275,7 @@ Abbildung \ref{fig:ususnet_histogram} zeigt die Häufigkeitsverteilungen aller Be
 	\caption{Usus.net Histogramm-Fenster}
 	\label{fig:ususnet_histogram}
 \end{figure}
-Ähnlich wie das Hotspots-Fenster, ist auch das Verteilungs-Fenster in Registerkarten eingeteilt. Um die Histogramme zu bestimmen, werden die Funktionen verwendet, die bereits in Abschnitt \ref{sec:distributions} vorgestellt wurden. Diese Verteilungen können anschließend angezeigt werden. Dazu verwendet Usus.net das Spalten-Diagramm des WPF Toolkits\footnote[1]{Windows Presentation Foundation Toolkit \url{http://wpf.codeplex.com/releases/view/40535}}.
+Ähnlich wie das Hotspots-Fenster, ist auch das Verteilungs-Fenster in Registerkarten eingeteilt. Um die Histogramme zu bestimmen, werden die Funktionen verwendet, die bereits in Abschnitt \ref{sec:distributions} vorgestellt wurden. Diese Verteilungen können anschließend angezeigt werden. Dazu verwendet Usus.net das Spalten-Diagramm des WPF Toolkits\footnote[1]{Windows Presentation Foundation Toolkit \url{http://wpf.codeplex.com/releases/view/40535}}. Usus.net versucht die Histogramme zu interpretieren, was in Abschnitt \ref{sec:histogramanalysis} beschrieben wird. Das Ergebnis dieser Interpretation wird am rechten oberen Rand angezeigt.
 
 \subsection{Class Graph \& Package Graph}
 In Unterabschnitt \ref{subsec:ususgraphs} wurde vorgestellt, wie Usus für Eclipse die Abhängigkeitsgraphen auf Klassen- und Package-Ebene visualisiert. Usus.net erstellt diese Graphen ebenfalls und veröffentlicht sie als Teil des Objektmodells, wie in Abschnitt \ref{sec:ususobjectmodel} beschrieben. Eine grafische Visualisierung dieser Graphen in Form eines Fensters in Visual Studio wird von Usus.net noch nicht unterstützt. Dieses Fenster kann im Rahmen dieser Master-Thesis aus Zeitgründen leider nicht mehr implementiert werden.
@@ -1326,7 +1324,7 @@ Usus.net ist als Erweiterung im Sinne von Unterabschnitt \ref{subsec:visualstudi
 Standardmäßig werden alle selbsterstellten Visual Studio Tool Windows unter \texttt{View / Other Windows} aufgeführt. Für Usus.net sollen die in Abschnitt \ref{sec:ususnetviews} beschriebenen Fenster aber einen besonderen Stellenwert genießen. Microsoft beschreibt in der MSDN Library wie ein solcher Menüpunkt in Form eines \emph{VSPackage}-Projekts implementiert werde kann \cite{MSDNMenuBar}. Abbildung \ref{fig:ususnet_menu} zeigt diesen Menüeintrag direkt in Visual Studio.
 \begin{figure}[h]
 	\centering
-		\includegraphics[width=8cm]{images/ususnet_menu.png}
+		\includegraphics[width=7cm]{images/ususnet_menu.png}
 	\caption{Usus.net Menüpunkt in der Menüleiste von Visual Studio}
 	\label{fig:ususnet_menu}
 \end{figure}
@@ -1441,21 +1439,16 @@ Die Funktion der geometrischen Verteilung verhält sich genauso, da sie den gleic
 \end{figure}
 Obwohl die Exponentialverteilung und die geometrische Verteilung nicht identisch sind, kann der Parameter, von dem beide abhängig sind auf die gleiche Art berechnet werden. Das Ergebnis verhält sich in beiden Verteilungen vergleichbar. Im Kontext der Software-Metriken gilt: je größer das $\lambda$, desto extremer entspricht der Code dem Clean Code Paradigma von Robert C. Martin. Martin befürwortet sehr einfache und sehr kurze Methoden, sowie Klassen mit sehr wenig Abhängigkeiten \cite{CleanCode}.
 \paragraph{}
-Usus.net berechnet das $\lambda$ nach Formel \ref{eq:edistributionml}. Die Komponenten, die für diese Berechnung zuständig sind, wurden bereits in Abschnitt \ref{sec:distributions} vorgestellt. Das Ergebnis kann anschließend in der Histogramm-Oberfläche aus Unterabschnitt \ref{subsec:ususnethostigram} angezeigt werden. Abbildung \ref{fig:gdistususnet} zeigt beispielsweise die Verteilung der zyklomatischen Komplexität einer Beispielanwendung.
-\begin{figure}[h]
-	\centering
-		\includegraphics[width=14cm]{images/gdistususnet.png}
-	\caption{Usus.net Histogramm-Fenster mit $\lambda$ der geometrischen Verteilung}
-	\label{fig:gdistususnet}
-\end{figure}
-In Kapitel \ref{chap:inaction} werden konkretere Beispiele betrachtet und mit Usus.net analysiert.
+Usus.net berechnet das $\lambda$ nach Formel \ref{eq:edistributionml}. Die Komponenten, die für diese Berechnung zuständig sind, wurden bereits in Abschnitt \ref{sec:distributions} vorgestellt. Das Ergebnis kann anschließend in der Histogramm-Oberfläche aus Unterabschnitt \ref{subsec:ususnethostigram} angezeigt werden. Abbildung \ref{fig:ususnet_histogram} zeigt beispielsweise die Verteilung der Klassengrößen einer Beispielanwendung. In Kapitel \ref{chap:inaction} werden konkretere Beispiele betrachtet und mit Usus.net analysiert.
 
 
 \section{Andrena Software Qualitäts Index}
-\textcolor[rgb]{1,0,0}{todo}
+Theoretisch interpretieren Entwickler kleinere Metriken in der Regel als bessere Metriken, obwohl bessere Metriken nicht automatisch besseren Code beschreiben. In Bezug auf die Methodenlänge ist Robert C. Martin in seinem Buch sehr deutlich und verteidigt kurze Methoden \cite{CleanCode}. Ein Softwaresystem, welches evolutionär gewachsen ist, enthält leider nicht nur kurze Methoden sondern auch zunehmend längere. Eine Interpretation über die Verteilung wie in Abschnitt \ref{sec:histogramanalysis} kann dann sehr schnell an Aussagekraft verlieren.
+\textcolor[rgb]{1,0,0}{todo}andrena, isis, ...
 
 \subsection{Relevante Code-Zeilen}
-ISIS verwendet eine einheitliche Größe für Codebasen, nämlich RLOC (engl. Relevant Lines Of Code). Dieser Wert entspricht der Anzahl aller Codezeilen in allen Code-Dokumenten ohne Kommentare und wird in dem \texttt{CommonReportKnowledge}-Objekt des Metrikberichts gespeichert (siehe Abschnitt \ref{sec:ususobjectmodel}). \emph{CCI Metadata} erlaubt es die Zeileninformationen der CIL-Anweisungen innerhalb einer Methoden mithilfe der \texttt{PeReader}-Klasse zu bestimmen. In Unterabschnitt \ref{subsec:methodlength} wurde beschrieben, dass Usus.net auf diese Weise auch die Methodenlänge eine Methode berechnet. Die Zeileninformationen von Methoden- und Klassendefinitionen können über das \texttt{PeReader}-Objekt nicht ermittelt werden. \emph{CCI Metadata} kann die Anzahl der relevanten Codezeilen also nicht direkt aus einer Assembly bestimmen. Aus diesem Grund versucht Usus.net den RLOC-Wert auszurechnen. Die Methodenlänge bildet dabei die Grundlage. Für jede Methode im \texttt{MetricsReport}-Objekt addiert Usus.net die Methodenlänge sowie eine weitere Zeile (Methodendefiniton) zu dem \texttt{RelevantLinesOfCode}-Property in dem \texttt{CommonReportKnowledge}-Objekt. Für jede Klasse wird dieses Property um zwei weitere Zeilen erhöht, welche für die Klassendefinition sowie die Namespace-Zugehörigkeit stehen. Mehrzeilige Methodensignaturen und Klassendefinitionen werden also trotzdem mit nur jeweils einer Zeile gerechnet. Die \texttt{using}-Angaben am Anfang jeder Quellcode-Datei werden ignoriert.
+\label{subsec:rloc}
+ISIS verwendet eine einheitliche Größe für Codebasen, nämlich RLOC (engl. Relevant Lines Of Code). Die Anzahl aller Codezeilen in allen Code-Dokumenten ohne Kommentare und ohne Klammern werden dabei berücksichtigt. Der Wert wird in dem \texttt{CommonReportKnowledge}-Objekt des Metrikberichts gespeichert (siehe Abschnitt \ref{sec:ususobjectmodel}). \emph{CCI Metadata} erlaubt es die Zeileninformationen der CIL-Anweisungen innerhalb einer Methoden mithilfe der \texttt{PeReader}-Klasse zu bestimmen. In Unterabschnitt \ref{subsec:methodlength} wurde beschrieben, dass Usus.net auf diese Weise auch die Methodenlänge eine Methode berechnet. Die Zeileninformationen von Methoden- und Klassendefinitionen können über das \texttt{PeReader}-Objekt nicht ermittelt werden. \emph{CCI Metadata} kann die Anzahl der relevanten Codezeilen also nicht direkt aus einer Assembly bestimmen. Aus diesem Grund versucht Usus.net den RLOC-Wert auszurechnen. Die Methodenlänge bildet dabei die Grundlage. Für jede Methode im \texttt{MetricsReport}-Objekt addiert Usus.net die Methodenlänge sowie eine weitere Zeile (Methodendefiniton) zu dem \texttt{RelevantLinesOfCode}-Property in dem \texttt{CommonReportKnowledge}-Objekt. Für jede Klasse wird dieses Property um zwei weitere Zeilen erhöht, welche für die Klassendefinition sowie die Namespace-Zugehörigkeit stehen. Mehrzeilige Methodensignaturen und Klassendefinitionen werden also trotzdem mit nur jeweils einer Zeile gerechnet. Die \texttt{using}-Angaben am Anfang jeder Quellcode-Datei werden ignoriert.
 
 
 \section{Metrik-Veränderung}

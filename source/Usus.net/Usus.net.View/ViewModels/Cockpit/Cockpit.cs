@@ -1,13 +1,13 @@
 ﻿using System.Collections.ObjectModel;
 using andrena.Usus.net.Core.Helper;
-using andrena.Usus.net.Core.Hotspots;
-using andrena.Usus.net.Core.Reports;
+using andrena.Usus.net.View.Hub;
 
 namespace andrena.Usus.net.View.ViewModels.Cockpit
 {
     public class Cockpit : AnalysisAwareViewModel
     {
         public ObservableCollection<CockpitEntry> Entries { get; private set; }
+        public string Rloc { get; private set; }
 
         public Cockpit()
         {
@@ -19,36 +19,111 @@ namespace andrena.Usus.net.View.ViewModels.Cockpit
             Entries.Clear();
         }
 
-        protected override void AnalysisFinished(MetricsReport metrics)
+        protected override void AnalysisFinished(PreparedMetricsReport metrics)
         {
-            RatedMetrics ratedMetrics = metrics.Rate();
-            Dispatch(() => SetNewEntries(ratedMetrics));
+            Dispatch(() =>
+            {
+                SetACD(metrics);
+                SetClassSize(metrics);
+                SetCyclomaticComplexity(metrics);
+                SetMethodLength(metrics);
+                SetNumberOfNonStaticPublicFields(metrics);
+                SetNamespacesWithCycles(metrics);
+                SetRloc(metrics);
+            });
         }
 
-        private void SetNewEntries(RatedMetrics ratedMetrics)
+        private void SetRloc(PreparedMetricsReport metrics)
         {
-            Entries.Add(new CockpitEntry { Metric = "Average Component Dependency", Average = ratedMetrics.AverageComponentDependency.Percent(), Total = AllClasses(ratedMetrics) });
-            Entries.Add(new CockpitEntry { Metric = "Class Size", Average = ratedMetrics.AverageRatedClassSize.Percent(), Total = AllClasses(ratedMetrics) });
-            Entries.Add(new CockpitEntry { Metric = "Cyclomatic Complexity", Average = ratedMetrics.AverageRatedCyclomaticComplexity.Percent(), Total = AllMethods(ratedMetrics) });
-            Entries.Add(new CockpitEntry { Metric = "Method Length", Average = ratedMetrics.AverageRatedMethodLength.Percent(), Total = AllMethods(ratedMetrics) });
-            Entries.Add(new CockpitEntry { Metric = "Number Of Non-Static Public Fields", Average = ratedMetrics.AverageRatedNumberOfNonStaticPublicFields.Percent(), Total = AllClasses(ratedMetrics) });
-            Entries.Add(new CockpitEntry { Metric = "Namespaces with Cycles", Average = ratedMetrics.NamespacesWithCyclicDependencies.Percent(), Total = AllNamespaces(ratedMetrics) });
-            Entries.Add(new CockpitEntry { Metric = "Relevant Lines Of Code", Average = "", Total = ratedMetrics.Metrics.CommonKnowledge.RelevantLinesOfCode.ToString() });
+            Rloc = string.Format("{0} Relevant Lines Of Code", metrics.CommonKnowledge.RelevantLinesOfCode);
+            Changed(() => Rloc);
         }
 
-        private string AllMethods(RatedMetrics ratedMetrics)
+        private void SetACD(PreparedMetricsReport metrics)
         {
-            return ratedMetrics.Metrics.CommonKnowledge.NumberOfMethods + " methods";
+            Entries.Add(new CockpitEntry
+                        {
+                            Metric = "Average Component Dependency",
+                            Average = metrics.Rated.AverageComponentDependency.Percent(),
+                            Total = AllClasses(metrics),
+                            Hotspots = metrics.CumulativeComponentDependencyHotspots.Number(),
+                            Distribution = metrics.CumulativeComponentDependencyHistogram.Fitting.ForGeometricalDistribution.Value()
+                        });
         }
-        
-        private string AllClasses(RatedMetrics ratedMetrics)
+
+        private void SetClassSize(PreparedMetricsReport metrics)
         {
-            return ratedMetrics.Metrics.CommonKnowledge.NumberOfClasses + " classes";
+            Entries.Add(new CockpitEntry
+                        {
+                            Metric = "Class Size",
+                            Average = metrics.Rated.AverageRatedClassSize.Percent(),
+                            Total = AllClasses(metrics),
+                            Hotspots = metrics.ClassSizeHotspots.Number(),
+                            Distribution = metrics.ClassSizeHistogram.Fitting.ForGeometricalDistribution.Value()
+                        });
         }
-        
-        private string AllNamespaces(RatedMetrics ratedMetrics)
+
+        private void SetCyclomaticComplexity(PreparedMetricsReport metrics)
         {
-            return ratedMetrics.Metrics.CommonKnowledge.NumberOfNamespaces + " namespaces";
+            Entries.Add(new CockpitEntry
+                        {
+                            Metric = "Cyclomatic Complexity",
+                            Average = metrics.Rated.AverageRatedCyclomaticComplexity.Percent(),
+                            Total = AllMethods(metrics),
+                            Hotspots = metrics.CyclomaticComplexityHotspots.Number(),
+                            Distribution = metrics.CyclomaticComplexityHistogram.Fitting.ForGeometricalDistribution.Value()
+                        });
+        }
+
+        private void SetMethodLength(PreparedMetricsReport metrics)
+        {
+            Entries.Add(new CockpitEntry
+                        {
+                            Metric = "Method Length",
+                            Average = metrics.Rated.AverageRatedMethodLength.Percent(),
+                            Total = AllMethods(metrics),
+                            Hotspots = metrics.MethodLengthHotspots.Number(),
+                            Distribution = metrics.MethodLengthHistogram.Fitting.ForGeometricalDistribution.Value()
+                        });
+        }
+
+        private void SetNumberOfNonStaticPublicFields(PreparedMetricsReport metrics)
+        {
+            Entries.Add(new CockpitEntry
+                        {
+                            Metric = "Non-Static Public Fields",
+                            Average = metrics.Rated.AverageRatedNumberOfNonStaticPublicFields.Percent(),
+                            Total = AllClasses(metrics),
+                            Hotspots = metrics.NumberOfNonStaticPublicFieldsHotspots.Number(),
+                            Distribution = metrics.NumberOfNonStaticPublicFieldsHistogram.Fitting.ForGeometricalDistribution.Value()
+                        });
+        }
+
+        private void SetNamespacesWithCycles(PreparedMetricsReport metrics)
+        {
+            Entries.Add(new CockpitEntry
+                        {
+                            Metric = "Namespaces with Cycles",
+                            Average = metrics.Rated.NamespacesWithCyclicDependencies.Percent(),
+                            Total = AllNamespaces(metrics),
+                            Hotspots = metrics.NumberOfNamespacesInCycleHotspots.Number(),
+                            Distribution = metrics.NumberOfNamespacesInCycleHistogram.Fitting.ForGeometricalDistribution.Value()
+                        });
+        }
+
+        private string AllMethods(PreparedMetricsReport metrics)
+        {
+            return metrics.Report.CommonKnowledge.NumberOfMethods + " methods";
+        }
+
+        private string AllClasses(PreparedMetricsReport metrics)
+        {
+            return metrics.Report.CommonKnowledge.NumberOfClasses + " classes";
+        }
+
+        private string AllNamespaces(PreparedMetricsReport metrics)
+        {
+            return metrics.Report.CommonKnowledge.NumberOfNamespaces + " namespaces";
         }
     }
 }

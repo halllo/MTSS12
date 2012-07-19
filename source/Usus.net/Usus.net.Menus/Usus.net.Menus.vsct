@@ -97,7 +97,7 @@
         <Icon guid="guidImages" id="bmpPicSearch" />
         <Strings>
           <CommandName>cmdidUsusNetDistributions</CommandName>
-          <ButtonText>Distributions</ButtonText>
+          <ButtonText>Histograms</ButtonText>
         </Strings>
       </Button>
 

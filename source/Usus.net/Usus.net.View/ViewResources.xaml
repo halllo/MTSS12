@@ -21,6 +21,7 @@
         <Setter Property="HorizontalGridLinesBrush" Value="LightGray"/>
         <Setter Property="VerticalGridLinesBrush" Value="LightGray"/>
         <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Margin" Value="0"/>
     </Style>
     
     <Style x:Key="BottomTabs" TargetType="TabControl">
@@ -44,7 +45,7 @@
 
     <Style x:Key="NoWhitespaceChart" TargetType="dvc:Chart">
         <Setter Property="Template" Value="{StaticResource NoChartPadding}"/>
-        <Setter Property="Margin" Value="-5"/>
+        <Setter Property="Margin" Value="0"/>
         <Setter Property="Padding" Value="0"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="PlotAreaStyle">
@@ -55,6 +56,12 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style x:Key="ChartDescription" TargetType="TextBlock">
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+    </Style>
+
+    
 
 
 </ResourceDictionary>

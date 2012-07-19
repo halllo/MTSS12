@@ -70,7 +70,7 @@ namespace andrena.Usus_net_Distributions {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Usus.net Distributions.
+        ///   Looks up a localized string similar to Usus.net Histograms.
         /// </summary>
         internal static string ToolWindowTitle {
             get {
