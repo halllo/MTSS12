@@ -20,6 +20,7 @@ namespace andrena.Usus.net.Core.Math
 
         public double Error
         {
+            //TODO: sum of squared errors? chi squared?
             get { throw new System.NotImplementedException(); }
         }
     }

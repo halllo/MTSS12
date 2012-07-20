@@ -9,16 +9,16 @@ MinPos.x=-1
 MinPos.y=-1
 MaxPos.x=-1
 MaxPos.y=-1
-NormalPos.left=1187
+NormalPos.left=4
 NormalPos.top=26
 NormalPos.right=1710
 NormalPos.bottom=789
-Class=BibTeXView
-Document=masterthesis.bib
+Class=LaTeXView
+Document=masterthesis.tex
 
 [Frame0_View0,0]
-TopLine=510
-Cursor=14386
+TopLine=2161
+Cursor=221794
 
 [Frame1]
 Flags=0
@@ -29,16 +29,16 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=1178
+NormalPos.right=1710
 NormalPos.bottom=789
-Class=LaTeXView
-Document=masterthesis.tex
+Class=BibTeXView
+Document=masterthesis.bib
 
 [Frame1_View0,0]
-TopLine=2450
-Cursor=212122
+TopLine=442
+Cursor=15154
 
 [SessionInfo]
 FrameCount=2
-ActiveFrame=1
+ActiveFrame=0
 
