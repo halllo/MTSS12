@@ -101,10 +101,11 @@
     <Compile Include="Hotspots\RatingFunctionLimits.cs" />
     <Compile Include="Hotspots\RatingFunctions.cs" />
     <Compile Include="Math\Histogram.cs" />
-    <Compile Include="Math\FittingReport.cs" />
-    <Compile Include="Math\IHistogram.cs" />
+    <Compile Include="Math\GeometricalDistributionFitting.cs" />
+    <Compile Include="Math\Distribution.cs" />
+    <Compile Include="Math\IFittingReport.cs" />
     <Compile Include="Metrics\SourceCodeLocating.cs" />
-    <Compile Include="Math\Histograms.cs" />
+    <Compile Include="Math\Distributions.cs" />
     <Compile Include="Reports\SourceCodeLocation.cs" />
     <Compile Include="Metrics\CreateGraph.cs" />
     <Compile Include="Metrics\Methods\CyclomaticComplexityOfAst.cs" />

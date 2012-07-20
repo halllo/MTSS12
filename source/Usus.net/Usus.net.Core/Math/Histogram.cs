@@ -5,7 +5,7 @@ using MathNet.Numerics.Statistics;
 
 namespace andrena.Usus.net.Core.Math
 {
-    public class Histogram : IHistogram
+    public class Histogram
     {
         MathNet.Numerics.Statistics.Histogram histogram;
         List<double> data;
@@ -19,7 +19,6 @@ namespace andrena.Usus.net.Core.Math
         private void Initialize()
         {
             histogram = new MathNet.Numerics.Statistics.Histogram();
-            Fitting = new FittingReport(this);
             InitializeBins();
             InitializeData();
         }
@@ -50,7 +49,5 @@ namespace andrena.Usus.net.Core.Math
         {
             get { return data; }
         }
-
-        public FittingReport Fitting { get; private set; }
     }
 }

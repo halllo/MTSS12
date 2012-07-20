@@ -6,26 +6,26 @@ using Usus.net.Core.UnitTests.Factories.Metrics;
 
 namespace Usus.net.Core.UnitTests.Factories
 {
-    public static class CreateHistogram
+    public static class CreateDistribution
     {
-        public static IHistogram ForMethods(Func<MethodMetricsReport, int> selector, params MethodMetricsReport[] methods)
+        public static Distribution ForMethods(Func<MethodMetricsReport, int> selector, params MethodMetricsReport[] methods)
         {
             var report = Create.MetricsReport(methods);
-            return report.MethodHistogram(selector);
+            return report.MethodDistribution(selector);
         }
 
-        public static IHistogram ForTypes(Func<TypeMetricsReport, int> selector, params TypeMetricsReport[] methods)
+        public static Distribution ForTypes(Func<TypeMetricsReport, int> selector, params TypeMetricsReport[] methods)
         {
             var report = Create.MetricsReport(methods);
-            return report.TypeHistogram(selector);
+            return report.TypeDistribution(selector);
         }
 
-        public static IHistogram ForMethodLengths(params int[] methodLengths)
+        public static Distribution ForMethodLengths(params int[] methodLengths)
         {
             return ForMethods(m => m.MethodLength, methodLengths.Select(m => MethodReport(m, 1)).ToArray());
         }
 
-        public static IHistogram ForPublicFields(params int[] publicFieldsLengths)
+        public static Distribution ForPublicFields(params int[] publicFieldsLengths)
         {
             return ForTypes(m => m.NumberOfNonStaticPublicFields, publicFieldsLengths.Select(m => TypeReport(m)).ToArray());
         }

@@ -47,7 +47,7 @@ namespace andrena.Usus.net.View.ViewModels.Cockpit
                             Average = metrics.Rated.AverageComponentDependency.Percent(),
                             Total = AllClasses(metrics),
                             Hotspots = metrics.CumulativeComponentDependencyHotspots.Number(),
-                            Distribution = metrics.CumulativeComponentDependencyHistogram.Fitting.ForGeometricalDistribution.Value()
+                            Distribution = metrics.CumulativeComponentDependencyHistogram.GeometricalFit.Parameter.Value()
                         });
         }
 
@@ -59,7 +59,7 @@ namespace andrena.Usus.net.View.ViewModels.Cockpit
                             Average = metrics.Rated.AverageRatedClassSize.Percent(),
                             Total = AllClasses(metrics),
                             Hotspots = metrics.ClassSizeHotspots.Number(),
-                            Distribution = metrics.ClassSizeHistogram.Fitting.ForGeometricalDistribution.Value()
+                            Distribution = metrics.ClassSizeHistogram.GeometricalFit.Parameter.Value()
                         });
         }
 
@@ -71,7 +71,7 @@ namespace andrena.Usus.net.View.ViewModels.Cockpit
                             Average = metrics.Rated.AverageRatedCyclomaticComplexity.Percent(),
                             Total = AllMethods(metrics),
                             Hotspots = metrics.CyclomaticComplexityHotspots.Number(),
-                            Distribution = metrics.CyclomaticComplexityHistogram.Fitting.ForGeometricalDistribution.Value()
+                            Distribution = metrics.CyclomaticComplexityHistogram.GeometricalFit.Parameter.Value()
                         });
         }
 
@@ -83,7 +83,7 @@ namespace andrena.Usus.net.View.ViewModels.Cockpit
                             Average = metrics.Rated.AverageRatedMethodLength.Percent(),
                             Total = AllMethods(metrics),
                             Hotspots = metrics.MethodLengthHotspots.Number(),
-                            Distribution = metrics.MethodLengthHistogram.Fitting.ForGeometricalDistribution.Value()
+                            Distribution = metrics.MethodLengthHistogram.GeometricalFit.Parameter.Value()
                         });
         }
 
@@ -95,7 +95,7 @@ namespace andrena.Usus.net.View.ViewModels.Cockpit
                             Average = metrics.Rated.AverageRatedNumberOfNonStaticPublicFields.Percent(),
                             Total = AllClasses(metrics),
                             Hotspots = metrics.NumberOfNonStaticPublicFieldsHotspots.Number(),
-                            Distribution = metrics.NumberOfNonStaticPublicFieldsHistogram.Fitting.ForGeometricalDistribution.Value()
+                            Distribution = metrics.NumberOfNonStaticPublicFieldsHistogram.GeometricalFit.Parameter.Value()
                         });
         }
 
@@ -107,7 +107,7 @@ namespace andrena.Usus.net.View.ViewModels.Cockpit
                             Average = metrics.Rated.NamespacesWithCyclicDependencies.Percent(),
                             Total = AllNamespaces(metrics),
                             Hotspots = metrics.NumberOfNamespacesInCycleHotspots.Number(),
-                            Distribution = metrics.NumberOfNamespacesInCycleHistogram.Fitting.ForGeometricalDistribution.Value()
+                            Distribution = metrics.NumberOfNamespacesInCycleHistogram.GeometricalFit.Parameter.Value()
                         });
         }
 

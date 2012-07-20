@@ -5,22 +5,21 @@ using andrena.Usus.net.Core.Reports;
 
 namespace andrena.Usus.net.Core.Math
 {
-    public static class Histograms
+    public static class Distributions
     {
-
-        public static IHistogram TypeHistogram(this MetricsReport metrics, Func<TypeMetricsReport, int> selector)
+        public static Distribution TypeDistribution(this MetricsReport metrics, Func<TypeMetricsReport, int> selector)
         {
-            return new Histogram(metrics.TypesNotGenerated(selector));
+            return new Distribution(metrics.TypesNotGenerated(selector));
         }
 
-        public static IHistogram MethodHistogram(this MetricsReport metrics, Func<MethodMetricsReport, int> selector)
+        public static Distribution MethodDistribution(this MetricsReport metrics, Func<MethodMetricsReport, int> selector)
         {
-            return new Histogram(metrics.MethodsNotGenerated(selector));
+            return new Distribution(metrics.MethodsNotGenerated(selector));
         }
 
-        public static IHistogram NamespaceHistogram(this MetricsReport metrics, Func<NamespaceMetricsReport, int> selector)
+        public static Distribution NamespaceDistribution(this MetricsReport metrics, Func<NamespaceMetricsReport, int> selector)
         {
-            return new Histogram(metrics.Namespaces.Select(selector));
+            return new Distribution(metrics.Namespaces.Select(selector));
         }
 
         private static IEnumerable<T> TypesNotGenerated<T>(this MetricsReport metrics, Func<TypeMetricsReport, T> selector)

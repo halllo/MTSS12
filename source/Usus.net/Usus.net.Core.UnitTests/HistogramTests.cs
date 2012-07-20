@@ -9,39 +9,39 @@ namespace Usus.net.Core.UnitTests
         [TestMethod]
         public void MethodDistribution_MethodWithZeroLines_OneElementAtZero()
         {
-            var distribution = CreateHistogram.ForMethodLengths(1);
-            Assert.AreEqual(2, distribution.BinCount);
-            Assert.AreEqual(1, distribution.ElementsInBin(1));
+            var distribution = CreateDistribution.ForMethodLengths(1);
+            Assert.AreEqual(2, distribution.Histogram.BinCount);
+            Assert.AreEqual(1, distribution.Histogram.ElementsInBin(1));
         }
 
         [TestMethod]
         public void MethodDistribution_MethodWith2Lines_OneElementAtTwo()
         {
-            var distribution = CreateHistogram.ForMethodLengths(2);
-            Assert.AreEqual(3, distribution.BinCount);
-            Assert.AreEqual(0, distribution.ElementsInBin(0));
-            Assert.AreEqual(0, distribution.ElementsInBin(1));
-            Assert.AreEqual(1, distribution.ElementsInBin(2));
+            var distribution = CreateDistribution.ForMethodLengths(2);
+            Assert.AreEqual(3, distribution.Histogram.BinCount);
+            Assert.AreEqual(0, distribution.Histogram.ElementsInBin(0));
+            Assert.AreEqual(0, distribution.Histogram.ElementsInBin(1));
+            Assert.AreEqual(1, distribution.Histogram.ElementsInBin(2));
         }
 
         [TestMethod]
         public void MethodDistribution_TwoMethodWith2Lines_TwoElementAtTwo()
         {
-            var distribution = CreateHistogram.ForMethodLengths(2, 2);
-            Assert.AreEqual(3, distribution.BinCount);
-            Assert.AreEqual(0, distribution.ElementsInBin(0));
-            Assert.AreEqual(0, distribution.ElementsInBin(1));
-            Assert.AreEqual(2, distribution.ElementsInBin(2));
+            var distribution = CreateDistribution.ForMethodLengths(2, 2);
+            Assert.AreEqual(3, distribution.Histogram.BinCount);
+            Assert.AreEqual(0, distribution.Histogram.ElementsInBin(0));
+            Assert.AreEqual(0, distribution.Histogram.ElementsInBin(1));
+            Assert.AreEqual(2, distribution.Histogram.ElementsInBin(2));
         }
 
         [TestMethod]
         public void MethodDistribution_TwoMethodWith1And2Lines_OneElementAtEach()
         {
-            var distribution = CreateHistogram.ForMethodLengths(1, 2);
-            Assert.AreEqual(3, distribution.BinCount);
-            Assert.AreEqual(0, distribution.ElementsInBin(0));
-            Assert.AreEqual(1, distribution.ElementsInBin(1));
-            Assert.AreEqual(1, distribution.ElementsInBin(2));
+            var distribution = CreateDistribution.ForMethodLengths(1, 2);
+            Assert.AreEqual(3, distribution.Histogram.BinCount);
+            Assert.AreEqual(0, distribution.Histogram.ElementsInBin(0));
+            Assert.AreEqual(1, distribution.Histogram.ElementsInBin(1));
+            Assert.AreEqual(1, distribution.Histogram.ElementsInBin(2));
         }
     }
 }

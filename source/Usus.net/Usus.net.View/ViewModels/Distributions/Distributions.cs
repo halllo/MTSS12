@@ -64,19 +64,19 @@ namespace andrena.Usus.net.View.ViewModels.Distributions
             Changed(() => NonStaticPublicFieldsText);
         }
 
-        private string Fit(IHistogram histogram)
+        private string Fit(Distribution distribution)
         {
-            return "Geometric Distribution (\u03BB(1 - \u03BB)^(x-1)): \u03BB = " + histogram.Fitting.ForGeometricalDistribution.Value();
+            return "Geometric Distribution (\u03BB(1 - \u03BB)^(x-1)): \u03BB = " + distribution.GeometricalFit.Parameter.Value();
         }
 
-        private IHistogram HistogramOf(ObservableCollection<KeyValuePair<double, double>> target, IHistogram histogram)
+        private Distribution HistogramOf(ObservableCollection<KeyValuePair<double, double>> target, Distribution distribution)
         {
             Dispatch(() =>
             {
-                for (int i = 0; i < Math.Min(50, histogram.BinCount); i++)
-                    target.Add(new KeyValuePair<double, double>(i, histogram.ElementsInBin(i)));
+                for (int i = 0; i < Math.Min(50, distribution.Histogram.BinCount); i++)
+                    target.Add(new KeyValuePair<double, double>(i, distribution.Histogram.ElementsInBin(i)));
             });
-            return histogram;
+            return distribution;
         }
     }
 }
