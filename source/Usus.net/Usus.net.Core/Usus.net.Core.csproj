@@ -152,6 +152,9 @@
     <Compile Include="Helper\StringExtensions.cs" />
     <Compile Include="Reports\TypeMetricsReport.cs" />
     <Compile Include="Reports\TypeMetricsWithMethodMetrics.cs" />
+    <Compile Include="SQI\IParameterProvider.cs" />
+    <Compile Include="SQI\Calculate.cs" />
+    <Compile Include="SQI\Sqi.cs" />
     <Compile Include="Verification\Expectation.cs" />
     <Compile Include="Verification\ExpectCumulativeComponentDependencyAttribute.cs" />
     <Compile Include="Verification\ExpectDirectDependencyAttribute.cs" />

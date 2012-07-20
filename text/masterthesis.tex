@@ -1462,20 +1462,20 @@ Da das $\lambda$ der geometrischen Verteilung bekannt ist, kann die Funktion $f(
 Theoretisch interpretieren Entwickler kleinere Metriken in der Regel als bessere Metriken, obwohl bessere Metriken nicht automatisch besseren Code beschreiben. In Bezug auf die Methodenlänge ist Robert C. Martin in seinem Buch sehr deutlich und verteidigt kurze Methoden \cite{CleanCode}. Ein Softwaresystem, welches evolutionär gewachsen ist, enthält leider nicht nur kurze Methoden sondern auch zunehmend längere. Eine Metrik-Interpretation über die Verteilung, wie in Abschnitt \ref{sec:histogramanalysis} beschrieben, kann dann sehr schnell an Aussagekraft verlieren. Die Gewichtung der Metriken, die in Usus für Eclipse und Usus.net vorgenommen und in Abschnitt \ref{sec:metrics} beschrieben wird, versucht die Interpretation trotzdem zu ermöglichen. Deswegen zeigt das Cockpit-Fenster der beiden Usus-Versionen auch nicht die Rohmetriken an. Die Metrikgewichtung von Usus geht auf das andrena-interne Werkzeug Isis zurück. Isis erlaubt es ungewichtete Metriken, die von einem anderen Tool erstellt wurden, zu importieren und zu bewerten. Das Ergebnis ist der von andrena sogenannte "`Softwarequalitätsindex"' (SQI), welcher in dem Manuskript von Dr. Eberhard Kuhn ausführlich beschrieben wird \cite{IsisSQI}.
 
 \subsection{SQI Parameter}
-Der von Isis berechnete Softwarequalitätsindex" ist von mehreren Metriken abhängig. Im folgenden werden diese Metriken im Isis-Kontext so definiert, wie Kuhn sie auch in seinem Manuskript verwendet.
+Der von Isis berechnete Softwarequalitätsindex ist von mehreren Metriken abhängig. Im Folgenden werden diese Metriken in der vorliegenden Master-Thesis so definiert, wie sie Kuhn in seinem Manuskript ebenfalls verwendet.
 \begin{definition}[Testabdeckung] Testabdeckung ist der prozentuale Anteil allen Quellcodes, der durch automatisierte Tests abgedeckt wird.
 \end{definition}
-\begin{definition}[Pakete in Zyklen] Pakete in Zyklen ist die Anzahl aller Namespaces, die Teil eines Namespace-Zyklus sind.
+\begin{definition}[Pakete in Zyklen] \emph{Pakete in Zyklen} ist die Anzahl aller Namespaces, die Teil eines Namespace-Zyklus sind.
 \end{definition}
-\begin{definition}[Methoden mit hohem CC] Methoden mit hohem CC ist die Anzahl aller Methoden, deren zyklomatische Komplexität den Schwellwert 5 übersteigen.
+\begin{definition}[Komplizierte Methoden] \emph{Komplizierte Methoden} ist die Anzahl aller Methoden, deren zyklomatische Komplexität den Schwellwert 5 übersteigen.
 \end{definition}
-\begin{definition}[Average Component Dependency] ACD ist der gemittelte CCD-Wert aller Klassen und gibt an, wie viel Prozent aller Klassen von jeder Klasse direkt oder indirekt abhängig ist.
+\begin{definition}[Average Component Dependency] \emph{ACD} ist der gemittelte CCD-Wert aller Klassen und gibt an, wie viel Prozent aller Klassen von jeder Klasse direkt oder indirekt abhängig ist.
 \end{definition}
-\begin{definition}[Klassen mit vielen Methoden] Klassen mit vielen Methoden ist die Anzahl aller Klassen, die mehr als 20 Methoden haben.
+\begin{definition}[Große Klassen] \emph{Große Klassen} ist die Anzahl aller Klassen, die mehr als 20 Methoden haben.
 \end{definition}
-\begin{definition}[Große Methoden] Große Methoden ist die Anzahl aller Methoden, die mehr als 15 Codezeilen enthalten.
+\begin{definition}[Große Methoden] \emph{Große Methoden} ist die Anzahl aller Methoden, die mehr als 15 Codezeilen enthalten.
 \end{definition}
-\begin{definition}[Compiler-Warnungen] Compiler-Warnungen ist die Anzahl der Warnungen, die der Compiler beim Kompilieren anzeigt.
+\begin{definition}[Compiler-Warnungen] \emph{Compiler-Warnungen} ist die Anzahl der Warnungen, die der Compiler beim Kompilieren anzeigt.
 \end{definition}
 Nachdem diese Metriken durch ein Tool bestimmt wurden, berechnet Isis für jede Metrik $m$, bis auf die Testabdeckung, das Softwarequalitätsniveau. Die Berechnungsvorschrift ist in Formel \ref{eq:sqniveau} dargestellt. Das Software Qualitätsniveau der Testabdeckung ist die Testabdeckung selber.
 \begin{equation}
@@ -1491,9 +1491,9 @@ Isis rechnet nicht mit den Rohwerten der Metriken, sondern verwendet dessen rela
 	Metrik $m$ & $RelativeGroeße(m)$ & $Zweidrittelkonstante(m)$ \\
 	\hline
 	Pakete in Zyklen & $\frac{\displaystyle m}{Anzahl Packages}$ & $\frac{1}{15}$ \\
-	Methoden mit hohem CC & $\frac{\displaystyle m}{Anzahl Methoden}$ & $\frac{1}{50}$ \\
+	Komplizierte Methoden & $\frac{\displaystyle m}{Anzahl Methoden}$ & $\frac{1}{50}$ \\
 	Average Component Dependency & 1 & $100 \times Anzahl Klassen^{-1/3}$ \\
-	Klassen mit vielen Methoden & $\frac{\displaystyle m}{Anzahl Klassen}$ & $\frac{1}{25}$ \\
+	Große Klassen & $\frac{\displaystyle m}{Anzahl Klassen}$ & $\frac{1}{25}$ \\
 	Große Methoden & $\frac{\displaystyle m}{Anzahl Methoden}$ & $\frac{1}{25}$ \\
 	Compiler-Warnungen & $\frac{\displaystyle m}{Anzahl Klassen}$ & $\frac{1}{50}$ \\
 \end{tabular}
@@ -1514,9 +1514,9 @@ Isis verwendet an dieser Stelle wieder eine Zweidrittelkonstante aus Tabelle \re
 	Metrik $m$ & Mittlere Größe & Zweidrittelkonstante$_{fmk}$ \\
 	\hline
 	Pakete in Zyklen & $\frac{\displaystyle RLOC}{Anzahl Packages}$ & 3000 \\
-	Methoden mit hohem CC & $\frac{\displaystyle RLOC}{Anzahl Methoden}$ & 15 \\
+	Komplizierte Methoden & $\frac{\displaystyle RLOC}{Anzahl Methoden}$ & 15 \\
 	Average Component Dependency & $\frac{\displaystyle RLOC}{Anzahl Klassen}$ & 200 \\
-	Klassen mit vielen Methoden & $\frac{\displaystyle RLOC}{Anzahl Klassen}$ & 200 \\
+	Große Klassen & $\frac{\displaystyle RLOC}{Anzahl Klassen}$ & 200 \\
 	Große Methoden & $\frac{\displaystyle RLOC}{Anzahl Methoden}$ & 15 \\
 \end{tabular}
 \caption{Zweidrittelkonstanten$_{fmk}$ der Isis-Monolithkorrekturfaktoren}
@@ -1541,9 +1541,9 @@ Isis nimmt dabei eine abschließende Gewichtung anhand Tabelle \ref{tab:sqiweight
 	\hline
 	Testabdeckung & 2,28 \\
 	Pakete in Zyklen & 1,93 \\
-	Methoden mit hohem CC & 1,75 \\
+	Komplizierte Methoden & 1,75 \\
 	Average Component Dependency & 1,58 \\
-	Klassen mit vielen Methoden & 1,05 \\
+	Große Klassen & 1,05 \\
 	Große Methoden & 1,05 \\
 	Compiler-Warnungen & 0,36 \\
 \end{tabular}
