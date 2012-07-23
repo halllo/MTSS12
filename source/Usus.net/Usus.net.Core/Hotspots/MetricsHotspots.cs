@@ -17,14 +17,29 @@ namespace andrena.Usus.net.Core.Hotspots
             return Metrics.MethodsOverLimit(m => m.CyclomaticComplexity, l => l.CyclomaticComplexity, m => !m.CompilerGenerated);
         }
 
+        public IEnumerable<MethodMetricsReport> OfCyclomaticComplexityOver(int limit)
+        {
+            return Metrics.MethodsOverLimit(m => m.CyclomaticComplexity, l => _ => limit, m => !m.CompilerGenerated);
+        }
+
         public IEnumerable<MethodMetricsReport> OfMethodLength()
         {
             return Metrics.MethodsOverLimit(m => m.MethodLength, l => l.MethodLength, m => !m.CompilerGenerated);
         }
 
+        public IEnumerable<MethodMetricsReport> OfMethodLengthOver(int limit)
+        {
+            return Metrics.MethodsOverLimit(m => m.MethodLength, l => _ => limit, m => !m.CompilerGenerated);
+        }
+
         public IEnumerable<TypeMetricsReport> OfClassSize()
         {
             return Metrics.TypesOverLimit(m => m.ClassSize, l => l.ClassSize, t => !t.CompilerGenerated);
+        }
+
+        public IEnumerable<TypeMetricsReport> OfClassSizeOver(int limit)
+        {
+            return Metrics.TypesOverLimit(m => m.ClassSize, l => _ => limit, t => !t.CompilerGenerated);
         }
 
         public IEnumerable<TypeMetricsReport> OfNumberOfNonStaticPublicFields()

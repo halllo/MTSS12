@@ -10,7 +10,6 @@ namespace andrena.Usus.net.Core.SQI
         int BigClasses { get; }
         int BigMethods { get; }
         int CompilerWarnings { get; }
-
         int Namespaces { get; }
         int Classes { get; }
         int Methods { get; }

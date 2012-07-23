@@ -38,6 +38,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Usus.net.EditorAdornment", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Usus.net.Menus", "Usus.net.Menus\Usus.net.Menus.csproj", "{528EDEA0-5D62-483B-8801-3ED9632E1D5E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Usus.net.Sqi", "Usus.net.Sqi\Usus.net.Sqi.csproj", "{14D86696-B774-4058-A0D1-451C8AC177AD}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Usus.net.vsmdi
@@ -201,6 +203,16 @@ Global
 		{528EDEA0-5D62-483B-8801-3ED9632E1D5E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{528EDEA0-5D62-483B-8801-3ED9632E1D5E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{528EDEA0-5D62-483B-8801-3ED9632E1D5E}.Release|x86.ActiveCfg = Release|Any CPU
+		{14D86696-B774-4058-A0D1-451C8AC177AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14D86696-B774-4058-A0D1-451C8AC177AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14D86696-B774-4058-A0D1-451C8AC177AD}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{14D86696-B774-4058-A0D1-451C8AC177AD}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{14D86696-B774-4058-A0D1-451C8AC177AD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{14D86696-B774-4058-A0D1-451C8AC177AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14D86696-B774-4058-A0D1-451C8AC177AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14D86696-B774-4058-A0D1-451C8AC177AD}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{14D86696-B774-4058-A0D1-451C8AC177AD}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{14D86696-B774-4058-A0D1-451C8AC177AD}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

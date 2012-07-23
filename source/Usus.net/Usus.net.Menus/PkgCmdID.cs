@@ -11,5 +11,6 @@ namespace andrena.Usus_net_Menus
         public const uint cmdidUsusNetDistributions = 0x0120;
         public const uint cmdidUsusNetCleanCode = 0x0130;
         public const uint cmdidUsusNetCurrent = 0x0140;
+        public const uint cmdidUsusNetSqi = 0x0150;
     };
 }

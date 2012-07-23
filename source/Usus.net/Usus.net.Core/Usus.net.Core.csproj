@@ -152,6 +152,7 @@
     <Compile Include="Helper\StringExtensions.cs" />
     <Compile Include="Reports\TypeMetricsReport.cs" />
     <Compile Include="Reports\TypeMetricsWithMethodMetrics.cs" />
+    <Compile Include="SQI\CachedParameters.cs" />
     <Compile Include="SQI\IParameterProvider.cs" />
     <Compile Include="SQI\Calculate.cs" />
     <Compile Include="SQI\Sqi.cs" />

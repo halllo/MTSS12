@@ -12,6 +12,12 @@ namespace Usus.net.Core.UnitTests.Factories.Metrics
                 .Hotspots().OfCyclomaticComplexity();
         }
 
+        public static IEnumerable<MethodMetricsReport> CyclomaticComplexityUnderLimit(int limit, params int[] ccs)
+        {
+            return CreateMany.Metrics(m => new MethodMetricsReport { CyclomaticComplexity = m }, ccs)
+                .Hotspots().OfCyclomaticComplexityOver(limit);
+        }
+
         public static IEnumerable<MethodMetricsReport> MethodLength(params int[] mls)
         {
             return CreateMany.Metrics(m => new MethodMetricsReport { NumberOfLogicalLines = m }, mls)

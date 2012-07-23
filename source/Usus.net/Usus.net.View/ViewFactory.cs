@@ -1,8 +1,8 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using andrena.Usus.net.View.ExtensionPoints;
 using andrena.Usus.net.View.Hub;
 using andrena.Usus.net.View.ViewModels.Current;
-using System;
 
 namespace andrena.Usus.net.View
 {
@@ -11,7 +11,7 @@ namespace andrena.Usus.net.View
         public static FrameworkElement CreateCockpit(ViewHub hub)
         {
             var cockpitView = new View.Cockpit();
-            var cockpitViewModel = new View.ViewModels.Cockpit.Cockpit { Dispatchable = cockpitView };
+            var cockpitViewModel = new ViewModels.Cockpit.Cockpit { Dispatchable = cockpitView };
             cockpitViewModel.RegisterHub(hub);
             cockpitView.DataContext = cockpitViewModel;
             return cockpitView;
@@ -20,7 +20,7 @@ namespace andrena.Usus.net.View
         public static FrameworkElement CreateDistributions(ViewHub hub)
         {
             var distributionsView = new View.Distributions();
-            var distributionsViewModel = new View.ViewModels.Distributions.Distributions { Dispatchable = distributionsView };
+            var distributionsViewModel = new ViewModels.Distributions.Distributions { Dispatchable = distributionsView };
             distributionsViewModel.RegisterHub(hub);
             distributionsView.DataContext = distributionsViewModel;
             return distributionsView;
@@ -29,7 +29,7 @@ namespace andrena.Usus.net.View
         public static FrameworkElement CreateCurrent(ViewHub hub, Action<Action<LineLocation>> lineRequestor)
         {
             var currentView = new View.Current();
-            var currentViewModel = new View.ViewModels.Current.Current { Dispatchable = currentView };
+            var currentViewModel = new ViewModels.Current.Current { Dispatchable = currentView };
             currentViewModel.RegisterHub(hub);
             lineRequestor(currentViewModel.RequestLineHandler());
             currentView.DataContext = currentViewModel;
@@ -39,11 +39,20 @@ namespace andrena.Usus.net.View
         public static FrameworkElement CreateHotspots(ViewHub hub, IJumpToSource jumpToSource)
         {
             var hotspotsView = new View.Hotspots();
-            var hotspotsViewModel = new View.ViewModels.Hotspots.Hotspots { Dispatchable = hotspotsView };
+            var hotspotsViewModel = new ViewModels.Hotspots.Hotspots { Dispatchable = hotspotsView };
             hotspotsViewModel.RegisterHub(hub);
             hotspotsViewModel.SourceLocating = jumpToSource;
             hotspotsView.DataContext = hotspotsViewModel;
             return hotspotsView;
+        }
+
+        public static FrameworkElement CreateSQI(ViewHub hub)
+        {
+            var sqiView = new View.SQI();
+            var sqiViewModel = new ViewModels.SQI.SQI { Dispatchable = sqiView };
+            sqiViewModel.RegisterHub(hub);
+            sqiView.DataContext = sqiViewModel;
+            return sqiView;
         }
     }
 }

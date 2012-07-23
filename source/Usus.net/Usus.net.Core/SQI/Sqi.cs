@@ -7,7 +7,7 @@ namespace andrena.Usus.net.Core.SQI
         internal delegate double RelativeSize(double metric, IParameterProvider parameters);
         internal readonly static RelativeSize RelativeSizeNamespacesInCycles = (m, p) => m / p.Namespaces;
         internal readonly static RelativeSize RelativeSizeComplicatedMethods = (m, p) => m / p.Methods;
-        internal readonly static RelativeSize RelativeSizeAcd = (m, p) => 1;
+        internal readonly static RelativeSize RelativeSizeAcd = (m, p) => m;
         internal readonly static RelativeSize RelativeSizeBigClasses = (m, p) => m / p.Classes;
         internal readonly static RelativeSize RelativeSizeBigMethods = (m, p) => m / p.Methods;
         internal readonly static RelativeSize RelativeCompilerWarnings = (m, p) => m / p.Classes;
@@ -41,7 +41,7 @@ namespace andrena.Usus.net.Core.SQI
 
         internal static double SqNiveauCorrection(this IParameterProvider parameters, Func<IParameterProvider, double> metric, MiddleSize middleSize, CorrectionCalibration calibration)
         {
-            return 1.0 / System.Math.Pow(1.5, middleSize(metric(parameters), parameters) / calibration(metric(parameters), parameters));
+            return 1.0 / System.Math.Pow(1.5, System.Math.Pow(middleSize(metric(parameters), parameters) / calibration(metric(parameters), parameters), 3.0));
         }
     }
 }

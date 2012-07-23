@@ -22,5 +22,6 @@
     <VsPackage>|Usus.net.Distributions;PkgdefProjectOutputGroup|</VsPackage>
     <MefComponent>|Usus.net.EditorAdornment|</MefComponent>
     <VsPackage>|Usus.net.Menus;PkgdefProjectOutputGroup|</VsPackage>
+    <VsPackage>|Usus.net.Sqi;PkgdefProjectOutputGroup|</VsPackage>
   </Content>
 </Vsix>

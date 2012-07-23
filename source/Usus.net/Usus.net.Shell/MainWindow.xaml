@@ -45,10 +45,10 @@
                     <RowDefinition Height="15"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <TextBlock Text="Clean Code"/>
-                <view:CleanCode Grid.Row="1"/>
+                <TextBlock Text="SQI"/>
+                <view:SQI x:Name="SQI" Grid.Row="1"/>
             </Grid>
-
+            
             <Grid Grid.Row="1" Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="15"/>

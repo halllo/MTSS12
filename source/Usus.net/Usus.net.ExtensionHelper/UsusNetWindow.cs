@@ -5,6 +5,7 @@ namespace andrena.Usus.net.ExtensionHelper
 {
     public static class UsusNetWindow
     {
+        public readonly static string Sqi = "7e2072fe-9fb5-4cc3-b968-44be201b0654";
         public readonly static string Current = "3c97d2fc-95d1-459a-90f4-3bf200360789";
         public readonly static string Cockpit = "e6a2f749-5fd9-4ade-a33e-02f5d4945c61";
         public readonly static string Hotspots = "2d71d321-dddd-4c87-aade-04a68f12212d";
