@@ -5,21 +5,21 @@ namespace andrena.Usus.net.View.ViewModels.SQI
 {
     public class SqiParameters : IParameterProvider
     {
-        public event Action ParametersChanged;
+        public event Action<double> SqiChanged;
 
         public SqiParameters()
         {
-            ParametersChanged += () => { };
+            SqiChanged += sqi => { };
         }
 
         public SqiParameter Assign(string parameter, int value, Action<SqiParameters, int> valueAssignment)
         {
             valueAssignment(this, value);
-            var sqiParameter = new SqiParameter(parameter) { Value = value.ToString() };
-            sqiParameter.OnChange += newValue => SqiParameterConverter.Number(newValue, v =>
+            var sqiParameter = new SqiParameter(parameter) { Value = SqiParameterType.Number(value) };
+            sqiParameter.PropertyChanged += (_, __) => SqiParameterType.Number(sqiParameter.Value, v =>
             {
                 valueAssignment(this, v);
-                ParametersChanged();
+                SqiChanged(CalculateSqi());
             });
             return sqiParameter;
         }
@@ -27,13 +27,18 @@ namespace andrena.Usus.net.View.ViewModels.SQI
         public SqiParameter Assign(string parameter, double value, Action<SqiParameters, double> valueAssignment)
         {
             valueAssignment(this, value);
-            var sqiParameter = new SqiParameter(parameter) { Value = value.ToString("0.00") };
-            sqiParameter.OnChange += newValue => SqiParameterConverter.Percentage(newValue, v =>
+            var sqiParameter = new SqiParameter(parameter) { Value = SqiParameterType.Percentage(value) };
+            sqiParameter.PropertyChanged += (_, __) => SqiParameterType.Percentage(sqiParameter.Value, v =>
             {
                 valueAssignment(this, v);
-                ParametersChanged();
+                SqiChanged(CalculateSqi());
             });
             return sqiParameter;
+        }
+
+        private double CalculateSqi()
+        {
+            return this.SoftwareQualityIndex();
         }
 
         public double TestCoverage { get; set; }

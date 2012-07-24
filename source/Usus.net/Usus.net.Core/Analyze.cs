@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Reflection;
+﻿using System.Reflection;
 using andrena.Usus.net.Core.Metrics;
 using andrena.Usus.net.Core.Reports;
 
@@ -19,8 +18,7 @@ namespace andrena.Usus.net.Core
 
         public static MetricsReport PortableExecutable(params string[] asmFiles)
         {
-            var report = MetricsReport.Of(from asm in asmFiles 
-                                          select AnalyseFile(asm));
+            var report = MetricsReport.Of(AnalyzeParallel.Files(asmFiles, AnalyseFile));
             report.PostProcess();
             return report;
         }

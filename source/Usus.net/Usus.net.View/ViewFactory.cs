@@ -46,11 +46,12 @@ namespace andrena.Usus.net.View
             return hotspotsView;
         }
 
-        public static FrameworkElement CreateSQI(ViewHub hub)
+        public static FrameworkElement CreateSQI(ViewHub hub, IKnowSqiDetails sqiDetails)
         {
             var sqiView = new View.SQI();
             var sqiViewModel = new ViewModels.SQI.SQI { Dispatchable = sqiView };
             sqiViewModel.RegisterHub(hub);
+            sqiViewModel.Details = sqiDetails;
             sqiView.DataContext = sqiViewModel;
             return sqiView;
         }

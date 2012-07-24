@@ -3,8 +3,18 @@ using System.Windows;
 
 namespace andrena.Usus.net.View.ViewModels.SQI
 {
-    public static class SqiParameterConverter
+    public static class SqiParameterType
     {
+        public static string Number(int value)
+        {
+            return value.ToString();
+        }
+
+        public static void Number(int value, Action<string> valueAssignment)
+        {
+            valueAssignment(Number(value));
+        }
+
         public static void Number(string newValue, Action<int> valueAssignment)
         {
             try
@@ -16,6 +26,16 @@ namespace andrena.Usus.net.View.ViewModels.SQI
             {
                 MessageBox.Show("Invalid number!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        public static string Percentage(double value)
+        {
+            return value.ToString("0.00");
+        }
+
+        public static void Percentage(double value, Action<string> valueAssignment)
+        {
+            if (!double.IsNaN(value)) valueAssignment(Percentage(value));
         }
 
         public static void Percentage(string newValue, Action<double> valueAssignment)

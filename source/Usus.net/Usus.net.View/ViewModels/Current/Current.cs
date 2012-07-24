@@ -33,7 +33,7 @@ namespace andrena.Usus.net.View.ViewModels.Current
         private void DisplayMetricsOfMethodAtDefinition(LineLocation location)
         {
             if (lastLocation.IsSameAs(location)) return;
-            DisplayMetrics(GetMethodOfDefiniton(location));
+            DisplayMetrics(metrics != null ? GetMethodOfDefiniton(location) : null);
         }
 
         private MethodAndTypeMetrics GetMethodOfDefiniton(LineLocation location)

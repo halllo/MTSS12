@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BuildAwareToolWindowPane.cs" />
+    <Compile Include="CompilerErrors.cs" />
     <Compile Include="CursorPosition.cs" />
     <Compile Include="GlobalEventManager.cs" />
     <Compile Include="UsusNetWindow.cs" />

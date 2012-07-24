@@ -9,6 +9,7 @@ using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.OLE.Interop;
 using Microsoft.VisualStudio.Shell;
 using andrena.Usus.net.ExtensionHelper;
+using System.Collections.Generic;
 
 namespace andrena.Usus_net_Sqi
 {
@@ -67,7 +68,6 @@ namespace andrena.Usus_net_Sqi
             Microsoft.VisualStudio.ErrorHandler.ThrowOnFailure(windowFrame.Show());
         }
 
-
         /////////////////////////////////////////////////////////////////////////////
         // Overriden Package Implementation
         #region Package Members
@@ -92,6 +92,5 @@ namespace andrena.Usus_net_Sqi
             }
         }
         #endregion
-
     }
 }

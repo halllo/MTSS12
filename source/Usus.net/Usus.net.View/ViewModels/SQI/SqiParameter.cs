@@ -2,11 +2,10 @@ using System;
 
 namespace andrena.Usus.net.View.ViewModels.SQI
 {
-    public class SqiParameter
+    public class SqiParameter : ViewModel
     {
         public SqiParameter(string parameter)
         {
-            OnChange += _ => { };
             Parameter = parameter;
         }
 
@@ -15,17 +14,12 @@ namespace andrena.Usus.net.View.ViewModels.SQI
         private string _Value;
         public string Value
         {
-            get
-            {
-                return _Value;
-            }
+            get { return _Value; }
             set
             {
                 _Value = value;
-                OnChange(_Value);
+                Changed(() => Value);
             }
         }
-
-        public event Action<string> OnChange;
     }
 }

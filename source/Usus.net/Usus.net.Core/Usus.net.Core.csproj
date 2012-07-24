@@ -80,6 +80,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Analyze.cs" />
+    <Compile Include="AnalyzeParallel.cs" />
     <Compile Include="AssemblyNavigation\NamespaceExtensions.cs" />
     <Compile Include="AssemblyNavigation\TypeExtensions.cs" />
     <Compile Include="AssemblyNavigation\MethodExtensions.cs" />
