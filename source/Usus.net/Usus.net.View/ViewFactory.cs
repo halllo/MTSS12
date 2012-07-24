@@ -50,8 +50,8 @@ namespace andrena.Usus.net.View
         {
             var sqiView = new View.SQI();
             var sqiViewModel = new ViewModels.SQI.SQI { Dispatchable = sqiView };
-            sqiViewModel.RegisterHub(hub);
             sqiViewModel.Details = sqiDetails;
+            sqiViewModel.RegisterHub(hub);
             sqiView.DataContext = sqiViewModel;
             return sqiView;
         }

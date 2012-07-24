@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using andrena.Usus.net.Core.Helper;
 using andrena.Usus.net.View.Hub;
+using System;
 
 namespace andrena.Usus.net.View.ViewModels.Cockpit
 {
@@ -8,6 +9,7 @@ namespace andrena.Usus.net.View.ViewModels.Cockpit
     {
         public ObservableCollection<CockpitEntry> Entries { get; private set; }
         public string Rloc { get; private set; }
+        public string LastMetricsTime { get; private set; }
 
         public Cockpit()
         {
@@ -29,14 +31,16 @@ namespace andrena.Usus.net.View.ViewModels.Cockpit
                 SetMethodLength(metrics);
                 SetNumberOfNonStaticPublicFields(metrics);
                 SetNamespacesWithCycles(metrics);
-                SetRloc(metrics);
+                SetFooter(metrics);
             });
         }
 
-        private void SetRloc(PreparedMetricsReport metrics)
+        private void SetFooter(PreparedMetricsReport metrics)
         {
             Rloc = string.Format("{0} Relevant Lines Of Code", metrics.CommonKnowledge.RelevantLinesOfCode);
             Changed(() => Rloc);
+            LastMetricsTime = string.Format("  ({0})", DateTime.Now.ToShortTimeString());
+            Changed(() => LastMetricsTime);
         }
 
         private void SetACD(PreparedMetricsReport metrics)

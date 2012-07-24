@@ -18,7 +18,10 @@
         <DataGrid Grid.Row="1" Style="{StaticResource DisplayGrid}" CanUserSortColumns="False"
                   ItemsSource="{Binding Entries}"/>
         <Border Grid.Row="2" Background="LightGray">
-            <TextBlock Text="{Binding Rloc}" HorizontalAlignment="Right" Margin="0 2 10 0"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 1 10 0">
+                <TextBlock Text="{Binding Rloc}" VerticalAlignment="Center"/>
+                <TextBlock Text="{Binding LastMetricsTime}" VerticalAlignment="Center"/>
+            </StackPanel>
         </Border>
     </Grid>
 </UserControl>

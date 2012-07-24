@@ -30,15 +30,19 @@ namespace andrena.Usus.net.ExtensionHelper
 
         protected CompilerErrors GetErrors()
         {
-            ErrorList list = MasterObjekt.ToolWindows.ErrorList;
             CompilerErrors errors = new CompilerErrors();
+            if (MasterObjekt != null) AnalyzeErrorItems(errors);
+            return errors;
+        }
+
+        private void AnalyzeErrorItems(CompilerErrors errors)
+        {
+            ErrorList list = MasterObjekt.ToolWindows.ErrorList;
             for (long index = 1; index <= list.ErrorItems.Count; index++)
             {
                 AddUpErrors(errors, list.ErrorItems.Item(index));
             }
-            return errors;
         }
-
         private void AddUpErrors(CompilerErrors errors, ErrorItem item)
         {
             switch (item.ErrorLevel)
