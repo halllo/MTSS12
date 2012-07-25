@@ -11,34 +11,16 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=814
-NormalPos.bottom=909
+NormalPos.right=1710
+NormalPos.bottom=789
 Class=LaTeXView
 Document=masterthesis.tex
 
 [Frame0_View0,0]
-TopLine=535
-Cursor=34747
-
-[Frame1]
-Flags=0
-ShowCmd=1
-MinPos.x=-1
-MinPos.y=-1
-MaxPos.x=-1
-MaxPos.y=-1
-NormalPos.left=4
-NormalPos.top=26
-NormalPos.right=814
-NormalPos.bottom=909
-Class=BibTeXView
-Document=masterthesis.bib
-
-[Frame1_View0,0]
-TopLine=459
-Cursor=15154
+TopLine=2184
+Cursor=225065
 
 [SessionInfo]
-FrameCount=2
+FrameCount=1
 ActiveFrame=0
 
