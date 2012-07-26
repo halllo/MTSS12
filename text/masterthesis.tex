@@ -1105,6 +1105,7 @@ Neben dem Abhängigkeitsgraphen auf Klassenebene steht auch der Abhängigkeitsgrap
 
 
 \section{Metrikgewichtung}
+\label{sec:metricweighting}
 Nachdem in den vorherigen beiden Abschnitten beschrieben wurde, wie die Berechnung der Metriken funktioniert und in welcher Struktur das Ergebnis präsentiert wird, beschäftigt sich dieser Abschnitt mit der Weiterverarbeitung dieser Ergebnisse. Usus verwendet die Metriken beispielsweise für die in Unterabschnitt \ref{subsec:ususcockpit} vorgestellte Cockpit-Ansicht und in der in Unterabschnitt \ref{subsec:usushotspots} betrachteten Hotspots-Ansicht. Für diese beiden Ansichten werden die ermittelten Metriken gewichtet, mit Schwellwerten verglichen und Mittelwerte gebildet. Wie dies geschieht, wurde bereits in Unterabschnitt \ref{subsec:allprojectsmetrics} ausführlich beschrieben. Die im folgenden vorgestellten Klassen befinden sich alle im Namespace \texttt{andrena.Usus.net.Core.Hotspots}.
 
 \subsection{Hotspots}
@@ -1297,9 +1298,20 @@ Ein Usus.net Fenster, das es nicht in der Eclipse Version gibt, ist \emph{Usus.n
 \end{figure}
 Zu jedem Grad werden die Prinzipien (Unterabschnitt \ref{subsec:ccdprinciples}) und Parktiken (Unterabschnitt \ref{subsec:ccdpractices}) als Hyperlinks aufgelistet. Über diese Hyperlinks lassen sich die Internetseiten von Westphal und Lieser öffnen, die ausführliche Beschreibungen der Grade enthalten. 
 
+\subsection{SQI}
+\label{subsec:ususnetsqi}
+Ein weiteres Usus.net Fenster, welches es in der Eclipse Version ebenfalls nicht gibt, ist \emph{Usus.net SQI}. Abbildung \ref{fig:ususnet_sqi} zeigt die Parameter des Softwarequalitätsindex in der Tabelle, sowie den Berechneten SQI einer Beispielanwendung. Wie diese Berechnung funktioniert und was die Parameter bedeuten, wird in Abschnitt \ref{sec:andrenasqi} ausführlich beschrieben.
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=14cm]{images/ususnet_sqi.png}
+	\caption{Usus.net SQI-Fenster}
+	\label{fig:ususnet_sqi}
+\end{figure}
+Nach jedem Kompiliervorgang trägt Usus.net automatisch alle Werte ein, bis auf die Testabdeckung. Da Usus.net die prozentuale Testabdeckung noch nicht automatisch bestimmen kann, muss dieser Wert vom Entwickler manuell eingetragen werden. Der SQI-Wert wird daraufhin sofort aktualisiert.
+
 
 \section{Visual Studio Integration}
-Nachdem alle Oberflächen von Usus.net beschrieben wurden, beschäftigt sich dieser Abschnitt mit der tatsächlichen Integration der Views in Visual Studio. Jede Oberfläche erhält ein eigenes Visual Studio-Fenster, welches beliebig in der IDE verschoben, angedockt und angepasst werden kann. Diese Fenster sind alle in separaten Projekten vom Typ \emph{VSPackage} implementiert. Die fünf Fenster-Projekte sind \texttt{Usus.net.Cockpit} (1), \texttt{Usus.net.Current} (2), \texttt{Usus.net.Hotspots} (3), \texttt{Usus.net.Distributions} (4) und \texttt{Usus.net.CleanCode} (5). Zusätzlich verwendet das Info-Fenster (\texttt{Usus.net.Current}) Buttons direkt neben dem Quellcode im Visual Studio Editor. Diese Buttons sind in dem \emph{Editor Adornment}-Projekt \texttt{Usus.net.EditorAdornment} (6) definiert. Das Projekt \texttt{Usus.net.Menus} (7) ist ein weiteres \emph{VSPackage}, welches das Usus.net-Menü in die Menüleiste von Visual Studio integriert. Alle diese sieben Erweiterungsprojekte werden vom dem \emph{VSPackage}-Projekt \texttt{Usus.net} (0) zusammengefasst. Dieses Projekt enthält keinen Quellcode und erzeugt auch keine eigene Assembly. Das \texttt{Usus.net}-Projekt erzeugt die VSIX-Datei der kompletten Usus.net-Erweiterung. Eine VSIX-Datei ist eine ZIP-Datei, welche alle benötigten Assemblies und das Erweiterungsmanifest enthält. Durch die Aufteilung von Usus.net in separate Pakete, braucht Visual Studio nicht die komplette Erweiterung zu laden sondern lediglich die Fenster, die tatsächlich benutzt werden. Ein weiterer Vorteil der getrennten Pakete ist, dass ein potenzieller Fehler in einem \emph{VSPackage} sich nicht auf die anderen auswirkt. Nur das fehlerhafte Paket wird dann von Visual Studio beendet, während die anderen Fenster, die sich ja in anderen Paketen befinden, weiter lauffähig bleiben.
+Nachdem alle Oberflächen von Usus.net beschrieben wurden, beschäftigt sich dieser Abschnitt mit der tatsächlichen Integration der Views in Visual Studio. Jede Oberfläche erhält ein eigenes Visual Studio-Fenster, welches beliebig in der IDE verschoben, angedockt und angepasst werden kann. Diese Fenster sind alle in separaten Projekten vom Typ \emph{VSPackage} implementiert. Die fünf Fenster-Projekte sind \texttt{Usus.net.Cockpit} (1), \texttt{Usus.net.Current} (2), \texttt{Usus.net.Hotspots} (3), \texttt{Usus.net.Distributions}, \texttt{Usus.net.CleanCode} (5) und \texttt{Usus.net.Sqi} (6). Zusätzlich verwendet das Info-Fenster (\texttt{Usus.net.Current}) Buttons direkt neben dem Quellcode im Visual Studio Editor. Diese Buttons sind in dem \emph{Editor Adornment}-Projekt \texttt{Usus.net.EditorAdornment} (7) definiert. Das Projekt \texttt{Usus.net.Menus} (8) ist ein weiteres \emph{VSPackage}, welches das Usus.net-Menü in die Menüleiste von Visual Studio integriert. Alle diese acht Erweiterungsprojekte werden vom dem \emph{VSPackage}-Projekt \texttt{Usus.net} (0) zusammengefasst. Dieses Projekt enthält keinen Quellcode und erzeugt auch keine eigene Assembly. Das \texttt{Usus.net}-Projekt erzeugt die VSIX-Datei der kompletten Usus.net-Erweiterung. Eine VSIX-Datei ist eine ZIP-Datei, welche alle benötigten Assemblies und das Erweiterungsmanifest enthält. Durch die Aufteilung von Usus.net in separate Pakete, braucht Visual Studio nicht die komplette Erweiterung zu laden sondern lediglich die Fenster, die tatsächlich benutzt werden. Ein weiterer Vorteil der getrennten Pakete ist, dass ein potenzieller Fehler in einem \emph{VSPackage} sich nicht auf die anderen auswirkt. Nur das fehlerhafte Paket wird dann von Visual Studio beendet, während die anderen Fenster, die sich ja in anderen Paketen befinden, weiter lauffähig bleiben.
 \paragraph{}
 Im Folgenden werden die allgemeinen Implementierungsdetails der Usus.net-Fenster vorgestellt. Dabei wird beschrieben, wie diese Fenster auf das Build-Ereignis in Visual Studio reagieren können. Weiterhin wird die Integration aller Erweiterungsprojekte in einen einzigen Menüpunkt behandelt, der außerdem eine Kommunikation zwischen den Fenstern ermöglicht. Abschließend wird gezeigt wie Erweiterungen an beliebige Codezeilen springen und wie diese Codezeilen grafische Elemente darstellen können.
 
@@ -1365,17 +1377,17 @@ Dieser Code befindet sich in der \texttt{DtAwareToolWindow}-Klasse und lässt sic
 \subsection{Editor Adornment}
 \label{subsec:editoradornment}
 In Unterabschnitt \ref{subsec:ususnetinfo} wurde beschrieben, dass das Info-Fenster von Usus.net über Buttons aufgerufen wird, die sich direkt neben den Methodensignaturen befinden. Das Erweiterungsmodell von Visual Studio unterstützt das Zeichnen von beliebigen WPF-Elementen im Code-Editor. Über die Projektvorlage \emph{Editor Adornment} (Editor Verzierung) kann eine Erweiterung erstellt werden, welche auf die aktuell sichtbaren Codezeilen reagieren kann. In dem von der Projektvorlage generierten Code existiert die Methode \texttt{CreateVisuals}, die einen Parameter vom Typ \texttt{ITextViewLine} übergeben bekommt. In dieser Methode kann die Logik implementiert werden, die ein grafisches Element in der übergebenen Zeile anzeigt. Im Fall von Usus.net ist dies ein kleiner Button, der in der Klasse \texttt{CodeTag} implementiert ist. Dieser Button wird nur neben einer Methodensignatur dargestellt. Usus.net stellt dies durch einen regulären Ausdruck sicher.
-\begin{lstlisting}[caption={Muster einer gültigen Methodensignatur in C$\#$},label={listing:methodregex1}]
+\begin{lstlisting}[caption={Regulärer Ausdruck einer gültigen Methodensignatur in C$\#$},label={listing:methodregex1}]
 ^{0}{1} {1}\\((((out |ref |this |params )?{1} {2})?(,[ ]?(out |ref |params )?
 {1} {2})*)\\)\$
 \end{lstlisting}
 Dieser Ausdruck besteht aus vier Komponenten. Die erste Komponente ist in Listing \ref{listing:methodregex1} zu sehen und stellt eine Form dar, die die anderen drei Komponenten mehrfach wiederverwendet. \{0\} ist der Platzhalter für die zweite Komponente, während \{1\} für die dritte und \{2\} für die vierte Komponente steht.
-\begin{lstlisting}[caption={Muster einer gültigen Zugriffseinschränkung in C$\#$},label={listing:methodregex2}]
+\begin{lstlisting}[caption={Regulärer Ausdruck einer gültigen Zugriffseinschränkung in C$\#$},label={listing:methodregex2}]
 (private |protected |public |internal )?(static |virtual new |virtual |new 
 |override |override sealed )?
 \end{lstlisting}
 Listing \ref{listing:methodregex2} zeigt die zweite Komponente des regulären Ausdrucks, welche die Sichtbarkeit einer Methode beschreibt. Die dritte Komponente beschreibt die Syntax eines Typen und die vierte beschreibt einen Variablennamen. Beide Ausdrücke sind in Listing \ref{listing:methodregex3} abgebildet.
-\begin{lstlisting}[caption={Muster eines gültigen Klassen- und Parameternamen in C$\#$},label={listing:methodregex3}]
+\begin{lstlisting}[caption={Regulärer Ausdruck eines gültigen Klassen- und Parameternamen in C$\#$},label={listing:methodregex3}]
 Klassenname:	([_a-zA-Z]+[\\._a-zA-Z0-9\\[\\]]*(<.*>)?)
 Parametername:	([_a-zA-Z]+[_a-zA-Z0-9]*([ ]?=[ ]?[^,<> ]*)?)
 \end{lstlisting}
@@ -1466,6 +1478,7 @@ Da das $\lambda$ der geometrischen Verteilung bekannt ist, kann die Funktion $f(
 
 
 \section{Andrena Softwarequalitätsindex}
+\label{sec:andrenasqi}
 Theoretisch interpretieren Entwickler kleinere Metriken in der Regel als bessere Metriken, obwohl bessere Metriken nicht automatisch besseren Code beschreiben. In Bezug auf die Methodenlänge ist Robert C. Martin in seinem Buch sehr deutlich und verteidigt kurze Methoden \cite{CleanCode}. Ein Softwaresystem, welches evolutionär gewachsen ist, enthält leider nicht nur kurze Methoden sondern auch zunehmend längere. Eine Metrik-Interpretation über die Verteilung, wie in Abschnitt \ref{sec:histogramanalysis} beschrieben, kann dann sehr schnell an Aussagekraft verlieren. Die Gewichtung der Metriken, die in Usus für Eclipse und Usus.net vorgenommen und in Abschnitt \ref{sec:metrics} beschrieben wird, versucht die Interpretation trotzdem zu ermöglichen. Deswegen zeigt das Cockpit-Fenster der beiden Usus-Versionen auch nicht die Rohmetriken an. Die Metrikgewichtung von Usus geht auf das andrena-interne Werkzeug Isis zurück. Isis erlaubt es ungewichtete Metriken, die von einem anderen Tool erstellt wurden, zu importieren und zu bewerten. Das Ergebnis ist der von andrena sogenannte "`Softwarequalitätsindex"' (SQI), welcher in dem Manuskript von Dr. Eberhard Kuhn ausführlich beschrieben wird \cite{IsisSQI}.
 
 \subsection{SQI Parameter}
@@ -1571,9 +1584,9 @@ return parameters.SqNiveau(m => m.BigMethods,
 \end{lstlisting}
 Die Variable \texttt{parameters} enthält eine \texttt{IParameterProvider}-Referenz, über die die beiden Methoden \texttt{SqNiveau} und \texttt{SqNiveauCorrection} als Extension Methods aufgerufen werden können. Die \texttt{Sqi}-Klasse enthält für jede SQI-Metrik je ein Objekt vom Typ \texttt{RelativeSize}, \texttt{Calibration}, \texttt{MiddleSize} und \texttt{CorrectionCalibration}. Diese Typen repräsentieren die Metrik-abhängigen Berechnungen und Gewichtungen aus Unterabschnitt \ref{subsec:sqiparams}. Mit diesen Berechnungen lassen sich das Softwarequalitätsniveau sowie der Monolithkorrekturfaktor jeder SQI-Metrik bestimmen. Dessen Produkt kann anschließend aufsummiert werden um den Softwarequalitätsindex zu erhalten.
 \paragraph{}
-Wer implementiert das \texttt{IParameterProvider}-Interface auf Seite des Metrik-Berichts?
-Das ViewModel der SQI-View verwendet eine Klasse \texttt{SqiParameters}, die das Interface implementiert. Diese Klasse verwaltet \texttt{SqiParameter}-Objekte, die direkt an die Oberfläche gebunden werden können. An der Oberfläche werden alle SQI-Parameter als Tabelle (\texttt{DataGrid}) angezeigt, die editiert werden kann. Eine Änderung eines Werts wird durch das Data Binding des ViewModels direkt in den \texttt{SqiParameter}-Objekten vorgenommen. Anschließend kann der SQI neu berrechnet werden.
-\textcolor[rgb]{1,0,0}{todo}
+Die Berechnung des SQI kann für jedes Objekt stattfinden, dessen Klasse das Interface \texttt{IParameterProvider} implementiert. In Unterabschnitt \ref{subsec:ususnetsqi} wurde das SQI-Fenster vorgestellt, welches das Ergebnis in Visual Studio präsentiert. Im ViewModel dieses Steuerelements, nämlich der Klasse \texttt{ViewModels.SQI}, wird für jeden Parameter ein \texttt{SqiParameter}-Objekt verwaltet. Diese Objekte werden direkt an die Oberfläche gebunden und in Form eines editierbaren \texttt{DataGrid}-Controls angezeigt. Eine Änderung eines Werts wird durch das Data Binding des ViewModels direkt in dem entsprechenden \texttt{SqiParameter}-Objekt vorgenommen. Die Parameter-Objekte werden über ein Objekt vom Typ \texttt{SqiParameters} erzeugt. Dieses Objekt beobachtet alle erzeugten Parameter und berechnet im Falle einer Änderung (entweder durch neue Metriken oder durch manuelle Eingabe den neuen SQI. Die \texttt{SqiParameters}-Klasse implementiert dafür das \texttt{IParameterProvider}-Interface. Über das Ereignis \texttt{SqiChanged} wird der neue Softwarequalitätsindex dann dem ViewModel und damit der View mitgeteilt.
+\paragraph{}
+Ein von Usus.net erstellter Metrikbericht in Form eines \texttt{MetricsReport}-Objekt enthält fast alle Daten, die für die Berechnung des SQI erforderlich sind. Im Folgenden wird die Berechnung der Parameter beschrieben, die im Rahmen der Usus.net Metrikberechnung aus Abschnitt \ref{sec:metriccalc} und der Metrikgewichtung aus Abschnitt \ref{sec:metricweighting} noch nicht beschrieben wurden.
 
 \subsubsection{Relevante Code-Zeilen}
 \label{subsubsec:rloc}
@@ -1609,6 +1622,7 @@ Stimmen die Werte, die Usus.net bestimmt mit denen der anderen Werkzeuge überein
 \section{Usus.net Performance}
 Wie schnell arbeitet Usus.net im Vergleich zu anderen Werkzeugen? Wird Zeit gespart, da kein Kontextswitch erforderlich ist und das Tool in die IDE integriert ist?
 \textcolor[rgb]{1,0,0}{todo}
+PLINQ is faster than task for every assembly
 
 
 \section{Fallbeispiel Andrena-Kurs}

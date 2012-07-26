@@ -12,12 +12,15 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
-            <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <ProgressBar Style="{StaticResource AnalysisProgress}"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <ProgressBar Style="{StaticResource AnalysisProgress}" Grid.ColumnSpan="2"/>
         <DataGrid Grid.Row="1" ItemsSource="{Binding Parameters}"
                   Style="{StaticResource DisplayGrid}" IsReadOnly="False"/>
-        <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
             <TextBlock Text="SQI = " FontSize="20" VerticalAlignment="Center"/>
             <TextBlock Text="{Binding Sqi}" FontSize="35"/>
         </StackPanel>
