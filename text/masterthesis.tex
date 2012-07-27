@@ -1417,6 +1417,7 @@ Listing \ref{listing:sendlineandfiletoinfo} zeigt wie ein Methodensignatur-Butto
 
 
 \chapter{Clean Code Unterstützung}
+Anforderung Clean Code Unterstützung haben, User Stories wegen Clean Code Metriken, leider noch kein CRAP oder das andere.
 \textcolor[rgb]{1,0,0}{todo}
 
 
@@ -1593,14 +1594,23 @@ Ein von Usus.net erstellter Metrikbericht in Form eines \texttt{MetricsReport}-O
 Der ISIS-SQI verwendet eine einheitliche Größe für Codebasen, nämlich RLOC (engl. Relevant Lines Of Code). Die Anzahl aller Codezeilen in allen Code-Dokumenten ohne Kommentare und ohne Klammern werden dabei berücksichtigt. Der Wert wird in dem \texttt{CommonReportKnowledge}-Objekt des Metrikberichts gespeichert (siehe Abschnitt \ref{sec:ususobjectmodel}). \emph{CCI Metadata} erlaubt es die Zeileninformationen der CIL-Anweisungen innerhalb einer Methoden mithilfe der \texttt{PeReader}-Klasse zu bestimmen. In Unterabschnitt \ref{subsec:methodlength} wurde beschrieben, dass Usus.net auf diese Weise auch die Methodenlänge eine Methode berechnet. Die Zeileninformationen von Methoden- und Klassendefinitionen können über das \texttt{PeReader}-Objekt nicht ermittelt werden. \emph{CCI Metadata} kann die Anzahl der relevanten Codezeilen also nicht direkt aus einer Assembly bestimmen. Aus diesem Grund versucht Usus.net den RLOC-Wert auszurechnen. Die Methodenlänge bildet dabei die Grundlage. Für jede Methode im \texttt{MetricsReport}-Objekt addiert Usus.net die Methodenlänge sowie eine weitere Zeile (Methodendefiniton) zu dem \texttt{RelevantLinesOfCode}-Property in dem \texttt{CommonReportKnowledge}-Objekt. Für jede Klasse wird dieses Property um zwei weitere Zeilen erhöht, welche für die Klassendefinition sowie die Namespace-Zugehörigkeit stehen. Mehrzeilige Methodensignaturen und Klassendefinitionen werden also trotzdem mit nur jeweils einer Zeile gerechnet. Die \texttt{using}-Angaben am Anfang jeder Quellcode-Datei werden ignoriert.
 
 \subsubsection{Compiler-Warnungen}
-Compiler-Warnungen werden automatisch ermittelt
-\textcolor[rgb]{1,0,0}{todo}
+Wenn beim Kompilieren Warnungen entstehen, werden diese ebenfalls in die Berechnung des ISIS-SQI einbezogen. \texttt{Usus.net.Core} kann die Anzahl dieser Warnungen allerdings nicht bestimmen, da diese nicht in der kompilierten Assembly hinterlegt sind. Eine Visual Studio Erweiterung in Form eines \emph{VSPackage} kann auf die Warnungen und Fehler eines Build-Vorgangs zugreifen. Wie in Listing \ref{listing:compilerwarnings} gezeigt, ist dies über das \texttt{DTE2}-Objekt möglich, welches über das Property \texttt{MasterObjekt} der \texttt{DtAwareToolWindow}-Klasse veröffentlicht wird.
+\begin{lstlisting}[caption={Anzahl der Compiler-Warnungen bestimmen},label={listing:compilerwarnings}]
+ErrorList list = MasterObjekt.ToolWindows.ErrorList;
+for (long index = 1; index <= list.ErrorItems.Count; index++)
+{
+	ErrorItem error = list.ErrorItems.Item(index);
+	if (error.ErrorLevel == vsBuildErrorLevel.vsBuildErrorLevelMedium
+	 || error.ErrorLevel == vsBuildErrorLevel.vsBuildErrorLevelLow)
+		AddWarning();
+}
+\end{lstlisting}
+Da das Usus.net SQI-Fenster ebenfalls eine Unterklasse von \texttt{BuildAwareToolWindowPane} ist, können die Warnungen von dem Fenster bestimmt werden. Warnungen und Fehler werden von Visual Studio in dem Fehlerliste-Fenster angezeigt. Über alle diese Warnungen und Fehler kann iteriert werden, wobei die Unterscheidung zwischen Fehler und Warnung mithilfe der \texttt{ErrorLevel}-Eigenschaft vorgenommen werden kann. Das Fehlerlevel \texttt{vsBuildErrorLevelHigh} steht für einen Fehler, während \texttt{vsBuildErrorLevelMedium} oder \texttt{vsBuildErrorLevelLow} eine Warnung repräsentieren. Alle Warnungen können somit aufsummiert und an das \texttt{SqiParameters}-Objekt des ViewModel weitergeben werden. Dazu implementiert das SQI-Fenster das Interface \texttt{IKnowSqiDetails}. Bei der Erzeugung des ViewModels registriert sich das Fenster bei dem ViewModel, sodass im Falle einer SQI-Berechnung auch die Werte, die nur vom \texttt{VSPackage} bestimmt werden können, ermittelt werden können. Durch das \texttt{IKnowSqiDetails}-Interface kann das Property \texttt{CompilerWarnings} des Fensters vom ViewModel aufgerufen werden, ohne das das ViewModel abhängig von dem \texttt{VSPackage} ist.
 
-\subsubsection{Testabdeckung)}
-Compiler-Warnungen werden automatisch ermittelt
-\textcolor[rgb]{1,0,0}{todo}
-
-\textcolor[rgb]{1,0,0}{todo}
+\subsubsection{Testabdeckung}
+Usus.net bezieht bei der Berechnung des ISIS-SQI auch die prozentuale Testabdeckung mit ein. Dieser Wert wird von einem Test-Runner ermittelt, der sich in Visual Studio integriert. Das Ergebnis kann nicht aus einer Assembly allein bestimmt werden. Genau wie die Anzahl der Compiler-Warnungen muss die Testabdeckung von dem \texttt{VSPackage} des SQI-Fenster bestimmt werden. Anschließend kann der Wert wieder über das \texttt{IKnowSqiDetails}-Interface an das \texttt{SqiParameters}-Objekt des ViewModel übergeben werden. Da Visual Studio in der Version Professional die Analyse der Code Coverage nicht unterstützt, muss ein anderes Werkzeug genutzt werden. Usus.net müsste also in der Lage sein, unabhängig vom verwendeten Werkzeug die Testabdeckung eines Projekts zu extrahieren. Dies ist nur möglich wenn Usus.net die Formate, in denen die einzelnen Code Coverage Tools ihr Ergebnis speichern, analysieren kann.
+\paragraph{}
+Im Rahmen dieser Master-Thesis wurden diese Analysen nicht implementiert. Die Testabdeckung muss daher im SQI-Fenster der aktuellen Version von Usus.net noch von Hand eingegeben werden.
 
 
 \section{Metrik-Veränderung}
