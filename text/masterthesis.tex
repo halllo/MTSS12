@@ -566,6 +566,7 @@ Formel \ref{eq:packageswithcyclicdependencies} zeigt dabei die Aufsummierung all
 
 
 \chapter{Andere Tools}
+\label{chap:othertools}
 Nachdem in dem vorherigen Kapitel das Eclipse Plugin Usus vorgestellt wurde, werden in diesem Kapitel einige andere Werkzeuge beschrieben, die ebenfalls eine statische Code-Analyse durchführen. Während Usus die direkte Inspiration für das in dieser Master-Thesis zu entwickelnde Tool darstellt, werden in diesem Kapitel einige Visual Studio Erweiterungen behandelt. Diese Erweiterungen versuchen bereits, die in Kapitel \ref{chap:requirements} definierten Anforderungen zu erfüllen und sind dabei auf Projekte spezialisiert, die für das .NET-Framework entwickelt werden.
 
 
@@ -1181,7 +1182,7 @@ histogram.AddData(data.Select(d => d * 1.0));
 \end{lstlisting}
 Die Variable \texttt{data} enthält die erwähnte Sequenz von Ganzzahlen (\texttt{IEnumerable<int>}), die über den Konstruktor übergeben wird. Usus.net unterstützt nur Histogramme mit positiven Werten. Ein fertiges Histogramm kann in Form eines \texttt{IHistogram}-Objekts weitergegeben und analysiert werden. Die Werte der x-Achse können mithilfe der Eigenschaft \texttt{BinCount} auf 0 bis \texttt{BinCount}-1 bestimmt werden. Um den y-Wert, also die absolute Häufigkeit zu einem x-Wert zu bestimmen, kann die Methode \texttt{ElementsInBin(x)} mit dem x-Wert als Parameter aufgerufen werden.
 \paragraph{}
-Usus.net nutzt Mechanismen um das Histogramm zu analysieren und speichert die Ergebnisse in Form von \texttt{IFittingReport}-Objekten ebenfalls in dem \texttt{Distribution}-Objekt. Das Interface \texttt{IFittingReport} definiert die beiden Properties \texttt{Parameter} und \texttt{Error}, welche von einer konkreten Verteilungsfunktion zur Verfügung gestellt werden können. In der aktuellen Version von Usus.net wird nur die geometrische Verteilung unterstützt. Die Klasse \texttt{Distribution} hat dafür das \texttt{GeometricalFit}-Property. Dieses Property liefert ein \texttt{GeometricalDistributionFitting}-Objekt, welches als \texttt{Parameter} das $\lambda$ der geometrischen Verteilung aus Formel \ref{eq:gdistribution} zurückgibt. Um diese Parameter der Verteilungen zu bestimmen, berechnet Usus.net statistische Kennzahlen (beispielsweise den Mittelwert) der Histogramm-Sequenz wieder mithilfe der Math.NET-Bibliothek. Wie diese Analyse des Histogramms und die Annäherung der Verteilungsfunktionen genau funktioniert, ist in Unterabschnitt \ref{subsec:histogramapproximation} beschrieben. Sobald der Parameter einer Verteilung bestimmt wurde, kann auch der Fehler dieser Verteilung berechnet und über das \texttt{Error}-Property veröffentlicht werden. Anhand des Fehlers können unterschiedliche Approximationen des Histogramms verglichen werden. Da Usus.net momentan nur eine Verteilung unterstützt, ist der Vergleich der Fehler noch nicht relevant. Wie der Fehler ermittelt werden könnte, wird in Unterabschnitt \ref{subsec:histogramerror} behandelt.
+Usus.net nutzt Mechanismen um das Histogramm zu analysieren und speichert die Ergebnisse in Form von \texttt{IFittingReport}-Objekten ebenfalls in dem \texttt{Distribution}-Objekt. Das Interface \texttt{IFittingReport} definiert die beiden Properties \texttt{Parameter} und \texttt{Error}, welche von einer konkreten Verteilungsfunktion zur Verfügung gestellt werden können. In der aktuellen Version von Usus.net wird nur die geometrische Verteilung unterstützt. Die Klasse \texttt{Distribution} hat dafür das \texttt{GeometricalFit}-Property. Dieses Property liefert ein \texttt{GeometricalDistributionFitting}-Objekt, welches als \texttt{Parameter} das $\lambda$ der geometrischen Verteilung aus Formel \ref{eq:gdistribution} zurückgibt. Um diese Parameter der Verteilungen zu bestimmen, berechnet Usus.net statistische Kennzahlen (beispielsweise den Mittelwert) der Histogramm-Sequenz wieder mithilfe der Math.NET-Bibliothek. Wie diese Analyse des Histogramms und die Annäherung der Verteilungsfunktionen genau funktioniert, ist in Abschnitt \ref{sec:histogramapproximation} beschrieben. Sobald der Parameter einer Verteilung bestimmt wurde, kann auch der Fehler dieser Verteilung berechnet und über das \texttt{Error}-Property veröffentlicht werden. Anhand des Fehlers können unterschiedliche Approximationen des Histogramms verglichen werden. Da Usus.net momentan nur eine Verteilung unterstützt, ist der Vergleich der Fehler noch nicht relevant. Wie der Fehler ermittelt werden könnte, wird in Abschnitt \ref{sec:histogramerror} behandelt.
 
 
 \section{Testen}
@@ -1243,7 +1244,7 @@ Das Fenster mit den am weitesten aggregierte Metriken ist \emph{Usus.net Cockpit
 	\caption{Usus.net Cockpit-Fenster}
 	\label{fig:ususnet_cockpit}
 \end{figure}
-Dieses Fenster verhält sich wie alle anderen Fenster und kann in Visual Studio beliebig angedockt werden. Das ViewModel reagiert auf einen verfügbaren Metrikbericht, indem es die Einträge der Tabelle durch neue Einträge für die Statistiken ersetzt. Als Tabelle wird ein \texttt{DataGrid}-Objekt verwendet. Neben der Anzahl der Hotspots wird zu jeder Metrik die Verteilungsinformation angezeigt, die ausführlicher in Abschnitt \ref{sec:histogramanalysis} beschrieben wird. Außerdem ist mit einem Blick ersichtlich wie viele relevante Codezeilen die analysierte Codebasis enthält. Unter-Unterabschnitt \ref{subsubsec:rloc} beschreibt wie sich dieser Wert zusammensetzt.
+Dieses Fenster verhält sich wie alle anderen Fenster und kann in Visual Studio beliebig angedockt werden. Das ViewModel reagiert auf einen verfügbaren Metrikbericht, indem es die Einträge der Tabelle durch neue Einträge für die Statistiken ersetzt. Als Tabelle wird ein \texttt{DataGrid}-Objekt verwendet. Neben der Anzahl der Hotspots wird zu jeder Metrik die Verteilungsinformation angezeigt, die ausführlicher in Abschnitt \ref{sec:histogramanalysis} beschrieben wird. Außerdem ist mit einem Blick ersichtlich wie viele relevante Codezeilen die analysierte Codebasis enthält. Unterabschnitt \ref{subsec:rloc} beschreibt wie sich dieser Wert zusammensetzt.
 
 \subsection{Info}
 \label{subsec:ususnetinfo}
@@ -1289,6 +1290,7 @@ Abbildung \ref{fig:ususnet_histogram} zeigt die Häufigkeitsverteilungen aller Be
 In Unterabschnitt \ref{subsec:ususgraphs} wurde vorgestellt, wie Usus für Eclipse die Abhängigkeitsgraphen auf Klassen- und Package-Ebene visualisiert. Usus.net erstellt diese Graphen ebenfalls und veröffentlicht sie als Teil des Objektmodells, wie in Abschnitt \ref{sec:ususobjectmodel} beschrieben. Eine grafische Visualisierung dieser Graphen in Form eines Fensters in Visual Studio wird von Usus.net noch nicht unterstützt. Dieses Fenster kann im Rahmen dieser Master-Thesis aus Zeitgründen leider nicht mehr implementiert werden.
 
 \subsection{Clean Code Grade}
+\label{subsec:ususnetcleancodegrades}
 Ein Usus.net Fenster, das es nicht in der Eclipse Version gibt, ist \emph{Usus.net CleanClode}. Damit ist Alexander Zeitler's Idee die Clean Code Grade von Ralf Westphal und Stefan Lieser \cite{CleanCodeDeveloper} immer direkt in der IDE zu sehen, in Usus.net integriert. Zeitlers Idee wurde bereits in Abschnitt \ref{sec:ccdaddin} vorgestellt. Abbildung \ref{fig:ususnet_cleancode} zeigt die Liste, mit den verschiedenen Graden.
 \begin{figure}[h]
 	\centering
@@ -1300,7 +1302,7 @@ Zu jedem Grad werden die Prinzipien (Unterabschnitt \ref{subsec:ccdprinciples}) 
 
 \subsection{SQI}
 \label{subsec:ususnetsqi}
-Ein weiteres Usus.net Fenster, welches es in der Eclipse Version ebenfalls nicht gibt, ist \emph{Usus.net SQI}. Abbildung \ref{fig:ususnet_sqi} zeigt die Parameter des Softwarequalitätsindex in der Tabelle, sowie den Berechneten SQI einer Beispielanwendung. Wie diese Berechnung funktioniert und was die Parameter bedeuten, wird in Abschnitt \ref{sec:andrenasqi} ausführlich beschrieben.
+Ein weiteres Usus.net Fenster, welches es in der Eclipse Version ebenfalls nicht gibt, ist \emph{Usus.net SQI}. Abbildung \ref{fig:ususnet_sqi} zeigt die Parameter des Softwarequalitätsindex in der Tabelle, sowie den Berechneten SQI einer Beispielanwendung. Wie diese Berechnung funktioniert und was die Parameter bedeuten, wird in Kapitel \ref{chap:andrenasqi} ausführlich beschrieben.
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=14cm]{images/ususnet_sqi.png}
@@ -1417,11 +1419,11 @@ Listing \ref{listing:sendlineandfiletoinfo} zeigt wie ein Methodensignatur-Butto
 
 
 \chapter{Clean Code Unterstützung}
-Anforderung Clean Code Unterstützung haben, User Stories wegen Clean Code Metriken, leider noch kein CRAP oder das andere.
-\textcolor[rgb]{1,0,0}{todo}
+\label{chap:cleancodesupport}
+Eine Anforderung an Usus.net ist die Unterstützung bei der Entwicklung von Clean Code. Dafür wurde bereits das Clean Code Grade-Fenster in Unterabschnitt \ref{subsec:ususnetcleancodegrades} vorgestellt. Dieses Fenster erinnert den Entwickler kontinuierlich an die Prinzipien und Parktiken, die er am besten befolgen sollte. Um ein Maß für das Level an Clean Code zu haben, reichen die bisher vorgestellten Metriken nicht aus. Robert C. Martin beschreibt in seinem Blog-Post \cite{CleanCodeMetrics} die beiden Clean Code Metriken "`CRAP"' und "`The Braithwaite Correlation"', welche nicht Bestandteil dieser Ausarbeitung sind. In dieser Master-Thesis wird eine dritte Metrik betrachtet, die aus der Häufigkeitsverteilung der Metriken berechnet werden kann. Der Parameter der approximierten Verteilungsfunktion soll die Clean Code Metrik von Usus.net sein.
 
 
-\section{Histogramm-Analyse}
+\section{Kleine Metriken}
 \label{sec:histogramanalysis}
 In Abschnitt \ref{sec:distributions} wurde beschrieben, das Usus.net Histogramme für alle Metriken erstellen kann. Dieser Abschnitt beschäftigt sich mit der Analyse ebendieser Metrik-Histogramme und wie die Metriken tatsächliche verteilt sind. Nach einer ersten Überlegung folgen beispielsweise Methodenlängen einer Exponentialverteilung. "`Kurz"' ist das Erste, was Robert C. Martin über Methoden schreibt \cite{CleanCode}. In einem Softwaresystem, das mit dieser Einstellung bezüglich Clean Code entwickelt wurde, wird also sehr viele sehr kurze Methoden haben, viele kurze und wenig lange Methoden. Die Methodenlänge nimmt also exponentiell ab und diese Entwicklung sollte auch im Histogramm der Methodenlängen zu sehen sein. Die Funktion der Exponentialverteilung ist laut Eric W. Weisstein wie in Formel \ref{eq:edistribution} definiert \cite{ExponentialDist}.
 \begin{equation}
@@ -1443,8 +1445,8 @@ f_\lambda(x) =
 \end{equation}
 Beide Funktionen sind von dem Parameter $\lambda$ abhängig. Die eigentliche Histogramm-Analyse besteht darin, diesen Parameter so zu bestimmen, dass die Funktionen das Histogramm möglichst genau beschreibt.
 
-\subsection{Approximation}
-\label{subsec:histogramapproximation}
+\section{Approximation}
+\label{sec:histogramapproximation}
 Eine Methode das $\lambda$ zu berechnen ist die Maximum Likelyhood-Methode, die Weisstein ebenfalls in seinem MathWorld-Eintrag beschreibt \cite{MaximumLikelihood}. Mit dieser Methode kann eine Schätzer-Funktion errechnet werden, die in Abhängigkeit der Werte des Histogramms den Parameter $\lambda$ bestimmt. Sigbert Klinke, Patrick Lehmann, Bernd Rönz, Sibylle Schmerbach und Olga Zlatkin-Troitschanskaia haben den Schätzer für die Exponentialverteilung bereits bestimmt \cite{MLExponentialDist}. Den Schätzer der geometrischen Verteilung wurde von Künzer, Meister und Nebe berechnet \cite{MLGeometricsDist}. Beide Schätzer-Funktion sind identisch und abhängig von der Histogramm-Sequenz. Formel \ref{eq:edistributionml} zeigt diese Rechenvorschrift zur Bestimmung des $\lambda$-Parameters.
 \begin{equation}
 \lambda = \frac{n}{\sum_{i=1}^n x_i} = \frac{1}{\bar{x}}
@@ -1468,8 +1470,8 @@ Obwohl die Exponentialverteilung und die geometrische Verteilung nicht identisch
 \paragraph{}
 Usus.net berechnet den $\lambda$-Parameter in der Klasse \texttt{GeometricalDistributionFitting} nach Formel \ref{eq:edistributionml}. Die Komponenten, die für diese Berechnung zuständig sind, wurden bereits in Abschnitt \ref{sec:distributions} vorgestellt. Das Ergebnis kann anschließend in der Histogramm-Oberfläche aus Unterabschnitt \ref{subsec:ususnethostigram} angezeigt werden. Abbildung \ref{fig:ususnet_histogram} zeigt beispielsweise die Verteilung der Klassengrößen einer Beispielanwendung. In Kapitel \ref{chap:inaction} werden konkretere Beispiele betrachtet und mit Usus.net analysiert.
 
-\subsection{Fehler}
-\label{subsec:histogramerror}
+\section{Fehler}
+\label{sec:histogramerror}
 Da das Histogramm durch eine stetige Funktion angenähert wird, ist es sehr wahrscheinlich, dass die Funktion mit dem bestimmten Parameter nicht exakt durch die Punkte des Histogramms läuft. Diese Abweichung kann laut Eric W. Weisstein mit den Chi-Squared Test ermittelt werden \cite{ChiSquared}. Formel \ref{eq:chisquaredtest} zeigt dieses Maß der Abweichung.
 \begin{equation}
 \chi^2 = \sum_{i=1}^n \frac{(x_i - f(x_i))^2}{f(x_i)}
@@ -1478,12 +1480,14 @@ Da das Histogramm durch eine stetige Funktion angenähert wird, ist es sehr wahrs
 Da das $\lambda$ der geometrischen Verteilung bekannt ist, kann die Funktion $f(x_i)$ durch die Funktion $f_\lambda(x_i)$ aus Formel \ref{eq:gdistribution} ersetzt werden. Das berechnete Ergebnis kann über den \texttt{Error}-Parameter des \texttt{GeometricalDistributionFitting}-Objekts zurückgegeben werden. Die Implementierung dieser Fehlerfunktion ist in der aktuellen Version von Usus.net noch nicht enthalten. Sobald Usus.net die Bestimmung von verschiedenen Verteilungen unterstützt, kann mithilfe des Fehlers die Verteilungsfunktion bestimmt werden, die das Histogramm am Besten (mit dem geringsten Fehler) annähert. Aufgrund der dadurch bestimmten wahrscheinlichsten Verteilung könnte eine bessere Aussage über die Metriken im betroffenen Softwaresystem getroffen werden. Diese weiteren Verteilungen könnten eventuell die Poisson-Verteilung und die Pareto-Verteilung sein. Eine weiterführende theoretische Analyse kann im zeitlichen Rahmen dieser Master-Thesis nicht vorgenommen werden.
 
 
-\section{Andrena Softwarequalitätsindex}
-\label{sec:andrenasqi}
-Theoretisch interpretieren Entwickler kleinere Metriken in der Regel als bessere Metriken, obwohl bessere Metriken nicht automatisch besseren Code beschreiben. In Bezug auf die Methodenlänge ist Robert C. Martin in seinem Buch sehr deutlich und verteidigt kurze Methoden \cite{CleanCode}. Ein Softwaresystem, welches evolutionär gewachsen ist, enthält leider nicht nur kurze Methoden sondern auch zunehmend längere. Eine Metrik-Interpretation über die Verteilung, wie in Abschnitt \ref{sec:histogramanalysis} beschrieben, kann dann sehr schnell an Aussagekraft verlieren. Die Gewichtung der Metriken, die in Usus für Eclipse und Usus.net vorgenommen und in Abschnitt \ref{sec:metrics} beschrieben wird, versucht die Interpretation trotzdem zu ermöglichen. Deswegen zeigt das Cockpit-Fenster der beiden Usus-Versionen auch nicht die Rohmetriken an. Die Metrikgewichtung von Usus geht auf das andrena-interne Werkzeug Isis zurück. Isis erlaubt es ungewichtete Metriken, die von einem anderen Tool erstellt wurden, zu importieren und zu bewerten. Das Ergebnis ist der von andrena sogenannte "`Softwarequalitätsindex"' (SQI), welcher in dem Manuskript von Dr. Eberhard Kuhn ausführlich beschrieben wird \cite{IsisSQI}.
 
-\subsection{SQI Parameter}
-\label{subsec:sqiparams}
+
+\chapter{Andrena Softwarequalitätsindex}
+\label{chap:andrenasqi}
+Dieses Kapitel beschäftigt sich mit dem Anwendungsfall \emph{Software Qualität interpretieren}. Wie bereits in Kapitel \ref{chap:cleancodesupport} beschrieben, interpretieren Entwickler kleinere Metriken in der Regel als bessere Metriken und das Obwohl bessere Metriken nicht automatisch besseren Code beschreiben. In Bezug auf die Methodenlänge ist Robert C. Martin in seinem Buch sehr deutlich und verteidigt kurze Methoden \cite{CleanCode}. Ein Softwaresystem, welches evolutionär gewachsen ist, enthält leider nicht nur kurze Methoden sondern auch zunehmend längere. Eine Metrik-Interpretation über die Verteilung, wie in Abschnitt \ref{sec:histogramanalysis} beschrieben, kann dann sehr schnell an Aussagekraft verlieren. Die Gewichtung der Metriken, die in Usus für Eclipse und Usus.net vorgenommen und in Abschnitt \ref{sec:metrics} beschrieben wird, versucht die Interpretation trotzdem zu ermöglichen. Deswegen zeigt das Cockpit-Fenster der beiden Usus-Versionen auch nicht die Rohmetriken an. Die Metrikgewichtung von Usus geht auf das andrena-interne Werkzeug Isis zurück. Isis erlaubt es ungewichtete Metriken, die von einem anderen Tool erstellt wurden, zu importieren und zu bewerten. Das Ergebnis ist der von andrena sogenannte "`Softwarequalitätsindex"' (SQI), welcher in dem Manuskript von Dr. Eberhard Kuhn ausführlich beschrieben wird \cite{IsisSQI}.
+
+\section{Parameter}
+\label{sec:sqiparams}
 Der von Isis berechnete Softwarequalitätsindex ist von mehreren Metriken abhängig. Im Folgenden werden diese Metriken in der vorliegenden Master-Thesis so definiert, wie sie Kuhn in seinem Manuskript ebenfalls verwendet.
 \begin{definition}[Testabdeckung] Testabdeckung ist der prozentuale Anteil allen Quellcodes, der durch automatisierte Tests abgedeckt wird.
 \end{definition}
@@ -1527,7 +1531,7 @@ Wie die Zweidrittelkonstanten zustande kommen beschreiben Andreas Leidig und Nic
 f_{mk}(m) = \frac{1}{1,5^{\Big(\displaystyle \frac{MittlereGroeße(m)}{Zweidrittelkonstante_{fmk}(m)}\Big)^3}}
 \label{eq:sqifmk}
 \end{equation}
-Isis verwendet an dieser Stelle wieder eine Zweidrittelkonstante aus Tabelle \ref{tab:sqniveaufmkfactors}, um die Gewichtung des Korrekturfaktors zu regulieren. Die Größe des Systems ist ebenfalls von Bedeutung und wird in Form der Anzahl aller relevanten Codezeilen (RLOC) verwendet. Wie Usus.net diese Codezeilen ermitteln kann ist in Unter-Unterabschnitt \ref{subsubsec:rloc} beschrieben.
+Isis verwendet an dieser Stelle wieder eine Zweidrittelkonstante aus Tabelle \ref{tab:sqniveaufmkfactors}, um die Gewichtung des Korrekturfaktors zu regulieren. Die Größe des Systems ist ebenfalls von Bedeutung und wird in Form der Anzahl aller relevanten Codezeilen (RLOC) verwendet. Wie Usus.net diese Codezeilen ermitteln kann ist in Unterabschnitt \ref{subsec:rloc} beschrieben.
 \begin{table}[htb]
 \centering
 \renewcommand{\arraystretch}{1.5}
@@ -1575,26 +1579,26 @@ Isis nimmt dabei eine abschließende Gewichtung anhand Tabelle \ref{tab:sqiweight
 In diesem Unterabschnitt wurden die Parameter beschrieben, mit denen Isis den Softwarequalitätsindex berechnet. Die nachfolgenden Unterabschnitte beschäftigen sich mit der Berechnung des SQI durch wie Usus.net.
 
 
-\subsection{Usus.net Berechnung}
-Nachdem in Unterabschnitt \ref{subsec:sqiparams} die Parameter und die Berechnungsvorschriften des Softwarequalitätsindex beschrieben wurden, beschäftigt sich dieser Unterabschnitt mit der tatsächlichen Berechnung in Usus.net. Der Namespace \texttt{andrena.Usus.net.Core.SQI} enthält die \texttt{Calculate}-Klasse, welche die Methode \texttt{SoftwareQualityIndex} enthält. Dieser Methode wird ein Objekt übergeben, das das \texttt{IParameterProvider}-Interface implementiert. Jenes Interface definiert \texttt{get}-Properties für alle Parameter, die für die Berechnung des SQI erforderlich sind. Listing \ref{listing:sqibigmethods} zeigt die beispielhafte Berechnung der \emph{Großen Methoden}.
+\section{Usus.net Berechnung}
+Nachdem in Abschnitt \ref{sec:sqiparams} die Parameter und die Berechnungsvorschriften des Softwarequalitätsindex beschrieben wurden, beschäftigt sich dieser Unterabschnitt mit der tatsächlichen Berechnung in Usus.net. Der Namespace \texttt{andrena.Usus.net.Core.SQI} enthält die \texttt{Calculate}-Klasse, welche die Methode \texttt{SoftwareQualityIndex} enthält. Dieser Methode wird ein Objekt übergeben, das das \texttt{IParameterProvider}-Interface implementiert. Jenes Interface definiert \texttt{get}-Properties für alle Parameter, die für die Berechnung des SQI erforderlich sind. Listing \ref{listing:sqibigmethods} zeigt die beispielhafte Berechnung der \emph{Großen Methoden}. Die Variable \texttt{parameters} enthält eine \texttt{IParameterProvider}-Referenz, über die die beiden Methoden \texttt{SqNiveau} und \texttt{SqNiveauCorrection} als Extension Methods aufgerufen werden können.
 \begin{lstlisting}[caption={Berechnung des SQI-Werts für Großen Methoden},label={listing:sqibigmethods}]
 return parameters.SqNiveau(m => m.BigMethods, 
 		Sqi.RelativeSizeBigMethods, Sqi.CalibrationBigMethods) 
      * parameters.SqNiveauCorrection(m => m.BigMethods, 
 		Sqi.MiddleSizeBigMethods, Sqi.CorrectionBigMethods);
 \end{lstlisting}
-Die Variable \texttt{parameters} enthält eine \texttt{IParameterProvider}-Referenz, über die die beiden Methoden \texttt{SqNiveau} und \texttt{SqNiveauCorrection} als Extension Methods aufgerufen werden können. Die \texttt{Sqi}-Klasse enthält für jede SQI-Metrik je ein Objekt vom Typ \texttt{RelativeSize}, \texttt{Calibration}, \texttt{MiddleSize} und \texttt{CorrectionCalibration}. Diese Typen repräsentieren die Metrik-abhängigen Berechnungen und Gewichtungen aus Unterabschnitt \ref{subsec:sqiparams}. Mit diesen Berechnungen lassen sich das Softwarequalitätsniveau sowie der Monolithkorrekturfaktor jeder SQI-Metrik bestimmen. Dessen Produkt kann anschließend aufsummiert werden um den Softwarequalitätsindex zu erhalten.
+Die \texttt{Sqi}-Klasse enthält für jede SQI-Metrik je ein Objekt vom Typ \texttt{RelativeSize}, \texttt{Calibration}, \texttt{MiddleSize} und \texttt{CorrectionCalibration}. Diese Typen repräsentieren die Metrik-abhängigen Berechnungen und Gewichtungen aus Abschnitt \ref{sec:sqiparams}. Mit diesen Berechnungen lassen sich das Softwarequalitätsniveau sowie der Monolithkorrekturfaktor jeder SQI-Metrik bestimmen. Dessen Produkt kann anschließend aufsummiert werden um den Softwarequalitätsindex zu erhalten.
 \paragraph{}
 Die Berechnung des SQI kann für jedes Objekt stattfinden, dessen Klasse das Interface \texttt{IParameterProvider} implementiert. In Unterabschnitt \ref{subsec:ususnetsqi} wurde das SQI-Fenster vorgestellt, welches das Ergebnis in Visual Studio präsentiert. Im ViewModel dieses Steuerelements, nämlich der Klasse \texttt{ViewModels.SQI}, wird für jeden Parameter ein \texttt{SqiParameter}-Objekt verwaltet. Diese Objekte werden direkt an die Oberfläche gebunden und in Form eines editierbaren \texttt{DataGrid}-Controls angezeigt. Eine Änderung eines Werts wird durch das Data Binding des ViewModels direkt in dem entsprechenden \texttt{SqiParameter}-Objekt vorgenommen. Die Parameter-Objekte werden über ein Objekt vom Typ \texttt{SqiParameters} erzeugt. Dieses Objekt beobachtet alle erzeugten Parameter und berechnet im Falle einer Änderung (entweder durch neue Metriken oder durch manuelle Eingabe den neuen SQI. Die \texttt{SqiParameters}-Klasse implementiert dafür das \texttt{IParameterProvider}-Interface. Über das Ereignis \texttt{SqiChanged} wird der neue Softwarequalitätsindex dann dem ViewModel und damit der View mitgeteilt.
 \paragraph{}
 Ein von Usus.net erstellter Metrikbericht in Form eines \texttt{MetricsReport}-Objekt enthält fast alle Daten, die für die Berechnung des SQI erforderlich sind. Im Folgenden wird die Berechnung der Parameter beschrieben, die im Rahmen der Usus.net Metrikberechnung aus Abschnitt \ref{sec:metriccalc} und der Metrikgewichtung aus Abschnitt \ref{sec:metricweighting} noch nicht beschrieben wurden.
 
-\subsubsection{Relevante Code-Zeilen}
-\label{subsubsec:rloc}
-Der ISIS-SQI verwendet eine einheitliche Größe für Codebasen, nämlich RLOC (engl. Relevant Lines Of Code). Die Anzahl aller Codezeilen in allen Code-Dokumenten ohne Kommentare und ohne Klammern werden dabei berücksichtigt. Der Wert wird in dem \texttt{CommonReportKnowledge}-Objekt des Metrikberichts gespeichert (siehe Abschnitt \ref{sec:ususobjectmodel}). \emph{CCI Metadata} erlaubt es die Zeileninformationen der CIL-Anweisungen innerhalb einer Methoden mithilfe der \texttt{PeReader}-Klasse zu bestimmen. In Unterabschnitt \ref{subsec:methodlength} wurde beschrieben, dass Usus.net auf diese Weise auch die Methodenlänge eine Methode berechnet. Die Zeileninformationen von Methoden- und Klassendefinitionen können über das \texttt{PeReader}-Objekt nicht ermittelt werden. \emph{CCI Metadata} kann die Anzahl der relevanten Codezeilen also nicht direkt aus einer Assembly bestimmen. Aus diesem Grund versucht Usus.net den RLOC-Wert auszurechnen. Die Methodenlänge bildet dabei die Grundlage. Für jede Methode im \texttt{MetricsReport}-Objekt addiert Usus.net die Methodenlänge sowie eine weitere Zeile (Methodendefiniton) zu dem \texttt{RelevantLinesOfCode}-Property in dem \texttt{CommonReportKnowledge}-Objekt. Für jede Klasse wird dieses Property um zwei weitere Zeilen erhöht, welche für die Klassendefinition sowie die Namespace-Zugehörigkeit stehen. Mehrzeilige Methodensignaturen und Klassendefinitionen werden also trotzdem mit nur jeweils einer Zeile gerechnet. Die \texttt{using}-Angaben am Anfang jeder Quellcode-Datei werden ignoriert.
+\subsection{Relevante Code-Zeilen}
+\label{subsec:rloc}
+Der Isis-SQI verwendet eine einheitliche Größe für Codebasen, nämlich RLOC (engl. Relevant Lines Of Code). Die Anzahl aller Codezeilen in allen Code-Dokumenten ohne Kommentare und ohne Klammern werden dabei berücksichtigt. Der Wert wird in dem \texttt{CommonReportKnowledge}-Objekt des Metrikberichts gespeichert (siehe Abschnitt \ref{sec:ususobjectmodel}). \emph{CCI Metadata} erlaubt es die Zeileninformationen der CIL-Anweisungen innerhalb einer Methoden mithilfe der \texttt{PeReader}-Klasse zu bestimmen. In Unterabschnitt \ref{subsec:methodlength} wurde beschrieben, dass Usus.net auf diese Weise auch die Methodenlänge eine Methode berechnet. Die Zeileninformationen von Methoden- und Klassendefinitionen können über das \texttt{PeReader}-Objekt nicht ermittelt werden. \emph{CCI Metadata} kann die Anzahl der relevanten Codezeilen also nicht direkt aus einer Assembly bestimmen. Aus diesem Grund versucht Usus.net den RLOC-Wert auszurechnen. Die Methodenlänge bildet dabei die Grundlage. Für jede Methode im \texttt{MetricsReport}-Objekt addiert Usus.net die Methodenlänge sowie eine weitere Zeile (Methodendefiniton) zu dem \texttt{RelevantLinesOfCode}-Property in dem \texttt{CommonReportKnowledge}-Objekt. Für jede Klasse wird dieses Property um zwei weitere Zeilen erhöht, welche für die Klassendefinition sowie die Namespace-Zugehörigkeit stehen. Mehrzeilige Methodensignaturen und Klassendefinitionen werden also trotzdem mit nur jeweils einer Zeile gerechnet. Die \texttt{using}-Angaben am Anfang jeder Quellcode-Datei werden ignoriert.
 
-\subsubsection{Compiler-Warnungen}
-Wenn beim Kompilieren Warnungen entstehen, werden diese ebenfalls in die Berechnung des ISIS-SQI einbezogen. \texttt{Usus.net.Core} kann die Anzahl dieser Warnungen allerdings nicht bestimmen, da diese nicht in der kompilierten Assembly hinterlegt sind. Eine Visual Studio Erweiterung in Form eines \emph{VSPackage} kann auf die Warnungen und Fehler eines Build-Vorgangs zugreifen. Wie in Listing \ref{listing:compilerwarnings} gezeigt, ist dies über das \texttt{DTE2}-Objekt möglich, welches über das Property \texttt{MasterObjekt} der \texttt{DtAwareToolWindow}-Klasse veröffentlicht wird.
+\subsection{Compiler-Warnungen}
+Wenn beim Kompilieren Warnungen entstehen, werden diese ebenfalls in die Berechnung des Isis-SQI einbezogen. \texttt{Usus.net.Core} kann die Anzahl dieser Warnungen allerdings nicht bestimmen, da diese nicht in der kompilierten Assembly hinterlegt sind. Eine Visual Studio Erweiterung in Form eines \emph{VSPackage} kann auf die Warnungen und Fehler eines Build-Vorgangs zugreifen. Wie in Listing \ref{listing:compilerwarnings} gezeigt, ist dies über das \texttt{DTE2}-Objekt möglich, welches über das Property \texttt{MasterObjekt} der \texttt{DtAwareToolWindow}-Klasse veröffentlicht wird.
 \begin{lstlisting}[caption={Anzahl der Compiler-Warnungen bestimmen},label={listing:compilerwarnings}]
 ErrorList list = MasterObjekt.ToolWindows.ErrorList;
 for (long index = 1; index <= list.ErrorItems.Count; index++)
@@ -1607,13 +1611,13 @@ for (long index = 1; index <= list.ErrorItems.Count; index++)
 \end{lstlisting}
 Da das Usus.net SQI-Fenster ebenfalls eine Unterklasse von \texttt{BuildAwareToolWindowPane} ist, können die Warnungen von dem Fenster bestimmt werden. Warnungen und Fehler werden von Visual Studio in dem Fehlerliste-Fenster angezeigt. Über alle diese Warnungen und Fehler kann iteriert werden, wobei die Unterscheidung zwischen Fehler und Warnung mithilfe der \texttt{ErrorLevel}-Eigenschaft vorgenommen werden kann. Das Fehlerlevel \texttt{vsBuildErrorLevelHigh} steht für einen Fehler, während \texttt{vsBuildErrorLevelMedium} oder \texttt{vsBuildErrorLevelLow} eine Warnung repräsentieren. Alle Warnungen können somit aufsummiert und an das \texttt{SqiParameters}-Objekt des ViewModel weitergeben werden. Dazu implementiert das SQI-Fenster das Interface \texttt{IKnowSqiDetails}. Bei der Erzeugung des ViewModels registriert sich das Fenster bei dem ViewModel, sodass im Falle einer SQI-Berechnung auch die Werte, die nur vom \texttt{VSPackage} bestimmt werden können, ermittelt werden können. Durch das \texttt{IKnowSqiDetails}-Interface kann das Property \texttt{CompilerWarnings} des Fensters vom ViewModel aufgerufen werden, ohne das das ViewModel abhängig von dem \texttt{VSPackage} ist.
 
-\subsubsection{Testabdeckung}
-Usus.net bezieht bei der Berechnung des ISIS-SQI auch die prozentuale Testabdeckung mit ein. Dieser Wert wird von einem Test-Runner ermittelt, der sich in Visual Studio integriert. Das Ergebnis kann nicht aus einer Assembly allein bestimmt werden. Genau wie die Anzahl der Compiler-Warnungen muss die Testabdeckung von dem \texttt{VSPackage} des SQI-Fenster bestimmt werden. Anschließend kann der Wert wieder über das \texttt{IKnowSqiDetails}-Interface an das \texttt{SqiParameters}-Objekt des ViewModel übergeben werden. Da Visual Studio in der Version Professional die Analyse der Code Coverage nicht unterstützt, muss ein anderes Werkzeug genutzt werden. Usus.net müsste also in der Lage sein, unabhängig vom verwendeten Werkzeug die Testabdeckung eines Projekts zu extrahieren. Dies ist nur möglich wenn Usus.net die Formate, in denen die einzelnen Code Coverage Tools ihr Ergebnis speichern, analysieren kann.
-\paragraph{}
-Im Rahmen dieser Master-Thesis wurden diese Analysen nicht implementiert. Die Testabdeckung muss daher im SQI-Fenster der aktuellen Version von Usus.net noch von Hand eingegeben werden.
+\subsection{Testabdeckung}
+Usus.net bezieht bei der Berechnung des Isis-SQI auch die prozentuale Testabdeckung mit ein. Dieser Wert wird von einem Test-Runner ermittelt, der sich in Visual Studio integriert. Das Ergebnis kann nicht aus einer Assembly allein bestimmt werden. Genau wie die Anzahl der Compiler-Warnungen muss die Testabdeckung von dem \texttt{VSPackage} des SQI-Fenster bestimmt werden. Anschließend kann der Wert wieder über das \texttt{IKnowSqiDetails}-Interface an das \texttt{SqiParameters}-Objekt des ViewModel übergeben werden. Da Visual Studio in der Version Professional die Analyse der Code Coverage nicht unterstützt, muss ein anderes Werkzeug genutzt werden. Usus.net müsste also in der Lage sein, unabhängig vom verwendeten Werkzeug die Testabdeckung eines Projekts zu extrahieren. Dies ist nur möglich wenn Usus.net die Formate, in denen die einzelnen Code Coverage Tools ihr Ergebnis speichern, analysieren kann. Im Rahmen dieser Master-Thesis wurden diese Analysen nicht implementiert. Die Testabdeckung muss daher im SQI-Fenster der aktuellen Version von Usus.net noch von Hand eingegeben werden.
 
 
-\section{Metrik-Veränderung}
+\section{Veränderung}
+Um die Veränderung der Softwarequalität zu beobachten, müssen die Metriken bei jedem Kompiliervorgang gespeichert werden. Anschließend können die neusten Metriken mit den vorherigen Metriken verglichen werden. Auf diese Weise könnten Veränderung betrachtet und eine eventuelle Verbesserung der Qualität festgestellt werden. Bei den betrachteten Metriken handelt es sich um die Werte, die im Usus.net Cockpit-Fenster angezeigt werden, sowie dem SQI-Wert. Die Clean Code Metrik von Usus.net wird damit ebenfalls berücksichtigt, da die Verteilungsparameter auch in der Cockpit-Ansicht angezeigt werden.
+
 \textcolor[rgb]{1,0,0}{todo}
 
 
@@ -1644,7 +1648,10 @@ PLINQ is faster than task for every assembly
 \chapter{Zusammenfassung}
 \textcolor[rgb]{1,0,0}{todo}
 Use Cases erfüllt, bla bla
+Alle User Stories erfüllt. Oder?
 Graphen Visualisierung weggelassen
+Nur Analyse einer Verteilungsfunktion
+keine Testcoverage Ermittlung (also auch keine CRAP-Metrik und kein vollständig automatischer SQI)
 
 
 
