@@ -287,37 +287,43 @@ Was die Abnahmekriterien jeder Anwendererzählung betrifft, so wurde auch hier ke
 
 
 \chapter{Vorgehensweise}
-Nach dem die Anforderungen an das System, das in dieser Masther-Thesis entwickelt werden soll, in Kapitel \ref{chap:requirements} definiert wurden, wird in diesem Kapitel die grobe Vorgehensweise beschrieben. Dabei wird eine grobe Zeitplanung vorgestellt. Dieses Kapitel gibt damit eine Antwort auf die Frage, wann die Anforderungen realisiert werden sollen. Abbildung \ref{fig:plan_table} zeigt die zeitliche Aufteilung der Master-Thesis, während Abbildung \ref{fig:plan_gantt} das dazugehörige Gant-Chart darstellt. Die Thesis besteht aus einem praktischen und einen theoretischen Teil. Beide Teile überlagern sich, sodass eine Dokumentation der Implementierung zeitnah erfolgen kann und keine große Schreibphase gegen Ende des sechsmonatigen Zeitrahmen notwendig ist.
+Nach dem die Anforderungen an das System, das in dieser Masther-Thesis entwickelt werden soll, in Kapitel \ref{chap:requirements} definiert wurden, wird in diesem Kapitel die Vorgehensweise beschrieben. Dieses Kapitel gibt damit eine Antwort auf die Frage, wann die Anforderungen realisiert werden sollen. Dabei wird zuerst eine grobe Zeitplanung vorgestellt, die zu Beginn der Thesis erstellt wurde. Anschließend wird dieser ursprüngliche Plan mit der tatsächlichen zeitlichen Durchführung verglichen, dessen Plan gegen Ende der Thesis erstellt wurde. Abbildung \ref{fig:planning1} zeigt die zeitliche Aufteilung der Aufgaben zu Beginn der Master-Thesis und nimmt eine Aufteilung in einen praktischen und einen theoretischen Teil vor. Beide Teile überlagern sich, sodass eine Dokumentation der Implementierung zeitnah erfolgen kann und keine große Schreibphase gegen Ende des sechsmonatigen Zeitrahmen notwendig ist.
 \begin{figure}[h]
 	\centering
-		\includegraphics[width=15cm]{images/planningTable.png}
-	\caption{Projektplan Tabelle}
-	\label{fig:plan_table}
-\end{figure}
-\begin{figure}[h]
-	\centering
-		\includegraphics[width=15cm]{images/planningGantt.png}
-	\caption{Projektplan Gantt-Chart}
-	\label{fig:plan_gantt}
+		\includegraphics[width=15cm]{images/planning1.png}
+	\caption{Ursprünglicher Projektplan}
+	\label{fig:planning1}
 \end{figure}
 
 
 \section{Praktischer Teil}
-Der praktische Teil besteht aus einer Evaluationsphase und der eigentlichen Implementierungsphase. Während der Evaluierung werden verschiedene Technologien betrachtet, mit denen eine statische Code-Analyse durchgeführt werden kann. Das Ergebnis der Evaluierung wird die Grundlage der nächsten Phase darstellen. In der zweiten Phase werden die User Stories aus Abschnitt \ref{sec:productbacklog} im Rahmen der Visual Studio-Erweiterung zur statischen Code-Analyse in fünf zweiwöchigen (10 Tage) Sprints implementiert.
-Sprint 1 (16.5.12 - 29.5.12)
-Sprint 2 (1.6.12 - 14.6.12)
-Sprint 3 (19.6.12 - 2.7.12)
-Sprint 4 (9.7.12 - 20.7.12)
-Sprint 5 (1.8.12 - 14.8.12)
+Der praktische Teil besteht aus einer Evaluationsphase und der eigentlichen Implementierungsphase. Während der Evaluierung werden verschiedene Technologien betrachtet, mit denen eine statische Code-Analyse durchgeführt werden kann. Das Ergebnis der Evaluierung wird die Grundlage der nächsten Phase darstellen. In der zweiten Phase werden die User Stories aus Abschnitt \ref{sec:productbacklog} in fünf zweiwöchigen (10 Tage) Sprints implementiert.
+\begin{description}
+\item[Sprint 1] 16.05.12 bis 29.05.12
+\item[Sprint 2] 01.06.12 bis 14.06.12
+\item[Sprint 3] 19.06.12 bis 02.07.12
+\item[Sprint 4] 05.07.12 bis 18.07.12
+\item[Sprint 5] 01.08.12 bis 14.08.12
+\end{description}
+Nach jedem Sprint soll eine funktionstüchtige Version der Visual Studio-Erweiterung zur statischen Code-Analyse vorliegen. Außerdem folgen allen Sprints Phasen der schriftlichen Zusammenfassung. Diese Phasen fassen die während des Sprints erstellten Notizen in Form der vorliegenden Ausarbeitung zusammen.
 
 
 \section{Theoretischer Teil}
 Der theoretische Teil entspricht hauptsächlich der Dokumentation aller Ergebnisse und deren Beschreibung in Form der schriftlichen Ausarbeitung dieser Master-Thesis. So werden in einer Planungsphase zunächst Grundlagen (Kapitel \ref{chap:basics}) beschrieben, sowie eine agile Anforderungsanalyse (Kapitel \ref{chap:requirements}) durchgeführt. Außerdem wird das Usus-Programm, dessen Funktionsumfang einen maßgeblichen Einfluss auf das zu entwickelnde System haben soll, näher betrachtet und dessen Metriken beschrieben (Kapitel \ref{chap:usus}). Anschließend soll das Ergebnis der Evaluierungsphase beschrieben werden (Kapitel \ref{chap:techeval}), bevor die tatsächlichen Sprints in Form von zwei-tägigen schriftlichen Zusammenfassungen abgeschlossen werden. Nach der Zusammenfassung des vierten Sprints soll eine Fallstudio auf Basis eines andrena Kurs zum Thema Refactoring durchgeführt werden. Bei diesem Kurs soll das in dem praktischen Teil zu entwickelnde System eingesetzt und ermittelt werden, wie gut das Werkzeug einen Entwickler unterstützen kann. Unmittelbar vor dem fünften und vorläufig letzten Sprint soll eine Analyse von statischen Verteilungen der Metrik-Werte sowie deren Bedeutung erfolgen.
+
+
+\section{Tatsächlicher Ablauf}
+Nach dem ersten Sprint bestand Usus.net nur aus einem Kommandozeilenwerkzeug, welches Assemblies einlesen und deren Methoden analysieren konnte. In der anschließenden Zusammenfassung sind große Teile von Kapitel \ref{chap:ususnet} entstanden. Der zweite Sprint hat eben dieses Kommandozeilenwerkzeug um die Fähigkeit Klassen zu analysieren erweitert. Kapitel \ref{chap:ususnet} konnte danach abgeschlossen werden. Erst nach dem dritten Sprint war Usus.net zum ersten Mal als Erweiterung in Visual Studio lauffähig und führte die Analysen bei jedem Build-Vorgang durch. Die daraus resultierende Zusammenfassung war aufwendiger als erwartet und dauerte vier Tage. Dabei ist Kapitel \ref{chap:ususnetvsext} entstanden. Der darauf folgende vierte Sprint musste daher um eine halbe Woche verschoben werden. Der neue Zeitraum dieses Sprints ist 09.07.12 bis 20.07.12.
 \paragraph{}
-Da nach dem dritten Sprint eine genauere Vorstellung der Use Cases \emph{Clean Code Hilfe bekommen} und \emph{Software-Qualität interpretieren} existierte, wurde der Plan aktualisiert. Im Rahmen dieser Aktualisierung wurde der vierte Sprint um eine halbe Woche verschoben.
-
-\textcolor[rgb]{1,0,0}{TODO: was wurde noch verschoben?}
-
+Nach diesem vierten Sprint hatte Usus.net als Visual Studio Erweiterung die Fähigkeit eine Clean Code Metrik sowie den Softwarequalitätsindex zu bestimmen. Ein besseres Verständnis der Use Cases \emph{Clean Code Hilfe bekommen} und \emph{Software-Qualität interpretieren} hat dazu geführt, dass die für den fünften Sprint geplanten User Stories aus Abschnitt \ref{sec:productbacklog} bereits im vierten Sprint implementiert werden konnten. Die anschließende Zusammenfassung dieses Sprints dauerte dadurch länger. Für den Clean Code-Teil, der in Kapitel \ref{chap:cleancodesupport} beschrieben wird, und den SQI-Teil, der in Kapitel \ref{chap:andrenasqi} vorgestellt wird, wurden jeweils drei Tage benötigt. Da für diese Zusammenfassung aber nur zwei Tage eingeplant waren, wurde das "`Refactoring"'-Fallbeispiel geringer priorisiert und als Teil des fünften Sprints vorgenommen. Dieser fünfte und letzte Sprint brauchte daraufhin nicht wieder verschoben zu werden.
+\paragraph{}
+Während dem fünften Sprint wurden einige Fehler von Usus.net behoben, sowie die Performance gemessen und verbessert. Außerdem wurde das andrena Fallbeispiel durchgeführt. \textcolor[rgb]{1,0,0}{TODO: was? wo?} Die Zusammenfassungen der Performance-Messungen und des Fallbeispiels konnten in jeweils zwei Tagen abgeschlossen werden. Da die fünftägige Analyse der Metrik-Verteilungen als Teil der Clean Code Metrik bereits im vierten Sprint implementiert werden konnte, können diese Tage gespart und die zeitliche Verspätung wieder aufgeholt werden. Abbildung \ref{fig:planning2} stellt den tatsächlichen Projektablauf grafisch dar.
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=15cm]{images/planning2.png}
+	\caption{Tatsächlicher Projektablauf}
+	\label{fig:planning2}
+\end{figure}
 
 
 
@@ -1209,6 +1215,7 @@ Usus.net nutzt das Verification Framework um die eigene Metrikberechnung und das
 
 
 \chapter{Usus.net als Visual Studio Erweiterung}
+\label{chap:ususnetvsext}
 Abbildung \ref{fig:architecture2} zeigt die Verwendung der in Kapitel \ref{chap:ususnet} beschrieben Funktionen der \texttt{Usus.net.Core}-Komponente. \texttt{Usus.net.Core} steht als Bibliothek in Form einer Assembly zur Verfügung und wird von der Bibliothek \texttt{Usus.net.View} genutzt. Diese Bibliothek enthält alle grafischen Oberflächen von Usus.net und wird von der \texttt{Usus.net}-Komponente in Form einer Visual Studio Erweiterung verwendet. Die Erweiterung stellt dann nur noch die Fenster-Infrastruktur für die Usus.net-Oberflächen zur Verfügung. Usus.net ist kein Addin im Sinne von Unterabschnitt \ref{subsec:visualstudio}, sondern eine Erweiterung. In diesem Kapitel werden zunächst die Steuerelemente von \texttt{Usus.net.View} vorgestellt. Anschließend wird auf die Integration mit Visual Studio eingegangen.
 
 
