@@ -41,21 +41,22 @@ namespace andrena.Usus.net.View.Hub
         private void StartAnalysis(IEnumerable<string> files)
         {
             AnalysisStarted();
+            var fileArray = files.ToArray();
             ThreadPool.QueueUserWorkItem((c) =>
             {
-                var metrics = AnalyzeProjectFilesOrNotifyError(files);
+                var metrics = AnalyzeProjectFilesOrNotifyError(fileArray);
                 MetricsReady(metrics);
             });
         }
 
-        private PreparedMetricsReport AnalyzeProjectFilesOrNotifyError(IEnumerable<string> files)
+        private PreparedMetricsReport AnalyzeProjectFilesOrNotifyError(string[] files)
         {
             return files.Any() ? AnalyzeProjectFiles(files) : NotifyError();
         }
 
-        private PreparedMetricsReport AnalyzeProjectFiles(IEnumerable<string> files)
+        private PreparedMetricsReport AnalyzeProjectFiles(string[] files)
         {
-            MetricsReport metrics = Analyze.PortableExecutable(files.ToArray());
+            MetricsReport metrics = Analyze.PortableExecutable(files);
             return new PreparedMetricsReport(metrics);
         }
 

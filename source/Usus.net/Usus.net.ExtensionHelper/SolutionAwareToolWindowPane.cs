@@ -12,7 +12,7 @@ namespace andrena.Usus.net.ExtensionHelper
         }
 
         protected EnvDTE.Solution RawSolution { get { return MasterObjekt.Solution; } }
-        protected IEnumerable<EnvDTE.Project> RawProjects { get { return RawSolution.Projects.Cast<EnvDTE.Project>(); } }
+        protected IEnumerable<EnvDTE.Project> RawProjects { get { return RawSolution.AllProjects(); } }
 
         protected IEnumerable<Project> Projects
         {

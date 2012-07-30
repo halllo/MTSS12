@@ -24,8 +24,8 @@ namespace andrena.Usus.net.ExtensionHelper
         private IEnumerable<string> FindCreatedFiles()
         {
             return from p in Projects
-                   where p.HasLatestOutputAssembly
-                   select p.LatestOutputAssembly().FullName;
+                   where p.OutputAssembly.Exists
+                   select p.OutputAssembly.FullName;
         }
 
         protected CompilerErrors GetErrors()
@@ -43,6 +43,7 @@ namespace andrena.Usus.net.ExtensionHelper
                 AddUpErrors(errors, list.ErrorItems.Item(index));
             }
         }
+
         private void AddUpErrors(CompilerErrors errors, ErrorItem item)
         {
             switch (item.ErrorLevel)
