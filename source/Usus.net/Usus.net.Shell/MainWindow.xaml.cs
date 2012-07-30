@@ -45,6 +45,7 @@ namespace andrena.Usus.net.Shell
         private View.ViewModels.SQI.SQI CreateSQIViewModel()
         {
             var sqi = new View.ViewModels.SQI.SQI { Dispatchable = SQI };
+            sqi.Details = new SqiDeatils();
             sqi.RegisterHub(ViewModel.Hub);
             return sqi;
         }

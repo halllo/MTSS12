@@ -31,7 +31,7 @@ namespace andrena.Usus.net.View.ViewModels
 
         private void OnAnalysisFinished(PreparedMetricsReport m)
         {
-            AnalysisFinished(m);
+            if (m != null) AnalysisFinished(m);
             Dispatch(() =>
             {
                 AnalysisRunning = false;

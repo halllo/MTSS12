@@ -26,7 +26,7 @@ namespace andrena.Usus.net.View.Hub
         public IEnumerable<MethodMetricsReport> MethodLengthHotspots { get; private set; }
         public IEnumerable<TypeMetricsReport> NumberOfNonStaticPublicFieldsHotspots { get; private set; }
         public IEnumerable<NamespaceMetricsReport> NumberOfNamespacesInCycleHotspots { get; private set; }
-        
+
         public PreparedMetricsReport(MetricsReport metrics)
         {
             Report = metrics;
