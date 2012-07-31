@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 
 namespace andrena.Usus.net.ExtensionHelper
@@ -11,10 +12,16 @@ namespace andrena.Usus.net.ExtensionHelper
 
         internal static bool IsValid(EnvDTE.Project project)
         {
-            bool hasProperties = project.Properties != null;
-            bool hasName = !string.IsNullOrEmpty(project.FullName);
-            bool hasFullPath = project.HasProperty("FullPath");
-            return hasProperties && hasName && hasFullPath;
+            try
+            {
+                return project.Properties != null 
+                    && !string.IsNullOrEmpty(project.FullName) 
+                    && project.HasProperty("FullPath");
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         internal Project(EnvDTE.Project project)

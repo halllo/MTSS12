@@ -110,6 +110,8 @@
     <Compile Include="ViewModels\SQI\SqiParameterType.cs" />
     <Compile Include="ViewModels\SQI\SqiParameters.cs" />
     <Compile Include="ViewModels\TrueToVisibleConverter.cs" />
+    <Compile Include="ViewModels\ValueInTime.cs" />
+    <Compile Include="ViewModels\ValueInTimeToColorConverter.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
     <Page Include="CleanCode.xaml">
       <SubType>Designer</SubType>

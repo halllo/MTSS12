@@ -1,52 +1,31 @@
+using System;
+using andrena.Usus.net.Core.Helper;
 
 namespace andrena.Usus.net.View.ViewModels.Cockpit
 {
     public class CockpitEntry : ViewModel
     {
-        public string Metric { get; set; }
+        public string Metric { get; private set; }
+        public ValueInTime<double> Average { get; private set; }
+        public ValueInTime<int> Total { get; private set; }
+        public ValueInTime<int> Hotspots { get; private set; }
+        public ValueInTime<double> Distribution { get; private set; }
 
-        private string _Average;
-        public string Average
+        public CockpitEntry(string metric, Func<int, string> totalToString)
         {
-            get { return _Average; }
-            set
-            {
-                _Average = value;
-                Changed(() => Average);
-            }
+            Metric = metric;
+            Average = new ValueInTime<double>(0, d => d.Percent());
+            Total = new ValueInTime<int>(0, totalToString);
+            Hotspots = new ValueInTime<int>(0);
+            Distribution = new ValueInTime<double>(0, d => d.Value());
         }
 
-        private string _Total;
-        public string Total
+        public void Update(double average, int total, int hotspots, double distribution)
         {
-            get { return _Total; }
-            set
-            {
-                _Total = value;
-                Changed(() => Total);
-            }
-        }
-
-        private string _Hotspots;
-        public string Hotspots
-        {
-            get { return _Hotspots; }
-            set
-            {
-                _Hotspots = value;
-                Changed(() => Hotspots);
-            }
-        }
-
-        private string _Distribution;
-        public string Distribution
-        {
-            get { return _Distribution; }
-            set
-            {
-                _Distribution = value;
-                Changed(() => Distribution);
-            }
+            Average.Update(average); Changed(() => Average);
+            Total.Update(total); Changed(() => Total);
+            Hotspots.Update(hotspots); Changed(() => Hotspots);
+            Distribution.Update(distribution); Changed(() => Distribution);
         }
     }
 }

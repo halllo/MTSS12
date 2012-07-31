@@ -16,7 +16,8 @@
         </Grid.RowDefinitions>
         <ProgressBar Style="{StaticResource AnalysisProgress}"/>
         <DataGrid Grid.Row="1" Style="{StaticResource DisplayGrid}" CanUserSortColumns="False"
-                  ItemsSource="{Binding Entries}"/>
+                  ItemsSource="{Binding Entries}" CellStyle="{StaticResource ImprovementAwareCell}">
+        </DataGrid>
         <Border Grid.Row="2" Background="LightGray">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 1 10 0">
                 <TextBlock Text="{Binding Rloc}" VerticalAlignment="Center"/>

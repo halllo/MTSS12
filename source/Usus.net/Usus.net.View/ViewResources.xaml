@@ -6,6 +6,7 @@
                     >
 
     <vm:TrueToVisibleConverter x:Key="TrueToVisibile"/>
+    <vm:ValueInTimeToColorConverter x:Key="ValueToColor"/>
 
     <Style x:Key="AnalysisProgress" TargetType="ProgressBar">
         <Setter Property="IsIndeterminate" Value="True"/>
@@ -23,7 +24,11 @@
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Margin" Value="0"/>
     </Style>
-    
+
+    <Style x:Key="ImprovementAwareCell" TargetType="DataGridCell">
+        <Setter Property="Foreground" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Converter={StaticResource ValueToColor}}"/>
+    </Style>
+
     <Style x:Key="BottomTabs" TargetType="TabControl">
         <Setter Property="TabStripPlacement" Value="Bottom"/>
         <Setter Property="BorderThickness" Value="1 0 1 1"/>
@@ -31,9 +36,9 @@
 
     <ControlTemplate x:Key="NoChartPadding" TargetType="dvc:Chart">
         <Border Background="{TemplateBinding Background}" 
-                    BorderBrush="{TemplateBinding BorderBrush}" 
-                    BorderThickness="{TemplateBinding BorderThickness}" 
-                    Padding="{TemplateBinding Padding}">
+                BorderBrush="{TemplateBinding BorderBrush}" 
+                BorderThickness="{TemplateBinding BorderThickness}" 
+                Padding="{TemplateBinding Padding}">
             <Grid>
                 <chartingprimitives:EdgePanel x:Name="ChartArea" Style="{TemplateBinding ChartAreaStyle}">
                     <Grid Canvas.ZIndex="-1" Style="{TemplateBinding PlotAreaStyle}" />

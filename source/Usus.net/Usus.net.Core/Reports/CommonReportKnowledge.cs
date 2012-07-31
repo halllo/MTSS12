@@ -30,10 +30,7 @@ namespace andrena.Usus.net.Core.Reports
 
         private static int LinesOfMethodDefintion(MethodMetricsReport method)
         {
-            if (method.DefaultConstructor && method.MethodLength == 0)
-                return 0;
-            else
-                return 1 + method.MethodLength;
+            return 1 + method.MethodLength;
         }
 
         internal void UpdateFor(TypeMetricsReport type)
