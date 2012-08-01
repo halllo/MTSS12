@@ -2,9 +2,9 @@ using System.Windows.Media;
 
 namespace andrena.Usus.net.View.ViewModels
 {
-    public class ValueInTimeToColorConverter : BindingConverter<ValueInTime, SolidColorBrush>
+    public class HigherValueIsBad : BindingConverter<ValueInTime, SolidColorBrush>
     {
-        public ValueInTimeToColorConverter()
+        public HigherValueIsBad()
         {
             Default = Brushes.Black;
             Converter = value =>

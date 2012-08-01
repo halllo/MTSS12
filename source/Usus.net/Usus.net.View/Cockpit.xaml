@@ -16,7 +16,32 @@
         </Grid.RowDefinitions>
         <ProgressBar Style="{StaticResource AnalysisProgress}"/>
         <DataGrid Grid.Row="1" Style="{StaticResource DisplayGrid}" CanUserSortColumns="False"
-                  ItemsSource="{Binding Entries}" CellStyle="{StaticResource ImprovementAwareCell}">
+                  ItemsSource="{Binding Entries}" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Metric" Binding="{Binding Metric}"/>
+                <DataGridTextColumn Header="Average" Binding="{Binding Average}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Foreground" Value="{Binding Average, Converter={StaticResource HigherValueIsBad}}"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Total" Binding="{Binding Total}"/>
+                <DataGridTextColumn Header="Hotspots" Binding="{Binding Hotspots}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Foreground" Value="{Binding Hotspots, Converter={StaticResource HigherValueIsBad}}"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Distribution" Binding="{Binding Distribution}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Foreground" Value="{Binding Distribution, Converter={StaticResource HigherValueIsGood}}"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+            </DataGrid.Columns>
         </DataGrid>
         <Border Grid.Row="2" Background="LightGray">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 1 10 0">

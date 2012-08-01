@@ -66,7 +66,7 @@ namespace andrena.Usus_net_EditorAdornment
         private UIElement GetPositionedCodeTag(ITextViewLine line, IWpfTextViewLineCollection textViewLines, Geometry geometry)
         {
             int lineNumber = _view.TextSnapshot.GetLineNumberFromPosition(line.Start.Position) + 1;
-            UIElement codeTagElement = CodeTag.ElementAtLine(lineNumber, GetFilename);
+            UIElement codeTagElement = CodeLine.ElementAt(lineNumber, GetFilename);
             PlaceVisualNextToGeometry(geometry, codeTagElement);
             return codeTagElement;
         }

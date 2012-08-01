@@ -81,6 +81,7 @@
     <Compile Include="ViewModels\Current\LineLocation.cs" />
     <Compile Include="ViewModels\Current\MethodAndTypeMetrics.cs" />
     <Compile Include="ViewModels\Distributions\Distributions.cs" />
+    <Compile Include="ViewModels\HigherValueIsBad.cs" />
     <Compile Include="ViewModels\Hotspots\Hotspot.cs" />
     <Compile Include="ViewModels\Hotspots\IDoubleClickable.cs" />
     <Compile Include="ExtensionPoints\IJumpToSource.cs" />
@@ -111,7 +112,7 @@
     <Compile Include="ViewModels\SQI\SqiParameters.cs" />
     <Compile Include="ViewModels\TrueToVisibleConverter.cs" />
     <Compile Include="ViewModels\ValueInTime.cs" />
-    <Compile Include="ViewModels\ValueInTimeToColorConverter.cs" />
+    <Compile Include="ViewModels\HigherValueIsGood.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
     <Page Include="CleanCode.xaml">
       <SubType>Designer</SubType>

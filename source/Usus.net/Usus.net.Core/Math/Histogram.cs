@@ -19,20 +19,29 @@ namespace andrena.Usus.net.Core.Math
         private void Initialize()
         {
             histogram = new MathNet.Numerics.Statistics.Histogram();
-            InitializeBins();
-            InitializeData();
-        }
-
-        private void InitializeBins()
-        {
-            var maxValue = data.Max();
-            for (int i = 0; i <= maxValue; i++)
-                histogram.AddBucket(new Bucket(-0.5 + i, 0.5 + i));
-        }
-
-        private void InitializeData()
-        {
+            InitializeBuckets();
             histogram.AddData(data);
+        }
+
+        private void InitializeBuckets()
+        {
+            foreach (var number in NumbersUpTo(MaxValueOf(data)))
+                AddNewBucketFor(number);
+        }
+
+        private void AddNewBucketFor(int number)
+        {
+            histogram.AddBucket(new Bucket(-0.5 + number, 0.5 + number));
+        }
+
+        private static int MaxValueOf(IEnumerable<double> data)
+        {
+            return (int)data.Max() + 1;
+        }
+
+        private static IEnumerable<int> NumbersUpTo(int maxValue)
+        {
+            return Enumerable.Range(0, maxValue);
         }
 
         public int BinCount

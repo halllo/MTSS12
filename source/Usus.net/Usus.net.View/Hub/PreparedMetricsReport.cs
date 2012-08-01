@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using andrena.Usus.net.Core.Hotspots;
 using andrena.Usus.net.Core.Math;
@@ -30,7 +31,14 @@ namespace andrena.Usus.net.View.Hub
         public PreparedMetricsReport(MetricsReport metrics)
         {
             Report = metrics;
+            ThrowExceptionWhenNoMetrics();
             Prepare();
+        }
+
+        private void ThrowExceptionWhenNoMetrics()
+        {
+            if (Report.CommonKnowledge.NumberOfClasses == 0)
+                throw new Exception("No metrics found. Consider analyzing a .NET library or executable.");
         }
 
         private void Prepare()
