@@ -104,6 +104,7 @@
     <Compile Include="Math\Histogram.cs" />
     <Compile Include="Math\GeometricalDistributionFitting.cs" />
     <Compile Include="Math\Distribution.cs" />
+    <Compile Include="Math\HistogramExtensions.cs" />
     <Compile Include="Math\IFittingReport.cs" />
     <Compile Include="Metrics\SourceCodeLocating.cs" />
     <Compile Include="Math\Distributions.cs" />

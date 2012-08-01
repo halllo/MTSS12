@@ -10,7 +10,7 @@ namespace andrena.Usus.net.Core.Math
         public GeometricalDistributionFitting(Histogram histogram)
         {
             this.histogram = histogram;
-            statistics = new DescriptiveStatistics(histogram.Data);
+            statistics = new DescriptiveStatistics(histogram.Numbers);
         }
 
         public double Parameter
