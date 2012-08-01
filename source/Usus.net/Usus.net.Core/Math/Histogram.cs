@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using MathNet.Numerics.Statistics;
-using Hist = MathNet.Numerics.Statistics.Histogram;
+using MathNetHistogram = MathNet.Numerics.Statistics.Histogram;
 
 namespace andrena.Usus.net.Core.Math
 {
     public class Histogram
     {
-        private Hist _histogram;
-        private readonly IEnumerable<int> _numbers; 
+        private MathNetHistogram _histogram;
+        private readonly IEnumerable<int> _numbers;
 
         public Histogram(IEnumerable<int> numbers)
         {
@@ -18,18 +18,15 @@ namespace andrena.Usus.net.Core.Math
 
         private void FillHistogram()
         {
-            _histogram = new Hist();
-            _histogram
-                .AddBuckets(For(Numbers))
-                .AddData(Numbers);
+            _histogram = new MathNetHistogram();
+            _histogram.AddBuckets(For(Numbers)).AddData(Numbers);
         }
 
         private static IEnumerable<Bucket> For(IEnumerable<double> numbers)
         {
             var biggestNumber = (int)numbers.Max() + 1;
-            return Enumerable
-                    .Range(0, biggestNumber)
-                    .Select(BucketWithTolerance);
+            return Enumerable.Range(0, biggestNumber)
+                .Select(BucketWithTolerance);
         }
 
         private static Bucket BucketWithTolerance(int number)
