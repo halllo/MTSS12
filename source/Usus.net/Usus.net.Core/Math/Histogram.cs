@@ -1,62 +1,56 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using andrena.Usus.net.Core.Helper;
 using MathNet.Numerics.Statistics;
+using Hist = MathNet.Numerics.Statistics.Histogram;
 
 namespace andrena.Usus.net.Core.Math
 {
     public class Histogram
     {
-        MathNet.Numerics.Statistics.Histogram histogram;
-        List<double> data;
+        private Hist _histogram;
+        private readonly IEnumerable<int> _numbers; 
 
-        public Histogram(IEnumerable<int> data)
+        public Histogram(IEnumerable<int> numbers)
         {
-            this.data = data.ToList(d => d * 1.0);
-            Initialize();
+            _numbers = numbers;
+            FillHistogram();
         }
 
-        private void Initialize()
+        private void FillHistogram()
         {
-            histogram = new MathNet.Numerics.Statistics.Histogram();
-            InitializeBuckets();
-            histogram.AddData(data);
+            _histogram = new Hist();
+            _histogram
+                .AddBuckets(For(Numbers))
+                .AddData(Numbers);
         }
 
-        private void InitializeBuckets()
+        private static IEnumerable<Bucket> For(IEnumerable<double> numbers)
         {
-            foreach (var number in NumbersUpTo(MaxValueOf(data)))
-                AddNewBucketFor(number);
+            var biggestNumber = (int)numbers.Max() + 1;
+            return Enumerable
+                    .Range(0, biggestNumber)
+                    .Select(BucketWithTolerance);
         }
 
-        private void AddNewBucketFor(int number)
+        private static Bucket BucketWithTolerance(int number)
         {
-            histogram.AddBucket(new Bucket(-0.5 + number, 0.5 + number));
-        }
-
-        private static int MaxValueOf(IEnumerable<double> data)
-        {
-            return (int)data.Max() + 1;
-        }
-
-        private static IEnumerable<int> NumbersUpTo(int maxValue)
-        {
-            return Enumerable.Range(0, maxValue);
+            const double tolerance = 0.5d;
+            return new Bucket(number - tolerance, number + tolerance);
         }
 
         public int BinCount
         {
-            get { return histogram.BucketCount; }
+            get { return _histogram.BucketCount; }
         }
 
         public double ElementsInBin(int index)
         {
-            return histogram[index].Count;
+            return _histogram[index].Count;
         }
 
-        public IEnumerable<double> Data
+        public IEnumerable<double> Numbers
         {
-            get { return data; }
+            get { return _numbers.Select(number => (double)number); }
         }
     }
 }
