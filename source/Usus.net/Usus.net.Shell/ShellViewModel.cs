@@ -13,6 +13,9 @@ namespace andrena.Usus.net.Shell
         public ShellViewModel()
         {
             Hub = ViewHub.Instance;
+
+            var differences = new View.ViewModels.DiagnoseDifferences { Dispatchable = new UIElement() };
+            differences.RegisterHub(Hub);
         }
 
         public void AnalyzeClicked(Window owner)

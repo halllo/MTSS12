@@ -27,7 +27,6 @@ namespace andrena.Usus.net.View.ViewModels.Cockpit
             Entries.Add(_MethodLength = new CockpitEntry("Method Length", n => n + " methods"));
             Entries.Add(_NonStaticPublicFields = new CockpitEntry("Non-Static Public Fields", n => n + " classes"));
             Entries.Add(_NamespacesWithCycles = new CockpitEntry("Namespaces with Cycles", n => n + " namespaces"));
-
         }
 
         protected override void AnalysisStarted()

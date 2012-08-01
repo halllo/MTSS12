@@ -106,6 +106,7 @@
     <Compile Include="ViewModels\Hotspots\HotspotsCollection.cs" />
     <Compile Include="ViewModels\Hotspots\MethodHotspot.cs" />
     <Compile Include="ViewModels\Hotspots\TypeHotspot.cs" />
+    <Compile Include="ViewModels\DiagnoseDifferences.cs" />
     <Compile Include="ViewModels\SQI\SQI.cs" />
     <Compile Include="ViewModels\SQI\SqiParameter.cs" />
     <Compile Include="ViewModels\SQI\SqiParameterType.cs" />
