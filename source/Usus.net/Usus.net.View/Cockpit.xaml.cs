@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
-using System.Windows.Threading;
 using andrena.Usus.net.Core.Reports;
+using andrena.Usus.net.View.Dialogs;
 
 namespace andrena.Usus.net.View
 {
@@ -15,16 +15,16 @@ namespace andrena.Usus.net.View
 
         private void DataGrid_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            var listDisplay = new View.ListDisplay();
+            var listDisplay = new ListDisplay();
             listDisplay.ItemClicked += i => ViewModel.JumpToMethod(i as MethodMetricsReport);
-            listDisplay.DataContext = CreateChangedMethods(listDisplay);
+            listDisplay.DataContext = CreateChangedMethods();
             listDisplay.Show();
         }
 
-        private ViewModels.ListDisplay<MethodMetricsReport> CreateChangedMethods(DispatcherObject listDisplay)
+        private ListDisplay<MethodMetricsReport> CreateChangedMethods()
         {
-            var methodChanges = new ViewModels.ListDisplay<MethodMetricsReport>("Changed Methods") { Dispatchable = listDisplay };
-            methodChanges.AddEntries(ViewModel.ChangedMethods);
+            var methodChanges = new ListDisplay<MethodMetricsReport>("Changed Methods since last build");
+            methodChanges.AddAll(ViewModel.ChangedMethods);
             return methodChanges;
         }
     }

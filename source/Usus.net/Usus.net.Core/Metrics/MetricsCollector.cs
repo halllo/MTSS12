@@ -17,7 +17,8 @@ namespace andrena.Usus.net.Core.Metrics
                 FullName = type.FullName(),
                 Namespaces = type.Namespaces(),
                 CompilerGenerated = type.IsGeneratedCode(),
-                NumberOfNonStaticPublicFields = NumberOfNonStaticPublicFields.Of(type),
+                NumberOfFields = NumberOfFields.Of(type),
+                NumberOfNonStaticPublicFields = NumberOfFields.NotStaticAndPublic(type),
                 NumberOfMethods = NumberOfMethods.Of(type),
                 DirectDependencies = DirectDependencies.Of(type, methods)
             };

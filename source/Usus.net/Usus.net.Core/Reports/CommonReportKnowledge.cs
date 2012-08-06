@@ -38,7 +38,7 @@ namespace andrena.Usus.net.Core.Reports
             if (!type.CompilerGenerated)
             {
                 NumberOfClasses++;
-                RelevantLinesOfCode += 2;
+                RelevantLinesOfCode += 2 + type.NumberOfFields;
             }
         }
 

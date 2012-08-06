@@ -46,7 +46,7 @@ namespace andrena.Usus.net.View.ViewModels.Hotspots
             Dispatch(() => SetCumulativeComponentDependencies(metrics.CumulativeComponentDependencyHotspots, metrics.Report));
             Dispatch(() => SetCyclomaticComplexities(metrics.CyclomaticComplexityHotspots));
             Dispatch(() => SetMethodLengths(metrics.MethodLengthHotspots));
-            Dispatch(() => SetNamespacesInCycle(metrics.NumberOfNamespacesInCycleHotspots));
+            Dispatch(() => SetNamespacesInCycle(metrics.NumberOfNamespacesInCycleHotspots, metrics.Report));
             Dispatch(() => SetNonStaticPublicFields(metrics.NumberOfNonStaticPublicFieldsHotspots, metrics.Report));
         }
 
@@ -73,10 +73,10 @@ namespace andrena.Usus.net.View.ViewModels.Hotspots
                 m => new HotspotMethodLength(m));
         }
 
-        private void SetNamespacesInCycle(IEnumerable<NamespaceMetricsReport> namespacesInCycle)
+        private void SetNamespacesInCycle(IEnumerable<NamespaceMetricsReport> namespacesInCycle, MetricsReport metrics)
         {
             SetHotspots(NamespacesInCycle, namespacesInCycle, 
-                m => new HotspotNamespaceInCycle(m));
+                m => new HotspotNamespaceInCycle(m, metrics));
         }
 
         private void SetNonStaticPublicFields(IEnumerable<TypeMetricsReport> nonStaticPublicFields, MetricsReport metrics)

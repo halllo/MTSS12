@@ -10,21 +10,21 @@ namespace andrena.Usus.net.Core.Reports
         public string FullName { get; internal set; }
         public IEnumerable<string> Namespaces { get; internal set; }
         public bool CompilerGenerated { get; internal set; }
+        public int NumberOfFields { get; internal set; }
         public int NumberOfNonStaticPublicFields { get; internal set; }
         public int NumberOfMethods { get; internal set; }
         public IEnumerable<string> DirectDependencies { get; internal set; }
         public IEnumerable<string> InterestingDirectDependencies { get; internal set; }
         public int CumulativeComponentDependency { get; internal set; }
 
-        public int ClassSize
-        {
-            get
-            {
-                return NumberOfMethods;
-            }
-        }
+        public int ClassSize { get { return NumberOfMethods; } }
 
         internal TypeMetricsReport()
         { }
+
+        public override string ToString()
+        {
+            return FullName;
+        }
     }
 }

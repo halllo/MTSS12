@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace andrena.Usus.net.View.ViewModels
+namespace andrena.Usus.net.View.Dialogs
 {
-    public class ListDisplay<T> : ViewModel
+    public class ListDisplay<T>
     {
         public string Header { get; private set; }
         public ObservableCollection<T> Entries { get; set; }
@@ -14,7 +14,7 @@ namespace andrena.Usus.net.View.ViewModels
             Entries = new ObservableCollection<T>();
         }
 
-        public void AddEntries(IEnumerable<T> entries)
+        public void AddAll(IEnumerable<T> entries)
         {
             if (entries != null)
                 foreach (var entry in entries) Entries.Add(entry);

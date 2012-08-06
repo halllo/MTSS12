@@ -71,7 +71,7 @@
     <Compile Include="ExtensionPoints\IKnowSqiDetails.cs" />
     <Compile Include="Hub\PreparedMetricsReport.cs" />
     <Compile Include="Hub\PreparedMetricsFactory.cs" />
-    <Compile Include="ListDisplay.xaml.cs">
+    <Compile Include="Dialogs\ListDisplay.xaml.cs">
       <DependentUpon>ListDisplay.xaml</DependentUpon>
     </Compile>
     <Compile Include="SQI.xaml.cs">
@@ -109,8 +109,10 @@
     <Compile Include="ViewModels\Hotspots\Hotspots.cs" />
     <Compile Include="ViewModels\Hotspots\HotspotsCollection.cs" />
     <Compile Include="ViewModels\Hotspots\MethodHotspot.cs" />
+    <Compile Include="ViewModels\Hotspots\NamespaceHotspot.cs" />
     <Compile Include="ViewModels\Hotspots\TypeHotspot.cs" />
-    <Compile Include="ViewModels\ListDisplay.cs" />
+    <Compile Include="Dialogs\ListDisplay.cs" />
+    <Compile Include="ViewModels\Hotspots\TypeJump.cs" />
     <Compile Include="ViewModels\SQI\SQI.cs" />
     <Compile Include="ViewModels\SQI\SqiParameter.cs" />
     <Compile Include="ViewModels\SQI\SqiParameterType.cs" />
@@ -143,7 +145,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ListDisplay.xaml">
+    <Page Include="Dialogs\ListDisplay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

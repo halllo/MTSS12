@@ -10,11 +10,7 @@ namespace andrena.Usus.net.View.ViewModels.Hotspots
         public IJumpToSource SourceLocating { private get; set; }
 
         public string CumulativeComponentDependenciesText { get; private set; }
-
-        public Hotspots()
-        {
-        }
-
+        
         protected override void AnalysisFinished(PreparedMetricsReport metrics)
         {
             base.AnalysisFinished(metrics);
