@@ -16,7 +16,8 @@
         </Grid.RowDefinitions>
         <ProgressBar Style="{StaticResource AnalysisProgress}"/>
         <DataGrid Grid.Row="1" Style="{StaticResource DisplayGrid}" CanUserSortColumns="False"
-                  ItemsSource="{Binding Entries}" AutoGenerateColumns="False">
+                  ItemsSource="{Binding Entries}" AutoGenerateColumns="False"
+                  MouseDoubleClick="DataGrid_MouseDoubleClick">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Metric" Binding="{Binding Metric}"/>
                 <DataGridTextColumn Header="Average" Binding="{Binding Average}">

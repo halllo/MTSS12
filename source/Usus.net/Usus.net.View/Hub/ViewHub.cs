@@ -20,13 +20,14 @@ namespace andrena.Usus.net.View.Hub
             }
         }
 
-        public event Action<PreparedMetricsReport> MetricsReady;
         public event Action AnalysisStarted;
-
+        public event Action<PreparedMetricsReport> MetricsReady;
         public PreparedMetricsReport MostRecentMetrics { get; private set; }
+        readonly PreparedMetricsFactory metricsFactory;
 
         private ViewHub()
         {
+            metricsFactory = new PreparedMetricsFactory();
             AnalysisStarted += () => analysisReady = false;
             MetricsReady += m => analysisReady = true;
             MetricsReady += m => MostRecentMetrics = m;
@@ -57,7 +58,7 @@ namespace andrena.Usus.net.View.Hub
         private PreparedMetricsReport AnalyzeProjectFiles(string[] files)
         {
             MetricsReport metrics = Analyze.PortableExecutable(files);
-            return new PreparedMetricsReport(metrics);
+            return metricsFactory.Prepare(metrics);
         }
 
         private PreparedMetricsReport NotifyError()

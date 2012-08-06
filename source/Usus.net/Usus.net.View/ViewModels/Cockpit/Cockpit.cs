@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using andrena.Usus.net.Core.Reports;
+using andrena.Usus.net.View.ExtensionPoints;
 using andrena.Usus.net.View.Hub;
+using andrena.Usus.net.View.ViewModels.Hotspots;
 
 namespace andrena.Usus.net.View.ViewModels.Cockpit
 {
@@ -15,8 +19,11 @@ namespace andrena.Usus.net.View.ViewModels.Cockpit
         CockpitEntry _NamespacesWithCycles;
 
         public ObservableCollection<CockpitEntry> Entries { get; private set; }
+        public IEnumerable<MethodMetricsReport> ChangedMethods { get; private set; }
         public string Rloc { get; private set; }
         public string LastMetricsTime { get; private set; }
+
+        public IJumpToSource SourceLocating { private get; set; }
 
         public Cockpit()
         {
@@ -34,6 +41,7 @@ namespace andrena.Usus.net.View.ViewModels.Cockpit
 
         protected override void AnalysisFinished(PreparedMetricsReport metrics)
         {
+            ChangedMethods = metrics.ChangedMethods;
             Dispatch(() =>
             {
                 SetACD(metrics);
@@ -106,6 +114,12 @@ namespace andrena.Usus.net.View.ViewModels.Cockpit
                 metrics.CommonKnowledge.NumberOfNamespaces,
                 metrics.NumberOfNamespacesInCycleHotspots.Count(),
                 metrics.NumberOfNamespacesInCycleHistogram.GeometricalFit.Parameter);
+        }
+
+        public void JumpToMethod(MethodMetricsReport method)
+        {
+            if (SourceLocating != null)
+                new MethodHotspot(method).OnDoubleClick(SourceLocating);
         }
     }
 }

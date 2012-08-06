@@ -35,6 +35,10 @@ namespace andrena.Usus.net.View.ViewModels.Distributions
 
         protected override void AnalysisStarted()
         {
+        }
+
+        private void ClearLists()
+        {
             ClassSizes.Clear();
             CumulativeComponentDependencies.Clear();
             CyclomaticComplexities.Clear();
@@ -45,6 +49,7 @@ namespace andrena.Usus.net.View.ViewModels.Distributions
 
         protected override void AnalysisFinished(PreparedMetricsReport metrics)
         {
+            Dispatch(ClearLists);
             ClassSizesText = Fit(HistogramOf(ClassSizes, metrics.ClassSizeHistogram));
             CumulativeComponentDependenciesText = Fit(HistogramOf(CumulativeComponentDependencies, metrics.CumulativeComponentDependencyHistogram));
             CyclomaticComplexitiesText = Fit(HistogramOf(CyclomaticComplexities, metrics.CyclomaticComplexityHistogram));

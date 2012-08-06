@@ -10,6 +10,7 @@ namespace andrena.Usus.net.View.Hub
     public class PreparedMetricsReport
     {
         public MetricsReport Report { get; private set; }
+        public MetricsReport PreviousReport { get; private set; }
         public MetricsHotspots Hotspots { get; private set; }
         public RatedMetrics Rated { get; private set; }
         public CommonReportKnowledge CommonKnowledge { get; private set; }
@@ -28,9 +29,15 @@ namespace andrena.Usus.net.View.Hub
         public IEnumerable<TypeMetricsReport> NumberOfNonStaticPublicFieldsHotspots { get; private set; }
         public IEnumerable<NamespaceMetricsReport> NumberOfNamespacesInCycleHotspots { get; private set; }
 
-        public PreparedMetricsReport(MetricsReport metrics)
+        public IEnumerable<MethodMetricsReport> ChangedMethods
+        {
+            get { return Changes.Of(Report).ComparedTo(PreviousReport); }
+        }
+
+        internal PreparedMetricsReport(MetricsReport metrics, MetricsReport lastMetrics)
         {
             Report = metrics;
+            PreviousReport = lastMetrics;
             ThrowExceptionWhenNoMetrics();
             Prepare();
         }

@@ -8,11 +8,12 @@ namespace andrena.Usus.net.View
 {
     public static class ViewFactory
     {
-        public static FrameworkElement CreateCockpit(ViewHub hub)
+        public static FrameworkElement CreateCockpit(ViewHub hub, IJumpToSource jumpToSource)
         {
             var cockpitView = new View.Cockpit();
             var cockpitViewModel = new ViewModels.Cockpit.Cockpit { Dispatchable = cockpitView };
             cockpitViewModel.RegisterHub(hub);
+            cockpitViewModel.SourceLocating = jumpToSource;
             cockpitView.DataContext = cockpitViewModel;
             return cockpitView;
         }

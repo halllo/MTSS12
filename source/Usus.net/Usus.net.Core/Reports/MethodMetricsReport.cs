@@ -29,5 +29,10 @@ namespace andrena.Usus.net.Core.Reports
 
         internal MethodMetricsReport()
         { }
+
+        public override string ToString()
+        {
+            return Signature;
+        }
     }
 }

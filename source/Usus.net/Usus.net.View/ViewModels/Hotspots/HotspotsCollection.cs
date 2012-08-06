@@ -27,6 +27,10 @@ namespace andrena.Usus.net.View.ViewModels.Hotspots
 
         protected override void AnalysisStarted()
         {
+        }
+
+        private void ClearLists()
+        {
             ClassSizes.Clear();
             CumulativeComponentDependencies.Clear();
             CyclomaticComplexities.Clear();
@@ -37,6 +41,7 @@ namespace andrena.Usus.net.View.ViewModels.Hotspots
 
         protected override void AnalysisFinished(PreparedMetricsReport metrics)
         {
+            Dispatch(ClearLists);
             Dispatch(() => SetClassSizes(metrics.ClassSizeHotspots, metrics.Report));
             Dispatch(() => SetCumulativeComponentDependencies(metrics.CumulativeComponentDependencyHotspots, metrics.Report));
             Dispatch(() => SetCyclomaticComplexities(metrics.CyclomaticComplexityHotspots));
