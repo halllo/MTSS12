@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using andrena.Usus.net.Core.AssemblyNavigation;
 
 namespace andrena.Usus.net.Core.Reports
 {
@@ -30,6 +31,7 @@ namespace andrena.Usus.net.Core.Reports
             return from m1 in _metrics.Methods
                    join m2 in metrics.Methods
                        on m1.Signature equals m2.Signature
+                   where !m1.CompilerGenerated
                    where MethodsDiffer(m1, m2)
                    select m1;
         }

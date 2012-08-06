@@ -17,7 +17,14 @@ namespace andrena.Usus.net.View.Dialogs
 
         private void ListBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            ItemClicked((sender as ListBox).SelectedItem);
+            var selectedItem = (sender as ListBox).SelectedItem;
+            if (selectedItem != null) TakeValue(selectedItem);
+        }
+
+        private void TakeValue(object selectedItem)
+        {
+            ItemClicked(selectedItem);
+            this.Close();
         }
     }
 }
