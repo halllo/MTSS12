@@ -92,6 +92,7 @@
     <Compile Include="Graphs\StronglyConntectedComponent.cs" />
     <Compile Include="Graphs\StronglyConntectedComponents.cs" />
     <Compile Include="Helper\DoubleExtensions.cs" />
+    <Compile Include="Helper\KeyValuePairExtensions.cs" />
     <Compile Include="Hotspots\MetricsHotspots.cs" />
     <Compile Include="Hotspots\MetricsRating.cs" />
     <Compile Include="Hotspots\RatedNamespaceMetrics.cs" />

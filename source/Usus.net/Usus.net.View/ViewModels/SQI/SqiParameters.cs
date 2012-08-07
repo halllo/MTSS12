@@ -5,11 +5,12 @@ namespace andrena.Usus.net.View.ViewModels.SQI
 {
     public class SqiParameters : IParameterProvider
     {
+        public double CurrentSqi { get; private set; }
         public event Action<double> SqiChanged;
-
+        
         public SqiParameters()
         {
-            SqiChanged += sqi => { };
+            SqiChanged += sqi => CurrentSqi = sqi;
         }
 
         public SqiParameter Assign(string parameter, int value, Action<SqiParameters, int> valueAssignment)

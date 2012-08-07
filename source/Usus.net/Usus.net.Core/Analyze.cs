@@ -24,14 +24,14 @@ namespace andrena.Usus.net.Core
             return report;
         }
         
-        private static MetricsReport AnalyseFile(string asmFile)
+        internal static MetricsReport AnalyseFile(string asmFile)
         {
             var mc = new MetricsCollector();
             mc.Analyze(asmFile);
             return mc.Report;
         }
 
-        private static void PostProcess(this MetricsReport metrics)
+        internal static void PostProcess(this MetricsReport metrics)
         {
             PostProcessTypeDependencies.Of(metrics);
             PostProcessNamespaceDependencies.Of(metrics);

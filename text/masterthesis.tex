@@ -1316,7 +1316,7 @@ Ein weiteres Usus.net Fenster, welches es in der Eclipse Version ebenfalls nicht
 	\caption{Usus.net SQI-Fenster}
 	\label{fig:ususnet_sqi}
 \end{figure}
-Nach jedem Kompiliervorgang trägt Usus.net automatisch alle Werte ein, bis auf die Testabdeckung. Da Usus.net die prozentuale Testabdeckung noch nicht automatisch bestimmen kann, muss dieser Wert vom Entwickler manuell eingetragen werden. Der SQI-Wert wird daraufhin sofort aktualisiert.
+Nach jedem Kompiliervorgang trägt Usus.net automatisch alle Werte ein, bis auf die Testabdeckung. Da Usus.net die prozentuale Testabdeckung noch nicht automatisch bestimmen kann, muss dieser Wert vom Entwickler manuell eingetragen werden. Der SQI-Wert wird daraufhin sofort aktualisiert in groß in der Registerkarte "`Current"' angezeigt. Die Registerkarte "`Change Over Time"' zeigt an, wie sich der SQI über die letzten Build-Vorgänge verändert hat. Die Entwicklung des SQI wird für jede Solution separat verwaltet. Wenn Visual Studio eine neue Solution analysiert, werden deren SQI-Werte angezeigt. Wie diese Veränderungen gespeichert werden, wird in Abschnitt \ref{sec:sqichange} ausführlicher beschrieben.
 
 
 \section{Visual Studio Integration}
@@ -1623,8 +1623,14 @@ Usus.net bezieht bei der Berechnung des Isis-SQI auch die prozentuale Testabdeck
 
 
 \section{Veränderung}
+\label{sec:sqichange}
 Um die Veränderung der Softwarequalität zu beobachten, müssen die Metriken bei jedem Kompiliervorgang gespeichert werden. Anschließend können die neusten Metriken mit den vorherigen Metriken verglichen werden. Auf diese Weise könnten Veränderung betrachtet und eine eventuelle Verbesserung der Qualität festgestellt werden. Bei den betrachteten Metriken handelt es sich um die Werte, die im Usus.net Cockpit-Fenster angezeigt werden, sowie dem SQI-Wert. Die Clean Code Metrik von Usus.net wird damit ebenfalls berücksichtigt, da die Verteilungsparameter auch in der Cockpit-Ansicht angezeigt werden.
-
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=14cm]{images/ususnet_sqihistory.png}
+	\caption{Historie des SQI im Usus.net SQI-Fenster}
+	\label{fig:ususnet_sqihistory}
+\end{figure}
 \textcolor[rgb]{1,0,0}{todo}
 
 

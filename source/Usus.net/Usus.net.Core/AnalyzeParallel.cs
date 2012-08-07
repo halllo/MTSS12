@@ -6,19 +6,21 @@ using andrena.Usus.net.Core.Reports;
 
 namespace andrena.Usus.net.Core
 {
-    internal static class AnalyzeParallel
+    public static class AnalyzeParallel
     {
-        public static IEnumerable<MetricsReport> Files(string[] files, Func<string, MetricsReport> fileFunction)
+        public static MetricsReport PortableExecutables(params string[] asmFiles)
         {
-            return OnParallel(files, fileFunction);
+            var report = MetricsReport.Of(Parallel(asmFiles, Analyze.AnalyseFile));
+            report.PostProcess();
+            return report;
         }
 
-        private static IEnumerable<MetricsReport> OnParallel(string[] files, Func<string, MetricsReport> fileFunction)
+        private static IEnumerable<MetricsReport> Parallel(string[] files, Func<string, MetricsReport> fileFunction)
         {
             return from file in files.AsParallel() select fileFunction(file);
         }
 
-        private static IEnumerable<MetricsReport> OnTasks(string[] files, Func<string, MetricsReport> fileFunction)
+        private static IEnumerable<MetricsReport> Tasks(string[] files, Func<string, MetricsReport> fileFunction)
         {
             var tasks = GetAnalyzeTasks(files, fileFunction).ToArray();
             Task.WaitAll(tasks);

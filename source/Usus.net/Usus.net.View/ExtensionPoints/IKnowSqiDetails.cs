@@ -5,5 +5,6 @@ namespace andrena.Usus.net.View.ExtensionPoints
     {
         double TestCoverage { get; }
         int CompilerWarnings { get; }
+        string CurrentSolutionFile { get; }
     }
 }

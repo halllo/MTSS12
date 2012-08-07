@@ -45,6 +45,10 @@
         </Border>
     </ControlTemplate>
 
+    <Style x:Key="ThickLine" TargetType="{x:Type Polyline}">
+        <Setter Property="StrokeThickness" Value="3" />
+    </Style>
+
     <Style x:Key="NoWhitespaceChart" TargetType="dvc:Chart">
         <Setter Property="Template" Value="{StaticResource NoChartPadding}"/>
         <Setter Property="Margin" Value="0"/>

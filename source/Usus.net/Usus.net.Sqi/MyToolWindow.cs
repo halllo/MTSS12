@@ -30,5 +30,10 @@ namespace andrena.Usus_net_Sqi
         {
             get { return GetErrors().WarningCount; }
         }
+
+        public string CurrentSolutionFile
+        {
+            get { return RawSolution.FullName; }
+        }
     }
 }

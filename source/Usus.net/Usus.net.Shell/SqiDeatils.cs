@@ -13,5 +13,10 @@ namespace andrena.Usus.net.Shell
         {
             get { return 0; }
         }
+
+        public string CurrentSolutionFile
+        {
+            get { return null; }
+        }
     }
 }

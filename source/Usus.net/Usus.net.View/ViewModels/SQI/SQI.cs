@@ -10,6 +10,8 @@ namespace andrena.Usus.net.View.ViewModels.SQI
     {
         public ObservableCollection<SqiParameter> Parameters { get; private set; }
         public IKnowSqiDetails Details { get; set; }
+        public SqiHistory SqiOverTime { get; set; }
+        
 
         public string Sqi { get; private set; }
         SqiParameters sqiParameters;
@@ -21,8 +23,10 @@ namespace andrena.Usus.net.View.ViewModels.SQI
         SqiParameter _BigMethods;
         SqiParameter _CompilerWarnings;
 
+        #region Setup
         public SQI()
         {
+            SqiOverTime = new SqiHistory();
             Parameters = new ObservableCollection<SqiParameter>();
             SetupSqi();
             SetupSqiParameters();
@@ -49,6 +53,7 @@ namespace andrena.Usus.net.View.ViewModels.SQI
             Parameters.Add(_BigMethods = sqiParameters.Assign("Bis Methods", 0, (p, v) => p.BigMethods = v));
             Parameters.Add(_CompilerWarnings = sqiParameters.Assign("Compiler Warnings", 0, (p, v) => p.CompilerWarnings = v));
         }
+        #endregion
 
         protected override void AnalysisStarted()
         {
@@ -59,6 +64,7 @@ namespace andrena.Usus.net.View.ViewModels.SQI
             SetCommonKnowledge(metrics);
             SetReportParameters(metrics);
             SetDetailParameters();
+            AddToSqiHistory();
         }
 
         private void SetCommonKnowledge(PreparedMetricsReport metrics)
@@ -82,6 +88,12 @@ namespace andrena.Usus.net.View.ViewModels.SQI
         {
             SqiParameterType.Percentage(Details.TestCoverage, v => _TestCoverage.Value = v);
             SqiParameterType.Number(Details.CompilerWarnings, v => _CompilerWarnings.Value = v);
+        }
+
+        private void AddToSqiHistory()
+        {
+            var solutionFile = Details.CurrentSolutionFile;
+            Dispatch(() => SqiOverTime.Now(sqiParameters.CurrentSqi, solutionFile));
         }
     }
 }

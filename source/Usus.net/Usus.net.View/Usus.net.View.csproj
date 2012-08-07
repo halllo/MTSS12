@@ -114,6 +114,7 @@
     <Compile Include="Dialogs\ListDisplay.cs" />
     <Compile Include="ViewModels\Hotspots\TypeJump.cs" />
     <Compile Include="ViewModels\SQI\SQI.cs" />
+    <Compile Include="ViewModels\SQI\SqiHistory.cs" />
     <Compile Include="ViewModels\SQI\SqiParameter.cs" />
     <Compile Include="ViewModels\SQI\SqiParameterType.cs" />
     <Compile Include="ViewModels\SQI\SqiParameters.cs" />
