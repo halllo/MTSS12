@@ -57,7 +57,7 @@ namespace andrena.Usus.net.View.Hub
 
         private PreparedMetricsReport AnalyzeProjectFiles(string[] files)
         {
-            MetricsReport metrics = Analyze.PortableExecutable(files);
+            MetricsReport metrics = Analyze.PortableExecutables(files);
             return metricsFactory.Prepare(metrics);
         }
 

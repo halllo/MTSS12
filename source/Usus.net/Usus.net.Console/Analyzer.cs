@@ -16,7 +16,7 @@ namespace andrena.Usus.net.Console
 
         public void AnalyzeFile(string assemblyToAnalyze)
         {
-            var metrics = Analyze.PortableExecutable(assemblyToAnalyze);
+            var metrics = Analyze.PortableExecutables(assemblyToAnalyze);
             OutputMetricsReport(metrics);
         }
 
