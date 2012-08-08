@@ -84,6 +84,7 @@
     <Compile Include="RatedNumberOfNamespacesInCycleTest.cs" />
     <Compile Include="RatedNumberOfNonStaticPublicFieldsTest.cs" />
     <Compile Include="RelevantLinesOfCodeTest.cs" />
+    <Compile Include="SqiTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Usus.net.Core\Usus.net.Core.csproj">

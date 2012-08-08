@@ -18,6 +18,15 @@ namespace Usus.net.Core.PerformanceTests
             Assert.IsFalse(buildDifferences.Any());
         }
 
+        [TestMethod]
+        public void AnalyzeParallel_NoChanges_NoDifferencesInMetrics()
+        {
+            var build1 = AnalyzeParallel.PortableExecutables(In("../../../Usus.net.Core.PerformanceTests/PdbIssue/build1"));
+            var build2 = AnalyzeParallel.PortableExecutables(In("../../../Usus.net.Core.PerformanceTests/PdbIssue/build2"));
+            var buildDifferences = Changes.Of(build2).ComparedTo(build1);
+            Assert.IsFalse(buildDifferences.Any());
+        }
+
         private string[] In(string path)
         {
             return Directory.EnumerateFiles(path, "*.dll").ToArray();
