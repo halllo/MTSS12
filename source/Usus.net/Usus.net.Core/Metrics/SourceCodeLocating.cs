@@ -14,7 +14,7 @@ namespace andrena.Usus.net.Core.Metrics
 
         public static SourceCodeLocation OfType(this INamedTypeDefinition type, PdbReader pdb)
         {
-            return Of(type, pdb);
+            return SourceCodeLocation.None;
         }
 
         private static SourceCodeLocation Of(this IObjectWithLocations locatable, PdbReader pdb)
