@@ -33,7 +33,7 @@ namespace andrena.Usus_net_Sqi
 
         public string CurrentSolutionFile
         {
-            get { return RawSolution.FullName; }
+            get { return MasterObjekt != null ? RawSolution.FullName : null; }
         }
     }
 }

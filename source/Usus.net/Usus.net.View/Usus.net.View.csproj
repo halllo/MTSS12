@@ -65,6 +65,10 @@
     <Compile Include="Current.xaml.cs">
       <DependentUpon>Current.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\NamespaceCycleDisplayVM.cs" />
+    <Compile Include="Dialogs\NamespaceCycleDisplay.xaml.cs">
+      <DependentUpon>NamespaceCycleDisplay.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Distributions.xaml.cs">
       <DependentUpon>Distributions.xaml</DependentUpon>
     </Compile>
@@ -135,6 +139,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Current.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\NamespaceCycleDisplay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

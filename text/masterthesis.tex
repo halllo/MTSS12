@@ -1244,6 +1244,7 @@ ThreadPool.QueueUserWorkItem((c) =>
 Zu Beginn wird das Event \texttt{AnalysisStarted} gefeuert. Alles weitere findet asynchron in einem eigenen Thread statt, der über den \texttt{ThreadPool} erzeugt wird. Dadurch muss der Aufrufer der \texttt{TryStartAnalysis}-Methode nicht warten, da die Analyse im Hintergrund ausgeführt wird. Die Klasse \texttt{Analyse} ist bereits aus Abschnitt \ref{sec:metriccalc} bekannt. Sobald der Bericht vom Typ \texttt{MetricsReport} erzeugt wurde, wird dieser über das Event \texttt{MetricsReady} an alle ViewModels übergeben. Diese müssen sich beim Anzeigen der Daten des Berichts nur noch darum kümmern, dass sie die Daten mit dem Thread der Oberfläche synchronisieren. Die grafischen Steuerelemente und die Factory befinden sich im Namespace \texttt{andrena.Usus.net.View}. Die Hub-Infrastruktur befindet sich in \texttt{andrena.Usus.net.View.Hub}. Die ViewModels der Oberflächen sind im Namespace \texttt{andrena.Usus.net.View.ViewModels} zu finden.
 
 \subsection{Cockpit}
+\label{subsec:ususnetcockpit}
 Das Fenster mit den am weitesten aggregierte Metriken ist \emph{Usus.net Cockpit}. Nach dem Vorbild aus Unterabschnitt \ref{subsec:ususcockpit} enthält die Oberfläche eine einfache Tabelle und zeigt alle Statistiken an, die bereits in Unterabschnitt \ref{subsec:statistics} vorgestellt wurden. Abbildung \ref{fig:ususnet_cockpit} zeigt das Cockpit-Steuerelement als Fenster in Visual Studio.
 \begin{figure}[h]
 	\centering
@@ -1624,16 +1625,14 @@ Usus.net bezieht bei der Berechnung des Isis-SQI auch die prozentuale Testabdeck
 
 \section{Veränderung}
 \label{sec:sqichange}
-Um die Veränderung der Softwarequalität zu beobachten, müssen die Metriken bei jedem Kompiliervorgang gespeichert werden. Anschließend können die neusten Metriken mit den vorherigen Metriken verglichen werden. Auf diese Weise könnten Veränderung betrachtet und eine eventuelle Verbesserung der Qualität festgestellt werden. Bei den betrachteten Metriken handelt es sich um die Werte, die im Usus.net Cockpit-Fenster angezeigt werden, sowie dem SQI-Wert. Die Clean Code Metrik von Usus.net wird damit ebenfalls berücksichtigt, da die Verteilungsparameter auch in der Cockpit-Ansicht angezeigt werden.
+Um die Veränderung der Softwarequalität zu beobachten, müssen die Metriken bei jedem Kompiliervorgang gemerkt werden. Anschließend können die neusten Metriken mit den vorherigen Metriken verglichen werden. Auf diese Weise könnten Veränderung betrachtet und eine eventuelle Verbesserung der Qualität festgestellt werden. Bei den betrachteten Metriken handelt es sich um die Werte, die im Usus.net Cockpit-Fenster angezeigt werden, sowie dem SQI-Wert. Die Clean Code Metrik von Usus.net wird damit ebenfalls berücksichtigt, da die Verteilungsparameter auch in der Cockpit-Ansicht angezeigt werden. Das Cockpit-Fenster, welches bereits in Unterabschnitt \ref{subsec:ususnetcockpit} vorgestellt wurde, visualisiert Veränderungen durch Farben. Ist der neue Wert weniger gut als der alte, wird er rot dargestellt. Ein besserer Wert wird grün angezeigt. Die Veränderung der Werte im Cockpit bezieht sich also immer nur auf den letzten und den vorletzten Build. Beim SQI dagegen, werden Veränderungen über mehrere Builds hinweg betrachtet. Diese zeitliche Entwicklung des SQI wird, wie Abbildung \ref{fig:ususnet_sqihistory} zeigt, im SQI-Fenster dargestellt.
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=14cm]{images/ususnet_sqihistory.png}
 	\caption{Historie des SQI im Usus.net SQI-Fenster}
 	\label{fig:ususnet_sqihistory}
 \end{figure}
-\textcolor[rgb]{1,0,0}{todo}
-
-
+Dieses SQI-Fenster wurde bereits in Unterabschnitt \ref{subsec:ususnetsqi} beschrieben. Das ViewModel verwendet dafür ein Objekt vom Typ \texttt{SqiHistory}, mit dessen \texttt{Now}-Methode SQI-Werte, die einer Solution zugeordnet sind, gespeichert werden können.
 
 
 \chapter{In Aktion}

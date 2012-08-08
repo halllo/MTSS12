@@ -15,6 +15,7 @@ namespace andrena.Usus.net.Core.Metrics
             {
                 Name = type.Name(),
                 FullName = type.FullName(),
+                SourceLocation = SourceCodeLocating.OfType(type, pdb),
                 Namespaces = type.Namespaces(),
                 CompilerGenerated = type.IsGeneratedCode(),
                 NumberOfFields = NumberOfFields.Of(type),
@@ -33,7 +34,7 @@ namespace andrena.Usus.net.Core.Metrics
                 CompilerGenerated = method.IsGeneratedCode(),
                 OnlyDeclaration = method.IsOnlyDeclaration(),
                 DefaultConstructor = method.IsDefaultCtor(),
-                SourceLocation = SourceCodeLocating.Of(method, pdb),
+                SourceLocation = SourceCodeLocating.OfMethod(method, pdb),
                 CyclomaticComplexity = CyclomaticComplexityOfAst.Of(method, pdb, host),
                 NumberOfStatements = NumberOfStatements.Of(method, pdb, host),
                 NumberOfRealLines = NumberOfRealLines.Of(method, pdb),

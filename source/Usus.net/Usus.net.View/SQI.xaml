@@ -33,6 +33,10 @@
             </TabItem>
             <TabItem Header="Change Over Time">
                 <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
                     <dvc:Chart Grid.Row="1" Style="{StaticResource NoWhitespaceChart}" >
                         <dvc:Chart.Series>
                             <dvc:LineSeries ItemsSource="{Binding SqiOverTime.PointsInTime}" 

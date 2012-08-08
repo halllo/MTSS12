@@ -6,7 +6,7 @@ namespace andrena.Usus.net.View.Dialogs
     public class ListDisplay<T>
     {
         public string Header { get; private set; }
-        public ObservableCollection<T> Entries { get; set; }
+        public ObservableCollection<T> Entries { get; private set; }
         
         public ListDisplay(string header)
         {

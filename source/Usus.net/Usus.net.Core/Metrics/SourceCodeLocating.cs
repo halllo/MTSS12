@@ -7,7 +7,17 @@ namespace andrena.Usus.net.Core.Metrics
 {
     internal static class SourceCodeLocating
     {
-        public static SourceCodeLocation Of(this IObjectWithLocations locatable, PdbReader pdb)
+        public static SourceCodeLocation OfMethod(this IMethodDefinition method, PdbReader pdb)
+        {
+            return Of(method, pdb);
+        }
+
+        public static SourceCodeLocation OfType(this INamedTypeDefinition type, PdbReader pdb)
+        {
+            return Of(type, pdb);
+        }
+
+        private static SourceCodeLocation Of(this IObjectWithLocations locatable, PdbReader pdb)
         {
             IPrimarySourceLocation location = locatable.GetValidLocation(pdb);
             return location != null ? location.ToSourceCodeLocation() : SourceCodeLocation.None;

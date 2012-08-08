@@ -19,22 +19,30 @@ namespace andrena.Usus.net.View.ViewModels.Hotspots
 
         public override void OnDoubleClick(IJumpToSource jumper)
         {
-            var listdisplay = new ListDisplay();
-            listdisplay.ItemClicked += i => TypeJump.To(metrics, i as TypeMetricsReport, jumper);
-            listdisplay.DataContext = FindCrossNamespaceTypes();
-            listdisplay.Show();
+            var cycleDisplay = new NamespaceCycleDisplay();
+            var viewModel = new NamespaceCycleDisplayVM("Namespace cycle");
+            viewModel.AddAll(FindCrossNamespaceTypes());
+            cycleDisplay.DataContext = viewModel;
+            //listdisplay.ItemClicked += i => TypeJump.To(metrics, i as TypeMetricsReport, jumper);
+            cycleDisplay.Show();
         }
 
-        private ListDisplay<TypeMetricsReport> FindCrossNamespaceTypes()
+        private Dictionary<string, IEnumerable<string>> FindCrossNamespaceTypes()
         {
-            var crossNamespaceTypeList = new ListDisplay<TypeMetricsReport>("Cross Namespace Types of " + Report.Name);
-            crossNamespaceTypeList.AddAll(CrossNamespaceTypes());
-            return crossNamespaceTypeList;
+            var cycle = new Dictionary<string, IEnumerable<string>>();
+            foreach (var namespaceName in Report.CyclicDependencies)
+                cycle.Add(namespaceName, ListOfTypesReferencingOutOf(namespaceName));
+            return cycle;
         }
 
-        private IEnumerable<TypeMetricsReport> CrossNamespaceTypes()
+        private IEnumerable<string> ListOfTypesReferencingOutOf(string namespaceName)
         {
-            var otherNamespaceInCycle = Report.CyclicDependencies.Except(Report.Name.Return()).ToList();
+            return TypesReferncingOutOf(namespaceName).Select(n => n.FullName);
+        }
+
+        private IEnumerable<TypeMetricsReport> TypesReferncingOutOf(string namespaceName)
+        {
+            var otherNamespaceInCycle = Report.CyclicDependencies.Except(namespaceName.Return()).ToList();
             return from type in metrics.TypesOfNamespace(Report)
                    where NamespaceReferencesOf(type).Intersect(otherNamespaceInCycle).Any()
                    select type;

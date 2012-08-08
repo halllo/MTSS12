@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 using andrena.Usus.net.Core.Helper;
 using andrena.Usus.net.Core.Reports;
 using andrena.Usus.net.View.ExtensionPoints;
-using System.Windows;
 
 namespace andrena.Usus.net.View.ViewModels.Hotspots
 {

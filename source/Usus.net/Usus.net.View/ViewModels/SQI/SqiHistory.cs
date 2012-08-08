@@ -60,7 +60,8 @@ namespace andrena.Usus.net.View.ViewModels.SQI
         private void StorePoint(DateTime time, double sqi)
         {
             PointsInTime.Add(time.WithValue(sqi));
-            File.WriteAllText(Path.Combine(SqiFolder, time.Ticks + ".sqi"), Convert.ToString(sqi, CultureInfo.InvariantCulture));
+            if (!string.IsNullOrEmpty(_solution))
+                File.WriteAllText(Path.Combine(SqiFolder, time.Ticks + ".sqi"), Convert.ToString(sqi, CultureInfo.InvariantCulture));
         }
 
         private string SqiFolder
