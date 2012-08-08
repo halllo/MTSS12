@@ -22,6 +22,7 @@ namespace andrena.Usus.net.View.Hub
 
         public event Action AnalysisStarted;
         public event Action<PreparedMetricsReport> MetricsReady;
+        public Func<bool> ShouldUseParallelism { private get; set; }
         public PreparedMetricsReport MostRecentMetrics { get; private set; }
         readonly PreparedMetricsFactory metricsFactory;
 
@@ -31,6 +32,7 @@ namespace andrena.Usus.net.View.Hub
             AnalysisStarted += () => analysisReady = false;
             MetricsReady += m => analysisReady = true;
             MetricsReady += m => MostRecentMetrics = m;
+            ShouldUseParallelism = () => false;
         }
 
         bool analysisReady = true;
@@ -57,7 +59,9 @@ namespace andrena.Usus.net.View.Hub
 
         private PreparedMetricsReport AnalyzeProjectFiles(string[] files)
         {
-            MetricsReport metrics = Analyze.PortableExecutables(files);
+            MetricsReport metrics = ShouldUseParallelism() ?
+                AnalyzeParallel.PortableExecutables(files) :
+                Analyze.PortableExecutables(files);
             return metricsFactory.Prepare(metrics);
         }
 

@@ -2,8 +2,8 @@
 using System.Runtime.InteropServices;
 using andrena.Usus.net.ExtensionHelper;
 using andrena.Usus.net.View;
-using andrena.Usus.net.View.Hub;
 using andrena.Usus.net.View.ExtensionPoints;
+using andrena.Usus.net.View.Hub;
 
 namespace andrena.Usus_net_Cockpit
 {

@@ -19,7 +19,7 @@ namespace andrena.Usus_net_Menus
         {
             Trace.WriteLine(string.Format(CultureInfo.CurrentCulture, "Entering constructor for: {0}", this.ToString()));
         }
-    
+
         protected override void Initialize()
         {
             Trace.WriteLine(string.Format(CultureInfo.CurrentCulture, "Entering Initialize() of: {0}", this.ToString()));
