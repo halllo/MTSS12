@@ -1,6 +1,7 @@
 ﻿using System.Windows.Controls;
 using andrena.Usus.net.Core.Reports;
 using andrena.Usus.net.View.Dialogs;
+using andrena.Usus.net.View.Dialogs.ViewModels;
 
 namespace andrena.Usus.net.View
 {

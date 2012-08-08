@@ -14,8 +14,8 @@
         </Grid.ColumnDefinitions>
         <TextBlock Grid.Row="0" Grid.Column="0" Text="all namespaces in cycle"/>
         <TextBlock Grid.Row="0" Grid.Column="1" Text="classes that reference classes in other namespaces"/>
-        <ListBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding MainEntries}" BorderThickness="0" MouseDoubleClick="ListBox_MouseDoubleClick"/>
-        <ListBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding SubEntries}" BorderThickness="0"/>
+        <ListBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding MainEntries}" BorderThickness="0" MouseDoubleClick="SelectNamespace"/>
+        <ListBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding SubEntries}" BorderThickness="0" MouseDoubleClick="SelectType"/>
         <Border Grid.Row="2" Grid.ColumnSpan="2" Background="Green" Margin="10"/>
     </Grid>
 </Window>

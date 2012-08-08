@@ -11,6 +11,11 @@ namespace andrena.Usus.net.Core.Helper
             yield return start;
         }
 
+        public static IEnumerable<T> ExceptThis<T>(this IEnumerable<T> sequence, T that)
+        {
+            return sequence.Except(that.Return());
+        }
+
         public static List<R> ToList<T, R>(this IEnumerable<T> sequence, Func<T, R> selector)
         {
             return sequence.ToList(selector, t => true);

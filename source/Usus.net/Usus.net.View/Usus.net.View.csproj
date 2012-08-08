@@ -65,7 +65,8 @@
     <Compile Include="Current.xaml.cs">
       <DependentUpon>Current.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Dialogs\NamespaceCycleDisplayVM.cs" />
+    <Compile Include="Dialogs\ViewModels\NamespaceCycle.cs" />
+    <Compile Include="Dialogs\ViewModels\NamespaceCycleDisplayVM.cs" />
     <Compile Include="Dialogs\NamespaceCycleDisplay.xaml.cs">
       <DependentUpon>NamespaceCycleDisplay.xaml</DependentUpon>
     </Compile>
@@ -115,7 +116,7 @@
     <Compile Include="ViewModels\Hotspots\MethodHotspot.cs" />
     <Compile Include="ViewModels\Hotspots\NamespaceHotspot.cs" />
     <Compile Include="ViewModels\Hotspots\TypeHotspot.cs" />
-    <Compile Include="Dialogs\ListDisplay.cs" />
+    <Compile Include="Dialogs\ViewModels\ListDisplay.cs" />
     <Compile Include="ViewModels\Hotspots\TypeJump.cs" />
     <Compile Include="ViewModels\SQI\SQI.cs" />
     <Compile Include="ViewModels\SQI\SqiHistory.cs" />

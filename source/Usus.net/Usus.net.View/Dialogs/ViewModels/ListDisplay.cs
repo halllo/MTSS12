@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace andrena.Usus.net.View.Dialogs
+namespace andrena.Usus.net.View.Dialogs.ViewModels
 {
     public class ListDisplay<T>
     {

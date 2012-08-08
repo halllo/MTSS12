@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using andrena.Usus.net.Core.Helper;
 using andrena.Usus.net.Core.Reports;
 using andrena.Usus.net.View.Dialogs;
+using andrena.Usus.net.View.Dialogs.ViewModels;
 using andrena.Usus.net.View.ExtensionPoints;
 
 namespace andrena.Usus.net.View.ViewModels.Hotspots
@@ -20,37 +20,28 @@ namespace andrena.Usus.net.View.ViewModels.Hotspots
         public override void OnDoubleClick(IJumpToSource jumper)
         {
             var cycleDisplay = new NamespaceCycleDisplay();
-            var viewModel = new NamespaceCycleDisplayVM("Namespace cycle");
-            viewModel.AddAll(FindCrossNamespaceTypes());
-            cycleDisplay.DataContext = viewModel;
-            //listdisplay.ItemClicked += i => TypeJump.To(metrics, i as TypeMetricsReport, jumper);
+            cycleDisplay.DataContext = CreateViewModel(jumper);
             cycleDisplay.Show();
         }
 
-        private Dictionary<string, IEnumerable<string>> FindCrossNamespaceTypes()
+        private NamespaceCycleDisplayVM CreateViewModel(IJumpToSource jumper)
         {
-            var cycle = new Dictionary<string, IEnumerable<string>>();
-            foreach (var namespaceName in Report.CyclicDependencies)
-                cycle.Add(namespaceName, ListOfTypesReferencingOutOf(namespaceName));
-            return cycle;
+            var viewModel = new NamespaceCycleDisplayVM("Namespace cycle");
+            viewModel.Display(NamespaceCycle(jumper));
+            return viewModel;
+        }
+  
+        private NamespaceCycle NamespaceCycle(IJumpToSource jumper)
+        {
+            var namespaceCycle = new NamespaceCycle(metrics, NamespacesInCycle());
+            namespaceCycle.Jump += type => TypeJump.To(metrics, type, jumper);
+            return namespaceCycle;
         }
 
-        private IEnumerable<string> ListOfTypesReferencingOutOf(string namespaceName)
+        private IEnumerable<NamespaceMetricsReport> NamespacesInCycle()
         {
-            return TypesReferncingOutOf(namespaceName).Select(n => n.FullName);
-        }
-
-        private IEnumerable<TypeMetricsReport> TypesReferncingOutOf(string namespaceName)
-        {
-            var otherNamespaceInCycle = Report.CyclicDependencies.Except(namespaceName.Return()).ToList();
-            return from type in metrics.TypesOfNamespace(Report)
-                   where NamespaceReferencesOf(type).Intersect(otherNamespaceInCycle).Any()
-                   select type;
-        }
-
-        private static IEnumerable<string> NamespaceReferencesOf(TypeMetricsReport type)
-        {
-            return type.InterestingDirectDependencies.Select(n => n.Substring(0, n.LastIndexOf(".")));
+            return from ns in Report.CyclicDependencies
+                   select metrics.ForNamespace(ns);
         }
     }
 }
