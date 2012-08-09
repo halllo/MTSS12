@@ -73,6 +73,12 @@ namespace Usus.net.Core.IntegrationTests.MethodMetrics
                 Console.WriteLine();
         }
 
+        [ExpectCyclomaticComplexity(1)]
+        public static void MethodWithIfTrue()
+        {
+            if (true) Console.WriteLine();
+        }
+
         [ExpectCyclomaticComplexity(3)]
         public static void MethodWithIf2Args()
         {

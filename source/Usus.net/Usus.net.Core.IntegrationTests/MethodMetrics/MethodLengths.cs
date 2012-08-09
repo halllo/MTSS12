@@ -57,6 +57,12 @@ namespace Usus.net.Core.IntegrationTests.MethodMetrics
         {
         }
 
+        [ExpectNumberOfStatements(1)]
+        private bool MethodWithJustReturn()
+        {
+            return true;
+        }
+
         [ExpectNumberOfLogicalLines(3)]
         [ExpectNumberOfRealLines(3)]
         [ExpectNumberOfStatements(3)]

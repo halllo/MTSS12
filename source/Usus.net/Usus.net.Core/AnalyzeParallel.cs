@@ -10,9 +10,8 @@ namespace andrena.Usus.net.Core
     {
         public static MetricsReport PortableExecutables(params string[] asmFiles)
         {
-            var report = MetricsReport.Of(Parallel(asmFiles, Analyze.AnalyseFile));
-            report.PostProcess();
-            return report;
+            var reports = Parallel(asmFiles, Analyze.AnalyseFile).ToArray();
+            return reports.Combine();
         }
 
         private static IEnumerable<MetricsReport> Parallel(string[] files, Func<string, MetricsReport> fileFunction)

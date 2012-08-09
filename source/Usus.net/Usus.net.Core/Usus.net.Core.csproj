@@ -110,6 +110,8 @@
     <Compile Include="Metrics\SourceCodeLocating.cs" />
     <Compile Include="Math\Distributions.cs" />
     <Compile Include="Reports\Changes.cs" />
+    <Compile Include="Reports\MetricsReportInfo.cs" />
+    <Compile Include="Reports\MetricsReportInfoExtensions.cs" />
     <Compile Include="Reports\SourceCodeLocation.cs" />
     <Compile Include="Metrics\CreateGraph.cs" />
     <Compile Include="Metrics\Methods\CyclomaticComplexityOfAst.cs" />

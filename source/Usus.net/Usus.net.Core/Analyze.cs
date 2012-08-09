@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using andrena.Usus.net.Core.Metrics;
 using andrena.Usus.net.Core.Reports;
@@ -19,8 +20,16 @@ namespace andrena.Usus.net.Core
 
         public static MetricsReport PortableExecutables(params string[] asmFiles)
         {
-            var report = MetricsReport.Of(asmFiles.Select(AnalyseFile));
+            var reports = asmFiles.Select(AnalyseFile).ToArray();
+            return reports.Combine();
+        }
+
+        internal static MetricsReport Combine(this MetricsReport[] reports)
+        {
+            var report = MetricsReport.Of(reports);
+            report.Remember.AssemblyAnalysisDone();
             report.PostProcess();
+            report.Remember.PostProcessingDone();
             return report;
         }
         

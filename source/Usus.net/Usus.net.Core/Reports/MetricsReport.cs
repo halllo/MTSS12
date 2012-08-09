@@ -6,6 +6,15 @@ namespace andrena.Usus.net.Core.Reports
 {
     public class MetricsReport
     {
+        internal static MetricsReport Of(IEnumerable<MetricsReport> reports)
+        {
+            var combinedReport = new MetricsReport();
+            combinedReport.Remember.WhenCreated = reports.FirstCreated();
+            foreach (var typeMetrics in reports.SelectMany(r => r.typeReports.Values))
+                combinedReport.AddTypeReport(typeMetrics);
+            return combinedReport;
+        }
+
         Dictionary<string, TypeMetricsWithMethodMetrics> typeReports;
         Dictionary<string, NamespaceMetricsWithTypeMetrics> namespaceReports;
 
@@ -13,6 +22,7 @@ namespace andrena.Usus.net.Core.Reports
         internal MutableGraph<NamespaceMetricsWithTypeMetrics> GraphOfNamespaces { get; set; }
 
         public CommonReportKnowledge CommonKnowledge { get; private set; }
+        public MetricsReportInfo Remember { get; private set; }
 
         public IEnumerable<MethodMetricsReport> Methods
         {
@@ -39,16 +49,9 @@ namespace andrena.Usus.net.Core.Reports
             get { return namespaceReports.Values.Select(t => t.Itself); }
         }
 
-        internal static MetricsReport Of(IEnumerable<MetricsReport> reports)
-        {
-            var combinedReport = new MetricsReport();
-            foreach (var typeMetrics in reports.SelectMany(r => r.typeReports.Values))
-                combinedReport.AddTypeReport(typeMetrics);
-            return combinedReport;
-        }
-
         internal MetricsReport()
         {
+            Remember = new MetricsReportInfo();
             CommonKnowledge = new CommonReportKnowledge();
             typeReports = new Dictionary<string, TypeMetricsWithMethodMetrics>();
             namespaceReports = new Dictionary<string, NamespaceMetricsWithTypeMetrics>();

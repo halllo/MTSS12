@@ -1,4 +1,3 @@
-using System.Linq;
 using andrena.Usus.net.Core.AssemblyNavigation;
 using Microsoft.Cci;
 
