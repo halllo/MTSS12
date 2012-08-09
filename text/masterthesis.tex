@@ -1632,7 +1632,13 @@ Um die Veränderung der Softwarequalität zu beobachten, müssen die Metriken bei j
 	\caption{Historie des SQI im Usus.net SQI-Fenster}
 	\label{fig:ususnet_sqihistory}
 \end{figure}
-Dieses SQI-Fenster wurde bereits in Unterabschnitt \ref{subsec:ususnetsqi} beschrieben. Das ViewModel verwendet dafür ein Objekt vom Typ \texttt{SqiHistory}, mit dessen \texttt{Now}-Methode SQI-Werte, die einer Solution zugeordnet sind, gespeichert werden können. Nach jedem Kompiliervorgang speichert Usus.net den neuen SQI-Wert in Zusammenhang mit der aktuellen Zeit und dem aktuellen Datum in dem Unterverzeichnis \emph{\_sqi} des Solution-Verzeichnisses. Sobald eine Solution neu geladen und kompiliert wird, werden auch die letzten hundert SQI-Werte dieser Solution geladen und in dem Schaubild angezeigt. Auf diese Weise kann die zeitliche Entwicklung des Softwarequalitätsindex beobachtet werden.
+Dieses SQI-Fenster wurde bereits in Unterabschnitt \ref{subsec:ususnetsqi} beschrieben. Das ViewModel verwendet dafür ein Objekt vom Typ \texttt{SqiHistory}, mit dessen \texttt{Now}-Methode SQI-Werte, die einer Solution zugeordnet sind, gespeichert werden können. Nach jedem Kompiliervorgang speichert Usus.net den neuen SQI-Wert in Zusammenhang mit der aktuellen Zeit und dem aktuellen Datum in dem Unterverzeichnis \emph{\_sqi} des Solution-Verzeichnisses. Die erzeugten Dateien haben die Dateiendung \emph{.sqi} und verwenden den Wert der \texttt{DateTime.Now.Ticks}-Eigenschaft als Dateinamen. Dadurch kann es keine Dateien mit doppeltem Namen geben und eine natürliche Sortierung ist implizit. Als Dateiinhalt wird der SQI-Wert als \texttt{double} serialisiert. Um diese Gleitkommazahl in einem länderunabhängigen Format zu speichern werden die Methoden des .NET-Framework verwendet, die auch in Listing \ref{listing:doublecultureinvariant} angegeben sind. In dem \emph{\_sqi}-Verzeichnis der aktuellen Solution entsteht also pro Build eine \emph{.sqi}-Datei. Sobald eine andere Solution geladen und kompiliert wird, werden auch die letzten hundert SQI-Werte dieser Solution geladen und in dem Schaubild angezeigt. Auf diese Weise kann die zeitliche Entwicklung des Softwarequalitätsindex beobachtet werden.
+\begin{lstlisting}[caption={Länderunabhängie Serialisierung von \texttt{double}-Werten},label={listing:doublecultureinvariant}]
+string sqiSerialized = Convert.ToString(sqi, CultureInfo.InvariantCulture);
+...
+double sqi = Convert.ToDouble(sqiSerialized, CultureInfo.InvariantCulture); 
+\end{lstlisting}
+Eventuell kann eine Kombination aus SQI-Wert und Zeit und Datum auch ergänzt werden. Eine Serialisierung der SQI-Messpunkte kann dann auch mehr Werte als nur den SQI selber in den \emph{.sqi}-Dateien speichern.
 
 
 
