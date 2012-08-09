@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Collections.ObjectModel;
 using andrena.Usus.net.View.Hub;
 using andrena.Usus.net.Core.Reports;
@@ -52,36 +53,37 @@ namespace andrena.Usus.net.View.ViewModels.Hotspots
 
         private void SetClassSizes(IEnumerable<TypeMetricsReport> classSizes, MetricsReport metrics)
         {
-            SetHotspots(ClassSizes, classSizes, m => new HotspotClassSize(m, metrics));
+            SetHotspots(ClassSizes, classSizes.OrderByDescending(c => c.ClassSize),
+                m => new HotspotClassSize(m, metrics));
         }
 
         private void SetCumulativeComponentDependencies(IEnumerable<TypeMetricsReport> cumulativeComponentDependencies, MetricsReport metrics)
         {
-            SetHotspots(CumulativeComponentDependencies, cumulativeComponentDependencies,
+            SetHotspots(CumulativeComponentDependencies, cumulativeComponentDependencies.OrderByDescending(c => c.CumulativeComponentDependency),
                 m => new HotspotCumulativeComponentDependency(m, metrics));
         }
 
         private void SetCyclomaticComplexities(IEnumerable<MethodMetricsReport> cyclomaticComplexities)
         {
-            SetHotspots(CyclomaticComplexities, cyclomaticComplexities, 
+            SetHotspots(CyclomaticComplexities, cyclomaticComplexities.OrderByDescending(m => m.CyclomaticComplexity),
                 m => new HotspotCyclomaticComplexity(m));
         }
 
         private void SetMethodLengths(IEnumerable<MethodMetricsReport> methodLengths)
         {
-            SetHotspots(MethodLengths, methodLengths, 
+            SetHotspots(MethodLengths, methodLengths.OrderByDescending(m => m.MethodLength),
                 m => new HotspotMethodLength(m));
         }
 
         private void SetNamespacesInCycle(IEnumerable<NamespaceMetricsReport> namespacesInCycle, MetricsReport metrics)
         {
-            SetHotspots(NamespacesInCycle, namespacesInCycle, 
+            SetHotspots(NamespacesInCycle, namespacesInCycle.OrderByDescending(n => n.NumberOfNamespacesInCycle),
                 m => new HotspotNamespaceInCycle(m, metrics));
         }
 
         private void SetNonStaticPublicFields(IEnumerable<TypeMetricsReport> nonStaticPublicFields, MetricsReport metrics)
         {
-            SetHotspots(NonStaticPublicFields, nonStaticPublicFields,
+            SetHotspots(NonStaticPublicFields, nonStaticPublicFields.OrderByDescending(c => c.NumberOfNonStaticPublicFields),
                 m => new HotspotNonStaticPublicFields(m, metrics));
         }
 

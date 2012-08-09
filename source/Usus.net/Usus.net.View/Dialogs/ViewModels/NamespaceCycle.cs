@@ -29,32 +29,33 @@ namespace andrena.Usus.net.View.Dialogs.ViewModels
         {
             var currentNamespace = metrics.ForNamespace(namespaceName);
             var otherNamespaceInCycle = namespaces.ExceptThis(currentNamespace).ToList();
-            return from type in TypesReferencingOutOf(currentNamespace, to: otherNamespaceInCycle)
-                   select type.FullName;
+            return from reference in ReferencesOutOf(currentNamespace, to: otherNamespaceInCycle)
+                   select DisplayStringOf(reference);
+        }
+
+        private IEnumerable<OutOfNamespaceReference> ReferencesOutOf(NamespaceMetricsReport currentNamespace, IEnumerable<NamespaceMetricsReport> to)
+        {
+            return from typeReferences in AllTypesWithReferencesIn(currentNamespace)
+                   from crossReference in typeReferences.Referencing(to)
+                   select crossReference;
+        }
+  
+        private IEnumerable<OutgoingTypeReferences> AllTypesWithReferencesIn(NamespaceMetricsReport currentNamespace)
+        {
+            return from type in metrics.TypesOfNamespace(currentNamespace)
+                   select new OutgoingTypeReferences(metrics, type);
+        }
+
+        private string DisplayStringOf(OutOfNamespaceReference reference)
+        {
+            return string.Format("{0}\n -> {1}", 
+                reference.Source.FullName, 
+                reference.Target.FullName);
         }
 
         public void JumpTo(string type)
         {
-            Jump(metrics.ForType(type));
-        }
-
-        private IEnumerable<TypeMetricsReport> TypesReferencingOutOf(NamespaceMetricsReport currentNamespace, IEnumerable<NamespaceMetricsReport> to)
-        {
-            return from type in metrics.TypesOfNamespace(currentNamespace)
-                   where NamespacesOf(ReferencesOf(type)).Intersect(to).Any()
-                   select type;
-        }
-
-        private IEnumerable<TypeMetricsReport> ReferencesOf(TypeMetricsReport type)
-        {
-            return from reference in type.InterestingDirectDependencies
-                   select metrics.ForType(reference);
-        }
-
-        private IEnumerable<NamespaceMetricsReport> NamespacesOf(IEnumerable<TypeMetricsReport> types)
-        {
-            return from type in types
-                   select metrics.ForNamespace(type.Namespaces.First());
+            Jump(metrics.ForType(type.Substring(0, type.IndexOf("\n"))));
         }
     }
 }

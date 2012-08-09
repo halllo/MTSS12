@@ -65,11 +65,13 @@
     <Compile Include="Current.xaml.cs">
       <DependentUpon>Current.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\ViewModels\OutOfNamespaceReference.cs" />
     <Compile Include="Dialogs\ViewModels\NamespaceCycle.cs" />
     <Compile Include="Dialogs\ViewModels\NamespaceCycleDisplayVM.cs" />
     <Compile Include="Dialogs\NamespaceCycleDisplay.xaml.cs">
       <DependentUpon>NamespaceCycleDisplay.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\ViewModels\OutgoingTypeReferences.cs" />
     <Compile Include="Distributions.xaml.cs">
       <DependentUpon>Distributions.xaml</DependentUpon>
     </Compile>
