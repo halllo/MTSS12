@@ -28,11 +28,11 @@ namespace andrena.Usus.net.View.ViewModels.Cockpit
         public Cockpit()
         {
             Entries = new ObservableCollection<CockpitEntry>();
-            Entries.Add(_AverageComponentDependency = new CockpitEntry("Average Component Dependency", n => n + " classes"));
-            Entries.Add(_ClassSize = new CockpitEntry("Class Size", n => n + " classes"));
+            Entries.Add(_AverageComponentDependency = new CockpitEntry("Average Component Dependency", n => n + " types"));
+            Entries.Add(_ClassSize = new CockpitEntry("Class Size", n => n + " types"));
             Entries.Add(_CyclomaticComplexity = new CockpitEntry("Cyclomatic Complexity", n => n + " methods"));
             Entries.Add(_MethodLength = new CockpitEntry("Method Length", n => n + " methods"));
-            Entries.Add(_NonStaticPublicFields = new CockpitEntry("Non-Static Public Fields", n => n + " classes"));
+            Entries.Add(_NonStaticPublicFields = new CockpitEntry("Non-Static Public Fields", n => n + " types"));
             Entries.Add(_NamespacesWithCycles = new CockpitEntry("Namespaces with Cycles", n => n + " namespaces"));
         }
 
@@ -66,7 +66,7 @@ namespace andrena.Usus.net.View.ViewModels.Cockpit
         {
             _AverageComponentDependency.Update(
                 metrics.Rated.AverageComponentDependency,
-                metrics.CommonKnowledge.NumberOfClasses,
+                metrics.CommonKnowledge.NumberOfTypes,
                 metrics.CumulativeComponentDependencyHotspots.Count(),
                 metrics.CumulativeComponentDependencyHistogram.GeometricalFit.Parameter);
         }
@@ -75,7 +75,7 @@ namespace andrena.Usus.net.View.ViewModels.Cockpit
         {
             _ClassSize.Update(
                 metrics.Rated.AverageRatedClassSize,
-                metrics.CommonKnowledge.NumberOfClasses,
+                metrics.CommonKnowledge.NumberOfTypes,
                 metrics.ClassSizeHotspots.Count(),
                 metrics.ClassSizeHistogram.GeometricalFit.Parameter);
         }
@@ -102,7 +102,7 @@ namespace andrena.Usus.net.View.ViewModels.Cockpit
         {
             _NonStaticPublicFields.Update(
                 metrics.Rated.AverageRatedNumberOfNonStaticPublicFields,
-                metrics.CommonKnowledge.NumberOfClasses,
+                metrics.CommonKnowledge.NumberOfTypes,
                 metrics.NumberOfNonStaticPublicFieldsHotspots.Count(),
                 metrics.NumberOfNonStaticPublicFieldsHistogram.GeometricalFit.Parameter);
         }

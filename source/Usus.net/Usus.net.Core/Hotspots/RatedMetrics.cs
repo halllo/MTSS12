@@ -39,7 +39,7 @@ namespace andrena.Usus.net.Core.Hotspots
             AverageRatedMethodLength = RatedMethods.AverageAny(m => m.RatedMethodLength, m => m.MethodLength > 0);
             AverageRatedClassSize = RatedTypes.AverageAny(m => m.RatedClassSize);
             AverageRatedNumberOfNonStaticPublicFields = RatedTypes.AverageAny(m => m.RatedNumberOfNonStaticPublicFields);
-            AverageComponentDependency = RatedTypes.AverageAny(m => m.CumulativeComponentDependency) / metrics.CommonKnowledge.NumberOfClasses;
+            AverageComponentDependency = RatedTypes.AverageAny(m => m.CumulativeComponentDependency) / metrics.CommonKnowledge.NumberOfTypes;
             NamespacesWithCyclicDependencies = (double)RatedNamespaces.CountAny(m => m.IsInCycle) / metrics.CommonKnowledge.NumberOfNamespaces;
         }
     }

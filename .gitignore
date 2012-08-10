@@ -4,3 +4,4 @@
 *.user
 _ReSharper*
 TestResults
+/source/Usus.net/Usus.net.Core.PerformanceTests/Samples

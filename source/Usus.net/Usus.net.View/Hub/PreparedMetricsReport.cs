@@ -44,7 +44,7 @@ namespace andrena.Usus.net.View.Hub
 
         private void ThrowExceptionWhenNoMetrics()
         {
-            if (Report.CommonKnowledge.NumberOfClasses == 0)
+            if (Report.CommonKnowledge.NumberOfTypes == 0)
                 throw new Exception("No metrics found. Consider analyzing a .NET library or executable.");
         }
 

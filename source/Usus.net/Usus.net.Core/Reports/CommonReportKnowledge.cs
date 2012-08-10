@@ -4,7 +4,7 @@ namespace andrena.Usus.net.Core.Reports
     public class CommonReportKnowledge
     {
         public int NumberOfMethods { get; private set; }
-        public int NumberOfClasses { get; private set; }
+        public int NumberOfTypes { get; private set; }
         public int NumberOfNamespaces { get; private set; }
         public int RelevantLinesOfCode { get; private set; }
 
@@ -14,7 +14,7 @@ namespace andrena.Usus.net.Core.Reports
         internal CommonReportKnowledge(int methods, int classes, int namespaces, int rlocs)
         {
             NumberOfMethods = methods;
-            NumberOfClasses = classes;
+            NumberOfTypes = classes;
             NumberOfNamespaces = namespaces;
             RelevantLinesOfCode = rlocs;
         }
@@ -37,7 +37,7 @@ namespace andrena.Usus.net.Core.Reports
         {
             if (!type.CompilerGenerated)
             {
-                NumberOfClasses++;
+                NumberOfTypes++;
                 RelevantLinesOfCode += 2 + type.NumberOfFields;
             }
         }

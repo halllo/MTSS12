@@ -69,7 +69,7 @@ namespace andrena.Usus.net.View.ViewModels.SQI
 
         private void SetCommonKnowledge(PreparedMetricsReport metrics)
         {
-            sqiParameters.Classes = metrics.CommonKnowledge.NumberOfClasses;
+            sqiParameters.Classes = metrics.CommonKnowledge.NumberOfTypes;
             sqiParameters.Methods = metrics.CommonKnowledge.NumberOfMethods;
             sqiParameters.Namespaces = metrics.CommonKnowledge.NumberOfNamespaces;
             sqiParameters.Rloc = metrics.CommonKnowledge.RelevantLinesOfCode;
