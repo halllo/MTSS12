@@ -39,7 +39,7 @@ namespace andrena.Usus.net.View.Dialogs.ViewModels
                    from crossReference in typeReferences.Referencing(to)
                    select crossReference;
         }
-  
+
         private IEnumerable<OutgoingTypeReferences> AllTypesWithReferencesIn(NamespaceMetricsReport currentNamespace)
         {
             return from type in metrics.TypesOfNamespace(currentNamespace)
@@ -48,9 +48,17 @@ namespace andrena.Usus.net.View.Dialogs.ViewModels
 
         private string DisplayStringOf(OutOfNamespaceReference reference)
         {
-            return string.Format("{0}\n -> {1}", 
-                reference.Source.FullName, 
-                reference.Target.FullName);
+            return string.Format("{0}\n -> {1} ({2})",
+                reference.Source.FullName,
+                reference.Target.FullName,
+                MethodsWith(reference));
+        }
+
+        private string MethodsWith(OutOfNamespaceReference reference)
+        {
+            return string.Join(", ", from method in metrics.MethodsOfType(reference.Source)
+                                     where method.TypeDependencies.Contains(reference.Target.FullName)
+                                     select method.Name);
         }
 
         public void JumpTo(string type)
