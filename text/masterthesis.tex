@@ -1005,7 +1005,7 @@ Die Klassengröße gehört zu den Metriken die kontextfrei bestimmt werden können. 
 \begin{lstlisting}[caption={Typen-Analyse zur Bestimmung der Anzahl der Methoden},label={listing:numberofmethods}]
 var result = type.Methods.Count(m => !m.IsDefaultCtor());
 \end{lstlisting}
-Da jeder nicht-statische Typ immer einen Default-Konstruktor enthält, wird dieser in der Klassengröße nicht berücksichtigt. Neben Konstruktoren und Destruktoren erzeugt der .NET-Compiler aus Properties, Indexern, Operatoren und Events ebenfalls Methoden. Gerade in den \texttt{get}- und \texttt{set}-Teilen eines Properties wird oft Logik implementiert, sodass auch hier mehr als nur Datenzugriff passiert und Methoden-ähnliche Konstrukte entstehen. Eine Unterscheidung, ob ein Property-Teil Logik enthält oder nicht (wie im Falle von Auto-Properties), kann Usus.net nicht machen. Usus.net sieht deswegen sowohl im \texttt{get}- als auch im \texttt{set}-Teil jeweils eine Methode. Wenn Properties generell ignoriert werden würden, könnte die Klassengröße-Metrik sehr leicht manipuliert werden, indem Methoden als Properties implementiert werden. Da Indexer sich wie Properties verhalten wird auch hier wieder eine Methode pro Zugriffsrichtung gezählt. Operatoren werden als statische Methoden definiert und beeinflussen daher ebenfalls die Klassengröße. Das letzte Sprachkonstrukt das ebenfalls in Methoden resultiert, ist das Event. Ein als \texttt{event} definiertes Feld beinhaltet ähnliche wie Properties zwei Teile. Über den \texttt{add}-Teil kann ein \texttt{EventHandler} registriert und den \texttt{remove}-Teil kann diesen wieder entfernt werden. Auch hier wird wieder pro Teil eine Methode erkannt, da in diesen Event-Teilen ebenfalls Logik implementiert werden kann.
+Da jeder nicht-statische Typ immer einen Default-Konstruktor enthält, wird dieser in der Klassengröße nicht berücksichtigt. Neben Konstruktoren und Destruktoren erzeugt der .NET-Compiler aus Properties, Indexern, Operatoren und Events ebenfalls Methoden, die von \emph{CCI Metadata} auch als solche erkannt werden. Gerade in den \texttt{get}- und \texttt{set}-Blöcken eines Properties wird oft Logik implementiert, sodass auch hier mehr als nur Datenzugriff passiert und Methoden-ähnliche Konstrukte entstehen. Eine Unterscheidung, ob ein Property-Block Logik enthält oder nicht (wie im Falle von Auto Implemented Properties), kann Usus.net nicht vornehmen. Usus.net sieht deswegen sowohl im \texttt{get}- als auch im \texttt{set}-Block jeweils eine Methode. Wenn Properties generell ignoriert werden würden, könnte die Klassengröße-Metrik sehr leicht manipuliert werden, indem Methoden als Properties implementiert werden. Da Indexer sich wie Properties verhalten wird auch hier wieder eine Methode pro Zugriffsrichtung gezählt. Operatoren werden als statische Methoden definiert und beeinflussen daher ebenfalls die Klassengröße. Das letzte Sprachkonstrukt das ebenfalls in Methoden resultiert, ist das Event. Ein als \texttt{event} definiertes Feld beinhaltet ähnlich wie Properties zwei Blöcke. Über den \texttt{add}-Block kann ein \texttt{EventHandler} registriert und den \texttt{remove}-Block kann diesen wieder entfernt werden. Auch hier wird wieder pro Block eine Methode erkannt, da in diesen Event-Blöcken ebenfalls Logik implementiert werden kann.
 
 \subsection{Nicht-statische öffentliche Felder}
 Die Anzahl der öffentlichen Felder, die nicht statisch sind, kann ebenfalls im Rahmen der kontextfreien Bestimmung der Klassenmetriken ermittelt werden. Diese Metrik wurde bereits in Unter-Unterabschnitt \ref{subsubsec:nonstaticpublicfields} vorgestellt. Listing \ref{listing:nonstaticpublicfields} zeigt diese bedingte Aufsummierung der Felder einer Klasse.
@@ -1017,7 +1017,7 @@ Auch hier ermöglicht die API der \emph{CCI Metadata} eine Iteration über alle Fe
 
 \subsection{Namespaces mit zyklischen Abhängigkeiten}
 \label{subsec:namespaceswithcyclicdependencies}
-Die einzige Metrik die Usus.net für Namespaces bestimmt, ist die Anzahl der zyklischen Abhängigkeiten. In Unter-Unterabschnitt \ref{subsubsec:packetswithcyclicdependencies} wurde hergeleitet, das dafür der Algorithmus \textit{Strongly Connected Components} verwendet werden kann. Die Berechnung setzt also den vollständigen Abhängigkeitsgraphen auf Namespace-Ebene voraus. Der Abhängigkeitsgraph auf Typen-Ebene wurde von Usus.net bereits für die Berechnung der kumulierten Komponentenabhängigkeit in \ref{subsec:ccdcode} erstellt. Aus diesem Graph kann der Namespace-Graph reduziert werden. Damit ist offensichtlich, das auch diese Metrik im Rahmen der nachträglichen Bearbeitung kontextabhängig bestimmt wird. Die Klasse \texttt{PostProcessNamespaceDependencies} führt die nötigen Berechnungen durch, indem zuerst der Abhängigkeitsgraph auf Namespace-Ebene erstellt wird. Danach werden die Kreise ermittelt und den entsprechenden Namespaces zugewiesen.
+Die Anzahl der zyklischen Abhängigkeiten ist die einzige Metrik die Usus.net für Namespaces bestimmen kann. In Unter-Unterabschnitt \ref{subsubsec:packetswithcyclicdependencies} wurde hergeleitet, das dafür der Algorithmus \textit{Strongly Connected Components} verwendet werden kann. Für die Berechnung wird also der vollständige Abhängigkeitsgraph auf Namespace-Ebene benötigt. Um die Berechnung der kumulierten Komponentenabhängigkeit in Unter-Unterabschnitt \ref{subsec:ccdcode} durchführen zu können, wurde der vollständige Abhängigkeitsgraph auf Typen-Ebene bereits erstellt. Aus diesem Graph kann der Namespace-Graph reduziert werden. Damit ist offensichtlich, das auch diese Metrik im Rahmen der nachträglichen Bearbeitung kontextabhängig bestimmt wird. Die Klasse \texttt{PostProcessNamespaceDependencies} führt die nötigen Berechnungen durch, indem zuerst der Abhängigkeitsgraph auf Namespace-Ebene erstellt wird. Danach werden die Kreise ermittelt und den entsprechenden Namespaces zugewiesen.
 \subsubsection{Namespace-Graph}
 Die Erstellung des Graphen aller Namespaces geschieht wie in Listing \ref{listing:namespacegraphcreation} dargestellt.
 \begin{lstlisting}[caption={Erzeugung des Abhängigkeitsgraphen auf Namespace-Ebene},label={listing:namespacegraphcreation}]
@@ -1065,6 +1065,8 @@ var result = from n in cycles.OfVertex(namespaceWithTypes).Vertices
 	     select n.Itself;
 \end{lstlisting}
 Nachdem alle Namespaces Informationen über die Kreise, auf denen sie sich eventuell befinden, erhalten haben, ist die nachträgliche Bearbeitung der Metrik-Analyse beendet. Das vollständige MetrikReport-Objekt steht dem Aufrufer der Analysemethoden der \texttt{Analyze}-Klasse zur Verfügung.
+\\
+Namespace-Hierarchie erzeugt trotzdem Zyklen (absolute Namespaces)
 
 
 \section{Objektmodell}
@@ -1663,6 +1665,8 @@ Wie schnell arbeitet Usus.net im Vergleich zu anderen Werkzeugen? Wird Zeit gesp
 PLINQ is faster than task for every assembly
 \\
 pdb-Files verhalten sich komisch bei parallelem einlesen. Bei erneutem Kompilieren entstehen Phantom-Änderungen, sprich Methodenlängen werden anders gelesen.
+\\
+pdb-Files werden nicht rechtzeitig freigegeben bei zu schnellen wiederholten Kompilieren.
 
 
 \section{Fallbeispiel Andrena-Kurs}
@@ -1691,6 +1695,10 @@ keine Testcoverage Ermittlung (also auch keine CRAP-Metrik und kein vollständig 
 automatische Refaktorings, bla bla
 \\
 mehr Verteilungen und deren Vergleich
+\\
+In der Evaluierung hat sich gezeigt, das die grafische Darstellung von Zyklen doch sinvoll ist
+\\
+Kleinester Zyklus in einem großen Zyklus hilft, die Problemstelle schneller zu finden
 
 
 
