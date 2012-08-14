@@ -70,7 +70,7 @@ namespace andrena.Usus_net_Cockpit {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Usus.net Cockpit.
+        ///   Looks up a localized string similar to Usus.NET Cockpit.
         /// </summary>
         internal static string ToolWindowTitle {
             get {

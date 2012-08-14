@@ -70,7 +70,7 @@ namespace andrena.Usus_net_Sqi {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Usus.net SQI.
+        ///   Looks up a localized string similar to Usus.NET SQI.
         /// </summary>
         internal static string ToolWindowTitle {
             get {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using andrena.Usus.net.View.Hub;
+using andrena.Usus.net.Core.Prepared;
+using andrena.Usus.net.Core.Reports;
 
 namespace andrena.Usus.net.View.ViewModels.Current
 {

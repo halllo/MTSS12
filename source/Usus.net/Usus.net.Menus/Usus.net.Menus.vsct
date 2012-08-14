@@ -41,7 +41,7 @@
       <Menu guid="guidUsus_net_MenusCmdSet" id="TopLevelMenu" priority="0x700" type="Menu">
         <Parent guid="guidSHLMainMenu" id="IDG_VS_MM_TOOLSADDINS" />
         <Strings>
-          <ButtonText>Usus.net</ButtonText>
+          <ButtonText>Usus.NET</ButtonText>
           <CommandName>Usus.net</CommandName>
         </Strings>
       </Menu>

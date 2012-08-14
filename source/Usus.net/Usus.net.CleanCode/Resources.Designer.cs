@@ -70,7 +70,7 @@ namespace andrena.Usus_net_CleanCode {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Usus.net CleanCode.
+        ///   Looks up a localized string similar to Usus.NET CleanCode.
         /// </summary>
         internal static string ToolWindowTitle {
             get {

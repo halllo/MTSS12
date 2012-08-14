@@ -1,8 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
 using andrena.Usus.net.Core.Helper;
+using andrena.Usus.net.Core.Prepared;
 using andrena.Usus.net.View.ExtensionPoints;
-using andrena.Usus.net.View.Hub;
 
 namespace andrena.Usus.net.View.ViewModels.SQI
 {
@@ -59,7 +59,7 @@ namespace andrena.Usus.net.View.ViewModels.SQI
         {
         }
 
-        protected override void AnalysisFinished(Hub.PreparedMetricsReport metrics)
+        protected override void AnalysisFinished(PreparedMetricsReport metrics)
         {
             SetCommonKnowledge(metrics);
             SetReportParameters(metrics);

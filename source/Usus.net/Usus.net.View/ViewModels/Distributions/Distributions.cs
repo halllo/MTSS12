@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using andrena.Usus.net.Core.Helper;
 using andrena.Usus.net.Core.Math;
+using andrena.Usus.net.Core.Prepared;
+using andrena.Usus.net.Core.Reports;
 using andrena.Usus.net.View.Hub;
 
 namespace andrena.Usus.net.View.ViewModels.Distributions

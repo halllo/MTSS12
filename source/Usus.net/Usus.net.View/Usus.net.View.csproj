@@ -76,8 +76,6 @@
       <DependentUpon>Distributions.xaml</DependentUpon>
     </Compile>
     <Compile Include="ExtensionPoints\IKnowSqiDetails.cs" />
-    <Compile Include="Hub\PreparedMetricsReport.cs" />
-    <Compile Include="Hub\PreparedMetricsFactory.cs" />
     <Compile Include="Dialogs\ListDisplay.xaml.cs">
       <DependentUpon>ListDisplay.xaml</DependentUpon>
     </Compile>

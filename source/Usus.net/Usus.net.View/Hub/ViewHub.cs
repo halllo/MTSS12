@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Windows;
 using andrena.Usus.net.Core;
+using andrena.Usus.net.Core.Prepared;
 using andrena.Usus.net.Core.Reports;
 
 namespace andrena.Usus.net.View.Hub

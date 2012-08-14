@@ -70,7 +70,7 @@ namespace andrena.Usus_net_Hotspots {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Usus.net Hotspots.
+        ///   Looks up a localized string similar to Usus.NET Hotspots.
         /// </summary>
         internal static string ToolWindowTitle {
             get {

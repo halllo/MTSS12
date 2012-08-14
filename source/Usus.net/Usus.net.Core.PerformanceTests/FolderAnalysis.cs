@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Linq;
 using andrena.Usus.net.Core;
@@ -20,6 +21,16 @@ namespace Usus.net.Core.PerformanceTests
         protected MetricsReport AnalyzeInParallelAssembliesIn(string ususNetCorePerformancetestsSamplesPdbissueBuild1)
         {
             return AnalyzeParallel.PortableExecutables(In(ususNetCorePerformancetestsSamplesPdbissueBuild1));
+        }
+
+        protected void OutputAnalysisTimes(string heading, MetricsReport metrics)
+        {
+            var times = new AnalyzeTimes(metrics);
+            Console.WriteLine(string.Format("{0}:\t{1}ms\t(analysis: {2}ms\tpostprocessing: {3}ms)",
+                                            heading,
+                                            times.CompleteTime.Milliseconds,
+                                            times.AnalysisTime.Milliseconds,
+                                            times.PostProcessingTime.Milliseconds));
         }
     }
 }

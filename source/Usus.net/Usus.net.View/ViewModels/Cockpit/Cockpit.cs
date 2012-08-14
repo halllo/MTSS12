@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using andrena.Usus.net.Core.Prepared;
 using andrena.Usus.net.Core.Reports;
 using andrena.Usus.net.View.ExtensionPoints;
-using andrena.Usus.net.View.Hub;
 using andrena.Usus.net.View.ViewModels.Hotspots;
 
 namespace andrena.Usus.net.View.ViewModels.Cockpit

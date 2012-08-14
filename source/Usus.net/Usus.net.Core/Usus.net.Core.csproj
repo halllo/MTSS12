@@ -112,6 +112,8 @@
     <Compile Include="Reports\Changes.cs" />
     <Compile Include="Reports\MetricsReportInfo.cs" />
     <Compile Include="Reports\MetricsReportInfoExtensions.cs" />
+    <Compile Include="Prepared\PreparedMetricsFactory.cs" />
+    <Compile Include="Prepared\PreparedMetricsReport.cs" />
     <Compile Include="Reports\SourceCodeLocation.cs" />
     <Compile Include="Metrics\CreateGraph.cs" />
     <Compile Include="Metrics\Methods\CyclomaticComplexityOfAst.cs" />

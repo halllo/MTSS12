@@ -1,4 +1,5 @@
 using andrena.Usus.net.Core.Hotspots;
+using andrena.Usus.net.Core.Prepared;
 using andrena.Usus.net.Core.Reports;
 using andrena.Usus.net.View.ExtensionPoints;
 using andrena.Usus.net.View.Hub;
