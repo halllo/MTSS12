@@ -11,7 +11,7 @@ namespace andrena.Usus_net_Cockpit
     {
         bool parallelAnalysis = false;
 
-        [Category("Usus.net")]
+        [Category("Usus.NET")]
         [DisplayName("Analyze in parallel")]
         [Description("When his value is set to True, the build analysis of the projects in the solution is parallelized using all available processor cores. When it is set to False, the analysis will not be parallelized.")]
         public bool ParallelizedAnalysis

@@ -15,7 +15,7 @@ namespace andrena.Usus_net_Cockpit
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [ProvideToolWindow(typeof(MyToolWindow))]
     [Guid(GuidList.guidUsus_net_CockpitPkgString)]
-    [ProvideOptionPage(typeof(OptionPane), "Usus.net", "Analysis Settings", 0, 0, true)]
+    [ProvideOptionPage(typeof(OptionPane), "Usus.NET", "Analysis Settings", 0, 0, true)]
     public sealed class Usus_net_CockpitPackage : Package
     {
         /// <summary>
