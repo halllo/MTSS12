@@ -3,5 +3,6 @@
 *.suo
 *.user
 _ReSharper*
+_sqi
 TestResults
 /source/Usus.net/Usus.net.Core.PerformanceTests/Samples

@@ -6,13 +6,19 @@ namespace andrena.Usus.net.Core.Reports
 {
     public class MetricsReport
     {
-        internal static MetricsReport Of(IEnumerable<MetricsReport> reports)
+        internal static MetricsReport Of(params MetricsReport[] reports)
         {
             var combinedReport = new MetricsReport();
             combinedReport.Remember.WhenCreated = reports.FirstCreated();
+            AddTypesOf(reports, combinedReport);
+            combinedReport.CommonKnowledge.SetAssemblies(reports.Length);
+            return combinedReport;
+        }
+
+        private static void AddTypesOf(MetricsReport[] reports, MetricsReport combinedReport)
+        {
             foreach (var typeMetrics in reports.SelectMany(r => r.typeReports.Values))
                 combinedReport.AddTypeReport(typeMetrics);
-            return combinedReport;
         }
 
         Dictionary<string, TypeMetricsWithMethodMetrics> typeReports;

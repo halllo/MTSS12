@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AnalyzeTimes.cs" />
+    <Compile Include="AndrenaRefactoring.cs" />
     <Compile Include="FolderAnalysis.cs" />
     <Compile Include="PdbIssueTest.cs" />
     <Compile Include="OpenSourceSoftwareAnalysis.cs" />

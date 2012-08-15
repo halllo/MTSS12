@@ -19,8 +19,10 @@ namespace Usus.net.Core.PerformanceTests
 
         private void AnalyzeFolder(string folder)
         {
-            var metrics = AnalyzeAssembliesIn(Samples.Folder + folder);
-            OutputAnalysisTimes(folder, metrics);
+            Console.WriteLine("Sequential");
+            OutputAnalysisTimes(folder, AnalyzeAssembliesIn(Samples.Folder + folder));
+            Console.WriteLine("Parallel");
+            OutputAnalysisTimes(folder, AnalyzeInParallelAssembliesIn(Samples.Folder + folder));
         }
     }
 }

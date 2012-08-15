@@ -1,7 +1,8 @@
 \documentclass[
 a4paper, 							% Papierformat
 %10pt,								% Schriftgröße (12pt, 11pt (Standard))
-%twoside,							% Doppelseiten
+twoside,							% Doppelseiten
+BCOR=0mm,							% Bundkorrektur
 titlepage,						% Titelei auf eigener Seite
 %normalheadings,			% Überschriften etwas kleiner (smallheadings)
 %idxtotoc,						% Index im Inhaltsverzeichnis
@@ -12,7 +13,7 @@ titlepage,						% Titelei auf eigener Seite
 %draft								% überlangen Zeilen in Ausgabe gekennzeichnet
 ]
 {scrreprt}
-\usepackage[ngerman]{babel}
+\usepackage[ngerman]{babel,translator}
 \usepackage[latin1]{inputenc}
 \usepackage{graphicx}
 \usepackage{url}
@@ -24,26 +25,44 @@ titlepage,						% Titelei auf eigener Seite
     colorlinks,
     citecolor=blue,
     filecolor=black,
-    linkcolor=blue,
+    linkcolor=[rgb]{0,0,0.6},
     urlcolor=blue
 }
 \usepackage{mathtools}
 \usepackage{listings} \lstset{numbers=left, numberstyle=\tiny, numbersep=5pt, basicstyle=\fontsize{9}{13}\selectfont, xleftmargin=1cm, xrightmargin=1cm, frame=topline} \lstset{language=Java}
 \usepackage{shadethm}
 \usepackage[table]{xcolor}
+\usepackage{glossaries}
+\makeglossaries
+\include{gloassary}
+\usepackage{fancyhdr}
+
+
 
 \newshadetheorem{definition}{Definition}
 \newshadetheorem{stakeholder}{Interessenvertreter}
 \newshadetheorem{goal}{Ziel}
-\definecolor{shadethmcolor}{rgb}{.95,.95,.95}   % Farbe des Hintergrundes  
-\definecolor{shaderulecolor}{rgb}{0.7,0.7,0.7}   % Farbe des Rahmens
+\definecolor{shadethmcolor}{rgb}{.95,.95,.95}   % Farbe des Hintergrundes
+\definecolor{shaderulecolor}{rgb}{.9,.9,.9}   % Farbe des Rahmens
 \setlength{\shadeboxrule}{1.0pt}   % Breite des Rahmens
+
+\newcommand{\blankpage}{
+	\newpage
+	\thispagestyle{empty}
+	\mbox{}
+	\newpage
+}
+\newcommand{\blankpagewithnumber}{
+	\newpage
+	\mbox{}
+	\newpage
+}
+
 
 \begin{document}
 
 
 
-\thispagestyle{empty}
 \begin{titlepage}
 \begin{figure}[t]
 	\centering
@@ -64,6 +83,10 @@ Bischweier, den \today
 
 
 
+\blankpage
+
+
+
 \pagenumbering{roman}
 \setcounter{page}{1}
 \begin{center}\textbf{\large Erklärung}\\[1cm]\end{center}
@@ -71,7 +94,9 @@ Hiermit versichere ich, dass ich die vorliegende Arbeit selbstständig verfasst u
 \\[4\baselineskip]
 Bischweier, den \today \\
 Manuel Naujoks
-\newpage
+
+
+\blankpagewithnumber
 
 
 
@@ -95,8 +120,20 @@ Another metric analysis is performed in order to find heuristics or rules with s
 
 
 
-
 \tableofcontents
+
+\listoffigures
+
+\listoftables
+
+
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[CE]{Visual Studio Erweiterung zur statischen Code-Analyse} 
+\fancyhead[LO]{\small{\leftmark}}
+\fancyhead[RO]{\small{\rightmark}}
+\fancyfoot[LE,RO]{\thepage}
 
 
 
@@ -110,6 +147,9 @@ bla bla bla Entwicklerfeedback
 bla bla bla Übersicht über Codebasis
 bla bla bla direkt in Visual Studio
 bla bla bla}
+Innerhalb welchen größeren Vorhabens wird die Arbeit durchgeführt?
+Bei welcher Firma?
+Was ist die Gesamtzielsetzung?
 
 \section{andrena objects ag}
 \label{sec:andrena}
@@ -133,9 +173,7 @@ In diesem Abschnitt wird zunächst auf die Clean Code Idee von Robert C. Martin s
 
 \subsection{Clean Code}
 \label{subsec:cleancode}
-Ein Softwaresystem wird in Form von Quellcode erstellt. Dieser Code wird anschließend kompiliert um eine ausführbares Programm zu erhalten. Robert C. Martin beschreibt Code in seinem Buch "`Clean Code"' als Sprache, in der wir die Anforderungen an die Software maschinenlesbar zum Ausdruck bringen \cite{CleanCode}. Weiter beschreibt er in seinem Buch auch Prinzipien und Best Practices, die das Erstellen von verständlicherem und wartbareren Quellcode unterstützen. Die selben Prinzipien wurden auch von Ralf Westphal und Stefan Lieser aufgegriffen und im Rahmen eines Wertesystems mit sieben Graden vorgestellt \cite{CleanCodeDeveloper}. Martin's "`Clean Code"' Buch bleibt auch für Westphal und Lieser die grundlegende Lektüre.
-\paragraph{}
-Die Prinzipien und Best Practices der Clean Code Bewegung umfassen viele Aspekte, die bereits durch Kent Beck in seinem Buch über die Methodik \emph{Extreme Programming} (XP) \cite{XP} eingeführt wurden. Drei wichtige Bestandteile von XP, die ebenfalls in den Graden des Clean Code Wertesystems von Westphal und Lieser auftreten, werden jetzt wie folgt definiert.
+Ein Softwaresystem wird in Form von Quellcode erstellt. Dieser Code wird anschließend kompiliert um eine ausführbares Programm zu erhalten. Robert C. Martin beschreibt Code in seinem Buch "`Clean Code"' als Sprache, in der wir die Anforderungen an die Software maschinenlesbar zum Ausdruck bringen \cite{CleanCode}. Weiter beschreibt er in seinem Buch auch Prinzipien und Best Practices, die das Erstellen von verständlicherem und wartbareren Quellcode unterstützen. Die selben Prinzipien wurden auch von Ralf Westphal und Stefan Lieser aufgegriffen und im Rahmen eines Wertesystems mit sieben Graden vorgestellt \cite{CleanCodeDeveloper}. Martin's "`Clean Code"' Buch bleibt auch für Westphal und Lieser die grundlegende Lektüre. Die Prinzipien und Best Practices der Clean Code Bewegung umfassen viele Aspekte, die bereits durch Kent Beck in seinem Buch über die Methodik \emph{Extreme Programming} (XP) \cite{XP} eingeführt wurden. Drei wichtige Bestandteile von XP, die ebenfalls in den Graden des Clean Code Wertesystems von Westphal und Lieser auftreten, werden jetzt wie folgt definiert.
 \begin{definition}[Automatisiertes Testen]
 Automatisiertes Testen ist eine der wichtigsten Praktiken in der Clean Code Bewegung. Nach Robert C. Martin ist es die Aufgabe eines Entwicklers keinen Schaden in einem Softwaresystem anzurichten. Damit meint er Schaden an der Funktionalität und Schaden an der Struktur der Anwendung. Beides kann mit automatisierten Testfällen sichergestellt werden.
 \end{definition}
@@ -814,7 +852,7 @@ CSharpAstResolver CreateResolver(CompilationUnit parsed, params Type[] types)
     return new CSharpAstResolver(project.CreateCompilation(), parsed, file);
 }
 \end{lstlisting}
-Der Code orientiert sich an dem Demo Beispiel von Daniel Grunwald in dem NRefactory-Repository \cite{NRefacRepo}. Das übergebene \texttt{CompilationUnit}-Objekt ist der Wurzelknoten eines NRefactory-AST, der aus Quellcode-Fragment erstellt wurde. Dieser AST wird für die Typ-Zuordnung vorbereitet und gemeinsam mit allen anderen Assemblies, die für die Auflösung von externen Typen verwendet werden sollen, in Form eines \texttt{CSharpProjectContent}-Objekts zusammengefasst. Um diese Assemblies zu finden, wird jede durch einen in ihr enthaltenen, nicht weiter relevanten Typ identifiziert. Für die Erzeugung des \texttt{CSharpAstResolver}-Objekts, wird der unvorbereitete AST, der vorbereitete AST und das Kompilat des \texttt{CSharpProjectContent}-Objekts übergeben. Die eigentliche Auflösung wird dann über einen Aufruf der \texttt{CSharpAstResolver.ApplyNavigator}-Methode synchron durchgeführt. Diese Funktion erwartet ein \texttt{IResolveVisitorNavigator}-Objekt und teilt diesem alle aufgelösten Details zu allen Knoten im AST mit. Ähnlich wie die CCI erlaubt auch Mono.Cecil das manuelle Einlesen von Assemblies und pdb-Dateien um diese anhand der CIL-Anweisungen zu analysieren. Assemblies und pdb-Dateien können außerdem auch verändert und gespeichert werden.
+Der Code orientiert sich an dem Demo Beispiel von Daniel Grunwald in dem NRefactory-Repository \cite{NRefacRepo}. Das übergebene \texttt{CompilationUnit}-Objekt ist der Wurzelknoten des AST, der aus dem Quellcode-Fragment erstellt wurde. Dieser AST wird für die Typ-Zuordnung vorbereitet und gemeinsam mit allen anderen Assemblies, die für die Auflösung von externen Typen verwendet werden sollen, in Form eines \texttt{CSharpProjectContent}-Objekts zusammengefasst. Um diese Assemblies zu finden, wird jede durch einen in ihr enthaltenen, nicht weiter relevanten Typ identifiziert. Für die Erzeugung des \texttt{CSharpAstResolver}-Objekts, wird der unvorbereitete AST, der vorbereitete AST und das Kompilat des \texttt{CSharpProjectContent}-Objekts übergeben. Die eigentliche Auflösung wird dann über einen Aufruf der \texttt{CSharpAstResolver.ApplyNavigator}-Methode synchron durchgeführt. Diese Funktion erwartet ein \texttt{IResolveVisitorNavigator}-Objekt und teilt diesem alle aufgelösten Details zu allen Knoten im AST mit. Ähnlich wie die CCI erlaubt auch Mono.Cecil das manuelle Einlesen von Assemblies und pdb-Dateien um diese anhand der CIL-Anweisungen zu analysieren. Assemblies und pdb-Dateien können außerdem auch verändert und gespeichert werden.
 
 
 \section{Codename "`Roslyn"'}
@@ -1487,9 +1525,9 @@ Die Funktion der geometrischen Verteilung verhält sich genauso, da sie den gleic
 \end{figure}
 Obwohl die Exponentialverteilung und die geometrische Verteilung nicht identisch sind, kann der Parameter, von dem beide abhängig sind auf die gleiche Art berechnet werden. Das Ergebnis verhält sich in beiden Verteilungen vergleichbar. Im Kontext der Software-Metriken gilt: je größer das $\lambda$, desto extremer entspricht der Code dem Clean Code Paradigma von Robert C. Martin. Martin befürwortet sehr einfache und sehr kurze Methoden, sowie Klassen mit sehr wenig Abhängigkeiten \cite{CleanCode}.
 \paragraph{}
-Usus.NET berechnet den $\lambda$-Parameter in der Klasse \texttt{GeometricalDistributionFitting} nach Formel \ref{eq:edistributionml}. Die Komponenten, die für diese Berechnung zuständig sind, wurden bereits in Abschnitt \ref{sec:distributions} vorgestellt. Das Ergebnis kann anschließend in der Histogramm-Oberfläche aus Unterabschnitt \ref{subsec:ususnethostigram} angezeigt werden. Abbildung \ref{fig:ususnet_histogram} zeigt beispielsweise die Verteilung der Klassengrößen einer Beispielanwendung. In Kapitel \ref{chap:inaction} werden konkretere Beispiele betrachtet und mit Usus.NET analysiert.
+Usus.NET berechnet den $\lambda$-Parameter in der Klasse \texttt{GeometricalDistributionFitting} nach Formel \ref{eq:edistributionml}. Die Komponenten, die für diese Berechnung zuständig sind, wurden bereits in Abschnitt \ref{sec:distributions} vorgestellt. Das Ergebnis kann anschließend in der Histogramm-Oberfläche aus Unterabschnitt \ref{subsec:ususnethostigram} angezeigt werden. Abbildung \ref{fig:ususnet_histogram} zeigt beispielsweise die Verteilung der Klassengrößen einer Beispielanwendung. In Kapitel \ref{chap:performance} werden konkretere Beispiele betrachtet und mit Usus.NET analysiert.
 
-\section{Fehler}
+\section{Abweichung}
 \label{sec:histogramerror}
 Da das Histogramm durch eine stetige Funktion angenähert wird, ist es sehr wahrscheinlich, dass die Funktion mit dem bestimmten Parameter nicht exakt durch die Punkte des Histogramms läuft. Diese Abweichung kann laut Eric W. Weisstein mit den Chi-Squared Test ermittelt werden \cite{ChiSquared}. Formel \ref{eq:chisquaredtest} zeigt dieses Maß der Abweichung.
 \begin{equation}
@@ -1654,21 +1692,22 @@ Eventuell kann eine Kombination aus SQI-Wert und Zeit und Datum auch ergänzt wer
 
 
 
-\chapter{In Aktion}
-\label{chap:inaction}
-Nachdem Usus.NET in den vergangenen Kapiteln umfangreich beschrieben wurde, soll die Erweiterung in diesem Kapitel einmal tatsächlich angewendet werden. In diesem Zusammenhang werden zunächst einige frei verfügbare Open Source Projekte analysiert um die Performance von Usus.NET zu messen. Dabei werden die Metriken dieser Programme mit der Laufzeit in Verbindung gebracht. Usus.NET wird ebenfalls von Usus.NET analysiert. Abschließend wird eine Refactoring-Übung aus einem andrena-Kurs mit Usus.NET durchgeführt.
+\chapter{Usus.NET Performance}
+\label{chap:performance}
+Nachdem Usus.NET in den vergangenen Kapiteln umfangreich beschrieben wurde, soll die Erweiterung in diesem Kapitel einmal tatsächlich eingesetzt werden. In diesem Zusammenhang werden zunächst einige frei verfügbare Open Source Projekte analysiert um die Performance von Usus.NET zu messen. Zusätzlich wird Usus.NET auch selber analysiert. Dabei werden die Metriken dieser Programme mit der Laufzeit der Analysen in Verbindung gebracht. Abschließend wird eine Refactoring-Übung aus einem andrena-Kurs mit Usus.NET durchgeführt.
 
 
-\section{Usus.NET Performance}
-Die Metriken, die Usus.NET berechnet und gewichtet werden in dieser Konstellation nur von dem Usus für Java berechnet. Ein fairer Vergleich mit anderen Werkzeugen wie Visual Studio Code Metrics Power Tool, Code Metrics Viewer und NDepend kann leider nicht durchgeführt werden, da diese Tools andere Metriken berechnen. Es hat den Anschein, das NDepend Analysen schneller durchführen kann Usus.NET. Dies könnte daran liegen, dass NDepend eventuell nur CCI Metadata und nicht auch CCI Code and AST Components, oder sogar eine optimierte Eigenentwicklung verwendet. Abbildung \ref{fig:samplesanalysis} zeigt die Laufzeiten von Usus.NET bei der Analyse verschiedener Open Source Projekte. In dieser Auswahl sind aktuell nur die Bibliotheken enthalten, die Usus.NET auch verwendet. Dabei liegt es nahe Usus.NET selber ebenfalls zu analysieren.
+\section{Laufzeitmessungen}
+Die Metriken, die Usus.NET berechnet und gewichtet werden in dieser Konstellation nur von dem Usus für Java berechnet. Ein fairer Vergleich mit anderen Werkzeugen wie Visual Studio Code Metrics Power Tool, Code Metrics Viewer und NDepend kann leider nicht durchgeführt werden, da diese Tools andere Metriken berechnen. Es hat den Anschein, das NDepend Analysen schneller durchführen kann Usus.NET. Dies könnte daran liegen, dass NDepend eventuell nur CCI Metadata und nicht auch CCI Code and AST Components, oder sogar eine optimierte Eigenentwicklung verwendet. Abbildung \ref{fig:projecttimes} zeigt die Laufzeiten von Usus.NET bei der Analyse verschiedener Open Source Projekte. Die beiden CCI-Bibliotheken, sowie QuickGraph werden von der Usus.NET-Implementierung direkt verwendet. GraphSharp ist eine Bibliothek, die die mit QuickGraph erzeugten Graphen visualisieren kann. Zusätzlich liegt es nahe, Usus.NET selber ebenfalls zu analysieren.
 \begin{figure}[h]
 	\centering
-		\includegraphics[width=15cm]{images/ossprojectanalysis.png}
-	\caption{Analyse von Beispiel-Projekten}
-	\label{fig:samplesanalysis}
+		\includegraphics[width=15cm]{images/projecttimes.png}
+	\caption{Laufzeiten der Analysen verschiedener Open Source Projekte}
+	\label{fig:projecttimes}
 \end{figure}
-\textcolor[rgb]{1,0,0}{todo: Bessere Tabelle mit Werten der parallelen Analyse und der RLOC, \# of Assemblies Metriken (als Diagramm)}
-Um die Analyse zu beschleunigen, kann Usus.NET eine Menge von Assemblies auch parallelisiert analysieren. In Abschnitt \ref{sec:metriccalc} wurde für die sequentielle Analyse die Klasse \texttt{Analyze} vorgestellt. Die Klasse \texttt{AnalyzeParallel} erlaubt es, die Analyse auf die einzelnen Prozessorkerne des Systems aufzuteilen. In der MSDN Library beschreibt Microsoft Parallel LINQ als elegantes Mittel um Parallelität bei der Verarbeitung von Listen zu verwenden \cite{PLINQ}. Da sich die zu analysierenden Assemblies in einer Liste befinden, kann PLINQ sehr einfach in Usus.NET verwendet werden. Listing \ref{listing:parallelanalyze} zeigt das nur durch den Methodenaufruf \texttt{AsParallel()} die Liste der Assemblies parallel verarbeitet wird.
+Die Schaubilder zeigen deutlich, das die Analyse größerer Projekte länger dauert. Als Projektgröße hat dabei ist Anzahl der Assemblies einen größeren Einfluss auf die Laufzeit als die Anzahl an relevanten Codezeilen (RLOC). Dieser Einfluss ist gut an der Laufzeit von QuickGraph zu erkennen. Obwohl diese eine Bibliothek im Vergleich zu GraphSharp mehr Zeilen Quellcode enthält, ist die Analyse schneller. Da GraphSharp aus zwei Assemblies mit insgesamt weniger Zeilen besteht, dauert die Analyse hier länger. Um die Analyse von großen Projekten zu beschleunigen, kann Usus.NET eine Menge von Assemblies auch parallelisiert analysieren. Abbildung \ref{fig:projecttimes} zeigt daher auch für jedes Projekt einmal die Laufzeit der sequentiellen und einmal die der parallelen Analyse. Je größer das Projekt, umso eher kann durch die Verwendung mehrerer Prozessorkerne eine deutliche Laufzeitreduktion gemessen werden. Im Beispiel konnte die Laufzeit des CciAst-Projekts (CCI Code and AST Components) auf einem System mit vier Kernen fast halbiert werden.
+\paragraph{}
+In Abschnitt \ref{sec:metriccalc} wurde für die sequentielle Analyse die Klasse \texttt{Analyze} vorgestellt. Die Klasse \texttt{AnalyzeParallel} erlaubt es, die Analyse auf die einzelnen Prozessorkerne des Systems aufzuteilen. In der MSDN Library beschreibt Microsoft "`Parallel LINQ"' (PLINQ) als elegantes Mittel um Parallelität bei der Verarbeitung von Listen zu verwenden \cite{PLINQ}. Da sich die zu analysierenden Assemblies in einer Liste befinden, kann PLINQ sehr einfach in Usus.NET verwendet werden. Listing \ref{listing:parallelanalyze} zeigt, dass nur durch den Methodenaufruf \texttt{AsParallel()} die Liste der Assemblies parallel verarbeitet wird.
 \begin{lstlisting}[caption={Sequentielle und parallele Analyse von mehreren Assemblies},label={listing:parallelanalyze}]
 //sequentiell: Analyze.PortableExecutables(files)
 from file in files select AnalyzeFile(file)
@@ -1676,7 +1715,7 @@ from file in files select AnalyzeFile(file)
 //parallel: AnalyzeParallel.PortableExecutables(files)
 from file in files.AsParallel() select AnalyzeFile(file)
 \end{lstlisting}
-Leider hat die parallele Analyse auch einen Nachteil. Manchmal werden pdb-Dateien von der CCI nicht korrekt geladen, wenn die Analyse auf mehrere Theads verteilt läuft. Dieses Problem äußert sich dadurch, dass beispielsweise Zeilenangaben zu Methodenlängen nicht erfolgreich ermittelt werden können. Im Usus.NET Cockpit-Fenster entstehen dadurch sogenannte Phantom-Änderungen der Methoden-Metriken, wenn die gleiche Solution zweimal hintereinander analysiert wird, ohne dass der Quellcode geändert wurde. Aus diesem Grund kann unter dem Menü-Eintrag \texttt{Tools / Options / Usus.NET} eingestellt werden, ob Usus.NET die Analyse sequentiell oder parallel durchführen soll. Generell scheint die CCI Schwierigkeiten mit dem Ressource Management der pdb-Dateien zu haben. Wenn Usus.NET die pdb-Dateien nutzt und anschließend sofort wieder über die CCI freigibt, kann Visual Studio diese Dateien erst nach einer kurzen zeitlichen Verzögerung wieder ersetzen.
+Leider hat die parallele Analyse gegenüber der höheren Geschwindigkeit auch einen Nachteil. Manchmal werden pdb-Dateien von der CCI nicht korrekt geladen, wenn die Analyse auf mehrere Theads verteilt läuft. Dieses Problem äußert sich dadurch, dass beispielsweise Zeilenangaben zu Methodenlängen nicht erfolgreich ermittelt werden können. Im Usus.NET Cockpit-Fenster entstehen dadurch sogenannte Phantom-Änderungen der Methoden-Metriken, wenn die gleiche Solution zweimal hintereinander analysiert wird, ohne dass der Quellcode geändert wurde. Aus diesem Grund kann unter dem Menü-Eintrag \texttt{Tools / Options / Usus.NET} eingestellt werden, ob Usus.NET die Analyse sequentiell oder parallel durchführen soll. Generell scheint die CCI Schwierigkeiten mit dem Ressource Management der pdb-Dateien zu haben. Wenn Usus.NET die pdb-Dateien nutzt und anschließend sofort wieder über die CCI freigibt, kann Visual Studio diese Dateien erst nach einer kurzen zeitlichen Verzögerung wieder ersetzen.
 
 
 \section{Fallbeispiel Andrena-Kurs}
@@ -1699,7 +1738,7 @@ Graphen Visualisierung weggelassen
 Nur Analyse einer Verteilungsfunktion als Clean Code-Metrik
 \\
 keine Testcoverage Ermittlung (also auch keine CRAP-Metrik und kein vollständig automatischer SQI)
-
+\gls{computer2}
 
 
 
@@ -1712,9 +1751,12 @@ mehr Verteilungen und deren Vergleich
 In der Evaluierung hat sich gezeigt, das die grafische Darstellung von Zyklen doch sinvoll ist
 \\
 Kleinester Zyklus in einem großen Zyklus hilft, die Problemstelle schneller zu finden
+\gls{computer}
 
 
 
+
+\printglossaries
 
 
 
@@ -1728,6 +1770,7 @@ Kleinester Zyklus in einem großen Zyklus hilft, die Problemstelle schneller zu f
 \chapter*{Anlagen}
 Das unveröffentlichte Manuskript "`Beschreibung der Berechnungsmethoden für Prozessqualitätsindex und Softwarequalitätsindex"' von Dr. Eberhard Kuhn befindet sich auf der beiliegenden CD.
 
+Unit- und Integration-Testpläne (Referenz aus Abschnitt "`Testen"')
 
 
 
