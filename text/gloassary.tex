@@ -7,61 +7,61 @@
 \newglossaryentry{CC}
 {
    name={Zyklomatische Komplexit\"at},
-   description={ist eine Eigenschaft von Methoden und bezeichnet die Anzahl der unabh\"angigen M\"oglichkeiten eine Methode zu durchlaufen}
+   description={ist eine \gls{Metrik} von Methoden und bezeichnet die Anzahl der unabh\"angigen M\"oglichkeiten eine Methode zu durchlaufen}
 }
 
 \newglossaryentry{ML}
 {
    name={Methodenl\"ange},
-   description={ist eine Eigenschaft von Methoden und bezeichnet im Kontext von Usus.NET die Anzahl der Code-Zeilen die Logik enthalten}
+   description={ist eine \gls{Metrik} von Methoden und bezeichnet im Kontext von Usus.NET die Anzahl der Code-Zeilen die Logik enthalten}
 }
 
 \newglossaryentry{CS}
 {
    name={Klassengr\"o\ss e},
-   description={ist eine Eigenschaft von Klassen und Interfaces und bezeichnet im Kontext von Usus.NET die Anzahl der Methoden eines Typen}
+   description={ist eine \gls{Metrik} von Klassen und Interfaces und bezeichnet im Kontext von Usus.NET die Anzahl der Methoden eines Typen}
 }
 
 \newglossaryentry{CCD}
 {
    name={Kumulierte Komponentenabh\"angigkeit},
-   description={ist eine Eigenschaft von Klassen und Interfaces und bezeichnet die Anzahl anderer Klassen und Interfaces, von denen die Klasse oder das Interface direkt und indirekt abh\"angig ist}
+   description={ist eine \gls{Metrik} von Klassen und Interfaces und bezeichnet die Anzahl anderer Klassen und Interfaces, von denen die Klasse oder das Interface direkt und indirekt abh\"angig ist}
 }
 
 \newglossaryentry{ACD}
 {
    name={Durchschnittliche Kumulierte Komponentenabh\"angigkeit},
-   description={ist eine Eigenschaft einer Menge an Klassen und Interfaces und bezeichnet den Durchschnitt aller \glslink{CCD}{kumulierter Komponentenabh\"angigkeiten} der enthaltenen Klassen und Interfaces}
+   description={ist eine \gls{Metrik} einer Menge an Klassen und Interfaces und bezeichnet den Durchschnitt aller \glslink{CCD}{kumulierter Komponentenabh\"angigkeiten} der enthaltenen Klassen und Interfaces}
 }
 
 \newglossaryentry{ACS}
 {
    name={Durchschnittliche Klassengr\"o\ss e},
-   description={ist eine Eigenschaft einer Menge an Klassen und Interfaces und bezeichnet den Durchschnitt aller \glslink{CS}{Klassengr\"o\ss en} der enthaltenen Klassen und Interfaces}
+   description={ist eine \gls{Metrik} einer Menge an Klassen und Interfaces und bezeichnet den Durchschnitt aller \glslink{CS}{Klassengr\"o\ss en} der enthaltenen Klassen und Interfaces}
 }
 
 \newglossaryentry{ACC}
 {
    name={Durchschnittliche Zyklomatische Komplexit\"at},
-   description={ist eine Eigenschaft einer Menge an Klassen und Interfaces und bezeichnet den Durchschnitt aller \glslink{CC}{zyklomatischer Komplexit\"aten} der Methoden aller enthaltenen Klassen und Interfaces}
+   description={ist eine \gls{Metrik} einer Menge an Klassen und Interfaces und bezeichnet den Durchschnitt aller \glslink{CC}{zyklomatischer Komplexit\"aten} der Methoden aller enthaltenen Klassen und Interfaces}
 }
 
 \newglossaryentry{AML}
 {
    name={Durchschnittliche Methodenl\"ange},
-   description={ist eine Eigenschaft einer Menge an Klassen und Interfaces und bezeichnet den Durchschnitt aller \glslink{ML}{Methodenl\"angen} der Methoden aller enthaltenen Klassen und Interfaces}
+   description={ist eine \gls{Metrik} einer Menge an Klassen und Interfaces und bezeichnet den Durchschnitt aller \glslink{ML}{Methodenl\"angen} der Methoden aller enthaltenen Klassen und Interfaces}
 }
 
 \newglossaryentry{NSPF}
 {
-   name={Anzahl nicht-statischer \"offentlicher Felder},
-   description={ist eine Eigenschaft einer Menge an Klassen und bezeichnet im Kontext von Usus.NET die Anzahl aller Klassen, die mindestens ein \"offentliches Feld haben, das nicht statisch ist}
+   name={Nicht-statische \"offentliche Felder},
+   description={ist eine \gls{Metrik} einer Menge an Klassen und bezeichnet im Kontext von Usus.NET die Anzahl aller Klassen, die mindestens ein \"offentliches Feld haben, das nicht statisch ist}
 }
 
-\newglossaryentry{PCD}
+\newglossaryentry{NCD}
 {
-   name={Pakete mit zyklischen Abh\"angigkeiten},
-   description={ist eine Eigenschaft einer Menge an Namespaces und bezeichnet im Kontext von Usus.NET die Anzahl aller Namespaces, die in einem Zyklus sind}
+   name={Namespaces mit zyklischen Abh\"angigkeiten},
+   description={ist eine \gls{Metrik} einer Menge an Namespaces und bezeichnet im Kontext von Usus.NET die Anzahl aller Namespaces, die in einem Zyklus sind}
 }
 
 \newglossaryentry{CCI}
@@ -79,7 +79,7 @@
 \newglossaryentry{CCIMetadata}
 {
    name={CCI Metadata},
-   description={ist eine von Mircosoft ver\"offentlichte Komponente, die es erlaubt Assemblies zu analysieren um Klassen-, Interface- und Methodendaten zu ermitteln}
+   description={ist eine von Mircosoft ver\"offentlichte Komponente, die es erlaubt \glslink{ASM}{Assemblies} zu analysieren um Klassen-, Interface- und Methodendaten zu ermitteln}
 }
 
 \newglossaryentry{Ast}
@@ -91,5 +91,17 @@
 \newglossaryentry{SCA}
 {
    name={Statische Code-Analyse},
-   description={bezeichnet das Analyse eines Software-Programms, ohne das dieses l\"auft, und erstellt einen Ergebnisbericht}
+   description={bezeichnet die Analyse eines Software-Programms, ohne das dieses ausgef\"uhrt werden muss. Als Ergebnis wird ein Bericht, beispielsweise über \glslink{Metrik}{Metriken}, erstellt}
+}
+
+\newglossaryentry{ASM}
+{
+   name={Assembly},
+   description={ist eine Datei, die ein .NET-Compiler aus einem Visual Studio-Projekt erzeugt. Die Datei ist entweder eine exe- oder eine dll-Datei. Synonym wird eine Assembly auch als PE-Datei (Portable Executable) bezeichnet}
+}
+
+\newglossaryentry{PDB}
+{
+   name={Program Database},
+   description={ist die pdb-Datei, die ein .NET-Compiler neben der \gls{ASM} erzeugt. Diese Datei enthält Dokument- und Zeileninformationen der Typen und Methoden in der entsprechenden \glslink{ASM}{PE-Datei}}
 }
