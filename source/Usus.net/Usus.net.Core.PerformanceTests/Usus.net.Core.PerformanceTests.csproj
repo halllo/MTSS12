@@ -47,7 +47,9 @@
   <ItemGroup>
     <Compile Include="AnalyzeTimes.cs" />
     <Compile Include="AndrenaRefactoring.cs" />
+    <Compile Include="CrmWrapperAnalysis.cs" />
     <Compile Include="FolderAnalysis.cs" />
+    <Compile Include="MescorAnalysis.cs" />
     <Compile Include="PdbIssueTest.cs" />
     <Compile Include="OpenSourceSoftwareAnalysis.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

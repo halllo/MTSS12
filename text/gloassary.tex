@@ -1,14 +1,95 @@
-\newglossaryentry{computer}
- {
-   name=computer,
-   description={is a programmable machine that receives input,
-                stores and manipulates data, and provides
-                output in a useful format}
+\newglossaryentry{Metrik}
+{
+   name={Metrik},
+   description={ist eine Eigenschaft oder der Wert dieser Eigenschaft und wird f\"ur Methoden, Typen oder Namespaces bestimmt}
 }
-\newglossaryentry{computer2}
- {
-   name=computer2,
-   description={is a programmable machine2 that receives input,
-                stores and manipulates data, and provides
-                output in a useful format}
+
+\newglossaryentry{CC}
+{
+   name={Zyklomatische Komplexit\"at},
+   description={ist eine Eigenschaft von Methoden und bezeichnet die Anzahl der unabh\"angigen M\"oglichkeiten eine Methode zu durchlaufen}
+}
+
+\newglossaryentry{ML}
+{
+   name={Methodenl\"ange},
+   description={ist eine Eigenschaft von Methoden und bezeichnet im Kontext von Usus.NET die Anzahl der Code-Zeilen die Logik enthalten}
+}
+
+\newglossaryentry{CS}
+{
+   name={Klassengr\"o\ss e},
+   description={ist eine Eigenschaft von Klassen und Interfaces und bezeichnet im Kontext von Usus.NET die Anzahl der Methoden eines Typen}
+}
+
+\newglossaryentry{CCD}
+{
+   name={Kumulierte Komponentenabh\"angigkeit},
+   description={ist eine Eigenschaft von Klassen und Interfaces und bezeichnet die Anzahl anderer Klassen und Interfaces, von denen die Klasse oder das Interface direkt und indirekt abh\"angig ist}
+}
+
+\newglossaryentry{ACD}
+{
+   name={Durchschnittliche Kumulierte Komponentenabh\"angigkeit},
+   description={ist eine Eigenschaft einer Menge an Klassen und Interfaces und bezeichnet den Durchschnitt aller \glslink{CCD}{kumulierter Komponentenabh\"angigkeiten} der enthaltenen Klassen und Interfaces}
+}
+
+\newglossaryentry{ACS}
+{
+   name={Durchschnittliche Klassengr\"o\ss e},
+   description={ist eine Eigenschaft einer Menge an Klassen und Interfaces und bezeichnet den Durchschnitt aller \glslink{CS}{Klassengr\"o\ss en} der enthaltenen Klassen und Interfaces}
+}
+
+\newglossaryentry{ACC}
+{
+   name={Durchschnittliche Zyklomatische Komplexit\"at},
+   description={ist eine Eigenschaft einer Menge an Klassen und Interfaces und bezeichnet den Durchschnitt aller \glslink{CC}{zyklomatischer Komplexit\"aten} der Methoden aller enthaltenen Klassen und Interfaces}
+}
+
+\newglossaryentry{AML}
+{
+   name={Durchschnittliche Methodenl\"ange},
+   description={ist eine Eigenschaft einer Menge an Klassen und Interfaces und bezeichnet den Durchschnitt aller \glslink{ML}{Methodenl\"angen} der Methoden aller enthaltenen Klassen und Interfaces}
+}
+
+\newglossaryentry{NSPF}
+{
+   name={Anzahl nicht-statischer \"offentlicher Felder},
+   description={ist eine Eigenschaft einer Menge an Klassen und bezeichnet im Kontext von Usus.NET die Anzahl aller Klassen, die mindestens ein \"offentliches Feld haben, das nicht statisch ist}
+}
+
+\newglossaryentry{PCD}
+{
+   name={Pakete mit zyklischen Abh\"angigkeiten},
+   description={ist eine Eigenschaft einer Menge an Namespaces und bezeichnet im Kontext von Usus.NET die Anzahl aller Namespaces, die in einem Zyklus sind}
+}
+
+\newglossaryentry{CCI}
+{
+   name={Common Compiler Infrastructure},
+   description={ist eine umfangreiche Bibliothek die es erm\"oglicht \glslink{SCA}{statische Code-Analysen} durchzuf\"uhren. Sie besteht aus den beiden Komponenten \gls{CCIMetadata} und \gls{CCIAst}}
+}
+
+\newglossaryentry{CCIAst}
+{
+   name={CCI Code and AST Components},
+   description={ist eine von Mircosoft ver\"offentlichte Komponente, die es erlaubt Methoden zu dekompilieren und einen \glslink{Ast}{abstrakten Syntax-Baum} zu erstellen}
+}
+
+\newglossaryentry{CCIMetadata}
+{
+   name={CCI Metadata},
+   description={ist eine von Mircosoft ver\"offentlichte Komponente, die es erlaubt Assemblies zu analysieren um Klassen-, Interface- und Methodendaten zu ermitteln}
+}
+
+\newglossaryentry{Ast}
+{
+   name={Abstrakter Syntax-Baum},
+   description={ist eine syntaktische Repr\"asentation von Methoden die f\"ur jede Anweisung einen Knoten enth\"alt}
+}
+
+\newglossaryentry{SCA}
+{
+   name={Statische Code-Analyse},
+   description={bezeichnet das Analyse eines Software-Programms, ohne das dieses l\"auft, und erstellt einen Ergebnisbericht}
 }

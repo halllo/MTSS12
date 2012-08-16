@@ -23,7 +23,7 @@ namespace andrena.Usus.net.Core.Reports
         {
             get
             {
-                return NumberOfLogicalLines < 0 ? NumberOfStatements : NumberOfLogicalLines;
+                return NumberOfLogicalLines < 1 ? NumberOfStatements : NumberOfLogicalLines;
             }
         }
 

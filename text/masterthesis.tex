@@ -185,7 +185,7 @@ Visual Studio erlaubt die Installation von externen Erweiterungen als Addin oder
 
 \section{Technische Grundlagen}
 \label{sec:technicalbasics}
-In diesem Abschnitt werden die technischen Grundlagen erläutert. Dazu wird zunächst der Begriff der Objektorientierung eingeführt, da sämtliche Software-Systeme, die in dieser Master-Thesis betrachtet werden, obejktorientiert sind. Anschließend werden Graphen und Bäume beschrieben, da verschiedene Software-Metriken anhand dieser Datenstruktur berechnet werden können. Abschließend wird das Konzept der statischen Code-Analyse vorgestellt, da die zu entwickelnde Erweiterung eben diese durchführen können soll.
+In diesem Abschnitt werden die technischen Grundlagen erläutert. Dazu wird zunächst der Begriff der Objektorientierung eingeführt, da sämtliche Software-Systeme, die in dieser Master-Thesis betrachtet werden, objektorientiert sind. Anschließend werden Graphen und Bäume beschrieben, da verschiedene Software-Metriken anhand dieser Datenstruktur berechnet werden können. Abschließend wird das Konzept der statischen Code-Analyse vorgestellt, da die zu entwickelnde Erweiterung eben diese durchführen können soll.
 
 \subsection{Objektorientierung}
 \label{subsec:oo}
@@ -1684,18 +1684,18 @@ Eventuell kann eine Kombination aus SQI-Wert und Zeit und Datum auch ergänzt wer
 
 \chapter{Usus.NET-Evaluation}
 \label{chap:evaluation}
-Nachdem Usus.NET in den vergangenen Kapiteln umfangreich beschrieben wurde, soll die Erweiterung in diesem Kapitel einmal tatsächlich eingesetzt werden. In diesem Zusammenhang werden zunächst einige frei verfügbare Open Source Projekte analysiert um die Performance von Usus.NET zu messen. Zusätzlich wird Usus.NET auch selber analysiert. Dabei werden die Metriken dieser Programme mit der Laufzeit der Analysen in Verbindung gebracht. Abschließend wird eine Refactoring-Übung aus einem andrena-Kurs mit Usus.NET durchgeführt.
+Nachdem Usus.NET in den vergangenen Kapiteln umfangreich beschrieben wurde, soll die Erweiterung in diesem Kapitel einmal tatsächlich eingesetzt werden. In diesem Zusammenhang werden unter anderem einige frei verfügbare Open Source Projekte analysiert um die Performance von Usus.NET zu messen. Zusätzlich wird Usus.NET auch selber analysiert. Dabei werden die Metriken dieser Programme mit der Laufzeit der Analysen in Verbindung gebracht. Abschließend wird eine Refactoring-Übung aus einem andrena-Kurs mit Usus.NET durchgeführt.
 
 
 \section{Laufzeitmessungen}
-Die Metriken, die Usus.NET berechnet und gewichtet werden in dieser Konstellation nur von dem Usus für Java berechnet. Ein fairer Vergleich mit anderen Werkzeugen wie Visual Studio Code Metrics Power Tool, Code Metrics Viewer und NDepend kann leider nicht durchgeführt werden, da diese Tools andere Metriken berechnen. Es hat den Anschein, das NDepend Analysen schneller durchführen kann Usus.NET. Dies könnte daran liegen, dass NDepend eventuell nur CCI Metadata und nicht auch CCI Code and AST Components, oder sogar eine optimierte Eigenentwicklung verwendet. Abbildung \ref{fig:projecttimes} zeigt die Laufzeiten von Usus.NET bei der Analyse verschiedener Open Source Projekte. Die beiden CCI-Bibliotheken, sowie QuickGraph werden von der Usus.NET-Implementierung direkt verwendet. GraphSharp ist eine Bibliothek, die die mit QuickGraph erzeugten Graphen visualisieren kann. Zusätzlich liegt es nahe, Usus.NET selber ebenfalls zu analysieren.
+Die Metriken, die Usus.NET berechnet und gewichtet werden in dieser Konstellation nur von dem Usus für Java berechnet. Ein fairer Vergleich mit anderen Werkzeugen wie Visual Studio Code Metrics Power Tool, Code Metrics Viewer und NDepend kann leider nicht durchgeführt werden, da diese Tools andere Metriken berechnen. Es hat den Anschein, das NDepend die Analysen schneller durchführen kann Usus.NET. Dies könnte daran liegen, dass NDepend eventuell nur CCI Metadata und nicht auch CCI Code and AST Components, oder sogar eine optimierte Eigenentwicklung verwendet. Abbildung \ref{fig:projecttimes} zeigt die Laufzeiten von Usus.NET bei der Analyse verschiedener Projekte. Die beiden CCI-Bibliotheken, sowie QuickGraph werden von der Usus.NET-Implementierung direkt verwendet. GraphSharp ist eine Bibliothek, die die mit QuickGraph erzeugten Graphen visualisieren kann. Zusätzlich liegt es nahe, Usus.NET selber ebenfalls zu analysieren. Als weiteres Projekt wird ein von andrena entwickeltes System mit dem Namen "`Mescor"' analysiert.
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=15cm]{images/projecttimes.png}
 	\caption{Laufzeiten der Analysen verschiedener Open Source Projekte}
 	\label{fig:projecttimes}
 \end{figure}
-Die Schaubilder zeigen deutlich, das die Analyse größerer Projekte länger dauert. Als Projektgröße hat dabei ist Anzahl der Assemblies einen größeren Einfluss auf die Laufzeit als die Anzahl an relevanten Codezeilen (RLOC). Dieser Einfluss ist gut an der Laufzeit von QuickGraph zu erkennen. Obwohl diese eine Bibliothek im Vergleich zu GraphSharp mehr Zeilen Quellcode enthält, ist die Analyse schneller. Da GraphSharp aus zwei Assemblies mit insgesamt weniger Zeilen besteht, dauert die Analyse hier länger. Um die Analyse von großen Projekten zu beschleunigen, kann Usus.NET eine Menge von Assemblies auch parallelisiert analysieren. Abbildung \ref{fig:projecttimes} zeigt daher auch für jedes Projekt einmal die Laufzeit der sequentiellen und einmal die der parallelen Analyse. Je größer das Projekt, umso eher kann durch die Verwendung mehrerer Prozessorkerne eine deutliche Laufzeitreduktion gemessen werden. Im Beispiel konnte die Laufzeit des CciAst-Projekts (CCI Code and AST Components) auf einem System mit vier Kernen fast halbiert werden.
+Die Schaubilder zeigen deutlich, das die Analyse größerer Projekte länger dauert. Als Projektgröße hat dabei ist Anzahl der Assemblies einen größeren Einfluss auf die Laufzeit als die Anzahl an relevanten Codezeilen (RLOC). Dieser Einfluss ist gut an der Laufzeit von QuickGraph zu erkennen. Obwohl diese eine Bibliothek im Vergleich zu GraphSharp mehr Zeilen Quellcode enthält, ist die Analyse schneller. Da GraphSharp aus zwei Assemblies mit insgesamt weniger Zeilen besteht, dauert die Analyse hier länger. Um die Analyse von großen Projekten zu beschleunigen, kann Usus.NET eine Menge von Assemblies auch parallelisiert analysieren. Abbildung \ref{fig:projecttimes} zeigt daher auch für jedes Projekt einmal die Laufzeit der sequentiellen und einmal die der parallelen Analyse. Je größer das Projekt, umso eher kann durch die Verwendung mehrerer Prozessorkerne eine Laufzeitreduktion gemessen werden. Im Beispiel konnte die Laufzeit des CciAst-Projekts (CCI Code and AST Components) auf einem System mit vier Kernen sogar fast halbiert werden. Leider konnte dieser Geschwindigkeitsgewinn nicht bei der Analyse des Mescor-Projekts erreicht werden, was vermutlich daran liegt, dass die Assemblies alle sehr klein sind. Viele große Assemblies würden sich mit dieser Argumentation besonders effizient parallel analysieren lassen. Die tatsächlichen Metriken dieser System sind für die Performance-Messungen nicht von Bedeutung.
 \paragraph{}
 In Abschnitt \ref{sec:metriccalc} wurde für die sequentielle Analyse die Klasse \texttt{Analyze} vorgestellt. Die Klasse \texttt{AnalyzeParallel} erlaubt es, die Analyse auf die einzelnen Prozessorkerne des Systems aufzuteilen. In der MSDN Library beschreibt Microsoft "`Parallel LINQ"' (PLINQ) als elegantes Mittel um Parallelität bei der Verarbeitung von Listen zu verwenden \cite{PLINQ}. Da sich die zu analysierenden Assemblies in einer Liste befinden, kann PLINQ sehr einfach in Usus.NET verwendet werden. Listing \ref{listing:parallelanalyze} zeigt, dass nur durch den Methodenaufruf \texttt{AsParallel()} die Liste der Assemblies parallel verarbeitet wird.
 \begin{lstlisting}[caption={Sequentielle und parallele Analyse von mehreren Assemblies},label={listing:parallelanalyze}]
@@ -1727,9 +1727,9 @@ Der Softwarequalitätsindex konnte sehr stark verbessert werden. Dies konnte erre
 
 
 \section{Ergebnis}
-Die oben beschriebene Refactoring-Übung wurde nicht selbst durchgeführt. Dank Usus.NET konnte allein durch die Betrachtung der Analyseergebnisse vor und nach dem Refactoring genügend Informationen ermittelt werden um die Codebasis und das Refactoring zu interpretieren. Der Quellcode müsste theoretisch nicht einmal mehr eingesehen werden um zu erkennen, das die Methoden verbessert wurden, ohne die Typen sehr zu verschlechtern. Auch vor dem Refactoring hat Usus.NET die Problemfälle der Codebasis automatisch erkannt und so ein effizientes und zielgerichtetes Refactoring ermöglicht. Nach dem Refactoring existieren zwar einige Hotspot-Typen, die beachtet werden müssen, aber der höhere SQI weißt auf eine sehr positiv zu wertende Verbesserung hin. Ohne Usus.NET hätte die Problemstelle erst gesucht werden müssen. Eine anschließende Verbesserung wäre dann auch nur schwer quantifizierbar gewesen. Beispielsweise hätten viel gravierendere Probleme entstehen und unerkannt bleiben können.
+Die oben beschriebene Refactoring-Übung wurde nicht selbst durchgeführt. Dank Usus.NET konnte allein durch die Betrachtung der Analyseergebnisse, vor und nach dem Refactoring, genügend Informationen ermittelt werden um die Codebasis und das Refactoring zu interpretieren. Der Quellcode müsste theoretisch nicht einmal mehr eingesehen werden um zu erkennen, das die Methoden verbessert wurden, ohne die Typen sehr zu verschlechtern. Auch vor dem Refactoring hat Usus.NET die Problemfälle der Codebasis automatisch erkannt und so ein effizientes und zielgerichtetes Refactoring ermöglicht. Nach dem Refactoring existieren zwar einige Hotspot-Typen, die beachtet werden müssen, aber der höhere SQI weißt auf eine sehr positiv zu wertende Verbesserung hin. Ohne Usus.NET hätte die Problemstelle erst gesucht werden müssen. Eine anschließende Verbesserung wäre dann auch nur schwer quantifizierbar gewesen. Beispielsweise hätten viel gravierendere Probleme entstehen und unerkannt bleiben können.
 \paragraph{}
-Usus.NET hat die Analyse automatisch nach dem Kompiliervorgang im Hintergrund durchgeführt, ohne das der Entwickler irgendetwas einstellen musste. Während der Analyse kann der Entwickler weiterhin mit dem Quelltext arbeiten oder die Anwendung debuggen. Wenn die Analyseergebnisse wirklich einmal erwartet werden, dauert die Analyse dank der parallelen Verarbeitung auch in großen Projekten in der Regel nicht länger als 5 Minuten. Die umfangreiche Darstellung der Ergebnisse unterstützt die Interpretation der Code-Qualität und nimmt diese durch die Verteilungsinformation und dem SQI teilweise sogar ab. Im dem Usus für Java sind genau diese Interpretationsfunktionen nicht enthalten, sodass Usus.NET an dieser Stelle eine umfangreichere Hilfestellung geben kann.
+Usus.NET hat die Analyse automatisch nach dem Kompiliervorgang im Hintergrund durchgeführt, ohne das der Entwickler irgendetwas einstellen musste. Während der Analyse kann der Entwickler weiterhin mit dem Quelltext arbeiten oder die Anwendung debuggen. Wenn die Analyseergebnisse wirklich einmal erwartet werden, dauert die Analyse dank der parallelen Verarbeitung auch in großen Projekten in der Regel nicht länger als 5 Minuten. Die umfangreiche Darstellung der Ergebnisse unterstützt die Interpretation der Code-Qualität und nimmt diese durch die Verteilungsinformation und dem SQI teilweise sogar ab. Im dem Usus für Java sind genau diese Interpretationsfunktionen nicht enthalten, sodass Usus.NET an dieser Stelle eine umfangreichere Hilfestellung und Einsicht in den Code geben kann.
 
 
 
@@ -1745,7 +1745,23 @@ Graphen Visualisierung weggelassen
 Nur Analyse einer Verteilungsfunktion als Clean Code-Metrik
 \\
 keine Testcoverage Ermittlung (also auch keine CRAP-Metrik und kein vollständig automatischer SQI)
-\gls{computer2}
+\gls{Metrik}
+\gls{CC}
+\glslink{ML}{Die Methodenlänge} bla bla
+\gls{CS}
+\gls{CCD}
+\gls{ACD}
+\gls{ACS}
+\gls{ACC}
+\gls{AML}
+\gls{NSPF}
+\gls{PCD}
+\gls{CCI}
+\gls{CCIAst}
+\gls{CCIMetadata}
+\gls{Ast}
+\gls{SCA}
+
 
 
 
@@ -1758,7 +1774,7 @@ mehr Verteilungen und deren Vergleich
 In der Evaluierung hat sich gezeigt, das die grafische Darstellung von Zyklen doch sinvoll ist
 \\
 Kleinester Zyklus in einem großen Zyklus hilft, die Problemstelle schneller zu finden
-\gls{computer}
+
 
 
 

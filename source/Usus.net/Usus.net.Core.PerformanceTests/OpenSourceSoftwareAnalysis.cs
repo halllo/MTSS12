@@ -9,12 +9,12 @@ namespace Usus.net.Core.PerformanceTests
         [TestMethod]
         public void AnalyzeFolders()
         {
-            AnalyzeFolder("CciAst");
-            AnalyzeFolder("CciMetadata");
-            AnalyzeFolder("GraphSharp");
-            AnalyzeFolder("QuickGraph");
-            AnalyzeFolder("Usus.net");
-            AnalyzeFolder("Usus.net ohne pdb");
+            //AnalyzeFolder("CciAst");
+            //AnalyzeFolder("CciMetadata");
+            //AnalyzeFolder("GraphSharp");
+            //AnalyzeFolder("QuickGraph");
+            //AnalyzeFolder("Usus.net");
+            //AnalyzeFolder("Usus.net ohne pdb");
         }
 
         private void AnalyzeFolder(string folder)
