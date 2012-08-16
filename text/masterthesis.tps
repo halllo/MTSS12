@@ -17,13 +17,10 @@ Class=LaTeXView
 Document=masterthesis.tex
 
 [Frame0_View0,0]
-TopLine=141
-Cursor=6170
+TopLine=1869
+Cursor=194604
 
 [SessionInfo]
 FrameCount=1
 ActiveFrame=0
-
-[Bookmarks]
-masterthesis.tex=89 
 

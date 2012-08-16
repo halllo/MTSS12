@@ -1,0 +1,8 @@
+D:\manuel\LaTeX\MiKTeX\miktex\bin\x64\pdflatex.exe
+-interaction=nonstopmode "%wm"
+
+D:\manuel\LaTeX\MiKTeX\miktex\bin\x64\bibtex.exe
+"%tm"
+
+D:\manuel\LaTeX\MiKTeX\miktex\bin\x64\makeindex.exe
+"%tm.glo" -t "%tm.glg" -o "%tm.gls" -s "%tm.ist"

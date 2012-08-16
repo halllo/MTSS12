@@ -11,7 +11,7 @@ titlepage,						% Titelei auf eigener Seite
 %fleqn,								% Ausgabe von Gleichungen linksbündig
 %draft								% überlangen Zeilen in Ausgabe gekennzeichnet
 ]
-{scrreprt}
+{scrbook}
 
 
 \usepackage[ngerman]{babel,translator}
@@ -52,11 +52,6 @@ titlepage,						% Titelei auf eigener Seite
 	\mbox{}
 	\newpage
 }
-\newcommand{\blankpagewithnumber}{
-	\newpage
-	\mbox{}
-	\newpage
-}
 
 \begin{document}
 
@@ -81,11 +76,7 @@ Bischweier, den \today
 \end{titlepage}
 
 
-
 \blankpage
-
-
-
 \pagenumbering{roman}
 \setcounter{page}{1}
 \begin{center}\textbf{\large Erklärung}\\[1cm]\end{center}
@@ -94,8 +85,6 @@ Hiermit versichere ich, dass ich die vorliegende Arbeit selbstständig verfasst u
 Bischweier, den \today \\
 Manuel Naujoks
 
-
-\blankpagewithnumber
 
 
 
@@ -1352,7 +1341,7 @@ In Unterabschnitt \ref{subsec:ususgraphs} wurde vorgestellt, wie Usus für Eclips
 Ein Usus.NET-Fenster, das es nicht in der Eclipse Version gibt, ist "`Usus.NET CleanClode"'. Damit ist Alexander Zeitler's Idee die Clean Code Grade von Ralf Westphal und Stefan Lieser \cite{CleanCodeDeveloper} immer direkt in der IDE zu sehen, in Usus.NET integriert. Zeitlers Idee wurde bereits in Abschnitt \ref{sec:ccdaddin} vorgestellt. Abbildung \ref{fig:ususnet_cleancode} zeigt die Liste, mit den verschiedenen Graden.
 \begin{figure}[h]
 	\centering
-		\includegraphics[width=12cm]{images/ususnet_cleancode.png}
+		\includegraphics[width=14cm]{images/ususnet_cleancode.png}
 	\caption{Usus.NET Clean Code Grade-Fenster}
 	\label{fig:ususnet_cleancode}
 \end{figure}
@@ -1720,11 +1709,24 @@ Leider hat die parallele Analyse gegenüber der höheren Geschwindigkeit auch eine
 
 
 \section{Fallbeispiel Andrena-Kurs}
-Einmal messen RefactoringCodingDojo
-Einmal messen RefactoringCodingDojoSolution
-Vergleich sollte besser sein: Cockpitwerte alle grün, SQI Verbessung (Screenshots)
-\textcolor[rgb]{1,0,0}{todo}
+Einmal messen RefactoringCodingDojo -> \ref{fig:andrenarefacbefore}
+Einmal messen RefactoringCodingDojoSolution -> \ref{fig:andrenarefacafter}
 
+
+Das zu lösende Problem in der Codebasis des Refactoring-Beispiels ist die \texttt{GetMailMessage}-Methode der Klasse \texttt{MailComposer}. Mit 19 logischen Zeilen und einer zyklomatischen Komplexität von 7, ist diese Methode ein absoluter Hotspot.
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=15cm]{images/andrenarefacbefore.png}
+	\caption{Vorher-Metriken des andrena Refactoring-Beispiels}
+	\label{fig:andrenarefacbefore}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=15cm]{images/andrenarefacafter.png}
+	\caption{Nachher-Metriken des andrena Refactoring-Beispiels}
+	\label{fig:andrenarefacafter}
+\end{figure}
 
 
 
@@ -1757,20 +1759,20 @@ Kleinester Zyklus in einem großen Zyklus hilft, die Problemstelle schneller zu f
 
 
 
-\printglossaries
-bla bla
-
-
-
 \newpage
 \pagestyle{plain}
 \pagenumbering{roman}
-\setcounter{page}{11}
+\setcounter{page}{15}
+
+
+
+\printglossaries
 
 
 
 \bibliography{masterthesis}
 \bibliographystyle{alpha}
+
 
 
 
