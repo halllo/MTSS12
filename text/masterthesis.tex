@@ -419,7 +419,7 @@ Das in Abbildung \ref{fig:usus_graph} dargestellte Fenster besteht aus zwei Kart
 
 \section{Metriken}
 \label{sec:metrics}
-In den Fenstern Usus Cockpit und Usus Info zeit das Eclipse Plugin die Werte verschiedener Metriken an. Das Usus Info Fenster zeigt im Kontext einer Methode neben den Metriken, die es zusätzlich für die Klasse anzeigt auch Methoden-Metriken. In diesem Abschnitt wird daher zuerst auf die Metriken eingegangen, die das Usus-Plugin für Methoden berechnet, bevor die Klassen-Metriken näher betrachtet werden. Abschließend werden die Usus Cockpit Metriken beschrieben. Diese Beschreibungen sind von Bedeutung, da sämtliche Metriken im Rahmen der Usus-Erweiterung für Visual Studio nach-implementiert werden sollen.
+In den Fenstern Usus Cockpit und Usus Info zeit das Eclipse Plugin die Werte verschiedener Metriken an. Das Usus Info Fenster zeigt im Kontext einer Methode neben den Metriken, die es zusätzlich für die Klasse anzeigt auch Methodenmetriken. In diesem Abschnitt wird daher zuerst auf die Metriken eingegangen, die das Usus-Plugin für Methoden berechnet, bevor die Klassenmetriken näher betrachtet werden. Abschließend werden die Usus Cockpit Metriken beschrieben. Diese Beschreibungen sind von Bedeutung, da sämtliche Metriken im Rahmen der Usus-Erweiterung für Visual Studio nach-implementiert werden sollen.
 
 \subsection{Pro Methode}
 Wenn das Usus Info-Fenster im Kontext einer Methode geöffnet wird, wird die zyklomatische Komplexität sowie die Länge der Methode dargestellt.
@@ -775,7 +775,7 @@ Nachdem sich die Regel mit einer dieser oberflächlichen \texttt{Check}-Methoden 
 
 \section{Common Compiler Infrastracture}
 \label{sec:cci}
-Die \emph{Common Compiler Infrastructure} (CCI) ist eine Sammlung von Bibliotheken, die Compiler-ähnliche Funktionen bereitstellen und von Microsoft Research entwickelt wurde \cite{CCI}. Auf Codeplex lässt sich die Komponente "`CCI Metadata"' finden. Guy Smith beschreibt sie als Obermenge von \texttt{System.Reflection}, \texttt{System.Reflection.Emit} und \texttt{System.CodeDom}, also den Mechanismen des .NET-Framework, die zur Laufzeit Reflektion und Code-Erzeugung möglich machen \cite{CCIMetadata}. Smith beschreibt CCI Metadata als Werkzeug, das mit den vom Compiler erzeugten CIL-Anweisungen arbeitet. Um einfacher mit Methoden zu arbeiten, stellt Smith mit "`CCI Code and AST Components"' eine weitere Komponente vor \cite{CCICode}. CCI Code and AST Components erleichtert das Arbeiten mit Methoden, da es von den CIL-Anweisungen abstrahiert und Quellcode-ähnliche Bäume nutzt. Beide Komponenten sind unter der Microsoft Public License veröffentlicht. Die CCI wird in einer ähnlichen Variante unter anderem von dem Code Metrics Power Tool aus Unterabschnitt \ref{subsec:vscodemetricspowertool} und FxCop aus Abschnitt \ref{sec:fxcop} genutzt. Die Assembly Microsoft.Cci.dll, die mit diesen Tools ausgeliefert wird, besitzt viele Funktionen nur intern oder von erlaubten Assemblies aufrufbar sind. Funktionen, die beispielsweise konkrete Methoden-Metriken berechnen, sind nur von Programmen aufrufbar, die in der CCI-Assembly aufgelistet sind, wie in Abbildung \ref{fig:cciinternalsvisible} dargestellt.
+Die \emph{Common Compiler Infrastructure} (CCI) ist eine Sammlung von Bibliotheken, die Compiler-ähnliche Funktionen bereitstellen und von Microsoft Research entwickelt wurde \cite{CCI}. Auf Codeplex lässt sich die Komponente "`CCI Metadata"' finden. Guy Smith beschreibt sie als Obermenge von \texttt{System.Reflection}, \texttt{System.Reflection.Emit} und \texttt{System.CodeDom}, also den Mechanismen des .NET-Framework, die zur Laufzeit Reflektion und Code-Erzeugung möglich machen \cite{CCIMetadata}. Smith beschreibt CCI Metadata als Werkzeug, das mit den vom Compiler erzeugten CIL-Anweisungen arbeitet. Um einfacher mit Methoden zu arbeiten, stellt Smith mit "`CCI Code and AST Components"' eine weitere Komponente vor \cite{CCICode}. CCI Code and AST Components erleichtert das Arbeiten mit Methoden, da es von den CIL-Anweisungen abstrahiert und Quellcode-ähnliche Bäume nutzt. Beide Komponenten sind unter der Microsoft Public License veröffentlicht. Die CCI wird in einer ähnlichen Variante unter anderem von dem Code Metrics Power Tool aus Unterabschnitt \ref{subsec:vscodemetricspowertool} und FxCop aus Abschnitt \ref{sec:fxcop} genutzt. Die Assembly Microsoft.Cci.dll, die mit diesen Tools ausgeliefert wird, besitzt viele Funktionen nur intern oder von erlaubten Assemblies aufrufbar sind. Funktionen, die beispielsweise konkrete Methodenmetriken berechnen, sind nur von Programmen aufrufbar, die in der CCI-Assembly aufgelistet sind, wie in Abbildung \ref{fig:cciinternalsvisible} dargestellt.
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=14cm]{images/cciinternalsvisible.png}
@@ -1207,7 +1207,7 @@ Außerdem betrachtet Usus.NET nur Methoden, die einen nicht leeren Methodenrumpf 
 
 \section{Metrikverteilung}
 \label{sec:distributions}
-Im Namespace \texttt{andrena.Usus.net.Core.Math} existiert die Klasse \texttt{Distributions}. In dieser Klassen sind mehrere Extensions Methods definiert, die Verteilungen von Methoden- und Klassen-Metriken bestimmen können. Listing \ref{listing:methodtypedistributions} zeigt, wie diese Methoden verwendet werden können.
+Im Namespace \texttt{andrena.Usus.net.Core.Math} existiert die Klasse \texttt{Distributions}. In dieser Klassen sind mehrere Extensions Methods definiert, die Verteilungen von Methoden- und Klassenmetriken bestimmen können. Listing \ref{listing:methodtypedistributions} zeigt, wie diese Methoden verwendet werden können.
 \begin{lstlisting}[caption={Verteilungen von Methoden- und Klassen-Berichten erstellen},label={listing:methodtypedistributions}]
 IHistogram css = Metrics.TypeDistribution(t => t.ClassSize);
 IHistogram ccs = Metrics.MethodDistribution(m => m.CyclomaticComplexity);
@@ -1295,7 +1295,7 @@ Das nächste Usus.NET-Fenster entspricht dem Usus Info-Fenster aus Unterabschnitt
 	\caption{Usus.NET Info-Fenster}
 	\label{fig:ususnet_info}
 \end{figure}
-Ein einfacher Mausklick öffnet das Usus.NET Info-Fenster und zeigt die Metriken der entsprechenden Methode an. Die Metriken der Klasse sind ebenfalls sichtbar. Wie der Button im Code-Editor angezeigt wird ist in Unterabschnitt \ref{subsec:editoradornment} beschrieben. Der Button erscheint nur neben Methoden und nicht neben Properties oder Klassen. Daher lässt sich das Info-Fenster auch nur für Methoden öffnen. Dies ist ausreichend, da die Klassen-Metriken ja ebenfalls angezeigt werden. Das Info-Fenster in der Eclipse Variante lässt sich zusätzlich auch für Klassen direkt öffnen. Wenn der Entwickler auf den Button klickt, werden die Zeilennummer sowie der Name der Datei an das ViewModel des Info-Fensters übertragen. Beide Informationen kommen dort in Form eines \texttt{LineLocation}-Objekts an. Obwohl die Editor-Buttons und das Fenster in separaten Erweiterungsprojekten implementiert sind, ist diese Übertragung über das in Unterabschnitt \ref{subsec:vsmenus} beschriebene Event-System möglich. Um den Methoden- und Klassenbericht zu einer Datei und Zeile zu ermitteln, wird die Klasse \texttt{CurrentMethodInfoCalculator} verwendet. Jeder Methodenbericht erhält durch die Metrikberechnung aus Abschnitt \ref{sec:metriccalc} die Zeilen-Informationen der pdb-Datei in Form eines \texttt{SourceCodeLocation}-Objekts. Usus.NET kann dadurch anhand der Zeilennummer und dem Dateipfad des geklickten Button den entsprechenden Methodenbericht finden und dessen Metriken anzeigen.
+Ein einfacher Mausklick öffnet das Usus.NET Info-Fenster und zeigt die Metriken der entsprechenden Methode an. Die Metriken der Klasse sind ebenfalls sichtbar. Wie der Button im Code-Editor angezeigt wird ist in Unterabschnitt \ref{subsec:editoradornment} beschrieben. Der Button erscheint nur neben Methoden und nicht neben Properties oder Klassen. Daher lässt sich das Info-Fenster auch nur für Methoden öffnen. Dies ist ausreichend, da die Klassenmetriken ja ebenfalls angezeigt werden. Das Info-Fenster in der Eclipse Variante lässt sich zusätzlich auch für Klassen direkt öffnen. Wenn der Entwickler auf den Button klickt, werden die Zeilennummer sowie der Name der Datei an das ViewModel des Info-Fensters übertragen. Beide Informationen kommen dort in Form eines \texttt{LineLocation}-Objekts an. Obwohl die Editor-Buttons und das Fenster in separaten Erweiterungsprojekten implementiert sind, ist diese Übertragung über das in Unterabschnitt \ref{subsec:vsmenus} beschriebene Event-System möglich. Um den Methoden- und Klassenbericht zu einer Datei und Zeile zu ermitteln, wird die Klasse \texttt{CurrentMethodInfoCalculator} verwendet. Jeder Methodenbericht erhält durch die Metrikberechnung aus Abschnitt \ref{sec:metriccalc} die Zeilen-Informationen der pdb-Datei in Form eines \texttt{SourceCodeLocation}-Objekts. Usus.NET kann dadurch anhand der Zeilennummer und dem Dateipfad des geklickten Button den entsprechenden Methodenbericht finden und dessen Metriken anzeigen.
 
 \subsection{Hotspots}
 \label{subsec:ususnethotspots}
@@ -1515,7 +1515,7 @@ Die Funktion der geometrischen Verteilung verhält sich genauso, da sie den gleic
 \end{figure}
 Obwohl die Exponentialverteilung und die geometrische Verteilung nicht identisch sind, kann der Parameter, von dem beide abhängig sind auf die gleiche Art berechnet werden. Das Ergebnis verhält sich in beiden Verteilungen vergleichbar. Im Kontext der Software-Metriken gilt: je größer das $\lambda$, desto extremer entspricht der Code dem Clean Code Paradigma von Robert C. Martin. Martin befürwortet sehr einfache und sehr kurze Methoden, sowie Klassen mit sehr wenig Abhängigkeiten \cite{CleanCode}.
 \paragraph{}
-Usus.NET berechnet den $\lambda$-Parameter in der Klasse \texttt{GeometricalDistributionFitting} nach Formel \ref{eq:edistributionml}. Die Komponenten, die für diese Berechnung zuständig sind, wurden bereits in Abschnitt \ref{sec:distributions} vorgestellt. Das Ergebnis kann anschließend in der Histogramm-Oberfläche aus Unterabschnitt \ref{subsec:ususnethostigram} angezeigt werden. Abbildung \ref{fig:ususnet_histogram} zeigt beispielsweise die Verteilung der Klassengrößen einer Beispielanwendung. In Kapitel \ref{chap:performance} werden konkretere Beispiele betrachtet und mit Usus.NET analysiert.
+Usus.NET berechnet den $\lambda$-Parameter in der Klasse \texttt{GeometricalDistributionFitting} nach Formel \ref{eq:edistributionml}. Die Komponenten, die für diese Berechnung zuständig sind, wurden bereits in Abschnitt \ref{sec:distributions} vorgestellt. Das Ergebnis kann anschließend in der Histogramm-Oberfläche aus Unterabschnitt \ref{subsec:ususnethostigram} angezeigt werden. Abbildung \ref{fig:ususnet_histogram} zeigt beispielsweise die Verteilung der Klassengrößen einer Beispielanwendung. In Kapitel \ref{chap:evaluation} werden konkretere Beispiele betrachtet und mit Usus.NET analysiert.
 
 \section{Abweichung}
 \label{sec:histogramerror}
@@ -1529,7 +1529,7 @@ Da das $\lambda$ der geometrischen Verteilung bekannt ist, kann die Funktion $f(
 
 
 
-\chapter{Andrena Softwarequalitätsindex}
+\chapter{andrena-Softwarequalitätsindex}
 \label{chap:andrenasqi}
 Dieses Kapitel beschäftigt sich mit dem Anwendungsfall \emph{Software Qualität interpretieren}. Wie bereits in Kapitel \ref{chap:cleancodesupport} beschrieben, interpretieren Entwickler kleinere Metriken in der Regel als bessere Metriken und das Obwohl bessere Metriken nicht automatisch besseren Code beschreiben. In Bezug auf die Methodenlänge ist Robert C. Martin in seinem Buch sehr deutlich und verteidigt kurze Methoden \cite{CleanCode}. Ein Softwaresystem, welches evolutionär gewachsen ist, enthält leider nicht nur kurze Methoden sondern auch zunehmend längere. Eine Metrik-Interpretation über die Verteilung, wie in Abschnitt \ref{sec:histogramanalysis} beschrieben, kann dann sehr schnell an Aussagekraft verlieren. Die Gewichtung der Metriken, die in Usus für Eclipse und Usus.NET vorgenommen und in Abschnitt \ref{sec:metrics} beschrieben wird, versucht die Interpretation trotzdem zu ermöglichen. Deswegen zeigt das Cockpit-Fenster der beiden Usus-Versionen auch nicht die Rohmetriken an. Die Metrikgewichtung von Usus geht auf das andrena-interne Werkzeug Isis zurück. Isis erlaubt es ungewichtete Metriken, die von einem anderen Tool erstellt wurden, zu importieren und zu bewerten. Das Ergebnis ist der von andrena sogenannte "`Softwarequalitätsindex"' (SQI), welcher in dem Manuskript von Dr. Eberhard Kuhn ausführlich beschrieben wird \cite{IsisSQI}.
 
@@ -1682,8 +1682,8 @@ Eventuell kann eine Kombination aus SQI-Wert und Zeit und Datum auch ergänzt wer
 
 
 
-\chapter{Usus.NET Performance}
-\label{chap:performance}
+\chapter{Usus.NET-Evaluation}
+\label{chap:evaluation}
 Nachdem Usus.NET in den vergangenen Kapiteln umfangreich beschrieben wurde, soll die Erweiterung in diesem Kapitel einmal tatsächlich eingesetzt werden. In diesem Zusammenhang werden zunächst einige frei verfügbare Open Source Projekte analysiert um die Performance von Usus.NET zu messen. Zusätzlich wird Usus.NET auch selber analysiert. Dabei werden die Metriken dieser Programme mit der Laufzeit der Analysen in Verbindung gebracht. Abschließend wird eine Refactoring-Übung aus einem andrena-Kurs mit Usus.NET durchgeführt.
 
 
@@ -1705,28 +1705,32 @@ from file in files select AnalyzeFile(file)
 //parallel: AnalyzeParallel.PortableExecutables(files)
 from file in files.AsParallel() select AnalyzeFile(file)
 \end{lstlisting}
-Leider hat die parallele Analyse gegenüber der höheren Geschwindigkeit auch einen Nachteil. Manchmal werden pdb-Dateien von der CCI nicht korrekt geladen, wenn die Analyse auf mehrere Theads verteilt läuft. Dieses Problem äußert sich dadurch, dass beispielsweise Zeilenangaben zu Methodenlängen nicht erfolgreich ermittelt werden können. Im Usus.NET Cockpit-Fenster entstehen dadurch sogenannte Phantom-Änderungen der Methoden-Metriken, wenn die gleiche Solution zweimal hintereinander analysiert wird, ohne dass der Quellcode geändert wurde. Aus diesem Grund kann unter dem Menü-Eintrag \texttt{Tools / Options / Usus.NET} eingestellt werden, ob Usus.NET die Analyse sequentiell oder parallel durchführen soll. Generell scheint die CCI Schwierigkeiten mit dem Ressource Management der pdb-Dateien zu haben. Wenn Usus.NET die pdb-Dateien nutzt und anschließend sofort wieder über die CCI freigibt, kann Visual Studio diese Dateien erst nach einer kurzen zeitlichen Verzögerung wieder ersetzen.
+Leider hat die parallele Analyse gegenüber der höheren Geschwindigkeit auch einen Nachteil. Manchmal werden pdb-Dateien von der CCI nicht korrekt geladen, wenn die Analyse auf mehrere Theads verteilt läuft. Dieses Problem äußert sich dadurch, dass beispielsweise Zeilenangaben zu Methodenlängen nicht erfolgreich ermittelt werden können. Im Usus.NET Cockpit-Fenster entstehen dadurch sogenannte Phantomänderungen der Methodenmetriken, wenn die gleiche Solution zweimal hintereinander analysiert wird, ohne dass der Quellcode geändert wurde. Aus diesem Grund kann unter dem Menü-Eintrag \texttt{Tools / Options / Usus.NET} eingestellt werden, ob Usus.NET die Analyse sequentiell oder parallel durchführen soll. Generell scheint die CCI Schwierigkeiten mit dem Ressource Management der pdb-Dateien zu haben. Wenn Usus.NET die pdb-Dateien nutzt und anschließend sofort wieder über die CCI freigibt, kann Visual Studio diese Dateien erst nach einer kurzen zeitlichen Verzögerung wieder ersetzen.
 
 
-\section{Fallbeispiel Andrena-Kurs}
-Einmal messen RefactoringCodingDojo -> \ref{fig:andrenarefacbefore}
-Einmal messen RefactoringCodingDojoSolution -> \ref{fig:andrenarefacafter}
-
-
-Das zu lösende Problem in der Codebasis des Refactoring-Beispiels ist die \texttt{GetMailMessage}-Methode der Klasse \texttt{MailComposer}. Mit 19 logischen Zeilen und einer zyklomatischen Komplexität von 7, ist diese Methode ein absoluter Hotspot.
+\section{Fallbeispiel andrena-Kurs}
+Im Rahmen eines Entwickler-Trainings bietet andrena eine Übung zum Thema Refactoring an. Die Teilnehmer bekommen dabei die Möglichkeit eine bestehende Codebasis, inklusive Tests, selbstständig umzugestalten. Das Ausgangsprojekt wurde mit Usus.NET einmal analysiert. Abbildung \ref{fig:andrenarefacbefore} zeigt das Ergebnis dieser Analyse.
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=15cm]{images/andrenarefacbefore.png}
 	\caption{Vorher-Metriken des andrena Refactoring-Beispiels}
 	\label{fig:andrenarefacbefore}
 \end{figure}
-
+Da das Projekt mit 96 relevante Codezeilen sehr klein ist, gibt es nicht viele verbesserungswürdige Stellen. Das Hauptproblem ist die \texttt{GetMailMessage}-Methode der Klasse \texttt{MailComposer}. Mit 19 logischen Zeilen und einer zyklomatischen Komplexität von 7, ist diese Methode ein absoluter Hotspot und wird dementsprechend auch als solcher angezeigt. Ziel der Übung ist es also, diese Methode umzugestalten. Dank der 100\% Testabdeckung ist dies ohne Schwierigkeiten möglich. Zu dieser Übung existiert auch eine "`Musterlösung"' der Trainer, die ebenfalls mit Usus.NET analysiert wurde. Das Ergebnis ist in Abbildung \ref{fig:andrenarefacafter} zu sehen. Zwischen diesen beiden Messungen hat also das Refactoring stattgefunden.
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=15cm]{images/andrenarefacafter.png}
 	\caption{Nachher-Metriken des andrena Refactoring-Beispiels}
 	\label{fig:andrenarefacafter}
 \end{figure}
+Der Softwarequalitätsindex konnte sehr stark verbessert werden. Dies konnte erreicht werden, indem die \texttt{GetMailMessage}-Methode auf 5 Zeilen und eine zyklomatischen Komplexität von 1 reduziert wurde. Dafür wurden drei neue Typen erstellt, was dazu geführt hat, dass die \texttt{MailComposer}-Klasse mehr Abhängigkeiten bekommen hat. Tatsächlich hat diese Klasse jetzt so viele direkte und indirekte Abhängigkeiten, dass Usus.NET dies als Problem sieht und die Klasse in den Hotspots auflistet. Eine Interpretation dieses Hotspots ist, dass diese Klasse überdurchschnittlich viele Abhängigkeiten in dem betrachteten System hat. Da diese Klasse auch von der Test-Klasse \texttt{MailComposerTest} verwendet wird und damit die gleichen indirekten Abhängigkeiten hat, wird auch diese Test-Klasse als Hotspot gesehen. Die durchschnittliche kumulierte Komponentenabhängigkeit ist dagegen gefallen, was darauf zurückzuführen ist, dass die neuen Abhängigkeiten der \texttt{MailComposer}-Klasse nicht sehr viele Abhängigkeiten haben und den Durchschnitt senken. In Bezug auf das Clean Code-Level der Codebasis hat sich das Hinzufügen der neuen Typen negativ auf die Verteilung der Klassenmetriken ausgewirkt. Die Verteilungen der Klassenmetriken entsprechen also geometrischen Verteilungen, die weniger schnell fallen, als vor dem Refactoring. Was die Methodenmetriken angeht, so fallen die geometrischen Verteilungen schneller. Es gibt also mehr kleine Methodenmetriken als große, was nach Kapitel \ref{chap:cleancodesupport} ein guter Indikator für Clean Code ist.
+
+
+\section{Ergebnis}
+Die oben beschriebene Refactoring-Übung wurde nicht selbst durchgeführt. Dank Usus.NET konnte allein durch die Betrachtung der Analyseergebnisse vor und nach dem Refactoring genügend Informationen ermittelt werden um die Codebasis und das Refactoring zu interpretieren. Der Quellcode müsste theoretisch nicht einmal mehr eingesehen werden um zu erkennen, das die Methoden verbessert wurden, ohne die Typen sehr zu verschlechtern. Auch vor dem Refactoring hat Usus.NET die Problemfälle der Codebasis automatisch erkannt und so ein effizientes und zielgerichtetes Refactoring ermöglicht. Nach dem Refactoring existieren zwar einige Hotspot-Typen, die beachtet werden müssen, aber der höhere SQI weißt auf eine sehr positiv zu wertende Verbesserung hin. Ohne Usus.NET hätte die Problemstelle erst gesucht werden müssen. Eine anschließende Verbesserung wäre dann auch nur schwer quantifizierbar gewesen. Beispielsweise hätten viel gravierendere Probleme entstehen und unerkannt bleiben können.
+\paragraph{}
+Usus.NET hat die Analyse automatisch nach dem Kompiliervorgang im Hintergrund durchgeführt, ohne das der Entwickler irgendetwas einstellen musste. Während der Analyse kann der Entwickler weiterhin mit dem Quelltext arbeiten oder die Anwendung debuggen. Wenn die Analyseergebnisse wirklich einmal erwartet werden, dauert die Analyse dank der parallelen Verarbeitung auch in großen Projekten in der Regel nicht länger als 5 Minuten. Die umfangreiche Darstellung der Ergebnisse unterstützt die Interpretation der Code-Qualität und nimmt diese durch die Verteilungsinformation und dem SQI teilweise sogar ab. Im dem Usus für Java sind genau diese Interpretationsfunktionen nicht enthalten, sodass Usus.NET an dieser Stelle eine umfangreichere Hilfestellung geben kann.
+
 
 
 
