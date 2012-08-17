@@ -89,21 +89,21 @@ Manuel Naujoks
 
 
 \chapter*{Zusammenfassung}
-Im Rahmen dieser Master-Thesis soll eine Visual Studio Erweiterung entwickelt werden, die direktes Entwickler-Feedback anhand von \glslink{Metrik}{Software-Metriken} geben kann. Dabei dient das Plugin Usus für Eclipse als Vorlage, welches bereits existiert. Die zu erstellende Erweiterung soll eine \glslink{SCA}{statische Code-Analyse} von .NET-Projekten in Visual Stuido 2010 durchführen und für andrena relevante \glslink{Metrik}{Code-Metriken} berechnen können.
+Im Rahmen dieser Master-Thesis wird eine Visual Studio Erweiterung entwickelt, die direktes Entwickler-Feedback anhand von \glslink{Metrik}{Softwaremetriken} gibt. Dabei dient das Plugin Usus für Eclipse als Vorlage. Die erstellte Erweiterung führt eine \glslink{SCA}{statische Code-Analyse} von .NET-Projekten in Visual Stuido 2010 durch und berechnet \glslink{Metrik}{Code-Metriken}, die für andrena relevant sind. Um diese Metriken zu berechnen analysiert das Tool die \glslink{ASM}{Assemblies} die Compiler bei jedem der jedem Kompiliervorgang erzeugt. Für die Analyse wird die \gls{CCI} verwendet. Durch die Integration in Visual Studio können die Ergebnisse direkt in Fenstern in der IDE angezeigt werden.
 \newline
-Die zu entwickelnde Erweiterung soll genutzt werden können, um Software-Entwickler aktiv zu unterstützen "`Clean code"' zu schreiben. Eine ähnliche Lösung zu Microsofts Achievements Extension mit Achievements in Bezug auf clean code best practices wäre denkbar. Dazu soll eine Evaluierung anhand von Beispielaufgaben aus einem andrena-Kurs zum Thema Refaktorisierung bearbeitet und die Veränderung in den \glslink{Metrik}{Metriken} entsprechend erfasst und dokumentiert werden.
+Die entwickelte Erweiterung ist in der Lage Softwareentwickler aktiv bei der Entwicklung von "`Clean code"' zu unterstützen. Über automatisiertes Feedback wird der Entwickler über Problemfälle in seinem Code informiert und kann diese schnell lokalisieren. Um zu entscheiden, ob es sich bei dem Code um Clean Code handelt, nutzt die Erweiterung die Verteilungen der \glslink{Metrik}{Metriken}. Diese Verteilung wird analysiert und das Ergebnis als Clean Code-\gls{Metrik} visualisiert. Zusätzlich kann das Tool den andrena-Softwarequalitätsindex berechnen und dessen Veränderung über die Zeit protokollieren, sodass auch hier die Interpretation der inneren Qualität der Software ermöglicht wird.
 \newline
-Weiterhin soll in einer Analyse der \glslink{Metrik}{Metriken} nach Heuristiken oder Regeln mit statischer Signifikanz gesucht werden, die eventuell guten von schlechtem Code unterscheiden können. Lassen sich hier Muster beziehungsweise Strukturen aufzeigen? Ein Indiz hierfür ist, dass die \glslink{Metrik}{Metriken} oft einer Exponentialverteilung folgen. Dabei soll untersucht werden, ob und wenn möglich wie sich dies auf den Software Qualitäts Index (SQI) von andrena abbilden lässt.
+Um das Tool und dessen Möglichkeiten der Entwicklerunterstützung zu evaluieren wird eine Beispielaufgabe aus einem andrena-Kurs zum Thema Refactoring analysiert und die Veränderung in den \glslink{Metrik}{Metriken} entsprechend erfasst und dokumentiert. Außerdem werden verschiedene Codebasen mit dem Werkzeug analysiert um die Geschwindigkeit zu messen und eventuelle Laufzeitprobleme bei der Analyse von großen Projekten zu erkennen.
 \newpage
 
 
 
 \chapter*{Abstract}
-Objective of this master thesis is the development of a Visual Studio Extension that is capable of providing direct development feedback based on \glslink{Metrik}{software metrics}. The Eclipse plugin Usus, which already exists, is going to be used as orientation. The extension that is developed shall be able to perform \glslink{SCA}{static code analysis} of .NET projects in Visual Studio 2010 in order to calculate the \glslink{Metrik}{code metrics} that are relevant for andrena.
+Durring this master thesis we developed a Visual Studio Extension that is capable of providing direct development feedback based on \glslink{Metrik}{software metrics}. The Eclipse plugin Usus, is going to be used for orientation. The extension that is developed shall be able to perform \glslink{SCA}{static code analysis} of .NET projects in Visual Studio 2010 in order to calculate the \glslink{Metrik}{code metrics} that are relevant for andrena. In order to calculate these \glslink{Metrik}{metrics} we use the \gls{CCI}. Because of the integration into Visual Studio the results can be displayed directly in the dialogs of the IDE.
 \newline
-As far as feedback is concerned, the extension shall be able to actively support developers to write "`clean code"'. A similar solution to Microsofts Achievements Extension could likely be found with achievements based on common clean code best practices. Therefore an evaluation with sample exercises of an andrena course on the topic of refactoring is done and the variation in the \glslink{Metrik}{metrics} is detected and documented.
+The developed extension is capable of actively supporting developers to write "`clean code"'. The automated feedback informs the developer about problematic areas in the code and allows for quick pinpointing. To detect whether the code is clean code, the extension utilizes the distribution of the \glslink{Metrik}{metrics}. These distributions are analyzed and the result is visualized as a Clean Code \glslink{Metrik}{metric}. The tool can additionally calculate the Software Quality Index of andrena, so that an interpretation of inner software quality is possible.
 \newline
-Another \glslink{Metrik}{metric} analysis is performed in order to find heuristics or rules with static significance, which might be able to distinguish good code from bad code. Are there detectable patterns? One thing might be that \glslink{Metrik}{metrics} often follow an exponential distribution. An analysis shall show whether it is possible and if yes, how this can be mapped to the Software Quality Index (SQI) of andrena.
+To evaluate the tool and its possibilities to support the developer we used to analyze an exercise of an andrena course about refactoring. Changes in the \glslink{Metrik}{metric} are recognized and documented. In order to see how well the extension performs on big projects, we timed the analysis of a few projects.
 \newpage
 
 
@@ -129,23 +129,31 @@ Another \glslink{Metrik}{metric} analysis is performed in order to find heuristi
 \chapter{Einführung}
 \pagenumbering{arabic}
 \setcounter{page}{1}
-\textcolor[rgb]{1,0,0}{bla bla bla Softwarequalität
-bla bla bla Metriken
-bla bla bla Entwicklerfeedback
-bla bla bla Übersicht über Codebasis
-bla bla bla direkt in Visual Studio
-bla bla bla}
-Innerhalb welchen größeren Vorhabens wird die Arbeit durchgeführt?
-Bei welcher Firma?
-Was ist die Gesamtzielsetzung?
+Als vor ungefähr 50 Jahren der erste Computer gebaut wurde \cite{ENIAC}, konnte sich wahrscheinlich niemand vorstellen wie schnell sich diese Rechenmaschinen verbreiten und weiterentwickeln würden. Die technischen Fortschritte, unter anderem in der Prozessortechnologie, haben dafür gesorgt, dass Ende 2008 weltweit mehr als eine Milliarde PCs tatsächlich verwendet werden \cite{PCsWorldWide}. Dank Moore's Law\footnote[1]{"`Moore's Law Inspires Intel Innovation"' \url{http://www.intel.com/content/www/us/en/silicon-innovations/moores-law-technology.html}} besitzen sogar heutige Smartphones eine erstaunliche Rechenkapazität, die auch weiterhin steigen wird. Doch mit der rasanten Entwicklung immer fähigerer Hardware entstehen auch immer neue Möglichkeiten für Software. Aus diesem Grund mussten sich auch die Programmiersprachen weiterentwickeln. Der O'REILLY-Verlag hat dazu ein Poster erstellt, das zeigt, wie Programmiersprachen andere Programmiersprachen beeinflusst haben \cite{ProgrammingLanguages}.
+\paragraph{}
+Bei all diesen Entwicklungen bleibt der zentrale Faktor der Softwareentwicklung der Mensch. Hardware und Software sollen dem Menschen das Leben erleichtern, indem sie ihm Arbeit abnehmen. Dafür muss der Maschine allerdings zuerst beigebracht werden, wie es dies machen soll. Aus dieser Motivation ist sogar eine eigene Industrie, die IT-Branche, entstanden. Die vielen verfügbaren Programmiersprachen schaffen eine Grundlage, mit den Maschinen zu reden und ihnen Aufgaben zuweisen zu können. Wie dies geschehen kann, hat die Menschen schon vor der ersten Programmiersprache beschäftigt und beschäftigt sie immer noch. Es wurden verschiedene Modelle von Entwicklungsprozessen formalisiert und angewendet, die beispielsweise auch von Walt Scacchi in seiner Veröffentlichung beschrieben werden \cite{ProcessModels}. Doch Softwareentwicklung wurde aufgrund der Möglichkeiten und der damit in Verbindung stehenden Erwartungen der Nutzer immer schwieriger. Die Anforderungen an die moderne Softwareentwicklung sind sogar so hoch, dass viele Projekte scheitern. Die Standish Group veröffentlicht mit dem "`CHAOS Report"' einen jährlichen Bericht, der die Erfolge und die Fehlschläge von IT-Projekten statistisch aufbereitet. Stefan Hagen interpretiert den CHAOS Report in seinem Blog-Post \cite{ChaosReport} und vergleicht diesen mit anderen Statistiken. 
+\paragraph{}
+Im Jahr 2001 haben sich 17 Softwareentwickler überlegt, wie bessere Software entwickelt werden kann. Das Ergebnis ist das sogenannte \emph{Agile Manifesto} \cite{AgileManifesto2001}, welches die folgenden vier Werte beinhaltet.
+\begin{description}
+\item[Individuals and interactions] over processes and tools
+\item[Working software] over comprehensive documentation
+\item[Customer collaboration] over contract negotiation
+\item[Responding to change] over following a plan
+\end{description}
+Zu diesen Werten wurden auch noch 12 unterstützende Prinzipien aufgeschrieben. Obwohl diese Gedanken nicht neu sind, wird ihnen seit 2001 mehr Bedeutung beigemessen. Während den vergangenen 10 Jahren hat die Standish Group eine Verbesserung der Entwicklungssituation Dokumentiert. So zitiert beispielsweise Mike Cohn in seinem Blog-Post \cite{AgileIsBetter} den CHAOS Report von 2011 und beschreibt agile Projekte im Durchschnitt als dreimal so erfolgreich wie nicht-agile Projekte. Für die Entwickler bedeutet das konkret, dass sie die vier Werte und die zwölf Prinzipien des agilen Manifesto mehr beherzigen sollten. Das ist natürlich nicht leicht. Je schneller auf Änderungen reagiert werden soll (Wert 4), desto größer ist die Gefahr, dass Entwickler den Code verschlechtern. Diese Verschlechterung kann bewusst oder unbewusst passieren und führt dazu, dass zukünftige Änderungen kompilizierter und langsamer vorgenommen werden können. Um dem entgegenzuwirken haben berühmte Entwickler Bücher geschrieben, die Hilfestellungen enthalten. Das bekannteste Werk ist das Buch "`Clean Code"' von Robert C. Martin \cite{CleanCode}. Diese Hilfestellungen adressieren jeden Entwickler und versuchen ihn zu motivieren Verantwortungsbewusst mit Quellcode zu arbeiten. Leider adressieren diese Hilfestellungen nicht den eigentlichen Gegenstand der Softwareentwicklung, nämlich den Quellcode selber. Moderne Entwicklungsumgebungen machen das Erstellen und Ändern von Code zwar sehr einfach, doch bieten sie momentan nur wenig Möglichkeiten die Codebasis zu analysieren und zu interpretieren. Einige separate Werkzeuge bieten etwas mehr Unterstützung und versuchen dem Entwicklern so viele Informationen zu liefern, dass er eine bessere Einsicht in das Projekt bekommt.
+
+
+\section{Aufgabenstellung}
+Genau an dieser Stelle setzt diese Master-Thesis an. Es soll ein Werkzeug für .NET-Code entwickelt werden, dass dem Entwickler mehr relevante Informationen über eine Codebasis liefert, als anderen Werkzeuge dies tun. Diese Informationen sollen den Entwickler unterstützen den Quellcode verantwortungsbewusster zu verändern, sodass der Code im Sinne von Robert C. Martin \emph{clean Code} bleibt. Das zu entwickelnde Tool soll außerdem direkt in Visual Studio integriert sein, sodass der Entwickler das Feedback automatisiert erhält und kein weiteres Werkzeug starten muss. Bei der Entwicklung der Visual Studio-Erweiterung soll ein Programm aus der Java-Welt als Orientierung dienen. Die Eclipse-Erweiterung Usus analysiert den Code und berechnet und gewichtet Kennzahlen, die dem Entwickler helfen können. In dieser Master-Thesis soll ein Tool entwickelt werden, das einen vergleichbarem Funktionsumfang hat und zusätzliche Interpretationsmöglichkeiten bietet. Dabei soll die Verteilung der \glslink{Metrik}{Metriken} untersucht und mit Clean Code in Verbindung gebracht werden. Zusätzlich soll der andrena-Softwarequalitätsindex berechnet werden, um eine Codebasis noch schneller einschätzen zu können.
+
 
 \section{andrena objects ag}
 \label{sec:andrena}
-Diese Master-Thesis wird bei dem Software-Unternehmen andrena objects ag durchgeführt. 
-\textcolor[rgb]{1,0,0}{bla bla bla.}
+Diese Master-Thesis wird bei dem Softwareunternehmen andrena objects ag durchgeführt. 
+\textcolor[rgb]{1,0,0}{TODO: bla bla bla.}
 
 \section{Aufbau der Thesis}
-\textcolor[rgb]{1,0,0}{bla bla bla.}
+\textcolor[rgb]{1,0,0}{TODO: bla bla bla.}
 
 
 
@@ -161,7 +169,7 @@ In diesem Abschnitt wird zunächst auf die Clean Code Idee von Robert C. Martin s
 
 \subsection{Clean Code}
 \label{subsec:cleancode}
-Ein Softwaresystem wird in Form von Quellcode erstellt. Dieser Code wird anschließend kompiliert um eine ausführbares Programm zu erhalten. Robert C. Martin beschreibt Code in seinem Buch "`Clean Code"' als Sprache, in der wir die Anforderungen an die Software maschinenlesbar zum Ausdruck bringen \cite{CleanCode}. Weiter beschreibt er in seinem Buch auch Prinzipien und Best Practices, die das Erstellen von verständlicherem und wartbareren Quellcode unterstützen. Die selben Prinzipien wurden auch von Ralf Westphal und Stefan Lieser aufgegriffen und im Rahmen eines Wertesystems mit sieben Graden vorgestellt \cite{CleanCodeDeveloper}. Martin's "`Clean Code"' Buch bleibt auch für Westphal und Lieser die grundlegende Lektüre. Die Prinzipien und Best Practices der Clean Code Bewegung umfassen viele Aspekte, die bereits durch Kent Beck in seinem Buch über die Methodik \emph{Extreme Programming} (XP) \cite{XP} eingeführt wurden. Drei wichtige Bestandteile von XP, die ebenfalls in den Graden des Clean Code Wertesystems von Westphal und Lieser auftreten, werden jetzt wie folgt definiert.
+Ein Softwaresystem wird in Form von Quellcode erstellt. Dieser Code wird anschließend kompiliert um eine ausführbares Programm zu erhalten. Robert C. Martin beschreibt Code in seinem Buch "`Clean Code"' als Sprache, in der wir die Anforderungen an die Software maschinenlesbar zum Ausdruck bringen \cite{CleanCode}. Weiter beschreibt er in seinem Buch auch Prinzipien und Best Practices, die das Erstellen von verständlicherem und wartbareren Quellcode unterstützen. Die selben Prinzipien wurden auch von Ralf Westphal und Stefan Lieser aufgegriffen und im Rahmen eines Wertesystems mit sieben Graden vorgestellt \cite{CleanCodeDeveloper}. Martin's Buch "`Clean Code"' bleibt auch für Westphal und Lieser die grundlegende Lektüre. Die Prinzipien und Best Practices der Clean Code Bewegung umfassen viele Aspekte, die bereits durch Kent Beck in seinem Buch über die Methodik \emph{Extreme Programming} (XP) \cite{XP} eingeführt wurden. Drei wichtige Bestandteile von XP, die ebenfalls in den Graden des Clean Code Wertesystems von Westphal und Lieser auftreten, werden jetzt wie folgt definiert.
 \begin{definition}[Automatisiertes Testen]
 Automatisiertes Testen ist eine der wichtigsten Praktiken in der Clean Code Bewegung. Nach Robert C. Martin ist es die Aufgabe eines Entwicklers keinen Schaden in einem Softwaresystem anzurichten. Damit meint er Schaden an der Funktionalität und Schaden an der Struktur der Anwendung. Beides kann mit automatisierten Testfällen sichergestellt werden.
 \end{definition}
@@ -185,7 +193,7 @@ Visual Studio erlaubt die Installation von externen Erweiterungen als Addin oder
 
 \section{Technische Grundlagen}
 \label{sec:technicalbasics}
-In diesem Abschnitt werden die technischen Grundlagen erläutert. Dazu wird zunächst der Begriff der Objektorientierung eingeführt, da sämtliche Software-Systeme, die in dieser Master-Thesis betrachtet werden, objektorientiert sind. Anschließend werden Graphen und Bäume beschrieben, da verschiedene \glslink{Metrik}{Software-Metriken} anhand dieser Datenstruktur berechnet werden können. Abschließend wird das Konzept der statischen Code-Analyse vorgestellt, da die zu entwickelnde Erweiterung eben diese durchführen können soll.
+In diesem Abschnitt werden die technischen Grundlagen erläutert. Dazu wird zunächst der Begriff der Objektorientierung eingeführt, da sämtliche Softwaresysteme, die in dieser Master-Thesis betrachtet werden, objektorientiert sind. Anschließend werden Graphen und Bäume beschrieben, da verschiedene \glslink{Metrik}{Softwaremetriken} anhand dieser Datenstruktur berechnet werden können. Abschließend wird das Konzept der statischen Code-Analyse vorgestellt, da die zu entwickelnde Erweiterung eben diese durchführen können soll.
 
 \subsection{Objektorientierung}
 \label{subsec:oo}
@@ -268,7 +276,7 @@ In einer vorhandenen Codebasis besteht die Gefahr, den Überblick über Problemfäl
 \begin{goal}[Förderung von Clean Code]
 Das Entwickeln von Code kann auf eine sehr rücksichtslose Art und Weise geschehen, sodass spätere Anpassungen nur schwer vorzunehmen sind. Durch Feedback und Unterstützung während der Programmierung kann die Entwicklung von Clean Code gefördert werden, was zu einer Codebasis führt, die flexibler auf Anpassungen reagieren kann. Dieses Ziel ist erreicht, sobald ein Entwickler mehr Clean Code Praktiken beachtet und einhält, als er dies ohne Unterstützung des Systems getan hätte.
 \end{goal}
-\begin{goal}[Interpretation der Software-Qualität]
+\begin{goal}[Interpretation der Softwarequalität]
 Eine bestehende Codebasis zu bewerten erfordert detaillierte Kenntnis über alle Klassen, deren Interaktionen und vielem mehr. Außerdem muss eine menschliche Bewertung manuell jedes mal neu erfolgen, ist subjektiv und fehleranfällig. Eine teilweise automatisierte Interpretation anhand von Regeln und Gewichtungen, die auf Erfahrungen basieren, kann die menschliche Bewertung optimieren und einem Entwickler jederzeit mit verhältnismäßig geringem Aufwand eine Qualitätsinterpretation ermöglichen. Dieses Ziel ist erreicht, sobald ein Entwickler, der die Codebasis nicht oder nur unzureichend kennt, die Qualität des Quellcodes durch Interpretation einschätzen und mit anderen Systemen vergleichen kann.
 \end{goal}
 
@@ -341,15 +349,16 @@ Der theoretische Teil entspricht hauptsächlich der Dokumentation aller Ergebniss
 \section{Tatsächlicher Ablauf}
 Nach dem ersten Sprint bestand das in dieser Master-Thesis entwickelte Programm nur aus einem Kommandozeilenwerkzeug, welches \glslink{ASM}{Assemblies} einlesen und deren Methoden analysieren konnte. In der anschließenden Zusammenfassung sind große Teile von Kapitel \ref{chap:ususnet} entstanden. Der zweite Sprint hat eben dieses Kommandozeilenwerkzeug um die Fähigkeit Klassen zu analysieren erweitert. Kapitel \ref{chap:ususnet} konnte danach abgeschlossen werden. Erst nach dem dritten Sprint war das Programm zum ersten Mal als Erweiterung in Visual Studio lauffähig und führte die Analysen bei jedem Build-Vorgang durch. Die daraus resultierende Zusammenfassung war aufwendiger als erwartet und dauerte vier Tage. Dabei ist Kapitel \ref{chap:ususnetvsext} entstanden. Der darauf folgende vierte Sprint musste daher um eine halbe Woche verschoben werden. Der neue Zeitraum dieses Sprints ist 09.07.12 bis 20.07.12.
 \paragraph{}
-Nach diesem vierten Sprint hatte das Programm als Visual Studio Erweiterung die Fähigkeit eine Clean Code \gls{Metrik} sowie den Softwarequalitätsindex zu bestimmen. Ein besseres Verständnis der Use Cases \emph{Clean Code Hilfe bekommen} und \emph{Software-Qualität interpretieren} hat dazu geführt, dass die für den fünften Sprint geplanten User Stories aus Abschnitt \ref{sec:productbacklog} bereits im vierten Sprint implementiert werden konnten. Die anschließende Zusammenfassung dieses Sprints dauerte dadurch länger. Für den Clean Code-Teil, der in Kapitel \ref{chap:cleancodesupport} beschrieben wird, und den SQI-Teil, der in Kapitel \ref{chap:andrenasqi} vorgestellt wird, wurden jeweils drei Tage benötigt. Da für diese Zusammenfassung aber nur zwei Tage eingeplant waren, wurde das "`Refactoring"'-Fallbeispiel geringer priorisiert und als Teil des fünften Sprints vorgenommen. Dieser fünfte und letzte Sprint brauchte daraufhin nicht wieder verschoben zu werden.
+Nach diesem vierten Sprint hatte das Programm als Visual Studio Erweiterung die Fähigkeit eine Clean Code \gls{Metrik} sowie den Softwarequalitätsindex zu bestimmen. Ein besseres Verständnis der Use Cases \emph{Clean Code Hilfe bekommen} und \emph{Softwarequalität interpretieren} hat dazu geführt, dass die für den fünften Sprint geplanten User Stories aus Abschnitt \ref{sec:productbacklog} bereits im vierten Sprint implementiert werden konnten. Die anschließende Zusammenfassung dieses Sprints dauerte dadurch länger. Für den Clean Code-Teil, der in Kapitel \ref{chap:cleancodesupport} beschrieben wird, und den SQI-Teil, der in Kapitel \ref{chap:andrenasqi} vorgestellt wird, wurden jeweils drei Tage benötigt. Da für diese Zusammenfassung aber nur zwei Tage eingeplant waren, wurde das Refactoring-Fallbeispiel geringer priorisiert und als Teil des fünften Sprints vorgenommen. Dieser fünfte und letzte Sprint brauchte daraufhin nicht wieder verschoben zu werden.
 \paragraph{}
-Während dem fünften Sprint wurden einige Fehler des Programms behoben, sowie die Performance gemessen und verbessert. Außerdem wurde das andrena-Fallbeispiel durchgeführt. \textcolor[rgb]{1,0,0}{TODO: was? wo?} Die Zusammenfassungen der Performance-Messungen und des Fallbeispiels konnten in jeweils zwei Tagen abgeschlossen werden. Da die fünftägige Analyse der \gls{Metrik}-Verteilungen als Teil der Clean Code-\gls{Metrik} bereits im vierten Sprint implementiert werden konnte, können diese Tage gespart und die zeitliche Verspätung wieder aufgeholt werden. Abbildung \ref{fig:planning2} stellt den tatsächlichen Projektablauf grafisch dar.
+Während dem fünften Sprint wurden einige Fehler des Programms behoben, sowie die Performance gemessen und verbessert. Außerdem wurde die Analyse des andrena-Fallbeispiels durchgeführt. Die Zusammenfassungen der Performance-Messungen und des Fallbeispiels konnten in jeweils zwei Tagen abgeschlossen und in Kapitel \ref{chap:evaluation} als Evaluierung der Visual Studio Erweiterung beschrieben werden. Da die fünftägige Analyse der \gls{Metrik}-Verteilungen als Teil der Clean Code-\gls{Metrik} bereits im vierten Sprint implementiert werden konnte, konnten diese Tage gespart und die zeitliche Verspätung wieder aufgeholt werden. Abbildung \ref{fig:planning2} stellt den tatsächlichen Projektablauf grafisch dar.
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=15cm]{images/planning2.png}
 	\caption{Tatsächlicher Projektablauf}
 	\label{fig:planning2}
 \end{figure}
+
 
 
 
@@ -1512,7 +1521,7 @@ Die Funktion der geometrischen Verteilung verhält sich genauso, da sie den gleic
 	\caption{Geometrische Verteilung für großes und kleines $\lambda$}
 	\label{fig:gdist}
 \end{figure}
-Obwohl die Exponentialverteilung und die geometrische Verteilung nicht identisch sind, kann der Parameter, von dem beide abhängig sind auf die gleiche Art berechnet werden. Das Ergebnis verhält sich in beiden Verteilungen vergleichbar. Im Kontext der \glslink{Metrik}{Software-Metriken} gilt: je größer das $\lambda$, desto extremer entspricht der Code dem Clean Code Paradigma von Robert C. Martin. Martin befürwortet sehr einfache und sehr kurze Methoden, sowie Klassen mit sehr wenig Abhängigkeiten \cite{CleanCode}.
+Obwohl die Exponentialverteilung und die geometrische Verteilung nicht identisch sind, kann der Parameter, von dem beide abhängig sind auf die gleiche Art berechnet werden. Das Ergebnis verhält sich in beiden Verteilungen vergleichbar. Im Kontext der \glslink{Metrik}{Softwaremetriken} gilt: je größer das $\lambda$, desto extremer entspricht der Code dem Clean Code Paradigma von Robert C. Martin. Martin befürwortet sehr einfache und sehr kurze Methoden, sowie Klassen mit sehr wenig Abhängigkeiten \cite{CleanCode}.
 \paragraph{}
 Usus.NET berechnet den $\lambda$-Parameter in der Klasse \texttt{GeometricalDistributionFitting} nach Formel \ref{eq:edistributionml}. Die Komponenten, die für diese Berechnung zuständig sind, wurden bereits in Abschnitt \ref{sec:distributions} vorgestellt. Das Ergebnis kann anschließend in der Histogramm-Oberfläche aus Unterabschnitt \ref{subsec:ususnethostigram} angezeigt werden. Abbildung \ref{fig:ususnet_histogram} zeigt beispielsweise die Verteilung der \glslink{CS}{Klassengrößen} einer Beispielanwendung. In Kapitel \ref{chap:evaluation} werden konkretere Beispiele betrachtet und mit Usus.NET analysiert.
 
