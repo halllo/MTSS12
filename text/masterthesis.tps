@@ -17,8 +17,8 @@ Class=LaTeXView
 Document=masterthesis.tex
 
 [Frame0_View0,0]
-TopLine=50
-Cursor=1787
+TopLine=2241
+Cursor=238195
 
 [Frame1]
 Flags=0
@@ -35,8 +35,8 @@ Class=BibTeXView
 Document=masterthesis.bib
 
 [Frame1_View0,0]
-TopLine=422
-Cursor=14585
+TopLine=456
+Cursor=15178
 
 [Frame2]
 Flags=0
@@ -53,7 +53,7 @@ Class=LaTeXView
 Document=gloassary.tex
 
 [Frame2_View0,0]
-TopLine=70
+TopLine=66
 Cursor=4859
 
 [SessionInfo]
