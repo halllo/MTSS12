@@ -149,11 +149,13 @@ Genau an dieser Stelle setzt diese Master-Thesis an. Es soll ein Werkzeug für .N
 
 \section{andrena objects ag}
 \label{sec:andrena}
-Diese Master-Thesis wird bei dem Softwareunternehmen andrena objects ag durchgeführt. 
-\textcolor[rgb]{1,0,0}{TODO: bla bla bla.}
+Diese Master-Thesis wird bei dem Karlsruher Unternehmen andrena objects ag durchgeführt. Agilität, Entwicklungsmethoden und \gls{CleanCode} sind die einzigen Produkte von andrena und können in Form von Projektunterstützung, Lösungen und Training erworben werden. In allen diesen drei Bereichen geht es um Software und wie diese entwickelt wird. Um die moderne Softwareentwicklung immer weiter zu verbessern, ist andrena daran interessiert sowohl die Fähigkeiten der Entwickler als auch die Fähigkeiten der eingesetzten Werkzeuge weiterzuentwickeln. Aus diesem Grund soll diese Master-Thesis die technologische Weiterentwicklung der agilen Entwicklung unterstützen. Jedes Projekt, an dem andrena beteiligt war, konnte, laut eigenen Angaben, bisher erfolgreich beendet werden \cite{andrena}. Diesen außergewöhnlichen Erfolg begründet andrena mit dem Konzept des \emph{agilen Software Engineering} und genau dieses Konzept soll durch das in dieser Master-Thesis zu entwickelnde Programm weiter unterstützt werden.
 
-\section{Aufbau der Thesis}
-\textcolor[rgb]{1,0,0}{TODO: bla bla bla.}
+
+\section{Aufbau dieses Dokuments}
+Die vorliegende Master-Thesis beschreibt die Entwicklung einer Visual Studio Erweiterung zur \glslink{SCA}{statischen Code-Analyse}. Dabei werden zuerst die Anforderungen an das System sowie eine Planung der Entwicklungsaufgaben in Form einer agilen Anforderungsanalyse dokumentiert, bevor die zeitliche Planung und nachträglich die tatsächliche Durchführung beschrieben wird. Dadurch entsteht eine konkretere Vorstellung der Software, die anschließend entwickelt werden soll. Wie diese Software die definierten Anforderungen realisieren kann, wird ermittelt indem bereits bestehende Werkzeuge und theoretische Ideen analysiert und umfangreich beschrieben werden. Dadurch werden die grundlegenden Funktionen des Systems spezifiziert. Nach dieser Analysephase wird die Entwicklung des Programms beschrieben indem zuerst auf die zentralen Komponenten eingegangen wird, die die eigentlichen Berechnungen anstellen. Danach wird die Integration dieser zentralen Komponenten in Visual Studio dokumentiert. Bis zu dieser Stelle wurde dann also ein System beschrieben, welches eine \glslink{SCA}{statische Code-Analyse} direkt in Visual Studio durchführen kann. Auf dieser Grundlage aufbauend, können dann weitere Funktionen konzipiert und implementiert werden. Es werden dann Funktionen spezifiziert, die eine Interpretation ermöglichen sollen, ob eine Codebasis den \gls{CleanCode}-Prinzipien entspricht und wie der \gls{SQI} berechnet werden kann. In diesem Zusammenhang wird dann auch die zusätzliche Implementierung beschrieben.
+\paragraph{}
+Abschließend wird die entwickelte Software evaluiert, indem zum Einen die Laufzeit der Analyse verschiedener Projekte gemessen wird. Zum anderen wird ein Refactoring-Beispiel von andrena analysiert. Die Ergebnisse beider Evaluierungen werden dabei beschrieben. Das Dokument endet mit einer Zusammenfassung und einem Ausblick, indem mögliche Weiterentwicklungen des Systems vorgeschlagen werden. 
 
 
 
@@ -253,7 +255,7 @@ In diesem Kapitel werden die Anforderungen an die Visual Studio Erweiterung zur 
 Die \emph{Interessenvertreter} (engl. Stakeholder) im Kontext dieser Master-Thesis sind Gruppen von Personen, die einen Einfluss auf Anforderungen des Systems haben können. Die folgenden vier Gruppen wurden dafür identifiziert.
 \begin{stakeholder}[andrena objects ag] Als Arbeitgeber stellt andrena das Umfeld dar, indem das Projekt durchgeführt und das System implementiert wird. Sie legt Wert auf agile Softwareentwicklung und möchte Entwicklungsprozesse und Praktiken gewinnbringend einsetzen. Die andrena objects ag hat bereits ein Plugin zur statischen Code-Analyse für Java und Eclipse entwickelt und möchte ihren Entwicklern ein ähnliches Programm auch für die .NET-Umgebung zur Verfügung stellen können.
 \end{stakeholder}
-\begin{stakeholder}[Leser dieser Thesis] Die Leser der vorliegenden Thesis haben ebenfalls ein Interesse an dem zu entwickelnden Produkt, das hauptsächlich theoretischer Natur ist. Sie haben einen Informatik-artigen Hintergrund und möchten einen Einblick in die Algorithmen und die Implementierungsdetails sämtlicher implementierten Aspekte des Systems erhalten.
+\begin{stakeholder}[Leser dieser Thesis] Die Leser der vorliegenden Thesis haben ebenfalls ein Interesse an dem zu entwickelnden Produkt. Dieses Interesse ist dabei hauptsächlich theoretischer Natur. Sie haben einen Informatik-artigen Hintergrund und möchten einen Einblick in die Algorithmen und die Implementierungsdetails sämtlicher implementierten Aspekte des Systems erhalten.
 \end{stakeholder}
 \begin{stakeholder}[.NET-Entwickler mit wenig Erfahrung] Entwickler mit wenig Erfahrung arbeiten an kleineren Codebasen und wollen auf einfache Weise einen Überblick über Problemfälle des Systems behalten. Mithilfe des Systems wollen sie diese rechtzeitig beseitigen und sicherstellen, dass dadurch keine neuen Probleme entstehen.
 \end{stakeholder}
@@ -1500,6 +1502,7 @@ f_\lambda(x) =
 \end{equation}
 Beide Funktionen sind von dem Parameter $\lambda$ abhängig. Die eigentliche Histogramm-Analyse besteht darin, diesen Parameter so zu bestimmen, dass die Funktionen das Histogramm möglichst genau beschreibt.
 
+
 \section{Approximation}
 \label{sec:histogramapproximation}
 Eine Methode das $\lambda$ zu berechnen ist die Maximum Likelyhood-Methode, die Weisstein ebenfalls in seinem MathWorld-Eintrag beschreibt \cite{MaximumLikelihood}. Mit dieser Methode kann eine Schätzer-Funktion errechnet werden, die in Abhängigkeit der Werte des Histogramms den Parameter $\lambda$ bestimmt. Sigbert Klinke, Patrick Lehmann, Bernd Rönz, Sibylle Schmerbach und Olga Zlatkin-Troitschanskaia haben den Schätzer für die Exponentialverteilung bereits bestimmt \cite{MLExponentialDist}. Den Schätzer der geometrischen Verteilung wurde von Künzer, Meister und Nebe berechnet \cite{MLGeometricsDist}. Beide Schätzer-Funktion sind identisch und abhängig von der Histogramm-Sequenz. Formel \ref{eq:edistributionml} zeigt diese Rechenvorschrift zur Bestimmung des $\lambda$-Parameters.
@@ -1525,6 +1528,7 @@ Obwohl die Exponentialverteilung und die geometrische Verteilung nicht identisch
 \paragraph{}
 Usus.NET berechnet den $\lambda$-Parameter in der Klasse \texttt{GeometricalDistributionFitting} nach Formel \ref{eq:edistributionml}. Die Komponenten, die für diese Berechnung zuständig sind, wurden bereits in Abschnitt \ref{sec:distributions} vorgestellt. Das Ergebnis kann anschließend in der Histogramm-Oberfläche aus Unterabschnitt \ref{subsec:ususnethostigram} angezeigt werden. Abbildung \ref{fig:ususnet_histogram} zeigt beispielsweise die Verteilung der \glslink{CS}{Klassengrößen} einer Beispielanwendung. In Kapitel \ref{chap:evaluation} werden konkretere Beispiele betrachtet und mit Usus.NET analysiert.
 
+
 \section{Abweichung}
 \label{sec:histogramerror}
 Da das Histogramm durch eine stetige Funktion angenähert wird, ist es sehr wahrscheinlich, dass die Funktion mit dem bestimmten Parameter nicht exakt durch die Punkte des Histogramms läuft. Diese Abweichung kann laut Eric W. Weisstein mit den Chi-Squared Test ermittelt werden \cite{ChiSquared}. Formel \ref{eq:chisquaredtest} zeigt dieses Maß der Abweichung.
@@ -1532,7 +1536,13 @@ Da das Histogramm durch eine stetige Funktion angenähert wird, ist es sehr wahrs
 \chi^2 = \sum_{i=1}^n \frac{(x_i - f(x_i))^2}{f(x_i)}
 \label{eq:chisquaredtest}
 \end{equation}
-Da das $\lambda$ der geometrischen Verteilung bekannt ist, kann die Funktion $f(x_i)$ durch die Funktion $f_\lambda(x_i)$ aus Formel \ref{eq:gdistribution} ersetzt werden. Das berechnete Ergebnis kann über den \texttt{Error}-Parameter des \texttt{GeometricalDistributionFitting}-Objekts zurückgegeben werden. Die Implementierung dieser Fehlerfunktion ist in der aktuellen Version von Usus.NET noch nicht enthalten. Sobald Usus.NET die Bestimmung von verschiedenen Verteilungen unterstützt, kann mithilfe des Fehlers die Verteilungsfunktion bestimmt werden, die das Histogramm am Besten (mit dem geringsten Fehler) annähert. Aufgrund der dadurch bestimmten wahrscheinlichsten Verteilung könnte eine bessere Aussage über die \glslink{Metrik}{Metriken} im betroffenen Softwaresystem getroffen werden. Diese weiteren Verteilungen könnten eventuell die Poisson-Verteilung und die Pareto-Verteilung sein. Eine weiterführende theoretische Analyse kann im zeitlichen Rahmen dieser Master-Thesis nicht vorgenommen werden.
+Da das $\lambda$ der geometrischen Verteilung bekannt ist, kann die Funktion $f(x_i)$ durch die Funktion $f_\lambda(x_i)$ aus Formel \ref{eq:gdistribution} ersetzt werden. Das berechnete Ergebnis kann über den \texttt{Error}-Parameter des \texttt{GeometricalDistributionFitting}-Objekts zurückgegeben werden. Die Implementierung dieser Fehlerfunktion ist in der aktuellen Version von Usus.NET noch nicht enthalten. Sobald Usus.NET die Bestimmung von verschiedenen Verteilungen unterstützt, kann mithilfe des Fehlers die Verteilungsfunktion bestimmt werden, die das Histogramm am Besten (mit dem geringsten Fehler) annähert. Aufgrund der dadurch bestimmten wahrscheinlichsten Verteilung könnte eine akkuratere Aussage über die \glslink{Metrik}{Metriken} im betroffenen Softwaresystem getroffen werden. Diese weiteren Verteilungen könnten eventuell die Poisson-Verteilung und die Pareto-Verteilung sein. In Usus.NET ist aktuell nur die geometrische Verteilung implementiert.
+
+
+\section{Refactoring-Vorschläge}
+Da die \glslink{Metrik}{Metriken} durch die Verteilungsanalyse besser verstanden werden, könnten gezielt Refactorings vorgeschlagen werden, die eine Verteilung in eine andere Verteilung überführen. Zustände der inneren Softwarequalität können dadurch auf zwei Informationen reduziert werden. Zum Einen die wahrscheinlichste Verteilung und zum Anderen die Parameter dieser Verteilung. Anschließend könnten gewünschte Verteilungen und deren Parameter als Endzustand definiert werden. Um diese Verteilung und deren Parameter zu erreichen, könnten von allen anderen Verteilungen Übergänge in Form von Refactorings definiert werden. Dadurch entsteht ein gerichteter Graph. Sobald Usus.NET die betrachtete Codebasis einem Zustand zuordnet, könnten die Übergänge (Refactorings) ermittelt werden, die zu dem Endzustand (gewünschte Verteilung und deren Parameter) führen.
+\paragraph{}
+Natürlich ist die Verteilung als Repräsentation der inneren Codequalität eine sehr allgemeine \gls{Metrik}. Die damit ermittelten Refactorings müssten also auch sehr allgemein sein. Solche allgemeinen Refactorings könnten beispielsweise "`Methode/Klasse $X$ auf Methoden/Klassen $X_1$ und $X_2$ aufteilen"' oder "`Namespace-Zyklus $X-Y-Z$ auflösen"' sein. Eine weiterführende theoretische Betrachtung oder eine rudimentäre Implementierung dieses Verteilung-Refactoring-Graph kann im zeitlichen Rahmen dieser Master-Thesis nicht vorgenommen werden.
 
 
 
@@ -1796,12 +1806,12 @@ manuelles starten der analyse auf knopfdruck
 \refstepcounter{chapter}
 
 
-\section{Prozess- und Softwarequalitätsindex}
+\section{Manuskript über den Prozess- und Softwarequalitätsindex}
 \label{sec:appendixsqi}
 Das unveröffentlichte Manuskript "`Beschreibung der Berechnungsmethoden für Prozessqualitätsindex und \gls{SQI}"' von Dr. Eberhard Kuhn befindet sich auf der beiliegenden CD.
 
 
-\section{Isis}
+\section{Artikel über Isis}
 \label{sec:appendixisis}
 Der unveröffentlichte technische Artikel "`Indicator-based Process and Software Quality Control in Agile Development Projects"' von Andreas Leidig und Nicole Rauch befindet sich auf der beiliegenden CD.
 
