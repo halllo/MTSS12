@@ -126,7 +126,8 @@ To evaluate the tool and its possibilities to support the developer we used to a
 
 
 
-\chapter{Einführung}
+\chapter{Einleitung}
+\label{chap:intro}
 \pagenumbering{arabic}
 \setcounter{page}{1}
 Als vor ungefähr 50 Jahren der erste Computer gebaut wurde \cite{ENIAC}, konnte sich wahrscheinlich niemand vorstellen wie schnell sich diese Rechenmaschinen verbreiten und weiterentwickeln würden. Die technischen Fortschritte, unter anderem in der Prozessortechnologie, haben dafür gesorgt, dass Ende 2008 weltweit mehr als eine Milliarde PCs tatsächlich verwendet werden \cite{PCsWorldWide}. Dank Moore's Law\footnote[1]{"`Moore's Law Inspires Intel Innovation"' \url{http://www.intel.com/content/www/us/en/silicon-innovations/moores-law-technology.html}} besitzen sogar heutige Smartphones eine erstaunliche Rechenkapazität, die auch weiterhin steigen wird. Doch mit der rasanten Entwicklung immer fähigerer Hardware entstehen auch immer neue Möglichkeiten für Software. Aus diesem Grund mussten sich auch die Programmiersprachen weiterentwickeln. Der O'REILLY-Verlag hat dazu ein Poster erstellt, das zeigt, wie Programmiersprachen andere Programmiersprachen beeinflusst haben \cite{ProgrammingLanguages}.
@@ -135,10 +136,10 @@ Bei all diesen Entwicklungen bleibt der zentrale Faktor der Softwareentwicklung 
 \paragraph{}
 Im Jahr 2001 haben sich 17 Softwareentwickler überlegt, wie bessere Software entwickelt werden kann. Das Ergebnis ist das sogenannte \emph{Agile Manifesto} \cite{AgileManifesto2001}, welches die folgenden vier Werte beinhaltet.
 \begin{description}
-\item[Individuals and interactions] over processes and tools
-\item[Working software] over comprehensive documentation
-\item[Customer collaboration] over contract negotiation
-\item[Responding to change] over following a plan
+\item[individuals and interactions] over processes and tools
+\item[working software] over comprehensive documentation
+\item[customer collaboration] over contract negotiation
+\item[responding to change] over following a plan
 \end{description}
 Zu diesen Werten wurden auch noch 12 unterstützende Prinzipien aufgeschrieben. Obwohl diese Gedanken nicht neu sind, wird ihnen seit 2001 mehr Bedeutung beigemessen. Während den vergangenen 10 Jahren hat die Standish Group eine Verbesserung der Entwicklungssituation Dokumentiert. So zitiert beispielsweise Mike Cohn in seinem Blog-Post \cite{AgileIsBetter} den CHAOS Report von 2011 und beschreibt agile Projekte im Durchschnitt als dreimal so erfolgreich wie nicht-agile Projekte. Für die Entwickler bedeutet das konkret, dass sie die vier Werte und die zwölf Prinzipien des agilen Manifesto mehr beherzigen sollten. Das ist natürlich nicht leicht. Je schneller auf Änderungen reagiert werden soll (Wert 4), desto größer ist die Gefahr, dass Entwickler den Code verschlechtern. Diese Verschlechterung kann bewusst oder unbewusst passieren und führt dazu, dass zukünftige Änderungen kompilizierter und langsamer vorgenommen werden können. Um dem entgegenzuwirken haben berühmte Entwickler Bücher geschrieben, die Hilfestellungen enthalten. Das bekannteste Werk ist das Buch "`Clean Code"' von Robert C. Martin \cite{CleanCode}. Diese Hilfestellungen adressieren jeden Entwickler und versuchen ihn zu motivieren Verantwortungsbewusst mit Quellcode zu arbeiten. Leider adressieren diese Hilfestellungen nicht den eigentlichen Gegenstand der Softwareentwicklung, nämlich den Quellcode selber. Moderne Entwicklungsumgebungen machen das Erstellen und Ändern von Code zwar sehr einfach, doch bieten sie momentan nur wenig Möglichkeiten die Codebasis zu analysieren und zu interpretieren. Einige separate Werkzeuge bieten etwas mehr Unterstützung und versuchen dem Entwicklern so viele Informationen zu liefern, dass er eine bessere Einsicht in das Projekt bekommt.
 
@@ -1778,36 +1779,13 @@ Die aktuelle Version von Usus.NET wurde unter der LGPL\footnote[1]{"`GNU Lesser 
 
 
 
-
 \chapter{Fazit und Ausblick}
-\textcolor[rgb]{1,0,0}{todo}
-wenig Zeit, bla bla
-\\
-viele Dinge mussten weggelassen werden, und können im Anschluss an diese Master-Thesis implementiert werden
-\\
-nur eine Evaluierung der \gls{SCA} möglich, weitere Technologie-Evaluierungen wie für die Graphenvisualisierung konnte nicht gemacht werden
-\\
-Mehr Settings erforderlich: Möglichkeit die \gls{SCA} ein oder auszuschalten. Manuelles Starten der \gls{SCA} auf Knopfdruck ermöglichen
-\\
-In der Evaluierung hat sich gezeigt, das die grafische Darstellung des Namespace-Graph insbesondere der Zyklen doch sinvoll ist
-\\
-Testabdeckung für \gls{SQI} automatisch ermitteln
-\\
-\textcolor[rgb]{1,0,0}{todo}
-weitere coole sachen könnten anschließend ebenfalls realisiert werden
-\\
-definierte und erreichbare Ziele erlauben keinen Rahmen für Ausprobieren von coolen Sachen, da die verfügbare Zeit lediglich für die Implementierung eines minimalen Funktionsumfang genutzt werden kann
-\\
-Kleinster Zyklus in einem großen Zyklus hilft, die Problemstelle schneller zu finden
-\\
-die CRAP-\gls{Metrik} bestimmen um einen weiteren \gls{CleanCode}-Indikator zu haben
-\\
-mehr Verteilungen und deren Vergleich
-\\
-Hinweise zu sinnvollen Refactorings um eine gewünschte Verteilung zu erreichen
-\\
-automatische Refaktorings, bla bla
-\\
+Innerhalb von fünf Sprints wurde die Visual Studio-Erweiterung Usus.NET entwickelt. Das Programm ist damit aber noch lange nicht fertig. Die sechs Monate der Master-Thesis haben gerade so gerreicht, um eine funktionsfähige Anwendung zu realisieren. Obwohl einige User Stories, die für den fünften Sprint geplant waren, bereits im vierten Sprint erledigt werden konnten, mussten im letzten Sprint einige Probleme behoben, sowie die Beispiel- und Performance-Messungen durchgeführt und beschrieben werden. Da diese Master-Thesis als Dokumentation der Entwicklung sehr wichtig ist, konnte die Entwicklung nicht 100\%ig agil durchgeführt werden. Der in der Einleitung in Kapitel \ref{chap:intro} erwähnte Wert "`working software over comprehensive documentation"' konnte also nicht wie gewünscht verfolgt werden. Beides war während dieser Master-Thesis gleich wichtig, sodass zugunsten der Dokumentation auch mehrere potenzielle Features von Usus.NET nicht implementiert werden konnten. So musste beispielsweise auf eine Visualisierung der Graphen komplett verzichtet werden, da eine notwendige Evaluierung verschiedener Darstellungstechnologieen aus zeitlichen Gründen nicht durchgeführt werden konnte. Besonders sinnvoll hätte sich dieses Feature bei der Analyse von Hotspots in Form von Namespace-Zyklen einsetzen lassen. In der aktuellen Version werden die problematischen Klassen, also die Klassen, die Klassen in den anderen Namespaces im selben Zyklen referenzieren, in Listen angezeigt. Eine grafische Darstellung des Zyklus in Form eines Graphen würde die Suche nach der schuldigen Abhängigkeit wahrscheinlich sehr erleichtern. Die Bearbeitung des Themas, das durch die andrena objects ag angeboten wurde, hat leider nur Zeit für eine Evaluierung zugelassen. In diesem Rahmen wurde die \gls{CCI} als technisches Mittel gefunden, um eine \glslink{SCA}{statische Code-Analyse} zu ermöglichen. Um die wichtigsten Teile der umfangreichen Erweiterung auf dieser Basis zu programmieren, wurde die restliche Zeit vollständig benötigt. Usus.NET vermisst in der aktuellen Version auch einige Einstellungen. Momentan kann lediglich eingestellt werden, ob eine \glslink{SCA}{Analyse} parallel oder sequentiell durchgeführt werden soll. Wünschenswert wären Einstellungsmöglichkeiten, die die \glslink{SCA}{Analyse} komplett ausschalten. Usus.NET analysiert in der aktuellen Version bei jedem Kompiliervorgang automatisch alle Projekte der aktuellen Solution. Eine manuelle \glslink{SCA}{Analyse} auf Knopfdruck könnte sich in manchen Szenarien als bessere Lösung herausstellen. Eine weitere Sache, die aus Zeit-Gründen nicht realisiert werden konnte, ist die automatische Bestimmung der aktuellen Testabdeckung. Um den \gls{SQI} in der aktuellen Version von Usus.NET vollständig zu bestimmen, muss dieser Wert manuell ermittelt und in das entsprechende Fenster eingetragen werden. Auch hier müsste wieder eine Evaulierung mehrerer Werkzeuge und Bibliotheken, die die Testabdeckung berechnen, durchgeführt werden.
+\paragraph{}
+Die nicht realisierten Features, die oben beschrieben wurden, können problemlos im Anschluss an diese Master-Thesis implementiert werden. Obwohl die sechs Monate nicht ausgereicht haben, um Usus.NET vollständig zu Ende zu entwickeln, konnte eine Grundlage gelegt werden, die eine Weiterentwicklung der Erweiterung als Open Source-Projekt ermöglicht. Das bedeutet, das auch andrena-externe Entwickler sich an der Fortführung des Projekts beteiligen dürfen und sollen. Auch nachdem die oben erwähnten Funktionen entwickelt wurden, kann Usus.NET auch um viele andere Funktionen erweitert werden. Die zu Beginn dieser Master-Thesis definierten Ziele haben keinen Platz und keine Zeit zum freien Experimentieren gelassen. Es konnte lediglich ein minimaler Funktionsumfang von dem implementiert werden, was Usus.NET hätte sein können und noch werden kann. Jetzt, nach Abschluss der Master-Thesis, kann dieses Ausprobieren ohne Zeitdruck nachgeholt werden. 
+\paragraph{}
+Beispielsweise wäre es spannend zu sehen, wie Namespace-Zyklus-Hotspots noch besser dargestellt werden können. Da Usus.NET in der aktuellen Version nur alle Namespaces in einem Zyklus auflistet, wäre es interessant zu sehen, ob in einem Zyklus ein kleinster Zyklus gefunden werden kann. Ein solcher kleinster Zyklus würde das Eigenliche Zyklus-Problem darstellen und eine effizientere Auflösung ermöglichen. Außerdem wäre die Integration weiterer \gls{CleanCode}-\glslink{Metrik}{Metriken} denkbar. Sobald Usus.NET die automatische Bestimmung der Testabdeckung unterstützt, kann die in Kapitel \ref{chap:cleancodesupport} erwähnte CRAP-\gls{Metrik} berechnet werden. Eventuell kann diese \gls{Metrik} auch mit den Verteilungsinformationen kombiniert werden. Oder es können mehr Verteilungen betrachtet werden, sodass die \gls{Metrik}-Histogramme besser interpretiert und Hinweise zu sinnvollen Refactorings gegeben werden können. Die Refactorings müssten im Vorfeld Veränderungen der Verteilungen zugeordnet werden. Anschließend könnte eine Veränderung der Verteilung erreicht werden indem ein Refactoring angewendet wird. So könnte Usus.NET den Entwickler Refactoring über Refactoring zu einer Verteilung führen, die für \gls{CleanCode} steht, beispielsweise die geometrische Verteilung mit einem großen $\lambda$. Eventuell könnten diese Refactorings auch automatisiert durchgeführt werden. Da Usus.NET die Refactorings kennen würde, die notwendig sind um ein System nach \gls{CleanCode} umzugestalten, könnte eine bestehende Codebasis eventuell auf Knopfdruck verbessert werden. Aktuell sind keine Werkzeuge bekannt, die bestehenden Code \emph{clean} machen. Wenn eine solcher Trend weiter verfolgt wird, wäre Usus.NET das richtige Werkzeug, um diese Funktionen zu implementieren, auszuprobieren und zu testen.
+
 
 
 
