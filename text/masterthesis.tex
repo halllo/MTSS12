@@ -1354,7 +1354,7 @@ Die Variable \texttt{Report} enthält eine Referenz auf das \texttt{MethodMetrics
 In der linken Spalte werden alle Namespaces in eben diesem Zyklus anzeigt. Per Doppelklick auf einen dieser Namespaces werden in der rechten Spalte die Typen angezeigt, die einen Typen in einem der anderen Namespaces referenzieren. Zusätzlich wird der dort referenzierte Typ angegeben und von welcher Methode diese Referenz ausgeht. Auch hier kann mit einem Doppelklick auf einen der Typen in der rechten Spalte direkt zu der Quellcodedatei, die den Typen enthält, gesprungen werden. Dadurch können die Klassen, die den Zyklus erzeugen schnell gefunden werden.
 
 \subsection{Histogramm}
-\label{subsec:ususnethostigram}
+\label{subsec:ususnethistogram}
 Abbildung \ref{fig:ususnet_histogram} zeigt die Häufigkeitsverteilungen aller Berichte des Objektmodells aus Abschnitt \ref{sec:ususobjectmodel} in Bezug auf die \glslink{Metrik}{Metriken} an.
 \begin{figure}[h]
 	\centering
@@ -1497,12 +1497,12 @@ Listing \ref{listing:sendlineandfiletoinfo} zeigt wie ein Methodensignatur-Butto
 
 \chapter{Clean Code-Unterstützung}
 \label{chap:cleancodesupport}
-Eine Anforderung an Usus.NET ist die Unterstützung bei der Entwicklung von \gls{CleanCode}. Dafür wurde bereits das \gls{CleanCode}-Grade-Fenster in Unterabschnitt \ref{subsec:ususnetcleancodegrades} vorgestellt. Dieses Fenster erinnert den Entwickler kontinuierlich an die Prinzipien und Parktiken, die er am besten befolgen sollte. Um ein Maß für das Level an \gls{CleanCode} zu haben, reichen die bisher vorgestellten \glslink{Metrik}{Metriken} nicht aus. Robert C. Martin beschreibt in seinem Blog-Post \cite{CleanCodeMetrics} die beiden \gls{CleanCode}-\glslink{Metrik}{Metriken} "`CRAP"' und "`The Braithwaite Correlation"', welche nicht Bestandteil dieser Ausarbeitung sind. In dieser Master-Thesis wird eine dritte \gls{Metrik} betrachtet, die aus der Häufigkeitsverteilung der \glslink{Metrik}{Metriken} berechnet werden kann. Der Parameter der approximierten Verteilungsfunktion soll die \gls{CleanCode}-\gls{Metrik} von Usus.NET sein.
+Eine Anforderung an Usus.NET ist die Unterstützung bei der Entwicklung von \gls{CleanCode}. Dafür wurde bereits das \gls{CleanCode}-Grade-Fenster in Unterabschnitt \ref{subsec:ususnetcleancodegrades} vorgestellt. Dieses Fenster erinnert den Entwickler kontinuierlich an die Prinzipien und Parktiken, die er am besten befolgen sollte. Um ein Maß für das Level an \gls{CleanCode} zu haben, reichen die bisher vorgestellten \glslink{Metrik}{Metriken} nicht aus. Robert C. Martin beschreibt in seinem Blog-Post \cite{CleanCodeMetrics} die beiden \gls{CleanCode}-\glslink{Metrik}{Metriken} \emph{CRAP} und \emph{The Braithwaite Correlation}, welche nicht Bestandteil dieser Ausarbeitung sind. In dieser Master-Thesis wird eine dritte \gls{Metrik} betrachtet, die aus der Häufigkeitsverteilung der \glslink{Metrik}{Metriken} berechnet werden kann. Der Parameter der approximierten Verteilungsfunktion soll die \gls{CleanCode}-\gls{Metrik} von Usus.NET sein.
 
 
 \section{Kleine Metriken}
 \label{sec:histogramanalysis}
-In Abschnitt \ref{sec:distributions} wurde beschrieben, das Usus.NET Histogramme für alle \glslink{Metrik}{Metriken} erstellen kann. Dieser Abschnitt beschäftigt sich mit der Analyse ebendieser Metrik-Histogramme und wie die \glslink{Metrik}{Metriken} tatsächliche verteilt sind. Nach einer ersten Überlegung folgen beispielsweise \glslink{ML}{Methodenlängen} einer \glslink{Verteilung}{Exponentialalverteilung}. "`Kurz"' ist das Erste, was Robert C. Martin über Methoden schreibt \cite{CleanCode}. In einem Softwaresystem, das mit dieser Einstellung bezüglich \gls{CleanCode} entwickelt wurde, wird also sehr viele sehr kurze Methoden haben, viele kurze und wenig lange Methoden. Die \glslink{ML}{Methodenlänge} nimmt also exponentiell ab und diese Entwicklung sollte auch im Histogramm der \glslink{ML}{Methodenlängen} zu sehen sein. Die Funktion der \glslink{Verteilung}{Exponentialalverteilung} ist laut Eric W. Weisstein wie in Formel \ref{eq:edistribution} definiert \cite{ExponentialDist}.
+In Abschnitt \ref{sec:distributions} wurde beschrieben, dass Usus.NET Histogramme für alle \glslink{Metrik}{Metriken} erstellen kann. Dieser Abschnitt beschäftigt sich mit der Analyse ebendieser Metrik-Histogramme und wie die \glslink{Metrik}{Metriken} tatsächliche verteilt sind. Nach einer ersten Überlegung folgen beispielsweise \glslink{ML}{Methodenlängen} einer \glslink{Verteilung}{Exponentialalverteilung}. "`Kurz"' ist das Erste, was Robert C. Martin über Methoden in Bezug auf \gls{CleanCode} schreibt \cite{CleanCode}. In einem Softwaresystem, das mit einem Bewusstsein für \gls{CleanCode} entwickelt wurde, werden also sehr viele sehr kurze Methoden existieren und wenig lange Methoden. Die \glslink{ML}{Methodenlänge} nimmt also exponentiell ab und diese Entwicklung sollte auch im Histogramm der \glslink{ML}{Methodenlängen} zu sehen sein. Die Funktion der \glslink{Verteilung}{Exponentialalverteilung} ist laut Eric W. Weisstein wie in Formel \ref{eq:edistribution} definiert \cite{ExponentialDist}.
 \begin{equation}
 f_\lambda(x) = 
 	\begin{cases}
@@ -1511,7 +1511,7 @@ f_\lambda(x) =
 	\end{cases}
 \label{eq:edistribution}
 \end{equation}
-Da alle \glslink{Metrik}{Metriken} ganzen Zahlen sind (es gibt keine \glslink{ML}{Methodenlänge} mit 1,5 logischen Zeilen), enthalten auch die Metrik-Histogramme nur diskrete Werte auf der x-Achse. Für die analytische Annäherung einer Verteilungsfunktion empfiehlt sich daher auch die Verwendung einer diskreten Verteilung. Laut Eric W. Weisstein ist das diskrete Gegenstück der kontinuierlichen \glslink{Verteilung}{Exponentialalverteilung} die geometrische \gls{Verteilung} \cite{GeometricsDist}. Die Funktion der geometrische \gls{Verteilung} ist in Formel \ref{eq:gdistribution} zu sehen.
+Da alle \glslink{Metrik}{Metriken} ganze Zahlen sind (es gibt keine \glslink{ML}{Methodenlänge} mit 1,5 logischen Zeilen), enthalten auch die Metrik-Histogramme nur diskrete Werte auf der x-Achse. Für die analytische Annäherung einer Verteilungsfunktion empfiehlt sich daher auch die Verwendung einer diskreten Verteilung. Laut Eric W. Weisstein ist das diskrete Gegenstück der kontinuierlichen \glslink{Verteilung}{Exponentialalverteilung} die geometrische \gls{Verteilung} \cite{GeometricsDist}. Die Funktion der geometrische \gls{Verteilung} ist in Formel \ref{eq:gdistribution} zu sehen.
 \begin{equation}
 f_\lambda(x) = 
 	\begin{cases}
@@ -1525,7 +1525,7 @@ Beide Funktionen sind von dem Parameter $\lambda$ abhängig. Die eigentliche Hist
 
 \section{Approximation}
 \label{sec:histogramapproximation}
-Eine Methode das $\lambda$ zu berechnen ist die Maximum Likelyhood-Methode, die Weisstein ebenfalls in seinem MathWorld-Eintrag beschreibt \cite{MaximumLikelihood}. Mit dieser Methode kann eine Schätzer-Funktion errechnet werden, die in Abhängigkeit der Werte des Histogramms den Parameter $\lambda$ bestimmt. Sigbert Klinke, Patrick Lehmann, Bernd Rönz, Sibylle Schmerbach und Olga Zlatkin-Troitschanskaia haben den Schätzer für die \glslink{Verteilung}{Exponentialalverteilung} bereits bestimmt \cite{MLExponentialDist}. Den Schätzer der geometrischen \gls{Verteilung} wurde von Künzer, Meister und Nebe berechnet \cite{MLGeometricsDist}. Beide Schätzer-Funktion sind identisch und abhängig von der Histogramm-Sequenz. Formel \ref{eq:edistributionml} zeigt diese Rechenvorschrift zur Bestimmung des $\lambda$-Parameters.
+Eine Methode um das $\lambda$ zu berechnen ist die Maximum Likelyhood-Methode, die Weisstein ebenfalls in seinem MathWorld-Eintrag beschreibt \cite{MaximumLikelihood}. Mit dieser Methode kann eine Schätzer-Funktion errechnet werden, die den Parameter $\lambda$ in Abhängigkeit der Werte des Histogramms bestimmt. Sigbert Klinke, Patrick Lehmann, Bernd Rönz, Sibylle Schmerbach und Olga Zlatkin-Troitschanskaia haben den Schätzer für die \glslink{Verteilung}{Exponentialalverteilung} bereits bestimmt \cite{MLExponentialDist}. Der Schätzer der geometrischen \gls{Verteilung} wurde von Künzer, Meister und Nebe berechnet \cite{MLGeometricsDist}. Beide Schätzer-Funktion sind identisch und abhängig von der Histogramm-Sequenz. Formel \ref{eq:edistributionml} zeigt diese Rechenvorschrift zur Bestimmung des $\lambda$-Parameters.
 \begin{equation}
 \lambda = \frac{n}{\sum_{i=1}^n x_i} = \frac{1}{\bar{x}}
 \label{eq:edistributionml}
@@ -1534,19 +1534,19 @@ Der Parameter $\lambda$ der \glslink{Verteilung}{Exponentialalverteilung} entspr
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=11cm]{images/edist.png}
-	\caption{\glslink{Verteilung}{Exponentialalverteilung} für großes und kleines $\lambda$}
+	\caption{\glslink{Verteilung}{Exponentialalverteilung} für \textcolor[rgb]{0.6,0,0}{großes} und \textcolor[rgb]{0,0,0.6}{kleines} $\lambda$}
 	\label{fig:edist}
 \end{figure}
 Die Funktion der geometrischen \gls{Verteilung} verhält sich genauso, da sie den gleichen Maximum Likelihood-Schätzer wie die \glslink{Verteilung}{Exponentialalverteilung} hat. Abbildung \ref{fig:gdist} zeigt wieder die wünschenswerte \gls{Verteilung} in rot und die weniger optimale in blau. Auch hier besteht die Stichprobe aus 100 Werten.
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=11cm]{images/gdist.png}
-	\caption{Geometrische \gls{Verteilung} für großes und kleines $\lambda$}
+	\caption{Geometrische \gls{Verteilung} für \textcolor[rgb]{0.6,0,0}{großes} und \textcolor[rgb]{0,0,0.6}{kleines} $\lambda$}
 	\label{fig:gdist}
 \end{figure}
-Obwohl die \glslink{Verteilung}{Exponentialalverteilung} und die geometrische \gls{Verteilung} nicht identisch sind, kann der Parameter, von dem beide abhängig sind auf die gleiche Art berechnet werden. Das Ergebnis verhält sich in beiden \glslink{Verteilung}{Verteilungen} vergleichbar. Im Kontext der \glslink{Metrik}{Softwaremetriken} gilt: je größer das $\lambda$, desto extremer entspricht der Code dem \gls{CleanCode}-Paradigma von Robert C. Martin. Martin befürwortet sehr einfache und sehr kurze Methoden, sowie Klassen mit sehr wenig Abhängigkeiten \cite{CleanCode}.
+Obwohl die \glslink{Verteilung}{Exponentialalverteilung} und die geometrische \gls{Verteilung} nicht identisch sind, kann der Parameter, von dem beide abhängig sind, auf die gleiche Art berechnet werden. Das Ergebnis verhält sich in beiden \glslink{Verteilung}{Verteilungen} vergleichbar. Im Kontext der \glslink{Metrik}{Softwaremetriken} gilt: je größer das $\lambda$, desto extremer entspricht die \gls{Metrik} dem \gls{CleanCode}-Paradigma von Robert C. Martin. Martin befürwortet sehr einfache und sehr kurze Methoden, sowie Klassen mit sehr wenig Abhängigkeiten \cite{CleanCode}.
 \paragraph{}
-Usus.NET berechnet den $\lambda$-Parameter in der Klasse \texttt{GeometricalDistributionFitting} nach Formel \ref{eq:edistributionml}. Die Komponenten, die für diese Berechnung zuständig sind, wurden bereits in Abschnitt \ref{sec:distributions} vorgestellt. Das Ergebnis kann anschließend in der Histogramm-Oberfläche aus Unterabschnitt \ref{subsec:ususnethostigram} angezeigt werden. Abbildung \ref{fig:ususnet_histogram} zeigt beispielsweise die \gls{Verteilung} der \glslink{CS}{Klassengrößen} einer Beispielanwendung. In Kapitel \ref{chap:evaluation} werden konkretere Beispiele betrachtet und mit Usus.NET analysiert.
+Usus.NET berechnet den $\lambda$-Parameter in der Klasse \texttt{GeometricalDistributionFitting} nach Formel \ref{eq:edistributionml}. Die Komponenten, die für diese Berechnung zuständig sind, wurden bereits in Abschnitt \ref{sec:distributions} vorgestellt. Das Ergebnis kann anschließend in der Oberfläche aus Unterabschnitt \ref{subsec:ususnethistogram} angezeigt werden. Abbildung \ref{fig:ususnet_histogram} zeigt beispielsweise die \gls{Verteilung} der \glslink{CS}{Klassengrößen} einer Beispielanwendung. In Kapitel \ref{chap:evaluation} werden konkretere Beispiele betrachtet und mit Usus.NET analysiert.
 
 
 \section{Abweichung}
@@ -1562,7 +1562,7 @@ Da das $\lambda$ der geometrischen \gls{Verteilung} bekannt ist, kann die Funkti
 \section{Refactoring-Vorschläge}
 Da die \glslink{Metrik}{Metriken} durch die Verteilungsanalyse besser verstanden werden, könnten gezielt Refactorings vorgeschlagen werden, die eine \gls{Verteilung} in eine andere \gls{Verteilung} überführen. Zustände der inneren Softwarequalität können dadurch auf zwei Informationen reduziert werden. Zum Einen die wahrscheinlichste \gls{Verteilung} und zum Anderen die Parameter dieser Verteilung. Anschließend könnten gewünschte \glslink{Verteilung}{Verteilungen} und deren Parameter als Endzustand definiert werden. Um diese \gls{Verteilung} und deren Parameter zu erreichen, könnten von allen anderen \glslink{Verteilung}{Verteilungen} Übergänge in Form von Refactorings definiert werden. Dadurch entsteht ein gerichteter Graph. Sobald Usus.NET die betrachtete Codebasis einem Zustand zuordnet, könnten die Übergänge (Refactorings) ermittelt werden, die zu dem Endzustand (gewünschte \gls{Verteilung} und deren Parameter) führen.
 \paragraph{}
-Natürlich ist die \gls{Verteilung} als Repräsentation der inneren Codequalität eine sehr allgemeine \gls{Metrik}. Die damit ermittelten Refactorings müssten also auch sehr allgemein sein. Solche allgemeinen Refactorings könnten beispielsweise "`Methode/Klasse $X$ auf Methoden/Klassen $X_1$ und $X_2$ aufteilen"' oder "`Namespace-Zyklus $X-Y-Z$ auflösen"' sein. Eine weiterführende theoretische Betrachtung oder eine rudimentäre Implementierung dieses Verteilung-Refactoring-Graph kann im zeitlichen Rahmen dieser Master-Thesis nicht vorgenommen werden.
+Natürlich ist die \gls{Verteilung} als Repräsentation der inneren Codequalität eine sehr allgemeine \gls{Metrik}. Die damit ermittelten Refactorings müssten also auch sehr allgemein sein. Solche allgemeinen Refactorings könnten beispielsweise "`Methode/Klasse $X$ auf Methoden/Klassen $X_1$ und $X_2$ aufteilen"' oder "`Namespace-Zyklus $X-Y-Z$ auflösen"' sein. Eine weiterführende theoretische Betrachtung oder eine rudimentäre Implementierung dieses Verteilung-Refactoring-Graph, kann im zeitlichen Rahmen dieser Master-Thesis nicht vorgenommen werden.
 
 
 
