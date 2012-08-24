@@ -13,12 +13,12 @@ NormalPos.left=4
 NormalPos.top=26
 NormalPos.right=1710
 NormalPos.bottom=789
-Class=BibTeXView
-Document=masterthesis.bib
+Class=LaTeXView
+Document=masterthesis.tex
 
 [Frame0_View0,0]
-TopLine=583
-Cursor=19553
+TopLine=2676
+Cursor=295206
 
 [SessionInfo]
 FrameCount=1
