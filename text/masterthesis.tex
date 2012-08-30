@@ -1520,8 +1520,8 @@ Da alle \glslink{Metrik}{Metriken} ganze Zahlen sind (es gibt keine \glslink{ML}
 \begin{equation}
 f_\lambda(x) = 
 	\begin{cases}
-		\lambda (1 - \lambda)^{x-1}&0 < x \wedge x <= 1  \\
-		0&\text{sonst}\\
+		\lambda (1 - \lambda)^x&x>=0 \wedge \lambda>0 \wedge \lambda<1\\
+		0&sonst\\
 	\end{cases}
 \label{eq:gdistribution}
 \end{equation}
