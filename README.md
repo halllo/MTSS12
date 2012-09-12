@@ -12,8 +12,8 @@ The analysis can also be performed in code.
 var metrics = Analyze.Me();
 foreach (var method in metrics.Methods)
 {
-Console.WriteLine("Signature: " + method.Signature);
-Console.WriteLine("CC: " + method.CyclomaticComplexity);
+	Console.WriteLine("Signature: " + method.Signature);
+	Console.WriteLine("CC: " + method.CyclomaticComplexity);
 }
 ```
 
