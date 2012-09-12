@@ -3,10 +3,8 @@ Master-Thesis Sommersemester 2012
 Dieses Repository nutze ich um den Code und den Text meiner Master-Thesis zu verwalten. Sämtlicher Inhalt ist urheberrechtlich geschütztes Material von Manuel Naujoks.
 
 # Usus.NET #
-Visual Studio-Erweiterung zur statischen Code-Analyse
-Visual Studio extention for static code analysis
-
 This Visual Studio extension provides static code analysis for software developed with .NET.
+![Usus.NET VSIX](https://github.com/halllo/MTSS12/text/images/andrenarefacafter.png)
 
 The analysis can also be performed in code.
 ```csharp
