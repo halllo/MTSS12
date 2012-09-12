@@ -4,7 +4,7 @@ Dieses Repository nutze ich um den Code und den Text meiner Master-Thesis zu ver
 
 # Usus.NET #
 This Visual Studio extension provides static code analysis for software developed with .NET.
-![Usus.NET VSIX](https://github.com/halllo/MTSS12/text/images/andrenarefacafter.png)
+![Usus.NET VSIX](https://github.com/halllo/MTSS12/wiki/andrenarefacafter.png)
 
 The analysis can also be performed in code.
 ```csharp
